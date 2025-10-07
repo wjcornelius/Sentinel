@@ -1,0 +1,15 @@
+# Ignore the Python virtual environment
+venv/
+
+# Ignore Python cache files
+__pycache__/
+*.pyc
+
+# Ignore the configuration file containing secret keys
+config.py
+
+# Ignore the database containg analysis, portfolio, and trade specifics
+sentinel.db
+
+# Environment variables
+.env

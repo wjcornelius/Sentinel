@@ -1,6 +1,6 @@
 # main_script.py
-# Version 3.2 - SAFE / NO-TRADE VERSION
-# Implements Nasdaq 100, cost-optimized news, and disables (but preserves) trade execution logic.
+# Version 6.2 - API COMPLIANCE FIX
+# Rounds notional trade values to 2 decimal places to meet Alpaca API requirements.
 
 import config
 import alpaca_trade_api as tradeapi
@@ -12,142 +12,223 @@ import time
 from io import StringIO
 from openai import OpenAI
 import requests
+from twilio.rest import Client
+import sqlite3
+
+# --- Global Constants ---
+DB_FILE = "sentinel.db"
+
+# --- Capital Allocation Rules from Charter ---
+TARGET_INVESTED_RATIO = 0.90  # Invest 90% of total portfolio value
+MAX_POSITION_PERCENTAGE = 0.10 # No single position should exceed 10% of the portfolio
+
+# --- STAGE -1: DAILY STATE CHECK ---
+def check_if_trades_executed_today():
+    """Checks the DB to see if any trades were already submitted today."""
+    try:
+        conn = sqlite3.connect(DB_FILE)
+        cursor = conn.cursor()
+        cursor.execute("""
+            SELECT 1 FROM trades 
+            WHERE DATE(timestamp) = DATE('now', 'localtime') 
+            AND status IN ('submitted', 'filled', 'execution_failed') 
+            LIMIT 1
+        """)
+        result = cursor.fetchone()
+        conn.close()
+        return result is not None
+    except sqlite3.Error as e:
+        print(f"DB_ERROR checking for executed trades: {e}")
+        return False
+
+def get_todays_proposed_plan():
+    """
+    Checks the DB for a plan that was proposed but not executed today.
+    Now also fetches the price at the time of decision to avoid re-aggregation.
+    """
+    try:
+        conn = sqlite3.connect(DB_FILE)
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+        cursor.execute("""
+            SELECT id, symbol, decision, conviction_score, rationale, latest_price FROM decisions
+            WHERE DATE(timestamp) = DATE('now', 'localtime')
+            AND decision IN ('Buy', 'Sell')
+        """)
+        rows = cursor.fetchall()
+        conn.close()
+        
+        if not rows: return []
+
+        proposed_trades = [{'db_decision_id': r['id'], 'symbol': r['symbol'], 'decision': r['decision'],
+                            'conviction_score': r['conviction_score'], 'rationale': r['rationale'],
+                            'latest_price': r['latest_price']} for r in rows]
+        return proposed_trades
+    except sqlite3.Error as e:
+        print(f"DB_ERROR getting today's proposed plan: {e}")
+        return []
 
 # --- Stage 0: System Initialization & State Review ---
 def get_alpaca_api():
-    """Initializes and returns an authenticated Alpaca API object."""
-    return tradeapi.REST(
-        config.APCA_API_KEY_ID,
-        config.APCA_API_SECRET_KEY,
-        config.APCA_API_BASE_URL,
-        api_version='v2'
-    )
+    return tradeapi.REST(config.APCA_API_KEY_ID, config.APCA_API_SECRET_KEY, config.APCA_API_BASE_URL, api_version='v2')
 
 def get_account_info(api):
-    """Fetches and prints account status and current positions."""
     print("--- [Stage 0: Account & Position Review] ---")
     try:
         account = api.get_account()
-        if account.status == 'ACTIVE':
-            print(f"Account is ACTIVE. Portfolio Value: ${account.portfolio_value}")
-        else:
-            print(f"Account status: {account.status}")
-
+        print(f"Account is {'ACTIVE' if account.status == 'ACTIVE' else account.status}. Portfolio Value: ${float(account.portfolio_value):,.2f}")
         positions = api.list_positions()
         if positions:
             print(f"Current Positions ({len(positions)}):")
             for pos in positions:
-                print(f"  - {pos.symbol}: {pos.qty} shares @ avg ${pos.avg_entry_price}")
+                print(f"  - {pos.symbol}: {pos.qty} shares @ avg ${float(pos.avg_entry_price):,.2f} (Value: ${float(pos.market_value):,.2f})")
         else:
             print("No open positions.")
-        
         return {p.symbol: p for p in positions}, account
-
     except Exception as e:
         print(f"Error connecting to Alpaca: {e}")
         return {}, None
 
+def display_performance_report(api, current_value):
+    """Fetches portfolio history and displays Daily and YTD performance."""
+    print("\n--- [Stage 0.1: Performance Report] ---")
+    try:
+        hist = api.get_portfolio_history(period='7D', timeframe='1D')
+        
+        if len(hist.equity) > 1:
+            prev_close = hist.equity[-2]
+            daily_pl = current_value - prev_close
+            daily_pl_pct = (daily_pl / prev_close) * 100 if prev_close != 0 else 0
+            print(f"  - Daily P/L:    ${daily_pl:,.2f} ({daily_pl_pct:+.2f}%)")
+        else:
+            print("  - Daily P/L:    Not enough history to calculate.")
+
+        today = datetime.now()
+        start_of_year_str = f"{today.year}-01-01"
+        ytd_hist = api.get_portfolio_history(date_start=start_of_year_str, timeframe='1D')
+        
+        if len(ytd_hist.equity) > 0:
+            ytd_start_value = next((val for val in ytd_hist.equity if val is not None and val > 0), 0)
+            
+            if ytd_start_value > 0:
+                ytd_pl = current_value - ytd_start_value
+                ytd_pl_pct = (ytd_pl / ytd_start_value) * 100
+                print(f"  - YTD P/L:      ${ytd_pl:,.2f} ({ytd_pl_pct:+.2f}%)")
+            else:
+                print(f"  - YTD P/L:      $0.00 (Not enough history for YTD %)")
+        else:
+            print("  - YTD P/L:      Not enough history to calculate.")
+
+    except Exception as e:
+        print(f"  - Could not generate performance report: {e}")
+        print("  - This may be due to a new account with insufficient history.")
+
 # --- Stage 1: Candidate Universe Generation ---
+def generate_and_log_new_plan(api, current_positions):
+    print("\n--- [Generating New Daily Plan] ---")
+    candidate_universe = generate_candidate_universe(current_positions.keys())
+    raw_news_data = get_raw_search_results_from_perplexity()
+    market_context = summarize_market_context_with_openai(raw_news_data)
+    all_dossiers = aggregate_data_dossiers(api, candidate_universe, market_context)
+    
+    print("\n--- [Stage 3: AI-Powered Analysis & Logging] ---")
+    all_analyses = []
+    if all_dossiers:
+        for symbol, dossier in all_dossiers.items():
+            analysis = get_ai_analysis(dossier, market_context)
+            if analysis:
+                decision_id = log_decision_to_db(analysis, dossier.get('latest_price'), market_context)
+                if decision_id:
+                    analysis['db_decision_id'] = decision_id
+                all_analyses.append(analysis)
+            time.sleep(2)
+    else:
+        print("No dossiers were created, skipping AI analysis.")
+    
+    proposed_trades = [an for an in all_analyses if an.get('decision', 'N/A').lower() in ['buy', 'sell']]
+    return proposed_trades, all_dossiers
+
 def get_nasdaq_100_symbols():
-    """Fetches the list of Nasdaq 100 symbols from a reliable source."""
     print("  - Fetching Nasdaq 100 constituents...")
     try:
+        headers = {'User-Agent': 'Mozilla/5.0'}
         url = 'https://en.wikipedia.org/wiki/Nasdaq-100'
-        response = requests.get(url)
-        tables = pd.read_html(response.text)
-        nasdaq_100_df = tables[4]
-        symbols = nasdaq_100_df['Ticker'].tolist()
-        symbols = [s.replace('.', '-') for s in symbols]
+        response = requests.get(url, headers=headers)
+        response.raise_for_status()
+        tables = pd.read_html(StringIO(response.text))
+        nasdaq_100_df = next(table for table in tables if 'Ticker' in table.columns)
+        symbols = [s.replace('.', '-') for s in nasdaq_100_df['Ticker'].tolist()]
         print(f"  - Successfully fetched {len(symbols)} symbols.")
         return symbols
     except Exception as e:
         print(f"  - ERROR: Could not fetch Nasdaq 100 list: {e}")
-        print("  - Falling back to a smaller, static list for this run.")
         return ['AAPL', 'MSFT', 'NVDA', 'TSLA', 'GOOGL', 'AMZN', 'META']
 
 def generate_candidate_universe(current_symbols):
-    """Generates the universe of stocks to be analyzed, starting with the Nasdaq 100."""
     print("\n--- [Stage 1: Candidate Universe Generation] ---")
     base_universe = get_nasdaq_100_symbols()
     candidate_universe = sorted(list(set(base_universe + list(current_symbols))))
     print(f"Generated a universe of {len(candidate_universe)} candidates for analysis.")
-    print(f"Sample candidates: {candidate_universe[:5]}...")
     return candidate_universe
 
 # --- Stage 2: Data Dossier Aggregation ---
-def get_market_context_from_perplexity():
-    """
-    Makes a single, cost-effective API call to Perplexity to get a summary
-    of the day's most important market-moving news.
-    """
-    print("\n--- [Fetching General Market News Context via Perplexity] ---")
+def get_raw_search_results_from_perplexity():
+    print("\n--- [News Gathering Step 1: Searching via Perplexity] ---")
     try:
-        client = OpenAI(api_key=config.PERPLEXITY_API_KEY, base_url="https://api.perplexity.ai")
-        prompt = """
-        As a financial news analyst, please search the web for the top 15-20 most significant,
-        market-moving news stories from the last 24 hours. Focus on topics like macroeconomic data releases
-        (CPI, jobs reports), central bank policy changes (e.g., Fed announcements), major geopolitical events,
-        or significant sector-wide trends. For each story, provide a concise one-sentence headline and a 2-3 sentence summary.
-        Format the entire output as a single block of text.
-        """
-        response = client.chat.completions.create(
-            model="llama-3-sonar-large-32k-online",
-            messages=[{"role": "user", "content": prompt}],
-        )
-        market_news = response.choices[0].message.content
-        print("Successfully fetched general market news from Perplexity.")
-        return market_news
+        url = "https://api.perplexity.ai/search"
+        payload = {"query": "Top 15-20 most significant, market-moving financial news stories last 24 hours"}
+        headers = { "accept": "application/json", "content-type": "application/json", "authorization": f"Bearer {config.PERPLEXITY_API_KEY}" }
+        response = requests.post(url, json=payload, headers=headers, timeout=20.0)
+        response.raise_for_status()
+        print("  - Successfully fetched raw search results from Perplexity.")
+        return response.json()
     except Exception as e:
-        print(f"Error fetching news from Perplexity: {e}")
-        return "Could not retrieve general market news from Perplexity."
+        print(f"  - ERROR fetching from Perplexity /search: {e}")
+        return None
+
+def summarize_market_context_with_openai(raw_results):
+    print("--- [News Gathering Step 2: Summarizing via OpenAI] ---")
+    if not raw_results: return "Could not retrieve general market news."
+    try:
+        client = OpenAI(api_key=config.OPENAI_API_KEY)
+        prompt = f"""You are a financial news analyst... RAW SEARCH DATA: {json.dumps(raw_results, indent=2)}"""
+        response = client.chat.completions.create(model="gpt-4-turbo", messages=[{"role": "user", "content": prompt}], timeout=45.0)
+        print("  - Successfully summarized market news using OpenAI.")
+        return response.choices[0].message.content
+    except Exception as e:
+        print(f"  - ERROR summarizing news with OpenAI: {e}")
+        return "Could not summarize general market news."
 
 def get_stock_specific_news_headlines(api, symbol):
-    """Fetches only the headlines of recent news for a given stock from Alpaca (free)."""
     try:
         end_time = datetime.now()
         start_time = end_time - timedelta(days=3)
         news = api.get_news(symbol=symbol, start=start_time.strftime('%Y-%m-%dT%H:%M:%SZ'), end=end_time.strftime('%Y-%m-%dT%H:%M:%SZ'), limit=5)
-        if not news: return "No recent stock-specific news headlines found."
-        headlines = [article.headline for article in news]
-        return " | ".join(headlines)
+        return " | ".join([article.headline for article in news]) if news else "No recent stock-specific news headlines found."
     except Exception:
         return "Error fetching stock-specific headlines."
 
 def aggregate_data_dossiers(api, universe, market_news_summary):
     print("\n--- [Stage 2: Data Dossier Aggregation] ---")
     dossiers = {}
-    end_date = datetime.now()
-    start_date = end_date - timedelta(days=365)
-    
-    universe_subset = universe[:10]
-    print(f"*** NOTE: Analyzing a subset of {len(universe_subset)} stocks for this test run. ***")
-
-    for i, symbol in enumerate(universe_subset):
-        print(f"Aggregating data for {symbol} ({i+1}/{len(universe_subset)})...")
+    print(f"*** Analyzing the full universe of {len(universe)} stocks. ***")
+    for i, symbol in enumerate(universe):
+        print(f"Aggregating data for {symbol} ({i+1}/{len(universe)})...")
         try:
+            end_date = datetime.now()
+            start_date = end_date - timedelta(days=365)
             bars = api.get_bars(symbol, '1Day', start=start_date.strftime('%Y-%m-%d'), end=end_date.strftime('%Y-%m-%d'), feed=config.APCA_API_DATA_FEED).df
-            if bars.empty:
-                print(f"  - No bar data found for {symbol}. Skipping.")
-                continue
-            
-            ticker = yf.Ticker(symbol)
-            info = ticker.info
-            fundamentals = {"sector": info.get('sector', 'N/A'), "forward_pe": info.get('forwardPE', 'N/A')}
-            
-            stock_headlines = get_stock_specific_news_headlines(api, symbol)
-            
+            if bars.empty: continue
+            info = yf.Ticker(symbol).info
             dossiers[symbol] = {
-                "symbol": symbol,
-                "fundamentals": fundamentals,
-                "historical_data": bars.to_json(orient='split'),
-                "stock_specific_headlines": stock_headlines,
+                "symbol": symbol, "fundamentals": {"sector": info.get('sector', 'N/A'), "forward_pe": info.get('forwardPE', 'N/A')},
+                "historical_data": bars.to_json(orient='split'), "stock_specific_headlines": get_stock_specific_news_headlines(api, symbol),
                 "latest_price": bars.iloc[-1]['close']
             }
             print(f"  - Successfully created dossier for {symbol}.")
             time.sleep(1)
         except Exception as e:
             print(f"  - Failed to create dossier for {symbol}: {e}")
-            
     print(f"\nSuccessfully aggregated {len(dossiers)} data dossiers.")
     return dossiers
 
@@ -155,7 +236,6 @@ def aggregate_data_dossiers(api, universe, market_news_summary):
 def get_ai_analysis(dossier, market_context):
     print(f"  - Getting AI analysis for {dossier['symbol']}...")
     client = OpenAI(api_key=config.OPENAI_API_KEY)
-
     try:
         df = pd.read_json(StringIO(dossier['historical_data']), orient='split')
         sma_50 = df['close'].rolling(window=50).mean().iloc[-1]
@@ -163,126 +243,261 @@ def get_ai_analysis(dossier, market_context):
         technical_signal = "Golden Cross (Bullish)" if sma_50 > sma_200 else "Death Cross (Bearish)"
     except Exception:
         technical_signal = "Could not calculate technical signal."
-
-    system_prompt = "You are a quantitative analyst..." # Abridged for brevity
     
+    system_prompt = "You are a quantitative analyst providing a trade recommendation."
     user_prompt = f"""
-    Please analyze the stock {dossier['symbol']} and provide a recommendation.
-    **1. Overall Market Context:** {market_context}
-    **2. Stock-Specific Data for {dossier['symbol']}:**
-    - **Fundamentals:** {json.dumps(dossier['fundamentals'], indent=2)}
-    - **Recent News Headlines:** {dossier['stock_specific_headlines']}
-    - **Technical Signal:** A {technical_signal} is present.
-    **Your Task:** Synthesize all information. Return a JSON object with "symbol", "decision", "conviction_score", and "rationale".
-    Output only the raw JSON object.
+    Please analyze the stock {dossier['symbol']}... Return a JSON object with four specific keys:
+    1. "symbol": A string, which must be exactly "{dossier['symbol']}".
+    2. "decision": A string, which must be one of "Buy", "Sell", or "Hold".
+    3. "conviction_score": An integer from 1 to 10.
+    4. "rationale": A single string explaining your reasoning in 2-3 sentences.
+    Output only the raw JSON object and nothing else.
     """
-
     try:
         response = client.chat.completions.create(
-            model="gpt-4-turbo",
-            messages=[{"role": "system", "content": system_prompt}, {"role": "user", "content": user_prompt}],
-            response_format={"type": "json_object"}
+            model="gpt-4-turbo", messages=[{"role": "system", "content": system_prompt}, {"role": "user", "content": user_prompt}],
+            response_format={"type": "json_object"}, timeout=30.0
         )
         analysis = json.loads(response.choices[0].message.content)
+
+        if not all(k in analysis for k in ['symbol', 'decision', 'conviction_score', 'rationale']):
+            print(f"    - ERROR: AI response for {dossier['symbol']} was missing required keys.")
+            return None
+        
+        if isinstance(analysis['rationale'], list):
+            analysis['rationale'] = ' '.join(map(str, analysis['rationale']))
+
         return analysis
     except Exception as e:
-        print(f"    - ERROR: Failed to get AI analysis for {dossier['symbol']}: {e}")
+        print(f"    - ERROR: Failed to get or parse AI analysis for {dossier['symbol']}: {e}")
         return None
 
-# --- STAGE 4: ORDER EXECUTION (DISABLED FOR NOW) ---
-# The following function is the complete trade execution logic. It is intentionally
-# disabled until the SMS approval workflow is implemented and tested. This prevents
-# accidental trades.
-"""
-def execute_trades(api, analyses, current_positions, account_info):
-    print("\n--- [Stage 4: Trade Execution] ---")
-    if not account_info:
-        print("Could not retrieve account info. Halting trade execution.")
+# --- STAGE 4: DATABASE, APPROVAL & EXECUTION ---
+def log_decision_to_db(analysis, latest_price, market_context):
+    try:
+        conn = sqlite3.connect(DB_FILE)
+        cursor = conn.cursor()
+        cursor.execute("""
+            INSERT INTO decisions (timestamp, symbol, decision, conviction_score, rationale, latest_price, market_context_summary)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+        """, (datetime.now(), analysis.get('symbol'), analysis.get('decision'), analysis.get('conviction_score'), 
+              analysis.get('rationale'), latest_price, market_context))
+        decision_id = cursor.lastrowid
+        conn.commit()
+        conn.close()
+        print(f"    - Successfully logged decision for {analysis.get('symbol')} to DB (ID: {decision_id}).")
+        return decision_id
+    except sqlite3.Error as e:
+        print(f"    - DB_ERROR: Failed to log decision for {analysis.get('symbol')}: {e}")
+        return None
+
+def handle_approval_process(proposed_trades):
+    print("\n--- [Stage 4: Trade Approval] ---")
+    if not proposed_trades:
+        print("  - No actionable trades proposed. Skipping approval.")
+        return False
+    
+    print("\n--- [Manual Approval Required] ---")
+    print("The following trade plan is proposed:")
+    print("-" * 35)
+    for trade in proposed_trades:
+        print(f"  - {trade['decision'].upper()} {trade['symbol']} (Conviction: {trade['conviction_score']})")
+    print("-" * 35)
+    
+    approval_input = input("Enter 'APPROVE' to confirm trades: ")
+
+    if approval_input.strip().upper() == 'APPROVE':
+        print("  - Approval received.")
+        return True
+    else:
+        print("  - Approval denied. No trades will be executed.")
+        return False
+
+# --- MODIFIED (v6.2): Rounds dollar amounts for API compliance ---
+def calculate_trade_plan(ai_proposals, current_positions, portfolio_value):
+    """
+    Calculates the final trade list based on conviction scores and portfolio rules.
+    This is the core "portfolio manager" logic from the Charter.
+    """
+    print("\n--- [Stage 4.1: Formulating Trade Plan] ---")
+    
+    investable_capital = portfolio_value * TARGET_INVESTED_RATIO
+    max_position_value = portfolio_value * MAX_POSITION_PERCENTAGE
+    print(f"  - Portfolio Value: ${portfolio_value:,.2f}")
+    print(f"  - Target Invested Capital (90%): ${investable_capital:,.2f}")
+    print(f"  - Max Position Size (10%): ${max_position_value:,.2f}")
+
+    target_portfolio = {p['symbol']: p for p in ai_proposals if p['decision'].lower() == 'buy'}
+    if not target_portfolio:
+        print("  - AI recommends no new 'Buy' positions.")
+    else:
+        print(f"  - AI has identified {len(target_portfolio)} stocks for the target portfolio.")
+
+    total_conviction = sum(p['conviction_score'] for p in target_portfolio.values())
+    target_allocations = {}
+    if total_conviction > 0:
+        for symbol, proposal in target_portfolio.items():
+            weight = proposal['conviction_score'] / total_conviction
+            target_value = min(investable_capital * weight, max_position_value)
+            target_allocations[symbol] = target_value
+
+    final_trades = []
+    
+    for symbol, target_value in target_allocations.items():
+        current_value = float(current_positions[symbol].market_value) if symbol in current_positions else 0.0
+        trade_dollar_amount = target_value - current_value
+        
+        if abs(trade_dollar_amount) > 25.0: 
+            side = 'buy' if trade_dollar_amount > 0 else 'sell'
+            final_trades.append({
+                'symbol': symbol, 'side': side, 
+                'dollar_amount': round(abs(trade_dollar_amount), 2), # <-- FIX IS HERE
+                'decision_id': target_portfolio[symbol]['db_decision_id']
+            })
+
+    for symbol, position in current_positions.items():
+        if symbol not in target_portfolio:
+            print(f"  - Position {symbol} is not in the AI's target portfolio. Marking for liquidation.")
+            ai_sell_decision = next((p for p in ai_proposals if p['symbol'] == symbol and p['decision'].lower() == 'sell'), None)
+            decision_id = ai_sell_decision['db_decision_id'] if ai_sell_decision else None
+            
+            final_trades.append({
+                'symbol': symbol, 'side': 'sell', 
+                'dollar_amount': round(float(position.market_value), 2), # <-- FIX IS HERE
+                'decision_id': decision_id
+            })
+    
+    for proposal in ai_proposals:
+        if proposal['decision'].lower() == 'sell' and proposal['symbol'] not in current_positions:
+            print(f"  - AI recommends 'Sell' for {proposal['symbol']}, but no position is held. No action needed.")
+
+    if not final_trades:
+        print("  - No rebalancing trades are necessary to match the AI's target portfolio.")
+    else:
+        print("\n--- [Final Rebalancing Plan] ---")
+        for trade in final_trades:
+            print(f"  - {trade['side'].upper()} {trade['symbol']} for approx. ${trade['dollar_amount']:,.2f}")
+            
+    return final_trades
+
+def update_trade_log(trade_id, status, order_id=None):
+    try:
+        conn = sqlite3.connect(DB_FILE)
+        cursor = conn.cursor()
+        cursor.execute("UPDATE trades SET status = ?, alpaca_order_id = ? WHERE id = ?", (status, order_id, trade_id))
+        conn.commit()
+        conn.close()
+    except sqlite3.Error as e:
+        print(f"  - DB_ERROR: Failed to update trade log for trade ID {trade_id}: {e}")
+
+def execute_trades(api, trade_plan, current_positions):
+    """Executes or simulates trades based on the LIVE_TRADING flag in config.py."""
+    
+    mode = "LIVE PAPER TRADING" if config.LIVE_TRADING else "SAFE MODE"
+    print(f"\n--- [Stage 5: Trade Execution & Logging ({mode})] ---")
+
+    if not trade_plan:
+        print("  - No trades to execute.")
         return
 
-    for analysis in analyses:
-        symbol = analysis['symbol']
-        decision = analysis['decision']
-        conviction = analysis['conviction_score']
-        rationale = analysis['rationale']
+    for trade in trade_plan:
+        symbol = trade.get('symbol')
+        side = trade.get('side').lower()
+        decision_id = trade.get('decision_id')
+        dollar_amount = trade.get('dollar_amount')
         
-        print(f"Processing {symbol}: AI Decision is '{decision}' with conviction {conviction}.")
-        print(f"  - Rationale: {rationale}")
-
-        has_position = symbol in current_positions
-        
-        if decision == "Buy" and not has_position and conviction >= 7:
-            try:
-                target_position_value = float(account_info.portfolio_value) * 0.10
-                latest_price = all_dossiers[symbol]['latest_price']
-                quantity_to_buy = int(target_position_value / latest_price)
-
-                if quantity_to_buy > 0:
-                    print(f"  - ACTION: Placing BUY order for {quantity_to_buy} shares of {symbol}.")
-                    api.submit_order(symbol=symbol, qty=quantity_to_buy, side='buy', type='market', time_in_force='day')
-                else:
-                    print(f"  - INFO: Target position value is too low to buy a single share.")
-            except Exception as e:
-                print(f"  - ERROR: Failed to place BUY order for {symbol}: {e}")
-
-        elif decision == "Sell" and has_position and conviction >= 7:
-            try:
-                position = current_positions[symbol]
-                print(f"  - ACTION: Placing SELL order for {position.qty} shares of {symbol}.")
-                api.submit_order(symbol=symbol, qty=position.qty, side='sell', type='market', time_in_force='day')
-            except Exception as e:
-                print(f"  - ERROR: Failed to place SELL order for {symbol}: {e}")
-        
+        # For full liquidations, we use quantity to ensure the position is closed.
+        if side == 'sell' and symbol in current_positions and symbol not in [p['symbol'] for p in trade_plan if p['side'] == 'buy']:
+             quantity = current_positions[symbol].qty
+             order_details = {'qty': quantity}
         else:
-            if decision == "Buy" and has_position:
-                print(f"  - INFO: AI recommends 'Buy', but we already hold {symbol}. No action taken.")
-            elif decision == "Sell" and not has_position:
-                print(f"  - INFO: AI recommends 'Sell', but we do not hold {symbol}. No action taken.")
-            elif decision == "Buy" or decision == "Sell" and conviction < 7:
-                 print(f"  - INFO: AI decision is '{decision}', but conviction ({conviction}) is below our threshold of 7. No action taken.")
-            else: # Hold
-                print(f"  - INFO: AI recommends 'Hold'. No action taken.")
-"""
+             order_details = {'notional': dollar_amount}
+
+        trade_id = None
+        try:
+            conn = sqlite3.connect(DB_FILE)
+            cursor = conn.cursor()
+            # Note: Storing dollar_amount instead of quantity for notional orders
+            cursor.execute("INSERT INTO trades (decision_id, timestamp, symbol, side, quantity, status) VALUES (?, ?, ?, ?, ?, ?)",
+                           (decision_id, datetime.now(), symbol, side, order_details.get('qty', 0) or order_details.get('notional', 0), 'approved'))
+            trade_id = cursor.lastrowid
+            conn.commit()
+            conn.close()
+            print(f"  - Logged trade as 'approved' in DB (Trade ID: {trade_id}).")
+        except sqlite3.Error as e:
+            print(f"  - DB_ERROR: Failed to insert approved trade for {symbol}: {e}")
+            continue
+
+        try:
+            order = None
+            if config.LIVE_TRADING:
+                print(f"  - Submitting {side.upper()} order for {symbol}...")
+                order = api.submit_order(
+                    symbol=symbol,
+                    side=side,
+                    time_in_force='day',
+                    **order_details
+                )
+                print(f"  - SUCCESS (LIVE): Order for {symbol} submitted. Order ID: {order.id}")
+                update_trade_log(trade_id, 'submitted', order.id)
+            else: # SAFE MODE
+                # We calculate the simulated quantity here just for the log message
+                latest_price = api.get_latest_trade(symbol).price
+                sim_qty = dollar_amount / latest_price if 'notional' in order_details else quantity
+                print(f"  - [SAFE MODE] Simulating {side.upper()} order for {sim_qty:.4f} shares of {symbol}...")
+                fake_order_id = f"fake_order_{int(time.time())}_{symbol}"
+                print(f"  - SUCCESS (SIMULATED): Order for {symbol}. Fake Order ID: {fake_order_id}")
+                update_trade_log(trade_id, 'submitted', fake_order_id)
+
+        except Exception as e:
+            print(f"  - FAILED to submit order for {symbol}: {e}")
+            update_trade_log(trade_id, 'execution_failed')
+
 
 # --- Main Execution Workflow ---
 def main():
-    """The main end-of-day execution function for the Sentinel system."""
     print("====== Sentinel Daily Run Initialized ======")
     
+    if check_if_trades_executed_today():
+        print("\nTrading has already been executed for today. See you tomorrow!")
+        print("\n====== Sentinel Daily Run Finished ======")
+        return
+
     alpaca_api = get_alpaca_api()
+    current_positions, account = get_account_info(alpaca_api)
     
-    current_positions, account_info = get_account_info(alpaca_api)
-    candidate_universe = generate_candidate_universe(current_positions.keys())
+    if not account:
+        print("\nCould not retrieve account info. Aborting run.")
+        return
+
+    portfolio_value = float(account.portfolio_value)
+    display_performance_report(alpaca_api, portfolio_value)
     
-    global all_dossiers
-    market_context = get_market_context_from_perplexity()
-    all_dossiers = aggregate_data_dossiers(alpaca_api, candidate_universe, market_context)
+    all_dossiers = {}
+    proposed_trades = get_todays_proposed_plan()
     
-    print("\n--- [Stage 3: AI-Powered Analysis] ---")
-    all_analyses = []
-    if all_dossiers:
-        for symbol, dossier in all_dossiers.items():
-            analysis = get_ai_analysis(dossier, market_context)
-            if analysis:
-                all_analyses.append(analysis)
-            time.sleep(2)
+    if proposed_trades:
+        print("\nFound a previously proposed plan for today. Proceeding to approval.")
+        all_dossiers = {trade['symbol']: {'latest_price': trade['latest_price']} for trade in proposed_trades}
+        print("  - Dossier information loaded from database. Skipping aggregation.")
     else:
-        print("No dossiers were created, skipping AI analysis.")
-    
-    # STAGE 4 & 5 ARE INTENTIONALLY OMITTED IN THIS SAFE VERSION
-    # execute_trades(alpaca_api, all_analyses, current_positions, account_info)
+        print("\nNo existing plan found for today. Generating a new one...")
+        proposed_trades, all_dossiers = generate_and_log_new_plan(alpaca_api, current_positions)
 
-    print("\n--- [Trade Plan Generation Complete] ---")
-    print("The following decisions have been recommended by the AI. No trades will be executed.")
-    
-    for analysis in all_analyses:
-        print("-" * 30)
-        print(f"  Symbol:    {analysis['symbol']}")
-        print(f"  Decision:  {analysis['decision']} (Conviction: {analysis['conviction_score']})")
-        print(f"  Rationale: {analysis['rationale']}")
-    
-    print("\n====== Sentinel Daily Run Finished (SAFE MODE) ======")
+    if not proposed_trades:
+        print("\nNo actionable trades were proposed. Concluding run.")
+    else:
+        # Note: The approval step is now just for the AI's high-level plan
+        is_approved = handle_approval_process(proposed_trades)
+        if is_approved:
+            final_trade_plan = calculate_trade_plan(proposed_trades, current_positions, portfolio_value)
+            # We pass current_positions to execute_trades for liquidation logic
+            execute_trades(alpaca_api, final_trade_plan, current_positions)
+        else:
+            print("\n--- [Trade Execution Halted] ---")
+            print("  - Run concluded without executing trades.")
 
+    print("\n====== Sentinel Daily Run Finished ======")
 
 if __name__ == "__main__":
     main()

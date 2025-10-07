@@ -1,0 +1,10 @@
+# requirements.txt
+alpaca-trade-api
+openai
+twilio
+requests
+python-dotenv
+pandas
+pandas-ta
+yfinance
+Flask

@@ -1,9 +1,26 @@
-# Ignore the Python virtual environment
-venv/
-
-# Ignore Python cache files
+# Python cache
 __pycache__/
 *.pyc
 
-# Ignore the configuration file containing secret keys
+# IDE / Editor specific
+.idea/
+.vscode/
+
+# Secrets - DO NOT COMMIT
 config.py
+
+# Database file - DO NOT COMMIT
+sentinel.db
+*.db
+
+# Backup files - DO NOT COMMIT
+*.bak
+
+# Archive folder - DO NOT COMMIT
+_archive/
+
+# Environment files
+.env
+
+# Text files used for notes (optional, but good practice)
+*.txt
