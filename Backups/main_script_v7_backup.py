@@ -1,6 +1,5 @@
-# -*- coding: cp1252 -*-
 # main_script.py
-# Version 7.2 - DEV override for plan regeneration, prompt refinements, decision post-processing
+# Version 7.0 - Portfolio Guardrails & Plan Transparency
 
 import config
 import alpaca_trade_api as tradeapi
@@ -15,25 +14,28 @@ import requests
 from twilio.rest import Client
 import sqlite3
 
+# --- Global Constants ---
 DB_FILE = "sentinel.db"
 
-TARGET_INVESTED_RATIO = 0.90
-MAX_POSITION_PERCENTAGE = 0.10
+# --- Capital Allocation Rules from Charter ---
+TARGET_INVESTED_RATIO = 0.90   # Invest 90% of total portfolio value
+MAX_POSITION_PERCENTAGE = 0.10 # No single position may exceed 10% of the portfolio
 
+# --- Position Count Guardrails ---
 MIN_POSITIONS = 10
 MAX_POSITIONS = 100
-TARGET_POSITION_COUNT = 80
+TARGET_POSITION_COUNT = 80     # Soft target, not a hard cap
 
-MIN_TRADE_DOLLAR_THRESHOLD = 25.0
+# --- Trading Safeguards ---
+MIN_TRADE_DOLLAR_THRESHOLD = 25.0  # Ignore miniscule trades
 SAME_DAY_CONFLICT_ERROR = (
     "SAFEGUARD TRIGGERED: The trade plan attempted to both buy and sell the same symbol "
     "in a single run. No trades will be executed. Please share the log with the developer."
 )
 
+# --- Stage -1: Daily State Check ---
 def check_if_trades_executed_today():
-    if getattr(config, "ALLOW_DEV_RERUNS", False):
-        print("\n[DEV MODE] Bypassing single-run safeguard for today.")
-        return False
+    """Checks the DB to see if any trades were already submitted today."""
     try:
         conn = sqlite3.connect(DB_FILE)
         cursor = conn.cursor()
@@ -51,6 +53,10 @@ def check_if_trades_executed_today():
         return False
 
 def get_todays_decisions():
+    """
+    Returns all AI decisions stored for today (Buy, Sell, Hold).
+    Each entry contains: id, symbol, decision, conviction_score, rationale, latest_price.
+    """
     try:
         conn = sqlite3.connect(DB_FILE)
         conn.row_factory = sqlite3.Row
@@ -78,48 +84,7 @@ def get_todays_decisions():
         print(f"DB_ERROR getting today's decisions: {e}")
         return []
 
-def wipe_today_plan():
-    if not getattr(config, "ALLOW_DEV_RERUNS", False):
-        return False
-    try:
-        conn = sqlite3.connect(DB_FILE)
-        cursor = conn.cursor()
-        cursor.execute("""
-            DELETE FROM decisions
-            WHERE DATE(timestamp) = DATE('now', 'localtime')
-        """)
-        decisions_deleted = cursor.rowcount
-        cursor.execute("""
-            DELETE FROM trades
-            WHERE DATE(timestamp) = DATE('now', 'localtime')
-        """)
-        trades_deleted = cursor.rowcount
-        conn.commit()
-        conn.close()
-        print(f"\n[DEV MODE] Cleared today's plan artifacts "
-              f"(decisions deleted: {decisions_deleted}, trades deleted: {trades_deleted}).")
-        return True
-    except sqlite3.Error as e:
-        print(f"[DEV MODE] Failed to clear today's plan artifacts: {e}")
-        return False
-
-def maybe_regenerate_plan(decisions):
-    if not decisions:
-        return decisions
-    if not getattr(config, "ALLOW_DEV_RERUNS", False):
-        return decisions
-
-    print("\n[DEV MODE] Existing plan detected for today.")
-    print("Options:")
-    print("  1. Press ENTER to reuse the stored plan.")
-    print("  2. Type 'R' and press ENTER to wipe it and build a fresh plan (testing only).")
-    choice = input("[DEV MODE] Enter selection: ").strip().upper()
-
-    if choice == "R":
-        if wipe_today_plan():
-            return []
-    return decisions
-
+# --- Stage 0: System Initialization & State Review ---
 def get_alpaca_api():
     return tradeapi.REST(
         config.APCA_API_KEY_ID,
@@ -153,6 +118,7 @@ def get_account_info(api):
         return {}, None
 
 def display_performance_report(api, current_value):
+    """Fetches portfolio history and displays Daily and YTD performance."""
     print("\n--- [Stage 0.1: Performance Report] ---")
     try:
         hist = api.get_portfolio_history(period='7D', timeframe='1D')
@@ -185,6 +151,7 @@ def display_performance_report(api, current_value):
         print(f"  - Could not generate performance report: {e}")
         print("  - This may be due to a new account with insufficient history.")
 
+# --- Stage 1: Candidate Universe Generation ---
 def get_nasdaq_100_symbols():
     print("  - Fetching Nasdaq 100 constituents...")
     try:
@@ -210,6 +177,7 @@ def generate_candidate_universe(current_symbols):
     print(f"Generated a universe of {len(candidate_universe)} candidates for analysis.")
     return candidate_universe
 
+# --- Stage 2: Data Dossier Aggregation ---
 def get_raw_search_results_from_perplexity():
     print("\n--- [News Gathering Step 1: Searching via Perplexity] ---")
     try:
@@ -302,14 +270,7 @@ def aggregate_data_dossiers(api, universe, market_news_summary):
     print(f"\nSuccessfully aggregated {len(dossiers)} data dossiers.")
     return dossiers
 
-def sanitize_conviction(raw_value):
-    try:
-        value = float(raw_value)
-    except (TypeError, ValueError):
-        return 5
-    value = max(1, min(10, value))
-    return int(round(value))
-
+# --- Stage 3: AI-Powered Analysis ---
 def get_ai_analysis(dossier, market_context):
     print(f"  - Getting AI analysis for {dossier['symbol']}...")
     client = OpenAI(api_key=config.OPENAI_API_KEY)
@@ -322,15 +283,13 @@ def get_ai_analysis(dossier, market_context):
         technical_signal = "Could not calculate technical signal."
 
     system_prompt = (
-        "You are a disciplined quantitative analyst. Use the provided data to issue a portfolio forecast.\n"
-        "Ground rules:\n"
-        " • Return only JSON.\n"
-        " • Default stance is HOLD unless evidence is compelling.\n"
-        " • Assign BUY only when the stock is a top-tier opportunity with conviction >= 7.\n"
-        " • Assign SELL only when downside odds are strong with conviction >= 7.\n"
-        " • Use the full 1-10 scale (1 = very weak, 10 = extremely strong).\n"
-        " • Clearly differentiate conviction levels so the weightings are meaningful.\n"
-        " • Keep rationale concise (2-3 sentences)."
+        "You are a disciplined quantitative analyst. Use the provided data to issue a portfolio forecast."
+        " Apply the following guidelines:\n"
+        " - Return decisions only in JSON.\n"
+        " - Use the full conviction scale: 1 (very weak) to 10 (very strong).\n"
+        " - 'Hold' means maintain approximately the current stake.\n"
+        " - 'Sell' means reduce to zero unless the human overrides you.\n"
+        " - Be decisive; aim to differentiate across the universe."
     )
 
     user_prompt = f"""
@@ -345,12 +304,17 @@ def get_ai_analysis(dossier, market_context):
     - Technical Signal: {technical_signal}
     - Stock-Specific Headlines: {dossier['stock_specific_headlines']}
 
-    Required JSON schema:
+    Expectations:
+    - decision ? {{ "Buy", "Sell", "Hold" }}
+    - conviction_score ? [1, 10], integer
+    - Keep rationale to 2-3 sentences.
+
+    Return ONLY the JSON object, e.g.:
     {{
-        "symbol": "TICKER",
-        "decision": "Buy" | "Sell" | "Hold",
-        "conviction_score": integer 1-10,
-        "rationale": "2-3 sentences"
+        "symbol": "XYZ",
+        "decision": "Buy",
+        "conviction_score": 9,
+        "rationale": "..."
     }}
     """
 
@@ -374,26 +338,12 @@ def get_ai_analysis(dossier, market_context):
         if isinstance(analysis['rationale'], list):
             analysis['rationale'] = ' '.join(map(str, analysis['rationale']))
 
-        decision = analysis.get("decision", "").strip().upper()
-        conviction = sanitize_conviction(analysis.get("conviction_score"))
-        rationale = analysis.get("rationale", "")
-
-        if decision == "BUY" and conviction < 7:
-            decision = "HOLD"
-            rationale += " | Adjusted to HOLD due to sub-7 conviction."
-        elif decision == "SELL" and conviction < 7:
-            decision = "HOLD"
-            rationale += " | Adjusted to HOLD due to sub-7 conviction."
-
-        analysis["decision"] = decision.title()
-        analysis["conviction_score"] = conviction
-        analysis["rationale"] = rationale.strip()
-
         return analysis
     except Exception as e:
         print(f"    - ERROR: Failed to get or parse AI analysis for {dossier['symbol']}: {e}")
         return None
 
+# --- Stage 4 Helpers: Portfolio Guardrails & Plan Construction ---
 def normalize_decision(decision_raw):
     if not decision_raw:
         return "HOLD"
@@ -401,6 +351,14 @@ def normalize_decision(decision_raw):
     if decision not in {"BUY", "SELL", "HOLD"}:
         return "HOLD"
     return decision
+
+def sanitize_conviction(raw_value):
+    try:
+        value = float(raw_value)
+    except (TypeError, ValueError):
+        return 5
+    value = max(1, min(10, value))
+    return int(round(value))
 
 def fetch_latest_price_from_alpaca(api, symbol):
     try:
@@ -410,6 +368,10 @@ def fetch_latest_price_from_alpaca(api, symbol):
         return None
 
 def prepare_decision_book(decisions, current_positions, api):
+    """
+    Builds a dictionary keyed by symbol with standardized decision metadata.
+    Ensures we have a usable latest_price for each symbol (fall back to Alpaca if needed).
+    """
     decision_book = {}
     skipped_symbols = []
 
@@ -443,24 +405,15 @@ def prepare_decision_book(decisions, current_positions, api):
 
     if skipped_symbols:
         print("\nWARNING: Missing reliable price data for the following symbols; "
-              "removed from today's plan:")
+              "they were removed from today's plan:")
         print("  - " + ", ".join(sorted(set(skipped_symbols))))
     return decision_book
 
-def display_decision_mix(decision_book):
-    counts = {"BUY": 0, "SELL": 0, "HOLD": 0}
-    convictions = []
-    for data in decision_book.values():
-        counts[data["decision"]] += 1
-        convictions.append(data["conviction_score"])
-    print(f"\nAI Decision Mix -> BUY: {counts['BUY']} | SELL: {counts['SELL']} | HOLD: {counts['HOLD']}")
-    if convictions:
-        avg = sum(convictions) / len(convictions)
-        hi = max(convictions)
-        lo = min(convictions)
-        print(f"Conviction stats -> avg: {avg:.2f} | range: {lo}-{hi}")
-
 def ensure_minimum_positions(decision_book, current_positions):
+    """
+    Guarantees at least MIN_POSITIONS symbols remain in the target set.
+    Returns (selected_symbols, notes)
+    """
     notes = []
     selected_symbols = {sym for sym, data in decision_book.items()
                         if data["decision"] in {"BUY", "HOLD"}}
@@ -472,6 +425,7 @@ def ensure_minimum_positions(decision_book, current_positions):
     print(f"\nEnforcing minimum position rule: need {MIN_POSITIONS}, "
           f"currently have {len(selected_symbols)}. Adding {needed} fallback holdings.")
 
+    # Sort current positions by market value descending
     existing_sorted = sorted(
         current_positions.items(),
         key=lambda kv: float(kv[1].market_value),
@@ -510,11 +464,15 @@ def ensure_minimum_positions(decision_book, current_positions):
     return selected_symbols, notes
 
 def enforce_position_limits(decision_book, selected_symbols):
+    """
+    Ensures we do not exceed MAX_POSITIONS.
+    Returns (selected_symbols, notes)
+    """
     notes = []
     if len(selected_symbols) <= MAX_POSITIONS:
         return selected_symbols, notes
 
-    print(f"\nApplying max position cap: target count {len(selected_symbols)} > {MAX_POSITIONS}.")
+    print(f"\nApplying max position cap: current target count {len(selected_symbols)} > {MAX_POSITIONS}.")
     ordered = sorted(
         [decision_book[sym] for sym in selected_symbols],
         key=lambda d: (d["conviction_score"], d["symbol"]),
@@ -527,17 +485,22 @@ def enforce_position_limits(decision_book, selected_symbols):
     for entry in dropped:
         symbol = entry["symbol"]
         decision_book[symbol]["decision"] = "SELL"
-        decision_book[symbol]["rationale"] += " | Set to SELL due to max position limit."
+        decision_book[symbol]["rationale"] += " | Trimmed due to max position limit."
         decision_book[symbol]["source"] = "max_cap_forced"
 
     notes.append(f"Max position cap enforced: retained {len(selected_symbols)} highest-conviction holdings.")
     return selected_symbols, notes
 
 def compute_target_allocations(decision_book, selected_symbols, portfolio_value):
+    """
+    Returns (allocations_dict, notes, invested_capital).
+    allocations_dict maps symbol -> target dollar value (<= investable capital and <= max position cap).
+    """
     investable_capital = portfolio_value * TARGET_INVESTED_RATIO
     max_position_value = portfolio_value * MAX_POSITION_PERCENTAGE
     notes = []
 
+    # Collect convictions for allocation
     convictions = {}
     for symbol in selected_symbols:
         conviction = decision_book[symbol]["conviction_score"]
@@ -545,16 +508,19 @@ def compute_target_allocations(decision_book, selected_symbols, portfolio_value)
 
     total_conviction = sum(convictions.values())
     if total_conviction == 0:
+        # fallback: equal weight
         for symbol in selected_symbols:
             convictions[symbol] = 1
         total_conviction = len(selected_symbols)
         notes.append("Conviction scores were zero; defaulted to equal weighting.")
 
+    # Initial allocation proportional to conviction
     allocations = {
         symbol: investable_capital * (convictions[symbol] / total_conviction)
         for symbol in selected_symbols
     }
 
+    # Enforce max-position cap iteratively
     max_cap = max_position_value
     iteration_guard = 0
     while iteration_guard < 20:
@@ -581,10 +547,18 @@ def compute_target_allocations(decision_book, selected_symbols, portfolio_value)
     invested_capital = sum(allocations.values())
     if invested_capital < investable_capital * 0.985:
         notes.append("Investable capital not fully allocated (likely due to caps or rounding). "
-                     "Cash buffer slightly above 10%.")
+                     "Cash buffer will be slightly above 10%.")
+
     return allocations, notes, invested_capital
 
 def build_trade_plan(decision_book, selected_symbols, allocations, current_positions, portfolio_value):
+    """
+    Constructs the final trade plan (buys/sells) and post-trade state.
+    Returns plan dictionary:
+        - trades: list of trade instructions (order_type, notional/qty)
+        - target_positions: map symbol -> target details
+        - constraint_notes: list of text notes applied during planning
+    """
     trades = []
     target_positions = {}
     constraint_notes = []
@@ -604,6 +578,7 @@ def build_trade_plan(decision_book, selected_symbols, allocations, current_posit
         delta_value = target_value - current_value
         delta_qty = target_qty - current_qty
 
+        # Determine action
         if abs(delta_value) < MIN_TRADE_DOLLAR_THRESHOLD:
             action = "hold"
         elif delta_qty > 0:
@@ -654,7 +629,7 @@ def build_trade_plan(decision_book, selected_symbols, allocations, current_posit
             trade["notional"] = round(abs(delta_value), 2)
             if trade["notional"] < MIN_TRADE_DOLLAR_THRESHOLD:
                 continue
-        else:
+        else:  # sell
             if target_value <= 0 and current_qty > 0:
                 trade["order_type"] = "quantity"
                 trade["quantity"] = str(round(current_qty, 6))
@@ -666,6 +641,7 @@ def build_trade_plan(decision_book, selected_symbols, allocations, current_posit
 
         trades.append(trade)
 
+    # Ensure we liquidate any remaining positions not selected
     for symbol, position in current_positions.items():
         symbol = symbol.upper()
         if symbol in selected_symbols:
@@ -703,6 +679,7 @@ def build_trade_plan(decision_book, selected_symbols, allocations, current_posit
             "db_decision_id": decision_book.get(symbol, {}).get("db_decision_id")
         }
 
+    # Safety check: ensure no buy/sell conflicts for a symbol
     buy_symbols = {trade["symbol"] for trade in trades if trade["side"] == "buy"}
     sell_symbols = {trade["symbol"] for trade in trades if trade["side"] == "sell"}
     conflicts = buy_symbols & sell_symbols
@@ -801,6 +778,7 @@ def request_user_approval():
     approval_input = input("Enter command: ")
     return approval_input.strip().upper() == 'APPROVE'
 
+# --- Stage 4: Database Logging ---
 def log_decision_to_db(analysis, latest_price, market_context):
     try:
         conn = sqlite3.connect(DB_FILE)
@@ -834,6 +812,7 @@ def log_decision_to_db(analysis, latest_price, market_context):
         print(f"    - DB_ERROR: Failed to log decision for {analysis.get('symbol')}: {e}")
         return None
 
+# --- Stage 5: Execution ---
 def update_trade_log(trade_id, status, order_id=None):
     try:
         conn = sqlite3.connect(DB_FILE)
@@ -917,6 +896,7 @@ def execute_trades(api, plan, current_positions):
             print(f"  - FAILED to submit order for {symbol}: {e}")
             update_trade_log(trade_id, 'execution_failed')
 
+# --- Stage 3 & 4 Orchestration ---
 def generate_and_log_new_plan(api, current_positions):
     print("\n--- [Generating New Daily Plan] ---")
     candidate_universe = generate_candidate_universe(current_positions.keys())
@@ -941,6 +921,7 @@ def generate_and_log_new_plan(api, current_positions):
 
     return decisions, dossiers
 
+# --- Main Execution Workflow ---
 def main():
     print("====== Sentinel Daily Run Initialized ======")
 
@@ -960,7 +941,6 @@ def main():
     display_performance_report(alpaca_api, portfolio_value)
 
     decisions = get_todays_decisions()
-    decisions = maybe_regenerate_plan(decisions)
     dossiers = {}
 
     if decisions:
@@ -979,8 +959,6 @@ def main():
         print("\nUnable to assemble decision book (missing prices). Aborting run.")
         print("\n====== Sentinel Daily Run Finished ======")
         return
-
-    display_decision_mix(decision_book)
 
     selected_symbols, notes_min = ensure_minimum_positions(decision_book, current_positions)
     selected_symbols, notes_max = enforce_position_limits(decision_book, selected_symbols)
