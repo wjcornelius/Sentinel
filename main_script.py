@@ -533,9 +533,52 @@ def aggregate_data_dossiers(api, universe, market_news_summary, current_position
     print("\n--- [Stage 2: Data Dossier Aggregation] ---")
     dossiers = {}
     print(f"*** Analyzing the full universe of {len(universe)} stocks. ***")
+
+    from threading import Thread
+    import queue
+
     for i, symbol in enumerate(universe):
         print(f"Aggregating data for {symbol} ({i+1}/{len(universe)})...")
+
+        # Use threading to add timeout for entire dossier creation
+        result_queue = queue.Queue()
+
+        def create_dossier_with_timeout():
+            try:
+                dossier = _create_single_dossier(api, symbol, market_news_summary, current_positions, portfolio_value)
+                result_queue.put(('success', dossier))
+            except Exception as e:
+                result_queue.put(('error', str(e)))
+
+        thread = Thread(target=create_dossier_with_timeout)
+        thread.daemon = True
+        thread.start()
+        thread.join(timeout=30)  # 30 second timeout per stock
+
+        if thread.is_alive():
+            print(f"  - Timeout fetching data for {symbol}; skipping.")
+            logging.warning(f"Timeout during dossier creation for {symbol}")
+            continue
+
         try:
+            status, result = result_queue.get_nowait()
+            if status == 'success' and result:
+                dossiers[symbol] = result
+                print(f"  - Successfully created dossier for {symbol}.")
+            elif status == 'error':
+                print(f"  - Failed to create dossier for {symbol}: {result}")
+        except queue.Empty:
+            print(f"  - No result returned for {symbol}; skipping.")
+
+        time.sleep(1)
+
+    print(f"\nSuccessfully aggregated {len(dossiers)} data dossiers.")
+    return dossiers
+
+
+def _create_single_dossier(api, symbol, market_news_summary, current_positions, portfolio_value):
+    """Create dossier for a single stock (extracted for timeout wrapper)."""
+    try:
             end_date = datetime.now()
             start_date = end_date - timedelta(days=365)
             bars_obj = api.get_bars(
@@ -604,7 +647,7 @@ def aggregate_data_dossiers(api, universe, market_news_summary, current_position
             current_weight = (current_value / portfolio_value) if (currently_held and portfolio_value) else 0.0
             prior_conviction = get_prior_conviction(symbol)
 
-            dossiers[symbol] = {
+            return {
                 "symbol": symbol,
                 "company_name": info.get('shortName') or info.get('longName') or symbol,
                 "fundamentals": {
@@ -643,12 +686,9 @@ def aggregate_data_dossiers(api, universe, market_news_summary, current_position
                 },
                 "alt_data": {}
             }
-            print(f"  - Successfully created dossier for {symbol}.")
-            time.sleep(1)
-        except Exception as e:
-            print(f"  - Failed to create dossier for {symbol}: {e}")
-    print(f"\nSuccessfully aggregated {len(dossiers)} data dossiers.")
-    return dossiers
+    except Exception as e:
+        logging.error(f"Error creating dossier for {symbol}: {e}")
+        return None
 
 def sanitize_conviction(raw_value):
     try:
