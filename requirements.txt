@@ -1,4 +1,5 @@
 # requirements.txt
+# Core trading dependencies
 alpaca-trade-api
 openai
 twilio
@@ -8,3 +9,6 @@ pandas
 pandas-ta
 yfinance
 Flask
+
+# Development/testing dependencies
+pytest>=8.0.0
