@@ -303,9 +303,12 @@ def wipe_today_plan():
         return False
 
 def maybe_regenerate_plan(decisions):
-    if not decisions:
-        return decisions
+    # Only prompt in DEV_RERUNS mode
     if not getattr(config, "ALLOW_DEV_RERUNS", False):
+        return decisions
+
+    # If no decisions found, nothing to regenerate
+    if not decisions:
         return decisions
 
     # Get info about existing plan
@@ -316,7 +319,8 @@ def maybe_regenerate_plan(decisions):
         "message": f"Existing plan covers {unique_symbols} symbols with {len(decisions)} decisions"
     }
 
-    print(f"\n[DEV MODE] Existing plan detected for today ({unique_symbols} symbols, {len(decisions)} decisions).")
+    print(f"\n[DEV MODE] Existing plan detected for today ({unique_symbols} symbols, {len(decisions)} decisions).", flush=True)
+    logging.info(f"[DEV MODE] Existing plan detected - requesting user decision")
 
     # Ask user via UI or console
     should_regenerate = ui_bridge.wait_for_plan_decision(plan_info)
