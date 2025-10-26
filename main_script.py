@@ -557,8 +557,29 @@ def aggregate_data_dossiers(api, universe, market_news_summary, current_position
 
             info = {}
             try:
-                info = yf.Ticker(symbol).info
-            except Exception:
+                # Fetch yfinance info with a timeout using threading
+                from threading import Thread
+                result_container = [{}]
+
+                def fetch_info():
+                    try:
+                        ticker = yf.Ticker(symbol)
+                        result_container[0] = ticker.info
+                    except Exception:
+                        result_container[0] = {}
+
+                thread = Thread(target=fetch_info)
+                thread.daemon = True
+                thread.start()
+                thread.join(timeout=10)  # 10 second timeout
+
+                if thread.is_alive():
+                    print(f"  - Warning: yfinance timeout for {symbol}, using empty info")
+                    info = {}
+                else:
+                    info = result_container[0]
+            except Exception as e:
+                print(f"  - Warning: Could not fetch yfinance info for {symbol}: {e}")
                 info = {}
 
             headlines = get_stock_specific_news_headlines(api, symbol)
