@@ -309,6 +309,14 @@ def maybe_regenerate_plan(decisions):
         return decisions
 
     print("\n[DEV MODE] Existing plan detected for today.")
+
+    # In UI mode, automatically reuse the plan (no console input available)
+    if ui_bridge.is_ui_mode():
+        print("[DEV MODE] Running in UI mode - automatically reusing stored plan.")
+        print("  (To regenerate, stop Sentinel, run main_script.py manually, and type 'R')")
+        return decisions
+
+    # In console mode, ask user
     print("Options:")
     print("  1. Press ENTER to reuse the stored plan.")
     print("  2. Type 'R' and press ENTER to wipe it and build a fresh plan (testing only).")
