@@ -25,7 +25,7 @@ app.config['SECRET_KEY'] = 'sentinel-nautical-dashboard-2025'
 current_process = None
 process_lock = threading.Lock()
 terminal_buffer = []
-current_status = "idle"  # idle, running, waiting_approval, completed, aborted, failed
+current_status = "idle"  # idle, running, waiting_approval, waiting_plan_decision, completed, aborted, failed
 current_plan = None
 
 
@@ -137,6 +137,40 @@ def deny_plan():
     return jsonify({'status': 'denied'})
 
 
+@app.route('/api/reuse_plan', methods=['POST'])
+def reuse_plan():
+    """Reuse existing plan."""
+    global current_status
+
+    if current_status != "waiting_plan_decision":
+        return jsonify({'error': 'Not waiting for plan decision'}), 400
+
+    from sentinel.ui_bridge import set_plan_regeneration_response
+    set_plan_regeneration_response(False)
+
+    add_terminal_output("\n[DASHBOARD] User chose to REUSE existing plan\n")
+    current_status = "running"
+
+    return jsonify({'status': 'reusing'})
+
+
+@app.route('/api/regenerate_plan', methods=['POST'])
+def regenerate_plan():
+    """Regenerate plan from scratch."""
+    global current_status
+
+    if current_status != "waiting_plan_decision":
+        return jsonify({'error': 'Not waiting for plan decision'}), 400
+
+    from sentinel.ui_bridge import set_plan_regeneration_response
+    set_plan_regeneration_response(True)
+
+    add_terminal_output("\n[DASHBOARD] User chose to REGENERATE plan\n")
+    current_status = "running"
+
+    return jsonify({'status': 'regenerating'})
+
+
 @app.route('/api/status')
 def get_status():
     """Get current status and terminal output."""
@@ -231,6 +265,8 @@ def run_sentinel_process():
                 # Check for special events
                 if 'Manual Approval Required' in line:
                     current_status = "waiting_approval"
+                elif 'Existing plan detected' in line or 'Waiting for plan decision' in line:
+                    current_status = "waiting_plan_decision"
                 elif 'ABORTED' in line:
                     current_status = "aborted"
 

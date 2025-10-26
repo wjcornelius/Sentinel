@@ -63,7 +63,25 @@
                     </button>
                 </div>
 
-                <!-- Approval Panel (hidden by default) -->
+                <!-- Plan Decision Panel (hidden by default) -->
+                <div class="panel-section approval-panel" id="planDecisionPanel" style="display: none;">
+                    <h2>Plan Decision Required</h2>
+                    <div class="approval-content" id="planDecisionContent">
+                        <p>Existing plan detected...</p>
+                    </div>
+                    <div class="approval-buttons">
+                        <button class="btn btn-success" id="reusePlanBtn">
+                            <span class="btn-icon">↻</span>
+                            REUSE PLAN
+                        </button>
+                        <button class="btn btn-warning" id="regeneratePlanBtn">
+                            <span class="btn-icon">⚡</span>
+                            REGENERATE
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Trade Approval Panel (hidden by default) -->
                 <div class="panel-section approval-panel" id="approvalPanel" style="display: none;">
                     <h2>Trade Plan Approval</h2>
                     <div class="approval-content" id="approvalContent">

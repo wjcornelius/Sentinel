@@ -308,21 +308,18 @@ def maybe_regenerate_plan(decisions):
     if not getattr(config, "ALLOW_DEV_RERUNS", False):
         return decisions
 
-    print("\n[DEV MODE] Existing plan detected for today.")
+    # Get info about existing plan
+    unique_symbols = len({d["symbol"].upper() for d in decisions})
+    plan_info = {
+        "symbol_count": unique_symbols,
+        "decision_count": len(decisions),
+        "message": f"Existing plan covers {unique_symbols} symbols with {len(decisions)} decisions"
+    }
 
-    # In UI mode, automatically reuse the plan (no console input available)
-    if ui_bridge.is_ui_mode():
-        print("[DEV MODE] Running in UI mode - automatically reusing stored plan.")
-        print("  (To regenerate, stop Sentinel, run main_script.py manually, and type 'R')")
-        return decisions
+    # Ask user via UI or console
+    should_regenerate = ui_bridge.wait_for_plan_decision(plan_info)
 
-    # In console mode, ask user
-    print("Options:")
-    print("  1. Press ENTER to reuse the stored plan.")
-    print("  2. Type 'R' and press ENTER to wipe it and build a fresh plan (testing only).")
-    choice = input("[DEV MODE] Enter selection: ").strip().upper()
-
-    if choice == "R":
+    if should_regenerate:
         if wipe_today_plan():
             return []
     return decisions

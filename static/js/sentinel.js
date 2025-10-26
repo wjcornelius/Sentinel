@@ -13,6 +13,8 @@ const startBtn = document.getElementById('startBtn');
 const stopBtn = document.getElementById('stopBtn');
 const approveBtn = document.getElementById('approveBtn');
 const denyBtn = document.getElementById('denyBtn');
+const reusePlanBtn = document.getElementById('reusePlanBtn');
+const regeneratePlanBtn = document.getElementById('regeneratePlanBtn');
 const clearTerminalBtn = document.getElementById('clearTerminalBtn');
 const terminal = document.getElementById('terminal');
 const statusIndicator = document.getElementById('statusIndicator');
@@ -20,6 +22,8 @@ const statusDot = statusIndicator.querySelector('.status-dot');
 const statusText = statusIndicator.querySelector('.status-text');
 const approvalPanel = document.getElementById('approvalPanel');
 const approvalContent = document.getElementById('approvalContent');
+const planDecisionPanel = document.getElementById('planDecisionPanel');
+const planDecisionContent = document.getElementById('planDecisionContent');
 const tradingMode = document.getElementById('tradingMode');
 const sessionTime = document.getElementById('sessionTime');
 
@@ -33,6 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
     stopBtn.addEventListener('click', handleStop);
     approveBtn.addEventListener('click', handleApprove);
     denyBtn.addEventListener('click', handleDeny);
+    reusePlanBtn.addEventListener('click', handleReusePlan);
+    regeneratePlanBtn.addEventListener('click', handleRegeneratePlan);
     clearTerminalBtn.addEventListener('click', clearTerminal);
     liveTradingToggle.addEventListener('change', updateTradingModeDisplay);
 
@@ -171,6 +177,48 @@ async function handleDeny() {
     }
 }
 
+// Handle Reuse Plan button
+async function handleReusePlan() {
+    try {
+        const response = await fetch('/api/reuse_plan', {
+            method: 'POST'
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            addTerminalLine('[USER] Reusing existing plan', 'success');
+            planDecisionPanel.style.display = 'none';
+        } else {
+            addTerminalLine(`[ERROR] ${result.error}`, 'error');
+        }
+    } catch (error) {
+        console.error('Reuse plan error:', error);
+        addTerminalLine(`[ERROR] Failed to reuse plan: ${error.message}`, 'error');
+    }
+}
+
+// Handle Regenerate Plan button
+async function handleRegeneratePlan() {
+    try {
+        const response = await fetch('/api/regenerate_plan', {
+            method: 'POST'
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            addTerminalLine('[USER] Regenerating plan from scratch...', 'warning');
+            planDecisionPanel.style.display = 'none';
+        } else {
+            addTerminalLine(`[ERROR] ${result.error}`, 'error');
+        }
+    } catch (error) {
+        console.error('Regenerate plan error:', error);
+        addTerminalLine(`[ERROR] Failed to regenerate plan: ${error.message}`, 'error');
+    }
+}
+
 // Clear terminal
 function clearTerminal() {
     terminal.innerHTML = '';
@@ -260,6 +308,7 @@ function updateStatus(status) {
             startBtn.disabled = false;
             stopBtn.disabled = true;
             approvalPanel.style.display = 'none';
+            planDecisionPanel.style.display = 'none';
             stopSessionTimer();
             break;
 
@@ -267,12 +316,21 @@ function updateStatus(status) {
             startBtn.disabled = true;
             stopBtn.disabled = false;
             approvalPanel.style.display = 'none';
+            planDecisionPanel.style.display = 'none';
+            break;
+
+        case 'waiting_plan_decision':
+            startBtn.disabled = true;
+            stopBtn.disabled = false;
+            approvalPanel.style.display = 'none';
+            planDecisionPanel.style.display = 'block';
             break;
 
         case 'waiting_approval':
             startBtn.disabled = true;
             stopBtn.disabled = false;
-            // Approval panel shown via showApprovalPanel()
+            approvalPanel.style.display = 'block';
+            planDecisionPanel.style.display = 'none';
             break;
 
         case 'completed':
@@ -281,6 +339,7 @@ function updateStatus(status) {
             startBtn.disabled = false;
             stopBtn.disabled = true;
             approvalPanel.style.display = 'none';
+            planDecisionPanel.style.display = 'none';
             stopSessionTimer();
 
             if (eventSource) {

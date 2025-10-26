@@ -20,6 +20,7 @@ import threading
 _ui_mode = os.getenv('SENTINEL_UI_MODE') == '1'
 _abort_requested = False
 _approval_response = None
+_plan_regeneration_response = None
 _terminal_queue = queue.Queue()
 _status_callbacks = []
 
@@ -146,6 +147,71 @@ def get_terminal_messages():
         except queue.Empty:
             break
     return messages
+
+
+def set_plan_regeneration_response(regenerate: bool):
+    """Set user's plan regeneration decision from dashboard."""
+    global _plan_regeneration_response
+    _plan_regeneration_response = regenerate
+    logging.info(f"Plan regeneration response: {'REGENERATE' if regenerate else 'REUSE'}")
+
+
+def wait_for_plan_decision(existing_plan_info: dict) -> bool:
+    """
+    Wait for user decision on whether to regenerate or reuse existing plan.
+
+    Args:
+        existing_plan_info: Dictionary with info about existing plan
+
+    Returns:
+        True if user wants to REGENERATE, False if REUSE
+    """
+    global _plan_regeneration_response
+
+    if not is_ui_mode():
+        # Console mode - traditional prompt
+        print("\n[DEV MODE] Existing plan detected for today.")
+        print("Options:")
+        print("  1. Press ENTER to reuse the stored plan.")
+        print("  2. Type 'R' and press ENTER to wipe it and build a fresh plan (testing only).")
+        choice = input("[DEV MODE] Enter selection: ").strip().upper()
+        regenerate = (choice == "R")
+        logging.info(f"Console plan decision: {'REGENERATE' if regenerate else 'REUSE'}")
+        return regenerate
+
+    # UI mode - wait for dashboard response
+    _plan_regeneration_response = None
+    send_terminal_output("\n[DEV MODE] Existing plan detected for today.\n")
+    send_terminal_output("Waiting for plan decision from dashboard...\n")
+    send_status_update("waiting_plan_decision", existing_plan_info)
+
+    logging.info("Waiting for UI plan regeneration response...")
+
+    # Wait up to 2 minutes for response
+    timeout = 120
+    start = time.time()
+
+    while _plan_regeneration_response is None:
+        if time.time() - start > timeout:
+            logging.warning("Plan decision timeout - defaulting to REUSE")
+            send_terminal_output("\n[TIMEOUT] No response received - reusing existing plan\n")
+            return False
+
+        if is_abort_requested():
+            logging.info("Abort requested during plan decision wait")
+            return False
+
+        time.sleep(0.1)
+
+    regenerate = _plan_regeneration_response
+    _plan_regeneration_response = None  # Reset for next time
+
+    if regenerate:
+        send_terminal_output("\n[REGENERATE] Building fresh plan...\n")
+    else:
+        send_terminal_output("\n[REUSE] Using existing plan\n")
+
+    return regenerate
 
 
 def check_abort_safe_point(stage_name: str) -> bool:
