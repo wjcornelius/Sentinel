@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # main_script.py
-# Version 7.5 - Added comprehensive logging, enhanced error handling, database backups
+# Version 7.7 - Bug fixes (YTD P/L, liquidation precision), enhanced analytics (Sharpe, drawdown), async data fetching
 
 import config
 import alpaca_trade_api as tradeapi
@@ -381,25 +381,61 @@ def display_performance_report(api, current_value):
         else:
             print("  - Daily P/L:    Not enough history to calculate.")
 
+        # YTD P/L calculation
         today = datetime.now()
         start_of_year_str = f"{today.year}-01-01"
+
+        logging.debug(f"Fetching YTD history from {start_of_year_str}")
         ytd_hist = api.get_portfolio_history(date_start=start_of_year_str, timeframe='1D')
 
-        if len(ytd_hist.equity) > 0:
-            ytd_start_value = next((val for val in ytd_hist.equity if val is not None and val > 0), 0)
+        if len(ytd_hist.equity) > 0 and len(ytd_hist.timestamp) > 0:
+            # Filter out None values and create list of valid (timestamp, equity) pairs
+            valid_data = [(ts, eq) for ts, eq in zip(ytd_hist.timestamp, ytd_hist.equity)
+                         if eq is not None and eq > 0]
 
-            if ytd_start_value > 0:
+            logging.debug(f"YTD history: {len(ytd_hist.equity)} total points, {len(valid_data)} valid points")
+
+            if valid_data:
+                # Get the first valid equity value (earliest trading day)
+                ytd_start_value = valid_data[0][1]
+                ytd_start_date = pd.to_datetime(valid_data[0][0]).strftime('%Y-%m-%d')
+
                 ytd_pl = current_value - ytd_start_value
                 ytd_pl_pct = (ytd_pl / ytd_start_value) * 100
-                print(f"  - YTD P/L:      ${ytd_pl:,.2f} ({ytd_pl_pct:+.2f}%)")
+                logging.info(f"YTD P/L: ${ytd_pl:,.2f} ({ytd_pl_pct:+.2f}%) from {ytd_start_date}")
+                print(f"  - YTD P/L:      ${ytd_pl:,.2f} ({ytd_pl_pct:+.2f}%) since {ytd_start_date}")
             else:
-                print("  - YTD P/L:      $0.00 (Not enough history for YTD %)")
+                logging.warning("No valid YTD equity data found")
+                print("  - YTD P/L:      No valid data (account may be new)")
         else:
+            logging.warning("YTD history returned empty")
             print("  - YTD P/L:      Not enough history to calculate.")
+
+        # Enhanced Analytics (Phase 3)
+        print("\n  [Advanced Metrics]")
+        try:
+            from sentinel.analytics import generate_performance_summary
+            metrics = generate_performance_summary(api, current_value)
+
+            if metrics['days_tracked'] >= 10:
+                print(f"  - Sharpe Ratio:   {metrics['sharpe_ratio']:.2f}")
+                print(f"  - Max Drawdown:   {metrics['max_drawdown']:.2f}%")
+                if metrics['max_dd_start'] and metrics['max_dd_end']:
+                    print(f"    (from {metrics['max_dd_start']} to {metrics['max_dd_end']})")
+                print(f"  - Volatility:     {metrics['volatility_annual']:.1f}% (annualized)")
+                logging.info(f"Advanced metrics: Sharpe={metrics['sharpe_ratio']:.2f}, MaxDD={metrics['max_drawdown']:.2f}%")
+            else:
+                print(f"  - Need {10 - metrics['days_tracked']} more days of data for advanced metrics")
+        except ImportError:
+            logging.debug("Analytics module not available, skipping advanced metrics")
+        except Exception as e:
+            logging.warning(f"Could not calculate advanced metrics: {e}")
+            print(f"  - Advanced metrics unavailable: {e}")
 
     except Exception as e:
         print(f"  - Could not generate performance report: {e}")
         print("  - This may be due to a new account with insufficient history.")
+        logging.error(f"Performance report error: {e}", exc_info=True)
 
 def get_nasdaq_100_symbols():
     print("  - Fetching Nasdaq 100 constituents...")
@@ -954,16 +990,13 @@ def build_trade_plan(decision_book, selected_symbols, allocations, current_posit
             if trade["notional"] < MIN_TRADE_DOLLAR_THRESHOLD:
                 continue
         else:
+            # Handle sell orders
             if target_value <= 0 and current_qty > 0:
-                current_qty_value = current_qty * latest_price
-                if current_qty_value < MIN_TRADE_DOLLAR_THRESHOLD:
-                    qty_to_sell = max(current_qty, 0.0)
-                else:
-                    qty_to_sell = floor_to_precision(current_qty, decimals=6)
-                if qty_to_sell <= 0:
-                    continue
+                # Full liquidation - use EXACT quantity from position to avoid remnants
+                # Do NOT use floor_to_precision as it can leave tiny amounts unsold
+                logging.debug(f"Full liquidation: {symbol} - selling exact qty {current_qty}")
                 trade["order_type"] = "quantity"
-                trade["quantity"] = f"{qty_to_sell:.6f}"
+                trade["quantity"] = f"{current_qty:.6f}"  # Exact quantity, no epsilon adjustment
             else:
                 trade["order_type"] = "notional"
                 trade["notional"] = round(abs(delta_value), 2)
@@ -982,45 +1015,17 @@ def build_trade_plan(decision_book, selected_symbols, allocations, current_posit
 
         current_qty = float(position.qty)
         current_value = current_qty * latest_price
-        if current_value < MIN_TRADE_DOLLAR_THRESHOLD:
-            qty_str = f"{current_qty:.6f}"
-            qty_float = float(qty_str)
-            if qty_float <= 0:
-                continue
-            trades.append({
-                "symbol": symbol,
-                "side": "sell",
-                "order_type": "quantity",
-                "quantity": qty_str,
-                "notional": round(current_value, 2),
-                "decision_id": decision_book.get(symbol, {}).get("db_decision_id"),
-                "note": "Position not in target portfolio; exiting.",
-                "target_value": 0.0,
-                "target_shares": 0.0,
-                "current_shares": current_qty,
-                "latest_price": latest_price
-            })
-            target_positions[symbol] = {
-                "decision": "SELL",
-                "conviction_score": decision_book.get(symbol, {}).get("conviction_score", 5),
-                "target_value": 0.0,
-                "target_shares": 0.0,
-                "latest_price": latest_price,
-                "note": "Position not in target portfolio; exiting.",
-                "db_decision_id": decision_book.get(symbol, {}).get("db_decision_id")
-            }
-            continue
 
-        qty_to_sell = floor_to_precision(current_qty, decimals=6)
-        if qty_to_sell <= 0:
-            continue
+        # Full liquidation for position not in target portfolio
+        # Use EXACT quantity to ensure complete exit (no remnants)
+        logging.debug(f"Liquidating {symbol} (not in target portfolio): exact qty {current_qty}")
 
         note = "Position not in target portfolio; exiting."
         trades.append({
             "symbol": symbol,
             "side": "sell",
             "order_type": "quantity",
-            "quantity": f"{qty_to_sell:.6f}",
+            "quantity": f"{current_qty:.6f}",  # Exact quantity from position
             "notional": round(current_value, 2),
             "decision_id": decision_book.get(symbol, {}).get("db_decision_id"),
             "note": note,
@@ -1323,7 +1328,7 @@ def main():
 
     logging.info("="*80)
     logging.info("SENTINEL DAILY RUN STARTED")
-    logging.info(f"Version: 7.5")
+    logging.info(f"Version: 7.7")
     logging.info(f"Live Trading: {config.LIVE_TRADING}")
     logging.info(f"Target Invested Ratio: {TARGET_INVESTED_RATIO:.2%}")
     logging.info("="*80)
