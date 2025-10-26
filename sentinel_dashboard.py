@@ -265,7 +265,7 @@ def run_sentinel_process():
                 # Check for special events
                 if 'Manual Approval Required' in line:
                     current_status = "waiting_approval"
-                elif 'Existing plan detected' in line or 'Waiting for plan decision' in line:
+                elif '[DEV MODE] Existing plan detected' in line:
                     current_status = "waiting_plan_decision"
                 elif 'ABORTED' in line:
                     current_status = "aborted"

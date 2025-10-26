@@ -316,6 +316,8 @@ def maybe_regenerate_plan(decisions):
         "message": f"Existing plan covers {unique_symbols} symbols with {len(decisions)} decisions"
     }
 
+    print(f"\n[DEV MODE] Existing plan detected for today ({unique_symbols} symbols, {len(decisions)} decisions).")
+
     # Ask user via UI or console
     should_regenerate = ui_bridge.wait_for_plan_decision(plan_info)
 
