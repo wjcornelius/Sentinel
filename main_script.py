@@ -591,7 +591,7 @@ def _create_single_dossier(api, symbol, market_news_summary, current_positions, 
             bars = bars_obj.df
             if bars.empty:
                 print(f"  - No price data found for {symbol}; skipping.")
-                continue
+                return None
 
             closes = bars['close']
             highs = bars['high']
