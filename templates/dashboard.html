@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentinel Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/sentinel.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>⚓ SENTINEL TRADING DASHBOARD</h1>
+                <div class="status-indicator" id="statusIndicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">IDLE</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Left Panel: Controls -->
+            <div class="control-panel">
+                <div class="panel-section">
+                    <h2>Configuration</h2>
+
+                    <div class="config-item">
+                        <label class="switch-label">
+                            <span class="label-text">LIVE TRADING</span>
+                            <label class="switch">
+                                <input type="checkbox" id="liveTradingToggle" {{ 'checked' if live_trading else '' }}>
+                                <span class="slider"></span>
+                            </label>
+                        </label>
+                        <p class="config-help">Enable real paper trades with Alpaca</p>
+                    </div>
+
+                    <div class="config-item">
+                        <label class="switch-label">
+                            <span class="label-text">DEV RERUNS</span>
+                            <label class="switch">
+                                <input type="checkbox" id="devRerunsToggle" {{ 'checked' if dev_reruns else '' }}>
+                                <span class="slider"></span>
+                            </label>
+                        </label>
+                        <p class="config-help">Allow multiple runs per day (testing only)</p>
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <h2>Control</h2>
+
+                    <button class="btn btn-primary" id="startBtn">
+                        <span class="btn-icon">▶</span>
+                        START SENTINEL
+                    </button>
+
+                    <button class="btn btn-danger" id="stopBtn" disabled>
+                        <span class="btn-icon">■</span>
+                        STOP
+                    </button>
+                </div>
+
+                <!-- Approval Panel (hidden by default) -->
+                <div class="panel-section approval-panel" id="approvalPanel" style="display: none;">
+                    <h2>Trade Plan Approval</h2>
+                    <div class="approval-content" id="approvalContent">
+                        <p>Waiting for trade plan...</p>
+                    </div>
+                    <div class="approval-buttons">
+                        <button class="btn btn-success" id="approveBtn">
+                            <span class="btn-icon">✓</span>
+                            APPROVE
+                        </button>
+                        <button class="btn btn-warning" id="denyBtn">
+                            <span class="btn-icon">✗</span>
+                            DENY
+                        </button>
+                    </div>
+                </div>
+
+                <!-- System Info -->
+                <div class="panel-section system-info">
+                    <h3>System Status</h3>
+                    <div class="info-row">
+                        <span class="info-label">Mode:</span>
+                        <span class="info-value" id="tradingMode">SAFE MODE</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Session:</span>
+                        <span class="info-value" id="sessionTime">--:--:--</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel: Terminal -->
+            <div class="terminal-panel">
+                <div class="terminal-header">
+                    <h2>Terminal Output</h2>
+                    <button class="btn-clear" id="clearTerminalBtn" title="Clear terminal">Clear</button>
+                </div>
+                <div class="terminal-content" id="terminal">
+                    <div class="terminal-line terminal-welcome">
+                        <span class="terminal-prompt">[SENTINEL]</span>
+                        <span>Dashboard initialized. Ready to start.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Sentinel Trading System v7.8 | Safe Mode by Default |
+                <a href="https://github.com/yourusername/sentinel" target="_blank">GitHub</a>
+            </p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/sentinel.js') }}"></script>
+</body>
+</html>

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # main_script.py
-# Version 7.7 - Bug fixes (YTD P/L, liquidation precision), enhanced analytics (Sharpe, drawdown), async data fetching
+# Version 7.8 - Desktop Dashboard with Web UI (Flask-based control panel)
 
 import config
 import alpaca_trade_api as tradeapi
@@ -20,6 +20,7 @@ import os
 from pathlib import Path
 import backup_database
 from functools import wraps
+from sentinel import ui_bridge
 
 DB_FILE = "sentinel.db"
 LOG_DIR = "logs"
@@ -1144,8 +1145,17 @@ def present_trade_plan(summary):
     else:
         print("\nNo trades required. Portfolio already aligns with target configuration.")
 
-def request_user_approval():
+def request_user_approval(plan_summary):
+    """Request approval from UI or console, depending on mode."""
     print("\n--- [Manual Approval Required] ---")
+
+    # If running in UI mode, delegate to UI bridge
+    if ui_bridge.is_ui_mode():
+        print("Waiting for approval from dashboard...")
+        logging.info("Requesting approval via dashboard UI")
+        return ui_bridge.wait_for_approval(plan_summary)
+
+    # Otherwise, use console input
     print("Type 'APPROVE' to authorize this plan. Any other input cancels execution.")
     approval_input = input("Enter command: ")
     return approval_input.strip().upper() == 'APPROVE'
@@ -1328,8 +1338,9 @@ def main():
 
     logging.info("="*80)
     logging.info("SENTINEL DAILY RUN STARTED")
-    logging.info(f"Version: 7.7")
+    logging.info(f"Version: 7.8")
     logging.info(f"Live Trading: {config.LIVE_TRADING}")
+    logging.info(f"UI Mode: {ui_bridge.is_ui_mode()}")
     logging.info(f"Target Invested Ratio: {TARGET_INVESTED_RATIO:.2%}")
     logging.info("="*80)
 
@@ -1356,6 +1367,12 @@ def main():
         print("\nCould not retrieve account info. Aborting run.")
         return
 
+    # Abort checkpoint: After account info retrieval
+    if ui_bridge.check_abort_safe_point("Account Info"):
+        print("\n[ABORTED] User requested stop.")
+        logging.warning("Run aborted by user at Account Info stage")
+        return
+
     portfolio_value = float(account.portfolio_value)
     display_performance_report(alpaca_api, portfolio_value)
 
@@ -1369,6 +1386,12 @@ def main():
     else:
         print("\nNo existing plan found for today. Generating a new one...")
         decisions, dossiers = generate_and_log_new_plan(alpaca_api, current_positions, portfolio_value)
+
+    # Abort checkpoint: After plan generation
+    if ui_bridge.check_abort_safe_point("Plan Generation"):
+        print("\n[ABORTED] User requested stop.")
+        logging.warning("Run aborted by user after Plan Generation")
+        return
 
     if not decisions:
         print("\nNo actionable decisions were produced. Concluding run.")
@@ -1405,6 +1428,12 @@ def main():
 
     plan["constraint_notes"].extend(notes_min + notes_max + allocation_notes)
 
+    # Abort checkpoint: Before trade approval
+    if ui_bridge.check_abort_safe_point("Trade Plan Review"):
+        print("\n[ABORTED] User requested stop.")
+        logging.warning("Run aborted by user before Trade Plan Review")
+        return
+
     summary = summarize_trade_plan(
         plan,
         current_positions_count=len(current_positions),
@@ -1414,7 +1443,7 @@ def main():
 
     present_trade_plan(summary)
 
-    approved = request_user_approval()
+    approved = request_user_approval(summary)
     if approved:
         logging.info("User approved trade plan - proceeding with execution")
         execute_trades(alpaca_api, plan, current_positions)
