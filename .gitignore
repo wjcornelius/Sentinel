@@ -1,28 +1,56 @@
 # Python cache
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+env/
+ENV/
 
 # IDE / Editor specific
 .idea/
 .vscode/
+.claude/
+*.swp
+*.swo
+*~
 
 # Secrets - DO NOT COMMIT
 config.py
+.env
+*.key
+*.pem
 
-# Database file - DO NOT COMMIT
+# Database files - DO NOT COMMIT
 sentinel.db
 *.db
+*.sqlite
+*.sqlite3
 
-# Backup files - DO NOT COMMIT
+# Logs - DO NOT COMMIT
+logs/
+*.log
+
+# Backup files and directories - DO NOT COMMIT
+backups/
+Backups/
 *.bak
+*.backup
+*.old
 
 # Archive folder - DO NOT COMMIT
 _archive/
 
-# Environment files
-.env
+# OS specific
+.DS_Store
+Thumbs.db
+desktop.ini
 
 # Text files used for notes (optional, but good practice)
 *.txt
 
-/Backups/
+# Temporary files
+*.tmp
+*.temp

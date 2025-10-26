@@ -1,6 +1,6 @@
-# -*- coding: cp1252 -*-
-# main_engine.py
-# Version 7.4 - Enhanced analysis prompt, conviction-weighted sizing, HOLD preservation, sell-first execution, quantity precision safeguards
+# -*- coding: utf-8 -*-
+# main_script.py
+# Version 7.5 - Added comprehensive logging, enhanced error handling, database backups
 
 import config
 import alpaca_trade_api as tradeapi
@@ -15,8 +15,19 @@ import requests
 from twilio.rest import Client
 import sqlite3
 import math
+import logging
+import os
+from pathlib import Path
+import backup_database
+from functools import wraps
 
 DB_FILE = "sentinel.db"
+LOG_DIR = "logs"
+BACKUP_DIR = "backups"
+
+# API retry configuration
+MAX_API_RETRIES = 3
+API_RETRY_DELAY = 2  # seconds
 
 TARGET_INVESTED_RATIO = 0.90
 MAX_POSITION_PERCENTAGE = 0.10
@@ -26,8 +37,89 @@ MAX_POSITIONS = 100
 TARGET_POSITION_COUNT = 80
 
 MIN_TRADE_DOLLAR_THRESHOLD = 25.0
-CONVICTION_WEIGHT_EXP = 1.6
-MIN_WEIGHT_FLOOR = 0.05
+CONVICTION_WEIGHT_EXP = 1.6  # Exponential weight for conviction scoring (higher = more aggressive weighting)
+MIN_WEIGHT_FLOOR = 0.05  # Minimum allocation weight to prevent zero-weight positions
+
+# Setup logging
+def setup_logging():
+    """Configure logging to both file and console with appropriate levels."""
+    Path(LOG_DIR).mkdir(exist_ok=True)
+
+    log_filename = os.path.join(LOG_DIR, f"sentinel_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log")
+
+    # Create formatter
+    formatter = logging.Formatter(
+        '%(asctime)s - %(levelname)s - %(funcName)s - %(message)s',
+        datefmt='%Y-%m-%d %H:%M:%S'
+    )
+
+    # File handler - detailed logging
+    file_handler = logging.FileHandler(log_filename, encoding='utf-8')
+    file_handler.setLevel(logging.DEBUG)
+    file_handler.setFormatter(formatter)
+
+    # Console handler - info and above (keeps console clean)
+    console_handler = logging.StreamHandler()
+    console_handler.setLevel(logging.WARNING)
+    console_handler.setFormatter(formatter)
+
+    # Configure root logger
+    logger = logging.getLogger()
+    logger.setLevel(logging.DEBUG)
+    logger.addHandler(file_handler)
+    logger.addHandler(console_handler)
+
+    logging.info("="*80)
+    logging.info("Sentinel logging initialized")
+    logging.info(f"Log file: {log_filename}")
+    logging.info(f"Config: LIVE_TRADING={config.LIVE_TRADING}, ALLOW_DEV_RERUNS={getattr(config, 'ALLOW_DEV_RERUNS', False)}")
+    logging.info("="*80)
+
+    return log_filename
+
+
+def retry_on_failure(max_retries=MAX_API_RETRIES, delay=API_RETRY_DELAY, exceptions=(Exception,)):
+    """
+    Decorator to retry a function on failure with exponential backoff.
+
+    Args:
+        max_retries: Maximum number of retry attempts
+        delay: Base delay in seconds between retries (doubles with each retry)
+        exceptions: Tuple of exception types to catch and retry on
+
+    Returns:
+        Decorated function that retries on failure
+    """
+    def decorator(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            last_exception = None
+            current_delay = delay
+
+            for attempt in range(max_retries):
+                try:
+                    return func(*args, **kwargs)
+                except exceptions as e:
+                    last_exception = e
+                    if attempt < max_retries - 1:
+                        logging.warning(
+                            f"{func.__name__} failed (attempt {attempt + 1}/{max_retries}): {e}. "
+                            f"Retrying in {current_delay}s..."
+                        )
+                        time.sleep(current_delay)
+                        current_delay *= 2  # Exponential backoff
+                    else:
+                        logging.error(
+                            f"{func.__name__} failed after {max_retries} attempts: {e}",
+                            exc_info=True
+                        )
+
+            # If we get here, all retries failed
+            raise last_exception
+
+        return wrapper
+    return decorator
+
 
 SAME_DAY_CONFLICT_ERROR = (
     "SAFEGUARD TRIGGERED: The trade plan attempted to both buy and sell the same symbol "
@@ -43,40 +135,42 @@ Payload:
 Your job is to decide whether the trading system should BUY, SELL, or HOLD this ticker tomorrow and to assign a conviction score between 1 and 10. Follow these instructions exactly:
 
 1. Decision categories
-   • BUY – add or increase exposure.
-   • SELL – exit or reduce exposure.
-   • HOLD – maintain the current position size.
+   ï¿½ BUY ï¿½ add or increase exposure.
+   ï¿½ SELL ï¿½ exit or reduce exposure.
+   ï¿½ HOLD ï¿½ maintain the current position size.
 
 2. Conviction scale (use the full range)
-   • 10 – Exceptional edge. Multiple independent, high-quality signals align in a compelling way. Very rare; reserve for best-in-class setups.
-   • 8–9 – Strong, actionable idea with clear catalysts and supportive data across most dimensions.
-   • 6–7 – Mild positive or negative bias. Evidence is mixed or moderate; fine for tactical adjustments but avoid clustering here unless warranted.
-   • 5 – Neutral stance. Signals conflict or lack sufficient edge. Prefer HOLD unless portfolio constraints require action.
-   • 3–4 – Notable caution. Signals lean bearish or thesis is deteriorating.
-   • 1–2 – Acute risk/urgency to exit. Severe red flags, broken thesis, or imminent negative catalysts. Use sparingly.
+   ï¿½ 10 ï¿½ Exceptional edge. Multiple independent, high-quality signals align in a compelling way. Very rare; reserve for best-in-class setups.
+   ï¿½ 8ï¿½9 ï¿½ Strong, actionable idea with clear catalysts and supportive data across most dimensions.
+   ï¿½ 6ï¿½7 ï¿½ Mild positive or negative bias. Evidence is mixed or moderate; fine for tactical adjustments but avoid clustering here unless warranted.
+   ï¿½ 5 ï¿½ Neutral stance. Signals conflict or lack sufficient edge. Prefer HOLD unless portfolio constraints require action.
+   ï¿½ 3ï¿½4 ï¿½ Notable caution. Signals lean bearish or thesis is deteriorating.
+   ï¿½ 1ï¿½2 ï¿½ Acute risk/urgency to exit. Severe red flags, broken thesis, or imminent negative catalysts. Use sparingly.
 
-   Important: If you find yourself defaulting to 6–7, reassess. Only sit in the mid-range when evidence is truly mixed. Push scores toward the tails when data justifies it.
+   Important: If you find yourself defaulting to 6ï¿½7, reassess. Only sit in the mid-range when evidence is truly mixed. Push scores toward the tails when data justifies it.
 
 3. Rationale
-   • Provide 2–3 concise bullet points (no more than ~40 words each) covering the strongest drivers of your decision.
-   • Mention concrete evidence: earnings momentum, valuation shifts, technical breaks, macro tailwinds/headwinds, regulatory news, etc.
-   • If data conflicts, call it out.
+   ï¿½ Provide 2ï¿½3 concise bullet points (no more than ~40 words each) covering the strongest drivers of your decision.
+   ï¿½ Mention concrete evidence: earnings momentum, valuation shifts, technical breaks, macro tailwinds/headwinds, regulatory news, etc.
+   ï¿½ If data conflicts, call it out.
 
 4. Output format
-   • Return a single JSON object on one line with the keys: symbol, decision, conviction, rationale (array of bullet strings).
-   • Ensure valid JSON (double quotes, no trailing commas).
+   ï¿½ Return a single JSON object on one line with the keys: symbol, decision, conviction, rationale (array of bullet strings).
+   ï¿½ Ensure valid JSON (double quotes, no trailing commas).
 
 5. Tone & discipline
-   • Be analytical, impartial, and data-driven.
-   • Do not reference this prompt or the fact you are an AI.
-   • If critical data is missing, mention it in the rationale and adjust conviction downward.
+   ï¿½ Be analytical, impartial, and data-driven.
+   ï¿½ Do not reference this prompt or the fact you are an AI.
+   ï¿½ If critical data is missing, mention it in the rationale and adjust conviction downward.
 
-Take a moment to weigh all inputs carefully before responding. The trading engine relies on your conviction spread to size positions—make each score count.
+Take a moment to weigh all inputs carefully before responding. The trading engine relies on your conviction spread to size positionsï¿½make each score count.
 """
 
 def check_if_trades_executed_today():
+    """Check if trades have already been executed today to prevent duplicate runs."""
     if getattr(config, "ALLOW_DEV_RERUNS", False):
         print("\n[DEV MODE] Bypassing single-run safeguard for today.")
+        logging.warning("DEV MODE: Bypassing single-run safeguard")
         return False
     try:
         conn = sqlite3.connect(DB_FILE)
@@ -89,8 +183,11 @@ def check_if_trades_executed_today():
         """)
         result = cursor.fetchone()
         conn.close()
-        return result is not None
+        already_ran = result is not None
+        logging.info(f"Checked for today's trades: already_ran={already_ran}")
+        return already_ran
     except sqlite3.Error as e:
+        logging.error(f"Database error checking for executed trades: {e}", exc_info=True)
         print(f"DB_ERROR checking for executed trades: {e}")
         return False
 
@@ -222,34 +319,52 @@ def maybe_regenerate_plan(decisions):
     return decisions
 
 def get_alpaca_api():
-    return tradeapi.REST(
-        config.APCA_API_KEY_ID,
-        config.APCA_API_SECRET_KEY,
-        config.APCA_API_BASE_URL,
-        api_version='v2'
-    )
+    """Initialize and return Alpaca API client."""
+    logging.debug(f"Connecting to Alpaca API at {config.APCA_API_BASE_URL}")
+    try:
+        api = tradeapi.REST(
+            config.APCA_API_KEY_ID,
+            config.APCA_API_SECRET_KEY,
+            config.APCA_API_BASE_URL,
+            api_version='v2'
+        )
+        logging.info("Successfully connected to Alpaca API")
+        return api
+    except Exception as e:
+        logging.error(f"Failed to connect to Alpaca API: {e}", exc_info=True)
+        raise
 
 def get_account_info(api):
+    """Retrieve account status and current positions from Alpaca."""
     print("--- [Stage 0: Account & Position Review] ---")
+    logging.info("Stage 0: Fetching account info and positions")
     try:
         account = api.get_account()
         portfolio_value = float(account.portfolio_value)
+        logging.info(f"Account status: {account.status}, Portfolio value: ${portfolio_value:,.2f}")
         print(f"Account is {'ACTIVE' if account.status == 'ACTIVE' else account.status}. "
               f"Portfolio Value: ${portfolio_value:,.2f}")
+
         positions = api.list_positions()
+        logging.info(f"Retrieved {len(positions)} open positions")
+
         if positions:
             print(f"Current Positions ({len(positions)}):")
             for pos in positions:
                 qty = float(pos.qty)
                 avg_price = float(pos.avg_entry_price)
                 market_value = float(pos.market_value)
+                logging.debug(f"Position: {pos.symbol} - {qty:.6f} shares @ ${avg_price:,.2f} = ${market_value:,.2f}")
                 print(f"  - {pos.symbol}: {qty:.6f} shares @ avg ${avg_price:,.2f} "
                       f"(Value: ${market_value:,.2f})")
         else:
             print("No open positions.")
+            logging.info("No open positions")
+
         position_map = {p.symbol.upper(): p for p in positions}
         return position_map, account
     except Exception as e:
+        logging.error(f"Error retrieving account info from Alpaca: {e}", exc_info=True)
         print(f"Error connecting to Alpaca: {e}")
         return {}, None
 
@@ -311,23 +426,24 @@ def generate_candidate_universe(current_symbols):
     print(f"Generated a universe of {len(candidate_universe)} candidates for analysis.")
     return candidate_universe
 
+@retry_on_failure(max_retries=2, delay=3, exceptions=(requests.RequestException,))
 def get_raw_search_results_from_perplexity():
+    """Fetch market news from Perplexity API with retry logic."""
     print("\n--- [News Gathering Step 1: Searching via Perplexity] ---")
-    try:
-        url = "https://api.perplexity.ai/search"
-        payload = {"query": "Top 15-20 most significant, market-moving financial news stories last 24 hours"}
-        headers = {
-            "accept": "application/json",
-            "content-type": "application/json",
-            "authorization": f"Bearer {config.PERPLEXITY_API_KEY}"
-        }
-        response = requests.post(url, json=payload, headers=headers, timeout=20.0)
-        response.raise_for_status()
-        print("  - Successfully fetched raw search results from Perplexity.")
-        return response.json()
-    except Exception as e:
-        print(f"  - ERROR fetching from Perplexity /search: {e}")
-        return None
+    logging.info("Fetching market news from Perplexity")
+
+    url = "https://api.perplexity.ai/search"
+    payload = {"query": "Top 15-20 most significant, market-moving financial news stories last 24 hours"}
+    headers = {
+        "accept": "application/json",
+        "content-type": "application/json",
+        "authorization": f"Bearer {config.PERPLEXITY_API_KEY}"
+    }
+    response = requests.post(url, json=payload, headers=headers, timeout=20.0)
+    response.raise_for_status()
+    logging.info("Successfully fetched market news from Perplexity")
+    print("  - Successfully fetched raw search results from Perplexity.")
+    return response.json()
 
 def summarize_market_context_with_openAI(raw_results):
     print("--- [News Gathering Step 2: Summarizing via OpenAI] ---")
@@ -474,7 +590,10 @@ def sanitize_conviction(raw_value):
     return int(round(value))
 
 def get_ai_analysis(dossier, market_context):
-    print(f"  - Getting AI analysis for {dossier['symbol']}...")
+    """Get AI-powered buy/sell/hold decision for a stock using OpenAI GPT-4."""
+    symbol = dossier['symbol']
+    print(f"  - Getting AI analysis for {symbol}...")
+    logging.debug(f"Requesting AI analysis for {symbol}")
     client = OpenAI(api_key=config.OPENAI_API_KEY)
 
     analysis_payload = {
@@ -523,8 +642,11 @@ def get_ai_analysis(dossier, market_context):
         analysis["conviction_score"] = conviction
         analysis["rationale"] = rationale_text
 
+        logging.info(f"AI analysis for {symbol}: {decision} (conviction: {conviction})")
+        logging.debug(f"AI rationale for {symbol}: {rationale_text}")
         return analysis
     except Exception as e:
+        logging.error(f"Failed to get AI analysis for {dossier['symbol']}: {e}", exc_info=True)
         print(f"    - ERROR: Failed to get or parse AI analysis for {dossier['symbol']}: {e}")
         return None
 
@@ -1070,14 +1192,18 @@ def update_trade_log(trade_id, status, order_id=None):
         print(f"  - DB_ERROR: Failed to update trade log (ID {trade_id}): {e}")
 
 def execute_trades(api, plan, current_positions):
+    """Execute approved trades via Alpaca API or simulate in safe mode."""
     mode = "LIVE PAPER TRADING" if config.LIVE_TRADING else "SAFE MODE"
     print(f"\n--- [Stage 5: Trade Execution & Logging ({mode})] ---")
+    logging.info(f"Stage 5: Beginning trade execution in {mode}")
 
     trades = plan.get("trades", [])
     if not trades:
         print("  - No trades to execute.")
+        logging.info("No trades to execute")
         return
 
+    logging.info(f"Executing {len(trades)} trades")
     trades = sorted(trades, key=trade_sort_key)
 
     for trade in trades:
@@ -1119,6 +1245,7 @@ def execute_trades(api, plan, current_positions):
         try:
             if config.LIVE_TRADING:
                 print(f"  - Submitting {side.upper()} order for {symbol} ({displayed_amount})...")
+                logging.info(f"Submitting LIVE order: {side.upper()} {symbol} {displayed_amount}")
                 order = api.submit_order(
                     symbol=symbol,
                     side=side,
@@ -1126,6 +1253,7 @@ def execute_trades(api, plan, current_positions):
                     **order_details
                 )
                 print(f"  - SUCCESS (LIVE): Order ID {order.id}")
+                logging.info(f"Order submitted successfully: {order.id} for {symbol}")
                 update_trade_log(trade_id, 'submitted', order.id)
             else:
                 latest_price = trade["latest_price"]
@@ -1134,18 +1262,35 @@ def execute_trades(api, plan, current_positions):
                 else:
                     sim_qty = order_details["notional"] / latest_price if latest_price > 0 else 0
                 fake_order_id = f"sim_{int(time.time())}_{symbol}"
+                logging.info(f"SAFE MODE simulation: {side.upper()} {symbol} {displayed_amount} ({sim_qty:.4f} shares)")
                 print(f"  - [SAFE MODE] {side.upper()} {symbol}: {displayed_amount} "
                       f"(~{sim_qty:,.4f} shares @ ${latest_price:,.2f}) -> Fake Order {fake_order_id}")
                 update_trade_log(trade_id, 'submitted', fake_order_id)
         except Exception as e:
+            logging.error(f"Failed to submit order for {symbol}: {e}", exc_info=True)
             print(f"  - FAILED to submit order for {symbol}: {e}")
             update_trade_log(trade_id, 'execution_failed')
 
 def generate_and_log_new_plan(api, current_positions, portfolio_value):
+    """Generate a complete daily trading plan with AI analysis."""
     print("\n--- [Generating New Daily Plan] ---")
+    logging.info("Beginning daily plan generation")
+
     candidate_universe = generate_candidate_universe(current_positions.keys())
-    raw_news_data = get_raw_search_results_from_perplexity()
-    market_context = summarize_market_context_with_openAI(raw_news_data)
+
+    # Graceful degradation: If news fetching fails, continue with generic context
+    try:
+        raw_news_data = get_raw_search_results_from_perplexity()
+        market_context = summarize_market_context_with_openAI(raw_news_data)
+    except Exception as e:
+        logging.error(f"News gathering failed, using fallback context: {e}")
+        print(f"  - WARNING: News gathering failed. Continuing with generic market context.")
+        market_context = (
+            "Market news unavailable for this analysis. "
+            "Proceeding with technical and fundamental data only. "
+            f"Analysis date: {datetime.now().strftime('%Y-%m-%d')}"
+        )
+
     dossiers = aggregate_data_dossiers(api, candidate_universe, market_context, current_positions, portfolio_value)
 
     print("\n--- [Stage 3: AI-Powered Analysis & Logging] ---")
@@ -1167,14 +1312,36 @@ def generate_and_log_new_plan(api, current_positions, portfolio_value):
     return decisions, dossiers
 
 def main():
+    # Initialize logging first
+    log_file = setup_logging()
+
     print("====== Sentinel Daily Run Initialized ======")
     print(f"[CONFIG] LIVE_TRADING={config.LIVE_TRADING} | "
           f"ALLOW_DEV_RERUNS={getattr(config, 'ALLOW_DEV_RERUNS', False)} | "
           f"TARGET_INVESTED_RATIO={TARGET_INVESTED_RATIO:.2f}")
+    print(f"[LOG] Session log: {log_file}")
+
+    logging.info("="*80)
+    logging.info("SENTINEL DAILY RUN STARTED")
+    logging.info(f"Version: 7.5")
+    logging.info(f"Live Trading: {config.LIVE_TRADING}")
+    logging.info(f"Target Invested Ratio: {TARGET_INVESTED_RATIO:.2%}")
+    logging.info("="*80)
+
+    # Create database backup before proceeding
+    print("\n--- [Backing up database] ---")
+    backup_success = backup_database.run_backup_maintenance()
+    if not backup_success:
+        logging.warning("Database backup failed, but continuing with run")
+        print("WARNING: Database backup failed. Continuing anyway...")
 
     if check_if_trades_executed_today():
         print("\nTrading has already been executed for today. See you tomorrow!")
+        logging.info("Run terminated: Trades already executed today")
         print("\n====== Sentinel Daily Run Finished ======")
+        logging.info("="*80)
+        logging.info("SENTINEL DAILY RUN FINISHED")
+        logging.info("="*80)
         return
 
     alpaca_api = get_alpaca_api()
@@ -1244,12 +1411,17 @@ def main():
 
     approved = request_user_approval()
     if approved:
+        logging.info("User approved trade plan - proceeding with execution")
         execute_trades(alpaca_api, plan, current_positions)
     else:
         print("\n--- [Trade Execution Halted] ---")
         print("  - Plan not approved; no trades executed.")
+        logging.warning("User rejected trade plan - no trades executed")
 
     print("\n====== Sentinel Daily Run Finished ======")
+    logging.info("="*80)
+    logging.info("SENTINEL DAILY RUN FINISHED")
+    logging.info("="*80)
 
 if __name__ == "__main__":
     main()
