@@ -209,9 +209,13 @@ def run_sentinel_process():
         env = os.environ.copy()
         env['SENTINEL_UI_MODE'] = '1'
 
+        # Use venv Python if available, otherwise system Python
+        venv_python = os.path.join('venv', 'Scripts', 'python.exe')
+        python_executable = venv_python if os.path.exists(venv_python) else sys.executable
+
         # Start process
         current_process = subprocess.Popen(
-            [sys.executable, 'main_script.py'],
+            [python_executable, 'main_script.py'],
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
             text=True,

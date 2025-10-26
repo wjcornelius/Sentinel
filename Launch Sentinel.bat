@@ -18,11 +18,14 @@ echo.
 REM Change to script directory
 cd /d "%~dp0"
 
-REM Check if Python is available
-python --version >nul 2>&1
-if errorlevel 1 (
-    echo [ERROR] Python is not installed or not in PATH
-    echo Please install Python 3.8+ and try again
+REM Check if venv exists
+if not exist "venv\Scripts\python.exe" (
+    echo [ERROR] Virtual environment not found!
+    echo.
+    echo Please create a virtual environment first:
+    echo   python -m venv venv
+    echo   venv\Scripts\activate
+    echo   pip install -r requirements.txt
     echo.
     pause
     exit /b 1
@@ -48,12 +51,13 @@ if not exist "config.py" (
     exit /b 1
 )
 
-REM Install Flask if not already installed (silent mode)
+REM Check Flask is installed in venv
 echo [INFO] Checking dependencies...
-python -c "import flask" >nul 2>&1
+venv\Scripts\python.exe -c "import flask" >nul 2>&1
 if errorlevel 1 (
-    echo [INFO] Installing Flask...
-    python -m pip install flask --quiet
+    echo [WARNING] Flask not installed in venv!
+    echo Installing Flask...
+    venv\Scripts\python.exe -m pip install flask --quiet
 )
 
 echo [OK] Dependencies verified
@@ -67,8 +71,8 @@ echo.
 echo Opening browser in 3 seconds...
 echo.
 
-REM Start dashboard server in background and capture PID
-start /B python sentinel_dashboard.py
+REM Start dashboard server using venv Python
+start /B venv\Scripts\python.exe sentinel_dashboard.py
 
 REM Wait 3 seconds for server to start
 timeout /t 3 /nobreak >nul
