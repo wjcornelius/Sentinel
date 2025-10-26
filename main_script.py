@@ -1,6 +1,6 @@
 # -*- coding: cp1252 -*-
-# main_script.py
-# Version 7.2 - DEV override for plan regeneration, prompt refinements, decision post-processing
+# main_engine.py
+# Version 7.4 - Enhanced analysis prompt, conviction-weighted sizing, HOLD preservation, sell-first execution, quantity precision safeguards
 
 import config
 import alpaca_trade_api as tradeapi
@@ -14,6 +14,7 @@ from openai import OpenAI
 import requests
 from twilio.rest import Client
 import sqlite3
+import math
 
 DB_FILE = "sentinel.db"
 
@@ -25,10 +26,53 @@ MAX_POSITIONS = 100
 TARGET_POSITION_COUNT = 80
 
 MIN_TRADE_DOLLAR_THRESHOLD = 25.0
+CONVICTION_WEIGHT_EXP = 1.6
+MIN_WEIGHT_FLOOR = 0.05
+
 SAME_DAY_CONFLICT_ERROR = (
     "SAFEGUARD TRIGGERED: The trade plan attempted to both buy and sell the same symbol "
     "in a single run. No trades will be executed. Please share the log with the developer."
 )
+
+ANALYSIS_PROMPT_TEMPLATE = """
+You are Sentinel, a disciplined equity analyst tasked with evaluating a single stock for a daily trading system. You will receive the following JSON payload:
+
+Payload:
+<<PAYLOAD>>
+
+Your job is to decide whether the trading system should BUY, SELL, or HOLD this ticker tomorrow and to assign a conviction score between 1 and 10. Follow these instructions exactly:
+
+1. Decision categories
+   • BUY – add or increase exposure.
+   • SELL – exit or reduce exposure.
+   • HOLD – maintain the current position size.
+
+2. Conviction scale (use the full range)
+   • 10 – Exceptional edge. Multiple independent, high-quality signals align in a compelling way. Very rare; reserve for best-in-class setups.
+   • 8–9 – Strong, actionable idea with clear catalysts and supportive data across most dimensions.
+   • 6–7 – Mild positive or negative bias. Evidence is mixed or moderate; fine for tactical adjustments but avoid clustering here unless warranted.
+   • 5 – Neutral stance. Signals conflict or lack sufficient edge. Prefer HOLD unless portfolio constraints require action.
+   • 3–4 – Notable caution. Signals lean bearish or thesis is deteriorating.
+   • 1–2 – Acute risk/urgency to exit. Severe red flags, broken thesis, or imminent negative catalysts. Use sparingly.
+
+   Important: If you find yourself defaulting to 6–7, reassess. Only sit in the mid-range when evidence is truly mixed. Push scores toward the tails when data justifies it.
+
+3. Rationale
+   • Provide 2–3 concise bullet points (no more than ~40 words each) covering the strongest drivers of your decision.
+   • Mention concrete evidence: earnings momentum, valuation shifts, technical breaks, macro tailwinds/headwinds, regulatory news, etc.
+   • If data conflicts, call it out.
+
+4. Output format
+   • Return a single JSON object on one line with the keys: symbol, decision, conviction, rationale (array of bullet strings).
+   • Ensure valid JSON (double quotes, no trailing commas).
+
+5. Tone & discipline
+   • Be analytical, impartial, and data-driven.
+   • Do not reference this prompt or the fact you are an AI.
+   • If critical data is missing, mention it in the rationale and adjust conviction downward.
+
+Take a moment to weigh all inputs carefully before responding. The trading engine relies on your conviction spread to size positions—make each score count.
+"""
 
 def check_if_trades_executed_today():
     if getattr(config, "ALLOW_DEV_RERUNS", False):
@@ -49,6 +93,63 @@ def check_if_trades_executed_today():
     except sqlite3.Error as e:
         print(f"DB_ERROR checking for executed trades: {e}")
         return False
+
+def get_prior_conviction(symbol):
+    try:
+        conn = sqlite3.connect(DB_FILE)
+        cursor = conn.cursor()
+        cursor.execute("""
+            SELECT conviction_score
+            FROM decisions
+            WHERE symbol = ?
+            ORDER BY timestamp DESC
+            LIMIT 1
+        """, (symbol.upper(),))
+        row = cursor.fetchone()
+        conn.close()
+        if row and row[0] is not None:
+            return sanitize_conviction(row[0])
+    except sqlite3.Error as e:
+        print(f"  - DB_ERROR fetching prior conviction for {symbol}: {e}")
+    return None
+
+def floor_to_precision(value, decimals=6):
+    if value <= 0:
+        return 0.0
+    factor = 10 ** decimals
+    floored = math.floor(value * factor) / factor
+    epsilon = 1 / factor
+    if floored > 0:
+        floored = max(0.0, floored - epsilon)
+    return max(0.0, floored)
+
+def conviction_to_weight(conviction):
+    normalized = max(1, min(10, conviction)) / 10.0
+    weight = normalized ** CONVICTION_WEIGHT_EXP
+    return max(MIN_WEIGHT_FLOOR, weight)
+
+def calculate_rsi(series, period=14):
+    if series is None or len(series) < period + 1:
+        return None
+    delta = series.diff()
+    gain = delta.clip(lower=0)
+    loss = -delta.clip(upper=0)
+    avg_gain = gain.rolling(window=period).mean()
+    avg_loss = loss.rolling(window=period).mean()
+    if avg_loss.iloc[-1] == 0:
+        return 100.0
+    rs = avg_gain.iloc[-1] / avg_loss.iloc[-1]
+    rsi = 100 - (100 / (1 + rs))
+    return float(rsi)
+
+def compute_pct_change(series, periods):
+    if len(series) <= periods:
+        return None
+    start = series.iloc[-periods - 1]
+    end = series.iloc[-1]
+    if start == 0:
+        return None
+    return float((end - start) / start * 100)
 
 def get_todays_decisions():
     try:
@@ -228,7 +329,7 @@ def get_raw_search_results_from_perplexity():
         print(f"  - ERROR fetching from Perplexity /search: {e}")
         return None
 
-def summarize_market_context_with_openai(raw_results):
+def summarize_market_context_with_openAI(raw_results):
     print("--- [News Gathering Step 2: Summarizing via OpenAI] ---")
     if not raw_results:
         return "Could not retrieve general market news."
@@ -236,9 +337,8 @@ def summarize_market_context_with_openai(raw_results):
         client = OpenAI(api_key=config.OPENAI_API_KEY)
         prompt = (
             "You are a financial news analyst. Summarize the key market-moving stories from the "
-            "following dataset into a concise briefing (5 bullet points max). "
-            "Highlight major risk factors and sentiment. Dataset:\n"
-            f"{json.dumps(raw_results, indent=2)}"
+            "following dataset into a concise briefing (5 bullet points max). Highlight major risk factors and sentiment.\n"
+            f"Dataset:\n{json.dumps(raw_results, indent=2)}"
         )
         response = client.chat.completions.create(
             model="gpt-4-turbo",
@@ -261,11 +361,11 @@ def get_stock_specific_news_headlines(api, symbol):
             end=end_time.strftime('%Y-%m-%dT%H:%M:%SZ'),
             limit=5
         )
-        return " | ".join([article.headline for article in news]) if news else "No recent stock-specific news headlines found."
+        return [article.headline for article in news] if news else []
     except Exception:
-        return "Error fetching stock-specific headlines."
+        return []
 
-def aggregate_data_dossiers(api, universe, market_news_summary):
+def aggregate_data_dossiers(api, universe, market_news_summary, current_positions, portfolio_value):
     print("\n--- [Stage 2: Data Dossier Aggregation] ---")
     dossiers = {}
     print(f"*** Analyzing the full universe of {len(universe)} stocks. ***")
@@ -274,26 +374,89 @@ def aggregate_data_dossiers(api, universe, market_news_summary):
         try:
             end_date = datetime.now()
             start_date = end_date - timedelta(days=365)
-            bars = api.get_bars(
+            bars_obj = api.get_bars(
                 symbol,
                 '1Day',
                 start=start_date.strftime('%Y-%m-%d'),
                 end=end_date.strftime('%Y-%m-%d'),
                 feed=config.APCA_API_DATA_FEED
-            ).df
+            )
+            bars = bars_obj.df
             if bars.empty:
                 print(f"  - No price data found for {symbol}; skipping.")
                 continue
-            info = yf.Ticker(symbol).info
+
+            closes = bars['close']
+            highs = bars['high']
+            lows = bars['low']
+            latest_close = float(closes.iloc[-1])
+            prev_close = float(closes.iloc[-2]) if len(closes) > 1 else latest_close
+            change_1d = ((latest_close - prev_close) / prev_close * 100) if prev_close else 0.0
+            change_20d = compute_pct_change(closes, 20)
+            change_60d = compute_pct_change(closes, 60)
+
+            sma_20 = float(closes.rolling(window=20).mean().iloc[-1]) if len(closes) >= 20 else None
+            sma_50 = float(closes.rolling(window=50).mean().iloc[-1]) if len(closes) >= 50 else None
+            sma_200 = float(closes.rolling(window=200).mean().iloc[-1]) if len(closes) >= 200 else None
+            rsi_14 = calculate_rsi(closes, period=14)
+            year_high = float(highs.rolling(window=min(len(highs), 252)).max().iloc[-1])
+            year_low = float(lows.rolling(window=min(len(lows), 252)).min().iloc[-1])
+
+            info = {}
+            try:
+                info = yf.Ticker(symbol).info
+            except Exception:
+                info = {}
+
+            headlines = get_stock_specific_news_headlines(api, symbol)
+            if not headlines:
+                headlines = ["No material stock-specific headlines in the last 72 hours."]
+
+            position = current_positions.get(symbol.upper())
+            currently_held = position is not None
+            current_qty = float(position.qty) if currently_held else 0.0
+            current_value = float(position.market_value) if currently_held else 0.0
+            current_weight = (current_value / portfolio_value) if (currently_held and portfolio_value) else 0.0
+            prior_conviction = get_prior_conviction(symbol)
+
             dossiers[symbol] = {
                 "symbol": symbol,
+                "company_name": info.get('shortName') or info.get('longName') or symbol,
                 "fundamentals": {
                     "sector": info.get('sector', 'N/A'),
-                    "forward_pe": info.get('forwardPE', 'N/A')
+                    "industry": info.get('industry', 'N/A'),
+                    "forward_pe": info.get('forwardPE', 'N/A'),
+                    "trailing_pe": info.get('trailingPE', 'N/A'),
+                    "market_cap": info.get('marketCap', 'N/A'),
+                    "profit_margins": info.get('profitMargins', 'N/A')
                 },
+                "technicals": {
+                    "latest_close": latest_close,
+                    "one_day_change_pct": change_1d,
+                    "twenty_day_change_pct": change_20d,
+                    "sixty_day_change_pct": change_60d,
+                    "sma_20": sma_20,
+                    "sma_50": sma_50,
+                    "sma_200": sma_200,
+                    "rsi_14": rsi_14,
+                    "fifty_two_week_high": year_high,
+                    "fifty_two_week_low": year_low
+                },
+                "news_headlines": headlines,
+                "stock_specific_headlines": " | ".join(headlines),
+                "latest_price": latest_close,
                 "historical_data": bars.to_json(orient='split'),
-                "stock_specific_headlines": get_stock_specific_news_headlines(api, symbol),
-                "latest_price": float(bars.iloc[-1]['close'])
+                "position_context": {
+                    "currently_held": currently_held,
+                    "current_shares": current_qty,
+                    "current_value": current_value,
+                    "current_weight": current_weight,
+                    "prior_conviction": prior_conviction
+                },
+                "macro_context": {
+                    "market_briefing": market_news_summary
+                },
+                "alt_data": {}
             }
             print(f"  - Successfully created dossier for {symbol}.")
             time.sleep(1)
@@ -313,81 +476,52 @@ def sanitize_conviction(raw_value):
 def get_ai_analysis(dossier, market_context):
     print(f"  - Getting AI analysis for {dossier['symbol']}...")
     client = OpenAI(api_key=config.OPENAI_API_KEY)
-    try:
-        df = pd.read_json(StringIO(dossier['historical_data']), orient='split')
-        sma_50 = df['close'].rolling(window=50).mean().iloc[-1]
-        sma_200 = df['close'].rolling(window=200).mean().iloc[-1]
-        technical_signal = "Golden Cross (Bullish)" if sma_50 > sma_200 else "Death Cross (Bearish)"
-    except Exception:
-        technical_signal = "Could not calculate technical signal."
 
-    system_prompt = (
-        "You are a disciplined quantitative analyst. Use the provided data to issue a portfolio forecast.\n"
-        "Ground rules:\n"
-        " • Return only JSON.\n"
-        " • Default stance is HOLD unless evidence is compelling.\n"
-        " • Assign BUY only when the stock is a top-tier opportunity with conviction >= 7.\n"
-        " • Assign SELL only when downside odds are strong with conviction >= 7.\n"
-        " • Use the full 1-10 scale (1 = very weak, 10 = extremely strong).\n"
-        " • Clearly differentiate conviction levels so the weightings are meaningful.\n"
-        " • Keep rationale concise (2-3 sentences)."
-    )
+    analysis_payload = {
+        "symbol": dossier.get("symbol"),
+        "company_name": dossier.get("company_name"),
+        "sector": dossier.get("fundamentals", {}).get("sector"),
+        "industry": dossier.get("fundamentals", {}).get("industry"),
+        "price": dossier.get("latest_price"),
+        "market_cap": dossier.get("fundamentals", {}).get("market_cap"),
+        "technicals": dossier.get("technicals", {}),
+        "fundamentals": dossier.get("fundamentals", {}),
+        "news_headlines": dossier.get("news_headlines", []),
+        "alt_datas": dossier.get("alt_data", {}),
+        "position_context": dossier.get("position_context", {}),
+        "macro_context": {"market_briefing": market_context}
+    }
 
-    user_prompt = f"""
-    Evaluate {dossier['symbol']} using the dossier and market context below.
-
-    MARKET CONTEXT SUMMARY:
-    {market_context}
-
-    STOCK DOSSIER:
-    - Sector: {dossier['fundamentals'].get('sector')}
-    - Forward P/E: {dossier['fundamentals'].get('forward_pe')}
-    - Technical Signal: {technical_signal}
-    - Stock-Specific Headlines: {dossier['stock_specific_headlines']}
-
-    Required JSON schema:
-    {{
-        "symbol": "TICKER",
-        "decision": "Buy" | "Sell" | "Hold",
-        "conviction_score": integer 1-10,
-        "rationale": "2-3 sentences"
-    }}
-    """
+    prompt = ANALYSIS_PROMPT_TEMPLATE.replace("<<PAYLOAD>>", json.dumps(analysis_payload, indent=2))
 
     try:
         response = client.chat.completions.create(
             model="gpt-4-turbo",
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt}
-            ],
+            messages=[{"role": "user", "content": prompt}],
             response_format={"type": "json_object"},
-            timeout=30.0
+            timeout=45.0
         )
         analysis = json.loads(response.choices[0].message.content)
 
-        required_keys = {'symbol', 'decision', 'conviction_score', 'rationale'}
+        required_keys = {'symbol', 'decision', 'conviction', 'rationale'}
         if not required_keys.issubset(analysis.keys()):
             print(f"    - ERROR: AI response for {dossier['symbol']} missing keys -> {analysis.keys()}")
             return None
 
-        if isinstance(analysis['rationale'], list):
-            analysis['rationale'] = ' '.join(map(str, analysis['rationale']))
+        decision = normalize_decision(analysis.get("decision"))
+        conviction = sanitize_conviction(analysis.get("conviction"))
 
-        decision = analysis.get("decision", "").strip().upper()
-        conviction = sanitize_conviction(analysis.get("conviction_score"))
-        rationale = analysis.get("rationale", "")
+        rationale = analysis.get("rationale", [])
+        if isinstance(rationale, list):
+            rationale_text = " | ".join(str(item).strip() for item in rationale if item)
+        else:
+            rationale_text = str(rationale).strip()
+        if not rationale_text:
+            rationale_text = "No rationale provided."
 
-        if decision == "BUY" and conviction < 7:
-            decision = "HOLD"
-            rationale += " | Adjusted to HOLD due to sub-7 conviction."
-        elif decision == "SELL" and conviction < 7:
-            decision = "HOLD"
-            rationale += " | Adjusted to HOLD due to sub-7 conviction."
-
-        analysis["decision"] = decision.title()
+        analysis["decision"] = decision
         analysis["conviction_score"] = conviction
-        analysis["rationale"] = rationale.strip()
+        analysis["rationale"] = rationale_text
 
         return analysis
     except Exception as e:
@@ -462,8 +596,15 @@ def display_decision_mix(decision_book):
 
 def ensure_minimum_positions(decision_book, current_positions):
     notes = []
-    selected_symbols = {sym for sym, data in decision_book.items()
-                        if data["decision"] in {"BUY", "HOLD"}}
+    current_position_symbols = {sym.upper() for sym in current_positions.keys()}
+    selected_symbols = set()
+
+    for sym, data in decision_book.items():
+        decision = data["decision"]
+        if decision == "BUY":
+            selected_symbols.add(sym)
+        elif decision == "HOLD" and sym in current_position_symbols:
+            selected_symbols.add(sym)
 
     if len(selected_symbols) >= MIN_POSITIONS:
         return selected_symbols, notes
@@ -533,55 +674,81 @@ def enforce_position_limits(decision_book, selected_symbols):
     notes.append(f"Max position cap enforced: retained {len(selected_symbols)} highest-conviction holdings.")
     return selected_symbols, notes
 
-def compute_target_allocations(decision_book, selected_symbols, portfolio_value):
+def compute_target_allocations(decision_book, selected_symbols, portfolio_value, current_positions):
     investable_capital = portfolio_value * TARGET_INVESTED_RATIO
     max_position_value = portfolio_value * MAX_POSITION_PERCENTAGE
     notes = []
 
-    convictions = {}
+    allocations = {}
+    base_total = 0.0
+
     for symbol in selected_symbols:
-        conviction = decision_book[symbol]["conviction_score"]
-        convictions[symbol] = max(1, conviction)
+        data = decision_book[symbol]
+        latest_price = data["latest_price"]
+        current_qty = float(current_positions[symbol].qty) if symbol in current_positions else 0.0
+        current_value = current_qty * latest_price
+        capped_value = min(current_value, max_position_value)
+        allocations[symbol] = capped_value
+        base_total += capped_value
+        if current_value > max_position_value + 1e-6:
+            notes.append(
+                f"{symbol} exceeds max position cap; trimming toward ${max_position_value:,.2f} target."
+            )
 
-    total_conviction = sum(convictions.values())
-    if total_conviction == 0:
-        for symbol in selected_symbols:
-            convictions[symbol] = 1
-        total_conviction = len(selected_symbols)
-        notes.append("Conviction scores were zero; defaulted to equal weighting.")
+    additional_capital = investable_capital - base_total
+    buy_candidates = [
+        sym for sym in selected_symbols
+        if decision_book[sym]["decision"] == "BUY"
+    ]
 
-    allocations = {
-        symbol: investable_capital * (convictions[symbol] / total_conviction)
-        for symbol in selected_symbols
-    }
+    if additional_capital > 1.0 and buy_candidates:
+        active_buys = [
+            sym for sym in buy_candidates
+            if allocations.get(sym, 0.0) < max_position_value - 1e-6
+        ]
+        if not active_buys:
+            notes.append("All BUY targets already at maximum cap; surplus retained as cash.")
+        else:
+            weights = {
+                sym: conviction_to_weight(decision_book[sym]["conviction_score"])
+                for sym in active_buys
+            }
+            total_weight = sum(weights.values())
+            if total_weight == 0:
+                for sym in active_buys:
+                    weights[sym] = 1.0
+                total_weight = len(active_buys)
+                notes.append("Conviction scores for BUY targets summed to zero; defaulted to equal weighting.")
 
-    max_cap = max_position_value
-    iteration_guard = 0
-    while iteration_guard < 20:
-        iteration_guard += 1
-        over_allocated = [sym for sym, value in allocations.items() if value > max_cap + 1e-6]
-        if not over_allocated:
-            break
+            remaining = additional_capital
+            iteration_guard = 0
+            while remaining > 1.0 and active_buys and iteration_guard < 20:
+                iteration_guard += 1
+                weight_total = sum(weights[sym] for sym in active_buys)
+                if weight_total <= 0:
+                    share_map = {sym: remaining / len(active_buys) for sym in active_buys}
+                else:
+                    share_map = {sym: remaining * (weights[sym] / weight_total) for sym in active_buys}
 
-        surplus = sum(allocations[sym] - max_cap for sym in over_allocated)
-        for sym in over_allocated:
-            allocations[sym] = max_cap
+                overflow = 0.0
+                for sym in list(active_buys):
+                    proposed = allocations.get(sym, 0.0) + share_map[sym]
+                    if proposed > max_position_value + 1e-6:
+                        overflow += proposed - max_position_value
+                        allocations[sym] = max_position_value
+                        active_buys.remove(sym)
+                    else:
+                        allocations[sym] = proposed
+                remaining = overflow
 
-        eligible = [sym for sym in allocations if sym not in over_allocated]
-        if not eligible or surplus <= 1:
-            notes.append("Unable to fully distribute capital due to max position caps; "
-                         "excess kept as cash buffer.")
-            break
-
-        eligible_conv_sum = sum(convictions[sym] for sym in eligible)
-        for sym in eligible:
-            share = surplus * (convictions[sym] / eligible_conv_sum)
-            allocations[sym] += share
+            if remaining > 1.0:
+                notes.append("Unable to fully deploy BUY capital due to max position caps; residual left in cash.")
+    elif additional_capital > 1.0 and not buy_candidates:
+        notes.append("Hold-only plan detected; unused capital remains in cash due to lack of BUY signals.")
+    elif additional_capital < -1.0:
+        notes.append("Existing exposure exceeds 90% target; retaining surplus until SELL signals emerge.")
 
     invested_capital = sum(allocations.values())
-    if invested_capital < investable_capital * 0.985:
-        notes.append("Investable capital not fully allocated (likely due to caps or rounding). "
-                     "Cash buffer slightly above 10%.")
     return allocations, notes, invested_capital
 
 def build_trade_plan(decision_book, selected_symbols, allocations, current_positions, portfolio_value):
@@ -589,7 +756,6 @@ def build_trade_plan(decision_book, selected_symbols, allocations, current_posit
     target_positions = {}
     constraint_notes = []
 
-    invested_capital = sum(allocations.values())
     max_position_value = portfolio_value * MAX_POSITION_PERCENTAGE
 
     for symbol in selected_symbols:
@@ -597,10 +763,16 @@ def build_trade_plan(decision_book, selected_symbols, allocations, current_posit
         latest_price = data["latest_price"]
         target_value = allocations.get(symbol, 0.0)
         target_value = min(target_value, max_position_value)
-        target_qty = target_value / latest_price if latest_price > 0 else 0
 
         current_qty = float(current_positions[symbol].qty) if symbol in current_positions else 0.0
         current_value = current_qty * latest_price
+
+        if data["decision"] == "HOLD" and symbol in current_positions:
+            target_qty = current_qty
+            target_value = current_value
+        else:
+            target_qty = target_value / latest_price if latest_price > 0 else 0.0
+
         delta_value = target_value - current_value
         delta_qty = target_qty - current_qty
 
@@ -624,6 +796,11 @@ def build_trade_plan(decision_book, selected_symbols, allocations, current_posit
             note.append("Full liquidation.")
         elif action == "sell":
             note.append("Trimming to target weight.")
+        elif action == "hold":
+            if current_qty > 0:
+                note.append("Maintaining current weight.")
+            else:
+                note.append("No action required.")
 
         target_positions[symbol] = {
             "decision": data["decision"],
@@ -656,8 +833,15 @@ def build_trade_plan(decision_book, selected_symbols, allocations, current_posit
                 continue
         else:
             if target_value <= 0 and current_qty > 0:
+                current_qty_value = current_qty * latest_price
+                if current_qty_value < MIN_TRADE_DOLLAR_THRESHOLD:
+                    qty_to_sell = max(current_qty, 0.0)
+                else:
+                    qty_to_sell = floor_to_precision(current_qty, decimals=6)
+                if qty_to_sell <= 0:
+                    continue
                 trade["order_type"] = "quantity"
-                trade["quantity"] = str(round(current_qty, 6))
+                trade["quantity"] = f"{qty_to_sell:.6f}"
             else:
                 trade["order_type"] = "notional"
                 trade["notional"] = round(abs(delta_value), 2)
@@ -677,6 +861,36 @@ def build_trade_plan(decision_book, selected_symbols, allocations, current_posit
         current_qty = float(position.qty)
         current_value = current_qty * latest_price
         if current_value < MIN_TRADE_DOLLAR_THRESHOLD:
+            qty_str = f"{current_qty:.6f}"
+            qty_float = float(qty_str)
+            if qty_float <= 0:
+                continue
+            trades.append({
+                "symbol": symbol,
+                "side": "sell",
+                "order_type": "quantity",
+                "quantity": qty_str,
+                "notional": round(current_value, 2),
+                "decision_id": decision_book.get(symbol, {}).get("db_decision_id"),
+                "note": "Position not in target portfolio; exiting.",
+                "target_value": 0.0,
+                "target_shares": 0.0,
+                "current_shares": current_qty,
+                "latest_price": latest_price
+            })
+            target_positions[symbol] = {
+                "decision": "SELL",
+                "conviction_score": decision_book.get(symbol, {}).get("conviction_score", 5),
+                "target_value": 0.0,
+                "target_shares": 0.0,
+                "latest_price": latest_price,
+                "note": "Position not in target portfolio; exiting.",
+                "db_decision_id": decision_book.get(symbol, {}).get("db_decision_id")
+            }
+            continue
+
+        qty_to_sell = floor_to_precision(current_qty, decimals=6)
+        if qty_to_sell <= 0:
             continue
 
         note = "Position not in target portfolio; exiting."
@@ -684,7 +898,7 @@ def build_trade_plan(decision_book, selected_symbols, allocations, current_posit
             "symbol": symbol,
             "side": "sell",
             "order_type": "quantity",
-            "quantity": str(round(current_qty, 6)),
+            "quantity": f"{qty_to_sell:.6f}",
             "notional": round(current_value, 2),
             "decision_id": decision_book.get(symbol, {}).get("db_decision_id"),
             "note": note,
@@ -719,15 +933,23 @@ def build_trade_plan(decision_book, selected_symbols, allocations, current_posit
         "constraint_notes": constraint_notes,
         "selected_symbols": selected_symbols,
         "allocations": allocations,
-        "invested_capital": invested_capital
+        "invested_capital": sum(allocations.values())
     }
+
+def trade_sort_key(trade):
+    return (
+        0 if trade["side"] == "sell" else 1,
+        0 if trade.get("order_type") == "quantity" else 1,
+        trade["symbol"]
+    )
 
 def summarize_trade_plan(plan, current_positions_count, portfolio_value):
     allocations = plan["allocations"]
     trades = plan["trades"]
+    sorted_trades = sorted(trades, key=trade_sort_key)
 
-    buy_trades = [t for t in trades if t["side"] == "buy"]
-    sell_trades = [t for t in trades if t["side"] == "sell"]
+    buy_trades = [t for t in sorted_trades if t["side"] == "buy"]
+    sell_trades = [t for t in sorted_trades if t["side"] == "sell"]
 
     buy_total = sum(t.get("notional", 0.0) for t in buy_trades)
     sell_total = sum(
@@ -752,7 +974,7 @@ def summarize_trade_plan(plan, current_positions_count, portfolio_value):
         "projected_cash": projected_cash,
         "invested_ratio": invested_ratio,
         "constraint_notes": plan["constraint_notes"],
-        "trades": trades,
+        "trades": sorted_trades,
         "target_positions": plan["target_positions"]
     }
 
@@ -767,7 +989,7 @@ def present_trade_plan(summary):
     print(f"Projected cash buffer:      ${summary['projected_cash']:,.2f}")
 
     if summary["invested_ratio"] > 90.5 or summary["invested_ratio"] < 89.0:
-        print("  - NOTE: Invested ratio deviates slightly from 90% due to caps/rounding.")
+        print("  - NOTE: Invested ratio deviates slightly from 90% due to caps/rounding or HOLD preservation.")
 
     if summary["target_position_count"] > TARGET_POSITION_COUNT + 5:
         print(f"  - NOTE: Target holdings exceed soft goal of {TARGET_POSITION_COUNT}; "
@@ -856,6 +1078,8 @@ def execute_trades(api, plan, current_positions):
         print("  - No trades to execute.")
         return
 
+    trades = sorted(trades, key=trade_sort_key)
+
     for trade in trades:
         symbol = trade["symbol"]
         side = trade["side"].lower()
@@ -868,7 +1092,7 @@ def execute_trades(api, plan, current_positions):
 
         if order_type == "quantity":
             qty = float(trade["quantity"])
-            order_details["qty"] = str(round(qty, 6))
+            order_details["qty"] = f"{qty:.6f}"
             displayed_amount = f"{qty:,.6f} shares"
         else:
             notional = float(trade["notional"])
@@ -917,18 +1141,19 @@ def execute_trades(api, plan, current_positions):
             print(f"  - FAILED to submit order for {symbol}: {e}")
             update_trade_log(trade_id, 'execution_failed')
 
-def generate_and_log_new_plan(api, current_positions):
+def generate_and_log_new_plan(api, current_positions, portfolio_value):
     print("\n--- [Generating New Daily Plan] ---")
     candidate_universe = generate_candidate_universe(current_positions.keys())
     raw_news_data = get_raw_search_results_from_perplexity()
-    market_context = summarize_market_context_with_openai(raw_news_data)
-    dossiers = aggregate_data_dossiers(api, candidate_universe, market_context)
+    market_context = summarize_market_context_with_openAI(raw_news_data)
+    dossiers = aggregate_data_dossiers(api, candidate_universe, market_context, current_positions, portfolio_value)
 
     print("\n--- [Stage 3: AI-Powered Analysis & Logging] ---")
     decisions = []
 
     if dossiers:
-        for symbol, dossier in dossiers.items():
+        for symbol in sorted(dossiers.keys()):
+            dossier = dossiers[symbol]
             analysis = get_ai_analysis(dossier, market_context)
             if analysis:
                 analysis["latest_price"] = dossier.get("latest_price")
@@ -943,6 +1168,9 @@ def generate_and_log_new_plan(api, current_positions):
 
 def main():
     print("====== Sentinel Daily Run Initialized ======")
+    print(f"[CONFIG] LIVE_TRADING={config.LIVE_TRADING} | "
+          f"ALLOW_DEV_RERUNS={getattr(config, 'ALLOW_DEV_RERUNS', False)} | "
+          f"TARGET_INVESTED_RATIO={TARGET_INVESTED_RATIO:.2f}")
 
     if check_if_trades_executed_today():
         print("\nTrading has already been executed for today. See you tomorrow!")
@@ -964,10 +1192,11 @@ def main():
     dossiers = {}
 
     if decisions:
-        print("\nFound a previously generated plan for today. Reusing stored decisions.")
+        unique_symbols = len({d["symbol"].upper() for d in decisions})
+        print(f"\n[INFO] Reusing stored plan for today covering {unique_symbols} symbols.")
     else:
         print("\nNo existing plan found for today. Generating a new one...")
-        decisions, dossiers = generate_and_log_new_plan(alpaca_api, current_positions)
+        decisions, dossiers = generate_and_log_new_plan(alpaca_api, current_positions, portfolio_value)
 
     if not decisions:
         print("\nNo actionable decisions were produced. Concluding run.")
@@ -986,7 +1215,7 @@ def main():
     selected_symbols, notes_max = enforce_position_limits(decision_book, selected_symbols)
 
     allocations, allocation_notes, invested_capital = compute_target_allocations(
-        decision_book, selected_symbols, portfolio_value
+        decision_book, selected_symbols, portfolio_value, current_positions
     )
 
     plan = build_trade_plan(

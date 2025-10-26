@@ -24,3 +24,5 @@ _archive/
 
 # Text files used for notes (optional, but good practice)
 *.txt
+
+/Backups/
