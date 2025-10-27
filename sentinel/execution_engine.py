@@ -635,71 +635,37 @@ class OrderExecutionEngine:
                     counts['unchanged'] += 1
                     continue
 
-                # Cancel old stop on Alpaca
-                try:
-                    self.api.cancel_order(current_stop_order_id)
-                except Exception as cancel_error:
-                    self.logger.error(f"Failed to cancel old stop {current_stop_order_id}: {cancel_error}")
-                    counts['errors'] += 1
-                    continue
-
-                # Submit new raised stop
-                timestamp = datetime.now(timezone.utc).isoformat()
-                new_stop_coid = f"{symbol}_trailing_{timestamp}"
-
+                # Use Alpaca's replace_order() to atomically update the stop price
+                # This avoids race conditions from cancel+submit
                 new_stop_order = self._submit_with_retry(
-                    lambda: self.api.submit_order(
-                        symbol=symbol,
-                        qty=current_qty,
-                        side='sell',
-                        type='stop',
-                        stop_price=new_stop_price,
-                        time_in_force='gtc',
-                        client_order_id=new_stop_coid
+                    lambda: self.api.replace_order(
+                        current_stop_order_id,
+                        qty=str(current_qty),
+                        stop_price=str(new_stop_price)
                     ),
-                    description=f"Trailing stop for {symbol}"
+                    description=f"Replace trailing stop for {symbol}"
                 )
 
                 if not new_stop_order:
-                    self.logger.error(f"Failed to submit new stop for {symbol} - old stop was canceled!")
+                    self.logger.error(f"Failed to replace trailing stop for {symbol}")
                     counts['errors'] += 1
-                    # Try to recreate emergency stop
-                    self._create_emergency_stop(symbol, current_price, current_qty, entry_price)
-                    continue
+                    continue  # Keep old stop in place
 
-                # Update database
+                # Update database (order_id stays the same with replace_order)
                 cursor.execute("""
                     UPDATE stop_loss_orders
-                    SET status = 'replaced',
-                        cancelled_at = ?,
-                        cancel_reason = 'trailing_stop_update',
-                        replaced_by_stop_id = (
-                            SELECT id FROM stop_loss_orders WHERE order_id = ?
-                        )
+                    SET stop_price = ?,
+                        stop_type = ?,
+                        submitted_at = ?
                     WHERE id = ?
-                """, (datetime.now(timezone.utc), new_stop_order.id, current_stop_id))
+                """, (new_stop_price, new_stop_type, datetime.now(timezone.utc), current_stop_id))
 
-                # Insert new stop record (need to find entry_order_id)
+                # Update entry_stop_pair if exists (skip for legacy stops)
                 cursor.execute("""
-                    SELECT entry_order_id FROM entry_stop_pairs
+                    UPDATE entry_stop_pairs
+                    SET stop_price = ?
                     WHERE stop_order_id = ?
-                """, (current_stop_id,))
-                entry_row = cursor.fetchone()
-                entry_id = entry_row['entry_order_id'] if entry_row else -1  # Use -1 for legacy stops
-
-                new_stop_id = self._store_stop_order(
-                    conn, entry_id, symbol, new_stop_order.id, new_stop_coid,
-                    current_qty, new_stop_price, new_stop_type
-                )
-
-                # Update entry_stop_pair to point to new stop (skip for legacy stops)
-                if entry_id != -1:
-                    cursor.execute("""
-                        UPDATE entry_stop_pairs
-                        SET stop_order_id = ?,
-                            stop_price = ?
-                        WHERE entry_order_id = ?
-                    """, (new_stop_id, new_stop_price, entry_id))
+                """, (new_stop_price, current_stop_id))
 
                 conn.commit()
 
