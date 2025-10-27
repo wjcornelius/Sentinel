@@ -590,7 +590,7 @@ class OrderExecutionEngine:
                 symbol = pos.symbol
                 current_price = float(pos.current_price)
                 entry_price = float(pos.avg_entry_price)
-                current_qty = abs(int(pos.qty))
+                current_qty = abs(int(float(pos.qty)))  # Handle fractional shares
 
                 # Calculate unrealized P&L percentage
                 unrealized_pnl_pct = (current_price - entry_price) / entry_price
@@ -684,20 +684,22 @@ class OrderExecutionEngine:
                     SELECT entry_order_id FROM entry_stop_pairs
                     WHERE stop_order_id = ?
                 """, (current_stop_id,))
-                entry_id = cursor.fetchone()['entry_order_id']
+                entry_row = cursor.fetchone()
+                entry_id = entry_row['entry_order_id'] if entry_row else -1  # Use -1 for legacy stops
 
                 new_stop_id = self._store_stop_order(
                     conn, entry_id, symbol, new_stop_order.id, new_stop_coid,
                     current_qty, new_stop_price, new_stop_type
                 )
 
-                # Update entry_stop_pair to point to new stop
-                cursor.execute("""
-                    UPDATE entry_stop_pairs
-                    SET stop_order_id = ?,
-                        stop_price = ?
-                    WHERE entry_order_id = ?
-                """, (new_stop_id, new_stop_price, entry_id))
+                # Update entry_stop_pair to point to new stop (skip for legacy stops)
+                if entry_id != -1:
+                    cursor.execute("""
+                        UPDATE entry_stop_pairs
+                        SET stop_order_id = ?,
+                            stop_price = ?
+                        WHERE entry_order_id = ?
+                    """, (new_stop_id, new_stop_price, entry_id))
 
                 conn.commit()
 
@@ -799,7 +801,7 @@ class OrderExecutionEngine:
                 f"(order {stop_order.id})"
             )
 
-            # Store in database (without entry_order_id - orphaned emergency stop)
+            # Store in database (use -1 as sentinel for emergency stops without entry_order_id)
             conn = self._get_db_connection()
             cursor = conn.cursor()
             cursor.execute("""
@@ -807,7 +809,7 @@ class OrderExecutionEngine:
                     entry_order_id, symbol, order_id, client_order_id,
                     qty, stop_price, stop_type, status
                 ) VALUES (
-                    NULL, ?, ?, ?, ?, ?, 'emergency', 'active'
+                    -1, ?, ?, ?, ?, ?, 'initial', 'active'
                 )
             """, (symbol, stop_order.id, stop_coid, qty, stop_price))
             conn.commit()
@@ -858,7 +860,7 @@ class OrderExecutionEngine:
                 symbol = pos.symbol
                 current_price = float(pos.current_price)
                 entry_price = float(pos.avg_entry_price)
-                qty = abs(int(pos.qty))
+                qty = abs(int(float(pos.qty)))  # Handle fractional shares
                 unrealized_pl = float(pos.unrealized_pl)
                 unrealized_pnl_pct = (current_price - entry_price) / entry_price
 
