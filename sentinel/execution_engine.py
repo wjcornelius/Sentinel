@@ -550,8 +550,558 @@ class OrderExecutionEngine:
             self.logger.error(f"Failed to cancel stop {stop_order_id}: {e}")
 
 
-# ============================================================================
-# CONTINUED IN PART 2...
-# ============================================================================
-# (Trailing stops, profit-taking, and cleanup methods will be in next message
-#  due to file length. This is a clean break point.)
+    # ========================================================================
+    # TRAILING STOP MANAGEMENT (Evening Workflow)
+    # ========================================================================
+
+    def update_trailing_stops(
+        self,
+        breakeven_threshold_pct: float = TRAILING_STOP_TRIGGER_PCT,
+        lock_in_pct: float = TRAILING_STOP_LOCK_IN_PCT
+    ) -> Dict[str, int]:
+        """
+        Raise stops to protect gains for profitable positions.
+        Uses staircase approach: higher gains = more protection.
+
+        Called during evening workflow (not intraday).
+
+        Args:
+            breakeven_threshold_pct: Minimum gain to activate trailing (default: 0.08)
+            lock_in_pct: Minimum profit to lock in (default: 0.02)
+
+        Returns:
+            Dict with counts: {'raised': N, 'unchanged': M, 'errors': K}
+        """
+        self.logger.info("Updating trailing stops for profitable positions...")
+
+        try:
+            positions = self.api.list_positions()
+        except Exception as e:
+            self.logger.error(f"Failed to fetch positions from Alpaca: {e}")
+            return {'raised': 0, 'unchanged': 0, 'errors': 1}
+
+        conn = self._get_db_connection()
+        cursor = conn.cursor()
+
+        counts = {'raised': 0, 'unchanged': 0, 'errors': 0, 'emergency_stops': 0}
+
+        for pos in positions:
+            try:
+                symbol = pos.symbol
+                current_price = float(pos.current_price)
+                entry_price = float(pos.avg_entry_price)
+                current_qty = abs(int(pos.qty))
+
+                # Calculate unrealized P&L percentage
+                unrealized_pnl_pct = (current_price - entry_price) / entry_price
+
+                # Only process profitable positions
+                if unrealized_pnl_pct < breakeven_threshold_pct:
+                    counts['unchanged'] += 1
+                    continue
+
+                # Get current stop
+                cursor.execute("""
+                    SELECT id, order_id, stop_price, stop_type
+                    FROM stop_loss_orders
+                    WHERE symbol = ?
+                      AND status = 'active'
+                    ORDER BY submitted_at DESC
+                    LIMIT 1
+                """, (symbol,))
+
+                stop_row = cursor.fetchone()
+
+                if not stop_row:
+                    self.logger.warning(
+                        f"No active stop found for {symbol} (position exists but no stop!) - creating emergency stop"
+                    )
+                    self._create_emergency_stop(symbol, current_price, current_qty, entry_price)
+                    counts['emergency_stops'] += 1
+                    continue
+
+                current_stop_id = stop_row['id']
+                current_stop_order_id = stop_row['order_id']
+                current_stop_price = stop_row['stop_price']
+                current_stop_type = stop_row['stop_type']
+
+                # Calculate new stop price using staircase logic
+                new_stop_price, new_stop_type = self._calculate_staircase_stop(
+                    entry_price, unrealized_pnl_pct
+                )
+
+                # Only raise stop, never lower
+                if new_stop_price <= current_stop_price:
+                    counts['unchanged'] += 1
+                    continue
+
+                # Cancel old stop on Alpaca
+                try:
+                    self.api.cancel_order(current_stop_order_id)
+                except Exception as cancel_error:
+                    self.logger.error(f"Failed to cancel old stop {current_stop_order_id}: {cancel_error}")
+                    counts['errors'] += 1
+                    continue
+
+                # Submit new raised stop
+                timestamp = datetime.now(timezone.utc).isoformat()
+                new_stop_coid = f"{symbol}_trailing_{timestamp}"
+
+                new_stop_order = self._submit_with_retry(
+                    lambda: self.api.submit_order(
+                        symbol=symbol,
+                        qty=current_qty,
+                        side='sell',
+                        type='stop',
+                        stop_price=new_stop_price,
+                        time_in_force='gtc',
+                        client_order_id=new_stop_coid
+                    ),
+                    description=f"Trailing stop for {symbol}"
+                )
+
+                if not new_stop_order:
+                    self.logger.error(f"Failed to submit new stop for {symbol} - old stop was canceled!")
+                    counts['errors'] += 1
+                    # Try to recreate emergency stop
+                    self._create_emergency_stop(symbol, current_price, current_qty, entry_price)
+                    continue
+
+                # Update database
+                cursor.execute("""
+                    UPDATE stop_loss_orders
+                    SET status = 'replaced',
+                        cancelled_at = ?,
+                        cancel_reason = 'trailing_stop_update',
+                        replaced_by_stop_id = (
+                            SELECT id FROM stop_loss_orders WHERE order_id = ?
+                        )
+                    WHERE id = ?
+                """, (datetime.now(timezone.utc), new_stop_order.id, current_stop_id))
+
+                # Insert new stop record (need to find entry_order_id)
+                cursor.execute("""
+                    SELECT entry_order_id FROM entry_stop_pairs
+                    WHERE stop_order_id = ?
+                """, (current_stop_id,))
+                entry_id = cursor.fetchone()['entry_order_id']
+
+                new_stop_id = self._store_stop_order(
+                    conn, entry_id, symbol, new_stop_order.id, new_stop_coid,
+                    current_qty, new_stop_price, new_stop_type
+                )
+
+                # Update entry_stop_pair to point to new stop
+                cursor.execute("""
+                    UPDATE entry_stop_pairs
+                    SET stop_order_id = ?,
+                        stop_price = ?
+                    WHERE entry_order_id = ?
+                """, (new_stop_id, new_stop_price, entry_id))
+
+                conn.commit()
+
+                counts['raised'] += 1
+                self.logger.info(
+                    f"[TRAILING STOP RAISED] {symbol}: "
+                    f"${current_stop_price:.2f} -> ${new_stop_price:.2f} "
+                    f"(P&L: +{unrealized_pnl_pct:.1%}, Type: {new_stop_type})"
+                )
+
+            except Exception as e:
+                self.logger.error(f"Error updating trailing stop for {symbol}: {e}")
+                counts['errors'] += 1
+                conn.rollback()
+                continue
+
+        conn.close()
+
+        self.logger.info(
+            f"Trailing stop update complete: "
+            f"{counts['raised']} raised, {counts['unchanged']} unchanged, "
+            f"{counts['emergency_stops']} emergency stops created, {counts['errors']} errors"
+        )
+
+        return counts
+
+    def _calculate_staircase_stop(
+        self,
+        entry_price: float,
+        unrealized_pnl_pct: float
+    ) -> Tuple[float, str]:
+        """
+        Calculate trailing stop price based on staircase levels.
+
+        Staircase approach:
+        - +8% gain -> lock in +2%
+        - +15% gain -> lock in +8%
+        - +25% gain -> lock in +15%
+
+        Args:
+            entry_price: Original entry price
+            unrealized_pnl_pct: Current unrealized P&L percentage
+
+        Returns:
+            Tuple of (stop_price, stop_type_label)
+        """
+        for min_gain, lock_in, stop_type in reversed(TRAILING_STOP_LEVELS):
+            if unrealized_pnl_pct >= min_gain:
+                stop_price = round(entry_price * (1 + lock_in), 2)
+                return (stop_price, stop_type)
+
+        # Below minimum threshold, use initial stop
+        stop_price = calculate_stop_price(entry_price)
+        return (stop_price, 'initial')
+
+    def _create_emergency_stop(
+        self,
+        symbol: str,
+        current_price: float,
+        qty: int,
+        entry_price: float
+    ):
+        """
+        Create emergency stop when position exists without protection.
+
+        This should NEVER happen in normal operation (every entry creates a stop).
+        If this executes, it indicates a critical system failure.
+
+        Args:
+            symbol: Stock ticker
+            current_price: Current market price
+            qty: Share quantity
+            entry_price: Average entry price
+        """
+        self.logger.critical(
+            f"[EMERGENCY STOP] Creating protective stop for {symbol} - "
+            f"position exists without stop protection!"
+        )
+
+        # Calculate stop at -8% from entry
+        stop_price = calculate_stop_price(entry_price)
+
+        timestamp = datetime.now(timezone.utc).isoformat()
+        stop_coid = f"{symbol}_emergency_{timestamp}"
+
+        try:
+            stop_order = self.api.submit_order(
+                symbol=symbol,
+                qty=qty,
+                side='sell',
+                type='stop',
+                stop_price=stop_price,
+                time_in_force='gtc',
+                client_order_id=stop_coid
+            )
+
+            self.logger.warning(
+                f"[EMERGENCY STOP CREATED] {symbol}: {qty} shares @ ${stop_price} "
+                f"(order {stop_order.id})"
+            )
+
+            # Store in database (without entry_order_id - orphaned emergency stop)
+            conn = self._get_db_connection()
+            cursor = conn.cursor()
+            cursor.execute("""
+                INSERT INTO stop_loss_orders (
+                    entry_order_id, symbol, order_id, client_order_id,
+                    qty, stop_price, stop_type, status
+                ) VALUES (
+                    NULL, ?, ?, ?, ?, ?, 'emergency', 'active'
+                )
+            """, (symbol, stop_order.id, stop_coid, qty, stop_price))
+            conn.commit()
+            conn.close()
+
+        except Exception as e:
+            self.logger.critical(
+                f"[EMERGENCY STOP FAILED] Could not create emergency stop for {symbol}: {e}. "
+                f"POSITION IS UNPROTECTED! MANUAL INTERVENTION REQUIRED!"
+            )
+
+    # ========================================================================
+    # PROFIT-TAKING DETECTION (Evening Workflow)
+    # ========================================================================
+
+    def check_profit_taking(
+        self,
+        profit_target_pct: float = PROFIT_TARGET_PCT,
+        require_approval: bool = REQUIRE_MANUAL_APPROVAL_FOR_PROFIT_TAKING
+    ) -> Dict[str, any]:
+        """
+        Check current positions for profit-taking opportunities.
+        Flags positions at +16% or better for review.
+
+        If manual approval required, returns list of candidates.
+        If auto-approval enabled, submits market sell orders.
+
+        Args:
+            profit_target_pct: Profit target threshold (default: 0.16)
+            require_approval: Whether to require manual approval (default: True)
+
+        Returns:
+            Dict with 'candidates' (list) and 'submitted' (list)
+        """
+        self.logger.info(f"Checking for profit-taking opportunities (target: +{profit_target_pct:.1%})...")
+
+        try:
+            positions = self.api.list_positions()
+        except Exception as e:
+            self.logger.error(f"Failed to fetch positions from Alpaca: {e}")
+            return {'candidates': [], 'submitted': []}
+
+        candidates = []
+        submitted = []
+
+        for pos in positions:
+            try:
+                symbol = pos.symbol
+                current_price = float(pos.current_price)
+                entry_price = float(pos.avg_entry_price)
+                qty = abs(int(pos.qty))
+                unrealized_pl = float(pos.unrealized_pl)
+                unrealized_pnl_pct = (current_price - entry_price) / entry_price
+
+                if unrealized_pnl_pct >= profit_target_pct:
+                    candidate = {
+                        'symbol': symbol,
+                        'qty': qty,
+                        'entry_price': entry_price,
+                        'current_price': current_price,
+                        'unrealized_pl': unrealized_pl,
+                        'unrealized_pnl_pct': unrealized_pnl_pct
+                    }
+                    candidates.append(candidate)
+
+                    self.logger.info(
+                        f"[PROFIT TARGET HIT] {symbol}: +{unrealized_pnl_pct:.1%} "
+                        f"(${unrealized_pl:.2f})"
+                    )
+
+            except Exception as e:
+                self.logger.error(f"Error checking profit target for {pos.symbol}: {e}")
+                continue
+
+        if not candidates:
+            self.logger.info("No positions at profit target")
+            return {'candidates': [], 'submitted': []}
+
+        # Manual approval mode: return candidates for user review
+        if require_approval:
+            self.logger.info(
+                f"Found {len(candidates)} profit target candidates - "
+                f"manual approval required"
+            )
+            return {'candidates': candidates, 'submitted': []}
+
+        # Auto-approval mode: submit market sells immediately
+        self.logger.warning("Auto-approval enabled - submitting profit-taking orders")
+
+        for candidate in candidates:
+            symbol = candidate['symbol']
+            qty = candidate['qty']
+
+            try:
+                # Submit market sell for next trading day
+                timestamp = datetime.now(timezone.utc).isoformat()
+                sell_coid = f"{symbol}_profit_{timestamp}"
+
+                sell_order = self.api.submit_order(
+                    symbol=symbol,
+                    qty=qty,
+                    side='sell',
+                    type='market',
+                    time_in_force='day',
+                    client_order_id=sell_coid
+                )
+
+                # Cancel corresponding stop
+                self._cancel_stop_for_symbol(symbol, reason='profit_target_hit')
+
+                submitted.append({
+                    'symbol': symbol,
+                    'qty': qty,
+                    'order_id': sell_order.id,
+                    'expected_profit': candidate['unrealized_pl']
+                })
+
+                self.logger.info(
+                    f"[PROFIT ORDER SUBMITTED] {symbol}: Market sell {qty} shares "
+                    f"(order {sell_order.id})"
+                )
+
+            except Exception as e:
+                self.logger.error(f"Failed to submit profit-taking order for {symbol}: {e}")
+                continue
+
+        return {'candidates': candidates, 'submitted': submitted}
+
+    def _cancel_stop_for_symbol(self, symbol: str, reason: str):
+        """
+        Cancel active stop order for a symbol.
+
+        Args:
+            symbol: Stock ticker
+            reason: Cancellation reason
+        """
+        conn = self._get_db_connection()
+        cursor = conn.cursor()
+
+        # Get active stop
+        cursor.execute("""
+            SELECT id, order_id
+            FROM stop_loss_orders
+            WHERE symbol = ?
+              AND status = 'active'
+            ORDER BY submitted_at DESC
+            LIMIT 1
+        """, (symbol,))
+
+        stop_row = cursor.fetchone()
+
+        if not stop_row:
+            self.logger.warning(f"No active stop found for {symbol} to cancel")
+            conn.close()
+            return
+
+        stop_id = stop_row['id']
+        stop_order_id = stop_row['order_id']
+
+        try:
+            # Cancel on Alpaca
+            self.api.cancel_order(stop_order_id)
+
+            # Update database
+            cursor.execute("""
+                UPDATE stop_loss_orders
+                SET status = 'cancelled',
+                    cancelled_at = ?,
+                    cancel_reason = ?
+                WHERE id = ?
+            """, (datetime.now(timezone.utc), reason, stop_id))
+
+            # Mark pair as resolved
+            cursor.execute("""
+                UPDATE entry_stop_pairs
+                SET resolved_at = ?,
+                    resolution = 'manual_exit',
+                    notes = ?
+                WHERE stop_order_id = ?
+            """, (datetime.now(timezone.utc), reason, stop_id))
+
+            conn.commit()
+            self.logger.debug(f"Stop {stop_order_id} canceled for {symbol} (reason: {reason})")
+
+        except Exception as e:
+            self.logger.error(f"Failed to cancel stop for {symbol}: {e}")
+            conn.rollback()
+
+        finally:
+            conn.close()
+
+    # ========================================================================
+    # ORPHANED STOP CLEANUP (Evening Workflow)
+    # ========================================================================
+
+    def cleanup_orphaned_stops(
+        self,
+        grace_period_minutes: int = ORPHANED_STOP_GRACE_PERIOD
+    ) -> Dict[str, int]:
+        """
+        Cancel stop orders for positions that no longer exist.
+
+        Orphaned stops occur when:
+        - Entry expired/cancelled (handled by reconcile_fills)
+        - Position sold manually
+        - Stop triggered and filled
+
+        Args:
+            grace_period_minutes: Wait time before canceling (default: 5 minutes)
+
+        Returns:
+            Dict with counts: {'cancelled': N, 'skipped': M}
+        """
+        self.logger.info("Cleaning up orphaned stop orders...")
+
+        try:
+            positions = self.api.list_positions()
+            current_position_symbols = {pos.symbol for pos in positions}
+        except Exception as e:
+            self.logger.error(f"Failed to fetch positions from Alpaca: {e}")
+            return {'cancelled': 0, 'skipped': 0}
+
+        conn = self._get_db_connection()
+        cursor = conn.cursor()
+
+        # Get all active stops
+        cursor.execute("""
+            SELECT id, symbol, order_id, submitted_at
+            FROM stop_loss_orders
+            WHERE status = 'active'
+        """)
+
+        active_stops = cursor.fetchall()
+
+        counts = {'cancelled': 0, 'skipped': 0}
+
+        for stop_row in active_stops:
+            stop_id = stop_row['id']
+            symbol = stop_row['symbol']
+            stop_order_id = stop_row['order_id']
+            submitted_at = datetime.fromisoformat(stop_row['submitted_at'])
+
+            # Check if position still exists
+            if symbol in current_position_symbols:
+                counts['skipped'] += 1
+                continue
+
+            # Check age (grace period for settlement)
+            age_minutes = (datetime.now(timezone.utc) - submitted_at).total_seconds() / 60
+
+            if age_minutes < grace_period_minutes:
+                self.logger.debug(
+                    f"Skipping recent orphaned stop for {symbol} "
+                    f"(age: {age_minutes:.1f}min < {grace_period_minutes}min grace period)"
+                )
+                counts['skipped'] += 1
+                continue
+
+            # Orphaned stop confirmed - cancel it
+            try:
+                self.api.cancel_order(stop_order_id)
+
+                cursor.execute("""
+                    UPDATE stop_loss_orders
+                    SET status = 'cancelled',
+                        cancelled_at = ?,
+                        cancel_reason = 'position_closed'
+                    WHERE id = ?
+                """, (datetime.now(timezone.utc), stop_id))
+
+                # Mark pair as resolved
+                cursor.execute("""
+                    UPDATE entry_stop_pairs
+                    SET resolved_at = ?,
+                        resolution = 'manual_exit',
+                        notes = 'Position closed, stop orphaned'
+                    WHERE stop_order_id = ?
+                """, (datetime.now(timezone.utc), stop_id))
+
+                conn.commit()
+
+                counts['cancelled'] += 1
+                self.logger.info(f"[ORPHANED STOP CANCELLED] {symbol} (order {stop_order_id})")
+
+            except Exception as e:
+                self.logger.error(f"Failed to cancel orphaned stop {stop_order_id} for {symbol}: {e}")
+                conn.rollback()
+                continue
+
+        conn.close()
+
+        self.logger.info(
+            f"Orphaned stop cleanup complete: "
+            f"{counts['cancelled']} cancelled, {counts['skipped']} skipped"
+        )
+
+        return counts
