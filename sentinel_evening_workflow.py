@@ -12,12 +12,15 @@ Workflow Steps:
 3. Check profit-taking (identify positions at +16% target)
 4. Cleanup orphaned stops (cancel stops for closed positions)
 5. Run conviction analysis (3-tier pipeline: technical -> AI screening -> deep analysis)
-6. Submit new entry orders (conviction-weighted allocation with stop-loss pairs)
+6A. Execute SELL signals (Tier 3 conviction-based exits - frees up cash)
+6B. Submit new BUY entry orders (conviction-weighted allocation with stop-loss pairs)
 7. Generate daily summary report
 
 Computer uptime required: 30-45 minutes (includes AI analysis)
 Frequency: Once per trading day
 Timing: After market close (7:00 PM or later)
+
+NOTE: Step 6A executes BEFORE 6B to ensure SELL orders free up cash for BUY orders.
 """
 
 import sys
@@ -41,6 +44,7 @@ from sentinel.tier2_ai_screening import run_tier2_screening
 from sentinel.context_builder import build_context
 from sentinel.tier3_conviction_analysis import run_tier3_analysis
 from sentinel.order_generator import generate_entry_orders
+from sentinel.perplexity_news import PerplexityNewsGatherer
 import alpaca_trade_api as tradeapi
 
 
@@ -173,6 +177,17 @@ def step_5_run_conviction_analysis(api, logger):
     logger.info("=" * 70)
 
     try:
+        # Get real-time market overview (Perplexity)
+        logger.info("  Gathering real-time market overview...")
+        try:
+            perplexity = PerplexityNewsGatherer(logger=logger)
+            market_overview = perplexity.gather_market_overview(max_words=300)
+            market_context = market_overview.get('market_summary', 'Market conditions vary - see detailed analysis')
+            logger.info(f"  Market overview gathered: {len(market_context)} chars")
+        except Exception as e:
+            logger.warning(f"  Could not fetch market overview: {e}. Using fallback.")
+            market_context = "Market conditions vary - see detailed analysis"
+
         # Get test universe (for now, use a subset - will expand to Russell 3000 later)
         logger.info("  Fetching universe...")
         positions = api.list_positions()
@@ -202,12 +217,12 @@ def step_5_run_conviction_analysis(api, logger):
             logger.warning("  No candidates from Tier 1, skipping analysis")
             return {'success': True, 'signals': [], 'reason': 'no_tier1_candidates'}
 
-        # Tier 2: AI Screening
+        # Tier 2: AI Screening (with real market context)
         logger.info("  Running Tier 2 (AI Screening)...")
         tier2_finalists = run_tier2_screening(
             api=api,
             tier1_candidates=tier1_candidates,
-            market_context="Market conditions vary - see detailed analysis",
+            market_context=market_context,  # Real-time market context now!
             logger=logger,
             target_count=70
         )
@@ -217,11 +232,11 @@ def step_5_run_conviction_analysis(api, logger):
             logger.warning("  No finalists from Tier 2, skipping analysis")
             return {'success': True, 'signals': [], 'reason': 'no_tier2_finalists'}
 
-        # Context Builder
+        # Context Builder (with real market context)
         logger.info("  Building hierarchical context...")
         hierarchical_context = build_context(
             tier2_finalists=tier2_finalists,
-            market_news="Tech sector leading with interest rate uncertainty",
+            market_news=market_context,  # Real-time market context now!
             logger=logger
         )
         logger.info(f"  Context built: {len(hierarchical_context['sector_contexts'])} sectors")
@@ -259,6 +274,106 @@ def step_5_run_conviction_analysis(api, logger):
         import traceback
         traceback.print_exc()
         return {'success': False, 'error': str(e), 'signals': []}
+
+
+def step_6a_execute_sell_signals(engine, logger, sell_signals, current_positions):
+    """
+    Step 6A: Execute SELL signals from Tier 3 conviction analysis.
+
+    This handles conviction-based exits (different from stop-losses or profit targets).
+    If Tier 3 says "SELL this position", we exit immediately at market.
+
+    CRITICAL: Execute SELL signals BEFORE BUY signals to free up cash first.
+
+    Args:
+        engine: OrderExecutionEngine instance
+        logger: Logger instance
+        sell_signals: List of SELL signals from Tier 3
+        current_positions: Dict mapping symbol -> position object
+
+    Returns:
+        Dict with execution results
+    """
+    logger.info("\n" + "=" * 70)
+    logger.info("STEP 6A: Execute SELL Signals (Tier 3 Conviction-Based)")
+    logger.info("=" * 70)
+
+    try:
+        if not sell_signals:
+            logger.info("  No SELL signals from Tier 3")
+            return {'success': True, 'executed': 0, 'signals': []}
+
+        logger.info(f"  Received {len(sell_signals)} SELL signals from Tier 3")
+
+        # Filter SELL signals to only existing positions
+        positions_to_sell = []
+        for signal in sell_signals:
+            symbol = signal['symbol']
+            if symbol in current_positions:
+                positions_to_sell.append(signal)
+                logger.info(
+                    f"  {symbol}: SELL conviction {signal['conviction_score']}/100 - "
+                    f"{signal.get('reasoning', 'No reasoning provided')[:80]}"
+                )
+            else:
+                logger.debug(f"  {symbol}: SELL signal but no position held (skipping)")
+
+        if not positions_to_sell:
+            logger.info("  No SELL signals match current positions")
+            return {'success': True, 'executed': 0, 'signals': []}
+
+        # Execute sells
+        executed = 0
+        failed = 0
+        executed_details = []
+
+        for signal in positions_to_sell:
+            symbol = signal['symbol']
+            position = current_positions[symbol]
+            qty = abs(int(float(position.qty)))
+
+            try:
+                logger.info(f"  Submitting market SELL for {symbol}: {qty} shares")
+
+                result = engine.submit_conviction_sell(
+                    symbol=symbol,
+                    qty=qty,
+                    conviction_score=signal['conviction_score'],
+                    reasoning=signal.get('reasoning', 'Tier 3 SELL signal')
+                )
+
+                if result['success']:
+                    executed += 1
+                    executed_details.append({
+                        'symbol': symbol,
+                        'qty': qty,
+                        'order_id': result['order_id'],
+                        'conviction_score': signal['conviction_score']
+                    })
+                    logger.info(f"    -> SUCCESS: Sell order {result['order_id']}")
+                else:
+                    failed += 1
+                    logger.error(f"    -> FAILED: {result.get('error', 'Unknown error')}")
+
+            except Exception as e:
+                failed += 1
+                logger.error(f"    -> ERROR selling {symbol}: {e}")
+
+        logger.info(f"  SELL execution complete: {executed} executed, {failed} failed")
+
+        return {
+            'success': True,
+            'executed': executed,
+            'failed': failed,
+            'signals': positions_to_sell,
+            'executed_details': executed_details
+        }
+
+    except Exception as e:
+        logger.error(f"  ERROR executing SELL signals: {e}")
+        import traceback
+        traceback.print_exc()
+        return {'success': False, 'error': str(e), 'executed': 0}
 
 
 def step_6_submit_new_entries(engine, api, logger, signals):
@@ -395,6 +510,20 @@ def step_7_generate_summary(logger, results, api):
             counts = results['step_4']['counts']
             logger.info(f"  Orphaned Stops: {counts['cancelled']} cancelled")
 
+        # Step 6A: Conviction sells
+        if 'step_6a' in results and results['step_6a']['success']:
+            executed = results['step_6a']['executed']
+            failed = results['step_6a'].get('failed', 0)
+            if executed > 0 or failed > 0:
+                logger.info(f"  Conviction SELL Orders: {executed} executed, {failed} failed")
+
+        # Step 6B: New entries
+        if 'step_6b' in results and results['step_6b']['success']:
+            submitted = results['step_6b']['submitted']
+            failed = results['step_6b'].get('failed', 0)
+            if submitted > 0 or failed > 0:
+                logger.info(f"  New BUY Orders: {submitted} submitted, {failed} failed")
+
         logger.info("\n=== WORKFLOW COMPLETE ===")
 
         return {'success': True}
@@ -460,9 +589,42 @@ def run_evening_workflow():
         # Step 5: Run conviction analysis (3-Tier Pipeline)
         results['step_5'] = step_5_run_conviction_analysis(api, logger)
 
-        # Step 6: Submit new entries (with order generation)
-        signals = results['step_5'].get('signals', [])
-        results['step_6'] = step_6_submit_new_entries(engine, api, logger, signals)
+        # Extract signals by decision type
+        conviction_results = results['step_5'].get('conviction_results', [])
+        buy_signals = [r for r in conviction_results if r['decision'] == 'BUY']
+        sell_signals = [r for r in conviction_results if r['decision'] == 'SELL']
+        hold_signals = [r for r in conviction_results if r['decision'] == 'HOLD']
+
+        # Filter BUY signals by conviction threshold (only execute high-conviction buys)
+        BUY_CONVICTION_THRESHOLD = 70  # Only execute BUYs with 70+ conviction (out of 100)
+        filtered_buy_signals = [
+            r for r in buy_signals
+            if r['conviction_score'] >= BUY_CONVICTION_THRESHOLD
+        ]
+
+        logger.info(
+            f"BUY signal filtering: {len(filtered_buy_signals)}/{len(buy_signals)} "
+            f"above {BUY_CONVICTION_THRESHOLD} threshold"
+        )
+        if len(buy_signals) > len(filtered_buy_signals):
+            filtered_out = [r for r in buy_signals if r['conviction_score'] < BUY_CONVICTION_THRESHOLD]
+            for signal in filtered_out:
+                logger.info(
+                    f"  Filtered out: {signal['symbol']} (conviction: {signal['conviction_score']})"
+                )
+
+        # Get current positions for SELL signal filtering
+        positions = api.list_positions()
+        current_positions = {p.symbol: p for p in positions}
+
+        # Step 6A: Execute SELL signals (BEFORE buys to free up cash)
+        # NOTE: ALL SELL signals execute regardless of conviction score (safety first)
+        results['step_6a'] = step_6a_execute_sell_signals(
+            engine, logger, sell_signals, current_positions
+        )
+
+        # Step 6B: Submit new BUY entry orders (only high-conviction signals)
+        results['step_6b'] = step_6_submit_new_entries(engine, api, logger, filtered_buy_signals)
 
         # Step 7: Generate summary
         results['step_7'] = step_7_generate_summary(logger, results, api)
