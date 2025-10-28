@@ -1073,3 +1073,100 @@ class OrderExecutionEngine:
         )
 
         return counts
+
+    # ========================================================================
+    # CONVICTION-BASED SELL EXECUTION (Morning/Evening Workflow)
+    # ========================================================================
+
+    def submit_conviction_sell(
+        self,
+        symbol: str,
+        qty: int,
+        conviction_score: int,
+        reasoning: str,
+        tier3_decision: str = 'SELL'
+    ) -> Dict[str, any]:
+        """
+        Submit market sell based on Tier 3 conviction analysis.
+        Cancels associated stop-loss order.
+
+        This handles conviction-based exits (different from stop-losses or profit targets).
+        When Tier 3 recommends SELL, this executes immediately at market.
+
+        Args:
+            symbol: Stock ticker
+            qty: Shares to sell
+            conviction_score: Tier 3 conviction (1-100)
+            reasoning: Why Tier 3 recommended SELL
+            tier3_decision: Decision type (default: 'SELL')
+
+        Returns:
+            Dict with 'success', 'order_id', and optional 'error'
+        """
+        timestamp = datetime.now(timezone.utc).isoformat()
+        sell_coid = f"{symbol}_conviction_sell_{timestamp}"
+
+        self.logger.info(
+            f"Submitting conviction SELL for {symbol}: {qty} shares "
+            f"(conviction: {conviction_score}/100)"
+        )
+
+        try:
+            # Submit market sell order
+            sell_order = self.api.submit_order(
+                symbol=symbol,
+                qty=qty,
+                side='sell',
+                type='market',
+                time_in_force='day',
+                client_order_id=sell_coid
+            )
+
+            # Cancel associated stop-loss
+            self._cancel_stop_for_symbol(symbol, reason=f'conviction_sell_{conviction_score}')
+
+            # Log to conviction_sells table
+            conn = self._get_db_connection()
+            cursor = conn.cursor()
+
+            cursor.execute("""
+                INSERT INTO conviction_sells (
+                    symbol, order_id, client_order_id, qty,
+                    conviction_score, reasoning, tier3_decision,
+                    submitted_at
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            """, (
+                symbol,
+                sell_order.id,
+                sell_coid,
+                qty,
+                conviction_score,
+                reasoning,
+                tier3_decision,
+                datetime.now(timezone.utc)
+            ))
+
+            conn.commit()
+            conn.close()
+
+            self.logger.info(
+                f"[CONVICTION SELL SUBMITTED] {symbol}: {qty} shares @ market "
+                f"(conviction: {conviction_score}/100, order: {sell_order.id})"
+            )
+
+            return {
+                'success': True,
+                'order_id': sell_order.id,
+                'conviction_score': conviction_score,
+                'symbol': symbol,
+                'qty': qty
+            }
+
+        except Exception as e:
+            self.logger.error(f"Failed to submit conviction sell for {symbol}: {e}")
+            return {
+                'success': False,
+                'error': str(e),
+                'symbol': symbol,
+                'qty': qty
+            }
