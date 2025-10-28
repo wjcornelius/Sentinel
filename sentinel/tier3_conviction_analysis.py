@@ -6,10 +6,11 @@
 Tier 3 Deep Conviction Analysis
 
 Performs comprehensive analysis on the top 70 finalists from Tier 2.
-Uses GPT-4 Turbo with full dossier (technicals, fundamentals, news, context).
+Uses Perplexity AI (real-time news) + GPT-4 Turbo (deep analysis).
 
-Output: BUY/SELL/HOLD decision + conviction score (1-10)
-Cost: ~$0.05 per stock × 70 stocks = ~$3.50/day
+Output: BUY/SELL/HOLD decision + conviction score (1-100)
+Cost: ~$0.005 per ticker (Perplexity) + $0.02 per ticker (GPT-4) = ~$0.025/ticker
+Total: ~$1.75/day for 70 stocks (Perplexity + GPT-4)
 """
 
 import logging
@@ -21,6 +22,7 @@ import pandas as pd
 
 from openai import OpenAI
 import alpaca_trade_api as tradeapi
+from sentinel.perplexity_news import PerplexityNewsGatherer
 
 try:
     import config
@@ -38,22 +40,26 @@ You are Sentinel, a disciplined equity analyst tasked with evaluating a single s
 Payload:
 <<PAYLOAD>>
 
-Your job is to decide whether the trading system should BUY, SELL, or HOLD this ticker tomorrow and to assign a conviction score between 1 and 10. Follow these instructions exactly:
+Your job is to decide whether the trading system should BUY, SELL, or HOLD this ticker tomorrow and to assign a conviction score between 1 and 100. Follow these instructions exactly:
 
 1. Decision categories
    • BUY – add or increase exposure.
    • SELL – exit or reduce exposure.
    • HOLD – maintain the current position size.
 
-2. Conviction scale (use the full range)
-   • 10 – Exceptional edge. Multiple independent, high-quality signals align in a compelling way. Very rare; reserve for best-in-class setups.
-   • 8–9 – Strong, actionable idea with clear catalysts and supportive data across most dimensions.
-   • 6–7 – Mild positive or negative bias. Evidence is mixed or moderate; fine for tactical adjustments but avoid clustering here unless warranted.
-   • 5 – Neutral stance. Signals conflict or lack sufficient edge. Prefer HOLD unless portfolio constraints require action.
-   • 3–4 – Notable caution. Signals lean bearish or thesis is deteriorating.
-   • 1–2 – Acute risk/urgency to exit. Severe red flags, broken thesis, or imminent negative catalysts. Use sparingly.
+2. Conviction scale (use the full range 1-100)
+   • 95-100 – Exceptional edge. Multiple independent, high-quality signals align in a compelling way. Very rare; reserve for best-in-class setups.
+   • 85-94 – Strong, actionable idea with clear catalysts and supportive data across most dimensions.
+   • 75-84 – Good setup with solid evidence. Above-average conviction with minor concerns.
+   • 70-74 – Mild positive bias. Decent setup but some mixed signals or moderate concerns.
+   • 60-69 – Slight positive lean. Evidence is somewhat supportive but not compelling.
+   • 50-59 – Neutral to slightly negative. Signals conflict or lack sufficient edge. Prefer HOLD.
+   • 40-49 – Notable caution. Signals lean bearish or thesis is deteriorating.
+   • 30-39 – Significant concerns. Multiple negative signals or broken technical setup.
+   • 20-29 – Strong sell signal. Clear deterioration with urgent need to exit or avoid.
+   • 1-19 – Acute risk/urgency. Severe red flags, broken thesis, or imminent negative catalysts. Use sparingly.
 
-   Important: If you find yourself defaulting to 6–7, reassess. Only sit in the mid-range when evidence is truly mixed. Push scores toward the tails when data justifies it.
+   Important: Use the full 1-100 range to capture nuances. Don't cluster around 70-80. Push scores toward extremes when data justifies it. This granularity is critical for position sizing.
 
 3. Rationale
    • Provide 2–3 concise bullet points (no more than ~40 words each) covering the strongest drivers of your decision.
@@ -93,12 +99,21 @@ class Tier3ConvictionAnalysis:
         self.api = api
         self.logger = logger or logging.getLogger(__name__)
 
+        # Initialize OpenAI
         if openai_client:
             self.openai = openai_client
         elif OPENAI_API_KEY:
             self.openai = OpenAI(api_key=OPENAI_API_KEY)
         else:
             raise ValueError("OpenAI API key required for Tier 3 analysis")
+
+        # Initialize Perplexity for real-time news
+        try:
+            self.perplexity = PerplexityNewsGatherer(logger=self.logger)
+            self.logger.info("Perplexity news gatherer initialized successfully")
+        except Exception as e:
+            self.logger.warning(f"Perplexity initialization failed: {e}. News context will be limited.")
+            self.perplexity = None
 
     def analyze_finalists(
         self,
@@ -122,6 +137,18 @@ class Tier3ConvictionAnalysis:
         market_context = hierarchical_context['market_context']
         sector_contexts = hierarchical_context['sector_contexts']
 
+        # PHASE 1: Batch gather news for all tickers (Perplexity)
+        news_context = {}
+        if self.perplexity:
+            self.logger.info("Gathering real-time news for all tickers via Perplexity...")
+            symbols = [f['symbol'] for f in tier2_finalists]
+            news_context = self.perplexity.gather_batch_news(symbols, days_back=7)
+            successful_news = sum(1 for n in news_context.values() if n['success'])
+            self.logger.info(f"News gathered: {successful_news}/{len(symbols)} successful")
+        else:
+            self.logger.warning("Perplexity not available - proceeding without real-time news")
+
+        # PHASE 2: Analyze each ticker with news context (GPT-4)
         results = []
         errors = 0
 
@@ -132,12 +159,13 @@ class Tier3ConvictionAnalysis:
             try:
                 self.logger.info(f"Analyzing {symbol} ({i}/{len(tier2_finalists)})...")
 
-                # Build complete dossier
+                # Build complete dossier with news context
                 dossier = self._build_dossier(
                     finalist,
                     market_context,
                     sector_contexts.get(sector, ''),
-                    current_positions
+                    current_positions,
+                    news_context.get(symbol, {})  # Add news context
                 )
 
                 if not dossier:
@@ -171,7 +199,8 @@ class Tier3ConvictionAnalysis:
         finalist: Dict,
         market_context: str,
         sector_context: str,
-        current_positions: Optional[Dict]
+        current_positions: Optional[Dict],
+        news_context: Optional[Dict] = None
     ) -> Optional[Dict]:
         """
         Build complete dossier for a stock.
@@ -181,6 +210,7 @@ class Tier3ConvictionAnalysis:
             market_context: Market context summary
             sector_context: Sector context summary
             current_positions: Dict of current positions
+            news_context: Optional Perplexity news context
 
         Returns:
             Complete dossier dict or None
@@ -224,12 +254,30 @@ class Tier3ConvictionAnalysis:
                 '52_week_low': info.get('fiftyTwoWeekLow')
             }
 
-            # Get news headlines
+            # Get news headlines from Alpaca (basic fallback)
             try:
                 news = self.api.get_news(symbol, limit=5)
                 headlines = [{'headline': n.headline, 'summary': n.summary} for n in news[:5]]
             except:
                 headlines = []
+
+            # Add Perplexity real-time news context (enhanced)
+            perplexity_news = {}
+            if news_context and news_context.get('success'):
+                perplexity_news = {
+                    'summary': news_context.get('news_summary', 'No recent news available'),
+                    'key_events': news_context.get('key_events', []),
+                    'sentiment': news_context.get('sentiment', 'neutral'),
+                    'sources': news_context.get('sources', [])[:3],  # First 3 sources
+                    'timestamp': news_context.get('timestamp', '')
+                }
+            else:
+                perplexity_news = {
+                    'summary': 'Real-time news unavailable',
+                    'key_events': [],
+                    'sentiment': 'unknown',
+                    'sources': []
+                }
 
             # Build position context if held
             position_context = {}
@@ -252,7 +300,8 @@ class Tier3ConvictionAnalysis:
                 'latest_price': float(closes.iloc[-1]),
                 'technicals': technicals,
                 'fundamentals': fundamentals,
-                'news_headlines': headlines,
+                'news_headlines': headlines,  # Alpaca news (fallback)
+                'perplexity_news': perplexity_news,  # Real-time news from Perplexity
                 'position_context': position_context,
                 'tier1_score': finalist['tier1_score'],
                 'tier2_score': finalist['tier2_score'],
@@ -389,12 +438,12 @@ class Tier3ConvictionAnalysis:
             if decision not in {"BUY", "SELL", "HOLD"}:
                 decision = "HOLD"
 
-            # Sanitize conviction
-            conviction = analysis.get("conviction", 5)
+            # Sanitize conviction (1-100 scale)
+            conviction = analysis.get("conviction", 50)
             try:
-                conviction = max(1, min(10, int(conviction)))
+                conviction = max(1, min(100, int(conviction)))
             except:
-                conviction = 5
+                conviction = 50
 
             # Format rationale
             rationale = analysis.get("rationale", [])

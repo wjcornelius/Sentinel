@@ -281,18 +281,18 @@ class OrderGenerator:
 
     def _conviction_to_weight(self, conviction: int) -> float:
         """
-        Convert conviction score (1-10) to allocation weight.
+        Convert conviction score (1-100) to allocation weight.
 
         Uses exponential weighting to give higher conviction scores
         disproportionately more weight.
 
         Args:
-            conviction: Conviction score (1-10)
+            conviction: Conviction score (1-100)
 
         Returns:
             Weight (0.0-1.0)
         """
-        normalized = max(1, min(10, conviction)) / 10.0
+        normalized = max(1, min(100, conviction)) / 100.0
         weight = normalized ** CONVICTION_WEIGHT_EXP
         return max(MIN_WEIGHT_FLOOR, weight)
 
