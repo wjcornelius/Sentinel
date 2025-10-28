@@ -136,6 +136,7 @@ SEND_EMAIL_ON_FILLS = True
 SEND_EMAIL_ON_STOP_TRIGGERS = True
 SEND_EMAIL_ON_PROFIT_TARGETS = True
 SEND_DAILY_SUMMARY_EMAIL = True
+SEND_EMAIL_ON_ERRORS = True       # Email on system errors
 
 # SMS notifications (high priority only)
 SEND_SMS_ON_STOP_TRIGGERS = True  # Stop losses are critical
