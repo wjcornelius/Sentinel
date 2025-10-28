@@ -141,6 +141,36 @@ Be factual and objective."""
                 'days_back': days_back
             }
 
+        except requests.exceptions.ConnectionError as e:
+            # Handle connection errors (connection aborted, remote disconnect, etc.)
+            self.logger.warning(f"Connection error fetching news for {symbol}: {e}")
+            return {
+                'symbol': symbol,
+                'news_summary': f"News temporarily unavailable (connection error)",
+                'key_events': [],
+                'sentiment': 'neutral',
+                'sources': [],
+                'timestamp': datetime.now(timezone.utc).isoformat(),
+                'success': False,
+                'error': 'ConnectionError',
+                'error_detail': str(e)
+            }
+
+        except requests.exceptions.Timeout as e:
+            # Handle timeout errors
+            self.logger.warning(f"Timeout fetching news for {symbol}: {e}")
+            return {
+                'symbol': symbol,
+                'news_summary': f"News temporarily unavailable (timeout)",
+                'key_events': [],
+                'sentiment': 'neutral',
+                'sources': [],
+                'timestamp': datetime.now(timezone.utc).isoformat(),
+                'success': False,
+                'error': 'Timeout',
+                'error_detail': str(e)
+            }
+
         except requests.exceptions.HTTPError as e:
             error_detail = e.response.text if hasattr(e, 'response') and e.response else str(e)
             self.logger.error(f"HTTP error fetching news for {symbol}: {e}")
@@ -158,16 +188,18 @@ Be factual and objective."""
             }
 
         except Exception as e:
-            self.logger.error(f"Error fetching news for {symbol}: {e}")
+            # Catch-all for any other unexpected errors
+            self.logger.error(f"Unexpected error fetching news for {symbol}: {e}", exc_info=True)
             return {
                 'symbol': symbol,
-                'news_summary': f"Error: {str(e)}",
+                'news_summary': f"News temporarily unavailable",
                 'key_events': [],
-                'sentiment': 'unknown',
+                'sentiment': 'neutral',
                 'sources': [],
                 'timestamp': datetime.now(timezone.utc).isoformat(),
                 'success': False,
-                'error': str(e)
+                'error': type(e).__name__,
+                'error_detail': str(e)
             }
 
     def gather_market_overview(
@@ -234,14 +266,37 @@ Be concise and focus on actionable market context."""
                 'success': True
             }
 
-        except Exception as e:
-            self.logger.error(f"Error fetching market overview: {e}")
+        except requests.exceptions.ConnectionError as e:
+            self.logger.warning(f"Connection error fetching market overview: {e}")
             return {
-                'market_summary': f"Error: {str(e)}",
+                'market_summary': "Market conditions vary - detailed analysis unavailable (connection error)",
                 'sources': [],
                 'timestamp': datetime.now(timezone.utc).isoformat(),
                 'success': False,
-                'error': str(e)
+                'error': 'ConnectionError',
+                'error_detail': str(e)
+            }
+
+        except requests.exceptions.Timeout as e:
+            self.logger.warning(f"Timeout fetching market overview: {e}")
+            return {
+                'market_summary': "Market conditions vary - detailed analysis unavailable (timeout)",
+                'sources': [],
+                'timestamp': datetime.now(timezone.utc).isoformat(),
+                'success': False,
+                'error': 'Timeout',
+                'error_detail': str(e)
+            }
+
+        except Exception as e:
+            self.logger.error(f"Unexpected error fetching market overview: {e}", exc_info=True)
+            return {
+                'market_summary': "Market conditions vary - see detailed analysis",
+                'sources': [],
+                'timestamp': datetime.now(timezone.utc).isoformat(),
+                'success': False,
+                'error': type(e).__name__,
+                'error_detail': str(e)
             }
 
     def gather_batch_news(
