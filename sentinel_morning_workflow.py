@@ -430,19 +430,22 @@ def step_6_submit_new_entries(engine, api, logger, signals):
             logger.info(f"  Submitting {symbol}: {qty} shares @ ${entry_price:.2f}, stop @ ${stop_price:.2f}")
 
             try:
-                result = engine.submit_entry_with_stop(
+                # Calculate stop_loss_pct from entry and stop prices
+                stop_loss_pct = stop_price / entry_price if entry_price > 0 else 0.92
+
+                entry_order, stop_order = engine.submit_entry_with_stop(
                     symbol=symbol,
+                    entry_price=entry_price,
                     qty=qty,
-                    limit_price=entry_price,
-                    stop_price=stop_price
+                    stop_loss_pct=stop_loss_pct
                 )
 
-                if result['success']:
+                if entry_order and stop_order:
                     submitted += 1
-                    logger.info(f"    -> SUCCESS: Entry {result['entry_order_id']}, Stop {result['stop_order_id']}")
+                    logger.info(f"    -> SUCCESS: Entry {entry_order.id}, Stop {stop_order.id}")
                 else:
                     failed += 1
-                    logger.error(f"    -> FAILED: {result.get('error', 'Unknown error')}")
+                    logger.error(f"    -> FAILED: Orders returned None")
 
             except Exception as e:
                 failed += 1
