@@ -590,7 +590,7 @@ class OrderExecutionEngine:
                 symbol = pos.symbol
                 current_price = float(pos.current_price)
                 entry_price = float(pos.avg_entry_price)
-                current_qty = abs(int(float(pos.qty)))  # Handle fractional shares
+                current_qty = abs(float(pos.qty))  # Keep fractional shares
 
                 # Calculate unrealized P&L percentage
                 unrealized_pnl_pct = (current_price - entry_price) / entry_price
@@ -826,7 +826,7 @@ class OrderExecutionEngine:
                 symbol = pos.symbol
                 current_price = float(pos.current_price)
                 entry_price = float(pos.avg_entry_price)
-                qty = abs(int(float(pos.qty)))  # Handle fractional shares
+                qty = abs(float(pos.qty))  # Keep fractional shares
                 unrealized_pl = float(pos.unrealized_pl)
                 unrealized_pnl_pct = (current_price - entry_price) / entry_price
 

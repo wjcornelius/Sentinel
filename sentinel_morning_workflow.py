@@ -46,6 +46,7 @@ from sentinel.tier1_technical_filter import run_tier1_filter
 from sentinel.tier2_ai_screening import run_tier2_screening
 from sentinel.context_builder import build_context
 from sentinel.tier3_conviction_analysis import run_tier3_analysis
+from sentinel.portfolio_optimizer import optimize_portfolio
 from sentinel.order_generator import generate_entry_orders
 from sentinel.perplexity_news import PerplexityNewsGatherer
 import alpaca_trade_api as tradeapi
@@ -56,11 +57,11 @@ import alpaca_trade_api as tradeapi
 # ============================================================================
 
 def setup_logging():
-    """Configure logging for evening workflow."""
+    """Configure logging for morning workflow."""
     log_dir = Path("logs")
     log_dir.mkdir(exist_ok=True)
 
-    log_filename = log_dir / f"evening_workflow_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
+    log_filename = log_dir / f"morning_workflow_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
 
     logging.basicConfig(
         level=logging.INFO,
@@ -191,28 +192,25 @@ def step_5_run_conviction_analysis(api, logger):
             logger.warning(f"  Could not fetch market overview: {e}. Using fallback.")
             market_context = "Market conditions vary - see detailed analysis"
 
-        # Get test universe (for now, use a subset - will expand to Russell 3000 later)
-        logger.info("  Fetching universe...")
+        # Production universe: S&P 500 + Nasdaq 100 (~600 stocks)
+        from sentinel.universe import SP500_NASDAQ100_UNIVERSE, UNIVERSE_SIZE
+
+        logger.info("  Loading universe...")
         positions = api.list_positions()
         portfolio_symbols = [p.symbol for p in positions]
 
-        # For now, use portfolio + common stocks as universe
-        universe = list(set(portfolio_symbols + [
-            'AAPL', 'MSFT', 'GOOGL', 'AMZN', 'NVDA', 'META', 'TSLA', 'AMD',
-            'NFLX', 'ADBE', 'CRM', 'ORCL', 'AVGO', 'CSCO', 'INTC', 'QCOM',
-            'TXN', 'AMAT', 'MU', 'KLAC', 'LRCX', 'ASML', 'SHOP',
-            'PYPL', 'V', 'MA', 'JPM', 'BAC', 'WFC', 'GS', 'MS',
-            'UNH', 'JNJ', 'PFE', 'ABBV', 'TMO', 'DHR', 'ABT', 'LLY'
-        ]))
-        logger.info(f"  Universe: {len(universe)} symbols")
+        # Full universe = S&P 500 + Nasdaq 100 + currently held positions (for SELL analysis)
+        universe = list(set(SP500_NASDAQ100_UNIVERSE + portfolio_symbols))
+        logger.info(f"  Universe: {UNIVERSE_SIZE} base stocks + {len(portfolio_symbols)} held = {len(universe)} total")
 
-        # Tier 1: Technical Filter
-        logger.info("  Running Tier 1 (Technical Filter)...")
+        # Tier 1: Aggressive Technical Filter (600 → ~100)
+        logger.info("  Running Tier 1 (Aggressive Technical Filter)...")
         tier1_candidates = run_tier1_filter(
             api=api,
             universe_symbols=universe,
-            logger=logger,
-            target_count=250
+            logger=logger
+            # Uses default aggressive parameters from tier1_technical_filter.py
+            # min_dollar_volume=$10M, min_price=$10, target_count=100
         )
         logger.info(f"  Tier 1 complete: {len(tier1_candidates)} candidates")
 
@@ -220,14 +218,14 @@ def step_5_run_conviction_analysis(api, logger):
             logger.warning("  No candidates from Tier 1, skipping analysis")
             return {'success': True, 'signals': [], 'reason': 'no_tier1_candidates'}
 
-        # Tier 2: AI Screening (with real market context)
-        logger.info("  Running Tier 2 (AI Screening)...")
+        # Tier 2: Enrichment (add sector/news context, no filtering)
+        logger.info("  Running Tier 2 (Context Enrichment)...")
         tier2_finalists = run_tier2_screening(
             api=api,
             tier1_candidates=tier1_candidates,
-            market_context=market_context,  # Real-time market context now!
+            market_context=market_context,  # Real-time market context
             logger=logger,
-            target_count=70
+            target_count=len(tier1_candidates)  # Pass all through (enrichment only, no filtering)
         )
         logger.info(f"  Tier 2 complete: {len(tier2_finalists)} finalists")
 
@@ -277,6 +275,71 @@ def step_5_run_conviction_analysis(api, logger):
         import traceback
         traceback.print_exc()
         return {'success': False, 'error': str(e), 'signals': []}
+
+
+def cleanup_zero_quantity_positions(engine, api, logger):
+    """
+    Cleanup: Liquidate zero or near-zero quantity positions (artifacts from previous version).
+
+    Args:
+        engine: OrderExecutionEngine instance
+        api: Alpaca API instance
+        logger: Logger instance
+
+    Returns:
+        Dict with cleanup results
+    """
+    logger.info("\n" + "=" * 70)
+    logger.info("CLEANUP: Liquidating Zero-Quantity Positions")
+    logger.info("=" * 70)
+
+    try:
+        positions = api.list_positions()
+        zero_positions = []
+
+        for pos in positions:
+            qty = abs(float(pos.qty))
+            if qty < 0.001:  # Less than 0.001 shares = essentially zero
+                zero_positions.append(pos)
+                logger.info(f"  Found zero position: {pos.symbol} ({qty} shares)")
+
+        if not zero_positions:
+            logger.info("  No zero-quantity positions found")
+            return {'success': True, 'liquidated': 0}
+
+        logger.info(f"  Liquidating {len(zero_positions)} zero-quantity positions...")
+        liquidated = 0
+        failed = 0
+
+        for pos in zero_positions:
+            symbol = pos.symbol
+            qty = abs(float(pos.qty))
+
+            try:
+                result = engine.submit_conviction_sell(
+                    symbol=symbol,
+                    qty=qty,
+                    conviction_score=0,
+                    reasoning='Cleanup: Zero-quantity position from previous version'
+                )
+
+                if result['success']:
+                    liquidated += 1
+                    logger.info(f"    -> SUCCESS: Liquidated {symbol} ({qty} shares)")
+                else:
+                    failed += 1
+                    logger.warning(f"    -> FAILED: {symbol} - {result.get('error', 'Unknown error')}")
+
+            except Exception as e:
+                failed += 1
+                logger.error(f"    -> ERROR liquidating {symbol}: {e}")
+
+        logger.info(f"  Cleanup complete: {liquidated} liquidated, {failed} failed")
+        return {'success': True, 'liquidated': liquidated, 'failed': failed}
+
+    except Exception as e:
+        logger.error(f"Cleanup failed: {e}", exc_info=True)
+        return {'success': False, 'error': str(e)}
 
 
 def step_6a_execute_sell_signals(engine, logger, sell_signals, current_positions):
@@ -333,7 +396,7 @@ def step_6a_execute_sell_signals(engine, logger, sell_signals, current_positions
         for signal in positions_to_sell:
             symbol = signal['symbol']
             position = current_positions[symbol]
-            qty = abs(int(float(position.qty)))
+            qty = abs(float(position.qty))  # Keep fractional shares
 
             try:
                 logger.info(f"  Submitting market SELL for {symbol}: {qty} shares")
@@ -553,7 +616,7 @@ def run_evening_workflow():
     logger = setup_logging()
 
     logger.info("\n" + "=" * 70)
-    logger.info("SENTINEL EVENING WORKFLOW")
+    logger.info("SENTINEL MORNING WORKFLOW")
     logger.info("=" * 70)
     logger.info(f"Start time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     logger.info(f"Mode: {'LIVE PAPER TRADING' if config.LIVE_TRADING else 'SAFE MODE'}")
@@ -595,42 +658,94 @@ def run_evening_workflow():
         # Step 5: Run conviction analysis (3-Tier Pipeline)
         results['step_5'] = step_5_run_conviction_analysis(api, logger)
 
-        # Extract signals by decision type
+        # Get conviction scores from Tier 3
         conviction_results = results['step_5'].get('conviction_results', [])
-        buy_signals = [r for r in conviction_results if r['decision'] == 'BUY']
-        sell_signals = [r for r in conviction_results if r['decision'] == 'SELL']
-        hold_signals = [r for r in conviction_results if r['decision'] == 'HOLD']
 
-        # Filter BUY signals by conviction threshold (only execute high-conviction buys)
-        BUY_CONVICTION_THRESHOLD = 70  # Only execute BUYs with 70+ conviction (out of 100)
-        filtered_buy_signals = [
-            r for r in buy_signals
-            if r['conviction_score'] >= BUY_CONVICTION_THRESHOLD
-        ]
+        logger.info(f"\nTier 3 returned {len(conviction_results)} conviction scores")
 
-        logger.info(
-            f"BUY signal filtering: {len(filtered_buy_signals)}/{len(buy_signals)} "
-            f"above {BUY_CONVICTION_THRESHOLD} threshold"
-        )
-        if len(buy_signals) > len(filtered_buy_signals):
-            filtered_out = [r for r in buy_signals if r['conviction_score'] < BUY_CONVICTION_THRESHOLD]
-            for signal in filtered_out:
-                logger.info(
-                    f"  Filtered out: {signal['symbol']} (conviction: {signal['conviction_score']})"
-                )
+        # Cleanup: Liquidate zero-quantity positions (artifacts from previous version)
+        results['cleanup'] = cleanup_zero_quantity_positions(engine, api, logger)
 
-        # Get current positions for SELL signal filtering
+        # Get current portfolio state for optimizer
+        account = api.get_account()
         positions = api.list_positions()
         current_positions = {p.symbol: p for p in positions}
 
+        account_info = {
+            'portfolio_value': float(account.portfolio_value),
+            'cash': float(account.cash),
+            'buying_power': float(account.buying_power)
+        }
+
+        # Step 5.5: Portfolio Optimization (NEW - makes holistic decisions with full information)
+        logger.info("\n" + "=" * 70)
+        logger.info("STEP 5.5: Portfolio Optimization (Holistic Decision Making)")
+        logger.info("=" * 70)
+        logger.info("NOTE: Portfolio optimizer now sees ALL conviction scores at once")
+        logger.info("      and makes globally optimal rebalancing decisions.")
+
+        optimization_result = optimize_portfolio(
+            conviction_scores=conviction_results,
+            current_positions=current_positions,
+            account_info=account_info,
+            logger=logger
+        )
+
+        if not optimization_result['success']:
+            logger.error(f"Portfolio optimization failed: {optimization_result.get('error')}")
+            logger.warning("Falling back to old sequential decision logic...")
+
+            # Fallback: use old logic
+            buy_signals = [r for r in conviction_results if r['decision'] == 'BUY']
+            sell_signals = [r for r in conviction_results if r['decision'] == 'SELL']
+        else:
+            # Extract plan from optimizer
+            plan = optimization_result['plan']
+
+            # Convert plan to signals format for execution
+            sell_signals = []
+            for sell in plan.get('sells', []):
+                # Find the conviction data
+                conv_data = next((r for r in conviction_results if r['symbol'] == sell['symbol']), None)
+                if conv_data and sell['symbol'] in current_positions:
+                    sell_signals.append({
+                        'symbol': sell['symbol'],
+                        'conviction_score': sell.get('conviction', conv_data['conviction_score']),
+                        'reasoning': sell.get('reason', 'Portfolio optimizer sell decision'),
+                        'decision': 'SELL'
+                    })
+
+            # Convert buys - but we need to generate orders with the specified allocations
+            buy_signals_from_plan = []
+            for buy in plan.get('buys', []):
+                conv_data = next((r for r in conviction_results if r['symbol'] == buy['symbol']), None)
+                if conv_data:
+                    buy_signals_from_plan.append({
+                        'symbol': buy['symbol'],
+                        'conviction_score': buy.get('conviction', conv_data['conviction_score']),
+                        'reasoning': buy.get('reason', 'Portfolio optimizer buy decision'),
+                        'allocation': buy['allocation'],  # Use optimizer's allocation
+                        'latest_price': conv_data['latest_price'],
+                        'decision': 'BUY'
+                    })
+
+            logger.info(f"\nPortfolio optimizer decisions:")
+            logger.info(f"  SELL: {len(sell_signals)} positions")
+            logger.info(f"  HOLD: {len(plan.get('holds', []))} positions")
+            logger.info(f"  BUY: {len(buy_signals_from_plan)} positions")
+
         # Step 6A: Execute SELL signals (BEFORE buys to free up cash)
-        # NOTE: ALL SELL signals execute regardless of conviction score (safety first)
         results['step_6a'] = step_6a_execute_sell_signals(
             engine, logger, sell_signals, current_positions
         )
 
-        # Step 6B: Submit new BUY entry orders (only high-conviction signals)
-        results['step_6b'] = step_6_submit_new_entries(engine, api, logger, filtered_buy_signals)
+        # Step 6B: Submit new BUY entry orders from portfolio optimizer
+        if optimization_result['success']:
+            results['step_6b'] = step_6_submit_new_entries(engine, api, logger, buy_signals_from_plan)
+        else:
+            # Fallback: filter and execute old way
+            filtered_buy_signals = [r for r in buy_signals if r['conviction_score'] >= 70]
+            results['step_6b'] = step_6_submit_new_entries(engine, api, logger, filtered_buy_signals)
 
         # Step 7: Generate summary
         results['step_7'] = step_7_generate_summary(logger, results, api)

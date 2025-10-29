@@ -1,19 +1,24 @@
 # -*- coding: utf-8 -*-
 # sentinel/tier1_technical_filter.py
-# Tier 1: Technical filtering to reduce universe from ~2500 to ~250 stocks
+# Tier 1: Aggressive technical filtering (600 → ~100 stocks)
 
 """
-Tier 1 Technical Filter
+Tier 1 Technical Filter - Racehorse Quality Selection
 
-Applies fast, cheap technical screens to reduce the Russell 3000 universe
-(~2500 liquid stocks) down to ~250 technically viable candidates.
+Applies aggressive technical screens to reduce S&P 500 + Nasdaq 100 universe
+(~600 stocks) down to ~100 high-quality candidates (adaptive: 80-120 range).
 
-Filters Applied:
-1. Liquidity: Average daily dollar volume > $1M
-2. Price: $5 < price < $500 (avoid penny stocks and expensive shares)
+Aggressive Filters Applied:
+1. Liquidity: Average daily dollar volume > $10M (only highly liquid stocks)
+2. Price: $10 < price < $1000 (no penny stocks, allows TSLA/GOOG/etc.)
 3. Momentum: Positive 20-day trend strength
-4. Volatility: ATR-based screens for tradeable range
-5. Technical: RSI not extreme (20-80 range)
+4. Volatility: ATR-based screens for tradeable range (1.5%+ minimum)
+5. Technical: RSI 30-75 range (avoid oversold disasters and overbought bubbles)
+
+Adaptive Behavior:
+- Bullish markets: More stocks pass momentum filters → ~120 output
+- Bearish markets: Fewer stocks pass momentum filters → ~80 output
+- Target: ~100 stocks for Tier 3 analysis (manageable cost, high quality)
 
 Cost: Near-zero (uses cached price data from Alpaca)
 """
@@ -49,12 +54,12 @@ class Tier1TechnicalFilter:
     def filter_universe(
         self,
         universe_symbols: List[str],
-        min_dollar_volume: float = 1_000_000,
-        min_price: float = 5.0,
-        max_price: float = 500.0,
-        min_rsi: float = 20.0,
-        max_rsi: float = 80.0,
-        target_count: int = 250
+        min_dollar_volume: float = 10_000_000,  # $10M minimum (aggressive, racehorse-quality)
+        min_price: float = 10.0,  # $10 minimum (no penny stocks)
+        max_price: float = 1000.0,  # Allow high-price stocks (TSLA, GOOG, etc.)
+        min_rsi: float = 30.0,  # Not oversold (avoid disasters)
+        max_rsi: float = 75.0,  # Not overbought (avoid bubbles)
+        target_count: int = 100  # Soft target (adapts 80-120 based on market conditions)
     ) -> List[Dict]:
         """
         Apply technical filters to universe.

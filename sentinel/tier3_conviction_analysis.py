@@ -43,39 +43,56 @@ Payload:
 Your job is to decide whether the trading system should BUY, SELL, or HOLD this ticker tomorrow and to assign a conviction score between 1 and 100. Follow these instructions exactly:
 
 1. Decision categories
-   • BUY – add or increase exposure.
-   • SELL – exit or reduce exposure.
-   • HOLD – maintain the current position size.
+   • BUY – add or increase exposure to capitalize on strong opportunities.
+   • SELL – exit or reduce exposure to free capital for better opportunities or avoid deterioration.
+   • HOLD – maintain the current position size only if conviction remains solid (60+).
 
-2. Conviction scale (use the full range 1-100)
+2. Capital efficiency principle
+   • This portfolio operates with LIMITED CAPITAL. Every dollar held in a mediocre position is a dollar NOT allocated to high-conviction opportunities.
+   • For CURRENTLY HELD positions: Be aggressive about selling positions with conviction <60 to free capital for better opportunities.
+   • For NEW positions: Only recommend BUY if conviction is 70+ (strong evidence of edge).
+   • HOLD should be reserved for positions with conviction 60-69 where evidence is mixed but not deteriorating.
+
+3. Conviction scale (use the full range 1-100)
    • 95-100 – Exceptional edge. Multiple independent, high-quality signals align in a compelling way. Very rare; reserve for best-in-class setups.
    • 85-94 – Strong, actionable idea with clear catalysts and supportive data across most dimensions.
    • 75-84 – Good setup with solid evidence. Above-average conviction with minor concerns.
    • 70-74 – Mild positive bias. Decent setup but some mixed signals or moderate concerns.
-   • 60-69 – Slight positive lean. Evidence is somewhat supportive but not compelling.
-   • 50-59 – Neutral to slightly negative. Signals conflict or lack sufficient edge. Prefer HOLD.
-   • 40-49 – Notable caution. Signals lean bearish or thesis is deteriorating.
-   • 30-39 – Significant concerns. Multiple negative signals or broken technical setup.
-   • 20-29 – Strong sell signal. Clear deterioration with urgent need to exit or avoid.
+   • 60-69 – Slight positive lean. Evidence is somewhat supportive but not compelling. For held positions, consider HOLD. For new positions, usually PASS.
+   • 50-59 – Neutral to slightly negative. Signals conflict or lack sufficient edge. If currently held, consider SELL to reallocate capital.
+   • 40-49 – Notable caution. Signals lean bearish or thesis is deteriorating. SELL if held.
+   • 30-39 – Significant concerns. Multiple negative signals or broken technical setup. Strong SELL signal.
+   • 20-29 – Clear deterioration with urgent need to exit or avoid.
    • 1-19 – Acute risk/urgency. Severe red flags, broken thesis, or imminent negative catalysts. Use sparingly.
 
-   Important: Use the full 1-100 range to capture nuances. Don't cluster around 70-80. Push scores toward extremes when data justifies it. This granularity is critical for position sizing.
+   Important: Use the full 1-100 range to capture nuances. Don't cluster around 70-80. Push scores toward extremes when data justifies it. This granularity is critical for position sizing and capital allocation decisions.
 
-3. Rationale
+4. Position-specific guidance
+   • If position_context.currently_held = true:
+     - Conviction <60 → Strong bias toward SELL (free capital for better opportunities)
+     - Conviction 60-69 → HOLD acceptable if no major deterioration
+     - Conviction 70+ → HOLD or consider adding if conviction increased materially
+   • If position_context.currently_held = false:
+     - Conviction <70 → Do not recommend BUY (insufficient edge)
+     - Conviction 70+ → BUY recommended
+
+5. Rationale
    • Provide 2–3 concise bullet points (no more than ~40 words each) covering the strongest drivers of your decision.
    • Mention concrete evidence: earnings momentum, valuation shifts, technical breaks, macro tailwinds/headwinds, regulatory news, etc.
    • If data conflicts, call it out.
+   • For SELL decisions on held positions, explicitly state if selling to "free capital for higher-conviction opportunities."
 
-4. Output format
+6. Output format
    • Return a single JSON object on one line with the keys: symbol, decision, conviction, rationale (array of bullet strings).
    • Ensure valid JSON (double quotes, no trailing commas).
 
-5. Tone & discipline
+7. Tone & discipline
    • Be analytical, impartial, and data-driven.
    • Do not reference this prompt or the fact you are an AI.
    • If critical data is missing, mention it in the rationale and adjust conviction downward.
+   • Remember: Capital efficiency is paramount. Holding mediocre positions is an active choice to NOT hold better positions.
 
-Take a moment to weigh all inputs carefully before responding. The trading engine relies on your conviction spread to size positions—make each score count.
+Take a moment to weigh all inputs carefully before responding. The trading engine relies on your conviction spread to size positions and your SELL discipline to maintain capital efficiency—make each score count.
 """
 
 

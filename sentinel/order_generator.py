@@ -117,12 +117,21 @@ class OrderGenerator:
                 'notes': ['No BUY signals generated']
             }
 
-        # Calculate allocations using conviction weighting
-        allocations, notes = self._calculate_allocations(
-            buy_signals,
-            portfolio_value,
-            current_positions
-        )
+        # Check if signals already have allocations (from portfolio optimizer)
+        has_preset_allocations = any('allocation' in sig for sig in buy_signals)
+
+        if has_preset_allocations:
+            # Use pre-set allocations from portfolio optimizer
+            self.logger.info("Using pre-set allocations from portfolio optimizer")
+            allocations = {sig['symbol']: sig['allocation'] for sig in buy_signals if 'allocation' in sig}
+            notes = ['Using portfolio optimizer allocations']
+        else:
+            # Calculate allocations using conviction weighting
+            allocations, notes = self._calculate_allocations(
+                buy_signals,
+                portfolio_value,
+                current_positions
+            )
 
         # Generate order pairs
         orders = []
@@ -139,7 +148,7 @@ class OrderGenerator:
             # Calculate order details
             entry_price = signal['latest_price']
             stop_price = calculate_stop_price(entry_price)
-            qty = int(allocation / entry_price)
+            qty = round(allocation / entry_price, 9)  # Support fractional shares (up to 9 decimals)
 
             if qty <= 0:
                 notes.append(f"{symbol}: Calculated qty is 0, skipping")
