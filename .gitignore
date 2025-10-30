@@ -34,12 +34,9 @@ sentinel.db
 logs/
 *.log
 
-# Backup files and directories - DO NOT COMMIT
+# Backup files and directories - DO NOT COMMIT (but allow specific important backups)
 backups/
 Backups/
-*.bak
-*.backup
-*.old
 
 # Archive folder - DO NOT COMMIT
 _archive/
@@ -49,10 +46,6 @@ _archive/
 Thumbs.db
 desktop.ini
 
-# Text files used for notes (optional, but good practice)
-*.txt
-
 # Temporary files
 *.tmp
-*.temp*.code-workspace
 *.code-workspace
