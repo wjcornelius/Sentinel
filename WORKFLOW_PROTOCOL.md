@@ -1,6 +1,6 @@
 # Sentinel Development Workflow Protocol
 
-**Version:** 1.2
+**Version:** 1.3
 **Last Updated:** October 30, 2025
 **Status:** Active Foundation Document - **OPERATIONAL**
 
@@ -269,6 +269,7 @@ https://github.com/wjcornelius/Sentinel/blob/main/[filepath]
 
 | Version | Date | Changes | Author |
 |---------|------|---------|--------|
+| 1.3 | 2025-10-30 | Added Multi-File Workflow documentation. Supports structured sequential prompt delivery to prevent premature AI responses. Includes example format for complex multi-file context loading. | Claude Code |
 | 1.2 | 2025-10-30 | Added Quick Reference section, Test Suite Status, and Message Exchange System documentation. Implemented Claude (PoE) suggestions from review. Status: OPERATIONAL. | Claude Code |
 | 1.1 | 2025-10-30 | **CRITICAL FIX:** Updated GitHub URL format to use raw URLs instead of blob URLs. Blob URLs return HTML wrapper, raw URLs return file content. Tested and confirmed via POE_URL_TEST_PROTOCOL.md Test Suite 0. | Claude Code |
 | 1.0 | 2025-10-30 | Initial protocol definition | Claude (PoE) |
@@ -318,7 +319,7 @@ https://github.com/wjcornelius/Sentinel/blob/main/[filepath]
 YYYY-MM-DD_HH-MM_subject-description.md
 ```
 
-**Workflow:**
+**Single-File Workflow:**
 1. Claude Code writes message to `Messages_For_Claude_Poe/[timestamp]_[subject].md`
 2. Claude Code commits and pushes to GitHub
 3. Human provides raw URL to Claude (PoE)
@@ -328,11 +329,35 @@ YYYY-MM-DD_HH-MM_subject-description.md
 7. Claude Code takes action based on response
 8. Repeat
 
+**Multi-File Workflow (when Claude PoE needs multiple files):**
+1. Claude Code creates prompt instruction file: `[timestamp]_PROMPTS_FOR_CLAUDE_POE.md`
+2. File contains numbered prompts (e.g., "PROMPT 1 OF 3", "FILE 1 OF 2")
+3. Includes instruction to wait before responding
+4. Human copies each prompt sequentially
+5. After last prompt, human signals "all context provided, please respond"
+6. Claude (PoE) responds with full context
+7. Prevents premature responses before all files loaded
+
+**Example Multi-File Structure:**
+```
+PROMPT 1 OF 3: Context Setting
+PROMPT 2 OF 3: Message Acknowledgment
+PROMPT 3 OF 3: File Review Request
+  → "Please wait for file URLs..."
+
+FILE 1 OF 3: [filename] + raw URL
+FILE 2 OF 3: [filename] + raw URL
+FILE 3 OF 3: [filename] + raw URL
+  → "All files provided. Please respond."
+```
+
 **Benefits:**
 - Complete audit trail of all three-party communications
 - Version-controlled message history
 - Clear timestamps for chronological tracking
 - Searchable archive of decisions and discussions
+- Multi-file context loading without premature AI responses
+- Structured prompt sequences for complex information transfer
 
 ---
 
