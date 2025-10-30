@@ -17,6 +17,106 @@
 
 ---
 
+## Test Suite 0: RAW GitHub URLs (CRITICAL - Test This First!)
+
+**DISCOVERY:** Initial testing revealed that PoE receives GitHub's HTML wrapper instead of raw file content when using standard `blob` URLs. This test suite checks if `raw.githubusercontent.com` URLs work better.
+
+### Test 0A: Raw URL - Small Markdown File
+**Hypothesis:** Raw URLs should provide plain text content without HTML wrapper
+
+**Prompt to PoE:**
+```
+Can you read and summarize this file using the raw GitHub URL?
+
+https://raw.githubusercontent.com/wjcornelius/Sentinel/main/README.md
+
+Please tell me:
+1. Can you access it? (Yes/No)
+2. Do you see plain markdown text or HTML?
+3. What is the first heading in the file?
+```
+
+**Expected Result:** ✅ Should see plain markdown content
+**Actual Result:** _[Record here]_
+
+---
+
+### Test 0B: Raw URL - Python Source Code
+**Hypothesis:** Raw URLs should work even better for code files
+
+**Prompt to PoE:**
+```
+Can you read this Python file using the raw GitHub URL?
+
+https://raw.githubusercontent.com/wjcornelius/Sentinel/main/sentinel/portfolio_optimizer.py
+
+Please tell me:
+1. Can you access it? (Yes/No)
+2. Do you see plain Python code or HTML?
+3. What OpenAI model does it use? (Search for "model=" in the code)
+```
+
+**Expected Result:** ✅ Should see plain Python code
+**Actual Result:** _[Record here]_
+
+---
+
+### Test 0C: Raw URL - Large File (CHANGELOG)
+**Hypothesis:** Raw URLs should handle large files better than blob URLs
+
+**Prompt to PoE:**
+```
+Can you read this large file using the raw GitHub URL?
+
+https://raw.githubusercontent.com/wjcornelius/Sentinel/main/CHANGELOG.md
+
+Please tell me:
+1. Can you access it? (Yes/No)
+2. Do you see plain markdown or HTML?
+3. What is the most recent version number at the top?
+```
+
+**Expected Result:** ✅ Should see plain markdown content
+**Actual Result:** _[Record here]_
+
+---
+
+### Test 0D: Comparison - Blob URL vs Raw URL
+**Hypothesis:** This will definitively show which format works better
+
+**First Message to PoE:**
+```
+Can you read this file and tell me what format you receive it in?
+
+https://github.com/wjcornelius/Sentinel/blob/main/README.md
+
+Please tell me:
+1. Do you see plain markdown text, or HTML with navigation/buttons/etc?
+2. Can you see the actual file content clearly?
+```
+
+**Second Message to PoE (after response):**
+```
+Now try this raw URL for the same file:
+
+https://raw.githubusercontent.com/wjcornelius/Sentinel/main/README.md
+
+Please tell me:
+1. Do you see plain markdown text, or HTML with navigation/buttons/etc?
+2. Can you see the actual file content clearly?
+3. Which format worked better - the previous blob URL or this raw URL?
+```
+
+**Expected Result:** Raw URL should be superior
+**Actual Result (Blob URL):** _[Record here]_
+**Actual Result (Raw URL):** _[Record here]_
+
+---
+
+**⚠️ IMPORTANT:** Based on initial testing, if raw URLs work better, update WORKFLOW_PROTOCOL.md to specify using `raw.githubusercontent.com` URLs instead of `blob` URLs.
+
+---
+
 ## Test Suite 1: Basic GitHub File Access
 
 ### Test 1A: Small Markdown File (README)
