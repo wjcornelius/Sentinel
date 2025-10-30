@@ -1,0 +1,71 @@
+# Trading_Wisdom Hard Constraints - Phase 1
+# Auto-reject any violation (no human approval needed)
+# Extracted: 2025-10-30 by C(P) from Trading_Wisdom.txt
+
+version: 1.0
+last_updated: 2025-10-30
+
+position_limits:
+  max_single_position_pct: 0.15          # Never >15% portfolio in one stock
+  min_position_pct: 0.03                 # Never <3% (too small to matter)
+  max_positions_total: 15                # Never hold >15 simultaneous positions
+  max_sector_concentration_pct: 0.40     # Never >40% in single sector
+  max_correlated_positions: 5            # Max 5 stocks with mutual correlation >0.7
+
+portfolio_risk:
+  max_portfolio_heat: 0.08               # Never exceed 8% portfolio heat (sum of position heats)
+  min_cash_reserve_pct: 0.10             # Always keep ≥10% cash (prefer 15%)
+  max_drawdown_halt_pct: 0.15            # Halt all trading if portfolio down >15% from peak
+
+liquidity_requirements:
+  min_daily_volume_shares: 500000        # Never trade stocks <500K daily volume
+  max_order_pct_of_volume: 0.10          # Never trade >10% of stock's daily volume
+  min_bid_ask_spread_pct: 0.02           # Reject if spread >2% (illiquid)
+
+price_constraints:
+  min_stock_price: 5.00                  # No penny stocks (<$5)
+  max_stock_price: null                  # No upper limit
+  min_market_cap_millions: 1000          # ≥$1B market cap (large/mid cap only)
+
+market_conditions:
+  vix_panic_threshold: 40                # Halt ALL trading if VIX >40
+  vix_caution_threshold: 30              # Cut position sizes 50% if VIX >30
+  vix_elevated_threshold: 20             # Increase risk scores 15% if VIX >20
+  max_spy_drawdown_pct: 0.10             # Halt if SPY down >10% from 52w high (bear market)
+
+timing_rules:
+  market_hours_only: true                # No extended hours (Phase 1)
+  no_positions_last_minutes: 15          # No new positions in last 15min of day
+  no_trading_on_halt: true               # Auto-reject if stock halted
+  no_earnings_day_trades: true           # No new positions on earnings day (Phase 1)
+
+kelly_criterion:
+  min_backtest_trades: 1000              # Never use Kelly without ≥1000 OOS trades
+  max_kelly_fraction: 0.25               # Never bet >25% Kelly (quarter-Kelly max)
+  kelly_enabled: false                   # Disabled for Phase 1 (equal-weight allocation)
+
+risk_score_gates:
+  auto_reject_threshold: 8.0             # Auto-reject if risk_score ≥8 (escalate to WJC)
+  executive_review_threshold: 5.0        # Scores ≥5 require Executive review
+  routine_approval_threshold: 3.0        # Scores <3 auto-approve (low risk)
+
+correlation_limits:
+  max_avg_portfolio_correlation: 0.50    # Avg pairwise correlation must be <0.5
+  max_single_correlation: 0.85           # No two positions with correlation >0.85
+
+technical_filters:
+  min_rsi: 25                            # Don't buy if RSI <25 (oversold, falling knife)
+  max_rsi: 75                            # Don't buy if RSI >75 (overbought, chase)
+  require_volume_confirmation: true      # Buy signals need above-avg volume
+
+# Violation Handling
+violation_actions:
+  hard_constraint_violation: "AUTO_REJECT"  # No human approval, immediate rejection
+  log_all_violations: true
+  escalate_repeated_violations: true         # If same ticker violates 3x, escalate to WJC
+
+# Notes for CC:
+# - Implement as pre-flight checks in Risk Department
+# - Any violation = immediate rejection, no Risk scoring needed
+# - Log violation reason in rejection message
+# - Portfolio/Executive never see hard-constraint-rejected proposals
