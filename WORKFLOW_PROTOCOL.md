@@ -1,8 +1,8 @@
 # Sentinel Development Workflow Protocol
 
-**Version:** 1.0
+**Version:** 1.1
 **Last Updated:** October 30, 2025
-**Status:** Active Foundation Document
+**Status:** Active Foundation Document - **CRITICAL URL FIX APPLIED**
 
 ---
 
@@ -165,7 +165,8 @@ Files modified/created:
 - [filepath]
 
 Commit: [commit hash]
-GitHub URL: https://github.com/wjcornelius/Sentinel/blob/main/[filepath]
+Raw GitHub URL for Claude (PoE): https://raw.githubusercontent.com/wjcornelius/Sentinel/main/[filepath]
+Human GitHub URL: https://github.com/wjcornelius/Sentinel/blob/main/[filepath]
 
 [Any relevant output or notes]
 
@@ -173,8 +174,8 @@ GitHub URL: https://github.com/wjcornelius/Sentinel/blob/main/[filepath]
 
 Claude Code completed [task description].
 
-GitHub URL for review:
-https://github.com/wjcornelius/Sentinel/blob/main/[filepath]
+Raw GitHub URL for review:
+https://raw.githubusercontent.com/wjcornelius/Sentinel/main/[filepath]
 
 [Paste of Claude Code's full response]
 
@@ -182,13 +183,51 @@ https://github.com/wjcornelius/Sentinel/blob/main/[filepath]
 
 ## GitHub URL Format
 
-**Standard format for main branch files:**
-https://github.com/wjcornelius/Sentinel/blob/main/[filepath]
+### ⚠️ CRITICAL: Use Raw URLs for Claude (PoE)
 
-**Examples:**
-- https://github.com/wjcornelius/Sentinel/blob/main/README.md
-- https://github.com/wjcornelius/Sentinel/blob/main/CORPORATE_CHARTER.md
-- https://github.com/wjcornelius/Sentinel/blob/main/sentinel/core.py
+**TESTED AND CONFIRMED:** Claude (PoE) requires **raw GitHub URLs** to access file content.
+
+**❌ BLOB URLs DON'T WORK (return HTML wrapper):**
+```
+https://github.com/wjcornelius/Sentinel/blob/main/README.md
+```
+Result: Claude (PoE) receives GitHub's web page HTML (navigation, menus, buttons) instead of file content.
+
+**✅ RAW URLs WORK (return plain text):**
+```
+https://raw.githubusercontent.com/wjcornelius/Sentinel/main/README.md
+```
+Result: Claude (PoE) receives actual markdown/code content.
+
+### URL Format Rules
+
+**For Claude (PoE) to read files:**
+```
+https://raw.githubusercontent.com/wjcornelius/Sentinel/main/[filepath]
+```
+
+**For human viewing on GitHub:**
+```
+https://github.com/wjcornelius/Sentinel/blob/main/[filepath]
+```
+
+### Examples
+
+**Claude (PoE) URLs (raw format):**
+- `https://raw.githubusercontent.com/wjcornelius/Sentinel/main/README.md`
+- `https://raw.githubusercontent.com/wjcornelius/Sentinel/main/CHANGELOG.md`
+- `https://raw.githubusercontent.com/wjcornelius/Sentinel/main/sentinel/portfolio_optimizer.py`
+
+**Human URLs (blob format):**
+- `https://github.com/wjcornelius/Sentinel/blob/main/README.md`
+- `https://github.com/wjcornelius/Sentinel/blob/main/CHANGELOG.md`
+- `https://github.com/wjcornelius/Sentinel/blob/main/sentinel/portfolio_optimizer.py`
+
+### Discovery Notes
+
+**Date Discovered:** October 30, 2025
+**Test Protocol:** POE_URL_TEST_PROTOCOL.md (Test Suite 0)
+**Finding:** PoE's URL pre-processing layer fetches web pages as-is. Blob URLs return GitHub's HTML interface, raw URLs return file content.
 
 ---
 
@@ -230,6 +269,7 @@ https://github.com/wjcornelius/Sentinel/blob/main/[filepath]
 
 | Version | Date | Changes | Author |
 |---------|------|---------|--------|
+| 1.1 | 2025-10-30 | **CRITICAL FIX:** Updated GitHub URL format to use raw URLs instead of blob URLs. Blob URLs return HTML wrapper, raw URLs return file content. Tested and confirmed via POE_URL_TEST_PROTOCOL.md Test Suite 0. | Claude Code |
 | 1.0 | 2025-10-30 | Initial protocol definition | Claude (PoE) |
 
 ---
