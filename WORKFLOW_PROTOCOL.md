@@ -1,8 +1,8 @@
 # Sentinel Development Workflow Protocol
 
-**Version:** 1.1
+**Version:** 1.2
 **Last Updated:** October 30, 2025
-**Status:** Active Foundation Document - **CRITICAL URL FIX APPLIED**
+**Status:** Active Foundation Document - **OPERATIONAL**
 
 ---
 
@@ -269,8 +269,70 @@ https://github.com/wjcornelius/Sentinel/blob/main/[filepath]
 
 | Version | Date | Changes | Author |
 |---------|------|---------|--------|
+| 1.2 | 2025-10-30 | Added Quick Reference section, Test Suite Status, and Message Exchange System documentation. Implemented Claude (PoE) suggestions from review. Status: OPERATIONAL. | Claude Code |
 | 1.1 | 2025-10-30 | **CRITICAL FIX:** Updated GitHub URL format to use raw URLs instead of blob URLs. Blob URLs return HTML wrapper, raw URLs return file content. Tested and confirmed via POE_URL_TEST_PROTOCOL.md Test Suite 0. | Claude Code |
 | 1.0 | 2025-10-30 | Initial protocol definition | Claude (PoE) |
+
+---
+
+## Quick Reference: URL Formats
+
+**✅ CORRECT (for Claude PoE to read files):**
+```
+https://raw.githubusercontent.com/wjcornelius/Sentinel/main/[filepath]
+```
+
+**❌ INCORRECT (returns HTML wrapper, not file content):**
+```
+https://github.com/wjcornelius/Sentinel/blob/main/[filepath]
+```
+
+**Examples:**
+```
+✅ https://raw.githubusercontent.com/wjcornelius/Sentinel/main/README.md
+❌ https://github.com/wjcornelius/Sentinel/blob/main/README.md
+```
+
+---
+
+## Test Suite Status
+
+**POE_URL_TEST_PROTOCOL.md - Test Suite 0 (Raw URLs):**
+- Test 0A (README.md raw URL): ✅ PASSED (2025-10-30)
+- Test 0B (Python file raw URL): ⏳ PENDING
+- Test 0C (Large file raw URL): ⏳ PENDING
+- Test 0D (Blob vs Raw comparison): ⏳ PENDING
+
+**Conclusion:** Raw URL format confirmed working for Claude (PoE) file access.
+
+---
+
+## Message Exchange System
+
+**Directory Structure:**
+- `Messages_For_Claude_Poe/` - Outgoing messages from Claude Code to Claude (PoE)
+- `Messages_From_Claude_Poe/` - Incoming messages from Claude (PoE) to Claude Code
+
+**File Naming Convention:**
+```
+YYYY-MM-DD_HH-MM_subject-description.md
+```
+
+**Workflow:**
+1. Claude Code writes message to `Messages_For_Claude_Poe/[timestamp]_[subject].md`
+2. Claude Code commits and pushes to GitHub
+3. Human provides raw URL to Claude (PoE)
+4. Claude (PoE) reads message and responds
+5. Human pastes full response to Claude Code
+6. Claude Code saves to `Messages_From_Claude_Poe/[timestamp]_[subject].md`
+7. Claude Code takes action based on response
+8. Repeat
+
+**Benefits:**
+- Complete audit trail of all three-party communications
+- Version-controlled message history
+- Clear timestamps for chronological tracking
+- Searchable archive of decisions and discussions
 
 ---
 
