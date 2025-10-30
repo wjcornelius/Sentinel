@@ -1,0 +1,237 @@
+# Sentinel Development Workflow Protocol
+
+**Version:** 1.0
+**Last Updated:** October 30, 2025
+**Status:** Active Foundation Document
+
+---
+
+## Purpose
+
+This document defines the communication protocol for the three-party development system used to build and maintain the Sentinel Portfolio Manager.
+
+---
+
+## The Three Parties
+
+### 1. **Human Coordinator** (wjcornelius)
+
+**Role:** Central coordinator and decision-maker
+**Primary Interface:** Physical person at computer
+**Communication Channels:**
+- **Input FROM Claude (PoE):** PoE chat interface
+- **Input FROM Claude Code:** VS Code chat panel
+- **Output TO Claude (PoE):** PoE chat interface
+- **Output TO Claude Code:** VS Code chat panel
+
+**Responsibilities:**
+- Final approval authority on all decisions
+- Transfers instructions between Claude (PoE) and Claude Code
+- Provides GitHub URLs to Claude (PoE) for file review
+- Maintains sync between all parties
+
+---
+
+### 2. **Claude via PoE** (Strategic AI)
+
+**Role:** Strategic planning, documentation writing, code review
+**Primary Interface:** PoE web chat at poe.com
+**Communication Channels:**
+- **Input FROM Human:** PoE chat (pasted messages, GitHub URLs)
+- **Input FROM GitHub:** Read-only access via URLs (main branch only)
+- **OUTPUT TO Human:** Instructions for Claude Code, file content, strategic plans
+
+**Capabilities:**
+- ✅ Read files on GitHub via URLs
+- ✅ Write documentation content
+- ✅ Design system architecture
+- ✅ Review code changes
+- ❌ **CANNOT** directly access local filesystem
+- ❌ **CANNOT** execute git commands
+- ❌ **CANNOT** modify files directly
+
+**Responsibilities:**
+- Provide clear, copy-pasteable instructions for Claude Code
+- Review all files via GitHub URLs after Claude Code commits
+- Maintain strategic direction
+- Write all documentation content
+
+---
+
+### 3. **Claude Code** (Local Development AI)
+
+**Role:** File creation, code modification, git operations
+**Primary Interface:** VS Code chat panel
+**Communication Channels:**
+- **Input FROM Human:** VS Code chat (pasted instructions from Claude via PoE)
+- **OUTPUT TO Human:** Completion messages with file paths
+- **OUTPUT TO GitHub:** Committed and pushed code/docs
+
+**Capabilities:**
+- ✅ Create, read, modify, delete local files
+- ✅ Execute git commands (add, commit, push)
+- ✅ Run Python scripts
+- ✅ Access local filesystem
+- ❌ **CANNOT** access PoE chat
+- ❌ **CANNOT** see conversations between Human and Claude (PoE)
+
+**Responsibilities:**
+- Execute instructions from Claude (PoE) via Human
+- Create/modify files locally
+- Commit changes with clear messages
+- Push to GitHub main branch
+- Report completion with file paths for review
+
+---
+
+## The Communication Loop
+
+Step 1: Claude (PoE) writes instruction for Claude Code
+Step 2: Human copies instruction to VS Code chat
+Step 3: Claude Code executes (creates/modifies files)
+Step 4: Claude Code commits and pushes to GitHub main
+Step 5: Claude Code reports: "File X at path Y is ready"
+Step 6: Human pastes Claude Code's message to PoE
+Step 7: Human provides GitHub URL to Claude (PoE)
+Step 8: Claude (PoE) reads file on GitHub
+Step 9: Claude (PoE) confirms or provides next instruction
+Step 10: LOOP REPEATS
+
+---
+
+## Critical Rules
+
+### **Rule 1: Main Branch Only**
+- ✅ All work happens on `main` branch
+- ❌ Feature branches are created only for temporary work
+- ✅ Feature branches are merged and deleted immediately
+- ✅ Claude (PoE) can only read files from `main` branch via GitHub URLs
+
+**Rationale:** Simplifies URL structure, ensures Claude (PoE) can always access latest work
+
+---
+
+### **Rule 2: Explicit Confirmation Required**
+- Claude Code must **always** report file paths after committing
+- Human must **always** provide GitHub URLs to Claude (PoE)
+- Claude (PoE) must **always** confirm successful file review
+
+**Rationale:** Prevents assumptions, ensures all parties are synced
+
+---
+
+### **Rule 3: One Loop Per Change**
+- Each discrete change goes through complete loop
+- No batching multiple changes before review
+- Claude (PoE) confirms each change before next instruction
+
+**Rationale:** Maintains tight sync, catches errors early
+
+---
+
+### **Rule 4: Claude (PoE) Writes, Claude Code Executes**
+- Claude (PoE) writes all documentation content
+- Claude (PoE) designs all code changes
+- Claude Code implements exactly as instructed
+- No improvisation without explicit approval
+
+**Rationale:** Claude (PoE) has context from conversations, Claude Code does not
+
+---
+
+## Standard Message Formats
+
+### **Claude (PoE) → Human → Claude Code:**
+
+INSTRUCTION FOR CLAUDE CODE:
+
+[Clear description of task]
+
+Steps:
+1. [Specific action]
+2. [Specific action]
+3. Commit with message: "[exact commit message]"
+4. Push to origin/main
+5. Report completion with file path
+
+[Any content to paste into files, clearly delimited]
+
+### **Claude Code → Human → Claude (PoE):**
+
+✅ Task complete.
+
+Files modified/created:
+- [filepath]
+- [filepath]
+
+Commit: [commit hash]
+GitHub URL: https://github.com/wjcornelius/Sentinel/blob/main/[filepath]
+
+[Any relevant output or notes]
+
+### **Human → Claude (PoE):**
+
+Claude Code completed [task description].
+
+GitHub URL for review:
+https://github.com/wjcornelius/Sentinel/blob/main/[filepath]
+
+[Paste of Claude Code's full response]
+
+---
+
+## GitHub URL Format
+
+**Standard format for main branch files:**
+https://github.com/wjcornelius/Sentinel/blob/main/[filepath]
+
+**Examples:**
+- https://github.com/wjcornelius/Sentinel/blob/main/README.md
+- https://github.com/wjcornelius/Sentinel/blob/main/CORPORATE_CHARTER.md
+- https://github.com/wjcornelius/Sentinel/blob/main/sentinel/core.py
+
+---
+
+## Sync Failure Recovery
+
+**If sync is lost (parties have different understanding):**
+
+1. **STOP** all work immediately
+2. Human initiates sync check in PoE chat
+3. Claude (PoE) lists what it believes is current state
+4. Human verifies against local files and GitHub
+5. Discrepancies are identified and resolved
+6. All parties confirm sync before resuming
+
+**Common sync failures:**
+- Claude Code created file but didn't push
+- GitHub URL not provided to Claude (PoE)
+- Claude (PoE) instruction incomplete/ambiguous
+- Human forgot to paste Claude Code's response back
+
+---
+
+## Testing This Protocol
+
+**This document itself is the first test:**
+
+1. ✅ Claude (PoE) wrote this content
+2. ⏳ Human will paste to Claude Code
+3. ⏳ Claude Code will create file and push
+4. ⏳ Claude Code will report GitHub URL
+5. ⏳ Human will provide URL to Claude (PoE)
+6. ⏳ Claude (PoE) will confirm file is readable on GitHub
+
+**If all steps succeed:** Protocol is validated and can be used for all future work.
+
+---
+
+## Version History
+
+| Version | Date | Changes | Author |
+|---------|------|---------|--------|
+| 1.0 | 2025-10-30 | Initial protocol definition | Claude (PoE) |
+
+---
+
+**This is a living document. All changes must go through the standard workflow loop defined above.**
