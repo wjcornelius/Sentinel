@@ -470,7 +470,10 @@ class RiskCalculator:
                 'max_risk_pct': self.max_risk_pct,
                 'approved': approved,
                 'rejection_reason': None if approved else 'RISK_PER_TRADE_EXCEEDED',
-                'rejection_details': None if approved else f"Risk {risk_pct*100:.2f}% exceeds limit {self.max_risk_pct*100:.1f}%"
+                'rejection_details': None if approved else (
+                    f"Trade risk too high: This trade risks ${total_risk:,.0f} ({risk_pct*100:.2f}% of capital), "
+                    f"exceeding the {self.max_risk_pct*100:.1f}% limit. Maximum allowed: ${capital * self.max_risk_pct:,.0f}."
+                )
             }
 
             if approved:
@@ -619,7 +622,12 @@ class SectorConcentrationChecker:
                 'status': status,
                 'approved': approved,
                 'rejection_reason': None if approved else 'SECTOR_CONCENTRATION_EXCEEDED',
-                'rejection_details': None if approved else f"Sector {sector} would be {sector_after_pct*100:.1f}%, limit is {self.max_sector_pct*100:.0f}%"
+                'rejection_details': None if approved else (
+                    f"Sector concentration limit exceeded: Adding this trade would increase {sector} sector exposure from "
+                    f"${sector_before:,.0f} ({sector_before_pct*100:.1f}%) to ${sector_after:,.0f} ({sector_after_pct*100:.1f}%), "
+                    f"exceeding the {self.max_sector_pct*100:.0f}% limit. Available capacity in {sector}: "
+                    f"${(capital * self.max_sector_pct) - sector_before:,.0f}."
+                )
             }
 
             if approved:
@@ -710,7 +718,12 @@ class PortfolioHeatMonitor:
                 'status': status,
                 'approved': approved,
                 'rejection_reason': None if approved else 'PORTFOLIO_HEAT_EXCEEDED',
-                'rejection_details': None if approved else f"Heat {heat_after_pct*100:.2f}% would exceed limit {self.max_heat_pct*100:.1f}%"
+                'rejection_details': None if approved else (
+                    f"Portfolio risk limit exceeded: Adding this trade would increase total portfolio risk from "
+                    f"${heat_before:,.0f} ({heat_before_pct*100:.1f}%) to ${heat_after:,.0f} ({heat_after_pct*100:.1f}%), "
+                    f"exceeding the {self.max_heat_pct*100:.1f}% limit. Available risk capacity: ${available_heat:,.0f} "
+                    f"(this trade needs ${new_trade_risk:,.0f})."
+                )
             }
 
             if approved:
@@ -759,6 +772,26 @@ class RiskDepartment:
         logger.info("RISK DEPARTMENT INITIALIZED")
         logger.info("=" * 80)
 
+    def _batch_fetch_sectors(self, tickers: List[str]) -> Dict[str, str]:
+        """
+        Fetch sectors for multiple tickers in one pass (reduces API calls)
+
+        Args:
+            tickers: List of stock symbols
+
+        Returns:
+            Dict mapping ticker -> sector
+        """
+        sector_map = {}
+
+        for ticker in tickers:
+            sector = self.sector_checker.get_stock_sector(ticker)
+            if sector:
+                sector_map[ticker] = sector
+
+        logger.info(f"Fetched sectors for {len(sector_map)}/{len(tickers)} tickers")
+        return sector_map
+
     def get_current_portfolio_state(self) -> Dict:
         """
         Query database to get current portfolio state
@@ -787,7 +820,7 @@ class RiskDepartment:
             logger.error(f"Failed to get portfolio state: {e}", exc_info=True)
             return None
 
-    def process_candidate(self, candidate: Dict, portfolio_state: Dict) -> Dict:
+    def process_candidate(self, candidate: Dict, portfolio_state: Dict, sector_map: Dict[str, str] = None) -> Dict:
         """
         Process single candidate through all risk checks
 
@@ -829,6 +862,11 @@ class RiskDepartment:
                     'rejection_details': 'Failed to calculate stop-loss'
                 }
 
+            # Step 2.5: Calculate target price (simple 2:1 risk-reward for Phase 1)
+            risk_per_share = stop['risk_per_share']
+            target_price = current_price + (risk_per_share * 2.0)  # 2:1 reward:risk
+            risk_reward_ratio = 2.0
+
             # Step 3: Risk per trade validation
             risk_check = self.risk_calc.validate_risk_per_trade(
                 shares=position['shares'],
@@ -869,12 +907,45 @@ class RiskDepartment:
                 }
 
             # Step 5: Sector concentration check
-            sector_check = self.sector_checker.check_sector_concentration(
-                ticker=ticker,
-                position_value=position['actual_position_value'],
-                capital=capital,
-                current_sector_allocations=portfolio_state['sector_allocations']
-            )
+            # Use cached sector if available, otherwise fetch
+            if sector_map and ticker in sector_map:
+                # Use pre-fetched sector
+                sector = sector_map[ticker]
+                sector_before = portfolio_state['sector_allocations'].get(sector, 0.0)
+                sector_after = sector_before + position['actual_position_value']
+                sector_before_pct = sector_before / capital if capital > 0 else 0
+                sector_after_pct = sector_after / capital if capital > 0 else 0
+
+                # Quick validation
+                approved = sector_after_pct <= self.sector_checker.max_sector_pct
+
+                sector_check = {
+                    'ticker': ticker,
+                    'sector': sector,
+                    'position_value': round(position['actual_position_value'], 2),
+                    'sector_before': round(sector_before, 2),
+                    'sector_after': round(sector_after, 2),
+                    'sector_before_pct': sector_before_pct,
+                    'sector_after_pct': sector_after_pct,
+                    'max_sector_pct': self.sector_checker.max_sector_pct,
+                    'status': 'LIMIT_EXCEEDED' if not approved else 'NORMAL',
+                    'approved': approved,
+                    'rejection_reason': None if approved else 'SECTOR_CONCENTRATION_EXCEEDED',
+                    'rejection_details': None if approved else (
+                        f"Sector concentration limit exceeded: Adding this trade would increase {sector} sector exposure from "
+                        f"${sector_before:,.0f} ({sector_before_pct*100:.1f}%) to ${sector_after:,.0f} ({sector_after_pct*100:.1f}%), "
+                        f"exceeding the {self.sector_checker.max_sector_pct*100:.0f}% limit. Available capacity in {sector}: "
+                        f"${(capital * self.sector_checker.max_sector_pct) - sector_before:,.0f}."
+                    )
+                }
+            else:
+                # Fall back to full check
+                sector_check = self.sector_checker.check_sector_concentration(
+                    ticker=ticker,
+                    position_value=position['actual_position_value'],
+                    capital=capital,
+                    current_sector_allocations=portfolio_state['sector_allocations']
+                )
 
             if not sector_check['approved']:
                 return {
@@ -898,6 +969,8 @@ class RiskDepartment:
                 'rejection_details': None,
                 'position': position,
                 'stop': stop,
+                'target_price': round(target_price, 2),
+                'risk_reward_ratio': risk_reward_ratio,
                 'risk_check': risk_check,
                 'heat_check': heat_check,
                 'sector_check': sector_check,
@@ -947,12 +1020,16 @@ class RiskDepartment:
 
         logger.info(f"Portfolio state: ${portfolio_state['capital']:,.0f} capital, ${portfolio_state['current_heat']:,.0f} heat, {portfolio_state['open_positions_count']} positions")
 
+        # Batch fetch sectors for all candidates (reduces API calls)
+        tickers = [c['ticker'] for c in candidates]
+        sector_map = self._batch_fetch_sectors(tickers)
+
         # Process each candidate
         approved_candidates = []
         rejected_candidates = []
 
         for candidate in candidates:
-            result = self.process_candidate(candidate, portfolio_state)
+            result = self.process_candidate(candidate, portfolio_state, sector_map)
 
             if result['approved']:
                 approved_candidates.append(result)
@@ -1021,7 +1098,8 @@ class RiskDepartment:
                 body_lines.append(f"### {i}. {ticker} ({sector})")
                 body_lines.append(f"- **Research Score**: {candidate['research_composite_score']}/10")
                 body_lines.append(f"- **Position**: {pos['shares']} shares @ ${pos['current_price']:.2f} = ${pos['actual_position_value']:,.0f}")
-                body_lines.append(f"- **Stop-Loss**: ${stop['stop_loss']:.2f} ({stop['method']})")
+                body_lines.append(f"- **Entry**: ${pos['current_price']:.2f} | **Stop**: ${stop['stop_loss']:.2f} | **Target**: ${candidate['target_price']:.2f}")
+                body_lines.append(f"- **Risk/Reward**: {candidate['risk_reward_ratio']:.1f}:1 ({stop['method']})")
                 body_lines.append(f"- **Risk**: ${risk['total_risk']:,.0f} ({risk['risk_percentage']*100:.2f}% of capital)")
                 body_lines.append("")
         else:
@@ -1077,6 +1155,8 @@ class RiskDepartment:
             'position_size_value': candidate['position']['actual_position_value'],
             'entry_price': candidate['position']['current_price'],
             'stop_loss': candidate['stop']['stop_loss'],
+            'target_price': candidate['target_price'],
+            'risk_reward_ratio': candidate['risk_reward_ratio'],
             'stop_loss_method': candidate['stop']['method'],
             'atr_value': candidate['stop'].get('atr_value'),
             'risk_per_share': candidate['stop']['risk_per_share'],
@@ -1136,11 +1216,11 @@ class RiskDepartment:
                     (message_id, ticker, assessment_date,
                      research_composite_score,
                      position_sizing_method, position_size_pct, position_size_shares, position_size_value,
-                     entry_price, stop_loss, stop_loss_method, atr_value,
-                     risk_per_share, total_risk, risk_percentage,
+                     entry_price, stop_loss, stop_loss_method, atr_value, target_price,
+                     risk_per_share, total_risk, risk_percentage, risk_reward_ratio,
                      portfolio_heat_before, portfolio_heat_after,
-                     sector)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                     sector, decision_timestamp)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """, (
                     message_id,
                     candidate['ticker'],
@@ -1154,12 +1234,15 @@ class RiskDepartment:
                     candidate['stop']['stop_loss'],
                     candidate['stop']['method'],
                     candidate['stop'].get('atr_value'),
+                    candidate['target_price'],
                     candidate['stop']['risk_per_share'],
                     candidate['risk_check']['total_risk'],
                     candidate['risk_check']['risk_percentage'],
+                    candidate['risk_reward_ratio'],
                     candidate['heat_check']['heat_before'],
                     candidate['heat_check']['heat_after'],
-                    candidate['sector_check'].get('sector')
+                    candidate['sector_check'].get('sector'),
+                    datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z')
                 ))
 
             # Save rejected candidates
@@ -1181,8 +1264,9 @@ class RiskDepartment:
                     INSERT INTO risk_rejected_candidates
                     (message_id, ticker, assessment_date,
                      research_composite_score,
-                     rejection_reason, rejection_category, rejection_details)
-                    VALUES (?, ?, ?, ?, ?, ?, ?)
+                     rejection_reason, rejection_category, rejection_details,
+                     decision_timestamp)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
                 """, (
                     message_id,
                     candidate['ticker'],
@@ -1190,7 +1274,8 @@ class RiskDepartment:
                     candidate.get('research_composite_score', 0.0),
                     reason,
                     category,
-                    candidate['rejection_details']
+                    candidate['rejection_details'],
+                    datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z')
                 ))
 
             conn.commit()

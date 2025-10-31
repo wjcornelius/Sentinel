@@ -89,6 +89,8 @@ CREATE TABLE IF NOT EXISTS risk_approved_candidates (
     sector TEXT,  -- Stock sector (for concentration tracking)
     sector_exposure_pct REAL,  -- Percentage of capital in this sector after trade
 
+    -- Timestamps
+    decision_timestamp DATETIME NOT NULL,  -- When this candidate was approved
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
 
     FOREIGN KEY (message_id) REFERENCES risk_assessments(message_id)
@@ -121,7 +123,9 @@ CREATE TABLE IF NOT EXISTS risk_rejected_candidates (
     would_be_total_risk REAL,
     would_be_portfolio_heat REAL,
 
-    rejection_timestamp DATETIME NOT NULL,
+    -- Timestamps
+    decision_timestamp DATETIME NOT NULL,  -- When this candidate was rejected
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
 
     FOREIGN KEY (message_id) REFERENCES risk_assessments(message_id)
 );
