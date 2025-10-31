@@ -25,7 +25,7 @@ import sqlite3
 import pandas as pd
 import yfinance as yf
 import requests
-from datetime import datetime, timedelta, date
+from datetime import datetime, timedelta, date, timezone
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 from dataclasses import dataclass
@@ -137,7 +137,7 @@ class MessageHandler:
         Returns:
             message_id (for database tracking)
         """
-        timestamp = datetime.utcnow().strftime('%Y%m%dT%H%M%SZ')
+        timestamp = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')
         msg_id = f"MSG_RESEARCH_{timestamp}_{uuid.uuid4().hex[:8]}"
 
         # Build YAML frontmatter
@@ -145,7 +145,7 @@ class MessageHandler:
             'message_id': msg_id,
             'from': 'RESEARCH',
             'to': to_dept,
-            'timestamp': datetime.utcnow().isoformat() + 'Z',
+            'timestamp': datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z'),
             'message_type': message_type,
             'priority': priority,
             'requires_response': False
@@ -376,7 +376,7 @@ class SentimentAnalyzer:
         conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
 
-        now = datetime.utcnow()
+        now = datetime.now(timezone.utc)
 
         cursor.execute("""
             SELECT sentiment_score, sentiment_summary, news_articles_count
@@ -493,7 +493,7 @@ class SentimentAnalyzer:
         conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
 
-        expires_at = datetime.utcnow() + timedelta(hours=self.cache_ttl_hours)
+        expires_at = datetime.now(timezone.utc) + timedelta(hours=self.cache_ttl_hours)
 
         cursor.execute("""
             INSERT OR REPLACE INTO research_sentiment_cache
@@ -972,7 +972,7 @@ class ResearchDepartment:
 
             result = {
                 'ticker': ticker,
-                'timestamp': datetime.utcnow().isoformat() + 'Z',
+                'timestamp': datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z'),
                 'technical': {
                     'score': tech_score,
                     'rsi': tech_result.get('rsi'),
@@ -1159,11 +1159,26 @@ class ResearchDepartment:
             cursor = conn.cursor()
 
             # Save market briefing
+            # Extract top 3 sectors from market_conditions
+            top_3 = market_conditions.top_sectors[:3] if len(market_conditions.top_sectors) >= 3 else market_conditions.top_sectors
+            while len(top_3) < 3:
+                top_3.append({'sector': None, 'change_pct': None})
+
+            bottom_3 = market_conditions.bottom_sectors[:3] if len(market_conditions.bottom_sectors) >= 3 else market_conditions.bottom_sectors
+            while len(bottom_3) < 3:
+                bottom_3.append({'sector': None, 'change_pct': None})
+
             cursor.execute("""
                 INSERT INTO research_market_briefings
-                (message_id, date, spy_price, spy_change_pct, qqq_price, qqq_change_pct,
-                 vix_level, vix_status, market_sentiment, sector_rotation_json, candidate_count)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                (message_id, briefing_date, spy_price, spy_change_pct, qqq_price, qqq_change_pct,
+                 vix_level, vix_status, market_sentiment,
+                 top_sector_1, top_sector_1_change,
+                 top_sector_2, top_sector_2_change,
+                 top_sector_3, top_sector_3_change,
+                 bottom_sector_1, bottom_sector_1_change,
+                 bottom_sector_2, bottom_sector_2_change,
+                 bottom_sector_3, bottom_sector_3_change)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """, (
                 message_id,
                 market_conditions.date.isoformat(),
@@ -1174,17 +1189,21 @@ class ResearchDepartment:
                 market_conditions.vix_level,
                 market_conditions.vix_status,
                 market_conditions.market_sentiment,
-                json.dumps(market_conditions.sector_performance),
-                len(candidates)
+                top_3[0]['sector'], top_3[0]['change_pct'],
+                top_3[1]['sector'], top_3[1]['change_pct'],
+                top_3[2]['sector'], top_3[2]['change_pct'],
+                bottom_3[0]['sector'], bottom_3[0]['change_pct'],
+                bottom_3[1]['sector'], bottom_3[1]['change_pct'],
+                bottom_3[2]['sector'], bottom_3[2]['change_pct']
             ))
 
             # Save candidate tickers
             for rank, candidate in enumerate(candidates, 1):
                 cursor.execute("""
                     INSERT INTO research_candidate_tickers
-                    (message_id, date, ticker, rank, composite_score,
-                     technical_score, fundamental_score, sentiment_score, analysis_json)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    (candidate_list_message_id, screening_date, ticker, rank,
+                     quick_score, technical_score, sentiment_score)
+                    VALUES (?, ?, ?, ?, ?, ?, ?)
                 """, (
                     message_id,
                     market_conditions.date.isoformat(),
@@ -1192,9 +1211,7 @@ class ResearchDepartment:
                     rank,
                     candidate['composite_score'],
                     candidate['technical']['score'],
-                    candidate['fundamental']['score'],
-                    candidate['sentiment']['score'],
-                    json.dumps(candidate)
+                    candidate['sentiment']['score']
                 ))
 
             conn.commit()
