@@ -1568,6 +1568,399 @@ class PortfolioRebalancer:
             conn.close()
 
 
+# ============================================================================
+# CLASS 6: PORTFOLIO DEPARTMENT - MAIN ORCHESTRATOR (Day 5)
+# ============================================================================
+class PortfolioDepartment:
+    """
+    Main orchestrator for Portfolio Department
+    Ties together all 5 components into daily workflow:
+    1. PortfolioDecisionEngine: Makes buy decisions
+    2. ExitSignalGenerator: Makes sell decisions
+    3. PositionTracker: Manages position lifecycle
+    4. PortfolioRebalancer: Monitors deployment
+    5. MessageHandler: Inter-department communication
+    """
+
+    def __init__(self, config_path: Path, db_path: Path):
+        self.logger = logging.getLogger(self.__class__.__name__)
+
+        # Load configuration
+        with open(config_path, 'r') as f:
+            self.config = yaml.safe_load(f)
+
+        self.db_path = db_path
+
+        # Initialize all components
+        self.message_handler = MessageHandler()
+        self.decision_engine = PortfolioDecisionEngine(self.config, db_path)
+        self.exit_generator = ExitSignalGenerator(self.config, db_path)
+        self.position_tracker = PositionTracker(db_path)
+        self.rebalancer = PortfolioRebalancer(self.config, db_path)
+
+        self.logger.info("Portfolio Department initialized")
+
+    def run_daily_cycle(self):
+        """
+        Execute complete daily Portfolio workflow
+
+        1. Process RiskAssessment messages (buy decisions)
+        2. Check exit signals (sell decisions)
+        3. Update position states (reconciliation)
+        4. Check rebalancing needs
+        5. Generate summary report
+        """
+        self.logger.info("=" * 80)
+        self.logger.info("PORTFOLIO DEPARTMENT - DAILY CYCLE START")
+        self.logger.info("=" * 80)
+
+        # Step 1: Process buy decisions from Risk
+        self._process_buy_decisions()
+
+        # Step 2: Check exit signals
+        self._process_exit_signals()
+
+        # Step 3: Reconcile positions
+        self._reconcile_positions()
+
+        # Step 4: Check rebalancing
+        self._check_rebalancing()
+
+        # Step 5: Generate summary
+        self._generate_daily_summary()
+
+        self.logger.info("=" * 80)
+        self.logger.info("PORTFOLIO DEPARTMENT - DAILY CYCLE COMPLETE")
+        self.logger.info("=" * 80)
+
+    def _process_buy_decisions(self):
+        """Process RiskAssessment messages and generate BuyOrders"""
+        self.logger.info("STEP 1: Processing Buy Decisions")
+
+        # Read RiskAssessment messages from inbox
+        risk_messages = self._read_risk_assessments()
+
+        if len(risk_messages) == 0:
+            self.logger.info("  No RiskAssessment messages to process")
+            return
+
+        self.logger.info(f"  Found {len(risk_messages)} RiskAssessment messages")
+
+        for risk_msg in risk_messages:
+            self._process_single_risk_assessment(risk_msg)
+
+    def _read_risk_assessments(self) -> List[Tuple[Dict, Dict, Path]]:
+        """Read unprocessed RiskAssessment messages from inbox"""
+        inbox_path = self.message_handler.inbox_path
+        messages = []
+
+        if not inbox_path.exists():
+            self.logger.warning(f"Inbox path does not exist: {inbox_path}")
+            return messages
+
+        for msg_file in inbox_path.glob("MSG_RISK_*.md"):
+            try:
+                metadata, body, data = self.message_handler.read_message(msg_file)
+
+                # Only process RiskAssessment messages
+                if metadata.get('message_type') == 'RiskAssessment':
+                    messages.append((metadata, data, msg_file))
+
+            except Exception as e:
+                self.logger.error(f"  Failed to read {msg_file.name}: {e}")
+
+        return messages
+
+    def _process_single_risk_assessment(self, risk_msg: Tuple[Dict, Dict, Path]):
+        """Process one RiskAssessment message"""
+        metadata, data, msg_file = risk_msg
+
+        self.logger.info(f"  Processing: {metadata['message_id']}")
+
+        # Extract candidates from data payload
+        candidates = data.get('approved_candidates', [])
+
+        if not candidates:
+            self.logger.info("    No candidates in this RiskAssessment")
+            return
+
+        # Get current portfolio state
+        summary = self.position_tracker.get_portfolio_summary()
+        current_positions = summary['open_positions'] + summary['pending_positions']
+        deployed_capital = summary['capital_deployed']
+
+        # Apply portfolio filters
+        # Step 1: Score filter
+        accepted, rejected = self.decision_engine.apply_score_filter(candidates)
+
+        # Step 2: Position limit filter
+        if accepted:
+            accepted, position_rejected = self.decision_engine.apply_position_limits(
+                accepted, current_positions
+            )
+            rejected.extend(position_rejected)
+
+        # Step 3: Capital limit filter
+        if accepted:
+            accepted, capital_rejected = self.decision_engine.apply_capital_limits(
+                accepted, deployed_capital
+            )
+            rejected.extend(capital_rejected)
+
+        self.logger.info(f"    Candidates: {len(candidates)} total, {len(accepted)} accepted, {len(rejected)} rejected")
+
+        # Generate BuyOrders for accepted candidates
+        for candidate in accepted:
+            # Add position_id to candidate
+            candidate['position_id'] = self.decision_engine.generate_position_id(
+                candidate['ticker'],
+                date.today()
+            )
+
+            # Generate BuyOrder message
+            msg_id, pos_id = self.decision_engine.generate_buy_order(
+                candidate,
+                metadata['message_id'],
+                self.message_handler
+            )
+
+            # Create PENDING position in database
+            self.position_tracker.create_pending_position(
+                candidate,
+                msg_id,
+                metadata['message_id']
+            )
+
+            self.logger.info(f"    BuyOrder generated: {pos_id} - {candidate['ticker']}")
+
+        # Log rejections to database
+        if rejected:
+            self._log_portfolio_rejections(rejected, metadata['message_id'])
+
+        # Log overall decision to database
+        self._log_portfolio_decision(
+            metadata,
+            accepted,
+            rejected,
+            current_positions,
+            deployed_capital
+        )
+
+    def _process_exit_signals(self):
+        """Check all open positions for exit signals"""
+        self.logger.info("STEP 2: Checking Exit Signals")
+
+        exits = self.exit_generator.check_all_exits()
+
+        if len(exits) == 0:
+            self.logger.info("  No exit signals triggered")
+            return
+
+        self.logger.info(f"  Found {len(exits)} exit signals")
+
+        for position, signal in exits:
+            # Generate SellOrder
+            msg_id = self.exit_generator.generate_sell_order(
+                position,
+                signal,
+                self.message_handler
+            )
+
+            self.logger.info(
+                f"  SellOrder generated: {position['position_id']} - "
+                f"{position['ticker']} ({signal['reason']})"
+            )
+
+    def _reconcile_positions(self):
+        """Check for stale positions and discrepancies"""
+        self.logger.info("STEP 3: Reconciling Positions")
+
+        issues = self.position_tracker.reconcile_with_trading()
+
+        if issues['stale_pending']:
+            self.logger.warning(
+                f"  Found {len(issues['stale_pending'])} stale PENDING positions"
+            )
+
+        if issues['price_discrepancies']:
+            self.logger.warning(
+                f"  Found {len(issues['price_discrepancies'])} price discrepancies"
+            )
+
+        if not issues['stale_pending'] and not issues['price_discrepancies']:
+            self.logger.info("  No issues found - all positions reconciled")
+
+    def _check_rebalancing(self):
+        """Check if portfolio needs rebalancing"""
+        self.logger.info("STEP 4: Checking Rebalancing Needs")
+
+        status = self.rebalancer.check_deployment_status()
+
+        if status['needs_rebalancing']:
+            self.logger.info(
+                f"  Portfolio under-deployed ({status['deployment_pct']:.1%}) - "
+                "requesting candidates"
+            )
+            self.rebalancer.generate_candidate_request(self.message_handler)
+        else:
+            self.logger.info(
+                f"  Portfolio adequately deployed: {status['deployment_pct']:.1%}"
+            )
+
+    def _generate_daily_summary(self):
+        """Generate end-of-day summary report"""
+        self.logger.info("STEP 5: Generating Daily Summary")
+
+        summary = self.position_tracker.get_portfolio_summary()
+
+        self.logger.info("  Portfolio Status:")
+        self.logger.info(f"    PENDING: {summary['pending_positions']}")
+        self.logger.info(f"    OPEN: {summary['open_positions']}")
+        self.logger.info(f"    CLOSED: {summary['closed_positions']}")
+        self.logger.info(f"    Deployed Capital: ${summary['capital_deployed']:,.2f}")
+        self.logger.info(f"    Unrealized P&L: ${summary['unrealized_pnl']:,.2f}")
+        self.logger.info(f"    Realized P&L: ${summary['realized_pnl']:,.2f}")
+        self.logger.info(f"    Total P&L: ${summary['total_pnl']:,.2f}")
+
+    def _log_portfolio_rejections(self, rejected: List[Dict], decision_msg_id: str):
+        """Log rejected candidates to portfolio_rejections table"""
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+
+        try:
+            for rejection in rejected:
+                cursor.execute("""
+                    INSERT INTO portfolio_rejections (
+                        decision_message_id,
+                        ticker,
+                        decision_date,
+                        rejection_reason,
+                        rejection_category,
+                        rejection_details,
+                        would_be_shares,
+                        would_be_position_value,
+                        would_be_risk,
+                        research_composite_score,
+                        decision_timestamp
+                    ) VALUES (?, ?, date('now'), ?, ?, ?, ?, ?, ?, ?, datetime('now'))
+                """, (
+                    decision_msg_id,
+                    rejection['ticker'],
+                    rejection['rejection_reason'],
+                    rejection['rejection_category'],
+                    rejection.get('rejection_details', ''),
+                    rejection.get('shares', 0),
+                    rejection.get('position_size_value', 0.0),
+                    rejection.get('total_risk', 0.0),
+                    rejection.get('research_composite_score', 0.0)
+                ))
+
+            conn.commit()
+            self.logger.info(f"  Logged {len(rejected)} rejections to database")
+
+        finally:
+            conn.close()
+
+    def _log_portfolio_decision(self, metadata: Dict, accepted: List, rejected: List,
+                               positions_before: int, capital_before: float):
+        """Log Portfolio decision to portfolio_decisions table"""
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+
+        try:
+            # Calculate positions/capital after this decision
+            positions_after = positions_before + len(accepted)
+
+            # Estimate capital after (sum of accepted position values)
+            capital_added = sum(c.get('position_size_value', 0.0) for c in accepted)
+            capital_after = capital_before + capital_added
+
+            total_capital = self.config['capital']['total']
+            deployment_before = capital_before / total_capital if total_capital > 0 else 0.0
+            deployment_after = capital_after / total_capital if total_capital > 0 else 0.0
+
+            cursor.execute("""
+                INSERT INTO portfolio_decisions (
+                    message_id,
+                    parent_message_id,
+                    decision_type,
+                    decision_date,
+                    decision_timestamp,
+                    positions_before,
+                    positions_after,
+                    capital_deployed_before,
+                    capital_deployed_after,
+                    deployment_pct_before,
+                    deployment_pct_after,
+                    buy_orders_count,
+                    rejected_count,
+                    max_positions,
+                    max_capital_deployed_pct,
+                    min_composite_score
+                ) VALUES (?, ?, 'BUY', date('now'), datetime('now'), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, (
+                f"MSG_PORTFOLIO_{datetime.now().strftime('%Y%m%dT%H%M%SZ')}_{uuid.uuid4().hex[:8]}",
+                metadata['message_id'],
+                positions_before,
+                positions_after,
+                capital_before,
+                capital_after,
+                deployment_before,
+                deployment_after,
+                len(accepted),
+                len(rejected),
+                self.config['limits']['max_positions'],
+                self.config['limits']['max_capital_deployed_pct'],
+                self.config['filters']['min_composite_score']
+            ))
+
+            conn.commit()
+            self.logger.info("  Decision logged to database")
+
+        finally:
+            conn.close()
+
+    def handle_trading_rejection(self, position_id: str, rejection_data: Dict):
+        """
+        Handle when Trading Department rejects a BuyOrder
+
+        Args:
+            position_id: Position that was rejected
+            rejection_data: Dict with rejection details from Trading
+                - rejection_reason: str
+                - rejection_details: str
+        """
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+
+        try:
+            # Update position status to REJECTED
+            cursor.execute("""
+                UPDATE portfolio_positions
+                SET status = 'REJECTED',
+                    updated_at = datetime('now')
+                WHERE position_id = ? AND status = 'PENDING'
+            """, (position_id,))
+
+            conn.commit()
+
+            # Free up capacity - Portfolio can now accept new candidates
+            self.logger.warning(
+                f"Position REJECTED by Trading: {position_id} - "
+                f"Reason: {rejection_data.get('rejection_reason', 'Unknown')}"
+            )
+
+            # Trigger rebalancing check (now have capacity)
+            status = self.rebalancer.check_deployment_status()
+
+            if status['needs_rebalancing']:
+                self.logger.info("Triggering candidate request after rejection")
+                self.rebalancer.generate_candidate_request(self.message_handler)
+
+        finally:
+            conn.close()
+
+
 if __name__ == "__main__":
     # Test Portfolio Decision Engine
     logger.info("Portfolio Department - Testing Decision Engine (Day 1)")
