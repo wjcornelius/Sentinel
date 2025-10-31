@@ -1,0 +1,187 @@
+# Research Department Configuration - Phase 1
+# Machine-readable settings for market analysis and sentiment scoring
+# Created: 2025-10-31
+# Pattern learned from hard_constraints.yaml (Week 1)
+
+version: 1.0
+last_updated: 2025-10-31
+
+# Sentiment Analysis Settings (Perplexity API)
+sentiment:
+  cache_ttl_hours: 24                          # Cache sentiment for 24 hours (news doesn't change much intraday)
+  perplexity_model: "llama-3.1-sonar-small-128k-online"
+  max_news_articles: 15                        # Analyze up to 15 recent articles per ticker
+  bullish_keywords:
+    - "beat earnings"
+    - "exceeded expectations"
+    - "strong growth"
+    - "positive outlook"
+    - "upgraded"
+    - "bullish"
+    - "breakout"
+    - "momentum"
+  bearish_keywords:
+    - "missed earnings"
+    - "below expectations"
+    - "guidance lowered"
+    - "downgraded"
+    - "bearish"
+    - "sell-off"
+    - "concerns"
+    - "weakness"
+  sentiment_score_weights:
+    keyword_count: 0.40                        # 40% weight on bullish/bearish keyword frequency
+    overall_tone: 0.60                         # 60% weight on Perplexity's analysis
+
+# Technical Analysis Settings (pandas-ta)
+technical:
+  rsi_period: 14                               # Standard 14-day RSI
+  rsi_oversold: 30                             # RSI < 30 = oversold (potentially bullish)
+  rsi_overbought: 70                           # RSI > 70 = overbought (potentially bearish)
+
+  macd_fast: 12                                # Fast EMA period
+  macd_slow: 26                                # Slow EMA period
+  macd_signal: 9                               # Signal line period
+
+  bollinger_period: 20                         # 20-day Bollinger Bands
+  bollinger_std_dev: 2                         # 2 standard deviations
+
+  volume_ma_period: 30                         # 30-day average volume
+  volume_surge_threshold: 1.5                  # Volume > 1.5x average = significant interest
+
+  technical_score_weights:
+    rsi: 0.30                                  # RSI contributes 30% to technical score
+    macd: 0.30                                 # MACD contributes 30%
+    bollinger: 0.25                            # Bollinger position contributes 25%
+    volume: 0.15                               # Volume contributes 15%
+
+# Fundamental Analysis Settings (yfinance)
+fundamental:
+  min_market_cap_billions: 10.0                # Only analyze stocks >= $10B market cap (large/mid cap)
+
+  pe_ratio_ranges:
+    undervalued: 15.0                          # P/E < 15 = potentially undervalued
+    fair_value: 25.0                           # P/E 15-25 = fair value range
+    overvalued: 35.0                           # P/E > 35 = potentially overvalued
+
+  revenue_growth_ranges:
+    low: 5.0                                   # < 5% YoY = low growth
+    moderate: 10.0                             # 5-10% = moderate growth
+    high: 15.0                                 # > 15% = high growth
+
+  profit_margin_ranges:
+    low: 5.0                                   # < 5% = low margin business
+    moderate: 15.0                             # 5-15% = moderate margins
+    high: 25.0                                 # > 25% = high margin business
+
+  debt_to_equity_ranges:
+    low: 0.5                                   # < 0.5 = low debt
+    moderate: 1.0                              # 0.5-1.0 = moderate debt
+    high: 2.0                                  # > 2.0 = high debt (risky)
+
+  fundamental_score_weights:
+    valuation: 0.35                            # P/E, PEG ratio = 35% weight
+    growth: 0.30                               # Revenue growth = 30% weight
+    profitability: 0.25                        # Profit margins = 25% weight
+    balance_sheet: 0.10                        # Debt levels = 10% weight
+
+# Market Conditions Monitoring
+market_conditions:
+  vix_thresholds:
+    normal: 15.0                               # VIX < 15 = calm market
+    elevated: 20.0                             # VIX 15-20 = elevated volatility
+    caution: 30.0                              # VIX 20-30 = caution advised
+    panic: 40.0                                # VIX > 40 = panic mode (halt trading)
+
+  spy_change_thresholds:
+    small_move: 0.5                            # < 0.5% = normal day
+    medium_move: 1.0                           # 0.5-1.0% = moderate move
+    large_move: 2.0                            # 1.0-2.0% = significant move
+    extreme_move: 3.0                          # > 3% = extreme move (alert Executive)
+
+  sector_etfs:
+    technology: "XLK"                          # Technology sector ETF
+    healthcare: "XLV"                          # Healthcare sector ETF
+    financials: "XLF"                          # Financials sector ETF
+    energy: "XLE"                              # Energy sector ETF
+    consumer_discretionary: "XLY"              # Consumer Discretionary ETF
+    consumer_staples: "XLP"                    # Consumer Staples ETF
+    industrials: "XLI"                         # Industrials ETF
+    materials: "XLB"                           # Materials ETF
+    utilities: "XLU"                           # Utilities ETF
+    real_estate: "XLRE"                        # Real Estate ETF
+    communication: "XLC"                       # Communication Services ETF
+
+# Daily Briefing Settings
+daily_briefing:
+  generation_time: "10:00"                     # Generate briefing at 10:00 AM ET daily
+  min_candidates: 10                           # Target minimum 10 stock candidates
+  max_candidates: 20                           # Target maximum 20 stock candidates
+  min_overall_score: 6.0                       # Only include stocks with overall score >= 6.0
+
+  stock_universe:
+    - "SPY"                                    # S&P 500 constituents (will expand in Phase 2)
+    - "QQQ"                                    # Nasdaq 100 constituents
+
+  screening_criteria:
+    min_liquidity_volume: 500000               # Must trade >= 500K shares/day
+    min_price: 5.00                            # No penny stocks (< $5)
+    max_price: 1000.00                         # Practical upper limit
+
+# API Configuration
+api:
+  perplexity:
+    rate_limit_per_minute: 50                  # 50 requests/minute (check docs)
+    timeout_seconds: 30                        # 30 second timeout
+    retry_delays: [1, 2, 4, 8, 16]            # Exponential backoff (learned from Trading)
+    max_retries: 5
+
+  yfinance:
+    timeout_seconds: 10                        # 10 second timeout
+    retry_delays: [1, 2, 4]                   # Shorter retry for free API
+    max_retries: 3
+
+  alpaca:
+    timeout_seconds: 5                         # 5 second timeout (real-time data)
+    retry_delays: [1, 2]                      # Quick retry for market data
+    max_retries: 2
+
+# Data Quality Thresholds
+data_quality:
+  max_stale_data_hours: 24                     # Flag data older than 24 hours as stale
+  min_data_completeness_pct: 80.0              # Warn if < 80% of required data available
+
+  required_fundamental_fields:
+    - "marketCap"
+    - "trailingPE"
+    - "profitMargins"
+
+  required_technical_fields:
+    - "close"
+    - "volume"
+
+# Composite Score Calculation
+composite_scoring:
+  overall_score_weights:
+    technical: 0.30                            # Technical analysis = 30% of overall score
+    fundamental: 0.40                          # Fundamental analysis = 40% of overall score
+    sentiment: 0.30                            # Sentiment analysis = 30% of overall score
+
+  score_scale:
+    min: 1.0                                   # Minimum score (very bearish)
+    max: 10.0                                  # Maximum score (very bullish)
+    neutral: 5.0                               # Neutral score (no clear signal)
+
+# Logging and Debugging
+logging:
+  api_calls: true                              # Log all API calls to research_api_calls table
+  cache_hits: true                             # Log cache hit/miss rates
+  score_calculations: true                     # Log detailed score breakdowns
+  performance_metrics: true                    # Log analysis timing
+
+# Notes for CC:
+# - All thresholds based on Trading_Wisdom.txt and industry standards
+# - Machine-readable format (no hard-coding in Python)
+# - Can be updated without code changes (like hard_constraints.yaml)
+# - Sentiment cache reduces Perplexity costs significantly
+# - Composite scoring is transparent and auditable
