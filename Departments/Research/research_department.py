@@ -51,6 +51,7 @@ class MarketConditions:
     market_sentiment: str  # BULLISH, NEUTRAL, BEARISH
     top_sectors: List[Dict]  # [{"sector": "Technology", "change_pct": 1.2}, ...]
     bottom_sectors: List[Dict]
+    sector_performance: Dict  # {"Technology": 1.2, "Healthcare": 0.5, ...}
 
 
 @dataclass
@@ -264,6 +265,9 @@ class MarketDataCollector:
             # Fetch sector performance
             top_sectors, bottom_sectors = self._get_sector_performance()
 
+            # Create sector_performance dict for easier access
+            sector_performance = {sector['sector']: sector['change_pct'] for sector in top_sectors + bottom_sectors}
+
             logger.info(f"Market conditions: SPY {spy_change_pct:+.2f}%, VIX {vix_level:.1f} ({vix_status})")
 
             return MarketConditions(
@@ -276,7 +280,8 @@ class MarketDataCollector:
                 vix_status=vix_status,
                 market_sentiment=market_sentiment,
                 top_sectors=top_sectors[:3],
-                bottom_sectors=bottom_sectors[:3]
+                bottom_sectors=bottom_sectors[:3],
+                sector_performance=sector_performance
             )
 
         except Exception as e:
@@ -833,21 +838,394 @@ class FundamentalAnalyzer:
         }
 
 
+class ResearchDepartment:
+    """
+    Main orchestrator for Research Department
+    Coordinates market analysis, ticker screening, and daily briefing generation
+    """
+
+    def __init__(self, config: Dict, perplexity_api_key: str, db_path: Path):
+        """
+        Initialize Research Department orchestrator
+
+        Args:
+            config: Research configuration dictionary
+            perplexity_api_key: API key for Perplexity sentiment analysis
+            db_path: Path to sentinel.db
+        """
+        self.config = config
+        self.db_path = db_path
+        self.perplexity_api_key = perplexity_api_key
+
+        # Initialize all analyzers
+        self.message_handler = MessageHandler()
+        self.market_data_collector = MarketDataCollector(config)
+        self.sentiment_analyzer = SentimentAnalyzer(config, perplexity_api_key)
+        self.technical_analyzer = TechnicalAnalyzer(config)
+        self.fundamental_analyzer = FundamentalAnalyzer(config)
+
+        logger.info("ResearchDepartment orchestrator initialized")
+
+    def get_ticker_universe(self) -> List[str]:
+        """
+        Get list of tickers to analyze based on universe configuration
+
+        Returns:
+            List of ticker symbols meeting screening criteria
+        """
+        logger.info("Building ticker universe from S&P 500 + Nasdaq 100")
+
+        # For Phase 1, use a curated list of liquid large-cap stocks
+        # Phase 2 will fetch full S&P 500 + Nasdaq 100 constituent lists
+        universe = [
+            # Mega-cap tech
+            'AAPL', 'MSFT', 'GOOGL', 'AMZN', 'META', 'NVDA', 'TSLA',
+            # Large-cap tech
+            'CRM', 'ADBE', 'NFLX', 'INTC', 'AMD', 'AVGO', 'ORCL',
+            # Financial
+            'JPM', 'BAC', 'WFC', 'GS', 'MS', 'V', 'MA',
+            # Healthcare
+            'UNH', 'JNJ', 'LLY', 'ABBV', 'MRK', 'PFE',
+            # Consumer
+            'WMT', 'HD', 'PG', 'KO', 'PEP', 'COST', 'NKE',
+            # Industrial
+            'BA', 'CAT', 'HON', 'GE', 'MMM',
+            # Energy
+            'XOM', 'CVX', 'COP',
+            # Communication
+            'DIS', 'CMCSA', 'T', 'VZ'
+        ]
+
+        # Apply screening criteria
+        screened_universe = []
+        min_price = self.config['daily_briefing']['screening_criteria']['min_price']
+        max_price = self.config['daily_briefing']['screening_criteria']['max_price']
+        min_volume = self.config['daily_briefing']['screening_criteria']['min_liquidity_volume']
+
+        for ticker in universe:
+            try:
+                stock = yf.Ticker(ticker)
+                hist = stock.history(period='5d')
+
+                if hist.empty:
+                    logger.warning(f"Skipping {ticker} - no price data")
+                    continue
+
+                current_price = float(hist['Close'].iloc[-1])
+                avg_volume = float(hist['Volume'].mean())
+
+                # Apply filters
+                if current_price < min_price:
+                    logger.debug(f"Skipping {ticker} - price ${current_price:.2f} below minimum ${min_price:.2f}")
+                    continue
+
+                if current_price > max_price:
+                    logger.debug(f"Skipping {ticker} - price ${current_price:.2f} above maximum ${max_price:.2f}")
+                    continue
+
+                if avg_volume < min_volume:
+                    logger.debug(f"Skipping {ticker} - volume {avg_volume:,.0f} below minimum {min_volume:,}")
+                    continue
+
+                screened_universe.append(ticker)
+                logger.debug(f"Added {ticker} to universe (Price: ${current_price:.2f}, Vol: {avg_volume:,.0f})")
+
+            except Exception as e:
+                logger.warning(f"Skipping {ticker} - screening error: {e}")
+                continue
+
+        logger.info(f"Ticker universe: {len(screened_universe)} stocks (from {len(universe)} candidates)")
+        return screened_universe
+
+    def analyze_ticker(self, ticker: str) -> Optional[Dict]:
+        """
+        Perform complete analysis on a single ticker
+
+        Args:
+            ticker: Stock symbol
+
+        Returns:
+            Dictionary with technical, fundamental, sentiment, and composite scores
+            None if analysis fails
+        """
+        try:
+            logger.info(f"Analyzing {ticker}...")
+
+            # Technical analysis
+            tech_result = self.technical_analyzer.calculate_technical_score(ticker)
+            tech_score = tech_result['technical_score']
+
+            # Fundamental analysis
+            fund_result = self.fundamental_analyzer.calculate_fundamental_score(ticker)
+            fund_score = fund_result['fundamental_score']
+
+            # Sentiment analysis
+            sent_score, sent_summary, news_count = self.sentiment_analyzer.get_sentiment_score(ticker)
+
+            # Calculate composite score
+            weights = self.config['composite_scoring']['overall_score_weights']
+            composite_score = (
+                tech_score * weights['technical'] +
+                fund_score * weights['fundamental'] +
+                sent_score * weights['sentiment']
+            )
+
+            result = {
+                'ticker': ticker,
+                'timestamp': datetime.utcnow().isoformat() + 'Z',
+                'technical': {
+                    'score': tech_score,
+                    'rsi': tech_result.get('rsi'),
+                    'macd': tech_result.get('macd'),
+                    'macd_signal': tech_result.get('macd_signal'),
+                    'bollinger_position': tech_result.get('bollinger_position'),
+                    'volume_ratio': tech_result.get('volume_ratio')
+                },
+                'fundamental': {
+                    'score': fund_score,
+                    'pe_ratio': fund_result.get('pe_ratio'),
+                    'revenue_growth_yoy': fund_result.get('revenue_growth_yoy'),
+                    'profit_margin': fund_result.get('profit_margin'),
+                    'debt_to_equity': fund_result.get('debt_to_equity'),
+                    'market_cap': fund_result.get('market_cap')
+                },
+                'sentiment': {
+                    'score': sent_score,
+                    'summary': sent_summary,
+                    'news_count': news_count
+                },
+                'composite_score': round(composite_score, 1)
+            }
+
+            logger.info(f"{ticker} analysis complete: Composite {composite_score:.1f}/10 (T:{tech_score:.1f} F:{fund_score:.1f} S:{sent_score:.1f})")
+            return result
+
+        except Exception as e:
+            logger.error(f"Failed to analyze {ticker}: {e}", exc_info=True)
+            return None
+
+    def generate_daily_briefing(self) -> str:
+        """
+        Generate daily market briefing with stock candidates
+
+        Returns:
+            Message ID of generated briefing
+        """
+        logger.info("=" * 80)
+        logger.info("GENERATING DAILY BRIEFING")
+        logger.info("=" * 80)
+
+        # Step 1: Collect market conditions
+        logger.info("[1/4] Collecting market conditions...")
+        market_conditions = self.market_data_collector.get_market_conditions()
+
+        # Step 2: Get ticker universe
+        logger.info("[2/4] Building ticker universe...")
+        universe = self.get_ticker_universe()
+
+        if not universe:
+            logger.error("No tickers in universe - cannot generate briefing")
+            return None
+
+        # Step 3: Market condition adjustments
+        logger.info("[3/4] Applying market condition adjustments...")
+        min_score = self.config['daily_briefing']['min_overall_score']
+        max_candidates = self.config['daily_briefing']['max_candidates']
+
+        # Adjust based on VIX
+        if market_conditions.vix_status == 'PANIC':
+            logger.warning(f"VIX PANIC MODE ({market_conditions.vix_level:.1f}) - HALTING RECOMMENDATIONS")
+            max_candidates = 0  # No recommendations in panic
+            min_score = 10.0    # Impossible threshold
+        elif market_conditions.vix_status == 'CAUTION':
+            logger.warning(f"VIX CAUTION ({market_conditions.vix_level:.1f}) - Reducing candidates to 5, raising threshold to 7.0")
+            max_candidates = 5
+            min_score = 7.0
+        elif market_conditions.vix_status == 'ELEVATED':
+            logger.info(f"VIX ELEVATED ({market_conditions.vix_level:.1f}) - Reducing candidates to 10, raising threshold to 6.5")
+            max_candidates = 10
+            min_score = 6.5
+
+        # Step 4: Analyze tickers and select candidates
+        logger.info(f"[4/4] Analyzing {len(universe)} tickers (targeting {max_candidates} candidates with score >= {min_score})...")
+
+        candidates = []
+        for ticker in universe:
+            analysis = self.analyze_ticker(ticker)
+
+            if analysis is None:
+                continue
+
+            if analysis['composite_score'] >= min_score:
+                candidates.append(analysis)
+
+            # Stop if we have enough candidates
+            if len(candidates) >= max_candidates:
+                logger.info(f"Reached target of {max_candidates} candidates - stopping analysis")
+                break
+
+        # Sort by composite score (highest first)
+        candidates.sort(key=lambda x: x['composite_score'], reverse=True)
+
+        # Limit to max candidates
+        candidates = candidates[:max_candidates]
+
+        logger.info(f"Selected {len(candidates)} candidates with scores >= {min_score}")
+
+        # Step 5: Generate briefing message
+        logger.info("Generating DailyBriefing message...")
+
+        # Create message body
+        body_lines = [
+            f"# Daily Market Briefing - {market_conditions.date.strftime('%B %d, %Y')}",
+            "",
+            "## Market Conditions",
+            f"- **SPY**: ${market_conditions.spy_price:.2f} ({market_conditions.spy_change_pct:+.2f}%)",
+            f"- **QQQ**: ${market_conditions.qqq_price:.2f} ({market_conditions.qqq_change_pct:+.2f}%)",
+            f"- **VIX**: {market_conditions.vix_level:.1f} ({market_conditions.vix_status})",
+            f"- **Market Sentiment**: {market_conditions.market_sentiment}",
+            "",
+            f"## Sector Rotation",
+        ]
+
+        # Add top 3 sectors
+        top_sectors = sorted(market_conditions.sector_performance.items(), key=lambda x: x[1], reverse=True)[:3]
+        for sector, perf in top_sectors:
+            body_lines.append(f"- **{sector}**: {perf:+.2f}%")
+
+        body_lines.extend([
+            "",
+            f"## Stock Candidates ({len(candidates)} recommended)",
+            ""
+        ])
+
+        if len(candidates) == 0:
+            body_lines.append("**NO RECOMMENDATIONS** - Market conditions unfavorable or no stocks meet criteria.")
+        else:
+            for i, candidate in enumerate(candidates, 1):
+                body_lines.append(f"### {i}. {candidate['ticker']} - Score: {candidate['composite_score']}/10")
+                body_lines.append(f"- **Technical**: {candidate['technical']['score']:.1f}/10")
+                body_lines.append(f"- **Fundamental**: {candidate['fundamental']['score']:.1f}/10")
+                body_lines.append(f"- **Sentiment**: {candidate['sentiment']['score']:.1f}/10")
+                body_lines.append("")
+
+        body = "\n".join(body_lines)
+
+        # Create data payload
+        data_payload = {
+            'market_conditions': {
+                'date': market_conditions.date.isoformat(),
+                'spy_price': market_conditions.spy_price,
+                'spy_change_pct': market_conditions.spy_change_pct,
+                'qqq_price': market_conditions.qqq_price,
+                'qqq_change_pct': market_conditions.qqq_change_pct,
+                'vix_level': market_conditions.vix_level,
+                'vix_status': market_conditions.vix_status,
+                'market_sentiment': market_conditions.market_sentiment,
+                'sector_performance': market_conditions.sector_performance
+            },
+            'candidates': candidates,
+            'screening': {
+                'universe_size': len(universe),
+                'candidates_found': len(candidates),
+                'min_score_threshold': min_score,
+                'max_candidates': max_candidates
+            }
+        }
+
+        # Write message to outbox
+        message_id = self.message_handler.write_message(
+            to_dept='PORTFOLIO',
+            message_type='DailyBriefing',
+            subject=f"Daily Market Briefing - {market_conditions.date.strftime('%Y-%m-%d')}",
+            body=body,
+            data_payload=data_payload,
+            priority='routine'
+        )
+
+        # Write to database
+        self._save_briefing_to_db(message_id, market_conditions, candidates)
+
+        logger.info(f"DailyBriefing generated: {message_id}")
+        logger.info(f"Message written to: Outbox/RESEARCH/{message_id}.md")
+        logger.info("=" * 80)
+
+        return message_id
+
+    def _save_briefing_to_db(self, message_id: str, market_conditions: MarketConditions, candidates: List[Dict]):
+        """Save briefing to database"""
+        try:
+            conn = sqlite3.connect(self.db_path)
+            cursor = conn.cursor()
+
+            # Save market briefing
+            cursor.execute("""
+                INSERT INTO research_market_briefings
+                (message_id, date, spy_price, spy_change_pct, qqq_price, qqq_change_pct,
+                 vix_level, vix_status, market_sentiment, sector_rotation_json, candidate_count)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, (
+                message_id,
+                market_conditions.date.isoformat(),
+                market_conditions.spy_price,
+                market_conditions.spy_change_pct,
+                market_conditions.qqq_price,
+                market_conditions.qqq_change_pct,
+                market_conditions.vix_level,
+                market_conditions.vix_status,
+                market_conditions.market_sentiment,
+                json.dumps(market_conditions.sector_performance),
+                len(candidates)
+            ))
+
+            # Save candidate tickers
+            for rank, candidate in enumerate(candidates, 1):
+                cursor.execute("""
+                    INSERT INTO research_candidate_tickers
+                    (message_id, date, ticker, rank, composite_score,
+                     technical_score, fundamental_score, sentiment_score, analysis_json)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """, (
+                    message_id,
+                    market_conditions.date.isoformat(),
+                    candidate['ticker'],
+                    rank,
+                    candidate['composite_score'],
+                    candidate['technical']['score'],
+                    candidate['fundamental']['score'],
+                    candidate['sentiment']['score'],
+                    json.dumps(candidate)
+                ))
+
+            conn.commit()
+            conn.close()
+
+            logger.info(f"Briefing saved to database: {len(candidates)} candidates")
+
+        except Exception as e:
+            logger.error(f"Failed to save briefing to database: {e}", exc_info=True)
+
+
 if __name__ == "__main__":
-    # Quick test of MarketDataCollector
-    logger.info("Research Department - Testing MarketDataCollector")
+    # Test ResearchDepartment orchestrator
+    logger.info("Research Department - Testing Orchestrator")
 
     # Load config
     config_path = Path("Config/research_config.yaml")
     with open(config_path, 'r') as f:
         config = yaml.safe_load(f)
 
-    # Test market data collection
-    collector = MarketDataCollector(config)
+    # Load API key
+    from config import PERPLEXITY_API_KEY
+
+    db_path = Path("sentinel.db")
+
+    # Initialize orchestrator
+    research = ResearchDepartment(config, PERPLEXITY_API_KEY, db_path)
+
+    # Generate daily briefing
     try:
-        market_conditions = collector.get_market_conditions()
-        logger.info(f"Market test successful: SPY ${market_conditions.spy_price:.2f} ({market_conditions.spy_change_pct:+.2f}%)")
-        logger.info(f"VIX: {market_conditions.vix_level:.1f} ({market_conditions.vix_status})")
-        logger.info(f"Sentiment: {market_conditions.market_sentiment}")
+        message_id = research.generate_daily_briefing()
+        logger.info(f"SUCCESS: Daily briefing generated - {message_id}")
     except Exception as e:
-        logger.error(f"Market test failed: {e}")
+        logger.error(f"FAILED: Daily briefing generation failed - {e}", exc_info=True)

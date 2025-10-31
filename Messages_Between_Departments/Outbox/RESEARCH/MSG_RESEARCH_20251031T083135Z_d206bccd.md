@@ -1,0 +1,89 @@
+---
+from: RESEARCH
+message_id: MSG_RESEARCH_20251031T083135Z_d206bccd
+message_type: DailyBriefing
+priority: routine
+requires_response: false
+timestamp: '2025-10-31T08:31:35.416657Z'
+to: PORTFOLIO
+---
+
+# Daily Market Briefing - 2025-10-31
+
+# Daily Market Briefing - October 31, 2025
+
+## Market Conditions
+- **SPY**: $679.83 (-1.10%)
+- **QQQ**: $626.05 (-1.53%)
+- **VIX**: 16.2 (NORMAL)
+- **Market Sentiment**: BEARISH
+
+## Sector Rotation
+- **real_estate**: +0.57%
+- **financials**: +0.27%
+- **healthcare**: +0.22%
+
+## Stock Candidates (1 recommended)
+
+### 1. BAC - Score: 6.0/10
+- **Technical**: 5.1/10
+- **Fundamental**: 7.7/10
+- **Sentiment**: 5.5/10
+
+
+```json
+{
+  "market_conditions": {
+    "date": "2025-10-31",
+    "spy_price": 679.8300170898438,
+    "spy_change_pct": -1.0998119550020342,
+    "qqq_price": 626.0499877929688,
+    "qqq_change_pct": -1.5288597196589704,
+    "vix_level": 16.25,
+    "vix_status": "NORMAL",
+    "market_sentiment": "BEARISH",
+    "sector_performance": {
+      "real_estate": 0.5658045107080847,
+      "financials": 0.2687644254911413,
+      "healthcare": 0.22225818427187394,
+      "materials": -1.3395903572275893,
+      "communication": -1.6940417965377152,
+      "consumer_discretionary": -2.25799457842418
+    }
+  },
+  "candidates": [
+    {
+      "ticker": "BAC",
+      "timestamp": "2025-10-31T08:31:18.371415Z",
+      "technical": {
+        "score": 5.1,
+        "rsi": 62.092126966884855,
+        "macd": 0.6640738177003414,
+        "macd_signal": 0.48056499940651537,
+        "bollinger_position": 0.8463521778137931,
+        "volume_ratio": 1.1220960284131187
+      },
+      "fundamental": {
+        "score": 7.7,
+        "pe_ratio": 14.48907,
+        "revenue_growth_yoy": 12.6,
+        "profit_margin": 29.224002,
+        "debt_to_equity": null,
+        "market_cap": 388679237632
+      },
+      "sentiment": {
+        "score": 5.5,
+        "summary": "The overall recent news sentiment for Bank of America (BAC) stock is **positive**, driven primarily by strong Q3 2025 earnings that exceeded analyst expectations, with EPS of $1.06 versus estimates of $0.93\u2013$0.95 and revenue growth of 10.8% year-over-year to $28.09 billion. Analysts have generally upgraded their ratings, with a consensus \"Buy\" rating and raised price targets around $55\u2013$57, reflecting confidence in BAC\u2019s market position and capital return strategies, including a $40 billion share buyback program. Key themes include robust earnings performance, effective cost control, institutional investor confidence, and a stable dividend outlook, although some technical forecasts predict short-term price dips amid cautious market sentiment[1][2][4][7][9].\n\nSpecifically:\n\n- **Earnings:** Strong Q3 results with significant net interest income growth and improved efficiency ratio, beating estimates and supporting share price gains[1][2]",
+        "news_count": 10
+      },
+      "composite_score": 6.0
+    }
+  ],
+  "screening": {
+    "universe_size": 45,
+    "candidates_found": 1,
+    "min_score_threshold": 6.0,
+    "max_candidates": 20
+  }
+}
+```
