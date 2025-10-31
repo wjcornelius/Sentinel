@@ -580,8 +580,13 @@ class TechnicalAnalyzer:
                                    std=self.config['technical']['bollinger_std_dev'])
 
             if bbands is not None and not bbands.empty:
-                bb_upper = float(bbands[f'BBU_{self.config["technical"]["bollinger_period"]}_{self.config["technical"]["bollinger_std_dev"]}.0'].iloc[-1])
-                bb_lower = float(bbands[f'BBL_{self.config["technical"]["bollinger_period"]}_{self.config["technical"]["bollinger_std_dev"]}.0'].iloc[-1])
+                # Dynamic column name detection (pandas-ta may return 'BBU_20_2' or 'BBU_20_2.0')
+                bb_columns = bbands.columns.tolist()
+                bb_upper_col = [c for c in bb_columns if c.startswith('BBU_')][0]
+                bb_lower_col = [c for c in bb_columns if c.startswith('BBL_')][0]
+
+                bb_upper = float(bbands[bb_upper_col].iloc[-1])
+                bb_lower = float(bbands[bb_lower_col].iloc[-1])
                 current_price = float(hist['Close'].iloc[-1])
 
                 # Bollinger position: 0 = at lower band, 1 = at upper band

@@ -1,0 +1,176 @@
+2025-10-31 01:08:02,477 - ResearchDepartment - INFO - TechnicalAnalyzer initialized
+2025-10-31 01:08:02,477 - ResearchDepartment - INFO - FundamentalAnalyzer initialized
+2025-10-31 01:08:02,477 - ResearchDepartment - INFO - SentimentAnalyzer initialized (model: sonar, cache TTL: 24h)
+2025-10-31 01:08:03,680 - ResearchDepartment - INFO - Technical analysis for AAPL: RSI=72.4, MACD=BULL, Score=4.5
+2025-10-31 01:08:04,023 - ResearchDepartment - INFO - Fundamental analysis for AAPL: P/E=41.121212, Growth=0.096, Score=4.2
+2025-10-31 01:08:04,026 - ResearchDepartment - INFO - Sentiment cache MISS for AAPL - calling Perplexity API
+2025-10-31 01:08:08,865 - ResearchDepartment - INFO - Perplexity sentiment for AAPL: 5.0/10
+2025-10-31 01:08:08,877 - ResearchDepartment - INFO - Cached sentiment for AAPL (expires: 2025-11-01 08:08:08.870360)
+2025-10-31 01:08:09,021 - ResearchDepartment - INFO - Technical analysis for TSLA: RSI=52.7, MACD=BEAR, Score=4.4
+2025-10-31 01:08:09,339 - ResearchDepartment - INFO - Fundamental analysis for TSLA: P/E=303.51724, Growth=0.116, Score=4.2
+2025-10-31 01:08:09,343 - ResearchDepartment - INFO - Sentiment cache MISS for TSLA - calling Perplexity API
+2025-10-31 01:08:14,713 - ResearchDepartment - INFO - Perplexity sentiment for TSLA: 4.5/10
+2025-10-31 01:08:14,722 - ResearchDepartment - INFO - Cached sentiment for TSLA (expires: 2025-11-01 08:08:14.717619)
+2025-10-31 01:08:14,881 - ResearchDepartment - INFO - Technical analysis for MSFT: RSI=54.3, MACD=BULL, Score=5.9
+2025-10-31 01:08:15,217 - ResearchDepartment - INFO - Fundamental analysis for MSFT: P/E=37.447296, Growth=0.181, Score=5.8
+2025-10-31 01:08:15,220 - ResearchDepartment - INFO - Sentiment cache MISS for MSFT - calling Perplexity API
+2025-10-31 01:08:19,633 - ResearchDepartment - INFO - Perplexity sentiment for MSFT: 5.0/10
+2025-10-31 01:08:19,643 - ResearchDepartment - INFO - Cached sentiment for MSFT (expires: 2025-11-01 08:08:19.637273)
+====================================================================================================
+COMPREHENSIVE SCORING TEST - ALL BUGS FIXED
+====================================================================================================
+
+CONFIGURATION VERIFICATION:
+  Perplexity Model: sonar
+  Composite Weights: Technical 40%, Fundamental 30%, Sentiment 30%
+
+====================================================================================================
+AAPL - COMPLETE SCORING ANALYSIS
+====================================================================================================
+
+[1/3] TECHNICAL ANALYSIS (AAPL):
+----------------------------------------------------------------------------------------------------
+  RSI (14-day): 72.36
+    - Interpretation: Overbought (Bearish)
+  MACD:
+    - MACD Line: 6.0288
+    - Signal Line: 4.8413
+    - Signal: BULLISH
+  Bollinger Bands (20-day, 2 std):
+    - Position: 91.92% (0%=lower band, 100%=upper band)
+  Volume:
+    - Ratio to 30-day avg: 1.33x
+    - Activity: Normal
+  TECHNICAL SCORE: 4.5/10
+
+[2/3] FUNDAMENTAL ANALYSIS (AAPL):
+----------------------------------------------------------------------------------------------------
+  Market Cap: $4027.7B
+  Valuation:
+    - P/E Ratio: 41.12
+    - Forward P/E: 32.66
+  Growth:
+    - Revenue Growth (YoY): 9.6%
+  Profitability:
+    - Profit Margin: 24.3%
+  Balance Sheet:
+    - Debt-to-Equity: 154.49
+  FUNDAMENTAL SCORE: 4.2/10
+
+[3/3] SENTIMENT ANALYSIS (AAPL):
+----------------------------------------------------------------------------------------------------
+  News Articles Analyzed: 10
+  Summary: The overall recent news sentiment for Apple (AAPL) stock is **positive and bullish**, driven primarily by strong earnings results, favorable analyst ratings, and solid market positioning. Apple report...
+  SENTIMENT SCORE: 5.0/10
+
+COMPOSITE SCORE CALCULATION (AAPL):
+----------------------------------------------------------------------------------------------------
+  Technical:   4.5/10 × 40% = 1.80
+  Fundamental: 4.2/10 × 30% = 1.26
+  Sentiment:   5.0/10 × 30% = 1.50
+  --------------------------------------------------
+  COMPOSITE SCORE: 4.6/10
+  RECOMMENDATION: SELL
+
+
+====================================================================================================
+TSLA - COMPLETE SCORING ANALYSIS
+====================================================================================================
+
+[1/3] TECHNICAL ANALYSIS (TSLA):
+----------------------------------------------------------------------------------------------------
+  RSI (14-day): 52.75
+    - Interpretation: Neutral
+  MACD:
+    - MACD Line: 10.8626
+    - Signal Line: 12.0865
+    - Signal: BEARISH
+  Bollinger Bands (20-day, 2 std):
+    - Position: 50.38% (0%=lower band, 100%=upper band)
+  Volume:
+    - Ratio to 30-day avg: 0.81x
+    - Activity: Normal
+  TECHNICAL SCORE: 4.4/10
+
+[2/3] FUNDAMENTAL ANALYSIS (TSLA):
+----------------------------------------------------------------------------------------------------
+  Market Cap: $1463.7B
+  Valuation:
+    - P/E Ratio: 303.52
+    - Forward P/E: 135.83
+  Growth:
+    - Revenue Growth (YoY): 11.6%
+  Profitability:
+    - Profit Margin: 5.3%
+  Balance Sheet:
+    - Debt-to-Equity: 17.08
+  FUNDAMENTAL SCORE: 4.2/10
+
+[3/3] SENTIMENT ANALYSIS (TSLA):
+----------------------------------------------------------------------------------------------------
+  News Articles Analyzed: 10
+  Summary: The recent news sentiment for **Tesla (TSLA)** stock is mixed to cautiously negative overall. While Tesla reported a solid **Q3 2025 revenue increase of about 11.6–12% year-over-year to $28.1 billion*...
+  SENTIMENT SCORE: 4.5/10
+
+COMPOSITE SCORE CALCULATION (TSLA):
+----------------------------------------------------------------------------------------------------
+  Technical:   4.4/10 × 40% = 1.76
+  Fundamental: 4.2/10 × 30% = 1.26
+  Sentiment:   4.5/10 × 30% = 1.35
+  --------------------------------------------------
+  COMPOSITE SCORE: 4.4/10
+  RECOMMENDATION: SELL
+
+
+====================================================================================================
+MSFT - COMPLETE SCORING ANALYSIS
+====================================================================================================
+
+[1/3] TECHNICAL ANALYSIS (MSFT):
+----------------------------------------------------------------------------------------------------
+  RSI (14-day): 54.28
+    - Interpretation: Neutral
+  MACD:
+    - MACD Line: 4.8924
+    - Signal Line: 3.1544
+    - Signal: BULLISH
+  Bollinger Bands (20-day, 2 std):
+    - Position: 61.27% (0%=lower band, 100%=upper band)
+  Volume:
+    - Ratio to 30-day avg: 2.01x
+    - Activity: High
+  TECHNICAL SCORE: 5.9/10
+
+[2/3] FUNDAMENTAL ANALYSIS (MSFT):
+----------------------------------------------------------------------------------------------------
+  Market Cap: $3907.6B
+  Valuation:
+    - P/E Ratio: 37.45
+    - Forward P/E: 35.17
+  Growth:
+    - Revenue Growth (YoY): 18.1%
+  Profitability:
+    - Profit Margin: 36.1%
+  Balance Sheet:
+    - Debt-to-Equity: 32.66
+  FUNDAMENTAL SCORE: 5.8/10
+
+[3/3] SENTIMENT ANALYSIS (MSFT):
+----------------------------------------------------------------------------------------------------
+  News Articles Analyzed: 10
+  Summary: Recent news sentiment for Microsoft (MSFT) is largely positive, driven by strong fiscal Q1 2026 earnings that beat analyst expectations on both EPS and revenue, with notable growth in cloud and produc...
+  SENTIMENT SCORE: 5.0/10
+
+COMPOSITE SCORE CALCULATION (MSFT):
+----------------------------------------------------------------------------------------------------
+  Technical:   5.9/10 × 40% = 2.36
+  Fundamental: 5.8/10 × 30% = 1.74
+  Sentiment:   5.0/10 × 30% = 1.50
+  --------------------------------------------------
+  COMPOSITE SCORE: 5.6/10
+  RECOMMENDATION: HOLD
+
+
+====================================================================================================
+TEST COMPLETE - ALL THREE SCORING DIMENSIONS VERIFIED
+====================================================================================================
