@@ -840,6 +840,431 @@ class ExitSignalGenerator:
         return message_id
 
 
+# ============================================================================
+# CLASS 4: POSITION TRACKER (Day 3)
+# ============================================================================
+class PositionTracker:
+    """
+    Tracks position lifecycle: PENDING → OPEN → CLOSED
+    Handles fill confirmations, partial fills, and reconciliation
+    """
+
+    def __init__(self, db_path: Path):
+        self.db_path = db_path
+        self.logger = logging.getLogger(self.__class__.__name__)
+
+    def create_pending_position(self,
+                               candidate: Dict,
+                               order_message_id: str,
+                               risk_assessment_message_id: str) -> str:
+        """
+        Create new position with status='PENDING' after BuyOrder sent
+
+        Args:
+            candidate: Approved candidate dict with ticker, entry, shares, etc.
+            order_message_id: The BuyOrder message_id sent to Trading
+            risk_assessment_message_id: Parent RiskAssessment message_id
+
+        Returns:
+            position_id: The position_id that was created
+        """
+        position_id = candidate['position_id']
+        ticker = candidate['ticker']
+
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+
+        try:
+            cursor.execute("""
+                INSERT INTO portfolio_positions (
+                    position_id,
+                    ticker,
+                    status,
+                    intended_entry_price,
+                    intended_shares,
+                    intended_stop_loss,
+                    intended_target,
+                    risk_per_share,
+                    total_risk,
+                    sector,
+                    entry_order_message_id,
+                    risk_assessment_message_id,
+                    created_at,
+                    updated_at
+                ) VALUES (?, ?, 'PENDING', ?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'), datetime('now'))
+            """, (
+                position_id,
+                ticker,
+                candidate['entry_price'],
+                candidate['shares'],
+                candidate['stop_loss'],
+                candidate['target_price'],
+                candidate.get('risk_per_share', 0.0),
+                candidate.get('total_risk', 0.0),
+                candidate.get('sector', 'Unknown'),
+                order_message_id,
+                risk_assessment_message_id
+            ))
+
+            conn.commit()
+            self.logger.info(f"Position created: {position_id} - {ticker} (PENDING)")
+
+        except sqlite3.IntegrityError as e:
+            self.logger.error(f"Position already exists: {position_id}")
+            raise
+        finally:
+            conn.close()
+
+        return position_id
+
+    def update_position_on_fill(self,
+                               position_id: str,
+                               fill_data: Dict) -> bool:
+        """
+        Update position to OPEN status when FillConfirmation received
+        Handles both full and partial fills
+
+        Args:
+            position_id: Position to update
+            fill_data: Dict with fill details:
+                - filled_shares: int (how many shares filled)
+                - fill_price: float (average fill price)
+                - fill_date: str (ISO date)
+                - fill_message_id: str (Trading's FillConfirmation message_id)
+
+        Returns:
+            success: True if updated, False if position not found
+        """
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+
+        try:
+            # Check if position exists and is PENDING
+            cursor.execute("""
+                SELECT position_id, intended_shares, ticker
+                FROM portfolio_positions
+                WHERE position_id = ? AND status = 'PENDING'
+            """, (position_id,))
+
+            row = cursor.fetchone()
+            if not row:
+                self.logger.warning(f"Position {position_id} not found or not PENDING")
+                return False
+
+            intended_shares = row[1]
+            ticker = row[2]
+            filled_shares = fill_data['filled_shares']
+
+            # Determine if partial fill
+            is_partial = filled_shares < intended_shares
+
+            # Update position
+            cursor.execute("""
+                UPDATE portfolio_positions
+                SET status = 'OPEN',
+                    actual_entry_price = ?,
+                    actual_entry_date = ?,
+                    actual_shares = ?,
+                    fill_message_id = ?,
+                    updated_at = datetime('now')
+                WHERE position_id = ?
+            """, (
+                fill_data['fill_price'],
+                fill_data['fill_date'],
+                filled_shares,
+                fill_data['fill_message_id'],
+                position_id
+            ))
+
+            conn.commit()
+
+            if is_partial:
+                self.logger.warning(
+                    f"PARTIAL FILL: {position_id} - {ticker} - "
+                    f"{filled_shares}/{intended_shares} shares @ ${fill_data['fill_price']:.2f}"
+                )
+            else:
+                self.logger.info(
+                    f"FULL FILL: {position_id} - {ticker} - "
+                    f"{filled_shares} shares @ ${fill_data['fill_price']:.2f}"
+                )
+
+            return True
+
+        finally:
+            conn.close()
+
+    def close_position(self,
+                      position_id: str,
+                      exit_data: Dict) -> bool:
+        """
+        Close position when SellOrder filled
+
+        Args:
+            position_id: Position to close
+            exit_data: Dict with exit details:
+                - exit_price: float
+                - exit_date: str (ISO date)
+                - exit_reason: str (STOP_LOSS, TARGET, DOWNGRADE, TIME)
+                - exit_message_id: str (SellOrder message_id)
+
+        Returns:
+            success: True if closed, False if not found
+        """
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+
+        try:
+            # Verify position exists and is OPEN
+            cursor.execute("""
+                SELECT position_id, ticker, actual_shares, actual_entry_price, actual_entry_date
+                FROM portfolio_positions
+                WHERE position_id = ? AND status = 'OPEN'
+            """, (position_id,))
+
+            row = cursor.fetchone()
+            if not row:
+                self.logger.warning(f"Position {position_id} not found or not OPEN")
+                return False
+
+            ticker = row[1]
+            shares = row[2]
+            entry_price = row[3]
+            entry_date = row[4]
+
+            # Calculate performance
+            exit_price = exit_data['exit_price']
+            gain_per_share = exit_price - entry_price
+            total_gain = gain_per_share * shares
+            return_pct = (gain_per_share / entry_price) * 100
+
+            # Calculate days held
+            entry_dt = datetime.fromisoformat(entry_date)
+            exit_dt = datetime.fromisoformat(exit_data['exit_date'])
+            days_held = (exit_dt - entry_dt).days
+
+            # Update position
+            cursor.execute("""
+                UPDATE portfolio_positions
+                SET status = 'CLOSED',
+                    exit_reason = ?,
+                    exit_price = ?,
+                    exit_date = ?,
+                    exit_order_message_id = ?,
+                    updated_at = datetime('now')
+                WHERE position_id = ?
+            """, (
+                exit_data['exit_reason'],
+                exit_price,
+                exit_data['exit_date'],
+                exit_data['exit_message_id'],
+                position_id
+            ))
+
+            conn.commit()
+
+            self.logger.info(
+                f"Position CLOSED: {position_id} - {ticker} - "
+                f"${entry_price:.2f} → ${exit_price:.2f} - "
+                f"{return_pct:+.2f}% over {days_held} days - "
+                f"Reason: {exit_data['exit_reason']}"
+            )
+
+            return True
+
+        finally:
+            conn.close()
+
+    def reconcile_with_trading(self) -> Dict[str, List[str]]:
+        """
+        Check for stale PENDING positions and price discrepancies
+
+        Returns:
+            issues: Dict with keys 'stale_pending', 'price_discrepancies'
+        """
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+
+        issues = {
+            'stale_pending': [],
+            'price_discrepancies': []
+        }
+
+        try:
+            # Find PENDING positions older than 1 hour
+            cursor.execute("""
+                SELECT position_id, ticker, created_at
+                FROM portfolio_positions
+                WHERE status = 'PENDING'
+                AND datetime(created_at, '+1 hour') < datetime('now')
+            """)
+
+            stale_rows = cursor.fetchall()
+            for row in stale_rows:
+                position_id, ticker, created_at = row
+                age_hours = (datetime.now() - datetime.fromisoformat(created_at)).total_seconds() / 3600
+
+                issues['stale_pending'].append(position_id)
+                self.logger.warning(
+                    f"STALE PENDING: {position_id} - {ticker} - "
+                    f"created {age_hours:.1f} hours ago"
+                )
+
+            # Check for price discrepancies (intended vs actual > 5%)
+            cursor.execute("""
+                SELECT position_id, ticker, intended_entry_price, actual_entry_price
+                FROM portfolio_positions
+                WHERE status = 'OPEN'
+                AND actual_entry_price IS NOT NULL
+                AND abs((actual_entry_price - intended_entry_price) / intended_entry_price) > 0.05
+            """)
+
+            discrepancy_rows = cursor.fetchall()
+            for row in discrepancy_rows:
+                position_id, ticker, intended, actual = row
+                diff_pct = ((actual - intended) / intended) * 100
+
+                issues['price_discrepancies'].append(position_id)
+                self.logger.warning(
+                    f"PRICE DISCREPANCY: {position_id} - {ticker} - "
+                    f"intended ${intended:.2f} vs actual ${actual:.2f} ({diff_pct:+.1f}%)"
+                )
+
+        finally:
+            conn.close()
+
+        return issues
+
+    def get_position_details(self, position_id: str) -> Optional[Dict]:
+        """
+        Retrieve all details for a specific position
+
+        Args:
+            position_id: Position to look up
+
+        Returns:
+            position_dict or None if not found
+        """
+        conn = sqlite3.connect(self.db_path)
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+
+        try:
+            cursor.execute("""
+                SELECT * FROM portfolio_positions
+                WHERE position_id = ?
+            """, (position_id,))
+
+            row = cursor.fetchone()
+            if row:
+                return dict(row)
+            return None
+
+        finally:
+            conn.close()
+
+    def get_portfolio_summary(self) -> Dict:
+        """
+        Get current portfolio status summary
+
+        Returns:
+            summary: Dict with counts, capital deployed, performance metrics
+        """
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+
+        try:
+            # Count positions by status
+            cursor.execute("""
+                SELECT status, COUNT(*) as count
+                FROM portfolio_positions
+                GROUP BY status
+            """)
+
+            status_counts = {row[0]: row[1] for row in cursor.fetchall()}
+
+            # Calculate deployed capital (OPEN positions)
+            cursor.execute("""
+                SELECT SUM(actual_entry_price * actual_shares) as deployed
+                FROM portfolio_positions
+                WHERE status = 'OPEN'
+            """)
+
+            deployed = cursor.fetchone()[0] or 0.0
+
+            # Calculate unrealized P&L for OPEN positions
+            cursor.execute("""
+                SELECT ticker, actual_shares, actual_entry_price
+                FROM portfolio_positions
+                WHERE status = 'OPEN'
+            """)
+
+            open_positions = cursor.fetchall()
+
+            # Fetch current prices for open positions
+            if open_positions:
+                tickers = [row[0] for row in open_positions]
+                current_prices = self._fetch_current_prices(tickers)
+
+                unrealized_pnl = 0.0
+                for ticker, shares, entry_price in open_positions:
+                    current_price = current_prices.get(ticker, entry_price)
+                    unrealized_pnl += (current_price - entry_price) * shares
+            else:
+                unrealized_pnl = 0.0
+
+            # Calculate realized P&L for CLOSED positions
+            cursor.execute("""
+                SELECT SUM((exit_price - actual_entry_price) * actual_shares) as realized
+                FROM portfolio_positions
+                WHERE status = 'CLOSED'
+                AND exit_price IS NOT NULL
+                AND actual_entry_price IS NOT NULL
+            """)
+
+            realized_pnl = cursor.fetchone()[0] or 0.0
+
+            summary = {
+                'pending_positions': status_counts.get('PENDING', 0),
+                'open_positions': status_counts.get('OPEN', 0),
+                'closed_positions': status_counts.get('CLOSED', 0),
+                'rejected_positions': status_counts.get('REJECTED', 0),
+                'capital_deployed': deployed,
+                'unrealized_pnl': unrealized_pnl,
+                'realized_pnl': realized_pnl,
+                'total_pnl': unrealized_pnl + realized_pnl
+            }
+
+            return summary
+
+        finally:
+            conn.close()
+
+    def _fetch_current_prices(self, tickers: List[str]) -> Dict[str, float]:
+        """Fetch current prices using yfinance (batch)"""
+        import yfinance as yf
+
+        prices = {}
+        try:
+            data = yf.download(tickers, period='1d', progress=False)
+
+            if len(tickers) == 1:
+                ticker = tickers[0]
+                if not data.empty and 'Close' in data.columns:
+                    prices[ticker] = float(data['Close'].iloc[-1])
+            else:
+                if not data.empty and 'Close' in data.columns:
+                    for ticker in tickers:
+                        try:
+                            prices[ticker] = float(data['Close'][ticker].iloc[-1])
+                        except:
+                            self.logger.warning(f"Could not fetch price for {ticker}")
+        except Exception as e:
+            self.logger.error(f"Error fetching prices: {e}")
+
+        return prices
+
+
 if __name__ == "__main__":
     # Test Portfolio Decision Engine
     logger.info("Portfolio Department - Testing Decision Engine (Day 1)")

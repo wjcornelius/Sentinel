@@ -36,6 +36,7 @@ CREATE TABLE IF NOT EXISTS portfolio_positions (
 
     -- Message Chain (audit trail)
     entry_order_message_id TEXT,  -- BuyOrder message sent to Trading
+    fill_message_id TEXT,  -- FillConfirmation message received from Trading
     exit_order_message_id TEXT,   -- SellOrder message sent to Trading
     risk_assessment_message_id TEXT,  -- Parent RiskAssessment message
 
