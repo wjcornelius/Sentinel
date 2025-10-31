@@ -1,0 +1,601 @@
+2025-10-31 01:25:17,756 - ResearchDepartment - INFO - Research Department - Testing Orchestrator
+2025-10-31 01:25:17,771 - ResearchDepartment - INFO - MessageHandler initialized for Research Department
+2025-10-31 01:25:17,771 - ResearchDepartment - INFO - MarketDataCollector initialized
+2025-10-31 01:25:17,771 - ResearchDepartment - INFO - SentimentAnalyzer initialized (model: sonar, cache TTL: 24h)
+2025-10-31 01:25:18,504 - ResearchDepartment - INFO - TechnicalAnalyzer initialized
+2025-10-31 01:25:18,504 - ResearchDepartment - INFO - FundamentalAnalyzer initialized
+2025-10-31 01:25:18,504 - ResearchDepartment - INFO - ResearchDepartment orchestrator initialized
+2025-10-31 01:25:18,504 - ResearchDepartment - INFO - ================================================================================
+2025-10-31 01:25:18,504 - ResearchDepartment - INFO - GENERATING DAILY BRIEFING
+2025-10-31 01:25:18,504 - ResearchDepartment - INFO - ================================================================================
+2025-10-31 01:25:18,504 - ResearchDepartment - INFO - [1/4] Collecting market conditions...
+2025-10-31 01:25:18,504 - ResearchDepartment - INFO - Fetching market conditions...
+2025-10-31 01:25:21,288 - ResearchDepartment - INFO - Market conditions: SPY -1.10%, VIX 16.2 (NORMAL)
+2025-10-31 01:25:21,288 - ResearchDepartment - INFO - [2/4] Building ticker universe...
+2025-10-31 01:25:21,288 - ResearchDepartment - INFO - Building ticker universe from S&P 500 + Nasdaq 100
+2025-10-31 01:25:35,357 - ResearchDepartment - INFO - Ticker universe: 45 stocks (from 46 candidates)
+2025-10-31 01:25:35,357 - ResearchDepartment - INFO - [3/4] Applying market condition adjustments...
+2025-10-31 01:25:35,358 - ResearchDepartment - INFO - [4/4] Analyzing 45 tickers (targeting 20 candidates with score >= 6.0)...
+2025-10-31 01:25:35,358 - ResearchDepartment - INFO - Analyzing AAPL...
+2025-10-31 01:25:35,841 - ResearchDepartment - INFO - Technical analysis for AAPL: RSI=72.4, MACD=BULL, Score=4.5
+2025-10-31 01:25:36,149 - ResearchDepartment - INFO - Fundamental analysis for AAPL: P/E=41.121212, Growth=0.096, Score=4.2
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:374: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.utcnow()
+2025-10-31 01:25:36,156 - ResearchDepartment - INFO - Sentiment cache HIT for AAPL
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:970: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  'timestamp': datetime.utcnow().isoformat() + 'Z',
+2025-10-31 01:25:36,156 - ResearchDepartment - INFO - AAPL analysis complete: Composite 4.6/10 (T:4.5 F:4.2 S:5.0)
+2025-10-31 01:25:36,156 - ResearchDepartment - INFO - Analyzing MSFT...
+2025-10-31 01:25:36,300 - ResearchDepartment - INFO - Technical analysis for MSFT: RSI=54.3, MACD=BULL, Score=5.9
+2025-10-31 01:25:36,594 - ResearchDepartment - INFO - Fundamental analysis for MSFT: P/E=37.447296, Growth=0.184, Score=5.8
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:374: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.utcnow()
+2025-10-31 01:25:36,597 - ResearchDepartment - INFO - Sentiment cache HIT for MSFT
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:970: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  'timestamp': datetime.utcnow().isoformat() + 'Z',
+2025-10-31 01:25:36,597 - ResearchDepartment - INFO - MSFT analysis complete: Composite 5.6/10 (T:5.9 F:5.8 S:5.0)
+2025-10-31 01:25:36,597 - ResearchDepartment - INFO - Analyzing GOOGL...
+2025-10-31 01:25:36,720 - ResearchDepartment - INFO - Technical analysis for GOOGL: RSI=78.1, MACD=BULL, Score=4.8
+2025-10-31 01:25:37,029 - ResearchDepartment - INFO - Fundamental analysis for GOOGL: P/E=27.786774, Growth=0.159, Score=6.5
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:374: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.utcnow()
+2025-10-31 01:25:37,033 - ResearchDepartment - INFO - Sentiment cache MISS for GOOGL - calling Perplexity API
+2025-10-31 01:25:42,887 - ResearchDepartment - INFO - Perplexity sentiment for GOOGL: 5.0/10
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:491: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  expires_at = datetime.utcnow() + timedelta(hours=self.cache_ttl_hours)
+2025-10-31 01:25:42,896 - ResearchDepartment - INFO - Cached sentiment for GOOGL (expires: 2025-11-01 08:25:42.890894)
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:970: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  'timestamp': datetime.utcnow().isoformat() + 'Z',
+2025-10-31 01:25:42,896 - ResearchDepartment - INFO - GOOGL analysis complete: Composite 5.4/10 (T:4.8 F:6.5 S:5.0)
+2025-10-31 01:25:42,896 - ResearchDepartment - INFO - Analyzing AMZN...
+2025-10-31 01:25:43,019 - ResearchDepartment - INFO - Technical analysis for AMZN: RSI=50.0, MACD=BULL, Score=5.9
+2025-10-31 01:25:43,371 - ResearchDepartment - INFO - Fundamental analysis for AMZN: P/E=34.024426, Growth=0.133, Score=5.0
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:374: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.utcnow()
+2025-10-31 01:25:43,375 - ResearchDepartment - INFO - Sentiment cache MISS for AMZN - calling Perplexity API
+2025-10-31 01:25:48,641 - ResearchDepartment - INFO - Perplexity sentiment for AMZN: 5.5/10
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:491: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  expires_at = datetime.utcnow() + timedelta(hours=self.cache_ttl_hours)
+2025-10-31 01:25:48,650 - ResearchDepartment - INFO - Cached sentiment for AMZN (expires: 2025-11-01 08:25:48.644543)
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:970: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  'timestamp': datetime.utcnow().isoformat() + 'Z',
+2025-10-31 01:25:48,650 - ResearchDepartment - INFO - AMZN analysis complete: Composite 5.5/10 (T:5.9 F:5.0 S:5.5)
+2025-10-31 01:25:48,651 - ResearchDepartment - INFO - Analyzing META...
+2025-10-31 01:25:48,780 - ResearchDepartment - INFO - Technical analysis for META: RSI=30.2, MACD=BEAR, Score=5.2
+2025-10-31 01:25:49,098 - ResearchDepartment - INFO - Fundamental analysis for META: P/E=29.502876, Growth=0.262, Score=6.5
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:374: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.utcnow()
+2025-10-31 01:25:49,103 - ResearchDepartment - INFO - Sentiment cache MISS for META - calling Perplexity API
+2025-10-31 01:25:58,362 - ResearchDepartment - INFO - Perplexity sentiment for META: 5.5/10
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:491: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  expires_at = datetime.utcnow() + timedelta(hours=self.cache_ttl_hours)
+2025-10-31 01:25:58,371 - ResearchDepartment - INFO - Cached sentiment for META (expires: 2025-11-01 08:25:58.366854)
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:970: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  'timestamp': datetime.utcnow().isoformat() + 'Z',
+2025-10-31 01:25:58,371 - ResearchDepartment - INFO - META analysis complete: Composite 5.7/10 (T:5.2 F:6.5 S:5.5)
+2025-10-31 01:25:58,371 - ResearchDepartment - INFO - Analyzing NVDA...
+2025-10-31 01:25:58,511 - ResearchDepartment - INFO - Technical analysis for NVDA: RSI=67.3, MACD=BULL, Score=5.1
+2025-10-31 01:25:58,818 - ResearchDepartment - INFO - Fundamental analysis for NVDA: P/E=57.803417, Growth=0.556, Score=5.8
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:374: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.utcnow()
+2025-10-31 01:25:58,822 - ResearchDepartment - INFO - Sentiment cache MISS for NVDA - calling Perplexity API
+2025-10-31 01:26:04,000 - ResearchDepartment - INFO - Perplexity sentiment for NVDA: 5.5/10
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:491: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  expires_at = datetime.utcnow() + timedelta(hours=self.cache_ttl_hours)
+2025-10-31 01:26:04,009 - ResearchDepartment - INFO - Cached sentiment for NVDA (expires: 2025-11-01 08:26:04.003718)
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:970: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  'timestamp': datetime.utcnow().isoformat() + 'Z',
+2025-10-31 01:26:04,009 - ResearchDepartment - INFO - NVDA analysis complete: Composite 5.4/10 (T:5.1 F:5.8 S:5.5)
+2025-10-31 01:26:04,009 - ResearchDepartment - INFO - Analyzing TSLA...
+2025-10-31 01:26:04,143 - ResearchDepartment - INFO - Technical analysis for TSLA: RSI=52.7, MACD=BEAR, Score=4.4
+2025-10-31 01:26:04,448 - ResearchDepartment - INFO - Fundamental analysis for TSLA: P/E=303.51724, Growth=0.116, Score=4.2
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:374: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.utcnow()
+2025-10-31 01:26:04,453 - ResearchDepartment - INFO - Sentiment cache HIT for TSLA
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:970: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  'timestamp': datetime.utcnow().isoformat() + 'Z',
+2025-10-31 01:26:04,453 - ResearchDepartment - INFO - TSLA analysis complete: Composite 4.4/10 (T:4.4 F:4.2 S:4.5)
+2025-10-31 01:26:04,453 - ResearchDepartment - INFO - Analyzing CRM...
+2025-10-31 01:26:04,573 - ResearchDepartment - INFO - Technical analysis for CRM: RSI=57.1, MACD=BULL, Score=5.1
+2025-10-31 01:26:04,883 - ResearchDepartment - INFO - Fundamental analysis for CRM: P/E=37.303776, Growth=0.098, Score=4.2
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:374: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.utcnow()
+2025-10-31 01:26:04,885 - ResearchDepartment - INFO - Sentiment cache MISS for CRM - calling Perplexity API
+2025-10-31 01:26:09,806 - ResearchDepartment - INFO - Perplexity sentiment for CRM: 5.0/10
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:491: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  expires_at = datetime.utcnow() + timedelta(hours=self.cache_ttl_hours)
+2025-10-31 01:26:09,819 - ResearchDepartment - INFO - Cached sentiment for CRM (expires: 2025-11-01 08:26:09.813676)
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:970: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  'timestamp': datetime.utcnow().isoformat() + 'Z',
+2025-10-31 01:26:09,819 - ResearchDepartment - INFO - CRM analysis complete: Composite 4.8/10 (T:5.1 F:4.2 S:5.0)
+2025-10-31 01:26:09,819 - ResearchDepartment - INFO - Analyzing ADBE...
+2025-10-31 01:26:09,972 - ResearchDepartment - INFO - Technical analysis for ADBE: RSI=44.0, MACD=BULL, Score=5.6
+2025-10-31 01:26:10,279 - ResearchDepartment - INFO - Fundamental analysis for ADBE: P/E=21.13645, Growth=0.107, Score=6.6
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:374: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.utcnow()
+2025-10-31 01:26:10,283 - ResearchDepartment - INFO - Sentiment cache MISS for ADBE - calling Perplexity API
+2025-10-31 01:26:15,760 - ResearchDepartment - INFO - Perplexity sentiment for ADBE: 5.5/10
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:491: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  expires_at = datetime.utcnow() + timedelta(hours=self.cache_ttl_hours)
+2025-10-31 01:26:15,769 - ResearchDepartment - INFO - Cached sentiment for ADBE (expires: 2025-11-01 08:26:15.763303)
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:970: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  'timestamp': datetime.utcnow().isoformat() + 'Z',
+2025-10-31 01:26:15,769 - ResearchDepartment - INFO - ADBE analysis complete: Composite 5.9/10 (T:5.6 F:6.6 S:5.5)
+2025-10-31 01:26:15,769 - ResearchDepartment - INFO - Analyzing INTC...
+2025-10-31 01:26:15,943 - ResearchDepartment - INFO - Technical analysis for INTC: RSI=66.0, MACD=BEAR, Score=3.9
+2025-10-31 01:26:16,273 - ResearchDepartment - INFO - Fundamental analysis for INTC: P/E=1338.6667, Growth=0.028, Score=2.5
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:374: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.utcnow()
+2025-10-31 01:26:16,277 - ResearchDepartment - INFO - Sentiment cache MISS for INTC - calling Perplexity API
+2025-10-31 01:26:21,112 - ResearchDepartment - INFO - Perplexity sentiment for INTC: 4.0/10
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:491: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  expires_at = datetime.utcnow() + timedelta(hours=self.cache_ttl_hours)
+2025-10-31 01:26:21,122 - ResearchDepartment - INFO - Cached sentiment for INTC (expires: 2025-11-01 08:26:21.117178)
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:970: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  'timestamp': datetime.utcnow().isoformat() + 'Z',
+2025-10-31 01:26:21,122 - ResearchDepartment - INFO - INTC analysis complete: Composite 3.5/10 (T:3.9 F:2.5 S:4.0)
+2025-10-31 01:26:21,122 - ResearchDepartment - INFO - Analyzing AMD...
+2025-10-31 01:26:21,248 - ResearchDepartment - INFO - Technical analysis for AMD: RSI=68.2, MACD=BULL, Score=5.1
+2025-10-31 01:26:21,570 - ResearchDepartment - INFO - Fundamental analysis for AMD: P/E=151.69048, Growth=0.317, Score=4.8
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:374: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.utcnow()
+2025-10-31 01:26:21,574 - ResearchDepartment - INFO - Sentiment cache MISS for AMD - calling Perplexity API
+2025-10-31 01:26:26,475 - ResearchDepartment - INFO - Perplexity sentiment for AMD: 5.0/10
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:491: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  expires_at = datetime.utcnow() + timedelta(hours=self.cache_ttl_hours)
+2025-10-31 01:26:26,486 - ResearchDepartment - INFO - Cached sentiment for AMD (expires: 2025-11-01 08:26:26.478348)
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:970: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  'timestamp': datetime.utcnow().isoformat() + 'Z',
+2025-10-31 01:26:26,486 - ResearchDepartment - INFO - AMD analysis complete: Composite 5.0/10 (T:5.1 F:4.8 S:5.0)
+2025-10-31 01:26:26,486 - ResearchDepartment - INFO - Analyzing AVGO...
+2025-10-31 01:26:26,623 - ResearchDepartment - INFO - Technical analysis for AVGO: RSI=63.8, MACD=BULL, Score=5.1
+2025-10-31 01:26:26,908 - ResearchDepartment - INFO - Fundamental analysis for AVGO: P/E=96.03826, Growth=0.164, Score=5.8
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:374: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.utcnow()
+2025-10-31 01:26:26,912 - ResearchDepartment - INFO - Sentiment cache MISS for AVGO - calling Perplexity API
+2025-10-31 01:26:31,589 - ResearchDepartment - INFO - Perplexity sentiment for AVGO: 5.5/10
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:491: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  expires_at = datetime.utcnow() + timedelta(hours=self.cache_ttl_hours)
+2025-10-31 01:26:31,598 - ResearchDepartment - INFO - Cached sentiment for AVGO (expires: 2025-11-01 08:26:31.592351)
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:970: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  'timestamp': datetime.utcnow().isoformat() + 'Z',
+2025-10-31 01:26:31,598 - ResearchDepartment - INFO - AVGO analysis complete: Composite 5.4/10 (T:5.1 F:5.8 S:5.5)
+2025-10-31 01:26:31,598 - ResearchDepartment - INFO - Analyzing ORCL...
+2025-10-31 01:26:31,752 - ResearchDepartment - INFO - Technical analysis for ORCL: RSI=37.2, MACD=BEAR, Score=4.9
+2025-10-31 01:26:32,073 - ResearchDepartment - INFO - Fundamental analysis for ORCL: P/E=59.46528, Growth=0.122, Score=4.8
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:374: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.utcnow()
+2025-10-31 01:26:32,077 - ResearchDepartment - INFO - Sentiment cache MISS for ORCL - calling Perplexity API
+2025-10-31 01:26:36,652 - ResearchDepartment - INFO - Perplexity sentiment for ORCL: 4.5/10
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:491: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  expires_at = datetime.utcnow() + timedelta(hours=self.cache_ttl_hours)
+2025-10-31 01:26:36,660 - ResearchDepartment - INFO - Cached sentiment for ORCL (expires: 2025-11-01 08:26:36.655484)
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:970: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  'timestamp': datetime.utcnow().isoformat() + 'Z',
+2025-10-31 01:26:36,660 - ResearchDepartment - INFO - ORCL analysis complete: Composite 4.8/10 (T:4.9 F:4.8 S:4.5)
+2025-10-31 01:26:36,660 - ResearchDepartment - INFO - Analyzing JPM...
+2025-10-31 01:26:36,851 - ResearchDepartment - INFO - Technical analysis for JPM: RSI=58.2, MACD=BULL, Score=5.1
+2025-10-31 01:26:37,140 - ResearchDepartment - INFO - Fundamental analysis for JPM: P/E=15.333994, Growth=0.088, Score=6.3
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:374: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.utcnow()
+2025-10-31 01:26:37,144 - ResearchDepartment - INFO - Sentiment cache MISS for JPM - calling Perplexity API
+2025-10-31 01:26:42,068 - ResearchDepartment - INFO - Perplexity sentiment for JPM: 5.0/10
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:491: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  expires_at = datetime.utcnow() + timedelta(hours=self.cache_ttl_hours)
+2025-10-31 01:26:42,076 - ResearchDepartment - INFO - Cached sentiment for JPM (expires: 2025-11-01 08:26:42.071311)
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:970: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  'timestamp': datetime.utcnow().isoformat() + 'Z',
+2025-10-31 01:26:42,076 - ResearchDepartment - INFO - JPM analysis complete: Composite 5.4/10 (T:5.1 F:6.3 S:5.0)
+2025-10-31 01:26:42,076 - ResearchDepartment - INFO - Analyzing BAC...
+2025-10-31 01:26:42,282 - ResearchDepartment - INFO - Technical analysis for BAC: RSI=62.1, MACD=BULL, Score=5.1
+2025-10-31 01:26:42,595 - ResearchDepartment - INFO - Fundamental analysis for BAC: P/E=14.48907, Growth=0.126, Score=7.7
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:374: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.utcnow()
+2025-10-31 01:26:42,599 - ResearchDepartment - INFO - Sentiment cache MISS for BAC - calling Perplexity API
+2025-10-31 01:26:47,962 - ResearchDepartment - INFO - Perplexity sentiment for BAC: 5.5/10
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:491: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  expires_at = datetime.utcnow() + timedelta(hours=self.cache_ttl_hours)
+2025-10-31 01:26:47,971 - ResearchDepartment - INFO - Cached sentiment for BAC (expires: 2025-11-01 08:26:47.965766)
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:970: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  'timestamp': datetime.utcnow().isoformat() + 'Z',
+2025-10-31 01:26:47,971 - ResearchDepartment - INFO - BAC analysis complete: Composite 6.0/10 (T:5.1 F:7.7 S:5.5)
+2025-10-31 01:26:47,971 - ResearchDepartment - INFO - Analyzing WFC...
+2025-10-31 01:26:48,163 - ResearchDepartment - INFO - Technical analysis for WFC: RSI=58.2, MACD=BULL, Score=5.1
+2025-10-31 01:26:48,511 - ResearchDepartment - INFO - Fundamental analysis for WFC: P/E=14.166391, Growth=0.075, Score=7.0
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:374: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.utcnow()
+2025-10-31 01:26:48,514 - ResearchDepartment - INFO - Sentiment cache MISS for WFC - calling Perplexity API
+2025-10-31 01:26:53,305 - ResearchDepartment - INFO - Perplexity sentiment for WFC: 5.0/10
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:491: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  expires_at = datetime.utcnow() + timedelta(hours=self.cache_ttl_hours)
+2025-10-31 01:26:53,313 - ResearchDepartment - INFO - Cached sentiment for WFC (expires: 2025-11-01 08:26:53.308636)
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:970: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  'timestamp': datetime.utcnow().isoformat() + 'Z',
+2025-10-31 01:26:53,313 - ResearchDepartment - INFO - WFC analysis complete: Composite 5.6/10 (T:5.1 F:7.0 S:5.0)
+2025-10-31 01:26:53,313 - ResearchDepartment - INFO - Analyzing GS...
+2025-10-31 01:26:53,468 - ResearchDepartment - INFO - Technical analysis for GS: RSI=56.3, MACD=BULL, Score=5.1
+2025-10-31 01:26:53,780 - ResearchDepartment - INFO - Fundamental analysis for GS: P/E=16.050375, Growth=0.207, Score=7.2
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:374: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.utcnow()
+2025-10-31 01:26:53,784 - ResearchDepartment - INFO - Sentiment cache MISS for GS - calling Perplexity API
+2025-10-31 01:26:58,940 - ResearchDepartment - INFO - Perplexity sentiment for GS: 5.0/10
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:491: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  expires_at = datetime.utcnow() + timedelta(hours=self.cache_ttl_hours)
+2025-10-31 01:26:58,948 - ResearchDepartment - INFO - Cached sentiment for GS (expires: 2025-11-01 08:26:58.943583)
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:970: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  'timestamp': datetime.utcnow().isoformat() + 'Z',
+2025-10-31 01:26:58,948 - ResearchDepartment - INFO - GS analysis complete: Composite 5.7/10 (T:5.1 F:7.2 S:5.0)
+2025-10-31 01:26:58,948 - ResearchDepartment - INFO - Analyzing MS...
+2025-10-31 01:26:59,112 - ResearchDepartment - INFO - Technical analysis for MS: RSI=62.0, MACD=BULL, Score=5.1
+2025-10-31 01:26:59,476 - ResearchDepartment - INFO - Fundamental analysis for MS: P/E=16.949743, Growth=0.191, Score=6.7
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:374: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.utcnow()
+2025-10-31 01:26:59,480 - ResearchDepartment - INFO - Sentiment cache MISS for MS - calling Perplexity API
+2025-10-31 01:27:03,640 - ResearchDepartment - INFO - Perplexity sentiment for MS: 5.0/10
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:491: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  expires_at = datetime.utcnow() + timedelta(hours=self.cache_ttl_hours)
+2025-10-31 01:27:03,648 - ResearchDepartment - INFO - Cached sentiment for MS (expires: 2025-11-01 08:27:03.643078)
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:970: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  'timestamp': datetime.utcnow().isoformat() + 'Z',
+2025-10-31 01:27:03,649 - ResearchDepartment - INFO - MS analysis complete: Composite 5.5/10 (T:5.1 F:6.7 S:5.0)
+2025-10-31 01:27:03,649 - ResearchDepartment - INFO - Analyzing V...
+2025-10-31 01:27:03,795 - ResearchDepartment - INFO - Technical analysis for V: RSI=51.4, MACD=BEAR, Score=4.4
+2025-10-31 01:27:04,084 - ResearchDepartment - INFO - Fundamental analysis for V: P/E=33.79334, Growth=0.115, Score=6.0
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:374: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.utcnow()
+2025-10-31 01:27:04,087 - ResearchDepartment - INFO - Sentiment cache MISS for V - calling Perplexity API
+2025-10-31 01:27:09,082 - ResearchDepartment - INFO - Perplexity sentiment for V: 5.0/10
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:491: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  expires_at = datetime.utcnow() + timedelta(hours=self.cache_ttl_hours)
+2025-10-31 01:27:09,092 - ResearchDepartment - INFO - Cached sentiment for V (expires: 2025-11-01 08:27:09.086185)
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:970: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  'timestamp': datetime.utcnow().isoformat() + 'Z',
+2025-10-31 01:27:09,092 - ResearchDepartment - INFO - V analysis complete: Composite 5.1/10 (T:4.4 F:6.0 S:5.0)
+2025-10-31 01:27:09,092 - ResearchDepartment - INFO - Analyzing MA...
+2025-10-31 01:27:09,239 - ResearchDepartment - INFO - Technical analysis for MA: RSI=40.2, MACD=BEAR, Score=5.2
+2025-10-31 01:27:09,528 - ResearchDepartment - INFO - Fundamental analysis for MA: P/E=35.46957, Growth=0.167, Score=5.8
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:374: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.utcnow()
+2025-10-31 01:27:09,533 - ResearchDepartment - INFO - Sentiment cache MISS for MA - calling Perplexity API
+2025-10-31 01:27:13,757 - ResearchDepartment - INFO - Perplexity sentiment for MA: 5.5/10
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:491: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  expires_at = datetime.utcnow() + timedelta(hours=self.cache_ttl_hours)
+2025-10-31 01:27:13,767 - ResearchDepartment - INFO - Cached sentiment for MA (expires: 2025-11-01 08:27:13.760720)
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:970: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  'timestamp': datetime.utcnow().isoformat() + 'Z',
+2025-10-31 01:27:13,768 - ResearchDepartment - INFO - MA analysis complete: Composite 5.5/10 (T:5.2 F:5.8 S:5.5)
+2025-10-31 01:27:13,768 - ResearchDepartment - INFO - Analyzing UNH...
+2025-10-31 01:27:13,948 - ResearchDepartment - INFO - Technical analysis for UNH: RSI=43.7, MACD=BEAR, Score=4.9
+2025-10-31 01:27:14,263 - ResearchDepartment - INFO - Fundamental analysis for UNH: P/E=17.955729, Growth=0.122, Score=5.1
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:374: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.utcnow()
+2025-10-31 01:27:14,268 - ResearchDepartment - INFO - Sentiment cache MISS for UNH - calling Perplexity API
+2025-10-31 01:27:19,545 - ResearchDepartment - INFO - Perplexity sentiment for UNH: 5.0/10
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:491: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  expires_at = datetime.utcnow() + timedelta(hours=self.cache_ttl_hours)
+2025-10-31 01:27:19,556 - ResearchDepartment - INFO - Cached sentiment for UNH (expires: 2025-11-01 08:27:19.549261)
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:970: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  'timestamp': datetime.utcnow().isoformat() + 'Z',
+2025-10-31 01:27:19,556 - ResearchDepartment - INFO - UNH analysis complete: Composite 5.0/10 (T:4.9 F:5.1 S:5.0)
+2025-10-31 01:27:19,556 - ResearchDepartment - INFO - Analyzing JNJ...
+2025-10-31 01:27:19,782 - ResearchDepartment - INFO - Technical analysis for JNJ: RSI=55.3, MACD=BEAR, Score=4.4
+2025-10-31 01:27:20,108 - ResearchDepartment - INFO - Fundamental analysis for JNJ: P/E=18.283365, Growth=0.068, Score=6.0
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:374: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.utcnow()
+2025-10-31 01:27:20,112 - ResearchDepartment - INFO - Sentiment cache MISS for JNJ - calling Perplexity API
+2025-10-31 01:27:26,103 - ResearchDepartment - INFO - Perplexity sentiment for JNJ: 5.0/10
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:491: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  expires_at = datetime.utcnow() + timedelta(hours=self.cache_ttl_hours)
+2025-10-31 01:27:26,112 - ResearchDepartment - INFO - Cached sentiment for JNJ (expires: 2025-11-01 08:27:26.106723)
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:970: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  'timestamp': datetime.utcnow().isoformat() + 'Z',
+2025-10-31 01:27:26,112 - ResearchDepartment - INFO - JNJ analysis complete: Composite 5.1/10 (T:4.4 F:6.0 S:5.0)
+2025-10-31 01:27:26,112 - ResearchDepartment - INFO - Analyzing LLY...
+2025-10-31 01:27:26,313 - ResearchDepartment - INFO - Technical analysis for LLY: RSI=62.4, MACD=BEAR, Score=4.2
+2025-10-31 01:27:26,607 - ResearchDepartment - INFO - Fundamental analysis for LLY: P/E=41.316048, Growth=0.539, Score=5.8
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:374: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.utcnow()
+2025-10-31 01:27:26,610 - ResearchDepartment - INFO - Sentiment cache MISS for LLY - calling Perplexity API
+2025-10-31 01:27:31,530 - ResearchDepartment - INFO - Perplexity sentiment for LLY: 5.0/10
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:491: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  expires_at = datetime.utcnow() + timedelta(hours=self.cache_ttl_hours)
+2025-10-31 01:27:31,540 - ResearchDepartment - INFO - Cached sentiment for LLY (expires: 2025-11-01 08:27:31.534952)
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:970: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  'timestamp': datetime.utcnow().isoformat() + 'Z',
+2025-10-31 01:27:31,540 - ResearchDepartment - INFO - LLY analysis complete: Composite 4.9/10 (T:4.2 F:5.8 S:5.0)
+2025-10-31 01:27:31,540 - ResearchDepartment - INFO - Analyzing ABBV...
+2025-10-31 01:27:31,693 - ResearchDepartment - INFO - Technical analysis for ABBV: RSI=54.0, MACD=BEAR, Score=4.4
+2025-10-31 01:27:32,000 - ResearchDepartment - INFO - Fundamental analysis for ABBV: P/E=108.66667, Growth=0.066, Score=4.0
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:374: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.utcnow()
+2025-10-31 01:27:32,004 - ResearchDepartment - INFO - Sentiment cache MISS for ABBV - calling Perplexity API
+2025-10-31 01:27:36,741 - ResearchDepartment - INFO - Perplexity sentiment for ABBV: 5.5/10
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:491: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  expires_at = datetime.utcnow() + timedelta(hours=self.cache_ttl_hours)
+2025-10-31 01:27:36,753 - ResearchDepartment - INFO - Cached sentiment for ABBV (expires: 2025-11-01 08:27:36.745796)
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:970: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  'timestamp': datetime.utcnow().isoformat() + 'Z',
+2025-10-31 01:27:36,753 - ResearchDepartment - INFO - ABBV analysis complete: Composite 4.6/10 (T:4.4 F:4.0 S:5.5)
+2025-10-31 01:27:36,753 - ResearchDepartment - INFO - Analyzing MRK...
+2025-10-31 01:27:36,978 - ResearchDepartment - INFO - Technical analysis for MRK: RSI=53.0, MACD=BEAR, Score=4.4
+2025-10-31 01:27:37,314 - ResearchDepartment - INFO - Fundamental analysis for MRK: P/E=11.412699, Growth=0.037, Score=6.1
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:374: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.utcnow()
+2025-10-31 01:27:37,318 - ResearchDepartment - INFO - Sentiment cache MISS for MRK - calling Perplexity API
+2025-10-31 01:27:42,135 - ResearchDepartment - INFO - Perplexity sentiment for MRK: 5.0/10
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:491: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  expires_at = datetime.utcnow() + timedelta(hours=self.cache_ttl_hours)
+2025-10-31 01:27:42,143 - ResearchDepartment - INFO - Cached sentiment for MRK (expires: 2025-11-01 08:27:42.138523)
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:970: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  'timestamp': datetime.utcnow().isoformat() + 'Z',
+2025-10-31 01:27:42,143 - ResearchDepartment - INFO - MRK analysis complete: Composite 5.1/10 (T:4.4 F:6.1 S:5.0)
+2025-10-31 01:27:42,143 - ResearchDepartment - INFO - Analyzing PFE...
+2025-10-31 01:27:42,321 - ResearchDepartment - INFO - Technical analysis for PFE: RSI=43.2, MACD=BEAR, Score=5.2
+2025-10-31 01:27:42,689 - ResearchDepartment - INFO - Fundamental analysis for PFE: P/E=12.851852, Growth=0.103, Score=6.9
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:374: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.utcnow()
+2025-10-31 01:27:42,693 - ResearchDepartment - INFO - Sentiment cache MISS for PFE - calling Perplexity API
+2025-10-31 01:27:47,816 - ResearchDepartment - INFO - Perplexity sentiment for PFE: 5.0/10
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:491: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  expires_at = datetime.utcnow() + timedelta(hours=self.cache_ttl_hours)
+2025-10-31 01:27:47,825 - ResearchDepartment - INFO - Cached sentiment for PFE (expires: 2025-11-01 08:27:47.819745)
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:970: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  'timestamp': datetime.utcnow().isoformat() + 'Z',
+2025-10-31 01:27:47,825 - ResearchDepartment - INFO - PFE analysis complete: Composite 5.7/10 (T:5.2 F:6.9 S:5.0)
+2025-10-31 01:27:47,825 - ResearchDepartment - INFO - Analyzing WMT...
+2025-10-31 01:27:48,020 - ResearchDepartment - INFO - Technical analysis for WMT: RSI=42.7, MACD=BEAR, Score=4.9
+2025-10-31 01:27:48,342 - ResearchDepartment - INFO - Fundamental analysis for WMT: P/E=38.57736, Growth=0.048, Score=2.5
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:374: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.utcnow()
+2025-10-31 01:27:48,348 - ResearchDepartment - INFO - Sentiment cache MISS for WMT - calling Perplexity API
+2025-10-31 01:27:52,733 - ResearchDepartment - INFO - Perplexity sentiment for WMT: 5.5/10
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:491: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  expires_at = datetime.utcnow() + timedelta(hours=self.cache_ttl_hours)
+2025-10-31 01:27:52,742 - ResearchDepartment - INFO - Cached sentiment for WMT (expires: 2025-11-01 08:27:52.736716)
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:970: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  'timestamp': datetime.utcnow().isoformat() + 'Z',
+2025-10-31 01:27:52,742 - ResearchDepartment - INFO - WMT analysis complete: Composite 4.4/10 (T:4.9 F:2.5 S:5.5)
+2025-10-31 01:27:52,742 - ResearchDepartment - INFO - Analyzing HD...
+2025-10-31 01:27:52,944 - ResearchDepartment - INFO - Technical analysis for HD: RSI=36.6, MACD=BEAR, Score=4.9
+2025-10-31 01:27:53,255 - ResearchDepartment - INFO - Fundamental analysis for HD: P/E=25.767141, Growth=0.049, Score=3.8
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:374: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.utcnow()
+2025-10-31 01:27:53,259 - ResearchDepartment - INFO - Sentiment cache MISS for HD - calling Perplexity API
+2025-10-31 01:27:58,188 - ResearchDepartment - INFO - Perplexity sentiment for HD: 5.0/10
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:491: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  expires_at = datetime.utcnow() + timedelta(hours=self.cache_ttl_hours)
+2025-10-31 01:27:58,198 - ResearchDepartment - INFO - Cached sentiment for HD (expires: 2025-11-01 08:27:58.192069)
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:970: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  'timestamp': datetime.utcnow().isoformat() + 'Z',
+2025-10-31 01:27:58,199 - ResearchDepartment - INFO - HD analysis complete: Composite 4.6/10 (T:4.9 F:3.8 S:5.0)
+2025-10-31 01:27:58,199 - ResearchDepartment - INFO - Analyzing PG...
+2025-10-31 01:27:58,402 - ResearchDepartment - INFO - Technical analysis for PG: RSI=45.1, MACD=BULL, Score=5.6
+2025-10-31 01:27:58,710 - ResearchDepartment - INFO - Fundamental analysis for PG: P/E=21.836496, Growth=0.03, Score=5.0
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:374: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.utcnow()
+2025-10-31 01:27:58,714 - ResearchDepartment - INFO - Sentiment cache MISS for PG - calling Perplexity API
+2025-10-31 01:28:03,128 - ResearchDepartment - INFO - Perplexity sentiment for PG: 5.5/10
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:491: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  expires_at = datetime.utcnow() + timedelta(hours=self.cache_ttl_hours)
+2025-10-31 01:28:03,137 - ResearchDepartment - INFO - Cached sentiment for PG (expires: 2025-11-01 08:28:03.132115)
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:970: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  'timestamp': datetime.utcnow().isoformat() + 'Z',
+2025-10-31 01:28:03,137 - ResearchDepartment - INFO - PG analysis complete: Composite 5.4/10 (T:5.6 F:5.0 S:5.5)
+2025-10-31 01:28:03,137 - ResearchDepartment - INFO - Analyzing KO...
+2025-10-31 01:28:03,344 - ResearchDepartment - INFO - Technical analysis for KO: RSI=53.9, MACD=BULL, Score=5.6
+2025-10-31 01:28:03,640 - ResearchDepartment - INFO - Fundamental analysis for KO: P/E=22.84106, Growth=0.051, Score=6.0
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:374: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.utcnow()
+2025-10-31 01:28:03,644 - ResearchDepartment - INFO - Sentiment cache MISS for KO - calling Perplexity API
+2025-10-31 01:28:08,696 - ResearchDepartment - INFO - Perplexity sentiment for KO: 5.5/10
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:491: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  expires_at = datetime.utcnow() + timedelta(hours=self.cache_ttl_hours)
+2025-10-31 01:28:08,705 - ResearchDepartment - INFO - Cached sentiment for KO (expires: 2025-11-01 08:28:08.700287)
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:970: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  'timestamp': datetime.utcnow().isoformat() + 'Z',
+2025-10-31 01:28:08,706 - ResearchDepartment - INFO - KO analysis complete: Composite 5.7/10 (T:5.6 F:6.0 S:5.5)
+2025-10-31 01:28:08,706 - ResearchDepartment - INFO - Analyzing PEP...
+2025-10-31 01:28:08,925 - ResearchDepartment - INFO - Technical analysis for PEP: RSI=49.4, MACD=BEAR, Score=4.4
+2025-10-31 01:28:09,216 - ResearchDepartment - INFO - Fundamental analysis for PEP: P/E=28.104763, Growth=0.027, Score=3.8
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:374: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.utcnow()
+2025-10-31 01:28:09,220 - ResearchDepartment - INFO - Sentiment cache MISS for PEP - calling Perplexity API
+2025-10-31 01:28:14,712 - ResearchDepartment - INFO - Perplexity sentiment for PEP: 6.0/10
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:491: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  expires_at = datetime.utcnow() + timedelta(hours=self.cache_ttl_hours)
+2025-10-31 01:28:14,721 - ResearchDepartment - INFO - Cached sentiment for PEP (expires: 2025-11-01 08:28:14.716667)
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:970: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  'timestamp': datetime.utcnow().isoformat() + 'Z',
+2025-10-31 01:28:14,721 - ResearchDepartment - INFO - PEP analysis complete: Composite 4.7/10 (T:4.4 F:3.8 S:6.0)
+2025-10-31 01:28:14,721 - ResearchDepartment - INFO - Analyzing COST...
+2025-10-31 01:28:14,876 - ResearchDepartment - INFO - Technical analysis for COST: RSI=43.6, MACD=BEAR, Score=4.4
+2025-10-31 01:28:15,186 - ResearchDepartment - INFO - Fundamental analysis for COST: P/E=50.503845, Growth=0.081, Score=3.2
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:374: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.utcnow()
+2025-10-31 01:28:15,189 - ResearchDepartment - INFO - Sentiment cache MISS for COST - calling Perplexity API
+2025-10-31 01:28:18,982 - ResearchDepartment - INFO - Perplexity sentiment for COST: 5.0/10
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:491: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  expires_at = datetime.utcnow() + timedelta(hours=self.cache_ttl_hours)
+2025-10-31 01:28:18,990 - ResearchDepartment - INFO - Cached sentiment for COST (expires: 2025-11-01 08:28:18.985850)
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:970: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  'timestamp': datetime.utcnow().isoformat() + 'Z',
+2025-10-31 01:28:18,990 - ResearchDepartment - INFO - COST analysis complete: Composite 4.2/10 (T:4.4 F:3.2 S:5.0)
+2025-10-31 01:28:18,990 - ResearchDepartment - INFO - Analyzing NKE...
+2025-10-31 01:28:19,155 - ResearchDepartment - INFO - Technical analysis for NKE: RSI=33.9, MACD=BEAR, Score=4.9
+2025-10-31 01:28:19,479 - ResearchDepartment - INFO - Fundamental analysis for NKE: P/E=33.28205, Growth=0.011, Score=3.8
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:374: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.utcnow()
+2025-10-31 01:28:19,485 - ResearchDepartment - INFO - Sentiment cache MISS for NKE - calling Perplexity API
+2025-10-31 01:28:24,343 - ResearchDepartment - INFO - Perplexity sentiment for NKE: 5.0/10
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:491: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  expires_at = datetime.utcnow() + timedelta(hours=self.cache_ttl_hours)
+2025-10-31 01:28:24,353 - ResearchDepartment - INFO - Cached sentiment for NKE (expires: 2025-11-01 08:28:24.346574)
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:970: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  'timestamp': datetime.utcnow().isoformat() + 'Z',
+2025-10-31 01:28:24,353 - ResearchDepartment - INFO - NKE analysis complete: Composite 4.6/10 (T:4.9 F:3.8 S:5.0)
+2025-10-31 01:28:24,353 - ResearchDepartment - INFO - Analyzing BA...
+2025-10-31 01:28:24,528 - ResearchDepartment - INFO - Technical analysis for BA: RSI=32.2, MACD=BEAR, Score=5.2
+2025-10-31 01:28:24,836 - ResearchDepartment - INFO - Fundamental analysis for BA: P/E=None, Growth=0.304, Score=5.7
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:374: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.utcnow()
+2025-10-31 01:28:24,839 - ResearchDepartment - INFO - Sentiment cache MISS for BA - calling Perplexity API
+2025-10-31 01:28:30,213 - ResearchDepartment - INFO - Perplexity sentiment for BA: 5.0/10
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:491: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  expires_at = datetime.utcnow() + timedelta(hours=self.cache_ttl_hours)
+2025-10-31 01:28:30,222 - ResearchDepartment - INFO - Cached sentiment for BA (expires: 2025-11-01 08:28:30.216419)
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:970: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  'timestamp': datetime.utcnow().isoformat() + 'Z',
+2025-10-31 01:28:30,222 - ResearchDepartment - INFO - BA analysis complete: Composite 5.3/10 (T:5.2 F:5.7 S:5.0)
+2025-10-31 01:28:30,222 - ResearchDepartment - INFO - Analyzing CAT...
+2025-10-31 01:28:30,446 - ResearchDepartment - INFO - Technical analysis for CAT: RSI=77.0, MACD=BULL, Score=4.5
+2025-10-31 01:28:30,759 - ResearchDepartment - INFO - Fundamental analysis for CAT: P/E=29.935833, Growth=0.095, Score=4.4
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:374: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.utcnow()
+2025-10-31 01:28:30,763 - ResearchDepartment - INFO - Sentiment cache MISS for CAT - calling Perplexity API
+2025-10-31 01:28:37,230 - ResearchDepartment - INFO - Perplexity sentiment for CAT: 5.5/10
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:491: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  expires_at = datetime.utcnow() + timedelta(hours=self.cache_ttl_hours)
+2025-10-31 01:28:37,239 - ResearchDepartment - INFO - Cached sentiment for CAT (expires: 2025-11-01 08:28:37.233869)
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:970: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  'timestamp': datetime.utcnow().isoformat() + 'Z',
+2025-10-31 01:28:37,239 - ResearchDepartment - INFO - CAT analysis complete: Composite 4.8/10 (T:4.5 F:4.4 S:5.5)
+2025-10-31 01:28:37,239 - ResearchDepartment - INFO - Analyzing HON...
+2025-10-31 01:28:37,454 - ResearchDepartment - INFO - Technical analysis for HON: RSI=52.8, MACD=BULL, Score=5.6
+2025-10-31 01:28:37,781 - ResearchDepartment - INFO - Fundamental analysis for HON: P/E=21.086407, Growth=0.07, Score=5.5
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:374: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.utcnow()
+2025-10-31 01:28:37,786 - ResearchDepartment - INFO - Sentiment cache MISS for HON - calling Perplexity API
+2025-10-31 01:28:42,347 - ResearchDepartment - INFO - Perplexity sentiment for HON: 5.5/10
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:491: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  expires_at = datetime.utcnow() + timedelta(hours=self.cache_ttl_hours)
+2025-10-31 01:28:42,357 - ResearchDepartment - INFO - Cached sentiment for HON (expires: 2025-11-01 08:28:42.352688)
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:970: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  'timestamp': datetime.utcnow().isoformat() + 'Z',
+2025-10-31 01:28:42,358 - ResearchDepartment - INFO - HON analysis complete: Composite 5.5/10 (T:5.6 F:5.5 S:5.5)
+2025-10-31 01:28:42,358 - ResearchDepartment - INFO - Analyzing GE...
+2025-10-31 01:28:42,605 - ResearchDepartment - INFO - Technical analysis for GE: RSI=60.0, MACD=BULL, Score=5.1
+2025-10-31 01:28:42,886 - ResearchDepartment - INFO - Fundamental analysis for GE: P/E=41.48865, Growth=0.238, Score=5.3
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:374: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.utcnow()
+2025-10-31 01:28:42,890 - ResearchDepartment - INFO - Sentiment cache MISS for GE - calling Perplexity API
+2025-10-31 01:28:48,109 - ResearchDepartment - INFO - Perplexity sentiment for GE: 5.5/10
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:491: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  expires_at = datetime.utcnow() + timedelta(hours=self.cache_ttl_hours)
+2025-10-31 01:28:48,119 - ResearchDepartment - INFO - Cached sentiment for GE (expires: 2025-11-01 08:28:48.113461)
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:970: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  'timestamp': datetime.utcnow().isoformat() + 'Z',
+2025-10-31 01:28:48,120 - ResearchDepartment - INFO - GE analysis complete: Composite 5.3/10 (T:5.1 F:5.3 S:5.5)
+2025-10-31 01:28:48,120 - ResearchDepartment - INFO - Analyzing MMM...
+2025-10-31 01:28:48,365 - ResearchDepartment - INFO - Technical analysis for MMM: RSI=61.5, MACD=BULL, Score=5.1
+2025-10-31 01:28:48,672 - ResearchDepartment - INFO - Fundamental analysis for MMM: P/E=26.504776, Growth=0.035, Score=3.8
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:374: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.utcnow()
+2025-10-31 01:28:48,675 - ResearchDepartment - INFO - Sentiment cache MISS for MMM - calling Perplexity API
+2025-10-31 01:28:55,781 - ResearchDepartment - INFO - Perplexity sentiment for MMM: 5.0/10
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:491: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  expires_at = datetime.utcnow() + timedelta(hours=self.cache_ttl_hours)
+2025-10-31 01:28:55,790 - ResearchDepartment - INFO - Cached sentiment for MMM (expires: 2025-11-01 08:28:55.785310)
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:970: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  'timestamp': datetime.utcnow().isoformat() + 'Z',
+2025-10-31 01:28:55,790 - ResearchDepartment - INFO - MMM analysis complete: Composite 4.7/10 (T:5.1 F:3.8 S:5.0)
+2025-10-31 01:28:55,790 - ResearchDepartment - INFO - Analyzing XOM...
+2025-10-31 01:28:55,982 - ResearchDepartment - INFO - Technical analysis for XOM: RSI=54.3, MACD=BULL, Score=5.6
+2025-10-31 01:28:56,298 - ResearchDepartment - INFO - Fundamental analysis for XOM: P/E=16.291193, Growth=-0.123, Score=4.5
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:374: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.utcnow()
+2025-10-31 01:28:56,301 - ResearchDepartment - INFO - Sentiment cache MISS for XOM - calling Perplexity API
+2025-10-31 01:29:01,448 - ResearchDepartment - INFO - Perplexity sentiment for XOM: 6.0/10
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:491: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  expires_at = datetime.utcnow() + timedelta(hours=self.cache_ttl_hours)
+2025-10-31 01:29:01,457 - ResearchDepartment - INFO - Cached sentiment for XOM (expires: 2025-11-01 08:29:01.452135)
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:970: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  'timestamp': datetime.utcnow().isoformat() + 'Z',
+2025-10-31 01:29:01,457 - ResearchDepartment - INFO - XOM analysis complete: Composite 5.4/10 (T:5.6 F:4.5 S:6.0)
+2025-10-31 01:29:01,457 - ResearchDepartment - INFO - Analyzing CVX...
+2025-10-31 01:29:01,639 - ResearchDepartment - INFO - Technical analysis for CVX: RSI=47.6, MACD=BULL, Score=5.6
+2025-10-31 01:29:01,913 - ResearchDepartment - INFO - Fundamental analysis for CVX: P/E=19.758045, Growth=-0.107, Score=4.5
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:374: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.utcnow()
+2025-10-31 01:29:01,917 - ResearchDepartment - INFO - Sentiment cache MISS for CVX - calling Perplexity API
+2025-10-31 01:29:07,088 - ResearchDepartment - INFO - Perplexity sentiment for CVX: 5.0/10
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:491: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  expires_at = datetime.utcnow() + timedelta(hours=self.cache_ttl_hours)
+2025-10-31 01:29:07,098 - ResearchDepartment - INFO - Cached sentiment for CVX (expires: 2025-11-01 08:29:07.092113)
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:970: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  'timestamp': datetime.utcnow().isoformat() + 'Z',
+2025-10-31 01:29:07,098 - ResearchDepartment - INFO - CVX analysis complete: Composite 5.1/10 (T:5.6 F:4.5 S:5.0)
+2025-10-31 01:29:07,098 - ResearchDepartment - INFO - Analyzing COP...
+2025-10-31 01:29:07,306 - ResearchDepartment - INFO - Technical analysis for COP: RSI=44.9, MACD=BULL, Score=5.6
+2025-10-31 01:29:07,643 - ResearchDepartment - INFO - Fundamental analysis for COP: P/E=11.815013, Growth=0.021, Score=5.6
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:374: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.utcnow()
+2025-10-31 01:29:07,648 - ResearchDepartment - INFO - Sentiment cache MISS for COP - calling Perplexity API
+2025-10-31 01:29:13,164 - ResearchDepartment - INFO - Perplexity sentiment for COP: 4.0/10
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:491: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  expires_at = datetime.utcnow() + timedelta(hours=self.cache_ttl_hours)
+2025-10-31 01:29:13,177 - ResearchDepartment - INFO - Cached sentiment for COP (expires: 2025-11-01 08:29:13.171125)
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:970: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  'timestamp': datetime.utcnow().isoformat() + 'Z',
+2025-10-31 01:29:13,177 - ResearchDepartment - INFO - COP analysis complete: Composite 5.1/10 (T:5.6 F:5.6 S:4.0)
+2025-10-31 01:29:13,177 - ResearchDepartment - INFO - Analyzing DIS...
+2025-10-31 01:29:13,348 - ResearchDepartment - INFO - Technical analysis for DIS: RSI=47.7, MACD=BULL, Score=5.6
+2025-10-31 01:29:13,640 - ResearchDepartment - INFO - Fundamental analysis for DIS: P/E=17.557299, Growth=0.021, Score=4.5
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:374: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.utcnow()
+2025-10-31 01:29:13,644 - ResearchDepartment - INFO - Sentiment cache MISS for DIS - calling Perplexity API
+2025-10-31 01:29:17,823 - ResearchDepartment - INFO - Perplexity sentiment for DIS: 5.0/10
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:491: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  expires_at = datetime.utcnow() + timedelta(hours=self.cache_ttl_hours)
+2025-10-31 01:29:17,831 - ResearchDepartment - INFO - Cached sentiment for DIS (expires: 2025-11-01 08:29:17.826446)
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:970: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  'timestamp': datetime.utcnow().isoformat() + 'Z',
+2025-10-31 01:29:17,832 - ResearchDepartment - INFO - DIS analysis complete: Composite 5.1/10 (T:5.6 F:4.5 S:5.0)
+2025-10-31 01:29:17,832 - ResearchDepartment - INFO - Analyzing CMCSA...
+2025-10-31 01:29:17,980 - ResearchDepartment - INFO - Technical analysis for CMCSA: RSI=22.3, MACD=BEAR, Score=5.8
+2025-10-31 01:29:18,297 - ResearchDepartment - INFO - Fundamental analysis for CMCSA: P/E=4.538206, Growth=-0.027, Score=5.6
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:374: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.utcnow()
+2025-10-31 01:29:18,301 - ResearchDepartment - INFO - Sentiment cache MISS for CMCSA - calling Perplexity API
+2025-10-31 01:29:22,040 - ResearchDepartment - INFO - Perplexity sentiment for CMCSA: 5.0/10
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:491: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  expires_at = datetime.utcnow() + timedelta(hours=self.cache_ttl_hours)
+2025-10-31 01:29:22,048 - ResearchDepartment - INFO - Cached sentiment for CMCSA (expires: 2025-11-01 08:29:22.043049)
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:970: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  'timestamp': datetime.utcnow().isoformat() + 'Z',
+2025-10-31 01:29:22,048 - ResearchDepartment - INFO - CMCSA analysis complete: Composite 5.5/10 (T:5.8 F:5.6 S:5.0)
+2025-10-31 01:29:22,049 - ResearchDepartment - INFO - Analyzing T...
+2025-10-31 01:29:22,216 - ResearchDepartment - INFO - Technical analysis for T: RSI=32.7, MACD=BEAR, Score=5.2
+2025-10-31 01:29:22,524 - ResearchDepartment - INFO - Fundamental analysis for T: P/E=8.039088, Growth=0.016, Score=5.6
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:374: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.utcnow()
+2025-10-31 01:29:22,528 - ResearchDepartment - INFO - Sentiment cache MISS for T - calling Perplexity API
+2025-10-31 01:29:27,548 - ResearchDepartment - INFO - Perplexity sentiment for T: 4.0/10
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:491: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  expires_at = datetime.utcnow() + timedelta(hours=self.cache_ttl_hours)
+2025-10-31 01:29:27,557 - ResearchDepartment - INFO - Cached sentiment for T (expires: 2025-11-01 08:29:27.551428)
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:970: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  'timestamp': datetime.utcnow().isoformat() + 'Z',
+2025-10-31 01:29:27,557 - ResearchDepartment - INFO - T analysis complete: Composite 5.0/10 (T:5.2 F:5.6 S:4.0)
+2025-10-31 01:29:27,557 - ResearchDepartment - INFO - Analyzing VZ...
+2025-10-31 01:29:27,721 - ResearchDepartment - INFO - Technical analysis for VZ: RSI=37.9, MACD=BEAR, Score=5.2
+2025-10-31 01:29:28,014 - ResearchDepartment - INFO - Fundamental analysis for VZ: P/E=8.307036, Growth=0.015, Score=5.1
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:374: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.utcnow()
+2025-10-31 01:29:28,019 - ResearchDepartment - INFO - Sentiment cache MISS for VZ - calling Perplexity API
+2025-10-31 01:29:31,878 - ResearchDepartment - INFO - Perplexity sentiment for VZ: 5.5/10
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:491: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  expires_at = datetime.utcnow() + timedelta(hours=self.cache_ttl_hours)
+2025-10-31 01:29:31,889 - ResearchDepartment - INFO - Cached sentiment for VZ (expires: 2025-11-01 08:29:31.883080)
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py:970: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  'timestamp': datetime.utcnow().isoformat() + 'Z',
+2025-10-31 01:29:31,889 - ResearchDepartment - INFO - VZ analysis complete: Composite 5.3/10 (T:5.2 F:5.1 S:5.5)
+2025-10-31 01:29:31,889 - ResearchDepartment - INFO - Selected 1 candidates with scores >= 6.0
+2025-10-31 01:29:31,889 - ResearchDepartment - INFO - Generating DailyBriefing message...
+2025-10-31 01:29:31,889 - ResearchDepartment - ERROR - FAILED: Daily briefing generation failed - 'MarketConditions' object has no attribute 'sector_performance'
+Traceback (most recent call last):
+  File "C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py", line 1223, in <module>
+    message_id = research.generate_daily_briefing()
+  File "C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py", line 1087, in generate_daily_briefing
+    top_sectors = sorted(market_conditions.sector_performance.items(), key=lambda x: x[1], reverse=True)[:3]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MarketConditions' object has no attribute 'sector_performance'

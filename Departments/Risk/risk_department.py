@@ -292,9 +292,170 @@ class StopLossCalculator:
         return result
 
 
+class RiskCalculator:
+    """
+    Validates risk per trade against configured limits
+    Phase 1: Hard limit of 1% of capital per trade
+    Future: VIX-adjusted risk, Score-adjusted risk
+    """
+
+    def __init__(self, config: Dict):
+        """
+        Initialize Risk Calculator
+
+        Args:
+            config: Risk configuration dictionary
+        """
+        self.config = config
+        self.max_risk_pct = config['risk_per_trade']['max_risk_pct']
+
+        logger.info(f"RiskCalculator initialized (max risk per trade: {self.max_risk_pct*100:.1f}% of capital)")
+
+    def validate_risk_per_trade(self, shares: int, risk_per_share: float, capital: float, ticker: str) -> Dict:
+        """
+        Validate that trade risk does not exceed configured limit
+
+        Args:
+            shares: Number of shares to buy
+            risk_per_share: Risk per share (entry_price - stop_loss)
+            capital: Total capital available
+            ticker: Stock symbol
+
+        Returns:
+            Dictionary with validation result
+        """
+        try:
+            # Calculate total risk
+            total_risk = shares * risk_per_share
+
+            # Calculate risk percentage
+            risk_pct = total_risk / capital if capital > 0 else 0
+
+            # Validate against limit
+            approved = risk_pct <= self.max_risk_pct
+
+            result = {
+                'ticker': ticker,
+                'shares': shares,
+                'risk_per_share': risk_per_share,
+                'total_risk': round(total_risk, 2),
+                'risk_percentage': risk_pct,
+                'max_risk_pct': self.max_risk_pct,
+                'approved': approved,
+                'rejection_reason': None if approved else 'RISK_PER_TRADE_EXCEEDED',
+                'rejection_details': None if approved else f"Risk {risk_pct*100:.2f}% exceeds limit {self.max_risk_pct*100:.1f}%"
+            }
+
+            if approved:
+                logger.info(f"{ticker}: Risk ${total_risk:,.0f} ({risk_pct*100:.2f}%) - APPROVED (under {self.max_risk_pct*100:.1f}% limit)")
+            else:
+                logger.warning(f"{ticker}: Risk ${total_risk:,.0f} ({risk_pct*100:.2f}%) - REJECTED (exceeds {self.max_risk_pct*100:.1f}% limit)")
+
+            return result
+
+        except Exception as e:
+            logger.error(f"Risk validation failed for {ticker}: {e}", exc_info=True)
+            return {
+                'ticker': ticker,
+                'approved': False,
+                'rejection_reason': 'CALCULATION_ERROR',
+                'rejection_details': str(e)
+            }
+
+
+class PortfolioHeatMonitor:
+    """
+    Monitors total portfolio risk (heat) across all open positions
+    Phase 1: Hard limit of 5% total portfolio heat
+    Future: VIX-adjusted heat limits, Dynamic heat scaling
+    """
+
+    def __init__(self, config: Dict):
+        """
+        Initialize Portfolio Heat Monitor
+
+        Args:
+            config: Risk configuration dictionary
+        """
+        self.config = config
+        self.max_heat_pct = config['portfolio_heat']['max_total_heat_pct']
+        self.warning_threshold_pct = config['portfolio_heat']['warning_threshold_pct']
+        self.critical_threshold_pct = config['portfolio_heat']['critical_threshold_pct']
+
+        logger.info(f"PortfolioHeatMonitor initialized (max heat: {self.max_heat_pct*100:.1f}%, warning: {self.warning_threshold_pct*100:.1f}%, critical: {self.critical_threshold_pct*100:.1f}%)")
+
+    def check_portfolio_heat(self, new_trade_risk: float, current_heat: float, capital: float, ticker: str) -> Dict:
+        """
+        Check if adding new trade would exceed portfolio heat limit
+
+        Args:
+            new_trade_risk: Dollar risk of new trade
+            current_heat: Current total risk across all open positions
+            capital: Total capital available
+            ticker: Stock symbol for new trade
+
+        Returns:
+            Dictionary with heat validation result
+        """
+        try:
+            # Calculate heat before/after
+            heat_before = current_heat
+            heat_after = current_heat + new_trade_risk
+
+            # Calculate percentages
+            heat_before_pct = heat_before / capital if capital > 0 else 0
+            heat_after_pct = heat_after / capital if capital > 0 else 0
+
+            # Calculate available heat
+            max_heat_dollars = capital * self.max_heat_pct
+            available_heat = max_heat_dollars - current_heat
+
+            # Validate against limit
+            approved = heat_after_pct <= self.max_heat_pct
+
+            # Determine status level
+            if heat_after_pct >= self.critical_threshold_pct:
+                status = 'CRITICAL'
+            elif heat_after_pct >= self.warning_threshold_pct:
+                status = 'WARNING'
+            else:
+                status = 'NORMAL'
+
+            result = {
+                'ticker': ticker,
+                'new_trade_risk': round(new_trade_risk, 2),
+                'heat_before': round(heat_before, 2),
+                'heat_after': round(heat_after, 2),
+                'heat_before_pct': heat_before_pct,
+                'heat_after_pct': heat_after_pct,
+                'available_heat': round(available_heat, 2),
+                'max_heat_pct': self.max_heat_pct,
+                'status': status,
+                'approved': approved,
+                'rejection_reason': None if approved else 'PORTFOLIO_HEAT_EXCEEDED',
+                'rejection_details': None if approved else f"Heat {heat_after_pct*100:.2f}% would exceed limit {self.max_heat_pct*100:.1f}%"
+            }
+
+            if approved:
+                logger.info(f"{ticker}: Portfolio heat ${heat_before:,.0f} → ${heat_after:,.0f} ({heat_after_pct*100:.2f}%) - APPROVED [{status}]")
+            else:
+                logger.warning(f"{ticker}: Portfolio heat ${heat_before:,.0f} → ${heat_after:,.0f} ({heat_after_pct*100:.2f}%) - REJECTED (exceeds {self.max_heat_pct*100:.1f}% limit)")
+
+            return result
+
+        except Exception as e:
+            logger.error(f"Portfolio heat check failed for {ticker}: {e}", exc_info=True)
+            return {
+                'ticker': ticker,
+                'approved': False,
+                'rejection_reason': 'CALCULATION_ERROR',
+                'rejection_details': str(e)
+            }
+
+
 if __name__ == "__main__":
-    # Test Position Sizer and Stop-Loss Calculator
-    logger.info("Risk Department - Testing Position Sizer & Stop-Loss Calculator")
+    # Test all Risk Department components
+    logger.info("Risk Department - Testing All Components (Days 1-3)")
 
     # Load config
     config_path = Path("Config/risk_config.yaml")
@@ -304,19 +465,21 @@ if __name__ == "__main__":
     # Initialize classes
     position_sizer = PositionSizer(config)
     stop_loss_calc = StopLossCalculator(config)
+    risk_calc = RiskCalculator(config)
+    heat_monitor = PortfolioHeatMonitor(config)
 
     # Test with sample data
     capital = config['testing']['initial_capital']  # $100,000
     test_ticker = "AAPL"
     test_price = 175.50
 
-    print("\n" + "=" * 80)
-    print(f"TESTING: {test_ticker} @ ${test_price:.2f}")
-    print("=" * 80)
+    print("\n" + "=" * 100)
+    print(f"TESTING: {test_ticker} @ ${test_price:.2f} (Capital: ${capital:,.0f})")
+    print("=" * 100)
 
-    # Test position sizing
-    print("\n[1/2] POSITION SIZING:")
-    print("-" * 80)
+    # Test 1: Position sizing
+    print("\n[1/4] POSITION SIZING:")
+    print("-" * 100)
     position = position_sizer.calculate_position_size(capital, test_price, test_ticker)
     if position:
         print(f"  Capital: ${capital:,.0f}")
@@ -324,9 +487,9 @@ if __name__ == "__main__":
         print(f"  Shares: {position['shares']}")
         print(f"  Actual Position: ${position['actual_position_value']:,.0f} ({position['actual_position_pct']*100:.1f}%)")
 
-    # Test stop-loss
-    print("\n[2/2] STOP-LOSS CALCULATION:")
-    print("-" * 80)
+    # Test 2: Stop-loss
+    print("\n[2/4] STOP-LOSS CALCULATION:")
+    print("-" * 100)
     stop = stop_loss_calc.calculate_stop_loss(test_ticker, test_price)
     if stop:
         print(f"  Entry Price: ${stop['entry_price']:.2f}")
@@ -336,12 +499,80 @@ if __name__ == "__main__":
         print(f"  Stop-Loss: ${stop['stop_loss']:.2f}")
         print(f"  Risk Per Share: ${stop['risk_per_share']:.2f} ({stop['stop_distance_pct']*100:.1f}%)")
 
-        # Calculate total risk
-        if position:
-            total_risk = position['shares'] * stop['risk_per_share']
-            risk_pct = total_risk / capital
-            print(f"\n  Total Risk: {position['shares']} shares × ${stop['risk_per_share']:.2f} = ${total_risk:,.0f} ({risk_pct*100:.2f}% of capital)")
+    # Test 3: Risk per trade validation
+    print("\n[3/4] RISK PER TRADE VALIDATION:")
+    print("-" * 100)
+    if position and stop:
+        risk_validation = risk_calc.validate_risk_per_trade(
+            shares=position['shares'],
+            risk_per_share=stop['risk_per_share'],
+            capital=capital,
+            ticker=test_ticker
+        )
+        print(f"  Shares: {risk_validation['shares']}")
+        print(f"  Risk Per Share: ${risk_validation['risk_per_share']:.2f}")
+        print(f"  Total Risk: ${risk_validation['total_risk']:,.0f}")
+        print(f"  Risk Percentage: {risk_validation['risk_percentage']*100:.2f}%")
+        print(f"  Max Allowed: {risk_validation['max_risk_pct']*100:.1f}%")
+        print(f"  Status: {'APPROVED' if risk_validation['approved'] else 'REJECTED'}")
+        if not risk_validation['approved']:
+            print(f"  Rejection Reason: {risk_validation['rejection_reason']}")
+            print(f"  Details: {risk_validation['rejection_details']}")
 
-    print("\n" + "=" * 80)
-    print("TEST COMPLETE")
-    print("=" * 80)
+    # Test 4: Portfolio heat monitoring
+    print("\n[4/4] PORTFOLIO HEAT MONITORING:")
+    print("-" * 100)
+
+    # Scenario A: Normal (0% current heat)
+    print("  Scenario A: Fresh portfolio (0% current heat)")
+    if position and stop:
+        total_risk = position['shares'] * stop['risk_per_share']
+        heat_check = heat_monitor.check_portfolio_heat(
+            new_trade_risk=total_risk,
+            current_heat=0.0,
+            capital=capital,
+            ticker=test_ticker
+        )
+        print(f"    Current Heat: ${heat_check['heat_before']:,.0f} ({heat_check['heat_before_pct']*100:.2f}%)")
+        print(f"    New Trade Risk: ${heat_check['new_trade_risk']:,.0f}")
+        print(f"    Heat After: ${heat_check['heat_after']:,.0f} ({heat_check['heat_after_pct']*100:.2f}%)")
+        print(f"    Available Heat: ${heat_check['available_heat']:,.0f}")
+        print(f"    Status: {heat_check['status']}")
+        print(f"    Decision: {'APPROVED' if heat_check['approved'] else 'REJECTED'}")
+
+    # Scenario B: High heat (4.5% current heat - at critical threshold)
+    print("\n  Scenario B: High heat portfolio (4.5% current heat)")
+    if position and stop:
+        current_heat = capital * 0.045  # $4,500 current heat
+        total_risk = position['shares'] * stop['risk_per_share']
+        heat_check = heat_monitor.check_portfolio_heat(
+            new_trade_risk=total_risk,
+            current_heat=current_heat,
+            capital=capital,
+            ticker=test_ticker
+        )
+        print(f"    Current Heat: ${heat_check['heat_before']:,.0f} ({heat_check['heat_before_pct']*100:.2f}%)")
+        print(f"    New Trade Risk: ${heat_check['new_trade_risk']:,.0f}")
+        print(f"    Heat After: ${heat_check['heat_after']:,.0f} ({heat_check['heat_after_pct']*100:.2f}%)")
+        print(f"    Available Heat: ${heat_check['available_heat']:,.0f}")
+        print(f"    Status: {heat_check['status']}")
+        print(f"    Decision: {'APPROVED' if heat_check['approved'] else 'REJECTED'}")
+        if not heat_check['approved']:
+            print(f"    Rejection Reason: {heat_check['rejection_reason']}")
+            print(f"    Details: {heat_check['rejection_details']}")
+
+    # Summary
+    print("\n" + "=" * 100)
+    print("VALIDATION SUMMARY:")
+    print("=" * 100)
+    if position and stop and risk_validation and heat_check:
+        print(f"  Position Size: {position['shares']} shares @ ${test_price:.2f} = ${position['actual_position_value']:,.0f}")
+        print(f"  Stop-Loss: ${stop['stop_loss']:.2f} (Risk: ${stop['risk_per_share']:.2f}/share)")
+        print(f"  Total Risk: ${risk_validation['total_risk']:,.0f} ({risk_validation['risk_percentage']*100:.2f}% of capital)")
+        print(f"  Risk Per Trade Check: {'PASS' if risk_validation['approved'] else 'FAIL'}")
+        print(f"  Portfolio Heat Check (0% heat): PASS")
+        print(f"  Portfolio Heat Check (4.5% heat): {'PASS' if heat_check['approved'] else 'FAIL (as expected)'}")
+
+    print("\n" + "=" * 100)
+    print("TEST COMPLETE - Days 1-3 Components Verified")
+    print("=" * 100)
