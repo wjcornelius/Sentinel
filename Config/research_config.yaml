@@ -9,7 +9,7 @@ last_updated: 2025-10-31
 # Sentiment Analysis Settings (Perplexity API)
 sentiment:
   cache_ttl_hours: 24                          # Cache sentiment for 24 hours (news doesn't change much intraday)
-  perplexity_model: "llama-3.1-sonar-small-128k-online"
+  perplexity_model: "sonar"
   max_news_articles: 15                        # Analyze up to 15 recent articles per ticker
   bullish_keywords:
     - "beat earnings"
@@ -163,8 +163,8 @@ data_quality:
 # Composite Score Calculation
 composite_scoring:
   overall_score_weights:
-    technical: 0.30                            # Technical analysis = 30% of overall score
-    fundamental: 0.40                          # Fundamental analysis = 40% of overall score
+    technical: 0.40                            # Technical analysis = 40% of overall score (C(P) feedback: increased from 30%)
+    fundamental: 0.30                          # Fundamental analysis = 30% of overall score (C(P) feedback: decreased from 40%)
     sentiment: 0.30                            # Sentiment analysis = 30% of overall score
 
   score_scale:
