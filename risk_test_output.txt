@@ -1,0 +1,167 @@
+2025-10-31 02:34:01,569 - RiskDepartment - INFO - Risk Department - Testing All Components (Days 1-3)
+2025-10-31 02:34:01,577 - RiskDepartment - INFO - PositionSizer initialized (method: FIXED_FRACTIONAL, size: 10%)
+2025-10-31 02:34:01,577 - RiskDepartment - INFO - StopLossCalculator initialized (method: ATR_BASED, ATR: 14d × 2.0)
+2025-10-31 02:34:01,577 - RiskDepartment - INFO - RiskCalculator initialized (max risk per trade: 1.0% of capital)
+2025-10-31 02:34:01,577 - RiskDepartment - INFO - PortfolioHeatMonitor initialized (max heat: 5.0%, warning: 4.0%, critical: 4.5%)
+2025-10-31 02:34:01,577 - RiskDepartment - INFO - SectorConcentrationChecker initialized (enabled: True, max per sector: 40%)
+2025-10-31 02:34:01,577 - RiskDepartment - INFO - Position size for AAPL: 56 shares @ $175.50 = $9,828 (9.8% of capital)
+2025-10-31 02:34:02,112 - RiskDepartment - INFO - Stop-loss for AAPL: $165.25 (ATR: $5.13, Risk: $10.25/share, 5.8%)
+2025-10-31 02:34:02,112 - RiskDepartment - INFO - AAPL: Risk $574 (0.57%) - APPROVED (under 1.0% limit)
+2025-10-31 02:34:02,112 - RiskDepartment - INFO - AAPL: Portfolio heat $0 \u2192 $574 (0.57%) - APPROVED [NORMAL]
+2025-10-31 02:34:02,112 - RiskDepartment - WARNING - AAPL: Portfolio heat $4,500 \u2192 $5,074 (5.07%) - REJECTED (exceeds 5.0% limit)
+2025-10-31 02:34:02,349 - RiskDepartment - INFO - AAPL (Technology): Sector exposure $0 \u2192 $9,828 (9.8%) - APPROVED [NORMAL]
+2025-10-31 02:34:02,410 - RiskDepartment - WARNING - AAPL (Technology): Sector exposure $35,000 \u2192 $44,828 (44.8%) - REJECTED (exceeds 40% limit)
+2025-10-31 02:34:02,418 - RiskDepartment - INFO - MessageHandler initialized for Risk Department
+2025-10-31 02:34:02,418 - RiskDepartment - INFO - PositionSizer initialized (method: FIXED_FRACTIONAL, size: 10%)
+2025-10-31 02:34:02,418 - RiskDepartment - INFO - StopLossCalculator initialized (method: ATR_BASED, ATR: 14d × 2.0)
+2025-10-31 02:34:02,418 - RiskDepartment - INFO - RiskCalculator initialized (max risk per trade: 1.0% of capital)
+2025-10-31 02:34:02,418 - RiskDepartment - INFO - PortfolioHeatMonitor initialized (max heat: 5.0%, warning: 4.0%, critical: 4.5%)
+2025-10-31 02:34:02,418 - RiskDepartment - INFO - SectorConcentrationChecker initialized (enabled: True, max per sector: 40%)
+2025-10-31 02:34:02,418 - RiskDepartment - INFO - ================================================================================
+2025-10-31 02:34:02,418 - RiskDepartment - INFO - RISK DEPARTMENT INITIALIZED
+2025-10-31 02:34:02,418 - RiskDepartment - INFO - ================================================================================
+2025-10-31 02:34:02,418 - RiskDepartment - INFO - ================================================================================
+2025-10-31 02:34:02,418 - RiskDepartment - INFO - PROCESSING DAILY BRIEFING
+2025-10-31 02:34:02,418 - RiskDepartment - INFO - ================================================================================
+2025-10-31 02:34:02,433 - RiskDepartment - INFO - Read message: MSG_RESEARCH_20251031T085558Z_e6d937e4
+2025-10-31 02:34:02,433 - RiskDepartment - INFO - Parent message: MSG_RESEARCH_20251031T085558Z_e6d937e4
+2025-10-31 02:34:02,433 - RiskDepartment - INFO - Assessment date: 2025-10-31
+2025-10-31 02:34:02,433 - RiskDepartment - INFO - Reviewing 1 candidates from Research...
+2025-10-31 02:34:02,433 - RiskDepartment - INFO - Portfolio state: $100,000 capital, $0 heat, 0 positions
+2025-10-31 02:34:02,692 - RiskDepartment - INFO - Processing BAC @ $53.03...
+2025-10-31 02:34:02,692 - RiskDepartment - INFO - Position size for BAC: 188 shares @ $53.03 = $9,970 (10.0% of capital)
+2025-10-31 02:34:02,835 - RiskDepartment - INFO - Stop-loss for BAC: $50.52 (ATR: $1.25, Risk: $2.51/share, 4.7%)
+2025-10-31 02:34:02,835 - RiskDepartment - INFO - BAC: Risk $472 (0.47%) - APPROVED (under 1.0% limit)
+2025-10-31 02:34:02,835 - RiskDepartment - INFO - BAC: Portfolio heat $0 \u2192 $472 (0.47%) - APPROVED [NORMAL]
+2025-10-31 02:34:03,040 - RiskDepartment - INFO - BAC (Financial Services): Sector exposure $0 \u2192 $9,970 (10.0%) - APPROVED [NORMAL]
+2025-10-31 02:34:03,040 - RiskDepartment - INFO - BAC APPROVED - All risk checks passed
+2025-10-31 02:34:03,040 - RiskDepartment - INFO - Risk assessment complete: 1 approved, 0 rejected
+2025-10-31 02:34:03,042 - RiskDepartment - INFO - Wrote message MSG_RISK_20251031T093403Z_eb145779 to PORTFOLIO
+2025-10-31 02:34:03,042 - RiskDepartment - INFO - RiskAssessment message generated: MSG_RISK_20251031T093403Z_eb145779
+2025-10-31 02:34:03,050 - RiskDepartment - ERROR - Failed to save assessment to database: NOT NULL constraint failed: risk_approved_candidates.position_size_pct
+Traceback (most recent call last):
+  File "C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Risk\risk_department.py", line 1134, in _save_assessment_to_db
+    cursor.execute("""
+    ~~~~~~~~~~~~~~^^^^
+        INSERT INTO risk_approved_candidates
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<25 lines>...
+        candidate['sector_check'].get('sector')
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ))
+    ^^
+sqlite3.IntegrityError: NOT NULL constraint failed: risk_approved_candidates.position_size_pct
+2025-10-31 02:34:03,052 - RiskDepartment - INFO - ================================================================================
+
+====================================================================================================
+TESTING: AAPL @ $175.50 (Capital: $100,000)
+====================================================================================================
+
+[1/5] POSITION SIZING:
+----------------------------------------------------------------------------------------------------
+  Capital: $100,000
+  Target Position: 10% = $10,000
+  Shares: 56
+  Actual Position: $9,828 (9.8%)
+
+[2/5] STOP-LOSS CALCULATION:
+----------------------------------------------------------------------------------------------------
+  Entry Price: $175.50
+  ATR(14): $5.13
+  Method: ATR_BASED
+  Stop-Loss: $165.25
+  Risk Per Share: $10.25 (5.8%)
+
+[3/5] RISK PER TRADE VALIDATION:
+----------------------------------------------------------------------------------------------------
+  Shares: 56
+  Risk Per Share: $10.25
+  Total Risk: $574
+  Risk Percentage: 0.57%
+  Max Allowed: 1.0%
+  Status: APPROVED
+
+[4/5] PORTFOLIO HEAT MONITORING:
+----------------------------------------------------------------------------------------------------
+  Scenario A: Fresh portfolio (0% current heat)
+    Current Heat: $0 (0.00%)
+    New Trade Risk: $574
+    Heat After: $574 (0.57%)
+    Available Heat: $5,000
+    Status: NORMAL
+    Decision: APPROVED
+
+  Scenario B: High heat portfolio (4.5% current heat)
+    Current Heat: $4,500 (4.50%)
+    New Trade Risk: $574
+    Heat After: $5,074 (5.07%)
+    Available Heat: $500
+    Status: CRITICAL
+    Decision: REJECTED
+    Rejection Reason: PORTFOLIO_HEAT_EXCEEDED
+    Details: Heat 5.07% would exceed limit 5.0%
+
+[5/5] SECTOR CONCENTRATION CHECKING:
+----------------------------------------------------------------------------------------------------
+  Scenario A: Fresh portfolio (no existing sector exposure)
+    Sector: Technology
+    Position Value: $9,828
+    Sector Before: $0 (0.0%)
+    Sector After: $9,828 (9.8%)
+    Max Allowed: 40%
+    Status: NORMAL
+    Decision: APPROVED
+
+  Scenario B: Portfolio with 35% existing Technology exposure
+    Sector: Technology
+    Position Value: $9,828
+    Sector Before: $35,000 (35.0%)
+    Sector After: $44,828 (44.8%)
+    Max Allowed: 40%
+    Status: LIMIT_EXCEEDED
+    Decision: REJECTED
+    Rejection Reason: SECTOR_CONCENTRATION_EXCEEDED
+    Details: Sector Technology would be 44.8%, limit is 40%
+
+====================================================================================================
+VALIDATION SUMMARY:
+====================================================================================================
+  Position Size: 56 shares @ $175.50 = $9,828
+  Stop-Loss: $165.25 (Risk: $10.25/share)
+  Total Risk: $574 (0.57% of capital)
+  Risk Per Trade Check: PASS
+  Portfolio Heat Check (0% heat): PASS
+  Portfolio Heat Check (4.5% heat): FAIL (as expected)
+  Sector Concentration (fresh): PASS (9.8% < 40%)
+  Sector Concentration (35% existing): FAIL (as expected)
+
+====================================================================================================
+TEST COMPLETE - Days 1-4 Components Verified
+====================================================================================================
+
+
+
+====================================================================================================
+END-TO-END TEST: Processing Research DailyBriefing
+====================================================================================================
+
+Processing latest briefing: MSG_RESEARCH_20251031T085558Z_e6d937e4.md
+Traceback (most recent call last):
+  File "C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Risk\risk_department.py", line 1410, in <module>
+    print(f"\n\u2713 RiskAssessment generated: {message_id}")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python314\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u2713' in position 2: character maps to <undefined>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Risk\risk_department.py", line 1417, in <module>
+    print(f"\n\u2717 End-to-end test failed: {e}")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python314\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u2717' in position 2: character maps to <undefined>

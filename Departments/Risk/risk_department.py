@@ -38,6 +38,133 @@ logging.basicConfig(
 logger = logging.getLogger('RiskDepartment')
 
 
+class MessageHandler:
+    """
+    Handles reading and writing messages for Risk Department
+
+    Pattern learned from Research Department (Week 2)
+    Implements YAML frontmatter + Markdown + JSON payload format
+    """
+
+    def __init__(self):
+        self.inbox_path = Path("Messages_Between_Departments/Inbox/RISK")
+        self.outbox_path = Path("Messages_Between_Departments/Outbox/RISK")
+        self.archive_path = Path("Messages_Between_Departments/Archive")
+
+        # Create directories if they don't exist
+        self.inbox_path.mkdir(parents=True, exist_ok=True)
+        self.outbox_path.mkdir(parents=True, exist_ok=True)
+
+        logger.info("MessageHandler initialized for Risk Department")
+
+    def read_message(self, message_path: Path) -> Tuple[Dict, str, Dict]:
+        """
+        Read message from file and parse YAML frontmatter + markdown body + JSON payload
+
+        Returns:
+            (metadata_dict, body_string, data_payload_dict)
+        """
+        with open(message_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+
+        # Split YAML frontmatter from body
+        parts = content.split('---\n')
+        if len(parts) < 3:
+            raise ValueError(f"Invalid message format in {message_path}")
+
+        metadata = yaml.safe_load(parts[1])
+        body_and_json = '---\n'.join(parts[2:]).strip()
+
+        # Extract JSON payload if present
+        data_payload = None
+        body = body_and_json
+
+        if '```json' in body_and_json:
+            body_parts = body_and_json.split('```json')
+            body = body_parts[0].strip()
+            json_str = body_parts[1].split('```')[0].strip()
+            data_payload = json.loads(json_str)
+
+        logger.info(f"Read message: {metadata.get('message_id')}")
+        return metadata, body, data_payload
+
+    def write_message(self, to_dept: str, message_type: str, subject: str,
+                     body: str, data_payload: Optional[Dict] = None,
+                     parent_message_id: Optional[str] = None,
+                     priority: str = 'routine') -> str:
+        """
+        Write message to outbox with YAML frontmatter + markdown + JSON payload
+
+        Args:
+            to_dept: Destination department
+            message_type: Type of message (e.g., 'RiskAssessment')
+            subject: Message subject line
+            body: Markdown body content
+            data_payload: Optional JSON data
+            parent_message_id: Optional parent message ID (for tracking message chains)
+            priority: Message priority (routine/urgent/critical)
+
+        Returns:
+            message_id (for database tracking)
+        """
+        timestamp = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')
+        msg_id = f"MSG_RISK_{timestamp}_{uuid.uuid4().hex[:8]}"
+
+        # Build YAML frontmatter
+        metadata = {
+            'message_id': msg_id,
+            'from': 'RISK',
+            'to': to_dept,
+            'timestamp': datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z'),
+            'message_type': message_type,
+            'priority': priority,
+            'requires_response': False
+        }
+
+        # Add parent message ID if provided (for message chain tracking)
+        if parent_message_id:
+            metadata['parent_message_id'] = parent_message_id
+
+        # Build message content
+        content = "---\n"
+        content += yaml.dump(metadata, default_flow_style=False)
+        content += "---\n\n"
+        content += f"# {subject}\n\n"
+        content += body
+
+        # Add JSON payload if provided
+        if data_payload:
+            content += "\n\n```json\n"
+            content += json.dumps(data_payload, indent=2)
+            content += "\n```\n"
+
+        # Write to outbox
+        filename = f"{msg_id}.md"
+        filepath = self.outbox_path / filename
+
+        with open(filepath, 'w', encoding='utf-8') as f:
+            f.write(content)
+
+        logger.info(f"Wrote message {msg_id} to {to_dept}")
+        return msg_id
+
+    def archive_message(self, message_path: Path):
+        """Move processed message to archive"""
+        today = datetime.now().strftime('%Y-%m-%d')
+        archive_dir = self.archive_path / today / "RISK"
+        archive_dir.mkdir(parents=True, exist_ok=True)
+
+        archived_path = archive_dir / message_path.name
+
+        # If file already exists in archive, remove inbox file
+        if archived_path.exists():
+            message_path.unlink()
+        else:
+            message_path.rename(archived_path)
+
+        logger.info(f"Archived message: {message_path.name}")
+
+
 class PositionSizer:
     """
     Calculates position sizes based on configured method
@@ -603,6 +730,478 @@ class PortfolioHeatMonitor:
             }
 
 
+class RiskDepartment:
+    """
+    Main Risk Department orchestrator
+
+    Consumes DailyBriefing messages from Research Department
+    Applies position sizing, stop-loss, and risk limit validation
+    Generates RiskAssessment messages for Portfolio Department
+    """
+
+    def __init__(self, config_path: str = "Config/risk_config.yaml", db_path: str = "sentinel.db"):
+        """Initialize Risk Department with all components"""
+        # Load config
+        with open(config_path, 'r') as f:
+            self.config = yaml.safe_load(f)
+
+        self.db_path = Path(db_path)
+
+        # Initialize all components
+        self.message_handler = MessageHandler()
+        self.position_sizer = PositionSizer(self.config)
+        self.stop_loss_calc = StopLossCalculator(self.config)
+        self.risk_calc = RiskCalculator(self.config)
+        self.heat_monitor = PortfolioHeatMonitor(self.config)
+        self.sector_checker = SectorConcentrationChecker(self.config)
+
+        logger.info("=" * 80)
+        logger.info("RISK DEPARTMENT INITIALIZED")
+        logger.info("=" * 80)
+
+    def get_current_portfolio_state(self) -> Dict:
+        """
+        Query database to get current portfolio state
+
+        Returns:
+            Dict with capital, heat, positions, sector_allocations
+        """
+        try:
+            # For Phase 1, use testing defaults
+            # In future, query Trading Department database for open positions
+            capital = self.config['testing']['initial_capital']
+            heat = self.config['testing']['initial_heat']
+            positions = self.config['testing']['initial_positions']
+
+            # Get sector allocations (empty for now)
+            sector_allocations = {}
+
+            return {
+                'capital': capital,
+                'current_heat': heat,
+                'open_positions_count': positions,
+                'sector_allocations': sector_allocations
+            }
+
+        except Exception as e:
+            logger.error(f"Failed to get portfolio state: {e}", exc_info=True)
+            return None
+
+    def process_candidate(self, candidate: Dict, portfolio_state: Dict) -> Dict:
+        """
+        Process single candidate through all risk checks
+
+        Args:
+            candidate: Candidate dict from Research briefing
+            portfolio_state: Current portfolio state
+
+        Returns:
+            Dict with 'approved', 'rejection_reason', 'risk_details'
+        """
+        ticker = candidate['ticker']
+        capital = portfolio_state['capital']
+
+        try:
+            # Get current price (from Research data or fetch fresh)
+            # For now, fetch fresh price
+            stock = yf.Ticker(ticker)
+            current_price = stock.history(period='1d')['Close'].iloc[-1]
+
+            logger.info(f"Processing {ticker} @ ${current_price:.2f}...")
+
+            # Step 1: Position sizing
+            position = self.position_sizer.calculate_position_size(capital, current_price, ticker)
+            if not position:
+                return {
+                    'ticker': ticker,
+                    'approved': False,
+                    'rejection_reason': 'DATA_UNAVAILABLE',
+                    'rejection_details': 'Failed to calculate position size'
+                }
+
+            # Step 2: Stop-loss calculation
+            stop = self.stop_loss_calc.calculate_stop_loss(ticker, current_price)
+            if not stop:
+                return {
+                    'ticker': ticker,
+                    'approved': False,
+                    'rejection_reason': 'DATA_UNAVAILABLE',
+                    'rejection_details': 'Failed to calculate stop-loss'
+                }
+
+            # Step 3: Risk per trade validation
+            risk_check = self.risk_calc.validate_risk_per_trade(
+                shares=position['shares'],
+                risk_per_share=stop['risk_per_share'],
+                capital=capital,
+                ticker=ticker
+            )
+
+            if not risk_check['approved']:
+                return {
+                    'ticker': ticker,
+                    'approved': False,
+                    'rejection_reason': risk_check['rejection_reason'],
+                    'rejection_details': risk_check['rejection_details'],
+                    'position': position,
+                    'stop': stop,
+                    'risk_check': risk_check
+                }
+
+            # Step 4: Portfolio heat check
+            heat_check = self.heat_monitor.check_portfolio_heat(
+                new_trade_risk=risk_check['total_risk'],
+                current_heat=portfolio_state['current_heat'],
+                capital=capital,
+                ticker=ticker
+            )
+
+            if not heat_check['approved']:
+                return {
+                    'ticker': ticker,
+                    'approved': False,
+                    'rejection_reason': heat_check['rejection_reason'],
+                    'rejection_details': heat_check['rejection_details'],
+                    'position': position,
+                    'stop': stop,
+                    'risk_check': risk_check,
+                    'heat_check': heat_check
+                }
+
+            # Step 5: Sector concentration check
+            sector_check = self.sector_checker.check_sector_concentration(
+                ticker=ticker,
+                position_value=position['actual_position_value'],
+                capital=capital,
+                current_sector_allocations=portfolio_state['sector_allocations']
+            )
+
+            if not sector_check['approved']:
+                return {
+                    'ticker': ticker,
+                    'approved': False,
+                    'rejection_reason': sector_check['rejection_reason'],
+                    'rejection_details': sector_check['rejection_details'],
+                    'position': position,
+                    'stop': stop,
+                    'risk_check': risk_check,
+                    'heat_check': heat_check,
+                    'sector_check': sector_check
+                }
+
+            # All checks passed - APPROVED
+            logger.info(f"{ticker} APPROVED - All risk checks passed")
+            return {
+                'ticker': ticker,
+                'approved': True,
+                'rejection_reason': None,
+                'rejection_details': None,
+                'position': position,
+                'stop': stop,
+                'risk_check': risk_check,
+                'heat_check': heat_check,
+                'sector_check': sector_check,
+                'research_composite_score': candidate['composite_score']
+            }
+
+        except Exception as e:
+            logger.error(f"Failed to process {ticker}: {e}", exc_info=True)
+            return {
+                'ticker': ticker,
+                'approved': False,
+                'rejection_reason': 'CALCULATION_ERROR',
+                'rejection_details': str(e)
+            }
+
+    def process_daily_briefing(self, briefing_message_path: Path) -> str:
+        """
+        Process DailyBriefing from Research Department
+
+        Args:
+            briefing_message_path: Path to Research DailyBriefing message
+
+        Returns:
+            Message ID of generated RiskAssessment
+        """
+        logger.info("=" * 80)
+        logger.info("PROCESSING DAILY BRIEFING")
+        logger.info("=" * 80)
+
+        # Read Research briefing
+        metadata, body, data_payload = self.message_handler.read_message(briefing_message_path)
+        parent_message_id = metadata['message_id']
+        assessment_date = date.today()
+
+        logger.info(f"Parent message: {parent_message_id}")
+        logger.info(f"Assessment date: {assessment_date}")
+
+        # Get candidates from payload
+        candidates = data_payload.get('candidates', [])
+        logger.info(f"Reviewing {len(candidates)} candidates from Research...")
+
+        # Get current portfolio state
+        portfolio_state = self.get_current_portfolio_state()
+        if not portfolio_state:
+            logger.error("Failed to get portfolio state - aborting assessment")
+            return None
+
+        logger.info(f"Portfolio state: ${portfolio_state['capital']:,.0f} capital, ${portfolio_state['current_heat']:,.0f} heat, {portfolio_state['open_positions_count']} positions")
+
+        # Process each candidate
+        approved_candidates = []
+        rejected_candidates = []
+
+        for candidate in candidates:
+            result = self.process_candidate(candidate, portfolio_state)
+
+            if result['approved']:
+                approved_candidates.append(result)
+            else:
+                rejected_candidates.append(result)
+
+        logger.info(f"Risk assessment complete: {len(approved_candidates)} approved, {len(rejected_candidates)} rejected")
+
+        # Generate RiskAssessment message
+        message_id = self._generate_risk_assessment_message(
+            parent_message_id=parent_message_id,
+            assessment_date=assessment_date,
+            portfolio_state=portfolio_state,
+            approved_candidates=approved_candidates,
+            rejected_candidates=rejected_candidates,
+            candidates_reviewed=len(candidates)
+        )
+
+        # Save to database
+        self._save_assessment_to_db(
+            message_id=message_id,
+            parent_message_id=parent_message_id,
+            assessment_date=assessment_date,
+            portfolio_state=portfolio_state,
+            approved_candidates=approved_candidates,
+            rejected_candidates=rejected_candidates,
+            candidates_reviewed=len(candidates)
+        )
+
+        logger.info("=" * 80)
+        return message_id
+
+    def _generate_risk_assessment_message(self, parent_message_id: str, assessment_date: date,
+                                         portfolio_state: Dict, approved_candidates: List[Dict],
+                                         rejected_candidates: List[Dict], candidates_reviewed: int) -> str:
+        """Generate RiskAssessment message for Portfolio Department"""
+
+        # Build markdown body
+        body_lines = [
+            f"**Assessment Date**: {assessment_date.strftime('%Y-%m-%d')}",
+            f"**Parent Message**: {parent_message_id}",
+            "",
+            "## Portfolio State",
+            f"- **Capital**: ${portfolio_state['capital']:,.0f}",
+            f"- **Current Heat**: ${portfolio_state['current_heat']:,.0f} ({portfolio_state['current_heat']/portfolio_state['capital']*100:.2f}%)",
+            f"- **Open Positions**: {portfolio_state['open_positions_count']}",
+            "",
+            f"## Risk Assessment Summary",
+            f"- **Candidates Reviewed**: {candidates_reviewed}",
+            f"- **Approved**: {len(approved_candidates)}",
+            f"- **Rejected**: {len(rejected_candidates)}",
+            ""
+        ]
+
+        # Approved candidates
+        if len(approved_candidates) > 0:
+            body_lines.append("## Approved Candidates")
+            body_lines.append("")
+            for i, candidate in enumerate(approved_candidates, 1):
+                ticker = candidate['ticker']
+                pos = candidate['position']
+                stop = candidate['stop']
+                risk = candidate['risk_check']
+                sector = candidate['sector_check'].get('sector', 'Unknown')
+
+                body_lines.append(f"### {i}. {ticker} ({sector})")
+                body_lines.append(f"- **Research Score**: {candidate['research_composite_score']}/10")
+                body_lines.append(f"- **Position**: {pos['shares']} shares @ ${pos['current_price']:.2f} = ${pos['actual_position_value']:,.0f}")
+                body_lines.append(f"- **Stop-Loss**: ${stop['stop_loss']:.2f} ({stop['method']})")
+                body_lines.append(f"- **Risk**: ${risk['total_risk']:,.0f} ({risk['risk_percentage']*100:.2f}% of capital)")
+                body_lines.append("")
+        else:
+            body_lines.append("## Approved Candidates")
+            body_lines.append("")
+            body_lines.append("**NONE** - No candidates passed risk validation")
+            body_lines.append("")
+
+        # Rejected candidates
+        if len(rejected_candidates) > 0:
+            body_lines.append("## Rejected Candidates")
+            body_lines.append("")
+            for candidate in rejected_candidates:
+                body_lines.append(f"- **{candidate['ticker']}**: {candidate['rejection_reason']} - {candidate['rejection_details']}")
+            body_lines.append("")
+
+        body = "\n".join(body_lines)
+
+        # Build JSON payload
+        data_payload = {
+            'assessment_date': assessment_date.isoformat(),
+            'parent_message_id': parent_message_id,
+            'portfolio_state': portfolio_state,
+            'approved_candidates': [self._serialize_candidate(c) for c in approved_candidates],
+            'rejected_candidates': [self._serialize_rejection(c) for c in rejected_candidates],
+            'summary': {
+                'candidates_reviewed': candidates_reviewed,
+                'candidates_approved': len(approved_candidates),
+                'candidates_rejected': len(rejected_candidates)
+            }
+        }
+
+        # Write message
+        message_id = self.message_handler.write_message(
+            to_dept='PORTFOLIO',
+            message_type='RiskAssessment',
+            subject=f"Risk Assessment - {assessment_date.strftime('%Y-%m-%d')}",
+            body=body,
+            data_payload=data_payload,
+            parent_message_id=parent_message_id,
+            priority='routine'
+        )
+
+        logger.info(f"RiskAssessment message generated: {message_id}")
+        return message_id
+
+    def _serialize_candidate(self, candidate: Dict) -> Dict:
+        """Serialize approved candidate for JSON payload"""
+        return {
+            'ticker': candidate['ticker'],
+            'research_composite_score': candidate['research_composite_score'],
+            'position_size_shares': candidate['position']['shares'],
+            'position_size_value': candidate['position']['actual_position_value'],
+            'entry_price': candidate['position']['current_price'],
+            'stop_loss': candidate['stop']['stop_loss'],
+            'stop_loss_method': candidate['stop']['method'],
+            'atr_value': candidate['stop'].get('atr_value'),
+            'risk_per_share': candidate['stop']['risk_per_share'],
+            'total_risk': candidate['risk_check']['total_risk'],
+            'risk_percentage': candidate['risk_check']['risk_percentage'],
+            'portfolio_heat_after': candidate['heat_check']['heat_after'],
+            'sector': candidate['sector_check'].get('sector')
+        }
+
+    def _serialize_rejection(self, candidate: Dict) -> Dict:
+        """Serialize rejected candidate for JSON payload"""
+        return {
+            'ticker': candidate['ticker'],
+            'rejection_reason': candidate['rejection_reason'],
+            'rejection_details': candidate['rejection_details']
+        }
+
+    def _save_assessment_to_db(self, message_id: str, parent_message_id: str,
+                               assessment_date: date, portfolio_state: Dict,
+                               approved_candidates: List[Dict], rejected_candidates: List[Dict],
+                               candidates_reviewed: int):
+        """Save risk assessment to database"""
+        try:
+            conn = sqlite3.connect(self.db_path)
+            cursor = conn.cursor()
+
+            # Save risk assessment header
+            cursor.execute("""
+                INSERT INTO risk_assessments
+                (message_id, parent_message_id, assessment_date, timestamp,
+                 current_capital, current_heat, available_heat, open_positions_count,
+                 candidates_reviewed, candidates_approved, candidates_rejected,
+                 max_risk_per_trade_pct, max_portfolio_heat_pct, max_sector_concentration_pct, position_size_pct)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, (
+                message_id,
+                parent_message_id,
+                assessment_date.isoformat(),
+                datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z'),
+                portfolio_state['capital'],
+                portfolio_state['current_heat'],
+                portfolio_state['capital'] * self.config['portfolio_heat']['max_total_heat_pct'] - portfolio_state['current_heat'],
+                portfolio_state['open_positions_count'],
+                candidates_reviewed,
+                len(approved_candidates),
+                len(rejected_candidates),
+                self.config['risk_per_trade']['max_risk_pct'],
+                self.config['portfolio_heat']['max_total_heat_pct'],
+                self.config['sector_concentration']['max_sector_pct'],
+                self.config['position_sizing']['position_size_pct']
+            ))
+
+            # Save approved candidates
+            for candidate in approved_candidates:
+                cursor.execute("""
+                    INSERT INTO risk_approved_candidates
+                    (message_id, ticker, assessment_date,
+                     research_composite_score,
+                     position_sizing_method, position_size_pct, position_size_shares, position_size_value,
+                     entry_price, stop_loss, stop_loss_method, atr_value,
+                     risk_per_share, total_risk, risk_percentage,
+                     portfolio_heat_before, portfolio_heat_after,
+                     sector)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """, (
+                    message_id,
+                    candidate['ticker'],
+                    assessment_date.isoformat(),
+                    candidate['research_composite_score'],
+                    candidate['position']['method'],
+                    candidate['position']['actual_position_pct'],
+                    candidate['position']['shares'],
+                    candidate['position']['actual_position_value'],
+                    candidate['position']['current_price'],
+                    candidate['stop']['stop_loss'],
+                    candidate['stop']['method'],
+                    candidate['stop'].get('atr_value'),
+                    candidate['stop']['risk_per_share'],
+                    candidate['risk_check']['total_risk'],
+                    candidate['risk_check']['risk_percentage'],
+                    candidate['heat_check']['heat_before'],
+                    candidate['heat_check']['heat_after'],
+                    candidate['sector_check'].get('sector')
+                ))
+
+            # Save rejected candidates
+            for candidate in rejected_candidates:
+                # Determine rejection category
+                reason = candidate['rejection_reason']
+                if reason == 'PORTFOLIO_HEAT_EXCEEDED':
+                    category = 'PORTFOLIO_HEAT'
+                elif reason == 'SECTOR_CONCENTRATION_EXCEEDED':
+                    category = 'SECTOR_CONCENTRATION'
+                elif reason == 'RISK_PER_TRADE_EXCEEDED':
+                    category = 'RISK_PER_TRADE'
+                elif reason == 'DATA_UNAVAILABLE':
+                    category = 'DATA_UNAVAILABLE'
+                else:
+                    category = 'OTHER'
+
+                cursor.execute("""
+                    INSERT INTO risk_rejected_candidates
+                    (message_id, ticker, assessment_date,
+                     research_composite_score,
+                     rejection_reason, rejection_category, rejection_details)
+                    VALUES (?, ?, ?, ?, ?, ?, ?)
+                """, (
+                    message_id,
+                    candidate['ticker'],
+                    assessment_date.isoformat(),
+                    candidate.get('research_composite_score', 0.0),
+                    reason,
+                    category,
+                    candidate['rejection_details']
+                ))
+
+            conn.commit()
+            conn.close()
+
+            logger.info(f"Risk assessment saved to database: {len(approved_candidates)} approved, {len(rejected_candidates)} rejected")
+
+        except Exception as e:
+            logger.error(f"Failed to save assessment to database: {e}", exc_info=True)
+
+
 if __name__ == "__main__":
     # Test all Risk Department components
     logger.info("Risk Department - Testing All Components (Days 1-3)")
@@ -781,4 +1380,45 @@ if __name__ == "__main__":
 
     print("\n" + "=" * 100)
     print("TEST COMPLETE - Days 1-4 Components Verified")
+    print("=" * 100)
+
+    # ====================================================================================
+    # END-TO-END TEST: Process Research DailyBriefing
+    # ====================================================================================
+    print("\n\n")
+    print("=" * 100)
+    print("END-TO-END TEST: Processing Research DailyBriefing")
+    print("=" * 100)
+
+    # Initialize Risk Department
+    risk_dept = RiskDepartment()
+
+    # Find most recent Research briefing
+    research_outbox = Path("Messages_Between_Departments/Outbox/RESEARCH")
+    briefings = sorted(research_outbox.glob("MSG_RESEARCH_*.md"), reverse=True)
+
+    if len(briefings) == 0:
+        print("\nNo Research briefings found - skipping end-to-end test")
+    else:
+        latest_briefing = briefings[0]
+        print(f"\nProcessing latest briefing: {latest_briefing.name}")
+
+        try:
+            # Process briefing
+            message_id = risk_dept.process_daily_briefing(latest_briefing)
+
+            if message_id:
+                print(f"\nSUCCESS: RiskAssessment generated: {message_id}")
+                print(f"SUCCESS: Message written to: Messages_Between_Departments/Outbox/RISK/{message_id}.md")
+                print(f"SUCCESS: Assessment saved to database")
+            else:
+                print("\nFAILED: Risk assessment failed")
+
+        except Exception as e:
+            print(f"\nFAILED: End-to-end test failed: {e}")
+            import traceback
+            traceback.print_exc()
+
+    print("\n" + "=" * 100)
+    print("ALL TESTS COMPLETE")
     print("=" * 100)
