@@ -1,0 +1,43 @@
+version: 1.0
+last_updated: 2025-10-31
+
+# Position Limits
+limits:
+  max_positions: 10  # Maximum concurrent positions
+  max_capital_deployed_pct: 1.0  # Deploy up to 100% of capital
+
+# Entry Filters
+filters:
+  min_composite_score: 5.0  # Don't buy stocks scoring < 5.0
+
+# Exit Rules
+exits:
+  max_hold_days: 30  # Close positions after 30 days
+  downgrade_score: 4.0  # Exit if Research score drops below 4.0
+
+  # Exit priority (if multiple signals on same day)
+  priority:
+    - STOP_LOSS  # Always exit stops first
+    - TARGET     # Then targets
+    - DOWNGRADE  # Then downgrades
+    - TIME       # Then time-based
+
+# Rebalancing
+rebalancing:
+  target_deployment: 1.0  # Target 100% deployed
+  threshold: 0.10  # Rebalance if > 10% deviation
+
+# Capital
+capital:
+  total: 100000  # $100K total capital
+
+# Message Settings
+message:
+  buy_order_priority: high
+  sell_order_priority: urgent  # Exits are more urgent
+
+# Testing
+testing:
+  simulate_fills: true  # Simulate Trading fills for Week 4
+  fill_delay_seconds: 5  # Simulate 5-second fill delay
+  partial_fill_rate: 0.05  # 5% chance of partial fill
