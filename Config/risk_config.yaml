@@ -1,0 +1,148 @@
+# Risk Department Configuration - Phase 1
+# Machine-readable settings for position sizing, stop-loss calculation, portfolio risk management
+# Created: 2025-10-31
+# Pattern learned from research_config.yaml (Week 2)
+
+version: 1.0
+last_updated: 2025-10-31
+
+# Position Sizing Configuration
+position_sizing:
+  method: "FIXED_FRACTIONAL"  # FIXED_FRACTIONAL, KELLY_CRITERION (future), VOLATILITY_ADJUSTED (future)
+
+  # Fixed Fractional Settings
+  position_size_pct: 0.10  # Use 10% of capital per position
+
+  # Future: Kelly Criterion Settings (Week 5+)
+  kelly_fraction: 0.25  # Use 25% of full Kelly (conservative)
+  kelly_min_win_rate: 0.45  # Minimum 45% win rate to use Kelly
+
+  # Future: Volatility-Adjusted Settings
+  base_position_pct: 0.10
+  volatility_scalar: 0.5  # Reduce position size by 50% when volatility doubles
+
+# Stop-Loss Configuration
+stop_loss:
+  method: "ATR_BASED"  # ATR_BASED, PERCENTAGE, SUPPORT_BASED (future)
+
+  # ATR-Based Settings
+  atr_period: 14  # Use 14-day ATR
+  atr_multiplier: 2.0  # Stop = Entry - (2 × ATR)
+
+  # Percentage-Based Settings (fallback if ATR unavailable)
+  percentage_stop: 0.05  # 5% stop-loss below entry
+
+  # Minimum Stop Distance (prevent stops that are too tight)
+  min_stop_distance_pct: 0.02  # Minimum 2% stop distance
+  max_stop_distance_pct: 0.15  # Maximum 15% stop distance (avoid extremely wide stops)
+
+# Risk Per Trade Configuration
+risk_per_trade:
+  max_risk_pct: 0.01  # Never risk more than 1% of capital per trade
+
+  # VIX-Adjusted Risk (future enhancement)
+  enable_vix_adjustment: false
+  vix_thresholds:
+    normal: 20.0  # VIX < 20: Use full 1% risk
+    elevated: 30.0  # VIX 20-30: Reduce to 0.75% risk
+    caution: 40.0  # VIX 30-40: Reduce to 0.5% risk
+    panic: 40.0  # VIX > 40: No new positions
+
+  # Score-Adjusted Risk (future enhancement)
+  enable_score_adjustment: false
+  score_risk_mapping:
+    excellent: 0.015  # 8.0-10.0 score: 1.5% risk
+    good: 0.01  # 6.0-8.0 score: 1.0% risk
+    fair: 0.005  # 4.0-6.0 score: 0.5% risk
+
+# Portfolio Heat Configuration
+portfolio_heat:
+  max_total_heat_pct: 0.05  # Maximum 5% of capital at risk across all positions
+
+  # Heat Monitoring
+  warning_threshold_pct: 0.04  # Warn when heat reaches 4%
+  critical_threshold_pct: 0.045  # Alert Executive when heat reaches 4.5%
+
+  # VIX-Adjusted Heat Limits (future)
+  enable_vix_adjustment: false
+  vix_heat_limits:
+    normal: 0.05  # VIX < 20: 5% max heat
+    elevated: 0.03  # VIX 20-30: 3% max heat
+    caution: 0.02  # VIX 30-40: 2% max heat
+    panic: 0.00  # VIX > 40: Close all positions
+
+# Sector Concentration Configuration
+sector_concentration:
+  enable: true
+  max_sector_pct: 0.40  # Maximum 40% of capital in any single sector
+
+  # Sector Definitions (maps to Research Department sector classifications)
+  sectors:
+    - "Technology"
+    - "Financials"
+    - "Healthcare"
+    - "Consumer Discretionary"
+    - "Consumer Staples"
+    - "Industrials"
+    - "Energy"
+    - "Materials"
+    - "Real Estate"
+    - "Utilities"
+    - "Communication Services"
+
+  # Warning thresholds
+  warning_threshold_pct: 0.35  # Warn when sector reaches 35%
+
+# Correlation Limits (future enhancement)
+correlation:
+  enable: false  # Disabled for Phase 1
+  max_correlation: 0.70  # Don't open positions with correlation > 0.70
+  lookback_period: 60  # Calculate correlation over 60 days
+
+# Data Quality & Fallbacks
+data_quality:
+  # ATR Calculation Fallbacks
+  min_atr_data_points: 20  # Need at least 20 days of data for ATR
+  fallback_to_percentage_stop: true  # Use percentage stop if ATR unavailable
+
+  # Price Data Requirements
+  max_stale_price_minutes: 60  # Price data older than 60 min = stale
+
+  # Required Data Fields
+  required_fields:
+    - "current_price"
+    - "sector"  # Needed for concentration checks
+
+# Message Generation
+message:
+  recipient: "PORTFOLIO"  # Risk assessments go to Portfolio Department
+  priority: "high"  # Risk assessments are high priority
+  include_rejected_candidates: true  # Include rejected candidates in message for transparency
+
+# Testing & Simulation
+testing:
+  # Initial Portfolio State (for testing before Portfolio Department built)
+  initial_capital: 100000  # $100,000 starting capital
+  initial_positions: 0  # No open positions
+  initial_heat: 0.0  # No current risk
+
+  # Backtesting
+  enable_backtesting: false
+  backtest_start_date: "2025-10-01"
+  backtest_end_date: "2025-10-31"
+
+# Logging Configuration
+logging:
+  log_all_calculations: true  # Log position size, stop-loss, risk calculations
+  log_rejection_reasons: true  # Log why candidates were rejected
+  log_portfolio_state: true  # Log capital, heat, positions before/after
+  performance_metrics: true  # Log calculation timing
+
+# Notes for CC:
+# - All risk parameters are configurable (no magic numbers in code)
+# - VIX-adjusted risk and score-adjusted risk are planned but disabled for Phase 1
+# - Correlation limits are disabled for Phase 1 (complex to calculate)
+# - Sector concentration is enabled (simpler than correlation)
+# - Testing section provides initial portfolio state for Week 3 testing
+# - Message configuration follows Research Department pattern
+# - Can tune risk tolerance (1% → 2%) without code changes
