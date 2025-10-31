@@ -70,6 +70,8 @@ restricted_tickers:
     - AMC   # Meme stock - high volatility
     - DWAC  # Political risk
     - SPAC  # No SPACs
+    - HOOD  # Excessive retail sentiment (C(P) recommendation)
+    - PLTR  # Extreme volatility (C(P) recommendation)
 
   # Allowed exceptions (even if < $5)
   allowlist:

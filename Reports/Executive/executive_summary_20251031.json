@@ -1,0 +1,211 @@
+{
+  "report_date": "2025-10-31",
+  "generated_at": "2025-10-31T09:11:38.466132",
+  "performance": {
+    "daily_pnl": {
+      "date": "2025-10-31",
+      "realized_pnl": 4978.550000000006,
+      "unrealized_pnl": 60426.62380218506,
+      "total_pnl": 65405.17380218506,
+      "pnl_pct": 65.40517380218506,
+      "starting_capital": 100000.0
+    },
+    "sharpe_ratio_30d": 472.05,
+    "win_rate_30d": 100.0,
+    "max_drawdown": {
+      "max_drawdown_pct": 0.0,
+      "peak_date": "2025-10-31",
+      "trough_date": null,
+      "recovery_date": null,
+      "currently_in_drawdown": false
+    }
+  },
+  "strategy": {
+    "sector_performance": [
+      {
+        "sector": "Financials",
+        "trade_count": 3,
+        "total_pnl": 3029.7500000000036,
+        "pnl_pct": 3.0297500000000035,
+        "avg_pnl_per_trade": 1009.9166666666679
+      },
+      {
+        "sector": "Technology",
+        "trade_count": 2,
+        "total_pnl": 1948.800000000002,
+        "pnl_pct": 1.9488000000000019,
+        "avg_pnl_per_trade": 974.400000000001
+      }
+    ],
+    "best_trades": [
+      {
+        "position_id": "POS_20251031_BAC_68bb85f4",
+        "ticker": "BAC",
+        "sector": "Financials",
+        "shares": 95,
+        "entry_price": 110.5,
+        "exit_price": 121.55000000000001,
+        "exit_date": "2025-10-31",
+        "exit_reason": "TARGET",
+        "realized_pnl": 1049.7500000000011,
+        "return_pct": 10.00000000000001
+      },
+      {
+        "position_id": "POS_20251031_GS_8225f74f",
+        "ticker": "GS",
+        "sector": "Financials",
+        "shares": 100,
+        "entry_price": 100.5,
+        "exit_price": 110.55000000000001,
+        "exit_date": "2025-10-31",
+        "exit_reason": "TARGET",
+        "realized_pnl": 1005.0000000000011,
+        "return_pct": 10.000000000000012
+      },
+      {
+        "position_id": "POS_20251031_AAPL_5ded3908",
+        "ticker": "AAPL",
+        "sector": "Technology",
+        "shares": 56,
+        "entry_price": 175.5,
+        "exit_price": 193.05,
+        "exit_date": "2025-10-31",
+        "exit_reason": "TARGET",
+        "realized_pnl": 982.8000000000006,
+        "return_pct": 10.000000000000005
+      },
+      {
+        "position_id": "POS_20251031_JPM_4c9e1298",
+        "ticker": "JPM",
+        "sector": "Financials",
+        "shares": 50,
+        "entry_price": 195.0,
+        "exit_price": 214.50000000000003,
+        "exit_date": "2025-10-31",
+        "exit_reason": "TARGET",
+        "realized_pnl": 975.0000000000014,
+        "return_pct": 10.000000000000014
+      },
+      {
+        "position_id": "POS_20251031_MSFT_45cb2044",
+        "ticker": "MSFT",
+        "sector": "Technology",
+        "shares": 23,
+        "entry_price": 420.0,
+        "exit_price": 462.00000000000006,
+        "exit_date": "2025-10-31",
+        "exit_reason": "TARGET",
+        "realized_pnl": 966.0000000000014,
+        "return_pct": 10.000000000000012
+      }
+    ],
+    "worst_trades": [
+      {
+        "position_id": "POS_20251031_MSFT_45cb2044",
+        "ticker": "MSFT",
+        "sector": "Technology",
+        "shares": 23,
+        "entry_price": 420.0,
+        "exit_price": 462.00000000000006,
+        "exit_date": "2025-10-31",
+        "exit_reason": "TARGET",
+        "realized_pnl": 966.0000000000014,
+        "return_pct": 10.000000000000012
+      },
+      {
+        "position_id": "POS_20251031_JPM_4c9e1298",
+        "ticker": "JPM",
+        "sector": "Financials",
+        "shares": 50,
+        "entry_price": 195.0,
+        "exit_price": 214.50000000000003,
+        "exit_date": "2025-10-31",
+        "exit_reason": "TARGET",
+        "realized_pnl": 975.0000000000014,
+        "return_pct": 10.000000000000014
+      },
+      {
+        "position_id": "POS_20251031_AAPL_5ded3908",
+        "ticker": "AAPL",
+        "sector": "Technology",
+        "shares": 56,
+        "entry_price": 175.5,
+        "exit_price": 193.05,
+        "exit_date": "2025-10-31",
+        "exit_reason": "TARGET",
+        "realized_pnl": 982.8000000000006,
+        "return_pct": 10.000000000000005
+      },
+      {
+        "position_id": "POS_20251031_GS_8225f74f",
+        "ticker": "GS",
+        "sector": "Financials",
+        "shares": 100,
+        "entry_price": 100.5,
+        "exit_price": 110.55000000000001,
+        "exit_date": "2025-10-31",
+        "exit_reason": "TARGET",
+        "realized_pnl": 1005.0000000000011,
+        "return_pct": 10.000000000000012
+      },
+      {
+        "position_id": "POS_20251031_BAC_68bb85f4",
+        "ticker": "BAC",
+        "sector": "Financials",
+        "shares": 95,
+        "entry_price": 110.5,
+        "exit_price": 121.55000000000001,
+        "exit_date": "2025-10-31",
+        "exit_reason": "TARGET",
+        "realized_pnl": 1049.7500000000011,
+        "return_pct": 10.00000000000001
+      }
+    ],
+    "benchmark_comparison": {
+      "period_days": 30,
+      "sentinel_return": 4.978550000000006,
+      "benchmark": "SPY",
+      "benchmark_return": 1.7024466564431604,
+      "alpha": 3.276103343556845,
+      "outperformance": true,
+      "note": "Real market data from yfinance (22 trading days)"
+    }
+  },
+  "system": {
+    "department_health": {
+      "Research": {
+        "status": "no_data",
+        "last_activity": null,
+        "age_hours": null,
+        "message": "Research table not initialized (research_market_briefings)"
+      },
+      "Risk": {
+        "status": "healthy",
+        "last_activity": "2025-10-31 09:57:27",
+        "age_hours": -0.7634824458333334,
+        "message": "Risk active within last hour"
+      },
+      "Portfolio": {
+        "status": "healthy",
+        "last_activity": "2025-10-31 10:41:47",
+        "age_hours": -1.5023712766666666,
+        "message": "Portfolio active within last hour"
+      },
+      "Compliance": {
+        "status": "no_data",
+        "last_activity": null,
+        "age_hours": null,
+        "message": "Compliance has no activity recorded"
+      },
+      "Trading": {
+        "status": "no_data",
+        "last_activity": null,
+        "age_hours": null,
+        "message": "Trading table not initialized (trading_orders)"
+      }
+    },
+    "bottlenecks": [
+      "WARNING: research_to_risk latency elevated (12.5s avg)"
+    ]
+  }
+}

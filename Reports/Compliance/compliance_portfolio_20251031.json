@@ -1,0 +1,165 @@
+{
+  "timestamp": "2025-10-31T05:41:24.062027",
+  "date": "2025-10-31",
+  "summary": {
+    "open_positions": 6,
+    "pending_positions": 5,
+    "capital_deployed": 63245.0,
+    "deployment_percentage": 0.63245
+  },
+  "risk": {
+    "total_portfolio_risk": 5844.0,
+    "risk_percentage": 0.05844
+  },
+  "concentration": {
+    "largest_position_ticker": "MA",
+    "largest_position_percentage": 0.17847260653016048,
+    "largest_sector": "Financials",
+    "largest_sector_percentage": 0.8807020317811685
+  },
+  "positions": [
+    {
+      "position_id": "POS_20251031_MA_d4596cb7",
+      "ticker": "MA",
+      "status": "OPEN",
+      "shares": 75,
+      "entry_price": 150.5,
+      "position_value": 11287.5,
+      "stop_loss": 140.0,
+      "target": 160.0,
+      "risk": 500.0,
+      "sector": "Financials",
+      "entry_date": "2025-10-31"
+    },
+    {
+      "position_id": "POS_20251031_V_e265647d",
+      "ticker": "V",
+      "status": "OPEN",
+      "shares": 80,
+      "entry_price": 140.5,
+      "position_value": 11240.0,
+      "stop_loss": 130.0,
+      "target": 150.0,
+      "risk": 500.0,
+      "sector": "Financials",
+      "entry_date": "2025-10-31"
+    },
+    {
+      "position_id": "POS_20251031_AXP_9a210266",
+      "ticker": "AXP",
+      "status": "OPEN",
+      "shares": 70,
+      "entry_price": 160.5,
+      "position_value": 11235.0,
+      "stop_loss": 150.0,
+      "target": 170.0,
+      "risk": 500.0,
+      "sector": "Financials",
+      "entry_date": "2025-10-31"
+    },
+    {
+      "position_id": "POS_20251031_C_5390a1b7",
+      "ticker": "C",
+      "status": "OPEN",
+      "shares": 85,
+      "entry_price": 130.5,
+      "position_value": 11092.5,
+      "stop_loss": 120.0,
+      "target": 140.0,
+      "risk": 500.0,
+      "sector": "Financials",
+      "entry_date": "2025-10-31"
+    },
+    {
+      "position_id": "POS_20251031_WFC_699cfe3f",
+      "ticker": "WFC",
+      "status": "OPEN",
+      "shares": 90,
+      "entry_price": 120.5,
+      "position_value": 10845.0,
+      "stop_loss": 110.0,
+      "target": 130.0,
+      "risk": 500.0,
+      "sector": "Financials",
+      "entry_date": "2025-10-31"
+    },
+    {
+      "position_id": "POS_20251031_TSLA_95b8b46a",
+      "ticker": "TSLA",
+      "status": "OPEN",
+      "shares": 30,
+      "entry_price": 251.5,
+      "position_value": 7545.0,
+      "stop_loss": 230.0,
+      "target": 270.0,
+      "risk": 800.0,
+      "sector": "Consumer Cyclical",
+      "entry_date": "2025-10-31"
+    },
+    {
+      "position_id": "POS_20251031_AAPL_de49c0a9",
+      "ticker": "AAPL",
+      "status": "PENDING",
+      "shares": null,
+      "entry_price": null,
+      "position_value": 0,
+      "stop_loss": 165.25,
+      "target": 185.75,
+      "risk": 574.0,
+      "sector": "Technology",
+      "entry_date": null
+    },
+    {
+      "position_id": "POS_20251031_MSFT_cc3e08e3",
+      "ticker": "MSFT",
+      "status": "PENDING",
+      "shares": null,
+      "entry_price": null,
+      "position_value": 0,
+      "stop_loss": 400.0,
+      "target": 440.0,
+      "risk": 460.0,
+      "sector": "Technology",
+      "entry_date": null
+    },
+    {
+      "position_id": "POS_20251031_JPM_abb98e0b",
+      "ticker": "JPM",
+      "status": "PENDING",
+      "shares": null,
+      "entry_price": null,
+      "position_value": 0,
+      "stop_loss": 185.0,
+      "target": 205.0,
+      "risk": 500.0,
+      "sector": "Financials",
+      "entry_date": null
+    },
+    {
+      "position_id": "POS_20251031_NVDA_7c4f6adc",
+      "ticker": "NVDA",
+      "status": "PENDING",
+      "shares": null,
+      "entry_price": null,
+      "position_value": 0,
+      "stop_loss": 850.0,
+      "target": 920.0,
+      "risk": 330.0,
+      "sector": "Technology",
+      "entry_date": null
+    },
+    {
+      "position_id": "POS_20251031_GOOGL_f5a8ef3f",
+      "ticker": "GOOGL",
+      "status": "PENDING",
+      "shares": null,
+      "entry_price": null,
+      "position_value": 0,
+      "stop_loss": 135.0,
+      "target": 155.0,
+      "risk": 680.0,
+      "sector": "Technology",
+      "entry_date": null
+    }
+  ]
+}

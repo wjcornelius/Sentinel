@@ -1,0 +1,134 @@
+2025-10-31 08:15:06,931 - ExecutiveDepartment - INFO - Executive Department - Testing PerformanceAnalyzer (Day 1)
+2025-10-31 08:15:06,931 - PerformanceAnalyzer - INFO - PerformanceAnalyzer initialized: db=C:\Users\wjcor\OneDrive\Desktop\Sentinel\sentinel.db
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Executive\executive_department.py:69: DeprecationWarning: The default date adapter is deprecated as of Python 3.12; see the sqlite3 documentation for suggested replacement recipes
+  cursor.execute("""
+2025-10-31 08:15:06,933 - PerformanceAnalyzer - INFO - Daily P&L calculated for 2025-10-31: $4,978.55 (4.98%)
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Executive\executive_department.py:155: DeprecationWarning: The default date adapter is deprecated as of Python 3.12; see the sqlite3 documentation for suggested replacement recipes
+  cursor.execute("""
+2025-10-31 08:15:06,934 - PerformanceAnalyzer - INFO - Sharpe ratio (30d): 472.050
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Executive\executive_department.py:223: DeprecationWarning: The default date adapter is deprecated as of Python 3.12; see the sqlite3 documentation for suggested replacement recipes
+  cursor.execute("""
+2025-10-31 08:15:06,935 - PerformanceAnalyzer - INFO - Win rate (30d): 100.0% (5/5)
+2025-10-31 08:15:06,937 - PerformanceAnalyzer - INFO - Max drawdown: 0.00% (peak: 2025-10-31, trough: None)
+2025-10-31 08:15:06,937 - StrategyReviewer - INFO - StrategyReviewer initialized: db=C:\Users\wjcor\OneDrive\Desktop\Sentinel\sentinel.db
+2025-10-31 08:15:06,940 - StrategyReviewer - INFO - Sector performance analyzed: 2 sectors
+2025-10-31 08:15:06,941 - StrategyReviewer - INFO - Best/worst trades identified: 3 best, 3 worst
+C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Executive\executive_department.py:521: DeprecationWarning: The default date adapter is deprecated as of Python 3.12; see the sqlite3 documentation for suggested replacement recipes
+  cursor.execute("""
+2025-10-31 08:15:06,943 - StrategyReviewer - INFO - Benchmark comparison: Sentinel 4.98% vs SPY 0.83% = Alpha 4.15%
+2025-10-31 08:15:06,943 - SystemMonitor - INFO - SystemMonitor initialized: db=C:\Users\wjcor\OneDrive\Desktop\Sentinel\sentinel.db, messages=..\..\Messages
+2025-10-31 08:15:06,945 - SystemMonitor - INFO - Department health checked: 5 departments
+2025-10-31 08:15:06,945 - SystemMonitor - INFO - Message latency analyzed: 5 flows
+2025-10-31 08:15:06,947 - SystemMonitor - INFO - Department health checked: 5 departments
+2025-10-31 08:15:06,947 - SystemMonitor - INFO - Message latency analyzed: 5 flows
+2025-10-31 08:15:06,947 - SystemMonitor - INFO - Bottleneck detection complete: 1 findings
+
+[TEST 1] Calculate Daily P&L
+--------------------------------------------------------------------------------
+  Date: 2025-10-31
+  Realized P&L: $4,978.55
+  Unrealized P&L: $0.00
+  Total P&L: $4,978.55
+  P&L %: 4.98%
+
+[TEST 2] Calculate Sharpe Ratio
+--------------------------------------------------------------------------------
+  Sharpe Ratio (30d): 472.050
+
+[TEST 3] Calculate Win Rate
+--------------------------------------------------------------------------------
+  Win Rate (30d): 100.0%
+
+[TEST 4] Calculate Maximum Drawdown
+--------------------------------------------------------------------------------
+  Max Drawdown: 0.00%
+  Peak Date: 2025-10-31
+  Trough Date: None
+  Recovery Date: None
+  Currently in Drawdown: False
+
+================================================================================
+Testing StrategyReviewer (Day 2)
+================================================================================
+
+[TEST 5] Analyze Sector Performance
+--------------------------------------------------------------------------------
+  Financials:
+    - Trades: 3
+    - Total P&L: $3,029.75
+    - P&L %: 3.03%
+    - Avg P&L/Trade: $1,009.92
+  Technology:
+    - Trades: 2
+    - Total P&L: $1,948.80
+    - P&L %: 1.95%
+    - Avg P&L/Trade: $974.40
+
+[TEST 6] Identify Best/Worst Trades
+--------------------------------------------------------------------------------
+  Top 3 Winners:
+    1. BAC - $1,049.75 (10.0%)
+    2. GS - $1,005.00 (10.0%)
+    3. AAPL - $982.80 (10.0%)
+
+  Top 3 Losers:
+    1. MSFT - $966.00 (10.0%)
+    2. JPM - $975.00 (10.0%)
+    3. AAPL - $982.80 (10.0%)
+
+[TEST 7] Compare to Benchmark (SPY)
+--------------------------------------------------------------------------------
+  Sentinel Return (30d): 4.98%
+  SPY Return (30d): 0.83%
+  Alpha: 4.15%
+  Outperformance: True
+  Note: Benchmark data is placeholder - will integrate yfinance in Week 7
+
+================================================================================
+Testing SystemMonitor (Day 3)
+================================================================================
+
+[TEST 8] Check Department Health
+--------------------------------------------------------------------------------
+  [N/A] Research: Research table not initialized (research_market_briefings)
+  [OK] Risk: Risk active within last hour
+  [OK] Portfolio: Portfolio active within last hour
+  [N/A] Compliance: Compliance has no activity recorded
+  [N/A] Trading: Trading table not initialized (trading_orders)
+
+[TEST 9] Analyze Message Latency
+--------------------------------------------------------------------------------
+  research_to_risk:
+    - Avg: 12.5s
+    - Max: 45.0s
+    - P95: 30.0s
+    - Samples: 10
+  risk_to_portfolio:
+    - Avg: 8.3s
+    - Max: 30.0s
+    - P95: 20.0s
+    - Samples: 10
+  portfolio_to_compliance:
+    - Avg: 2.1s
+    - Max: 5.0s
+    - P95: 4.0s
+    - Samples: 10
+  compliance_to_portfolio:
+    - Avg: 1.5s
+    - Max: 3.0s
+    - P95: 2.0s
+    - Samples: 10
+  portfolio_to_trading:
+    - Avg: 5.2s
+    - Max: 15.0s
+    - P95: 10.0s
+    - Samples: 10
+  Note: Latency data is placeholder - will implement real message parsing in Week 7
+
+[TEST 10] Detect Processing Bottlenecks
+--------------------------------------------------------------------------------
+  - WARNING: research_to_risk latency elevated (12.5s avg)
+
+================================================================================
+Week 6 Days 1-3 COMPLETE: Performance + Strategy + System Monitoring functional
+================================================================================

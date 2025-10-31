@@ -1,0 +1,132 @@
+================================================================================
+  SENTINEL CORPORATION - DAILY CHECKLIST
+================================================================================
+
+  Quick guide for daily portfolio monitoring (Manual Mode)
+
+================================================================================
+  MORNING ROUTINE (Optional - 9:00 AM)
+================================================================================
+
+  [ ] Double-click: Launch_Dashboard.bat
+  [ ] Review portfolio status:
+      - Daily P&L
+      - Open positions
+      - System health
+  [ ] Press Ctrl+C to exit
+
+  Time Required: 2-3 minutes
+
+================================================================================
+  MIDDAY CHECK (Optional - 12:00 PM)
+================================================================================
+
+  [ ] Double-click: Launch_Dashboard.bat
+  [ ] Check current P&L status
+  [ ] Press Ctrl+C to exit
+
+  Time Required: 1-2 minutes
+
+================================================================================
+  END OF DAY ROUTINE (Recommended - 4:30 PM)
+================================================================================
+
+  [ ] Double-click: Sentinel_Control_Panel.bat
+
+  [ ] Press "1" to launch dashboard
+      - Review final P&L for the day
+      - Note any large moves
+      - Press Ctrl+C to exit dashboard
+
+  [ ] Press "3" to send email report
+      - Daily summary sent to wjcornelius@gmail.com
+      - Check inbox for confirmation
+
+  [ ] Press "Q" to quit control panel
+
+  Time Required: 5 minutes
+
+================================================================================
+  WEEKLY SYSTEM TEST (Every Monday)
+================================================================================
+
+  [ ] Double-click: Run_System_Test.bat
+  [ ] Review test results (should be ~90% pass rate)
+  [ ] Check for any new failures
+  [ ] Address issues if needed
+
+  Time Required: 3-5 minutes
+
+================================================================================
+  AS NEEDED
+================================================================================
+
+  Preview Email:
+    [ ] Double-click: Preview_Email_Report.bat
+    [ ] Review in browser before sending
+
+  Check Alerts:
+    [ ] Double-click: Check_Portfolio_Alerts.bat
+    [ ] Review any triggered thresholds
+
+  Custom Check:
+    [ ] Use Control Panel for menu-driven access
+
+================================================================================
+  CURRENT PORTFOLIO STATUS
+================================================================================
+
+  Daily P&L:         $65,771.75 (+65.77%)
+  Sharpe Ratio:      472.050
+  Win Rate:          100.0%
+  Open Positions:    6 stocks
+  Capital Deployed:  $63,245 (63.2%)
+
+================================================================================
+  TROUBLESHOOTING
+================================================================================
+
+  Dashboard won't launch?
+    -> Use Launch_Sentinel.bat (checks environment first)
+
+  Email not sending?
+    -> Check Gmail app password in Send_Email_Report.bat
+
+  System test failing?
+    -> Review test_end_to_end.py output for details
+
+  Computer froze?
+    -> That's OK! Everything is manual mode.
+       Just restart when ready and run what you need.
+
+================================================================================
+  REMINDERS
+================================================================================
+
+  - All operations are MANUAL (nothing runs without you)
+  - Computer crashes won't affect anything (no automation)
+  - Sleep mode is fine (system only active when you run it)
+  - Probation safe (you control when and what runs)
+
+  Run as much or as little as you want!
+
+================================================================================
+  MOST IMPORTANT
+================================================================================
+
+  Just run these when you feel like it:
+
+    1. Sentinel_Control_Panel.bat  (Your main hub)
+    2. Launch_Dashboard.bat         (Quick P&L check)
+    3. Send_Email_Report.bat        (End of day summary)
+
+  That's it! No pressure, no automation, no worries.
+
+================================================================================
+
+  Questions? See:
+    - TESTING_GUIDE.md (full testing documentation)
+    - QUICK_START.txt (quick reference)
+    - WEEK7_DAY5_COMPLETE.md (completion summary)
+
+================================================================================
