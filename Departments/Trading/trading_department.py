@@ -491,14 +491,386 @@ class TradingDepartment:
         self.duplicate_detector.cleanup_expired()
 
     def _process_execution_request(self, metadata: Dict, body: str):
-        """Process an order execution request from Portfolio"""
+        """Process an order execution request from Executive"""
         logger.info(f"Processing execution request: {metadata.get('message_id')}")
 
-        # TODO: Parse order from message body
-        # This is a placeholder - actual implementation will parse the markdown/JSON
-        # For now, skip to demonstrate the architecture
+        try:
+            # Extract JSON data payload from message body
+            data_payload = self._extract_json_payload(body)
+            if not data_payload:
+                logger.error("No data payload found in message")
+                return
 
-        logger.info("Execution request processed (placeholder)")
+            # Parse order details
+            order = ExecutionOrder(
+                ticker=data_payload.get('ticker'),
+                action=data_payload.get('action'),
+                quantity=data_payload.get('shares'),
+                order_type=data_payload.get('order_type', 'MARKET'),
+                limit_price=data_payload.get('limit_price'),
+                executive_approval_msg_id=metadata.get('message_id'),
+                portfolio_request_msg_id=data_payload.get('proposal_id')
+            )
+
+            # Check for duplicate
+            if self.duplicate_detector.is_duplicate(order):
+                self._handle_duplicate(order, metadata)
+                return
+
+            # Get portfolio state and market data for validation
+            portfolio_state = self._get_portfolio_state()
+            market_data = self._get_market_data(order.ticker)
+
+            # Validate hard constraints
+            is_valid, violations = self.constraint_validator.validate_order(
+                order, portfolio_state, market_data
+            )
+
+            if not is_valid:
+                self._handle_constraint_violations(order, violations, metadata)
+                return
+
+            # Execute order via Alpaca
+            self._execute_order_with_retry(order, metadata)
+
+        except Exception as e:
+            logger.error(f"Error processing execution request: {e}", exc_info=True)
+            self._escalate_error(metadata, str(e))
+
+    def _extract_json_payload(self, body: str) -> Optional[Dict]:
+        """Extract JSON data payload from message body"""
+        import re
+
+        # Find JSON code block in markdown
+        json_match = re.search(r'```json\n(.*?)\n```', body, re.DOTALL)
+        if not json_match:
+            return None
+
+        try:
+            return json.loads(json_match.group(1))
+        except json.JSONDecodeError as e:
+            logger.error(f"Failed to parse JSON payload: {e}")
+            return None
+
+    def _get_portfolio_state(self) -> Dict:
+        """Get current portfolio state from Alpaca"""
+        try:
+            account = self.trading_client.get_account()
+            positions = self.trading_client.get_all_positions()
+
+            portfolio_value = float(account.portfolio_value)
+            current_prices = {}
+
+            for pos in positions:
+                current_prices[pos.symbol] = float(pos.current_price)
+
+            return {
+                'portfolio_value': portfolio_value,
+                'cash': float(account.cash),
+                'buying_power': float(account.buying_power),
+                'current_prices': current_prices
+            }
+        except Exception as e:
+            logger.error(f"Failed to get portfolio state: {e}")
+            return {
+                'portfolio_value': 0,
+                'cash': 0,
+                'buying_power': 0,
+                'current_prices': {}
+            }
+
+    def _get_market_data(self, ticker: str) -> Dict:
+        """Get market data for ticker (placeholder - will use yfinance in production)"""
+        # TODO: Implement yfinance data fetching
+        # For now, return placeholder data
+        return {
+            'current_price': 100.00,
+            'average_volume': 1000000,
+            'vix': 15.0
+        }
+
+    def _execute_order_with_retry(self, order: ExecutionOrder, metadata: Dict):
+        """
+        Execute order via Alpaca with exponential backoff retry logic
+
+        Pattern learned from v6.2's execution_engine.py _submit_with_retry()
+        Implementation is FRESH code for message-based architecture
+        """
+        max_retries = 5
+        retry_delays = [1, 2, 4, 8, 16]  # Exponential backoff
+
+        for attempt in range(max_retries):
+            try:
+                # Submit order to Alpaca
+                alpaca_order = self._submit_to_alpaca(order)
+
+                if alpaca_order:
+                    # Success - store in database and send confirmation
+                    order_id = self._store_order_in_database(order, alpaca_order, metadata)
+                    self.duplicate_detector.record_submission(order, order_id)
+                    self._send_execution_confirmation(order, alpaca_order, metadata)
+                    logger.info(f"Order executed successfully: {order.ticker} {order.action} {order.quantity}")
+                    return
+
+            except Exception as e:
+                if attempt < max_retries - 1:
+                    wait_time = retry_delays[attempt]
+                    logger.warning(
+                        f"Order submission failed (attempt {attempt + 1}/{max_retries}): {e}. "
+                        f"Retrying in {wait_time}s..."
+                    )
+                    time.sleep(wait_time)
+                else:
+                    logger.error(f"Order submission failed after {max_retries} attempts: {e}")
+                    self._handle_submission_failure(order, metadata, str(e))
+
+    def _submit_to_alpaca(self, order: ExecutionOrder):
+        """Submit order to Alpaca API"""
+        # Determine order side
+        side = OrderSide.BUY if order.action == 'BUY' else OrderSide.SELL
+
+        # Create order request
+        if order.order_type == 'MARKET':
+            order_request = MarketOrderRequest(
+                symbol=order.ticker,
+                qty=order.quantity,
+                side=side,
+                time_in_force=TimeInForce.DAY
+            )
+        else:  # LIMIT order
+            order_request = LimitOrderRequest(
+                symbol=order.ticker,
+                qty=order.quantity,
+                side=side,
+                time_in_force=TimeInForce.DAY,
+                limit_price=order.limit_price
+            )
+
+        # Submit to Alpaca
+        alpaca_order = self.trading_client.submit_order(order_request)
+        logger.info(f"Submitted order to Alpaca: {alpaca_order.id}")
+        return alpaca_order
+
+    def _store_order_in_database(self, order: ExecutionOrder, alpaca_order, metadata: Dict) -> int:
+        """Store order in database with message chain tracking"""
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+
+        # Generate internal order ID
+        internal_order_id = f"ORD_{datetime.utcnow().strftime('%Y%m%d_%H%M%S')}_{uuid.uuid4().hex[:8]}"
+
+        cursor.execute("""
+            INSERT INTO trading_orders (
+                order_id, alpaca_order_id, ticker, action, quantity, order_type, limit_price,
+                executive_approval_msg_id, portfolio_request_msg_id,
+                status, submitted_timestamp, hard_constraints_passed
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, (
+            internal_order_id,
+            alpaca_order.id,
+            order.ticker,
+            order.action,
+            order.quantity,
+            order.order_type,
+            order.limit_price,
+            order.executive_approval_msg_id,
+            order.portfolio_request_msg_id,
+            'SUBMITTED',
+            datetime.utcnow(),
+            1  # Hard constraints passed
+        ))
+
+        order_db_id = cursor.lastrowid
+        conn.commit()
+        conn.close()
+
+        logger.info(f"Stored order in database: {internal_order_id}")
+        return order_db_id
+
+    def _send_execution_confirmation(self, order: ExecutionOrder, alpaca_order, metadata: Dict):
+        """Send execution confirmation to Portfolio and Compliance"""
+        data_payload = {
+            'order_id': alpaca_order.id,
+            'ticker': order.ticker,
+            'action': order.action,
+            'shares': order.quantity,
+            'order_type': order.order_type,
+            'status': 'SUBMITTED',
+            'submitted_at': alpaca_order.submitted_at.isoformat() if alpaca_order.submitted_at else datetime.utcnow().isoformat(),
+            'alpaca_order_id': alpaca_order.id
+        }
+
+        # Send to Portfolio
+        self.message_handler.write_message(
+            to_dept='PORTFOLIO',
+            message_type='execution',
+            subject=f"Order Submitted: {order.ticker} {order.action} {order.quantity}",
+            body=f"## Order Confirmation\n\nYour order has been submitted to Alpaca.\n\n"
+                 f"- **Ticker:** {order.ticker}\n"
+                 f"- **Action:** {order.action}\n"
+                 f"- **Quantity:** {order.quantity}\n"
+                 f"- **Order Type:** {order.order_type}\n"
+                 f"- **Alpaca Order ID:** {alpaca_order.id}\n",
+            data_payload=data_payload
+        )
+
+        # Send to Compliance
+        self.message_handler.write_message(
+            to_dept='COMPLIANCE',
+            message_type='log',
+            subject=f"Trade Executed: {order.ticker} {order.action} {order.quantity}",
+            body=f"## Execution Log\n\nTrade executed via Alpaca.\n\n"
+                 f"- **Ticker:** {order.ticker}\n"
+                 f"- **Action:** {order.action}\n"
+                 f"- **Quantity:** {order.quantity}\n"
+                 f"- **Alpaca Order ID:** {alpaca_order.id}\n",
+            data_payload=data_payload
+        )
+
+        logger.info(f"Sent execution confirmations to Portfolio and Compliance")
+
+    def _handle_duplicate(self, order: ExecutionOrder, metadata: Dict):
+        """Handle duplicate order detection"""
+        logger.warning(f"Duplicate order blocked: {order.ticker} {order.action} {order.quantity}")
+
+        # Store rejection in database
+        self._store_rejection(order, metadata, "DUPLICATE", "Duplicate order detected (submitted within last 5 minutes)")
+
+        # Send rejection notice to Executive
+        self.message_handler.write_message(
+            to_dept='EXECUTIVE',
+            message_type='escalation',
+            subject=f"DUPLICATE ORDER BLOCKED: {order.ticker}",
+            body=f"## Duplicate Order Detected\n\n"
+                 f"A duplicate order was automatically blocked:\n\n"
+                 f"- **Ticker:** {order.ticker}\n"
+                 f"- **Action:** {order.action}\n"
+                 f"- **Quantity:** {order.quantity}\n\n"
+                 f"**Reason:** Same order submitted within last 5 minutes.\n\n"
+                 f"**Action Required:** Review if this was intentional or a bug.",
+            priority='elevated'
+        )
+
+    def _handle_constraint_violations(self, order: ExecutionOrder, violations: List[HardConstraintViolation], metadata: Dict):
+        """Handle hard constraint violations"""
+        logger.warning(f"Order rejected due to {len(violations)} hard constraint violation(s)")
+
+        # Format violations for message
+        violations_text = "\n".join([
+            f"- **{v.constraint_name}:** {v.violation_reason} (limit: {v.limit_value}, actual: {v.violating_value})"
+            for v in violations
+        ])
+
+        # Store rejection in database
+        violation_json = json.dumps([{
+            'constraint': v.constraint_name,
+            'reason': v.violation_reason,
+            'limit': str(v.limit_value),
+            'actual': str(v.violating_value)
+        } for v in violations])
+
+        self._store_rejection(order, metadata, "HARD_CONSTRAINT", violation_json)
+
+        # Send rejection notice to Executive
+        self.message_handler.write_message(
+            to_dept='EXECUTIVE',
+            message_type='escalation',
+            subject=f"ORDER REJECTED: {order.ticker} (Hard Constraint Violations)",
+            body=f"## Hard Constraint Violations\n\n"
+                 f"Order was automatically rejected due to hard constraint violations:\n\n"
+                 f"**Order Details:**\n"
+                 f"- **Ticker:** {order.ticker}\n"
+                 f"- **Action:** {order.action}\n"
+                 f"- **Quantity:** {order.quantity}\n\n"
+                 f"**Violations:**\n{violations_text}\n\n"
+                 f"**Action Required:** Review portfolio allocation or adjust constraints in hard_constraints.yaml.",
+            priority='elevated'
+        )
+
+    def _handle_submission_failure(self, order: ExecutionOrder, metadata: Dict, error_msg: str):
+        """Handle Alpaca submission failure after retries"""
+        logger.error(f"Order submission failed: {error_msg}")
+
+        # Store rejection in database
+        self._store_rejection(order, metadata, "ALPACA", error_msg)
+
+        # Escalate to Executive
+        self.message_handler.write_message(
+            to_dept='EXECUTIVE',
+            message_type='escalation',
+            subject=f"ORDER SUBMISSION FAILED: {order.ticker}",
+            body=f"## Alpaca Submission Failure\n\n"
+                 f"Order failed to submit to Alpaca after 5 retry attempts:\n\n"
+                 f"**Order Details:**\n"
+                 f"- **Ticker:** {order.ticker}\n"
+                 f"- **Action:** {order.action}\n"
+                 f"- **Quantity:** {order.quantity}\n\n"
+                 f"**Error:** {error_msg}\n\n"
+                 f"**Action Required:** Check Alpaca API status or manually submit order if urgent.",
+            priority='critical'
+        )
+
+    def _store_rejection(self, order: ExecutionOrder, metadata: Dict, rejection_source: str, rejection_reason: str):
+        """Store order rejection in database"""
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+
+        # First, create order record with REJECTED status
+        internal_order_id = f"ORD_{datetime.utcnow().strftime('%Y%m%d_%H%M%S')}_{uuid.uuid4().hex[:8]}"
+
+        cursor.execute("""
+            INSERT INTO trading_orders (
+                order_id, ticker, action, quantity, order_type, limit_price,
+                executive_approval_msg_id, portfolio_request_msg_id,
+                status, hard_constraints_passed, constraint_violations
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, (
+            internal_order_id,
+            order.ticker,
+            order.action,
+            order.quantity,
+            order.order_type,
+            order.limit_price,
+            order.executive_approval_msg_id,
+            order.portfolio_request_msg_id,
+            'REJECTED',
+            0 if rejection_source == 'HARD_CONSTRAINT' else 1,
+            rejection_reason if rejection_source == 'HARD_CONSTRAINT' else None
+        ))
+
+        order_db_id = cursor.lastrowid
+
+        # Then, create rejection record
+        cursor.execute("""
+            INSERT INTO trading_rejections (
+                order_id, rejection_reason, rejection_code, rejection_timestamp, rejection_source
+            ) VALUES (?, ?, ?, ?, ?)
+        """, (
+            order_db_id,
+            rejection_reason,
+            None,  # rejection_code (Alpaca error code if available)
+            datetime.utcnow(),
+            rejection_source
+        ))
+
+        conn.commit()
+        conn.close()
+
+        logger.info(f"Stored rejection in database: {internal_order_id}")
+
+    def _escalate_error(self, metadata: Dict, error_msg: str):
+        """Escalate unexpected error to Executive"""
+        self.message_handler.write_message(
+            to_dept='EXECUTIVE',
+            message_type='escalation',
+            subject="TRADING DEPARTMENT ERROR",
+            body=f"## Unexpected Error\n\n"
+                 f"An unexpected error occurred while processing execution request:\n\n"
+                 f"**Message ID:** {metadata.get('message_id')}\n\n"
+                 f"**Error:** {error_msg}\n\n"
+                 f"**Action Required:** Review logs and investigate.",
+            priority='critical'
+        )
 
 
 if __name__ == "__main__":
