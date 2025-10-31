@@ -1,0 +1,224 @@
+#!/usr/bin/env python3
+"""
+Sentinel MCP Server
+Gives Claude Desktop read/write access to Sentinel files and Alpaca data
+"""
+
+import json
+import os
+from pathlib import Path
+from typing import Any
+
+# MCP SDK (we'll install this next)
+from mcp.server import Server
+from mcp.server.stdio import stdio_server
+from mcp.types import Tool, TextContent
+
+# Alpaca SDK
+from alpaca.trading.client import TradingClient
+from alpaca.data.historical import StockHistoricalDataClient
+from alpaca.data.requests import StockLatestQuoteRequest
+
+# Database
+import sqlite3
+
+# Load your config
+import config
+
+# Initialize Alpaca clients
+trading_client = TradingClient(config.ALPACA_API_KEY, config.ALPACA_SECRET_KEY, paper=True)
+data_client = StockHistoricalDataClient(config.ALPACA_API_KEY, config.ALPACA_SECRET_KEY)
+
+# Sentinel paths
+SENTINEL_DIR = Path(__file__).parent
+DB_PATH = SENTINEL_DIR / "sentinel.db"
+
+# Create MCP server
+app = Server("sentinel-mcp")
+
+
+# TOOL 1: Read any Sentinel file
+@app.tool()
+async def read_sentinel_file(filename: str) -> list[TextContent]:
+    """Read contents of any file in Sentinel directory"""
+    file_path = SENTINEL_DIR / filename
+    
+    if not file_path.exists():
+        return [TextContent(type="text", text=f"ERROR: File {filename} not found")]
+    
+    try:
+        content = file_path.read_text()
+        return [TextContent(type="text", text=content)]
+    except Exception as e:
+        return [TextContent(type="text", text=f"ERROR reading {filename}: {str(e)}")]
+
+
+# TOOL 2: Write to any Sentinel file
+@app.tool()
+async def write_sentinel_file(filename: str, content: str) -> list[TextContent]:
+    """Write content to a file in Sentinel directory"""
+    file_path = SENTINEL_DIR / filename
+    
+    try:
+        file_path.write_text(content)
+        return [TextContent(type="text", text=f"Successfully wrote to {filename}")]
+    except Exception as e:
+        return [TextContent(type="text", text=f"ERROR writing {filename}: {str(e)}")]
+
+
+# TOOL 3: List Sentinel files
+@app.tool()
+async def list_sentinel_files() -> list[TextContent]:
+    """List all files in Sentinel directory"""
+    try:
+        files = [f.name for f in SENTINEL_DIR.iterdir() if f.is_file()]
+        return [TextContent(type="text", text="\n".join(sorted(files)))]
+    except Exception as e:
+        return [TextContent(type="text", text=f"ERROR: {str(e)}")]
+
+
+# TOOL 4: Get Alpaca account info
+@app.tool()
+async def get_account_status() -> list[TextContent]:
+    """Get current Alpaca account status (cash, equity, positions)"""
+    try:
+        account = trading_client.get_account()
+        positions = trading_client.get_all_positions()
+        
+        result = {
+            "cash": float(account.cash),
+            "portfolio_value": float(account.portfolio_value),
+            "buying_power": float(account.buying_power),
+            "positions_count": len(positions),
+            "positions": [
+                {
+                    "symbol": p.symbol,
+                    "qty": float(p.qty),
+                    "current_price": float(p.current_price),
+                    "market_value": float(p.market_value),
+                    "unrealized_pl": float(p.unrealized_pl),
+                    "unrealized_plpc": float(p.unrealized_plpc)
+                }
+                for p in positions
+            ]
+        }
+        
+        return [TextContent(type="text", text=json.dumps(result, indent=2))]
+    except Exception as e:
+        return [TextContent(type="text", text=f"ERROR: {str(e)}")]
+
+
+# TOOL 5: Get latest quote for a symbol
+@app.tool()
+async def get_latest_quote(symbol: str) -> list[TextContent]:
+    """Get latest quote for a stock symbol"""
+    try:
+        request = StockLatestQuoteRequest(symbol_or_symbols=symbol)
+        quote = data_client.get_stock_latest_quote(request)[symbol]
+        
+        result = {
+            "symbol": symbol,
+            "bid": float(quote.bid_price),
+            "ask": float(quote.ask_price),
+            "bid_size": int(quote.bid_size),
+            "ask_size": int(quote.ask_size),
+            "timestamp": str(quote.timestamp)
+        }
+        
+        return [TextContent(type="text", text=json.dumps(result, indent=2))]
+    except Exception as e:
+        return [TextContent(type="text", text=f"ERROR: {str(e)}")]
+
+
+# TOOL 6: Query Sentinel database
+@app.tool()
+async def query_database(sql: str) -> list[TextContent]:
+    """Execute a SELECT query on sentinel.db"""
+    if not sql.strip().upper().startswith("SELECT"):
+        return [TextContent(type="text", text="ERROR: Only SELECT queries allowed")]
+    
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        cursor = conn.cursor()
+        cursor.execute(sql)
+        
+        rows = cursor.fetchall()
+        columns = [desc[0] for desc in cursor.description]
+        
+        result = {
+            "columns": columns,
+            "rows": rows,
+            "count": len(rows)
+        }
+        
+        conn.close()
+        return [TextContent(type="text", text=json.dumps(result, indent=2))]
+    except Exception as e:
+        return [TextContent(type="text", text=f"ERROR: {str(e)}")]
+
+
+# TOOL 7: Get today's trading plan
+@app.tool()
+async def get_todays_plan() -> list[TextContent]:
+    """Get today's trading decisions and plan from database"""
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        cursor = conn.cursor()
+        
+        # Get latest decisions
+        cursor.execute("""
+            SELECT symbol, decision, conviction_score, reasoning 
+            FROM decisions 
+            WHERE date = date('now')
+            ORDER BY conviction_score DESC
+        """)
+        decisions = cursor.fetchall()
+        
+        # Get executed trades
+        cursor.execute("""
+            SELECT symbol, action, quantity, notional_value, status
+            FROM trades
+            WHERE date = date('now')
+        """)
+        trades = cursor.fetchall()
+        
+        result = {
+            "date": "today",
+            "decisions_count": len(decisions),
+            "decisions": [
+                {
+                    "symbol": d[0],
+                    "decision": d[1],
+                    "conviction": d[2],
+                    "reasoning": d[3]
+                }
+                for d in decisions
+            ],
+            "trades_executed": len(trades),
+            "trades": [
+                {
+                    "symbol": t[0],
+                    "action": t[1],
+                    "quantity": t[2],
+                    "value": t[3],
+                    "status": t[4]
+                }
+                for t in trades
+            ]
+        }
+        
+        conn.close()
+        return [TextContent(type="text", text=json.dumps(result, indent=2))]
+    except Exception as e:
+        return [TextContent(type="text", text=f"ERROR: {str(e)}")]
+
+
+# Run the server
+async def main():
+    async with stdio_server() as (read_stream, write_stream):
+        await app.run(read_stream, write_stream, app.create_initialization_options())
+
+
+if __name__ == "__main__":
+    import asyncio
+    asyncio.run(main())

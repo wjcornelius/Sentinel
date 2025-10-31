@@ -476,10 +476,12 @@ class TradingDepartment:
                     continue
 
                 # Process based on message type
-                if metadata.get('message_type') == 'execution_request':
+                message_type = metadata.get('message_type')
+                if message_type in ['execution_request', 'ExecutiveApproval']:
+                    # Both execution_request and ExecutiveApproval trigger order execution
                     self._process_execution_request(metadata, body)
                 else:
-                    logger.warning(f"Unknown message type: {metadata.get('message_type')}")
+                    logger.warning(f"Unknown message type: {message_type}")
 
                 # Archive processed message
                 self.message_handler.archive_message(message_path)

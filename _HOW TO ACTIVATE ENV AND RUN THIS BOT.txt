@@ -1,0 +1,11 @@
+Windows Key, then CMD, then Enter.
+
+CMDs:
+
+cd C:\Users\wjcor\OneDrive\Desktop\Sentinel
+venv\Scripts\activate.bat
+python main_script.py
+
+
+# Run the quick-look script:
+python sentinel_quicklook.py AAPL MSFT MP

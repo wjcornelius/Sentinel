@@ -358,18 +358,19 @@ DEPARTMENT → COMPLIANCE (log: "Malformed message incident")
 perplexity_api:
   rate_limit: 60  # queries per hour
   handling: "Queue requests, process batch every minute"
+  credentials: "Load from /Sentinel/config.py"
 
 yfinance:
-  rate_limit: null  # No official limit, but be respectful
-  handling: "Cache aggressively, 5-min refresh"
-
-alpha_vantage:
-  rate_limit: 5  # queries per minute (free tier)
-  handling: "Critical data only, cache 24h"
+  rate_limit: null  # No official limit, 5-10 req/min respectful
+  handling: "Cache aggressively, 5-min refresh for VIX/indices, 1-hour for stocks"
 
 alpaca_api:
-  rate_limit: 200  # requests per minute
-  handling: "Batching orders, no throttling needed for Phase 1 volumes"
+  rate_limit: 200  # requests per minute (paper trading)
+  handling: "No throttling needed for Phase 1 volumes"
+  credentials: "Load from /Sentinel/config.py"
+
+# NOTE: Alpha Vantage REMOVED - not needed for Phase 1
+# Using Alpaca for price/technical data, yfinance for fundamentals
 ```
 
 ### 6.2 Backoff Strategy

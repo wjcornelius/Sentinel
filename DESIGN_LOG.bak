@@ -1,0 +1,18 @@
+# Project Sentinel - Design & Decision Log
+
+This document tracks the key architectural decisions, bug fixes, and strategic pivots made during the development of Sentinel. It serves as a condensed version of the full conversation history.
+
+---
+### v6.2 (Live Trading Go-Ahead & Push Protection Fix)
+- **Decision:** Implemented a `LIVE_TRADING` boolean flag in `config.py` to act as a master switch between simulation and live paper trading.
+- **Reasoning:** Avoids having to comment/uncomment code, reducing risk of error. Provides a single, clear point of control.
+- **Bug Fix:** Added `round(value, 2)` to notional order calculations in `calculate_trade_plan`.
+- **Reasoning:** The Alpaca API rejected orders with more than two decimal places, causing all live trades to fail on the first attempt.
+- **Bug Fix:** Corrected a `git push` failure caused by committing secret keys in backup (`.bak`) files. Resolved by resetting the commit, deleting the backup files, and updating `.gitignore` to prevent this in the future.
+- **Reasoning:** GitHub's Push Protection correctly blocked the push to prevent leaking secrets. The fix ensures only safe files are ever committed.
+
+### v6.1 (Database & State Management)
+- **Decision:** Integrated a SQLite database (`sentinel.db`) with `decisions` and `trades` tables.
+- **Reasoning:** To make the system stateful, prevent duplicate daily runs, and allow for performance analysis. This replaced the simple text file log.
+
+---
