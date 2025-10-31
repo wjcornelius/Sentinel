@@ -525,6 +525,321 @@ class PortfolioDecisionEngine:
         return message_id, position_id
 
 
+class ExitSignalGenerator:
+    """
+    Monitors open positions for exit signals
+
+    Exit Conditions:
+    1. Stop-Loss Hit: current_price <= stop_loss
+    2. Target Hit: current_price >= target_price
+    3. Time-Based: days_held > max_hold_days
+    4. Research Downgrade: new Research score < threshold
+    """
+
+    def __init__(self, config: Dict, db_path: Path):
+        self.config = config
+        self.db_path = db_path
+
+        # Load exit rules from config
+        self.max_hold_days = config['exits']['max_hold_days']
+        self.downgrade_threshold = config['exits']['downgrade_score']
+        self.exit_priority = config['exits']['priority']
+
+        logger.info(f"ExitSignalGenerator initialized (max hold: {self.max_hold_days} days, "
+                   f"downgrade threshold: {self.downgrade_threshold})")
+
+    def get_open_positions(self) -> List[Dict]:
+        """Get all open positions from database"""
+        try:
+            conn = sqlite3.connect(self.db_path)
+            cursor = conn.cursor()
+
+            cursor.execute("""
+                SELECT position_id, ticker, intended_shares, actual_shares,
+                       intended_entry_price, actual_entry_price, actual_entry_date,
+                       intended_stop_loss, intended_target, sector
+                FROM portfolio_positions
+                WHERE status = 'OPEN'
+                ORDER BY actual_entry_date
+            """)
+
+            positions = []
+            for row in cursor.fetchall():
+                positions.append({
+                    'position_id': row[0],
+                    'ticker': row[1],
+                    'intended_shares': row[2],
+                    'actual_shares': row[3],
+                    'intended_entry_price': row[4],
+                    'actual_entry_price': row[5],
+                    'actual_entry_date': datetime.strptime(row[6], '%Y-%m-%d').date() if row[6] else None,
+                    'stop_loss': row[7],
+                    'target_price': row[8],
+                    'sector': row[9]
+                })
+
+            conn.close()
+            return positions
+
+        except Exception as e:
+            logger.error(f"Failed to get open positions: {e}", exc_info=True)
+            return []
+
+    def fetch_current_prices(self, tickers: List[str]) -> Dict[str, float]:
+        """
+        Fetch current prices for multiple tickers
+
+        Returns:
+            Dict mapping ticker -> current_price
+        """
+        prices = {}
+
+        for ticker in tickers:
+            try:
+                stock = yf.Ticker(ticker)
+                hist = stock.history(period='1d')
+
+                if len(hist) > 0:
+                    current_price = hist['Close'].iloc[-1]
+                    prices[ticker] = float(current_price)
+                    logger.debug(f"{ticker}: Current price ${current_price:.2f}")
+                else:
+                    logger.warning(f"{ticker}: No price data available")
+
+            except Exception as e:
+                logger.error(f"Failed to fetch price for {ticker}: {e}")
+
+        return prices
+
+    def get_latest_research_score(self, ticker: str) -> Optional[float]:
+        """
+        Get most recent Research composite score for ticker
+
+        Returns:
+            Latest composite score or None if not found
+        """
+        try:
+            conn = sqlite3.connect(self.db_path)
+            cursor = conn.cursor()
+
+            cursor.execute("""
+                SELECT quick_score
+                FROM research_candidate_tickers
+                WHERE ticker = ?
+                ORDER BY screening_date DESC
+                LIMIT 1
+            """)
+
+            result = cursor.fetchone()
+            conn.close()
+
+            if result:
+                return float(result[0])
+            else:
+                return None
+
+        except Exception as e:
+            logger.error(f"Failed to get Research score for {ticker}: {e}", exc_info=True)
+            return None
+
+    def check_exit_conditions(self, position: Dict, current_price: float) -> Optional[Dict]:
+        """
+        Check if any exit condition is triggered
+
+        Args:
+            position: Position dict
+            current_price: Current market price
+
+        Returns:
+            Exit signal dict or None
+        """
+        ticker = position['ticker']
+
+        # Condition 1: Stop-loss hit
+        if current_price <= position['stop_loss']:
+            return {
+                'reason': 'STOP_LOSS',
+                'priority': 1,
+                'details': (
+                    f"Price ${current_price:.2f} hit stop-loss ${position['stop_loss']:.2f}. "
+                    f"Protecting capital - closing position to limit loss."
+                ),
+                'exit_price': current_price
+            }
+
+        # Condition 2: Target hit
+        if current_price >= position['target_price']:
+            return {
+                'reason': 'TARGET',
+                'priority': 2,
+                'details': (
+                    f"Price ${current_price:.2f} hit target ${position['target_price']:.2f}. "
+                    f"Taking profit at target price."
+                ),
+                'exit_price': current_price
+            }
+
+        # Condition 3: Time-based exit
+        if position['actual_entry_date']:
+            days_held = (date.today() - position['actual_entry_date']).days
+
+            if days_held > self.max_hold_days:
+                return {
+                    'reason': 'TIME',
+                    'priority': 4,
+                    'details': (
+                        f"Position held {days_held} days, exceeds maximum {self.max_hold_days} days. "
+                        f"Closing position to free up capital for new opportunities."
+                    ),
+                    'exit_price': current_price
+                }
+
+        # Condition 4: Research downgrade
+        latest_score = self.get_latest_research_score(ticker)
+        if latest_score and latest_score < self.downgrade_threshold:
+            return {
+                'reason': 'DOWNGRADE',
+                'priority': 3,
+                'details': (
+                    f"Research score downgraded to {latest_score:.1f}, below threshold {self.downgrade_threshold:.1f}. "
+                    f"Fundamentals deteriorated - exiting position."
+                ),
+                'exit_price': current_price
+            }
+
+        # No exit triggered
+        return None
+
+    def check_all_exits(self) -> List[Tuple[Dict, Dict]]:
+        """
+        Check all open positions for exit signals
+
+        Returns:
+            List of (position, exit_signal) tuples
+        """
+        logger.info("=" * 80)
+        logger.info("CHECKING EXIT SIGNALS")
+        logger.info("=" * 80)
+
+        open_positions = self.get_open_positions()
+        logger.info(f"Monitoring {len(open_positions)} open positions")
+
+        if len(open_positions) == 0:
+            logger.info("No open positions to monitor")
+            logger.info("=" * 80)
+            return []
+
+        # Fetch current prices for all tickers
+        tickers = [p['ticker'] for p in open_positions]
+        current_prices = self.fetch_current_prices(tickers)
+
+        # Check each position for exit signals
+        exits_triggered = []
+
+        for position in open_positions:
+            ticker = position['ticker']
+            current_price = current_prices.get(ticker)
+
+            if not current_price:
+                logger.warning(f"{ticker}: No price data, skipping exit check")
+                continue
+
+            # Check exit conditions
+            exit_signal = self.check_exit_conditions(position, current_price)
+
+            if exit_signal:
+                exits_triggered.append((position, exit_signal))
+                logger.info(f"{ticker}: EXIT TRIGGERED - {exit_signal['reason']} - {exit_signal['details']}")
+            else:
+                logger.debug(f"{ticker}: No exit conditions met (price: ${current_price:.2f})")
+
+        logger.info(f"Exit check complete: {len(exits_triggered)} exits triggered")
+        logger.info("=" * 80)
+
+        return exits_triggered
+
+    def generate_sell_order(self, position: Dict, exit_signal: Dict,
+                           message_handler: MessageHandler) -> str:
+        """
+        Generate SellOrder message for Trading Department
+
+        Args:
+            position: Position being closed
+            exit_signal: Exit signal details
+            message_handler: MessageHandler instance
+
+        Returns:
+            sell_order_message_id
+        """
+        ticker = position['ticker']
+        shares = position['actual_shares'] or position['intended_shares']
+
+        # Calculate performance if we have entry price
+        entry_price = position['actual_entry_price'] or position['intended_entry_price']
+        exit_price = exit_signal['exit_price']
+        gain_per_share = exit_price - entry_price
+        total_gain = gain_per_share * shares
+        return_pct = (gain_per_share / entry_price * 100) if entry_price > 0 else 0
+
+        # Calculate days held
+        days_held = 0
+        if position['actual_entry_date']:
+            days_held = (date.today() - position['actual_entry_date']).days
+
+        # Build markdown body
+        body_lines = [
+            f"**Order Type**: SELL",
+            f"**Position ID**: {position['position_id']}",
+            f"**Exit Reason**: {exit_signal['reason']}",
+            "",
+            "## Order Details",
+            f"- **Ticker**: {ticker}",
+            f"- **Shares**: {shares} (close full position)",
+            f"- **Order Type**: MARKET",
+            f"- **Current Price**: ${exit_price:.2f}",
+            "",
+            "## Exit Signal",
+            f"- **Reason**: {exit_signal['reason']}",
+            f"- **Details**: {exit_signal['details']}",
+            "",
+            "## Performance",
+            f"- **Entry**: ${entry_price:.2f}",
+            f"- **Exit**: ${exit_price:.2f} (estimated)",
+            f"- **Gain**: ${gain_per_share:.2f}/share × {shares} = ${total_gain:.2f}",
+            f"- **Return**: {return_pct:+.2f}%",
+            f"- **Days Held**: {days_held}"
+        ]
+
+        body = "\n".join(body_lines)
+
+        # Build JSON payload
+        data_payload = {
+            'order_type': 'SELL',
+            'ticker': ticker,
+            'shares': shares,
+            'execution_type': 'MARKET',
+            'position_id': position['position_id'],
+            'exit_reason': exit_signal['reason'],
+            'exit_price': exit_price,
+            'timeout_seconds': 60  # Exits are urgent, shorter timeout
+        }
+
+        # Write message
+        message_id = message_handler.write_message(
+            to_dept='TRADING',
+            message_type='TradeOrder',
+            subject=f"Trade Order - SELL {ticker}",
+            body=body,
+            data_payload=data_payload,
+            parent_message_id=position['position_id'],
+            priority='urgent',  # Exits are urgent
+            requires_response=True
+        )
+
+        logger.info(f"SellOrder generated: {message_id} for {ticker} ({exit_signal['reason']})")
+        return message_id
+
+
 if __name__ == "__main__":
     # Test Portfolio Decision Engine
     logger.info("Portfolio Department - Testing Decision Engine (Day 1)")
