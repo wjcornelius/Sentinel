@@ -88,9 +88,9 @@ fundamental:
 # Market Conditions Monitoring
 market_conditions:
   vix_thresholds:
-    normal: 15.0                               # VIX < 15 = calm market
-    elevated: 20.0                             # VIX 15-20 = elevated volatility
-    caution: 30.0                              # VIX 20-30 = caution advised
+    normal: 20.0                               # VIX < 20 = normal market (C(P) feedback: recalibrated from 15)
+    elevated: 30.0                             # VIX 20-30 = elevated volatility
+    caution: 40.0                              # VIX 30-40 = caution advised (C(P) feedback: adjusted)
     panic: 40.0                                # VIX > 40 = panic mode (halt trading)
 
   spy_change_thresholds:
