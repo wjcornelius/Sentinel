@@ -24,8 +24,8 @@ exits:
 
 # Rebalancing
 rebalancing:
-  target_deployment: 1.0  # Target 100% deployed
-  threshold: 0.10  # Rebalance if > 10% deviation
+  min_deployment_threshold: 0.90  # Trigger rebalancing if < 90% of target deployed
+  buffer_pct: 0.05  # 5% buffer for rebalancing decisions
 
 # Capital
 capital:

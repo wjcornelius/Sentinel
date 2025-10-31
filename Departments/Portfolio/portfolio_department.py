@@ -1265,6 +1265,309 @@ class PositionTracker:
         return prices
 
 
+# ============================================================================
+# CLASS 5: PORTFOLIO REBALANCER (Day 4)
+# ============================================================================
+class PortfolioRebalancer:
+    """
+    Monitors portfolio deployment and requests new candidates when under-deployed
+    Ensures capital stays fully invested per target allocation
+    """
+
+    def __init__(self, config: Dict, db_path: Path):
+        self.db_path = db_path
+        self.logger = logging.getLogger(self.__class__.__name__)
+
+        # Load configuration
+        self.total_capital = config['capital']['total']
+        self.target_deployment_pct = config['limits']['max_capital_deployed_pct']
+        self.max_positions = config['limits']['max_positions']
+
+        # Rebalancing thresholds
+        self.min_deployment_threshold = config.get('rebalancing', {}).get('min_deployment_threshold', 0.90)
+        self.rebalance_buffer_pct = config.get('rebalancing', {}).get('buffer_pct', 0.05)
+
+    def check_deployment_status(self) -> Dict:
+        """
+        Check current capital deployment vs target
+
+        Returns:
+            status: Dict with deployment metrics and rebalancing recommendation
+        """
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+
+        try:
+            # Count positions by status
+            cursor.execute("""
+                SELECT status, COUNT(*) as count
+                FROM portfolio_positions
+                GROUP BY status
+            """)
+
+            status_counts = {row[0]: row[1] for row in cursor.fetchall()}
+            open_positions = status_counts.get('OPEN', 0)
+            pending_positions = status_counts.get('PENDING', 0)
+
+            # Calculate deployed capital (OPEN + PENDING)
+            cursor.execute("""
+                SELECT SUM(actual_entry_price * actual_shares) as deployed_open
+                FROM portfolio_positions
+                WHERE status = 'OPEN'
+            """)
+            deployed_open = cursor.fetchone()[0] or 0.0
+
+            cursor.execute("""
+                SELECT SUM(intended_entry_price * intended_shares) as deployed_pending
+                FROM portfolio_positions
+                WHERE status = 'PENDING'
+            """)
+            deployed_pending = cursor.fetchone()[0] or 0.0
+
+            total_deployed = deployed_open + deployed_pending
+
+            # Calculate metrics
+            target_capital = self.total_capital * self.target_deployment_pct
+            deployment_pct = (total_deployed / self.total_capital) if self.total_capital > 0 else 0.0
+            available_capital = target_capital - total_deployed
+            available_positions = self.max_positions - (open_positions + pending_positions)
+
+            # Determine if rebalancing needed
+            under_deployed = deployment_pct < (self.target_deployment_pct * self.min_deployment_threshold)
+            has_capacity = available_positions > 0 and available_capital > 0
+
+            needs_rebalancing = under_deployed and has_capacity
+
+            status = {
+                'timestamp': datetime.now().isoformat(),
+                'open_positions': open_positions,
+                'pending_positions': pending_positions,
+                'total_positions': open_positions + pending_positions,
+                'max_positions': self.max_positions,
+                'deployed_capital': total_deployed,
+                'target_capital': target_capital,
+                'available_capital': max(0, available_capital),
+                'deployment_pct': deployment_pct,
+                'target_deployment_pct': self.target_deployment_pct,
+                'under_deployed': under_deployed,
+                'has_capacity': has_capacity,
+                'needs_rebalancing': needs_rebalancing,
+                'available_positions': max(0, available_positions)
+            }
+
+            if needs_rebalancing:
+                self.logger.info(
+                    f"REBALANCING NEEDED: Deployed {deployment_pct:.1%} vs target {self.target_deployment_pct:.1%}, "
+                    f"{available_positions} positions available, ${available_capital:,.0f} capital available"
+                )
+            else:
+                self.logger.info(
+                    f"Portfolio status OK: {deployment_pct:.1%} deployed, "
+                    f"{open_positions + pending_positions}/{self.max_positions} positions"
+                )
+
+            return status
+
+        finally:
+            conn.close()
+
+    def generate_candidate_request(self, message_handler: MessageHandler) -> str:
+        """
+        Generate message to Research Department requesting new candidates
+
+        Args:
+            message_handler: MessageHandler instance for writing messages
+
+        Returns:
+            message_id: The CandidateRequest message ID
+        """
+        # Get current deployment status
+        status = self.check_deployment_status()
+
+        # Build request message
+        subject = "Candidate Request - Portfolio Under-Deployed"
+
+        body_lines = [
+            "# Candidate Request",
+            "",
+            "The Portfolio Department requires additional stock candidates to maintain target capital deployment.",
+            "",
+            "## Current Portfolio Status",
+            f"- **Current Deployment**: {status['deployment_pct']:.1%}",
+            f"- **Target Deployment**: {status['target_deployment_pct']:.1%}",
+            f"- **Deployed Capital**: ${status['deployed_capital']:,.0f}",
+            f"- **Available Capital**: ${status['available_capital']:,.0f}",
+            f"- **Open Positions**: {status['open_positions']}/{status['max_positions']}",
+            f"- **Pending Positions**: {status['pending_positions']}",
+            "",
+            "## Request Parameters",
+            f"- **Available Position Slots**: {status['available_positions']}",
+            f"- **Capital Available for New Positions**: ${status['available_capital']:,.0f}",
+            f"- **Minimum Composite Score**: 6.0",
+            "",
+            "## Action Required",
+            "Please run daily screening and provide candidates that:",
+            "1. Meet minimum composite score threshold (6.0+)",
+            "2. Pass sector diversification requirements",
+            "3. Fit within available capital constraints",
+            "",
+            "Priority: **High** - Portfolio is significantly under-deployed"
+        ]
+
+        body = "\n".join(body_lines)
+
+        # Build JSON payload
+        data_payload = {
+            'request_type': 'CANDIDATE_REQUEST',
+            'deployment_status': {
+                'current_deployment_pct': status['deployment_pct'],
+                'target_deployment_pct': status['target_deployment_pct'],
+                'available_capital': status['available_capital'],
+                'available_positions': status['available_positions']
+            },
+            'criteria': {
+                'min_composite_score': 6.0,
+                'max_candidates': status['available_positions'],
+                'require_sector_diversification': True
+            }
+        }
+
+        # Write message to Research Department
+        message_id = message_handler.write_message(
+            to_dept='RESEARCH',
+            message_type='CandidateRequest',
+            subject=subject,
+            body=body,
+            data_payload=data_payload,
+            priority='high',
+            requires_response=True
+        )
+
+        self.logger.info(f"Candidate request sent to Research: {message_id}")
+        return message_id
+
+    def check_sector_concentration(self) -> Dict[str, float]:
+        """
+        Calculate sector concentration in current portfolio
+
+        Returns:
+            sector_weights: Dict mapping sector -> weight percentage
+        """
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+
+        try:
+            # Get total portfolio value
+            cursor.execute("""
+                SELECT SUM(actual_entry_price * actual_shares) as total
+                FROM portfolio_positions
+                WHERE status = 'OPEN'
+            """)
+
+            total_value = cursor.fetchone()[0] or 0.0
+
+            if total_value == 0:
+                return {}
+
+            # Calculate sector weights
+            cursor.execute("""
+                SELECT sector, SUM(actual_entry_price * actual_shares) as sector_value
+                FROM portfolio_positions
+                WHERE status = 'OPEN'
+                GROUP BY sector
+            """)
+
+            sector_weights = {}
+            for sector, value in cursor.fetchall():
+                if sector and value:
+                    sector_weights[sector] = (value / total_value)
+
+            # Log if any sector is over-concentrated (>30%)
+            for sector, weight in sector_weights.items():
+                if weight > 0.30:
+                    self.logger.warning(
+                        f"SECTOR CONCENTRATION: {sector} is {weight:.1%} of portfolio (>30% threshold)"
+                    )
+
+            return sector_weights
+
+        finally:
+            conn.close()
+
+    def generate_rebalancing_report(self) -> Dict:
+        """
+        Generate comprehensive rebalancing report
+
+        Returns:
+            report: Dict with deployment status, sector allocation, recommendations
+        """
+        deployment_status = self.check_deployment_status()
+        sector_allocation = self.check_sector_concentration()
+
+        # Calculate position metrics
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+
+        try:
+            # Average position size
+            cursor.execute("""
+                SELECT AVG(actual_entry_price * actual_shares) as avg_size,
+                       MIN(actual_entry_price * actual_shares) as min_size,
+                       MAX(actual_entry_price * actual_shares) as max_size
+                FROM portfolio_positions
+                WHERE status = 'OPEN'
+            """)
+
+            row = cursor.fetchone()
+            avg_size = row[0] or 0.0
+            min_size = row[1] or 0.0
+            max_size = row[2] or 0.0
+
+            # Position concentration (largest position as % of portfolio)
+            largest_position_pct = (max_size / deployment_status['deployed_capital']) if deployment_status['deployed_capital'] > 0 else 0.0
+
+            report = {
+                'timestamp': datetime.now().isoformat(),
+                'deployment': deployment_status,
+                'sector_allocation': sector_allocation,
+                'position_metrics': {
+                    'average_size': avg_size,
+                    'min_size': min_size,
+                    'max_size': max_size,
+                    'largest_position_pct': largest_position_pct
+                },
+                'recommendations': []
+            }
+
+            # Generate recommendations
+            if deployment_status['needs_rebalancing']:
+                report['recommendations'].append({
+                    'priority': 'HIGH',
+                    'action': 'REQUEST_CANDIDATES',
+                    'reason': f"Portfolio {deployment_status['deployment_pct']:.1%} deployed vs {deployment_status['target_deployment_pct']:.1%} target"
+                })
+
+            if largest_position_pct > 0.15:
+                report['recommendations'].append({
+                    'priority': 'MEDIUM',
+                    'action': 'POSITION_SIZING_REVIEW',
+                    'reason': f"Largest position is {largest_position_pct:.1%} of portfolio (>15% threshold)"
+                })
+
+            for sector, weight in sector_allocation.items():
+                if weight > 0.30:
+                    report['recommendations'].append({
+                        'priority': 'MEDIUM',
+                        'action': 'SECTOR_DIVERSIFICATION',
+                        'reason': f"{sector} is {weight:.1%} of portfolio (>30% threshold)"
+                    })
+
+            return report
+
+        finally:
+            conn.close()
+
+
 if __name__ == "__main__":
     # Test Portfolio Decision Engine
     logger.info("Portfolio Department - Testing Decision Engine (Day 1)")
