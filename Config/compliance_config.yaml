@@ -1,0 +1,164 @@
+version: 1.0
+last_updated: 2025-10-31
+
+# ============================================================================
+# POSITION SIZING RULES
+# ============================================================================
+position_sizing:
+  max_position_pct: 0.10  # Maximum 10% of portfolio in single position
+  min_position_value: 1000  # Minimum $1,000 position size
+  max_position_value: 50000  # Maximum $50,000 position size (safety limit)
+
+  # Enforcement
+  enforce_max_position_pct: true
+  enforce_min_position_value: true
+  enforce_max_position_value: true
+
+# ============================================================================
+# SECTOR CONCENTRATION LIMITS
+# ============================================================================
+sector_limits:
+  max_concentration_pct: 0.30  # Maximum 30% of portfolio in single sector
+
+  # Sector-specific overrides (optional)
+  sector_specific:
+    Technology: 0.35  # Allow 35% in Tech (higher than default)
+    Financials: 0.25  # Limit Financials to 25%
+    Energy: 0.15  # Conservative limit on Energy
+
+  # Enforcement
+  enforce_max_concentration: true
+
+# ============================================================================
+# RISK LIMITS
+# ============================================================================
+risk_limits:
+  max_risk_per_trade_pct: 0.02  # Maximum 2% risk per trade
+  max_portfolio_risk_pct: 0.10  # Maximum 10% total portfolio at risk
+
+  # Stop-loss requirements
+  min_stop_loss_pct: 0.02  # Minimum 2% stop-loss distance
+  max_stop_loss_pct: 0.10  # Maximum 10% stop-loss distance
+
+  # Enforcement
+  enforce_max_risk_per_trade: true
+  enforce_max_portfolio_risk: true
+  enforce_stop_loss_range: true
+
+# ============================================================================
+# DUPLICATE ORDER PREVENTION
+# ============================================================================
+duplicate_prevention:
+  check_pending_orders: true  # Check for existing PENDING positions
+  check_open_positions: true  # Check for existing OPEN positions
+  allow_reopens: false  # Disallow reopening recently closed positions (within 24h)
+
+  # Time windows
+  reopen_cooldown_hours: 24  # Must wait 24h before reopening closed position
+
+# ============================================================================
+# RESTRICTED TICKERS
+# ============================================================================
+restricted_tickers:
+  # Penny stocks (< $5)
+  enabled: true
+  min_price: 5.00  # Block any ticker trading < $5
+
+  # Explicit blocklist
+  blocklist:
+    - GME   # Meme stock - high volatility
+    - AMC   # Meme stock - high volatility
+    - DWAC  # Political risk
+    - SPAC  # No SPACs
+
+  # Allowed exceptions (even if < $5)
+  allowlist:
+    - F     # Ford - legitimate company despite low price
+
+  # Enforcement
+  enforce_min_price: true
+  enforce_blocklist: true
+
+# ============================================================================
+# POST-TRADE AUDIT THRESHOLDS
+# ============================================================================
+audit_thresholds:
+  # Slippage tolerances
+  slippage:
+    warn_threshold_pct: 0.02  # Warn if slippage > 2%
+    fail_threshold_pct: 0.05  # Fail if slippage > 5%
+
+  # Partial fill tolerances
+  partial_fill:
+    warn_threshold_pct: 0.75  # Warn if fill rate < 75%
+    fail_threshold_pct: 0.50  # Fail if fill rate < 50%
+
+  # Stop-loss/Target accuracy
+  parameter_accuracy:
+    warn_threshold_pct: 0.01  # Warn if stop/target deviates > 1%
+    fail_threshold_pct: 0.03  # Fail if stop/target deviates > 3%
+
+# ============================================================================
+# VIOLATION SEVERITY MAPPING
+# ============================================================================
+violation_severity:
+  # Automatically assign severity based on violation type
+  POSITION_SIZE: CRITICAL      # Over-sized position = critical
+  SECTOR_CONCENTRATION: WARN   # Sector limit breach = warning
+  RISK_LIMIT: CRITICAL         # Risk limit breach = critical
+  DUPLICATE_ORDER: WARN        # Duplicate order = warning
+  RESTRICTED_TICKER: CRITICAL  # Trading restricted ticker = critical
+  SLIPPAGE: WARN               # Excessive slippage = warning
+  PARTIAL_FILL: INFO           # Partial fill = informational
+
+# ============================================================================
+# REPORTING SETTINGS
+# ============================================================================
+reporting:
+  # Report generation
+  generate_daily_report: true
+  report_output_dir: "Reports/Compliance"
+  report_formats:
+    - markdown  # Human-readable markdown
+    - csv       # Machine-readable CSV
+
+  # Report sections
+  include_validation_summary: true
+  include_audit_summary: true
+  include_violation_list: true
+  include_position_summary: true
+  include_sector_breakdown: true
+
+  # Alert thresholds
+  alert_on_critical_violations: true
+  alert_on_audit_failures: true
+  max_violations_before_alert: 3
+
+# ============================================================================
+# INTEGRATION SETTINGS
+# ============================================================================
+integration:
+  # Portfolio integration
+  validate_before_portfolio_decision: true  # Validate trades before Portfolio approves
+
+  # Trading integration
+  audit_after_fill: true  # Audit every fill confirmation
+
+  # Message priorities
+  trade_approval_priority: high
+  trade_rejection_priority: urgent
+  audit_report_priority: routine
+
+# ============================================================================
+# CAPITAL SETTINGS
+# ============================================================================
+capital:
+  total: 100000  # $100K total capital (must match Portfolio config)
+
+# ============================================================================
+# TESTING & SIMULATION
+# ============================================================================
+testing:
+  simulate_mode: false  # Set true for testing without real enforcement
+  log_all_checks: true  # Log every rule check (verbose mode)
+  allow_override: false  # Allow manual overrides of rejections (DANGER)
