@@ -519,6 +519,315 @@ class SentimentAnalyzer:
         conn.close()
 
 
+class TechnicalAnalyzer:
+    """
+    Calculates technical indicators using pandas-ta
+
+    Indicators:
+    - RSI (Relative Strength Index)
+    - MACD (Moving Average Convergence Divergence)
+    - Bollinger Bands
+    - Volume analysis
+    """
+
+    def __init__(self, config: Dict):
+        self.config = config
+        self.rsi_period = config['technical']['rsi_period']
+        self.rsi_oversold = config['technical']['rsi_oversold']
+        self.rsi_overbought = config['technical']['rsi_overbought']
+
+        import pandas_ta as ta
+        self.ta = ta
+
+        logger.info("TechnicalAnalyzer initialized")
+
+    def calculate_technical_score(self, ticker: str) -> Dict:
+        """
+        Calculate technical score (1-10) based on multiple indicators
+
+        Returns:
+            dict with RSI, MACD, Bollinger position, volume ratio, technical_score
+        """
+        try:
+            # Fetch historical data (60 days for indicators)
+            stock = yf.Ticker(ticker)
+            hist = stock.history(period="60d")
+
+            if len(hist) < 30:
+                logger.warning(f"Insufficient data for {ticker} technical analysis")
+                return self._default_technical_scores()
+
+            # Calculate RSI
+            rsi = self.ta.rsi(hist['Close'], length=self.rsi_period)
+            current_rsi = float(rsi.iloc[-1]) if not rsi.empty else 50.0
+
+            # Calculate MACD
+            macd_result = self.ta.macd(hist['Close'],
+                                       fast=self.config['technical']['macd_fast'],
+                                       slow=self.config['technical']['macd_slow'],
+                                       signal=self.config['technical']['macd_signal'])
+
+            if macd_result is not None and not macd_result.empty:
+                current_macd = float(macd_result[f'MACD_{self.config["technical"]["macd_fast"]}_{self.config["technical"]["macd_slow"]}_{self.config["technical"]["macd_signal"]}'].iloc[-1])
+                current_signal = float(macd_result[f'MACDs_{self.config["technical"]["macd_fast"]}_{self.config["technical"]["macd_slow"]}_{self.config["technical"]["macd_signal"]}'].iloc[-1])
+            else:
+                current_macd = 0.0
+                current_signal = 0.0
+
+            # Calculate Bollinger Bands
+            bbands = self.ta.bbands(hist['Close'],
+                                   length=self.config['technical']['bollinger_period'],
+                                   std=self.config['technical']['bollinger_std_dev'])
+
+            if bbands is not None and not bbands.empty:
+                bb_upper = float(bbands[f'BBU_{self.config["technical"]["bollinger_period"]}_{self.config["technical"]["bollinger_std_dev"]}.0'].iloc[-1])
+                bb_lower = float(bbands[f'BBL_{self.config["technical"]["bollinger_period"]}_{self.config["technical"]["bollinger_std_dev"]}.0'].iloc[-1])
+                current_price = float(hist['Close'].iloc[-1])
+
+                # Bollinger position: 0 = at lower band, 1 = at upper band
+                if bb_upper > bb_lower:
+                    bollinger_position = (current_price - bb_lower) / (bb_upper - bb_lower)
+                else:
+                    bollinger_position = 0.5
+            else:
+                bollinger_position = 0.5
+
+            # Volume analysis
+            avg_volume = float(hist['Volume'].rolling(window=30).mean().iloc[-1])
+            current_volume = float(hist['Volume'].iloc[-1])
+            volume_ratio = current_volume / avg_volume if avg_volume > 0 else 1.0
+
+            # Calculate component scores
+            rsi_score = self._score_rsi(current_rsi)
+            macd_score = self._score_macd(current_macd, current_signal)
+            bollinger_score = self._score_bollinger(bollinger_position)
+            volume_score = self._score_volume(volume_ratio)
+
+            # Weighted composite technical score
+            weights = self.config['technical']['technical_score_weights']
+            technical_score = (
+                rsi_score * weights['rsi'] +
+                macd_score * weights['macd'] +
+                bollinger_score * weights['bollinger'] +
+                volume_score * weights['volume']
+            )
+
+            logger.info(f"Technical analysis for {ticker}: RSI={current_rsi:.1f}, MACD={'BULL' if current_macd > current_signal else 'BEAR'}, Score={technical_score:.1f}")
+
+            return {
+                'rsi': current_rsi,
+                'macd': current_macd,
+                'macd_signal': current_signal,
+                'bollinger_position': bollinger_position,
+                'volume_ratio': volume_ratio,
+                'technical_score': round(technical_score, 1)
+            }
+
+        except Exception as e:
+            logger.error(f"Technical analysis failed for {ticker}: {e}", exc_info=True)
+            return self._default_technical_scores()
+
+    def _score_rsi(self, rsi: float) -> float:
+        """Convert RSI to 1-10 score"""
+        if rsi < self.rsi_oversold:
+            return 7.0  # Oversold = potentially bullish
+        elif rsi > self.rsi_overbought:
+            return 3.0  # Overbought = potentially bearish
+        else:
+            return 5.0  # Neutral
+
+    def _score_macd(self, macd: float, signal: float) -> float:
+        """Convert MACD to 1-10 score"""
+        if macd > signal:
+            return 7.0  # Bullish crossover
+        else:
+            return 3.0  # Bearish crossover
+
+    def _score_bollinger(self, position: float) -> float:
+        """Convert Bollinger position to 1-10 score"""
+        if position < 0.3:
+            return 7.0  # Near lower band = oversold
+        elif position > 0.7:
+            return 3.0  # Near upper band = overbought
+        else:
+            return 5.0  # Middle of bands = neutral
+
+    def _score_volume(self, ratio: float) -> float:
+        """Convert volume ratio to 1-10 score"""
+        threshold = self.config['technical']['volume_surge_threshold']
+        if ratio > threshold:
+            return 7.0  # High volume = strong interest
+        elif ratio < 0.5:
+            return 3.0  # Low volume = weak interest
+        else:
+            return 5.0  # Normal volume
+
+    def _default_technical_scores(self) -> Dict:
+        """Return default neutral scores when data unavailable"""
+        return {
+            'rsi': 50.0,
+            'macd': 0.0,
+            'macd_signal': 0.0,
+            'bollinger_position': 0.5,
+            'volume_ratio': 1.0,
+            'technical_score': 5.0
+        }
+
+
+class FundamentalAnalyzer:
+    """
+    Analyzes fundamental metrics using yfinance
+
+    Metrics:
+    - Valuation (P/E, PEG ratio)
+    - Growth (revenue growth YoY)
+    - Profitability (profit margins)
+    - Balance sheet (debt-to-equity)
+    """
+
+    def __init__(self, config: Dict):
+        self.config = config
+        self.min_market_cap = config['fundamental']['min_market_cap_billions'] * 1e9
+
+        logger.info("FundamentalAnalyzer initialized")
+
+    def calculate_fundamental_score(self, ticker: str) -> Dict:
+        """
+        Calculate fundamental score (1-10) based on multiple metrics
+
+        Returns:
+            dict with P/E, revenue growth, profit margin, debt-to-equity, fundamental_score
+        """
+        try:
+            stock = yf.Ticker(ticker)
+            info = stock.info
+
+            # Extract fundamental metrics
+            market_cap = info.get('marketCap', 0)
+            pe_ratio = info.get('trailingPE')
+            forward_pe = info.get('forwardPE')
+            peg_ratio = info.get('pegRatio')
+            revenue_growth = info.get('revenueGrowth')
+            profit_margin = info.get('profitMargins')
+            debt_to_equity = info.get('debtToEquity')
+
+            # Check minimum market cap
+            if market_cap < self.min_market_cap:
+                logger.warning(f"{ticker} below minimum market cap (${market_cap/1e9:.1f}B)")
+                return self._default_fundamental_scores()
+
+            # Calculate component scores
+            valuation_score = self._score_valuation(pe_ratio, peg_ratio)
+            growth_score = self._score_growth(revenue_growth)
+            profitability_score = self._score_profitability(profit_margin)
+            balance_sheet_score = self._score_balance_sheet(debt_to_equity)
+
+            # Weighted composite fundamental score
+            weights = self.config['fundamental']['fundamental_score_weights']
+            fundamental_score = (
+                valuation_score * weights['valuation'] +
+                growth_score * weights['growth'] +
+                profitability_score * weights['profitability'] +
+                balance_sheet_score * weights['balance_sheet']
+            )
+
+            logger.info(f"Fundamental analysis for {ticker}: P/E={pe_ratio}, Growth={revenue_growth}, Score={fundamental_score:.1f}")
+
+            return {
+                'market_cap': market_cap,
+                'pe_ratio': pe_ratio,
+                'forward_pe': forward_pe,
+                'peg_ratio': peg_ratio,
+                'revenue_growth_yoy': revenue_growth * 100 if revenue_growth else None,
+                'profit_margin': profit_margin * 100 if profit_margin else None,
+                'debt_to_equity': debt_to_equity,
+                'fundamental_score': round(fundamental_score, 1)
+            }
+
+        except Exception as e:
+            logger.error(f"Fundamental analysis failed for {ticker}: {e}", exc_info=True)
+            return self._default_fundamental_scores()
+
+    def _score_valuation(self, pe_ratio: Optional[float], peg_ratio: Optional[float]) -> float:
+        """Score valuation metrics"""
+        if pe_ratio is None:
+            return 5.0  # Neutral if unavailable
+
+        ranges = self.config['fundamental']['pe_ratio_ranges']
+
+        if pe_ratio < ranges['undervalued']:
+            return 8.0  # Undervalued
+        elif pe_ratio < ranges['fair_value']:
+            return 6.0  # Fair value
+        elif pe_ratio < ranges['overvalued']:
+            return 4.0  # Slightly overvalued
+        else:
+            return 2.0  # Overvalued
+
+    def _score_growth(self, revenue_growth: Optional[float]) -> float:
+        """Score revenue growth"""
+        if revenue_growth is None:
+            return 5.0
+
+        growth_pct = revenue_growth * 100
+        ranges = self.config['fundamental']['revenue_growth_ranges']
+
+        if growth_pct > ranges['high']:
+            return 9.0  # High growth
+        elif growth_pct > ranges['moderate']:
+            return 7.0  # Moderate growth
+        elif growth_pct > ranges['low']:
+            return 5.0  # Low growth
+        else:
+            return 3.0  # Declining revenue
+
+    def _score_profitability(self, profit_margin: Optional[float]) -> float:
+        """Score profit margins"""
+        if profit_margin is None:
+            return 5.0
+
+        margin_pct = profit_margin * 100
+        ranges = self.config['fundamental']['profit_margin_ranges']
+
+        if margin_pct > ranges['high']:
+            return 9.0  # High margin business
+        elif margin_pct > ranges['moderate']:
+            return 7.0  # Moderate margins
+        elif margin_pct > ranges['low']:
+            return 5.0  # Low margins
+        else:
+            return 3.0  # Unprofitable
+
+    def _score_balance_sheet(self, debt_to_equity: Optional[float]) -> float:
+        """Score debt levels"""
+        if debt_to_equity is None:
+            return 5.0
+
+        ranges = self.config['fundamental']['debt_to_equity_ranges']
+
+        if debt_to_equity < ranges['low']:
+            return 8.0  # Low debt (healthy)
+        elif debt_to_equity < ranges['moderate']:
+            return 6.0  # Moderate debt
+        elif debt_to_equity < ranges['high']:
+            return 4.0  # High debt (risky)
+        else:
+            return 2.0  # Very high debt (very risky)
+
+    def _default_fundamental_scores(self) -> Dict:
+        """Return default neutral scores when data unavailable"""
+        return {
+            'market_cap': 0,
+            'pe_ratio': None,
+            'forward_pe': None,
+            'peg_ratio': None,
+            'revenue_growth_yoy': None,
+            'profit_margin': None,
+            'debt_to_equity': None,
+            'fundamental_score': 5.0
+        }
+
+
 if __name__ == "__main__":
     # Quick test of MarketDataCollector
     logger.info("Research Department - Testing MarketDataCollector")
