@@ -20,9 +20,11 @@ ENV/
 
 # Secrets - DO NOT COMMIT
 config.py
+config.bak
 .env
 *.key
 *.pem
+*.bak
 
 # Database files - DO NOT COMMIT
 sentinel.db
