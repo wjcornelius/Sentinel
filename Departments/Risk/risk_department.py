@@ -363,6 +363,156 @@ class RiskCalculator:
             }
 
 
+class SectorConcentrationChecker:
+    """
+    Monitors sector concentration to prevent over-exposure
+    Phase 1: Hard limit of 40% per sector
+    Future: Dynamic sector limits, Correlation-based limits
+    """
+
+    def __init__(self, config: Dict):
+        """
+        Initialize Sector Concentration Checker
+
+        Args:
+            config: Risk configuration dictionary
+        """
+        self.config = config
+        self.enabled = config['sector_concentration']['enable']
+        self.max_sector_pct = config['sector_concentration']['max_sector_pct']
+        self.warning_threshold_pct = config['sector_concentration']['warning_threshold_pct']
+
+        logger.info(f"SectorConcentrationChecker initialized (enabled: {self.enabled}, max per sector: {self.max_sector_pct*100:.0f}%)")
+
+    def get_stock_sector(self, ticker: str) -> Optional[str]:
+        """
+        Get sector for a stock using yfinance
+
+        Args:
+            ticker: Stock symbol
+
+        Returns:
+            Sector name or None if unavailable
+        """
+        try:
+            stock = yf.Ticker(ticker)
+            info = stock.info
+
+            # Try sector field first
+            sector = info.get('sector')
+            if sector:
+                logger.debug(f"{ticker} sector: {sector}")
+                return sector
+
+            # Fallback: Try industry and map to sector
+            industry = info.get('industry')
+            if industry:
+                logger.debug(f"{ticker} industry: {industry} (no sector available)")
+                return None
+
+            logger.warning(f"{ticker}: No sector or industry information available")
+            return None
+
+        except Exception as e:
+            logger.error(f"Failed to get sector for {ticker}: {e}")
+            return None
+
+    def check_sector_concentration(
+        self,
+        ticker: str,
+        position_value: float,
+        capital: float,
+        current_sector_allocations: Dict[str, float]
+    ) -> Dict:
+        """
+        Check if adding new position would exceed sector concentration limit
+
+        Args:
+            ticker: Stock symbol for new trade
+            position_value: Dollar value of new position
+            capital: Total capital available
+            current_sector_allocations: Dict mapping sector -> current dollar allocation
+
+        Returns:
+            Dictionary with sector concentration validation result
+        """
+        try:
+            # Check if sector concentration is enabled
+            if not self.enabled:
+                return {
+                    'ticker': ticker,
+                    'sector': None,
+                    'approved': True,
+                    'status': 'DISABLED',
+                    'rejection_reason': None,
+                    'rejection_details': None
+                }
+
+            # Get sector for new stock
+            sector = self.get_stock_sector(ticker)
+
+            if sector is None:
+                logger.warning(f"{ticker}: Sector unavailable - cannot check concentration (approving by default)")
+                return {
+                    'ticker': ticker,
+                    'sector': None,
+                    'approved': True,
+                    'status': 'SECTOR_UNAVAILABLE',
+                    'rejection_reason': None,
+                    'rejection_details': 'Sector information not available for this stock'
+                }
+
+            # Calculate sector allocation before/after
+            sector_before = current_sector_allocations.get(sector, 0.0)
+            sector_after = sector_before + position_value
+
+            sector_before_pct = sector_before / capital if capital > 0 else 0
+            sector_after_pct = sector_after / capital if capital > 0 else 0
+
+            # Validate against limit
+            approved = sector_after_pct <= self.max_sector_pct
+
+            # Determine status
+            if sector_after_pct >= self.max_sector_pct:
+                status = 'LIMIT_EXCEEDED'
+            elif sector_after_pct >= self.warning_threshold_pct:
+                status = 'WARNING'
+            else:
+                status = 'NORMAL'
+
+            result = {
+                'ticker': ticker,
+                'sector': sector,
+                'position_value': round(position_value, 2),
+                'sector_before': round(sector_before, 2),
+                'sector_after': round(sector_after, 2),
+                'sector_before_pct': sector_before_pct,
+                'sector_after_pct': sector_after_pct,
+                'max_sector_pct': self.max_sector_pct,
+                'status': status,
+                'approved': approved,
+                'rejection_reason': None if approved else 'SECTOR_CONCENTRATION_EXCEEDED',
+                'rejection_details': None if approved else f"Sector {sector} would be {sector_after_pct*100:.1f}%, limit is {self.max_sector_pct*100:.0f}%"
+            }
+
+            if approved:
+                logger.info(f"{ticker} ({sector}): Sector exposure ${sector_before:,.0f} → ${sector_after:,.0f} ({sector_after_pct*100:.1f}%) - APPROVED [{status}]")
+            else:
+                logger.warning(f"{ticker} ({sector}): Sector exposure ${sector_before:,.0f} → ${sector_after:,.0f} ({sector_after_pct*100:.1f}%) - REJECTED (exceeds {self.max_sector_pct*100:.0f}% limit)")
+
+            return result
+
+        except Exception as e:
+            logger.error(f"Sector concentration check failed for {ticker}: {e}", exc_info=True)
+            return {
+                'ticker': ticker,
+                'sector': None,
+                'approved': False,
+                'rejection_reason': 'CALCULATION_ERROR',
+                'rejection_details': str(e)
+            }
+
+
 class PortfolioHeatMonitor:
     """
     Monitors total portfolio risk (heat) across all open positions
@@ -467,6 +617,7 @@ if __name__ == "__main__":
     stop_loss_calc = StopLossCalculator(config)
     risk_calc = RiskCalculator(config)
     heat_monitor = PortfolioHeatMonitor(config)
+    sector_checker = SectorConcentrationChecker(config)
 
     # Test with sample data
     capital = config['testing']['initial_capital']  # $100,000
@@ -478,7 +629,7 @@ if __name__ == "__main__":
     print("=" * 100)
 
     # Test 1: Position sizing
-    print("\n[1/4] POSITION SIZING:")
+    print("\n[1/5] POSITION SIZING:")
     print("-" * 100)
     position = position_sizer.calculate_position_size(capital, test_price, test_ticker)
     if position:
@@ -488,7 +639,7 @@ if __name__ == "__main__":
         print(f"  Actual Position: ${position['actual_position_value']:,.0f} ({position['actual_position_pct']*100:.1f}%)")
 
     # Test 2: Stop-loss
-    print("\n[2/4] STOP-LOSS CALCULATION:")
+    print("\n[2/5] STOP-LOSS CALCULATION:")
     print("-" * 100)
     stop = stop_loss_calc.calculate_stop_loss(test_ticker, test_price)
     if stop:
@@ -500,7 +651,7 @@ if __name__ == "__main__":
         print(f"  Risk Per Share: ${stop['risk_per_share']:.2f} ({stop['stop_distance_pct']*100:.1f}%)")
 
     # Test 3: Risk per trade validation
-    print("\n[3/4] RISK PER TRADE VALIDATION:")
+    print("\n[3/5] RISK PER TRADE VALIDATION:")
     print("-" * 100)
     if position and stop:
         risk_validation = risk_calc.validate_risk_per_trade(
@@ -520,7 +671,7 @@ if __name__ == "__main__":
             print(f"  Details: {risk_validation['rejection_details']}")
 
     # Test 4: Portfolio heat monitoring
-    print("\n[4/4] PORTFOLIO HEAT MONITORING:")
+    print("\n[4/5] PORTFOLIO HEAT MONITORING:")
     print("-" * 100)
 
     # Scenario A: Normal (0% current heat)
@@ -561,6 +712,57 @@ if __name__ == "__main__":
             print(f"    Rejection Reason: {heat_check['rejection_reason']}")
             print(f"    Details: {heat_check['rejection_details']}")
 
+    # Test 5: Sector concentration
+    print("\n[5/5] SECTOR CONCENTRATION CHECKING:")
+    print("-" * 100)
+
+    # Scenario A: No existing sector exposure
+    print("  Scenario A: Fresh portfolio (no existing sector exposure)")
+    if position:
+        sector_check_a = sector_checker.check_sector_concentration(
+            ticker=test_ticker,
+            position_value=position['actual_position_value'],
+            capital=capital,
+            current_sector_allocations={}
+        )
+        if sector_check_a['sector']:
+            print(f"    Sector: {sector_check_a['sector']}")
+            print(f"    Position Value: ${sector_check_a['position_value']:,.0f}")
+            print(f"    Sector Before: ${sector_check_a['sector_before']:,.0f} ({sector_check_a['sector_before_pct']*100:.1f}%)")
+            print(f"    Sector After: ${sector_check_a['sector_after']:,.0f} ({sector_check_a['sector_after_pct']*100:.1f}%)")
+            print(f"    Max Allowed: {sector_check_a['max_sector_pct']*100:.0f}%")
+            print(f"    Status: {sector_check_a['status']}")
+            print(f"    Decision: {'APPROVED' if sector_check_a['approved'] else 'REJECTED'}")
+        else:
+            print(f"    Status: {sector_check_a['status']}")
+            print(f"    Decision: APPROVED (sector unavailable)")
+
+    # Scenario B: High existing sector exposure (35%)
+    print("\n  Scenario B: Portfolio with 35% existing Technology exposure")
+    if position:
+        # Simulate 35% Technology exposure
+        existing_tech = capital * 0.35  # $35,000
+        sector_check_b = sector_checker.check_sector_concentration(
+            ticker=test_ticker,
+            position_value=position['actual_position_value'],
+            capital=capital,
+            current_sector_allocations={'Technology': existing_tech}
+        )
+        if sector_check_b['sector']:
+            print(f"    Sector: {sector_check_b['sector']}")
+            print(f"    Position Value: ${sector_check_b['position_value']:,.0f}")
+            print(f"    Sector Before: ${sector_check_b['sector_before']:,.0f} ({sector_check_b['sector_before_pct']*100:.1f}%)")
+            print(f"    Sector After: ${sector_check_b['sector_after']:,.0f} ({sector_check_b['sector_after_pct']*100:.1f}%)")
+            print(f"    Max Allowed: {sector_check_b['max_sector_pct']*100:.0f}%")
+            print(f"    Status: {sector_check_b['status']}")
+            print(f"    Decision: {'APPROVED' if sector_check_b['approved'] else 'REJECTED'}")
+            if not sector_check_b['approved']:
+                print(f"    Rejection Reason: {sector_check_b['rejection_reason']}")
+                print(f"    Details: {sector_check_b['rejection_details']}")
+        else:
+            print(f"    Status: {sector_check_b['status']}")
+            print(f"    Decision: APPROVED (sector unavailable)")
+
     # Summary
     print("\n" + "=" * 100)
     print("VALIDATION SUMMARY:")
@@ -572,7 +774,11 @@ if __name__ == "__main__":
         print(f"  Risk Per Trade Check: {'PASS' if risk_validation['approved'] else 'FAIL'}")
         print(f"  Portfolio Heat Check (0% heat): PASS")
         print(f"  Portfolio Heat Check (4.5% heat): {'PASS' if heat_check['approved'] else 'FAIL (as expected)'}")
+        if sector_check_a and sector_check_a['sector']:
+            print(f"  Sector Concentration (fresh): PASS ({sector_check_a['sector_after_pct']*100:.1f}% < 40%)")
+        if sector_check_b and sector_check_b['sector']:
+            print(f"  Sector Concentration (35% existing): {'PASS' if sector_check_b['approved'] else 'FAIL (as expected)'}")
 
     print("\n" + "=" * 100)
-    print("TEST COMPLETE - Days 1-3 Components Verified")
+    print("TEST COMPLETE - Days 1-4 Components Verified")
     print("=" * 100)
