@@ -437,6 +437,93 @@ class PortfolioDecisionEngine:
 
         return candidates, all_rejected
 
+    def generate_position_id(self, ticker: str, trade_date: date) -> str:
+        """
+        Generate unique position ID
+
+        Format: POS_{YYYYMMDD}_{TICKER}_{UUID8}
+        Example: POS_20251031_AAPL_a7b3c2d1
+        """
+        date_str = trade_date.strftime('%Y%m%d')
+        uuid_short = uuid.uuid4().hex[:8]
+        position_id = f"POS_{date_str}_{ticker}_{uuid_short}"
+
+        logger.debug(f"Generated position ID: {position_id}")
+        return position_id
+
+    def generate_buy_order(self, candidate: Dict, risk_message_id: str,
+                          message_handler: MessageHandler) -> Tuple[str, str]:
+        """
+        Generate BuyOrder message for Trading Department
+
+        Args:
+            candidate: Accepted candidate from Risk
+            risk_message_id: Parent RiskAssessment message ID
+            message_handler: MessageHandler instance for writing message
+
+        Returns:
+            (buy_order_message_id, position_id)
+        """
+        ticker = candidate['ticker']
+
+        # Generate position ID
+        position_id = self.generate_position_id(ticker, date.today())
+
+        # Build markdown body
+        body_lines = [
+            f"**Order Type**: BUY",
+            f"**Position ID**: {position_id}",
+            "",
+            "## Order Details",
+            f"- **Ticker**: {ticker}",
+            f"- **Shares**: {candidate['position_size_shares']}",
+            f"- **Order Type**: MARKET",
+            f"- **Stop-Loss**: ${candidate['stop_loss']:.2f}",
+            f"- **Target**: ${candidate['target_price']:.2f}",
+            "",
+            "## Risk Parameters",
+            f"- **Risk Per Share**: ${candidate['risk_per_share']:.2f}",
+            f"- **Total Risk**: ${candidate['total_risk']:.2f} ({candidate['risk_percentage']*100:.2f}% of capital)",
+            f"- **Risk-Reward**: {candidate['risk_reward_ratio']:.1f}:1",
+            "",
+            "## Context",
+            f"- **Research Score**: {candidate['research_composite_score']:.1f}/10",
+            f"- **Sector**: {candidate.get('sector', 'Unknown')}",
+            f"- **Entry Reason**: Passed all risk checks, portfolio has capacity"
+        ]
+
+        body = "\n".join(body_lines)
+
+        # Build JSON payload
+        data_payload = {
+            'order_type': 'BUY',
+            'ticker': ticker,
+            'shares': candidate['position_size_shares'],
+            'execution_type': 'MARKET',
+            'limit_price': None,
+            'stop_loss': candidate['stop_loss'],
+            'target_price': candidate['target_price'],
+            'position_id': position_id,
+            'risk_per_share': candidate['risk_per_share'],
+            'total_risk': candidate['total_risk'],
+            'timeout_seconds': 300
+        }
+
+        # Write message
+        message_id = message_handler.write_message(
+            to_dept='TRADING',
+            message_type='TradeOrder',
+            subject=f"Trade Order - BUY {ticker}",
+            body=body,
+            data_payload=data_payload,
+            parent_message_id=risk_message_id,
+            priority='high',
+            requires_response=True
+        )
+
+        logger.info(f"BuyOrder generated: {message_id} for {ticker} (position: {position_id})")
+        return message_id, position_id
+
 
 if __name__ == "__main__":
     # Test Portfolio Decision Engine
@@ -500,6 +587,48 @@ if __name__ == "__main__":
     print(f"  Accepted: {len(accepted)} - {[c['ticker'] for c in accepted]}")
     print(f"  Rejected: {len(rejected)} - {[r['ticker'] for r in rejected]}")
 
+    print("\n[4/4] Testing BuyOrder Generation:")
+    print("-" * 100)
+
+    # Generate BuyOrder for accepted candidate
+    if len(accepted) > 0:
+        test_candidate = {
+            'ticker': 'AAPL',
+            'research_composite_score': 7.5,
+            'position_size_shares': 56,
+            'position_size_value': 9828,
+            'entry_price': 175.50,
+            'stop_loss': 165.25,
+            'target_price': 185.75,
+            'risk_per_share': 10.25,
+            'total_risk': 574,
+            'risk_percentage': 0.00574,
+            'risk_reward_ratio': 2.0,
+            'sector': 'Technology'
+        }
+
+        risk_message_id = "MSG_RISK_20251031T100000Z_test123"
+        message_id, position_id = decision_engine.generate_buy_order(
+            test_candidate,
+            risk_message_id,
+            message_handler
+        )
+
+        print(f"  BuyOrder Message ID: {message_id}")
+        print(f"  Position ID: {position_id}")
+        print(f"  Message File: Messages_Between_Departments/Outbox/PORTFOLIO/{message_id}.md")
+
+        # Read back the message to verify
+        message_path = Path(f"Messages_Between_Departments/Outbox/PORTFOLIO/{message_id}.md")
+        if message_path.exists():
+            print(f"  Message Created: SUCCESS")
+            with open(message_path, 'r') as f:
+                first_30_lines = ''.join(f.readlines()[:30])
+                print(f"\n  First 30 lines of message:")
+                print("  " + "-" * 96)
+                for line in first_30_lines.split('\n'):
+                    print(f"  {line}")
+
     print("\n" + "=" * 100)
-    print("TEST COMPLETE - PortfolioDecisionEngine Day 1")
+    print("TEST COMPLETE - PortfolioDecisionEngine Day 1 (All Components)")
     print("=" * 100)
