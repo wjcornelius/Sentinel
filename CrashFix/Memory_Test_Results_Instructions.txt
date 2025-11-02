@@ -1,0 +1,119 @@
+﻿=== Windows Memory Diagnostic - Results Instructions ===
+Test Scheduled: 2025-11-01 11:11:12
+Computer: LAPTOP-1FV3ILC1
+
+WHAT YOU JUST DID:
+==================
+You scheduled a Windows Memory Diagnostic test that will run when you restart.
+
+WHAT HAPPENS DURING RESTART:
+=============================
+1. Computer restarts
+2. Blue screen appears showing "Windows Memory Diagnostic"
+3. Progress bar shows test status
+4. Two passes: Basic (quick) and Standard (thorough)
+5. Computer boots to Windows automatically when done
+6. Results are logged in Event Viewer
+
+TEST DURATION:
+==============
+Approximately 5-20 minutes (depends on RAM size and test thoroughness)
+
+During the test, you'll see:
+  - Current test pass (Pass 1 of 2, Pass 2 of 2)
+  - Overall status
+  - Cache tests, various pattern tests
+  - DO NOT interrupt the test - let it complete
+
+HOW TO CHECK RESULTS AFTER RESTART:
+====================================
+
+METHOD 1: Automatic Popup (Sometimes)
+--------------------------------------
+Windows may show a notification with results when you log in.
+
+METHOD 2: Event Viewer (Most Reliable)
+---------------------------------------
+1. Press Windows Key + R
+2. Type: eventvwr.msc
+3. Press Enter
+4. Navigate to: Windows Logs > System
+5. Click "Find..." in right panel
+6. Search for: MemoryDiagnostics-Results
+7. Double-click the result to see details
+
+METHOD 3: PowerShell (Quick)
+-----------------------------
+1. Open PowerShell as Administrator
+2. Run this command:
+
+   Get-WinEvent -FilterHashtable @{LogName='System'; ProviderName='Microsoft-Windows-MemoryDiagnostics-Results'} -MaxEvents 1 | Format-List *
+
+INTERPRETING RESULTS:
+=====================
+
+GOOD RESULT:
+------------
+"Windows Memory Diagnostic tested the computer's memory and detected no errors."
+-> Your RAM is healthy!
+-> Crashes are caused by something else (driver, software, etc.)
+
+BAD RESULT:
+-----------
+"Windows Memory Diagnostic tested the computer's memory and detected hardware errors."
+-> Your RAM is faulty and needs replacement
+-> Contact ASUS support or computer technician
+-> RAM is usually easy and inexpensive to replace
+
+If Errors Found:
+----------------
+1. Note the specific error details
+2. Run the test again to confirm (may be intermittent)
+3. If errors persist, replace RAM
+4. RAM errors cannot be fixed with software - hardware replacement required
+
+WHAT TO DO NEXT:
+================
+
+If NO ERRORS (Good RAM):
+------------------------
+Continue troubleshooting:
+  - Intel Graphics driver is most likely culprit (update first)
+  - Power management settings (already optimized if you ran Fix_Power_Management.ps1)
+  - Samsung NVMe driver (update via Samsung Magician)
+  - Check Event Viewer for crash patterns
+
+If ERRORS FOUND (Bad RAM):
+---------------------------
+1. Run test one more time to confirm
+2. If errors persist, RAM needs replacement
+3. Identify which module is faulty (if multiple modules)
+4. Replace faulty RAM module
+5. Computer should be stable after RAM replacement
+
+PROBATION MONITORING NOTE:
+==========================
+The memory test runs BEFORE Windows loads, so your probation monitoring
+software is not active during the test. It will resume normally when
+Windows boots after the test completes. No interference will occur.
+
+RUNNING THE TEST AGAIN:
+========================
+If you need to run the test again:
+  1. Press Windows Key + R
+  2. Type: mdsched.exe
+  3. Click "Restart now and check for problems"
+
+Or run this script (Run_Memory_Diagnostic.ps1) again.
+
+NEED HELP?
+==========
+If you have trouble interpreting results or need assistance:
+  - Check Event Viewer as described above
+  - Screenshot the results
+  - Contact computer technician if errors found
+
+=== End of Instructions ===
+
+This file will remain here: C:\Users\wjcor\OneDrive\Desktop\Sentinel\CrashFix\Memory_Test_Results_Instructions.txt
+You can reference it after the test completes.

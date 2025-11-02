@@ -1,0 +1,13 @@
+[2025-11-01 11:11:12] === Memory Diagnostic Launcher Started ===
+[2025-11-01 11:11:12] Computer: LAPTOP-1FV3ILC1
+[2025-11-01 11:11:12] User: wjcor
+[2025-11-01 11:11:12] 
+[2025-11-01 11:11:12] Running with Administrator privileges - OK
+[2025-11-01 11:11:12] Checking system memory configuration...
+[2025-11-01 11:11:12] Total RAM: 7.63 GB
+[2025-11-01 11:11:12]   Memory module: Controller0-ChannelA - 8 GB @ 3200 MHz
+[2025-11-01 11:11:12] User confirmed - proceeding with scheduling
+[2025-11-01 11:11:12] Creating instructions file...
+[2025-11-01 11:11:12] Instructions file created
+[2025-11-01 11:11:12] Launching Windows Memory Diagnostic scheduler...
+[2025-11-01 11:11:12] Launching mdsched.exe...

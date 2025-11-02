@@ -1,0 +1,21 @@
+[2025-11-01 10:33:34] === Intel Graphics Driver Update Started ===
+[2025-11-01 10:33:34] Computer: LAPTOP-1FV3ILC1
+[2025-11-01 10:33:34] User: wjcor
+[2025-11-01 10:33:34] 
+[2025-11-01 10:33:34] Running with Administrator privileges - OK
+[2025-11-01 10:33:34] Checking current Intel Graphics driver...
+[2025-11-01 10:33:34] Current driver: Intel(R) UHD Graphics
+[2025-11-01 10:33:34] Current version: 32.0.101.6127
+[2025-11-01 10:33:34] Current date: 2024-10-10
+[2025-11-01 10:33:34] Age: 386 days
+[2025-11-01 10:33:34] User confirmed - proceeding with update
+[2025-11-01 10:33:34] Creating System Restore Point...
+[2025-11-01 10:33:34] System Restore Point created: Before Intel Graphics Driver Update - Sentinel
+[2025-11-01 10:33:34] Downloading Intel Driver & Support Assistant...
+[2025-11-01 10:33:34] Using Windows Update method
+[2025-11-01 10:33:34] No Intel driver updates found via Windows Update
+[2025-11-01 10:33:34] Opened Intel download page for manual installation
+[2025-11-01 10:33:34] Driver update process completed
+[2025-11-01 10:33:34] === Intel Graphics Driver Update Session Ended ===
+[2025-11-01 10:33:34] 
+[2025-11-01 10:33:34] User initiated restart

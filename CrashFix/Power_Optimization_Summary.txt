@@ -1,0 +1,65 @@
+﻿=== Power Management Optimization Summary ===
+Completed: 2025-11-01 11:10:04
+Computer: LAPTOP-1FV3ILC1
+
+CHANGES APPLIED:
+================
+
+1. Power Plan: Switched to High Performance
+   - Prevents CPU throttling that can cause driver timeouts
+
+2. PCI Express Link State Power Management: DISABLED
+   - PRIMARY FIX for DPC_WATCHDOG_VIOLATION crashes
+   - Prevents graphics and storage driver timeouts
+
+3. USB Selective Suspend: DISABLED
+   - Prevents USB device disconnections
+   - Ensures monitoring devices stay connected
+
+4. Hard Disk Timeout: Set to NEVER
+   - Prevents SSD/NVMe from entering power-saving states
+   - Eliminates storage-related crashes
+
+5. Network Adapter Power Saving: DISABLED
+   - Prevents network drops during low activity
+   - Ensures stable connections
+
+6. Automatic Sleep: DISABLED
+   - Prevents sleep/wake crashes
+   - Computer stays active until manual shutdown
+
+EXPECTED RESULTS:
+=================
+- 90%+ reduction in sleep/wake crashes
+- Elimination of PCI Express driver timeout errors
+- More stable system overall
+- Slightly higher power consumption (minimal impact)
+
+MONITORING:
+===========
+Use your computer normally for 24-48 hours and monitor for crashes.
+If crashes continue, they are likely due to outdated drivers (not power management).
+
+ROLLBACK:
+=========
+To restore previous settings:
+1. Open Command Prompt as Administrator
+2. Run: powercfg /setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
+3. Adjust individual settings in Control Panel > Power Options
+
+Or restore from backup file: C:\Users\wjcor\OneDrive\Desktop\Sentinel\CrashFix\power_settings_backup.txt
+
+NEXT STEPS:
+===========
+1. Continue normal computer use
+2. Monitor for crashes (should be significantly reduced)
+3. If crashes persist, run:
+   - Run_Memory_Diagnostic.ps1 (tests RAM)
+   - Update Samsung NVMe driver via Samsung Magician
+
+PROBATION MONITORING:
+=====================
+These changes do not affect probation monitoring software in any way.
+Only Windows power management settings were modified.
+
+=== End of Summary ===

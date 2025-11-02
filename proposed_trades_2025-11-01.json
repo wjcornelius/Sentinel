@@ -1,0 +1,43 @@
+{
+  "generated_at": "2025-11-01T16:23:35.750247",
+  "status": "APPROVED",
+  "current_state": {
+    "positions": 0,
+    "deployed_capital": 0,
+    "cash_balance": 100000.0,
+    "buying_power": 200000.0
+  },
+  "orders": [
+    {
+      "ticker": "MSFT",
+      "action": "BUY",
+      "shares": 48,
+      "estimated_price": 415.3,
+      "estimated_value": 19934.4,
+      "score": 88.0
+    },
+    {
+      "ticker": "AAPL",
+      "action": "BUY",
+      "shares": 110,
+      "estimated_price": 180.5,
+      "estimated_value": 19855.0,
+      "score": 85.0
+    },
+    {
+      "ticker": "GOOGL",
+      "action": "BUY",
+      "shares": 142,
+      "estimated_price": 140.25,
+      "estimated_value": 19915.5,
+      "score": 82.0
+    }
+  ],
+  "summary": {
+    "total_orders": 3,
+    "total_value": 59704.9,
+    "available_cash": 100000.0,
+    "remaining_cash": 40295.1
+  },
+  "approved_at": "2025-11-01T16:25:12.730731"
+}

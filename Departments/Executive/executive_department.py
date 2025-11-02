@@ -31,6 +31,9 @@ from typing import Dict, List, Tuple, Optional
 # Add project root to path for Utils imports
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
+# Import unified data source (routes to Alpaca or database)
+from Utils.data_source import create_data_source
+
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
@@ -51,8 +54,9 @@ class PerformanceAnalyzer:
     - Maximum drawdown (peak-to-trough decline)
     """
 
-    def __init__(self, db_path: Path):
+    def __init__(self, db_path: Path, data_source=None):
         self.db_path = db_path
+        self.data_source = data_source  # Can be None for backward compatibility
         self.logger = logging.getLogger(self.__class__.__name__)
         self.logger.info(f"PerformanceAnalyzer initialized: db={db_path}")
 
@@ -374,8 +378,9 @@ class StrategyReviewer:
     - Best/worst trades identification
     """
 
-    def __init__(self, db_path: Path):
+    def __init__(self, db_path: Path, data_source=None):
         self.db_path = db_path
+        self.data_source = data_source  # Can be None for backward compatibility
         self.logger = logging.getLogger(self.__class__.__name__)
         self.logger.info(f"StrategyReviewer initialized: db={db_path}")
 
@@ -814,9 +819,12 @@ class ExecutiveDepartment:
         self.reports_dir = reports_dir
         self.logger = logging.getLogger(self.__class__.__name__)
 
-        # Initialize all 3 components
-        self.performance = PerformanceAnalyzer(db_path)
-        self.strategy = StrategyReviewer(db_path)
+        # Initialize data source (routes to Alpaca or database)
+        self.data_source = create_data_source(str(db_path))
+
+        # Initialize all 3 components (pass data_source to them)
+        self.performance = PerformanceAnalyzer(db_path, self.data_source)
+        self.strategy = StrategyReviewer(db_path, self.data_source)
         self.monitor = SystemMonitor(db_path, messages_dir)
 
         # Create directories
@@ -828,6 +836,7 @@ class ExecutiveDepartment:
             directory.mkdir(parents=True, exist_ok=True)
 
         self.logger.info(f"ExecutiveDepartment initialized: db={db_path}, messages={messages_dir}, reports={reports_dir}")
+        self.logger.info(f"Data source: {self.data_source.get_data_source_info()['data_source']}")
 
     def generate_daily_executive_summary(self, report_date: date = None) -> Dict:
         """

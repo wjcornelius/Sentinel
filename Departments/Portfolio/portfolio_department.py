@@ -29,6 +29,9 @@ from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 from dataclasses import dataclass
 
+# Import unified data source (routes to Alpaca or database)
+from Utils.data_source import create_data_source
+
 # Set up logging
 logging.basicConfig(
     level=logging.INFO,
@@ -187,68 +190,34 @@ class PortfolioDecisionEngine:
         self.min_composite_score = config['filters']['min_composite_score']
         self.total_capital = config['capital']['total']
 
+        # Initialize data source (routes to Alpaca or database)
+        self.data_source = create_data_source(str(db_path))
+
         logger.info(f"PortfolioDecisionEngine initialized (max positions: {self.max_positions}, "
                    f"max deployed: {self.max_capital_deployed_pct*100:.0f}%, "
                    f"min score: {self.min_composite_score})")
+        logger.info(f"Data source: {self.data_source.get_data_source_info()['data_source']}")
 
     def get_open_positions_count(self) -> int:
-        """Get count of current open/pending positions"""
+        """Get count of current open/pending positions (from Alpaca or database)"""
         try:
-            conn = sqlite3.connect(self.db_path)
-            cursor = conn.cursor()
-
-            cursor.execute("""
-                SELECT COUNT(*) FROM portfolio_positions
-                WHERE status IN ('PENDING', 'OPEN')
-            """)
-
-            count = cursor.fetchone()[0]
-            conn.close()
-
-            return count
-
+            return self.data_source.get_position_count()
         except Exception as e:
             logger.error(f"Failed to get position count: {e}", exc_info=True)
             return 0
 
     def get_deployed_capital(self) -> float:
-        """Get total capital currently deployed in open/pending positions"""
+        """Get total capital currently deployed in open/pending positions (from Alpaca or database)"""
         try:
-            conn = sqlite3.connect(self.db_path)
-            cursor = conn.cursor()
-
-            cursor.execute("""
-                SELECT SUM(intended_shares * intended_entry_price) as deployed
-                FROM portfolio_positions
-                WHERE status IN ('PENDING', 'OPEN')
-            """)
-
-            result = cursor.fetchone()[0]
-            conn.close()
-
-            return result if result else 0.0
-
+            return self.data_source.get_deployed_capital()
         except Exception as e:
             logger.error(f"Failed to get deployed capital: {e}", exc_info=True)
             return 0.0
 
     def get_open_tickers(self) -> List[str]:
-        """Get list of tickers for open/pending positions"""
+        """Get list of tickers for open/pending positions (from Alpaca or database)"""
         try:
-            conn = sqlite3.connect(self.db_path)
-            cursor = conn.cursor()
-
-            cursor.execute("""
-                SELECT ticker FROM portfolio_positions
-                WHERE status IN ('PENDING', 'OPEN')
-                ORDER BY ticker
-            """)
-
-            tickers = [row[0] for row in cursor.fetchall()]
-            conn.close()
-
-            return tickers
-
+            return self.data_source.get_open_tickers()
         except Exception as e:
             logger.error(f"Failed to get open tickers: {e}", exc_info=True)
             return []
