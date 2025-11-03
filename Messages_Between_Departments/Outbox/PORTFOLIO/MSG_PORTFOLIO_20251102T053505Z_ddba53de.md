@@ -1,0 +1,46 @@
+---
+from: PORTFOLIO
+message_id: MSG_PORTFOLIO_20251102T053505Z_ddba53de
+message_type: TradeOrder
+parent_message_id: POS_20251031_AXP_9a210266
+priority: urgent
+requires_response: true
+timestamp: '2025-11-02T05:35:05.239759Z'
+to: TRADING
+---
+
+# Trade Order - SELL AXP
+
+**Order Type**: SELL
+**Position ID**: POS_20251031_AXP_9a210266
+**Exit Reason**: TARGET
+
+## Order Details
+- **Ticker**: AXP
+- **Shares**: 70 (close full position)
+- **Order Type**: MARKET
+- **Current Price**: $360.73
+
+## Exit Signal
+- **Reason**: TARGET
+- **Details**: Price $360.73 hit target $170.00. Taking profit at target price.
+
+## Performance
+- **Entry**: $160.50
+- **Exit**: $360.73 (estimated)
+- **Gain**: $200.23/share × 70 = $14016.10
+- **Return**: +124.75%
+- **Days Held**: 1
+
+```json
+{
+  "order_type": "SELL",
+  "ticker": "AXP",
+  "shares": 70,
+  "execution_type": "MARKET",
+  "position_id": "POS_20251031_AXP_9a210266",
+  "exit_reason": "TARGET",
+  "exit_price": 360.7300109863281,
+  "timeout_seconds": 60
+}
+```

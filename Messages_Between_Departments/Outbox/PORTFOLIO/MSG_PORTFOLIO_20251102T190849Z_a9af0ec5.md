@@ -1,0 +1,46 @@
+---
+from: PORTFOLIO
+message_id: MSG_PORTFOLIO_20251102T190849Z_a9af0ec5
+message_type: TradeOrder
+parent_message_id: POS_20251031_MA_d4596cb7
+priority: urgent
+requires_response: true
+timestamp: '2025-11-02T19:08:49.140698Z'
+to: TRADING
+---
+
+# Trade Order - SELL MA
+
+**Order Type**: SELL
+**Position ID**: POS_20251031_MA_d4596cb7
+**Exit Reason**: TARGET
+
+## Order Details
+- **Ticker**: MA
+- **Shares**: 75 (close full position)
+- **Order Type**: MARKET
+- **Current Price**: $551.99
+
+## Exit Signal
+- **Reason**: TARGET
+- **Details**: Price $551.99 hit target $160.00. Taking profit at target price.
+
+## Performance
+- **Entry**: $150.50
+- **Exit**: $551.99 (estimated)
+- **Gain**: $401.49/share × 75 = $30111.75
+- **Return**: +266.77%
+- **Days Held**: 2
+
+```json
+{
+  "order_type": "SELL",
+  "ticker": "MA",
+  "shares": 75,
+  "execution_type": "MARKET",
+  "position_id": "POS_20251031_MA_d4596cb7",
+  "exit_reason": "TARGET",
+  "exit_price": 551.989990234375,
+  "timeout_seconds": 60
+}
+```

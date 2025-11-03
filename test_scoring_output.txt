@@ -1,0 +1,20 @@
+2025-11-01 20:00:37,049 - ResearchDepartment - INFO - MessageHandler initialized for Research Department
+2025-11-01 20:00:37,049 - ResearchDepartment - INFO - MarketDataCollector initialized
+2025-11-01 20:00:37,050 - ResearchDepartment - INFO - SentimentAnalyzer initialized (model: sonar, cache TTL: 24h)
+================================================================================
+TESTING NEW 0-100 SCORING SYSTEM
+================================================================================
+
+Initializing Research Department...
+Traceback (most recent call last):
+  File "C:\Users\wjcor\OneDrive\Desktop\Sentinel\test_new_scoring.py", line 152, in <module>
+    test_scoring()
+    ~~~~~~~~~~~~^^
+  File "C:\Users\wjcor\OneDrive\Desktop\Sentinel\test_new_scoring.py", line 44, in test_scoring
+    research = ResearchDepartment(research_config, perplexity_api_key, db_path)
+  File "C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py", line 957, in __init__
+    self.technical_analyzer = TechnicalAnalyzer(config)
+                              ~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\wjcor\OneDrive\Desktop\Sentinel\Departments\Research\research_department.py", line 554, in __init__
+    import pandas_ta as ta
+ModuleNotFoundError: No module named 'pandas_ta'

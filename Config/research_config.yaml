@@ -8,7 +8,7 @@ last_updated: 2025-10-31
 
 # Sentiment Analysis Settings (Perplexity API)
 sentiment:
-  cache_ttl_hours: 24                          # Cache sentiment for 24 hours (news doesn't change much intraday)
+  cache_ttl_hours: 48                          # Cache sentiment for 48 hours (reduces API costs, full refresh after weekends)
   perplexity_model: "sonar"
   max_news_articles: 15                        # Analyze up to 15 recent articles per ticker
   bullish_keywords:
@@ -117,7 +117,7 @@ daily_briefing:
   generation_time: "10:00"                     # Generate briefing at 10:00 AM ET daily
   min_candidates: 10                           # Target minimum 10 stock candidates
   max_candidates: 20                           # Target maximum 20 stock candidates
-  min_overall_score: 6.0                       # Only include stocks with overall score >= 6.0
+  min_overall_score: 60                        # Only include stocks with overall score >= 60/100 (lowered from 70 for market participation)
 
   stock_universe:
     - "SPY"                                    # S&P 500 constituents (will expand in Phase 2)
@@ -168,9 +168,9 @@ composite_scoring:
     sentiment: 0.30                            # Sentiment analysis = 30% of overall score
 
   score_scale:
-    min: 1.0                                   # Minimum score (very bearish)
-    max: 10.0                                  # Maximum score (very bullish)
-    neutral: 5.0                               # Neutral score (no clear signal)
+    min: 0                                     # Minimum score (very bearish) - 0-100 scale
+    max: 100                                   # Maximum score (very bullish) - 0-100 scale
+    neutral: 50                                # Neutral score (no clear signal) - 0-100 scale
 
 # Logging and Debugging
 logging:

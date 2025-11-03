@@ -8,12 +8,12 @@ limits:
 
 # Entry Filters
 filters:
-  min_composite_score: 5.0  # Don't buy stocks scoring < 5.0
+  min_composite_score: 50.0  # Don't buy stocks scoring < 50/100 (was 5.0/10)
 
 # Exit Rules
 exits:
   max_hold_days: 30  # Close positions after 30 days
-  downgrade_score: 4.0  # Exit if Research score drops below 4.0
+  downgrade_score: 40.0  # Exit if Research score drops below 40/100 (was 4.0/10)
 
   # Exit priority (if multiple signals on same day)
   priority:

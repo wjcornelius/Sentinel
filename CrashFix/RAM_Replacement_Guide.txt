@@ -1,0 +1,398 @@
+================================================================================
+RAM REPLACEMENT GUIDE - ASUS Vivobook Go E1504GA
+================================================================================
+
+YOUR LAPTOP SPECIFICATIONS:
+- Make: ASUS
+- Model: Vivobook Go E1504GAB_E1504GA (Also known as E1504GA)
+- Processor: Intel Core i3-N305
+- Current RAM: 8GB Samsung DDR4 3200MHz (Single stick in BANK 0)
+- RAM Type: DDR4 SO-DIMM (Laptop memory)
+- Form Factor: 260-pin SO-DIMM
+- Current Speed: 3200MHz (PC4-25600)
+
+MEMORY TEST RESULT: ERRORS DETECTED - Your current Samsung RAM stick is FAULTY
+
+================================================================================
+PART 1: WHAT RAM TO ORDER FROM AMAZON
+================================================================================
+
+OPTION 1: REPLACE FAULTY 8GB (Keep 8GB Total) - $20-30
+---------------------------------------------------------
+Search Amazon for: "8GB DDR4 3200MHz SO-DIMM laptop RAM"
+
+Recommended brands (in order of preference):
+1. Crucial 8GB DDR4 3200 MT/s CL22 SODIMM 260-Pin Memory - CT8G4SFRA32A
+   - Price: ~$20-25
+   - Most reliable brand
+   - Lifetime warranty
+
+2. Kingston ValueRAM 8GB DDR4 3200MHz SODIMM - KVR32S22S8/8
+   - Price: ~$22-28
+   - Excellent compatibility
+   - Lifetime warranty
+
+3. Samsung 8GB DDR4 3200MHz SODIMM (if you want to stay with Samsung)
+   - Part: M471A1K43DB1-CWE or similar
+   - Price: ~$25-30
+
+IMPORTANT: Make sure it says:
+- DDR4 (NOT DDR5 or DDR3)
+- 3200MHz (or PC4-25600)
+- SO-DIMM or SODIMM (laptop memory, NOT desktop DIMM)
+- 260-pin
+
+
+OPTION 2: UPGRADE TO 16GB (RECOMMENDED) - $40-60
+---------------------------------------------------------
+Your laptop supports up to 16GB total. You have ONE RAM slot currently occupied.
+
+**IMPORTANT CHECK**: Some Vivobook Go E1504GA models have:
+- 1 slot (4GB or 8GB soldered + 1 slot for upgrade)
+- 2 slots (both upgradeable)
+
+Your system shows 8GB in "BANK 0" which suggests it's upgradeable.
+
+To check if you can add a second stick:
+1. Open the bottom panel (see instructions below)
+2. Count the RAM slots
+   - If you see 1 stick and 1 empty slot: You can ADD 8GB for 16GB total
+   - If you see 1 stick only (no empty slot): You must REPLACE with 16GB
+
+For 16GB upgrade, search Amazon for: "16GB DDR4 3200MHz SO-DIMM laptop RAM"
+
+Recommended:
+1. Crucial 16GB DDR4 3200 MT/s CL22 SODIMM - CT16G4SFRA32A
+   - Price: ~$40-50
+   - Replaces your faulty 8GB with healthy 16GB
+
+2. Kingston ValueRAM 16GB DDR4 3200MHz SODIMM - KVR32S22D8/16
+   - Price: ~$45-55
+
+
+OPTION 3: ADD 8GB for 16GB Total (If 2 slots available) - $20-30
+---------------------------------------------------------
+If your laptop has 2 RAM slots and one is empty:
+- Remove the faulty 8GB from BANK 0
+- Install a NEW 8GB stick in BANK 0
+- Keep using your computer
+- If it's stable, your old stick was the problem
+- Later, you can add another 8GB in the empty slot for 16GB total
+
+================================================================================
+PART 2: AMAZON SEARCH TERMS & LINKS
+================================================================================
+
+EXACT SEARCH TERMS TO USE ON AMAZON:
+
+For 8GB replacement:
+"Crucial 8GB DDR4 3200 SODIMM CT8G4SFRA32A"
+or
+"Kingston 8GB DDR4 3200 SODIMM laptop memory"
+
+For 16GB upgrade:
+"Crucial 16GB DDR4 3200 SODIMM CT16G4SFRA32A"
+or
+"Kingston 16GB DDR4 3200 SODIMM laptop memory"
+
+WHAT TO AVOID:
+- DDR5 memory (too new, won't fit)
+- DDR3 memory (too old, won't fit)
+- Desktop DIMM (too big, laptop needs SO-DIMM)
+- Speeds below 3200MHz (will work but slower)
+- Speeds above 3200MHz (will work but waste money, system runs at 3200MHz max)
+
+================================================================================
+PART 3: FINDING REPLACEMENT INSTRUCTIONS
+================================================================================
+
+YOUTUBE VIDEO SEARCHES:
+---------------------------------------------------------
+Search YouTube for these EXACT phrases:
+
+1. "ASUS Vivobook Go E1504GA RAM upgrade"
+   - Most specific to your model
+
+2. "ASUS Vivobook E1504 memory upgrade"
+   - Slightly broader search
+
+3. "ASUS Vivobook 15 2024 RAM replacement"
+   - Your model is from 2024 lineup
+
+4. "How to upgrade RAM laptop ASUS Vivobook"
+   - General guide that applies to most Vivobooks
+
+RECOMMENDED CHANNELS:
+- JayzTwoCents (professional, clear)
+- Linus Tech Tips (detailed)
+- Hardware Canucks (laptop-specific)
+
+LOOK FOR VIDEOS THAT SHOW:
+- Opening the bottom panel with screwdriver
+- Locating RAM slots
+- Removing RAM clips/tabs
+- Installing new RAM at 45-degree angle
+- Pressing down until it clicks
+
+
+WRITTEN INSTRUCTIONS:
+---------------------------------------------------------
+Google search for:
+"ASUS Vivobook E1504GA service manual PDF"
+or
+"ASUS Vivobook E1504GA RAM upgrade guide"
+
+ASUS Official Support:
+https://www.asus.com/support/
+(Enter model: E1504GA, look for "Manual" or "User Guide")
+
+================================================================================
+PART 4: STEP-BY-STEP REPLACEMENT PROCESS (GENERAL)
+================================================================================
+
+TOOLS NEEDED:
+- Phillips head screwdriver (small, #0 or #1)
+- Plastic pry tool or old credit card (optional, for opening case)
+- Clean, static-free workspace
+
+SAFETY:
+- Turn off laptop completely (not sleep)
+- Unplug power adapter
+- Remove battery if removable (yours is likely internal)
+- Touch metal to discharge static before handling RAM
+
+STEPS (TYPICAL FOR ASUS VIVOBOOK):
+---------------------------------------------------------
+
+1. PREPARE
+   - Shut down laptop completely
+   - Unplug power
+   - Place laptop face-down on soft surface (towel/cloth)
+
+2. REMOVE BOTTOM PANEL
+   - Locate screws on bottom (usually 8-12 Phillips screws)
+   - **IMPORTANT**: Some screws may be under rubber feet - peel them up gently
+   - Remove all visible screws
+   - Carefully pry open bottom panel starting from a corner
+   - Use plastic tool or credit card, not metal screwdriver
+   - Work your way around the edges
+   - Lift off bottom panel
+
+3. LOCATE RAM
+   - RAM slot is usually near center or side of motherboard
+   - Look for a small rectangular module with metal contacts
+   - It's held by metal clips on each side
+
+4. REMOVE OLD (FAULTY) RAM
+   - Gently push the metal clips OUTWARD (away from RAM)
+   - RAM will pop up at 45-degree angle
+   - Carefully pull RAM stick straight out
+   - **DO NOT touch the gold contacts**
+
+5. INSTALL NEW RAM
+   - Hold new RAM stick by the edges (avoid touching gold contacts)
+   - Line up the notch in the RAM with the notch in the slot
+   - Insert RAM at 45-degree angle
+   - Press down firmly until it clicks into place
+   - Metal clips should snap inward to hold it
+
+6. REASSEMBLE
+   - Replace bottom panel
+   - Replace all screws (keep track of which screws go where!)
+   - Replace rubber feet if you removed them
+
+7. TEST
+   - Plug in power
+   - Turn on laptop
+   - Laptop should boot normally
+   - Windows should recognize new RAM automatically
+
+8. VERIFY IN WINDOWS
+   - Press Windows Key + Pause/Break
+   - Or: Settings > System > About
+   - Check "Installed RAM" shows correct amount (8GB or 16GB)
+
+================================================================================
+PART 5: TROUBLESHOOTING
+================================================================================
+
+IF LAPTOP DOESN'T BOOT AFTER RAM REPLACEMENT:
+---------------------------------------------------------
+
+1. No power, no lights:
+   - Turn off, remove RAM, reseat it firmly
+   - Make sure RAM clicked into place
+   - Check RAM is correct type (DDR4 SO-DIMM)
+
+2. Beeps when turning on:
+   - RAM not seated properly
+   - Remove and reinstall, press down harder until CLICK
+
+3. Windows shows wrong RAM amount:
+   - RAM not fully inserted
+   - Re-check installation
+
+4. Computer still crashes after RAM replacement:
+   - If using 2 sticks, one might still be bad
+   - Test each stick individually
+   - Or: You may have other hardware issues (unlikely based on memory test)
+
+================================================================================
+PART 6: IDENTIFYING THE FAULTY STICK (If you have 2 sticks)
+================================================================================
+
+If your laptop has 2 RAM slots with 2 sticks:
+
+1. Open laptop, remove BOTH RAM sticks
+2. Install stick #1 in BANK 0
+3. Close laptop, use normally for a day
+4. If it crashes: Stick #1 is bad
+5. If stable: Remove stick #1, install stick #2
+6. Use for a day
+7. If it crashes: Stick #2 is bad
+
+Since your system shows only BANK 0 with 8GB, you likely have just one stick,
+which the memory test confirmed is faulty.
+
+================================================================================
+PART 7: WHAT TO DO WITH OLD RAM
+================================================================================
+
+Your old Samsung RAM stick (M471A1G44BB0-CWE) has MEMORY ERRORS.
+
+DO NOT:
+- Use it in another computer (will cause crashes there too)
+- Sell it or give it away (it's defective)
+
+DO:
+- Keep it as a backup temporarily (in case new RAM is also defective - unlikely)
+- Recycle it at electronics recycling center after verifying new RAM works
+- Some computer stores accept defective RAM for recycling
+
+================================================================================
+PART 8: AFTER REPLACEMENT - VERIFY SUCCESS
+================================================================================
+
+After installing new RAM:
+
+1. Boot into Windows
+2. Run our diagnostic again:
+   - Open PowerShell as Administrator
+   - Run: C:\Users\wjcor\OneDrive\Desktop\Sentinel\CrashFix\Quick_Diagnostic.ps1
+   - Should show: "No crashes found in last 7 days!" (after a few days)
+
+3. Run Windows Memory Diagnostic again:
+   - Press Windows Key + R
+   - Type: mdsched.exe
+   - Choose "Restart now and check for problems"
+   - Let it complete (5-20 minutes)
+   - After restart, check Event Viewer for results
+   - Should show: "No errors detected"
+
+4. Use computer normally for 3-7 days
+   - If no crashes: SUCCESS! Problem solved!
+   - If crashes continue: Contact me, may be other hardware issue (rare)
+
+================================================================================
+PART 9: COST SUMMARY
+================================================================================
+
+OPTION 1: Replace with 8GB (minimum fix)
+- New 8GB DDR4 3200 SO-DIMM: $20-30
+- Tools: $0 (you have screwdriver)
+- TOTAL: $20-30
+
+OPTION 2: Upgrade to 16GB (recommended)
+- New 16GB DDR4 3200 SO-DIMM: $40-60
+- Tools: $0
+- TOTAL: $40-60
+- BENEFIT: Double your RAM + fix crashes
+
+OPTION 3: Professional repair
+- Labor: $50-100
+- Parts: $20-60
+- TOTAL: $70-160
+
+YOUR SITUATION:
+You're a former electronics engineer, comfortable with this work.
+DIY replacement will save you $50-100 in labor costs.
+With YouTube video guidance, this is a 15-30 minute job.
+
+================================================================================
+PART 10: RECOMMENDED ACTION PLAN
+================================================================================
+
+TODAY:
+1. Order RAM from Amazon:
+   - Recommended: Crucial 16GB DDR4 3200 SODIMM (CT16G4SFRA32A) - ~$45
+   - Arrives in 1-2 days with Prime
+
+2. While waiting for RAM:
+   - Watch YouTube videos: "ASUS Vivobook RAM upgrade"
+   - Download ASUS service manual if available
+   - Locate your Phillips screwdriver
+   - Find a clean workspace
+
+WHEN RAM ARRIVES:
+1. Watch video one more time
+2. Follow steps above
+3. Replace RAM (15-30 minutes)
+4. Boot and verify
+5. Use normally for a few days
+6. Run diagnostic to confirm no more crashes
+
+EXPECTED RESULT:
+- Computer will be 100% stable
+- No more crashes
+- Possibly faster (if you upgrade to 16GB)
+- Problem permanently solved
+
+================================================================================
+QUESTIONS TO ANSWER BEFORE ORDERING:
+================================================================================
+
+1. Do you want 8GB (minimum) or 16GB (better)?
+   - For Sentinel Corporation work: 16GB recommended
+   - Python + multiple apps = benefits from 16GB
+
+2. Do you have Amazon Prime for fast shipping?
+   - 1-2 day delivery vs 5-7 days
+
+3. Any concerns about the replacement process?
+   - Happy to clarify any steps
+   - The process is very straightforward for someone with your background
+
+================================================================================
+SUMMARY - WHAT TO ORDER
+================================================================================
+
+MY RECOMMENDATION FOR YOU:
+
+Product: Crucial 16GB DDR4 3200MHz SODIMM Laptop Memory (CT16G4SFRA32A)
+Amazon Search: "Crucial 16GB DDR4 3200 SODIMM CT16G4SFRA32A"
+Price: ~$40-50
+Result: Fixes crashes + doubles your RAM
+
+WHY THIS CHOICE:
+- Crucial is most reliable brand (Micron-made)
+- Lifetime warranty
+- 16GB helps with Python development work
+- Only $20-25 more than 8GB
+- Your laptop supports 16GB max
+- Good investment for system longevity
+
+ALTERNATIVE (Budget option):
+Product: Crucial 8GB DDR4 3200MHz SODIMM (CT8G4SFRA32A)
+Price: ~$20-25
+Result: Fixes crashes, keeps 8GB
+
+================================================================================
+
+You have everything you need to fix this!
+
+Your electronics engineering background means this will be straightforward.
+The memory test CONFIRMED the RAM is bad - replacing it WILL fix your crashes.
+
+Good luck with the replacement! Let me know if you have any questions.
+
+================================================================================

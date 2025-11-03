@@ -35,6 +35,7 @@ from Departments.Research.research_department import ResearchDepartment
 from Departments.Risk.risk_department import RiskDepartment
 from Departments.Portfolio.portfolio_department import PortfolioDepartment
 from Departments.Compliance.compliance_department import ComplianceDepartment
+from Departments.Executive.gpt5_portfolio_optimizer import GPT5PortfolioOptimizer
 
 # Import config
 import config
@@ -101,6 +102,7 @@ class OperationsManager:
         self._risk_dept = None
         self._portfolio_dept = None
         self._compliance_dept = None
+        self._gpt5_optimizer = None
 
         self.logger.info("Operations Manager initialized successfully")
         self.logger.info(f"Project root: {project_root}")
@@ -141,16 +143,24 @@ class OperationsManager:
                 return self._handle_stage_failure('risk', risk_result, stage_results)
 
             # STAGE 3: Portfolio Department
-            self.logger.info("\n[STAGE 3/4] Portfolio Department - Constraint Application & Selection")
+            self.logger.info("\n[STAGE 3/5] Portfolio Department - Constraint Application & Selection")
             portfolio_result = self._run_portfolio_stage(risk_result)
             stage_results.append(portfolio_result)
 
             if not portfolio_result.success:
                 return self._handle_stage_failure('portfolio', portfolio_result, stage_results)
 
-            # STAGE 4: Compliance Department
-            self.logger.info("\n[STAGE 4/4] Compliance Department - Pre-Trade Validation")
-            compliance_result = self._run_compliance_stage(portfolio_result)
+            # STAGE 4: GPT-5 Portfolio Optimizer (NEW - AI-driven capital allocation)
+            self.logger.info("\n[STAGE 4/5] GPT-5 Portfolio Optimizer - Intelligent Capital Allocation")
+            gpt5_result = self._run_gpt5_optimization_stage(portfolio_result, risk_result)
+            stage_results.append(gpt5_result)
+
+            if not gpt5_result.success:
+                return self._handle_stage_failure('gpt5_optimizer', gpt5_result, stage_results)
+
+            # STAGE 5: Compliance Department
+            self.logger.info("\n[STAGE 5/5] Compliance Department - Pre-Trade Validation")
+            compliance_result = self._run_compliance_stage(gpt5_result)
             stage_results.append(compliance_result)
 
             if not compliance_result.success:
@@ -254,11 +264,13 @@ class OperationsManager:
                 top_3 = sorted(candidates, key=lambda x: x.get('composite_score', 0), reverse=True)[:3]
                 self.logger.info(f"  Top candidates:")
                 for c in top_3:
-                    self.logger.info(f"    - {c['ticker']}: Score {c.get('composite_score', 0):.1f}")
+                    self.logger.info(f"    - {c['ticker']}: Score {c.get('composite_score', 0):.1f}/100")
 
             if issues:
                 for issue in issues:
                     self.logger.warning(f"  ISSUE: {issue}")
+
+            avg_score = sum(c.get('composite_score', 0) for c in candidates) / len(candidates) if candidates else 0
 
             return WorkflowStageResult(
                 stage='research',
@@ -267,9 +279,9 @@ class OperationsManager:
                     'message_id': message_id,
                     'candidates': candidates,
                     'candidate_count': candidate_count,
-                    'avg_score': sum(c.get('composite_score', 0) for c in candidates) / len(candidates) if candidates else 0
+                    'avg_score': avg_score
                 },
-                message=f"Research found {candidate_count} candidates (avg score: {sum(c.get('composite_score', 0) for c in candidates) / len(candidates):.1f if candidates else 0})",
+                message=f"Research found {candidate_count} candidates (avg score: {avg_score:.1f})" if candidates else f"Research found {candidate_count} candidates",
                 quality_score=quality_score,
                 issues=issues
             )
@@ -507,7 +519,172 @@ class OperationsManager:
                 issues=[str(e)]
             )
 
-    def _run_compliance_stage(self, portfolio_result: WorkflowStageResult) -> WorkflowStageResult:
+    def _run_gpt5_optimization_stage(self, portfolio_result: WorkflowStageResult, risk_result: WorkflowStageResult) -> WorkflowStageResult:
+        """Run GPT-5 Portfolio Optimizer for intelligent capital allocation"""
+        try:
+            # Initialize GPT-5 Optimizer
+            if not self._gpt5_optimizer:
+                self.logger.info("  Initializing GPT-5 Portfolio Optimizer (OpenAI GPT-5)...")
+                # Get OpenAI API key from config
+                import config as app_config
+                self._gpt5_optimizer = GPT5PortfolioOptimizer(api_key=app_config.OPENAI_API_KEY)
+
+            # Get candidates from Portfolio and Risk
+            buy_orders = portfolio_result.data.get('buy_orders', [])
+            approved_candidates = risk_result.data.get('approved_candidates', [])
+
+            if not buy_orders:
+                raise ValueError("No buy orders from Portfolio to optimize")
+
+            # Merge data: buy_orders from Portfolio + full candidate data from Risk
+            # Build comprehensive candidate list for GPT-5
+            candidates_for_gpt5 = []
+            for order in buy_orders:
+                ticker = order.get('ticker', order.get('symbol'))
+
+                # Find matching candidate from Risk to get full data
+                risk_candidate = next((c for c in approved_candidates if c.get('ticker') == ticker), None)
+
+                if risk_candidate:
+                    # Combine Portfolio order with Risk candidate data
+                    merged = {
+                        'ticker': ticker,
+                        'research_composite_score': risk_candidate.get('research_composite_score', 0),
+                        'technical_score': risk_candidate.get('technical_score', 0),
+                        'fundamental_score': risk_candidate.get('fundamental_score', 0),
+                        'sentiment_score': risk_candidate.get('sentiment_score', 0),
+                        'risk_reward_ratio': risk_candidate.get('risk_reward_ratio', 0),
+                        'position_size_shares': order.get('shares', order.get('position_size_shares', 0)),
+                        'position_size_value': order.get('position_size_value', order.get('position_value', 0)),
+                        'entry_price': order.get('price', order.get('entry_price', 0)),
+                        'stop_loss': order.get('stop_loss', order.get('stop', 0)),
+                        'target': order.get('target_price', order.get('target', 0)),
+                        'sector': order.get('sector', 'Unknown'),
+                        'total_risk': order.get('total_risk', 0),
+                        'portfolio_heat': risk_candidate.get('portfolio_heat', 0)
+                    }
+                    candidates_for_gpt5.append(merged)
+
+            self.logger.info(f"  Sending {len(candidates_for_gpt5)} candidates to GPT-5 for intelligent allocation...")
+            self.logger.info("  (GPT-5 will analyze scores, risk/reward, and determine optimal capital allocation...)")
+
+            # Get current portfolio state
+            # TODO: Query database for current positions and available capital
+            # For now, use placeholder values
+            available_capital = 100000.0  # $100K default
+            current_positions = 0
+            max_positions = 10
+
+            # Get market conditions
+            # TODO: Query actual SPY, VIX data
+            market_conditions = {
+                'spy_change_pct': 0.0,
+                'vix_level': 20.0,
+                'market_sentiment': 'neutral',
+                'timestamp': datetime.now().isoformat()
+            }
+
+            # Call GPT-5 optimizer
+            optimized_candidates, reasoning = self._gpt5_optimizer.optimize_portfolio(
+                candidates=candidates_for_gpt5,
+                available_capital=available_capital,
+                market_conditions=market_conditions,
+                current_positions=current_positions,
+                max_positions=max_positions
+            )
+
+            self.logger.info(f"  GPT-5 optimization completed for {len(optimized_candidates)} candidates")
+
+            # Log GPT-5's reasoning
+            self.logger.info("  GPT-5 Chief Investment Officer Analysis:")
+            for line in reasoning.split('\n')[:10]:  # First 10 lines
+                if line.strip():
+                    self.logger.info(f"    {line.strip()}")
+
+            # Calculate total allocated capital
+            total_allocated = sum(c.get('allocated_capital', 0) for c in optimized_candidates)
+            capital_deployment_pct = (total_allocated / available_capital * 100) if available_capital > 0 else 0
+
+            self.logger.info(f"  Capital Deployment: ${total_allocated:,.2f} / ${available_capital:,.2f} ({capital_deployment_pct:.1f}%)")
+
+            # Update buy_orders with GPT-5's allocations
+            optimized_orders = []
+            for candidate in optimized_candidates:
+                ticker = candidate['ticker']
+                allocated_capital = candidate.get('allocated_capital', 0)
+
+                # Find original order
+                original_order = next((o for o in buy_orders if o.get('ticker', o.get('symbol')) == ticker), None)
+
+                if original_order and allocated_capital > 0:
+                    # Recalculate shares based on GPT-5's capital allocation
+                    entry_price = candidate.get('entry_price', original_order.get('price', 1))
+                    new_shares = allocated_capital / entry_price if entry_price > 0 else 0
+
+                    # Update order with GPT-5's allocation
+                    optimized_order = original_order.copy()
+                    optimized_order['position_value'] = allocated_capital
+                    optimized_order['position_size_value'] = allocated_capital
+                    optimized_order['shares'] = new_shares
+                    optimized_order['position_size_shares'] = new_shares
+                    optimized_order['gpt5_allocated'] = True
+                    optimized_order['gpt5_conviction'] = candidate.get('conviction_level', 'medium')
+
+                    optimized_orders.append(optimized_order)
+
+            approved_count = len(optimized_orders)
+
+            # Quality score based on capital deployment and diversification
+            quality_score = min(100, int(
+                (capital_deployment_pct / 90.0 * 70) +  # 70% weight on capital deployment (90%+ target)
+                (min(approved_count / 5.0, 1.0) * 30)   # 30% weight on diversification (5+ positions ideal)
+            ))
+
+            issues = []
+            if capital_deployment_pct < 80:
+                issues.append(f"Capital deployment below target: {capital_deployment_pct:.1f}% (target 90%+)")
+            if approved_count < 5:
+                issues.append(f"Limited diversification: {approved_count} positions (target 5+)")
+
+            success = approved_count > 0 and capital_deployment_pct >= 50  # At least 50% deployed
+
+            return WorkflowStageResult(
+                stage='gpt5_optimizer',
+                success=success,
+                data={
+                    'buy_orders': optimized_orders,
+                    'approved_count': approved_count,
+                    'total_allocated': total_allocated,
+                    'capital_deployment_pct': capital_deployment_pct,
+                    'gpt5_reasoning': reasoning,
+                    'optimized_candidates': optimized_candidates
+                },
+                message=f"GPT-5 optimized {approved_count} positions (${total_allocated:,.0f} allocated, {capital_deployment_pct:.1f}% deployment)",
+                quality_score=int(quality_score),
+                issues=issues
+            )
+
+        except Exception as e:
+            self.logger.error(f"  GPT-5 Optimizer stage FAILED: {e}", exc_info=True)
+
+            # FALLBACK: Use Portfolio's original orders if GPT-5 fails
+            self.logger.warning("  Falling back to Portfolio's original allocations...")
+            buy_orders = portfolio_result.data.get('buy_orders', [])
+
+            return WorkflowStageResult(
+                stage='gpt5_optimizer',
+                success=len(buy_orders) > 0,
+                data={
+                    'buy_orders': buy_orders,
+                    'approved_count': len(buy_orders),
+                    'fallback_mode': True
+                },
+                message=f"GPT-5 failed, using fallback allocation ({len(buy_orders)} orders)",
+                quality_score=50,  # Reduced score for fallback
+                issues=[f"GPT-5 optimization failed: {str(e)}", "Using fallback allocation"]
+            )
+
+    def _run_compliance_stage(self, gpt5_result: WorkflowStageResult) -> WorkflowStageResult:
         """Run Compliance Department and validate output"""
         try:
             # Initialize Compliance Department
@@ -523,11 +700,11 @@ class OperationsManager:
                     db_path=self.db_path
                 )
 
-            # Get buy orders from Portfolio
-            buy_orders = portfolio_result.data.get('buy_orders', [])
+            # Get buy orders from GPT-5 Optimizer (which has dynamic capital allocations)
+            buy_orders = gpt5_result.data.get('buy_orders', [])
 
             if not buy_orders:
-                raise ValueError("No buy orders to validate from Portfolio")
+                raise ValueError("No buy orders to validate from GPT-5 Optimizer")
 
             # Validate each trade against compliance rules
             self.logger.info("  Validating trades against compliance rules...")
@@ -538,12 +715,16 @@ class OperationsManager:
 
             for order in buy_orders:
                 # Format trade proposal for Compliance validator
+                # Note: Portfolio uses 'position_size_value' from Risk, not 'position_value'
+                position_val = order.get('position_value', order.get('position_size_value', 0))
+                entry_price = order.get('price', order.get('entry_price', order.get('current_price', 0)))
+
                 proposal = {
                     'ticker': order.get('ticker', order.get('symbol', 'UNKNOWN')),
                     'trade_type': 'BUY',
-                    'shares': order.get('shares', order.get('qty', 0)),
-                    'price': order.get('price', order.get('current_price', 0)),
-                    'position_value': order.get('position_value', 0),
+                    'shares': order.get('shares', order.get('position_size_shares', order.get('qty', 0))),
+                    'price': entry_price,
+                    'position_value': position_val,
                     'total_risk': order.get('total_risk', 0),
                     'sector': order.get('sector', 'Unknown'),
                     'stop_loss': order.get('stop_loss', order.get('stop', 0)),

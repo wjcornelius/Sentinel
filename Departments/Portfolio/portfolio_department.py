@@ -243,8 +243,8 @@ class PortfolioDecisionEngine:
                     'rejection_reason': 'LOW_SCORE',
                     'rejection_category': 'SCORE',
                     'rejection_details': (
-                        f"Research composite score {score:.1f} is below minimum threshold {self.min_composite_score:.1f}. "
-                        f"Only candidates scoring {self.min_composite_score:.1f}+ are eligible for trading."
+                        f"Research composite score {score:.1f}/100 is below minimum threshold {self.min_composite_score:.1f}/100. "
+                        f"Only candidates scoring {self.min_composite_score:.1f}/100+ are eligible for trading."
                     ),
                     'would_be_shares': candidate.get('position_size_shares'),
                     'would_be_position_value': candidate.get('position_size_value'),
@@ -305,7 +305,7 @@ class PortfolioDecisionEngine:
                 'rejection_category': 'CAPACITY',
                 'rejection_details': (
                     f"Portfolio has {available_slots} available slots out of {self.max_positions} max positions. "
-                    f"This candidate (score {candidate.get('research_composite_score', 0):.1f}) "
+                    f"This candidate (score {candidate.get('research_composite_score', 0):.1f}/100) "
                     f"ranked below the cutoff. "
                     f"Accepted candidates: {', '.join([c['ticker'] for c in accepted])}"
                 ),
@@ -456,7 +456,7 @@ class PortfolioDecisionEngine:
             f"- **Risk-Reward**: {candidate['risk_reward_ratio']:.1f}:1",
             "",
             "## Context",
-            f"- **Research Score**: {candidate['research_composite_score']:.1f}/10",
+            f"- **Research Score**: {candidate['research_composite_score']:.1f}/100",
             f"- **Sector**: {candidate.get('sector', 'Unknown')}",
             f"- **Entry Reason**: Passed all risk checks, portfolio has capacity"
         ]
