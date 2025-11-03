@@ -315,7 +315,11 @@ class ResearchDepartment:
                 return None
 
             # Cache for 16 hours
-            self._cache_price_data(ticker, data)
+            try:
+                self._cache_price_data(ticker, data)
+            except Exception as cache_error:
+                logger.warning(f"{ticker}: Failed to cache data - {cache_error}")
+                # Still return data even if caching fails
 
             return data
 
@@ -331,9 +335,23 @@ class ResearchDepartment:
         now = datetime.now()
         expires_at = now + timedelta(hours=self.cache_ttl_hours)
 
-        # Convert DataFrame to JSON
+        # Convert DataFrame to JSON (handle datetime index and MultiIndex columns)
         import json
-        data_json = json.dumps(data.reset_index().to_dict(orient='records'))
+        df_copy = data.copy()
+
+        # Flatten MultiIndex columns if present (yfinance returns MultiIndex)
+        if isinstance(df_copy.columns, pd.MultiIndex):
+            df_copy.columns = [col[0] if isinstance(col, tuple) else col for col in df_copy.columns]
+
+        # Reset index to include dates as a column
+        df_copy = df_copy.reset_index()
+
+        # Convert any datetime columns to strings for JSON serialization
+        for col in df_copy.columns:
+            if pd.api.types.is_datetime64_any_dtype(df_copy[col]):
+                df_copy[col] = df_copy[col].astype(str)
+
+        data_json = json.dumps(df_copy.to_dict(orient='records'))
 
         cursor.execute("""
             INSERT OR REPLACE INTO market_data_cache

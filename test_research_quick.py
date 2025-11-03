@@ -68,7 +68,9 @@ def test_research_quick():
     if len(buy_candidates) > 0:
         print("Top 10 Buy Candidates:")
         for i, c in enumerate(buy_candidates[:10], 1):
-            print(f"  {i:2d}. {c['ticker']:6s} - Score: {c['score']:5.1f}/100")
+            ticker = c if isinstance(c, str) else c.get('ticker', 'UNKNOWN')
+            score = c.get('score', 0.0) if isinstance(c, dict) else 0.0
+            print(f"  {i:2d}. {ticker:6s} - Score: {score:5.1f}/100" if isinstance(c, dict) else f"  {i:2d}. {ticker}")
         print()
 
     print("=" * 80)
