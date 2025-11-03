@@ -7,6 +7,65 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [Phase 2] - 2025-11-02
+
+### Added
+- **CEO Orchestration Layer**: New daily cycle orchestrator (`run_daily_cycle.py`)
+  - `SentinelCEO` class coordinates all departments
+  - Linear pipeline execution: Research → News → Compliance → Portfolio
+  - Mesh network architecture: All departments accessible to each other
+  - Graceful error handling and comprehensive logging
+  - Daily report generation with summary statistics
+
+### Architecture
+- **New Pipeline Flow**:
+  ```
+  Stage 1: Research (v3.0) → Generate ~50 swing-suitable candidates
+  Stage 2: News → Add sentiment scores + news summaries
+  Stage 3: Compliance → Validate candidates (simplified)
+  Stage 4: Portfolio → Optimization ready
+  ```
+- **Mesh Network**: All departments initialized upfront, can communicate as needed
+- **Risk Department Retired**: Functionality absorbed into Research Stage 1 (swing suitability scoring)
+- **Entry Point**: `python run_daily_cycle.py` - single command to run full pipeline
+
+### Changed
+- **Department Initialization**: Standardized across all departments
+  - Research: `db_path`, `alpaca_client`
+  - News: `db_path`
+  - Compliance: `config_path` (Path), `db_path` (Path)
+  - Portfolio: `config_path` (Path), `db_path` (Path)
+- **News Integration**: Batch sentiment scoring via `get_sentiment_scores(tickers)`
+  - Returns dict with `sentiment_score`, `news_summary`, `sentiment_reasoning`
+  - Graceful fallback to neutral (50.0) on API errors
+- **Compliance Integration**: Simplified pre-validation (full validation at trade execution)
+
+### Fixed
+- Missing `__init__.py` files for Compliance and Portfolio departments
+- Department initialization parameter mismatches
+- News API method name (singular → plural)
+
+### Testing
+- Full end-to-end pipeline tested and passing
+- Successfully processes 50 candidates through all 4 stages
+- ~30s execution time (including Research Stage 1 scoring)
+- Handles API failures gracefully (Perplexity 401 → neutral sentiment)
+
+### Files Created
+- `run_daily_cycle.py` - Main orchestrator and entry point
+- `Departments/Compliance/__init__.py`
+- `Departments/Portfolio/__init__.py`
+
+### Output Example
+```
+Research: 50 candidates, 0 holdings
+News: 50 tickers scored
+Compliance: 50 approved, 0 flagged
+Portfolio: 50 ready for optimization
+```
+
+---
+
 ## [Phase 1.5] - 2025-11-02
 
 ### Fixed
