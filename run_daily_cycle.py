@@ -24,6 +24,9 @@ from typing import Dict, List
 project_root = Path(__file__).parent
 sys.path.insert(0, str(project_root))
 
+# Import config for API keys
+import config
+
 # Import departments
 from Departments.Research import ResearchDepartment
 from Departments.News import NewsDepartment
@@ -62,7 +65,10 @@ class SentinelCEO:
         logger.info("Initializing departments...")
 
         self.research = ResearchDepartment(db_path=str(self.db_path), alpaca_client=alpaca_client)
-        self.news = NewsDepartment(db_path=str(self.db_path))
+        self.news = NewsDepartment(
+            db_path=str(self.db_path),
+            perplexity_api_key=config.PERPLEXITY_API_KEY
+        )
         self.compliance = ComplianceDepartment(
             config_path=project_root / "Config" / "compliance_config.yaml",
             db_path=self.db_path
