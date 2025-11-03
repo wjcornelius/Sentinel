@@ -22,6 +22,8 @@ Date: November 1, 2025
 import sys
 import json
 import logging
+import uuid
+import yaml
 from pathlib import Path
 from datetime import datetime, date, timezone
 from typing import Dict, List, Optional
@@ -448,15 +450,122 @@ class CEO:
         self.logger.info(f"[CEO] Executing approved plan: {self.current_plan['plan_id']}")
         self.logger.info("[CEO] Delegating to Trading Department...")
 
-        # TODO: Implement actual execution via Trading Department
-        # For now, return mock success
+        try:
+            # Initialize Trading Department
+            from Departments.Trading.trading_department import TradingDepartment
+            trading_dept = TradingDepartment(db_path=str(self.db_path))
 
-        return {
-            'status': 'EXECUTION_INITIATED',
-            'plan_id': self.current_plan['plan_id'],
-            'message': '[CEO] Orders submitted to Trading Department for execution. I will monitor personally.',
-            'trades_submitted': self.current_plan['summary']['total_trades']
+            # Get trades from approved plan
+            trades = self.current_plan.get('trades', [])
+
+            if not trades:
+                return {
+                    'status': 'ERROR',
+                    'message': '[CEO] Approved plan contains no trades to execute.'
+                }
+
+            self.logger.info(f"[CEO] Submitting {len(trades)} orders to Trading Department")
+
+            # Send each trade to Trading Department via message
+            execution_results = []
+            for trade in trades:
+                # Create execution message for Trading Department
+                message_id = self._send_trade_to_trading_dept(trade)
+                execution_results.append({
+                    'ticker': trade.get('ticker'),
+                    'message_id': message_id
+                })
+
+            # Process inbox to execute the orders
+            self.logger.info("[CEO] Trading Department processing orders...")
+            trading_dept.process_inbox()
+
+            return {
+                'status': 'EXECUTION_INITIATED',
+                'plan_id': self.current_plan['plan_id'],
+                'message': '[CEO] Orders submitted to Trading Department for execution. Execution complete.',
+                'trades_submitted': len(trades),
+                'execution_results': execution_results
+            }
+
+        except Exception as e:
+            self.logger.error(f"[CEO] Execution failed: {e}", exc_info=True)
+            return {
+                'status': 'ERROR',
+                'message': f'[CEO] Execution failed: {str(e)}'
+            }
+
+    def _send_trade_to_trading_dept(self, trade: Dict) -> str:
+        """Send a single trade order to Trading Department"""
+        # Determine if this is a BUY or SELL
+        # BUY orders have 'allocated_capital', SELL orders have 'position_id'
+        if 'allocated_capital' in trade:
+            action = 'BUY'
+            shares = trade.get('shares', 0)
+        else:
+            action = 'SELL'
+            shares = trade.get('shares', 0)
+
+        # Get price from trade data
+        price = trade.get('entry_price', trade.get('current_price', trade.get('price', 0)))
+        ticker = trade.get('ticker', 'UNKNOWN')
+        sector = trade.get('sector', 'Unknown')
+
+        # Generate message ID
+        timestamp = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')
+        msg_id = f"MSG_EXECUTIVE_{timestamp}_{uuid.uuid4().hex[:8]}"
+
+        # Create message
+        metadata = {
+            'message_id': msg_id,
+            'from': 'EXECUTIVE',
+            'to': 'TRADING',
+            'timestamp': datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z'),
+            'message_type': 'ExecutiveApproval',
+            'priority': 'urgent',
+            'requires_response': False
         }
+
+        # Build message body with JSON payload
+        body = f"""# Executive Approval - {action} {ticker}
+
+**Order Type**: {action}
+**Ticker**: {ticker}
+**Shares**: {shares}
+**Price**: ${price:.2f}
+**Sector**: {sector}
+
+```json
+{{
+  "ticker": "{ticker}",
+  "action": "{action}",
+  "shares": {shares},
+  "price": {price},
+  "sector": "{sector}",
+  "order_type": "MARKET",
+  "plan_id": "{self.current_plan['plan_id']}",
+  "approved_at": "{datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z')}"
+}}
+```
+"""
+
+        # Write message to Trading inbox
+        trading_inbox = self.project_root / "Messages_Between_Departments" / "Inbox" / "TRADING"
+        trading_inbox.mkdir(parents=True, exist_ok=True)
+
+        message_file = trading_inbox / f"{msg_id}.md"
+
+        content = "---\n"
+        content += yaml.dump(metadata, default_flow_style=False, sort_keys=False)
+        content += "---\n"
+        content += body
+
+        with open(message_file, 'w') as f:
+            f.write(content)
+
+        self.logger.info(f"[CEO] Sent {action} order for {ticker} to Trading (msg: {msg_id})")
+
+        return msg_id
 
 
 if __name__ == "__main__":

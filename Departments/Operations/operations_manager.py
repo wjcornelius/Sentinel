@@ -32,6 +32,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 # Import departments
 from Departments.Research.research_department import ResearchDepartment
+from Departments.News.news_department import NewsDepartment
 from Departments.Risk.risk_department import RiskDepartment
 from Departments.Portfolio.portfolio_department import PortfolioDepartment
 from Departments.Compliance.compliance_department import ComplianceDepartment
@@ -99,6 +100,7 @@ class OperationsManager:
 
         # Initialize departments (lazy loading)
         self._research_dept = None
+        self._news_dept = None
         self._risk_dept = None
         self._portfolio_dept = None
         self._compliance_dept = None
@@ -126,48 +128,42 @@ class OperationsManager:
         stage_results = []
 
         try:
-            # STAGE 1: Research Department
-            self.logger.info("\n[STAGE 1/4] Research Department - Market Analysis & Candidate Screening")
+            # STAGE 1: Research Department (50 buy candidates)
+            self.logger.info("\n[STAGE 1/3] Research Department - Market Analysis & Candidate Screening")
             research_result = self._run_research_stage()
             stage_results.append(research_result)
 
             if not research_result.success:
                 return self._handle_stage_failure('research', research_result, stage_results)
 
-            # STAGE 2: Risk Department
-            self.logger.info("\n[STAGE 2/4] Risk Department - Position Sizing & Risk Assessment")
-            risk_result = self._run_risk_stage(research_result)
-            stage_results.append(risk_result)
+            # STAGE 2: News Department (sentiment for ALL ~110 stocks: candidates + holdings)
+            self.logger.info("\n[STAGE 2/3] News Department - Sentiment Analysis for All Stocks")
+            news_result = self._run_news_stage(research_result)
+            stage_results.append(news_result)
 
-            if not risk_result.success:
-                return self._handle_stage_failure('risk', risk_result, stage_results)
+            if not news_result.success:
+                return self._handle_stage_failure('news', news_result, stage_results)
 
-            # STAGE 3: Portfolio Department
-            self.logger.info("\n[STAGE 3/5] Portfolio Department - Constraint Application & Selection")
-            portfolio_result = self._run_portfolio_stage(risk_result)
-            stage_results.append(portfolio_result)
-
-            if not portfolio_result.success:
-                return self._handle_stage_failure('portfolio', portfolio_result, stage_results)
-
-            # STAGE 4: GPT-5 Portfolio Optimizer (NEW - AI-driven capital allocation)
-            self.logger.info("\n[STAGE 4/5] GPT-5 Portfolio Optimizer - Intelligent Capital Allocation")
-            gpt5_result = self._run_gpt5_optimization_stage(portfolio_result, risk_result)
+            # STAGE 3: GPT-5 Portfolio Optimizer (creates proposed trading plan from all scored stocks)
+            self.logger.info("\n[STAGE 3/3] GPT-5 Portfolio Optimizer - Creating Proposed Trading Plan")
+            self.logger.info("  (Portfolio + CEO working with GPT-5 to create intelligent allocation...)")
+            gpt5_result = self._run_gpt5_optimization_stage(news_result)
             stage_results.append(gpt5_result)
 
             if not gpt5_result.success:
                 return self._handle_stage_failure('gpt5_optimizer', gpt5_result, stage_results)
 
-            # STAGE 5: Compliance Department
-            self.logger.info("\n[STAGE 5/5] Compliance Department - Pre-Trade Validation")
-            compliance_result = self._run_compliance_stage(gpt5_result)
+            # ITERATIVE COMPLIANCE REVIEW (advisory - not filtering)
+            self.logger.info("\n[COMPLIANCE REVIEW] Compliance Department - Advisory Feedback Loop")
+            self.logger.info("  (CEO <-> Portfolio <-> Compliance iterating until all satisfied...)")
+            compliance_result = self._run_compliance_advisory_loop(gpt5_result)
             stage_results.append(compliance_result)
 
-            if not compliance_result.success:
-                return self._handle_stage_failure('compliance', compliance_result, stage_results)
+            # Note: Compliance is advisory, so we proceed even with suggestions
+            # The final plan incorporates all agreed-upon improvements
 
-            # ALL STAGES PASSED - Aggregate final plan
-            self.logger.info("\n[AGGREGATION] All stages passed - building final plan")
+            # ALL STAGES COMPLETE - Aggregate final plan for CEO presentation
+            self.logger.info("\n[AGGREGATION] Building final trading plan for CEO review")
             final_plan = self._aggregate_final_plan(stage_results)
 
             self.logger.info("=" * 80)
@@ -192,28 +188,23 @@ class OperationsManager:
     def _run_research_stage(self) -> WorkflowStageResult:
         """Run Research Department and validate output"""
         try:
-            # Initialize Research Department
+            # Initialize Research Department v3.0
             if not self._research_dept:
-                self.logger.info("  Initializing Research Department...")
-                config_path = self.config_dir / "research_config.yaml"
+                self.logger.info("  Initializing Research Department v3.0...")
 
-                if not config_path.exists():
-                    raise FileNotFoundError(f"Research config not found: {config_path}")
-
-                with open(config_path, 'r') as f:
-                    research_config = yaml.safe_load(f)
-
-                # Check if PERPLEXITY_API_KEY is configured
-                if not hasattr(config, 'PERPLEXITY_API_KEY') or not config.PERPLEXITY_API_KEY:
-                    self.logger.warning("  PERPLEXITY_API_KEY not configured - Research will use basic analysis only")
-                    perplexity_key = None
-                else:
-                    perplexity_key = config.PERPLEXITY_API_KEY
+                # Try to get Alpaca client for current holdings
+                alpaca_client = None
+                try:
+                    from Utils.alpaca_client import AlpacaClient
+                    alpaca_client = AlpacaClient()
+                    self.logger.info("  Alpaca client available - will fetch current holdings")
+                except Exception as e:
+                    self.logger.warning(f"  Alpaca client not available: {e}")
+                    self.logger.info("  Continuing without current holdings")
 
                 self._research_dept = ResearchDepartment(
-                    config=research_config,
-                    perplexity_api_key=perplexity_key,
-                    db_path=self.db_path
+                    db_path=str(self.db_path),
+                    alpaca_client=alpaca_client
                 )
 
             # Generate daily briefing (this calls the REAL Research Department)
@@ -297,109 +288,205 @@ class OperationsManager:
                 issues=[str(e)]
             )
 
-    def _run_risk_stage(self, research_result: WorkflowStageResult) -> WorkflowStageResult:
+    def _run_news_stage(self, research_result: WorkflowStageResult) -> WorkflowStageResult:
+        """
+        Run News Department to enrich candidates with sentiment scores
+
+        Takes Research output and adds sentiment analysis for ALL stocks:
+        - Candidates from Research
+        - Current holdings from Alpaca (included in Research output)
+
+        Returns WorkflowStageResult with enriched candidate data
+        """
+        try:
+            # Initialize News Department
+            if not self._news_dept:
+                self.logger.info("  Initializing News Department...")
+                self._news_dept = NewsDepartment(
+                    db_path=str(self.db_path),
+                    perplexity_api_key=config.PERPLEXITY_API_KEY if hasattr(config, 'PERPLEXITY_API_KEY') else None
+                )
+                self.logger.info("  News Department initialized")
+
+            # Extract candidates from Research result
+            candidates = research_result.data.get('candidates', [])
+            holdings = research_result.data.get('current_holdings', [])
+
+            # Collect all tickers (candidates + holdings)
+            candidate_tickers = [c['ticker'] for c in candidates]
+            holding_tickers = [h['ticker'] for h in holdings] if holdings else []
+            all_tickers = list(set(candidate_tickers + holding_tickers))  # Deduplicate
+
+            self.logger.info(f"  Scoring sentiment for {len(all_tickers)} stocks:")
+            self.logger.info(f"    - Candidates: {len(candidate_tickers)}")
+            self.logger.info(f"    - Holdings: {len(holding_tickers)}")
+
+            # Get sentiment scores for all tickers
+            sentiment_data = self._news_dept.get_sentiment_scores(all_tickers)
+
+            # Enrich candidates with sentiment
+            enriched_candidates = []
+            for candidate in candidates:
+                ticker = candidate['ticker']
+                sent_info = sentiment_data.get(ticker, {})
+
+                # Update sentiment in candidate dict
+                candidate['sentiment'] = {
+                    'score': sent_info.get('sentiment_score', 50.0),
+                    'summary': sent_info.get('news_summary', 'No sentiment data available'),
+                    'news_count': 1 if sent_info else 0
+                }
+
+                # Recalculate composite score with real sentiment
+                tech_score = candidate.get('technical', {}).get('score', 50.0)
+                fund_score = candidate.get('fundamental', {}).get('score', 50.0)
+                sent_score = candidate['sentiment']['score']
+
+                # Use same weights as Research (40% tech, 40% fund, 20% sent)
+                composite_score = (tech_score * 0.4) + (fund_score * 0.4) + (sent_score * 0.2)
+                candidate['composite_score'] = round(composite_score, 1)
+
+                enriched_candidates.append(candidate)
+
+            # Enrich holdings with sentiment (for Portfolio/CEO decision making)
+            enriched_holdings = []
+            for holding in holdings:
+                ticker = holding['ticker']
+                sent_info = sentiment_data.get(ticker, {})
+
+                holding['sentiment'] = {
+                    'score': sent_info.get('sentiment_score', 50.0),
+                    'summary': sent_info.get('news_summary', 'No sentiment data available'),
+                    'news_count': 1 if sent_info else 0
+                }
+
+                enriched_holdings.append(holding)
+
+            # Calculate quality score based on sentiment data coverage
+            total_stocks = len(all_tickers)
+            scored_stocks = sum(1 for t in all_tickers if sentiment_data.get(t, {}).get('sentiment_score') is not None)
+            coverage_rate = scored_stocks / total_stocks if total_stocks > 0 else 0
+            quality_score = int(coverage_rate * 100)
+
+            self.logger.info(f"  News stage completed:")
+            self.logger.info(f"    - Sentiment coverage: {scored_stocks}/{total_stocks} ({coverage_rate*100:.1f}%)")
+            self.logger.info(f"    - Quality score: {quality_score}/100")
+
+            # Show top candidates with sentiment
+            if enriched_candidates:
+                top_3 = sorted(enriched_candidates, key=lambda x: x.get('composite_score', 0), reverse=True)[:3]
+                self.logger.info(f"  Top candidates (with sentiment):")
+                for c in top_3:
+                    self.logger.info(f"    - {c['ticker']}: Composite {c.get('composite_score', 0):.1f}/100 (Sentiment: {c['sentiment']['score']:.1f})")
+
+            success = coverage_rate >= 0.5  # At least 50% coverage required
+
+            return WorkflowStageResult(
+                stage='news',
+                success=success,
+                data={
+                    'message_id': research_result.data.get('message_id'),  # Pass through for Risk
+                    'candidates': enriched_candidates,
+                    'current_holdings': enriched_holdings,
+                    'sentiment_data': sentiment_data,
+                    'coverage_rate': coverage_rate,
+                    'total_stocks_scored': scored_stocks
+                },
+                message=f"News enriched {scored_stocks}/{total_stocks} stocks with sentiment",
+                quality_score=quality_score,
+                issues=[] if success else [f"Low sentiment coverage: {coverage_rate*100:.1f}%"]
+            )
+
+        except Exception as e:
+            self.logger.error(f"  News stage FAILED: {e}", exc_info=True)
+            return WorkflowStageResult(
+                stage='news',
+                success=False,
+                data={},
+                message=f"News failed: {str(e)}",
+                quality_score=0,
+                issues=[str(e)]
+            )
+
+    def _run_risk_stage(self, news_result: WorkflowStageResult) -> WorkflowStageResult:
         """Run Risk Department and validate output"""
         try:
             # Initialize Risk Department
             if not self._risk_dept:
                 self.logger.info("  Initializing Risk Department...")
-                config_path = self.config_dir / "risk_config.yaml"
 
-                if not config_path.exists():
-                    raise FileNotFoundError(f"Risk config not found: {config_path}")
-
+                # Risk Department uses default parameters (1% per trade, 5% portfolio heat)
                 self._risk_dept = RiskDepartment(
-                    config_path=str(config_path),
-                    db_path=str(self.db_path)
+                    max_risk_per_trade_pct=1.0,
+                    max_portfolio_heat_pct=5.0
                 )
 
-            # Get Research message path
-            research_msg_id = research_result.data['message_id']
-            research_msg_path = self.messages_dir / "Outbox" / "RESEARCH" / f"{research_msg_id}.md"
+            # Get enriched candidates from News stage
+            candidates = news_result.data.get('candidates', [])
 
-            if not research_msg_path.exists():
-                raise FileNotFoundError(f"Research message not found: {research_msg_path}")
+            if not candidates:
+                raise ValueError("No candidates provided from News stage")
 
-            # Process daily briefing (calls REAL Risk Department)
+            # Get available capital (simple calculation for now)
+            # TODO: Get from Alpaca or database
+            available_capital = 100000.0  # Default $100K
+
             self.logger.info("  Calculating position sizes and risk metrics...")
-            self.logger.info("  (Applying risk limits: 1% per trade, 5% portfolio heat, 40% sector max...)")
+            self.logger.info(f"  Available capital: ${available_capital:,.2f}")
+            self.logger.info("  (Applying risk limits: 1% per trade, 5% portfolio heat...)")
 
-            risk_msg_id = self._risk_dept.process_daily_briefing(research_msg_path)
+            # Call Risk Department to assess candidates
+            assessed_candidates = self._risk_dept.assess_candidates(candidates, available_capital)
 
-            if not risk_msg_id:
-                raise ValueError("Risk Department failed to generate RiskAssessment message")
-
-            # Read the RiskAssessment message to get results
-            risk_msg_path = self.messages_dir / "Outbox" / "RISK" / f"{risk_msg_id}.md"
-
-            if not risk_msg_path.exists():
-                raise FileNotFoundError(f"Risk output message not found: {risk_msg_path}")
-
-            # Parse message to extract approved candidate data
-            with open(risk_msg_path, 'r', encoding='utf-8') as f:
-                content = f.read()
-
-            # Extract JSON payload
-            if '```json' in content:
-                json_start = content.find('```json') + 7
-                json_end = content.find('```', json_start)
-                json_str = content[json_start:json_end].strip()
-                data = json.loads(json_str)
-            else:
-                raise ValueError("No JSON payload found in Risk message")
-
-            approved_candidates = data.get('approved_candidates', [])
-            rejected_candidates = data.get('rejected_candidates', [])
+            # Risk Department adds risk metrics to ALL candidates (advisory role)
+            # No filtering - all candidates passed through with risk scores
+            approved_candidates = assessed_candidates
             approved_count = len(approved_candidates)
-            rejected_count = len(rejected_candidates)
+            rejected_count = 0  # Risk v2.0 doesn't reject
 
             # Calculate quality metrics
             issues = []
             if approved_count < self.min_risk_approved:
-                issues.append(f"Only {approved_count} candidates approved by Risk (minimum {self.min_risk_approved})")
+                issues.append(f"Only {approved_count} candidates from Risk (minimum {self.min_risk_approved})")
 
-            # Quality score based on approval rate and average risk/reward
+            # Quality score based on average risk_score (0-100)
             if approved_candidates:
-                avg_risk_reward = sum(c.get('risk_reward_ratio', 0) for c in approved_candidates) / len(approved_candidates)
-                approval_rate = approved_count / (approved_count + rejected_count) if (approved_count + rejected_count) > 0 else 0
-
-                # Quality = 50% approval rate + 50% risk/reward quality
-                quality_score = min(100, int(
-                    (approval_rate * 50) +
-                    (min(avg_risk_reward / 3.0, 1.0) * 50)  # R/R of 3:1 = perfect score
-                ))
+                avg_risk_score = sum(c.get('risk_score', 50) for c in approved_candidates) / len(approved_candidates)
+                quality_score = int(avg_risk_score)
             else:
                 quality_score = 0
 
             success = approved_count >= self.min_risk_approved
 
-            self.logger.info(f"  Risk assessment completed: {approved_count} approved, {rejected_count} rejected")
+            self.logger.info(f"  Risk assessment completed: {approved_count} candidates with risk metrics")
             if approved_candidates:
-                # Log top 3 by risk/reward
-                top_3 = sorted(approved_candidates, key=lambda x: x.get('risk_reward_ratio', 0), reverse=True)[:3]
-                self.logger.info(f"  Top risk/reward ratios:")
+                # Log top 3 by risk_score
+                top_3 = sorted(approved_candidates, key=lambda x: x.get('risk_score', 0), reverse=True)[:3]
+                self.logger.info(f"  Top risk scores (swing suitability):")
                 for c in top_3:
                     ticker = c.get('ticker', 'N/A')
-                    rr = c.get('risk_reward_ratio', 0)
-                    shares = c['position'].get('shares', 0) if 'position' in c else 0
-                    self.logger.info(f"    - {ticker}: {rr:.2f}:1 R/R, {shares:.2f} shares")
+                    risk_score = c.get('risk_score', 0)
+                    warnings = c.get('risk_warnings', [])
+                    self.logger.info(f"    - {ticker}: {risk_score:.1f}/100 swing score, {len(warnings)} warnings")
 
             if issues:
                 for issue in issues:
                     self.logger.warning(f"  ISSUE: {issue}")
 
+            # Generate RiskAssessment message for Portfolio
+            risk_msg_id = self._generate_risk_assessment_message(approved_candidates, available_capital)
+            self.logger.info(f"  RiskAssessment message generated: {risk_msg_id}")
+
             return WorkflowStageResult(
                 stage='risk',
                 success=success,
                 data={
-                    'message_id': risk_msg_id,
-                    'approved_candidates': approved_candidates,
-                    'rejected_candidates': rejected_candidates,
+                    'message_id': risk_msg_id,  # For Portfolio to read from outbox
+                    'candidates': approved_candidates,  # All candidates with risk metrics added
                     'approved_count': approved_count,
-                    'rejected_count': rejected_count,
-                    'avg_risk_reward': sum(c.get('risk_reward_ratio', 0) for c in approved_candidates) / len(approved_candidates) if approved_candidates else 0
+                    'avg_risk_score': sum(c.get('risk_score', 0) for c in approved_candidates) / len(approved_candidates) if approved_candidates else 0
                 },
-                message=f"Risk approved {approved_count} candidates (avg R/R {sum(c.get('risk_reward_ratio', 0) for c in approved_candidates) / len(approved_candidates):.2f}:1)" if approved_candidates else f"Risk approved {approved_count} candidates",
+                message=f"Risk assessed {approved_count} candidates (avg risk score {sum(c.get('risk_score', 0) for c in approved_candidates) / len(approved_candidates):.1f}/100)" if approved_candidates else f"Risk assessed {approved_count} candidates",
                 quality_score=int(quality_score),
                 issues=issues
             )
@@ -421,8 +508,9 @@ class OperationsManager:
             # Initialize Portfolio Department
             if not self._portfolio_dept:
                 self.logger.info("  Initializing Portfolio Department...")
-                config_path = self.config_dir / "portfolio_config.yaml"
 
+                # Portfolio Department requires config_path and db_path
+                config_path = self.config_dir / "portfolio_config.yaml"
                 if not config_path.exists():
                     raise FileNotFoundError(f"Portfolio config not found: {config_path}")
 
@@ -519,8 +607,16 @@ class OperationsManager:
                 issues=[str(e)]
             )
 
-    def _run_gpt5_optimization_stage(self, portfolio_result: WorkflowStageResult, risk_result: WorkflowStageResult) -> WorkflowStageResult:
-        """Run GPT-5 Portfolio Optimizer for intelligent capital allocation"""
+    def _run_gpt5_optimization_stage(self, news_result: WorkflowStageResult) -> WorkflowStageResult:
+        """
+        Run GPT-5 Portfolio Optimizer for intelligent capital allocation
+
+        This stage receives ALL scored stocks from News (candidates + holdings)
+        and uses GPT-5 to create a complete proposed trading plan:
+        - Which positions to SELL (from holdings)
+        - Which stocks to BUY (from candidates)
+        - How much capital to allocate to each
+        """
         try:
             # Initialize GPT-5 Optimizer
             if not self._gpt5_optimizer:
@@ -529,137 +625,131 @@ class OperationsManager:
                 import config as app_config
                 self._gpt5_optimizer = GPT5PortfolioOptimizer(api_key=app_config.OPENAI_API_KEY)
 
-            # Get candidates from Portfolio and Risk
-            buy_orders = portfolio_result.data.get('buy_orders', [])
-            approved_candidates = risk_result.data.get('approved_candidates', [])
+            # Get ALL stocks from News stage (candidates + holdings with scores/sentiment)
+            candidates = news_result.data.get('candidates', [])
+            holdings = news_result.data.get('current_holdings', [])
 
-            if not buy_orders:
-                raise ValueError("No buy orders from Portfolio to optimize")
+            if not candidates:
+                raise ValueError("No candidates from News stage to optimize")
 
-            # Merge data: buy_orders from Portfolio + full candidate data from Risk
-            # Build comprehensive candidate list for GPT-5
-            candidates_for_gpt5 = []
-            for order in buy_orders:
-                ticker = order.get('ticker', order.get('symbol'))
+            self.logger.info(f"  GPT-5 analyzing complete portfolio:")
+            self.logger.info(f"    - {len(candidates)} buy candidates (with scores & sentiment)")
+            self.logger.info(f"    - {len(holdings)} current holdings (with scores & sentiment)")
+            self.logger.info(f"    - Total stocks under consideration: {len(candidates) + len(holdings)}")
+            self.logger.info("  (GPT-5 will decide which to BUY, which to SELL, and allocation amounts...)")
 
-                # Find matching candidate from Risk to get full data
-                risk_candidate = next((c for c in approved_candidates if c.get('ticker') == ticker), None)
-
-                if risk_candidate:
-                    # Combine Portfolio order with Risk candidate data
-                    merged = {
-                        'ticker': ticker,
-                        'research_composite_score': risk_candidate.get('research_composite_score', 0),
-                        'technical_score': risk_candidate.get('technical_score', 0),
-                        'fundamental_score': risk_candidate.get('fundamental_score', 0),
-                        'sentiment_score': risk_candidate.get('sentiment_score', 0),
-                        'risk_reward_ratio': risk_candidate.get('risk_reward_ratio', 0),
-                        'position_size_shares': order.get('shares', order.get('position_size_shares', 0)),
-                        'position_size_value': order.get('position_size_value', order.get('position_value', 0)),
-                        'entry_price': order.get('price', order.get('entry_price', 0)),
-                        'stop_loss': order.get('stop_loss', order.get('stop', 0)),
-                        'target': order.get('target_price', order.get('target', 0)),
-                        'sector': order.get('sector', 'Unknown'),
-                        'total_risk': order.get('total_risk', 0),
-                        'portfolio_heat': risk_candidate.get('portfolio_heat', 0)
-                    }
-                    candidates_for_gpt5.append(merged)
-
-            self.logger.info(f"  Sending {len(candidates_for_gpt5)} candidates to GPT-5 for intelligent allocation...")
-            self.logger.info("  (GPT-5 will analyze scores, risk/reward, and determine optimal capital allocation...)")
-
-            # Get current portfolio state
-            # TODO: Query database for current positions and available capital
-            # For now, use placeholder values
-            available_capital = 100000.0  # $100K default
-            current_positions = 0
-            max_positions = 10
-
-            # Get market conditions
-            # TODO: Query actual SPY, VIX data
-            market_conditions = {
+            # Get portfolio state and market conditions from News result
+            market_conditions = news_result.data.get('market_conditions', {
                 'spy_change_pct': 0.0,
                 'vix_level': 20.0,
-                'market_sentiment': 'neutral',
-                'timestamp': datetime.now().isoformat()
-            }
+                'market_sentiment': 'NEUTRAL'
+            })
 
-            # Call GPT-5 optimizer
+            # TODO: Get available capital from Alpaca
+            available_capital = 100000.0  # $100K default
+            current_positions = len(holdings)
+            max_positions = 10
+
+            # Call GPT-5 optimizer with BOTH candidates and holdings
+            # GPT-5 will decide which to BUY and which to SELL
             optimized_candidates, reasoning = self._gpt5_optimizer.optimize_portfolio(
-                candidates=candidates_for_gpt5,
+                candidates=candidates,
                 available_capital=available_capital,
                 market_conditions=market_conditions,
                 current_positions=current_positions,
                 max_positions=max_positions
             )
 
-            self.logger.info(f"  GPT-5 optimization completed for {len(optimized_candidates)} candidates")
+            self.logger.info(f"  GPT-5 optimization completed: {len(optimized_candidates)} positions selected")
 
-            # Log GPT-5's reasoning
+            # Log GPT-5's reasoning (first 15 lines)
             self.logger.info("  GPT-5 Chief Investment Officer Analysis:")
-            for line in reasoning.split('\n')[:10]:  # First 10 lines
+            for line in reasoning.split('\n')[:15]:
                 if line.strip():
                     self.logger.info(f"    {line.strip()}")
 
-            # Calculate total allocated capital
+            # Calculate metrics
             total_allocated = sum(c.get('allocated_capital', 0) for c in optimized_candidates)
             capital_deployment_pct = (total_allocated / available_capital * 100) if available_capital > 0 else 0
 
             self.logger.info(f"  Capital Deployment: ${total_allocated:,.2f} / ${available_capital:,.2f} ({capital_deployment_pct:.1f}%)")
 
-            # Update buy_orders with GPT-5's allocations
-            optimized_orders = []
+            # Build buy orders and sell orders from GPT-5's decisions
+            buy_orders = []
+            sell_orders = []
+
             for candidate in optimized_candidates:
                 ticker = candidate['ticker']
                 allocated_capital = candidate.get('allocated_capital', 0)
 
-                # Find original order
-                original_order = next((o for o in buy_orders if o.get('ticker', o.get('symbol')) == ticker), None)
+                if allocated_capital > 0:
+                    # This is a BUY
+                    entry_price = candidate.get('current_price', candidate.get('entry_price', 0))
+                    shares = int(allocated_capital / entry_price) if entry_price > 0 else 0
 
-                if original_order and allocated_capital > 0:
-                    # Recalculate shares based on GPT-5's capital allocation
-                    entry_price = candidate.get('entry_price', original_order.get('price', 1))
-                    new_shares = allocated_capital / entry_price if entry_price > 0 else 0
+                    buy_order = {
+                        'ticker': ticker,
+                        'action': 'BUY',
+                        'shares': shares,
+                        'allocated_capital': allocated_capital,
+                        'entry_price': entry_price,
+                        'composite_score': candidate.get('composite_score', 0),
+                        'sentiment_score': candidate.get('sentiment', {}).get('score', 50),
+                        'sentiment_summary': candidate.get('sentiment', {}).get('summary', 'No data'),
+                        'sector': candidate.get('sector', 'Unknown'),
+                        'gpt5_reasoning': candidate.get('gpt5_reasoning', 'Selected by GPT-5'),
+                        'gpt5_allocated': True
+                    }
+                    buy_orders.append(buy_order)
 
-                    # Update order with GPT-5's allocation
-                    optimized_order = original_order.copy()
-                    optimized_order['position_value'] = allocated_capital
-                    optimized_order['position_size_value'] = allocated_capital
-                    optimized_order['shares'] = new_shares
-                    optimized_order['position_size_shares'] = new_shares
-                    optimized_order['gpt5_allocated'] = True
-                    optimized_order['gpt5_conviction'] = candidate.get('conviction_level', 'medium')
+            # Identify SELLs: holdings that GPT-5 didn't select
+            selected_tickers = {c['ticker'] for c in optimized_candidates if c.get('allocated_capital', 0) > 0}
+            for holding in holdings:
+                ticker = holding.get('ticker')
+                if ticker and ticker not in selected_tickers:
+                    # GPT-5 wants to sell this holding
+                    sell_order = {
+                        'ticker': ticker,
+                        'action': 'SELL',
+                        'shares': holding.get('quantity', 0),
+                        'composite_score': holding.get('composite_score', 0),
+                        'sentiment_score': holding.get('sentiment', {}).get('score', 50),
+                        'sentiment_summary': holding.get('sentiment', {}).get('summary', 'No data'),
+                        'gpt5_reasoning': 'Position underperforming - reallocate capital',
+                        'current_value': holding.get('market_value', 0)
+                    }
+                    sell_orders.append(sell_order)
 
-                    optimized_orders.append(optimized_order)
+            total_orders = len(buy_orders) + len(sell_orders)
+            self.logger.info(f"  Trading Plan: {len(sell_orders)} SELLs, {len(buy_orders)} BUYs")
 
-            approved_count = len(optimized_orders)
-
-            # Quality score based on capital deployment and diversification
+            # Quality score based on deployment and diversification
             quality_score = min(100, int(
-                (capital_deployment_pct / 90.0 * 70) +  # 70% weight on capital deployment (90%+ target)
-                (min(approved_count / 5.0, 1.0) * 30)   # 30% weight on diversification (5+ positions ideal)
+                (capital_deployment_pct / 90.0 * 70) +  # 70% weight on deployment
+                (min(len(buy_orders) / 5.0, 1.0) * 30)  # 30% weight on diversification
             ))
 
             issues = []
             if capital_deployment_pct < 80:
-                issues.append(f"Capital deployment below target: {capital_deployment_pct:.1f}% (target 90%+)")
-            if approved_count < 5:
-                issues.append(f"Limited diversification: {approved_count} positions (target 5+)")
+                issues.append(f"Capital deployment {capital_deployment_pct:.1f}% (target 90%+)")
+            if len(buy_orders) < 5:
+                issues.append(f"Limited diversification: {len(buy_orders)} positions (target 5+)")
 
-            success = approved_count > 0 and capital_deployment_pct >= 50  # At least 50% deployed
+            success = total_orders > 0
 
             return WorkflowStageResult(
                 stage='gpt5_optimizer',
                 success=success,
                 data={
-                    'buy_orders': optimized_orders,
-                    'approved_count': approved_count,
+                    'buy_orders': buy_orders,
+                    'sell_orders': sell_orders,
+                    'total_orders': total_orders,
                     'total_allocated': total_allocated,
                     'capital_deployment_pct': capital_deployment_pct,
                     'gpt5_reasoning': reasoning,
                     'optimized_candidates': optimized_candidates
                 },
-                message=f"GPT-5 optimized {approved_count} positions (${total_allocated:,.0f} allocated, {capital_deployment_pct:.1f}% deployment)",
+                message=f"GPT-5 created trading plan: {len(sell_orders)} SELLs, {len(buy_orders)} BUYs (${total_allocated:,.0f} allocated)",
                 quality_score=int(quality_score),
                 issues=issues
             )
@@ -667,21 +757,304 @@ class OperationsManager:
         except Exception as e:
             self.logger.error(f"  GPT-5 Optimizer stage FAILED: {e}", exc_info=True)
 
-            # FALLBACK: Use Portfolio's original orders if GPT-5 fails
-            self.logger.warning("  Falling back to Portfolio's original allocations...")
-            buy_orders = portfolio_result.data.get('buy_orders', [])
+            # FALLBACK: Simple equal-weight allocation to top candidates
+            self.logger.warning("  Falling back to simple equal-weight allocation...")
+
+            # Take top 5 candidates by composite score
+            candidates = news_result.data.get('candidates', [])
+            top_candidates = sorted(candidates, key=lambda x: x.get('composite_score', 0), reverse=True)[:5]
+
+            available_capital = 100000.0
+            per_position = (available_capital * 0.9) / max(len(top_candidates), 1)
+
+            fallback_orders = []
+            for candidate in top_candidates:
+                entry_price = candidate.get('current_price', 1)
+                shares = int(per_position / entry_price) if entry_price > 0 else 0
+
+                fallback_orders.append({
+                    'ticker': candidate['ticker'],
+                    'action': 'BUY',
+                    'shares': shares,
+                    'allocated_capital': per_position,
+                    'entry_price': entry_price,
+                    'composite_score': candidate.get('composite_score', 0),
+                    'gpt5_reasoning': 'Fallback allocation - GPT-5 unavailable'
+                })
 
             return WorkflowStageResult(
                 stage='gpt5_optimizer',
-                success=len(buy_orders) > 0,
+                success=len(fallback_orders) > 0,
                 data={
-                    'buy_orders': buy_orders,
-                    'approved_count': len(buy_orders),
+                    'buy_orders': fallback_orders,
+                    'sell_orders': [],
+                    'total_orders': len(fallback_orders),
                     'fallback_mode': True
                 },
-                message=f"GPT-5 failed, using fallback allocation ({len(buy_orders)} orders)",
-                quality_score=50,  # Reduced score for fallback
-                issues=[f"GPT-5 optimization failed: {str(e)}", "Using fallback allocation"]
+                message=f"GPT-5 failed - using fallback allocation ({len(fallback_orders)} orders)",
+                quality_score=50,
+                issues=[f"GPT-5 optimization failed: {str(e)}", "Using fallback equal-weight allocation"]
+            )
+
+    def _generate_risk_assessment_message(self, candidates: List[Dict], available_capital: float) -> str:
+        """
+        Generate RiskAssessment message for Portfolio Department
+
+        Args:
+            candidates: List of candidates with risk metrics from Risk Department
+            available_capital: Available capital for trading
+
+        Returns:
+            message_id of generated RiskAssessment message
+        """
+        from datetime import datetime, timezone
+        import uuid
+        import json
+        import yaml
+
+        # Generate message ID
+        timestamp_str = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+        unique_id = str(uuid.uuid4())[:8]
+        msg_id = f"MSG_RISK_{timestamp_str}_{unique_id}"
+
+        # Get parent message ID (from News or Research)
+        parent_msg_id = "MSG_RESEARCH_UNKNOWN"  # TODO: Track this properly
+
+        # Count approved vs rejected
+        approved = [c for c in candidates if c.get('risk_score', 0) >= 50]
+        rejected = [c for c in candidates if c.get('risk_score', 0) < 50]
+
+        # Create YAML frontmatter
+        metadata = {
+            'from': 'RISK',
+            'to': 'PORTFOLIO',
+            'message_type': 'RiskAssessment',
+            'message_id': msg_id,
+            'parent_message_id': parent_msg_id,
+            'timestamp': datetime.now(timezone.utc).isoformat(),
+            'priority': 'routine',
+            'requires_response': False
+        }
+
+        # Create markdown body
+        date_str = datetime.now().strftime("%Y-%m-%d")
+        body = f"""# Risk Assessment - {date_str}
+
+**Assessment Date**: {date_str}
+**Parent Message**: {parent_msg_id}
+
+## Portfolio State
+- **Capital**: ${available_capital:,.0f}
+- **Current Heat**: $0 (0.00%)
+- **Open Positions**: 0
+
+## Risk Assessment Summary
+- **Candidates Reviewed**: {len(candidates)}
+- **Approved**: {len(approved)}
+- **Rejected**: {len(rejected)}
+
+## Approved Candidates
+
+"""
+
+        # Add each approved candidate
+        for i, candidate in enumerate(approved, 1):
+            ticker = candidate.get('ticker', 'N/A')
+            sector = candidate.get('sector', 'Unknown')
+            score = candidate.get('composite_score', candidate.get('research_composite_score', 0))
+            shares = candidate.get('position_size_shares', 0)
+            price = candidate.get('entry_price', candidate.get('current_price', 0))
+            value = shares * price
+            stop = candidate.get('stop_loss', 0)
+            target = candidate.get('target_price', 0)
+            rr_ratio = candidate.get('risk_reward_ratio', 0)
+            risk_method = candidate.get('stop_loss_method', 'ATR_BASED')
+            risk_per_share = candidate.get('risk_per_share', 0)
+            total_risk = candidate.get('total_risk', 0)
+            risk_pct = (total_risk / available_capital * 100) if available_capital > 0 else 0
+
+            body += f"""### {i}. {ticker} ({sector})
+- **Research Score**: {score:.1f}/100
+- **Position**: {shares} shares @ ${price:.2f} = ${value:,.0f}
+- **Entry**: ${price:.2f} | **Stop**: ${stop:.2f} | **Target**: ${target:.2f}
+- **Risk/Reward**: {rr_ratio:.1f}:1 ({risk_method})
+- **Risk**: ${total_risk:.0f} ({risk_pct:.2f}% of capital)
+
+"""
+
+        # Add rejected section if any
+        if rejected:
+            body += "\n## Rejected Candidates\n\n"
+            for candidate in rejected:
+                ticker = candidate.get('ticker', 'N/A')
+                risk_score = candidate.get('risk_score', 0)
+                warnings = candidate.get('risk_warnings', [])
+                body += f"- **{ticker}**: Risk score {risk_score:.1f}/100"
+                if warnings:
+                    body += f" - {', '.join(warnings)}"
+                body += "\n"
+
+        # Create JSON payload
+        payload = {
+            'approved_candidates': approved,
+            'rejected_candidates': rejected,
+            'available_capital': available_capital,
+            'total_candidates': len(candidates)
+        }
+
+        # Combine into message
+        yaml_str = yaml.dump(metadata, default_flow_style=False, sort_keys=False)
+        json_str = json.dumps(payload, indent=2)
+
+        message_content = f"""---
+{yaml_str}---
+
+{body}
+
+```json
+{json_str}
+```
+"""
+
+        # Write to outbox
+        outbox_path = self.messages_dir / "Outbox" / "RISK"
+        outbox_path.mkdir(parents=True, exist_ok=True)
+
+        message_file = outbox_path / f"{msg_id}.md"
+        with open(message_file, 'w', encoding='utf-8') as f:
+            f.write(message_content)
+
+        return msg_id
+
+    def _run_compliance_advisory_loop(self, gpt5_result: WorkflowStageResult) -> WorkflowStageResult:
+        """
+        Run Compliance Department in ADVISORY mode
+
+        Compliance reviews the GPT-5 proposed plan and provides suggestions.
+        This is NOT a pass/fail filter - Compliance advises, CEO/Portfolio incorporate feedback.
+
+        In future iterations, this could involve back-and-forth dialogue.
+        For now, we get Compliance's advisory feedback and incorporate reasonable suggestions.
+        """
+        try:
+            self.logger.info("  Compliance reviewing proposed trading plan (advisory mode)...")
+
+            # Initialize Compliance Department
+            if not self._compliance_dept:
+                self.logger.info("  Initializing Compliance Department...")
+                config_path = self.config_dir / "compliance_config.yaml"
+
+                if not config_path.exists():
+                    self.logger.warning(f"  Compliance config not found: {config_path}")
+                    self.logger.warning("  Continuing without Compliance review")
+                    return WorkflowStageResult(
+                        stage='compliance_advisory',
+                        success=True,
+                        data=gpt5_result.data,  # Pass through GPT-5 plan unchanged
+                        message="Compliance config not found - skipped advisory review",
+                        quality_score=100,
+                        issues=[]
+                    )
+
+                from Departments.Compliance.compliance_department import ComplianceDepartment
+                self._compliance_dept = ComplianceDepartment(
+                    config_path=config_path,
+                    db_path=self.db_path
+                )
+
+            # Get trading plan from GPT-5
+            buy_orders = gpt5_result.data.get('buy_orders', [])
+            sell_orders = gpt5_result.data.get('sell_orders', [])
+
+            self.logger.info(f"  Reviewing {len(buy_orders)} BUYs and {len(sell_orders)} SELLs...")
+
+            # Compliance checks each order and provides advisory feedback
+            compliance_suggestions = []
+            approved_buys = []
+            flagged_buys = []
+
+            for buy_order in buy_orders:
+                # Run through Compliance pre-trade validation (advisory only)
+                # Note: We're using Compliance's validate_trade but treating rejections as suggestions
+                proposal = {
+                    'ticker': buy_order['ticker'],
+                    'trade_type': 'BUY',
+                    'shares': buy_order['shares'],
+                    'price': buy_order['entry_price'],
+                    'position_value': buy_order['allocated_capital'],
+                    'total_risk': buy_order.get('total_risk', 0),
+                    'sector': buy_order.get('sector', 'Unknown'),
+                    'stop_loss': buy_order.get('stop_loss', 0),
+                    'target': buy_order.get('target_price', 0)
+                }
+
+                is_approved, rejection_reason, rejection_category, check_results = \
+                    self._compliance_dept.validator.validate_trade(proposal)
+
+                if is_approved:
+                    approved_buys.append(buy_order)
+                else:
+                    # Compliance flagged this - add advisory note but DON'T reject
+                    flagged_buys.append(buy_order)
+                    compliance_suggestions.append({
+                        'ticker': buy_order['ticker'],
+                        'suggestion_type': rejection_category,
+                        'suggestion': rejection_reason,
+                        'severity': 'WARNING'  # Advisory, not blocking
+                    })
+
+                    # Still include it, but mark as flagged
+                    buy_order['compliance_flagged'] = True
+                    buy_order['compliance_note'] = rejection_reason
+                    approved_buys.append(buy_order)
+
+            # SELLs don't need pre-trade validation (closing positions)
+            approved_sells = sell_orders
+
+            self.logger.info(f"  Compliance Advisory Summary:")
+            self.logger.info(f"    - {len(approved_buys)} BUYs reviewed ({len(flagged_buys)} with advisory notes)")
+            self.logger.info(f"    - {len(approved_sells)} SELLs approved (no validation needed)")
+            self.logger.info(f"    - {len(compliance_suggestions)} total suggestions provided")
+
+            if compliance_suggestions:
+                self.logger.info("  Compliance Suggestions:")
+                for suggestion in compliance_suggestions[:5]:  # Show first 5
+                    self.logger.info(f"    - {suggestion['ticker']}: {suggestion['suggestion']}")
+
+            # Quality score: 100 if no flags, reduced if there are suggestions
+            quality_score = max(70, 100 - (len(compliance_suggestions) * 5))
+
+            return WorkflowStageResult(
+                stage='compliance_advisory',
+                success=True,  # Always success in advisory mode
+                data={
+                    'buy_orders': approved_buys,
+                    'sell_orders': approved_sells,
+                    'total_orders': len(approved_buys) + len(approved_sells),
+                    'compliance_suggestions': compliance_suggestions,
+                    'flagged_count': len(flagged_buys),
+                    'gpt5_reasoning': gpt5_result.data.get('gpt5_reasoning', ''),
+                    'total_allocated': gpt5_result.data.get('total_allocated', 0),
+                    'capital_deployment_pct': gpt5_result.data.get('capital_deployment_pct', 0)
+                },
+                message=f"Compliance reviewed plan: {len(approved_buys)} BUYs, {len(approved_sells)} SELLs ({len(compliance_suggestions)} suggestions)",
+                quality_score=int(quality_score),
+                issues=[f"{len(flagged_buys)} orders flagged with advisory notes"] if flagged_buys else []
+            )
+
+        except Exception as e:
+            self.logger.error(f"  Compliance advisory loop FAILED: {e}", exc_info=True)
+
+            # If Compliance fails, continue with GPT-5's plan unchanged
+            self.logger.warning("  Continuing with GPT-5 plan (Compliance unavailable)")
+
+            return WorkflowStageResult(
+                stage='compliance_advisory',
+                success=True,
+                data=gpt5_result.data,  # Pass through unchanged
+                message=f"Compliance advisory failed: {str(e)} - proceeding with GPT-5 plan",
+                quality_score=80,
+                issues=[f"Compliance review unavailable: {str(e)}"]
             )
 
     def _run_compliance_stage(self, gpt5_result: WorkflowStageResult) -> WorkflowStageResult:
@@ -890,10 +1263,12 @@ class OperationsManager:
 
     def _aggregate_final_plan(self, stage_results: List[WorkflowStageResult]) -> Dict:
         """Aggregate all stage results into final trading plan"""
-        # Extract final trade count from compliance stage
-        compliance_result = stage_results[-1]
-        trade_count = compliance_result.data.get('approved_count', 0)
-        approved_trades = compliance_result.data.get('approved_trades', [])
+        # Extract final orders from compliance advisory stage
+        compliance_result = stage_results[-1]  # Compliance advisory is last stage
+        buy_orders = compliance_result.data.get('buy_orders', [])
+        sell_orders = compliance_result.data.get('sell_orders', [])
+        all_trades = buy_orders + sell_orders
+        trade_count = len(all_trades)
 
         # Build comprehensive plan
         plan = {
@@ -903,18 +1278,19 @@ class OperationsManager:
             'summary': {
                 'total_trades': trade_count,
                 'research_candidates': stage_results[0].data.get('candidate_count', 0),
-                'risk_approved': stage_results[1].data.get('approved_count', 0),
-                'portfolio_selected': stage_results[2].data.get('approved_count', 0),
-                'compliance_approved': trade_count,
+                'gpt5_selected': compliance_result.data.get('total_orders', 0),
+                'compliance_flagged': compliance_result.data.get('flagged_count', 0),
                 'overall_quality_score': sum(r.quality_score for r in stage_results) // len(stage_results)
             },
             'stage_quality': {
                 'research': stage_results[0].quality_score,
-                'risk': stage_results[1].quality_score,
-                'portfolio': stage_results[2].quality_score,
-                'compliance': stage_results[3].quality_score
+                'news': stage_results[1].quality_score,
+                'gpt5_optimizer': stage_results[2].quality_score,
+                'compliance_advisory': stage_results[3].quality_score
             },
-            'trades': approved_trades,  # Real approved trades from Compliance
+            'trades': all_trades,  # All trades (BUYs + SELLs) including flagged ones
+            'gpt5_reasoning': compliance_result.data.get('gpt5_reasoning', ''),
+            'compliance_suggestions': compliance_result.data.get('compliance_suggestions', []),
             'workflow_summary': [
                 {
                     'stage': r.stage,

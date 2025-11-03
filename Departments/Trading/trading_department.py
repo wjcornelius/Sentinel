@@ -503,6 +503,8 @@ class TradingDepartment:
                 logger.error("No data payload found in message")
                 return
 
+            logger.info(f"Extracted data payload: {data_payload}")
+
             # Parse order details
             order = ExecutionOrder(
                 ticker=data_payload.get('ticker'),
@@ -521,6 +523,20 @@ class TradingDepartment:
 
             # Get portfolio state and market data for validation
             portfolio_state = self._get_portfolio_state()
+
+            # Add the price from Executive's message to portfolio_state for validation
+            # This handles NEW positions that aren't in the portfolio yet
+            executive_price = data_payload.get('price', 0)
+            logger.info(f"Executive price for {order.ticker}: {executive_price}")
+            if executive_price > 0:
+                if 'current_prices' not in portfolio_state:
+                    portfolio_state['current_prices'] = {}
+                portfolio_state['current_prices'][order.ticker] = executive_price
+                logger.info(f"Added price to portfolio_state: {order.ticker} = ${executive_price:.2f}")
+            else:
+                logger.warning(f"No price provided in Executive message for {order.ticker}")
+
+            logger.info(f"Portfolio state current_prices: {portfolio_state.get('current_prices', {})}")
             market_data = self._get_market_data(order.ticker)
 
             # Validate hard constraints
@@ -531,6 +547,9 @@ class TradingDepartment:
             if not is_valid:
                 self._handle_constraint_violations(order, violations, metadata)
                 return
+
+            # Add price to metadata for bracket order calculation
+            metadata['price'] = executive_price
 
             # Execute order via Alpaca
             self._execute_order_with_retry(order, metadata)
@@ -597,56 +616,112 @@ class TradingDepartment:
 
         Pattern learned from v6.2's execution_engine.py _submit_with_retry()
         Implementation is FRESH code for message-based architecture
+
+        CRITICAL: Alpaca submission happens ONCE. Only database storage retries.
+        This prevents duplicate order submissions when database operations fail.
         """
         max_retries = 5
         retry_delays = [1, 2, 4, 8, 16]  # Exponential backoff
 
+        # Step 1: Submit to Alpaca (NO RETRY - happens once only)
+        try:
+            alpaca_order = self._submit_to_alpaca(order, metadata)
+            if not alpaca_order:
+                logger.error(f"Alpaca submission returned None for {order.ticker}")
+                self._handle_submission_failure(order, metadata, "Alpaca API returned None")
+                return
+        except Exception as e:
+            logger.error(f"Alpaca submission failed for {order.ticker}: {e}")
+            self._handle_submission_failure(order, metadata, str(e))
+            return
+
+        # Step 2: Store in database (WITH RETRY - can retry safely)
         for attempt in range(max_retries):
             try:
-                # Submit order to Alpaca
-                alpaca_order = self._submit_to_alpaca(order)
-
-                if alpaca_order:
-                    # Success - store in database and send confirmation
-                    order_id = self._store_order_in_database(order, alpaca_order, metadata)
-                    self.duplicate_detector.record_submission(order, order_id)
-                    self._send_execution_confirmation(order, alpaca_order, metadata)
-                    logger.info(f"Order executed successfully: {order.ticker} {order.action} {order.quantity}")
-                    return
+                order_id = self._store_order_in_database(order, alpaca_order, metadata)
+                self.duplicate_detector.record_submission(order, order_id)
+                self._send_execution_confirmation(order, alpaca_order, metadata)
+                logger.info(f"Order executed successfully: {order.ticker} {order.action} {order.quantity}")
+                return
 
             except Exception as e:
                 if attempt < max_retries - 1:
                     wait_time = retry_delays[attempt]
                     logger.warning(
-                        f"Order submission failed (attempt {attempt + 1}/{max_retries}): {e}. "
-                        f"Retrying in {wait_time}s..."
+                        f"Database storage failed (attempt {attempt + 1}/{max_retries}): {e}. "
+                        f"Retrying in {wait_time}s... (Order already submitted to Alpaca: {alpaca_order.id})"
                     )
                     time.sleep(wait_time)
                 else:
-                    logger.error(f"Order submission failed after {max_retries} attempts: {e}")
-                    self._handle_submission_failure(order, metadata, str(e))
+                    logger.error(
+                        f"Database storage failed after {max_retries} attempts: {e}. "
+                        f"CRITICAL: Order was submitted to Alpaca ({alpaca_order.id}) but not stored in database!"
+                    )
+                    self._handle_submission_failure(order, metadata, f"Database error: {e}")
 
-    def _submit_to_alpaca(self, order: ExecutionOrder):
-        """Submit order to Alpaca API"""
+    def _submit_to_alpaca(self, order: ExecutionOrder, metadata: Dict):
+        """
+        Submit order to Alpaca API with bracket orders for risk management
+
+        For BUY orders, creates bracket orders with:
+        - Stop-loss: 8% below current market price (room to run for volatile swing trades)
+        - Take-profit: 16% above current market price (capture meaningful swing moves)
+
+        This implements swing trading philosophy: fewer, larger wins rather than many small stops.
+        Wide brackets accommodate the volatility that makes these stocks good swing candidates.
+        """
         # Determine order side
         side = OrderSide.BUY if order.action == 'BUY' else OrderSide.SELL
 
-        # Create order request
-        if order.order_type == 'MARKET':
+        # For BUY orders, use bracket orders with stop-loss and take-profit
+        if order.action == 'BUY':
+            # Get CURRENT market price from Alpaca (not 16-hour-old research data)
+            try:
+                latest_trade = self.trading_client.get_latest_trade(order.ticker)
+                current_price = float(latest_trade.price)
+                logger.info(f"Current market price for {order.ticker}: ${current_price:.2f}")
+            except Exception as e:
+                logger.warning(f"Could not fetch current price for {order.ticker}: {e}")
+                # Fallback to Executive's price estimate
+                current_price = metadata.get('price', 0)
+                if current_price <= 0:
+                    logger.error(f"No price available for {order.ticker}, cannot calculate brackets")
+                    raise ValueError(f"Cannot determine current price for {order.ticker}")
+                logger.info(f"Using estimated price for {order.ticker}: ${current_price:.2f}")
+
+            # Calculate bracket prices with wider ranges for swing trading
+            # 8% stop-loss gives "room to run" for volatile stocks
+            # 16% take-profit captures meaningful swing moves (not just noise)
+            stop_loss_price = round(current_price * 0.92, 2)  # 8% below current
+            take_profit_price = round(current_price * 1.16, 2)  # 16% above current
+
+            logger.info(f"Bracket order for {order.ticker}: Entry ~${current_price:.2f}, Stop ${stop_loss_price:.2f} (-8%), Target ${take_profit_price:.2f} (+16%)")
+
+            # Create bracket market order
+            order_request = MarketOrderRequest(
+                symbol=order.ticker,
+                qty=order.quantity,
+                side=side,
+                time_in_force=TimeInForce.DAY,
+                order_class="bracket",
+                stop_loss={"stop_price": stop_loss_price},
+                take_profit={"limit_price": take_profit_price}
+            )
+
+        elif order.action == 'SELL':
+            # For SELL orders (closing positions), use simple market orders
+            # No bracket needed as we're exiting
+            logger.info(f"Simple SELL order for {order.ticker} (closing position)")
             order_request = MarketOrderRequest(
                 symbol=order.ticker,
                 qty=order.quantity,
                 side=side,
                 time_in_force=TimeInForce.DAY
             )
-        else:  # LIMIT order
-            order_request = LimitOrderRequest(
-                symbol=order.ticker,
-                qty=order.quantity,
-                side=side,
-                time_in_force=TimeInForce.DAY,
-                limit_price=order.limit_price
-            )
+
+        else:
+            logger.error(f"Unknown order action: {order.action}")
+            raise ValueError(f"Invalid order action: {order.action}")
 
         # Submit to Alpaca
         alpaca_order = self.trading_client.submit_order(order_request)
@@ -669,7 +744,7 @@ class TradingDepartment:
             ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """, (
             internal_order_id,
-            alpaca_order.id,
+            str(alpaca_order.id),  # Convert UUID to string for SQLite compatibility
             order.ticker,
             order.action,
             order.quantity,
@@ -692,14 +767,14 @@ class TradingDepartment:
     def _send_execution_confirmation(self, order: ExecutionOrder, alpaca_order, metadata: Dict):
         """Send execution confirmation to Portfolio and Compliance"""
         data_payload = {
-            'order_id': alpaca_order.id,
+            'order_id': str(alpaca_order.id),  # Convert UUID to string for JSON serialization
             'ticker': order.ticker,
             'action': order.action,
             'shares': order.quantity,
             'order_type': order.order_type,
             'status': 'SUBMITTED',
             'submitted_at': alpaca_order.submitted_at.isoformat() if alpaca_order.submitted_at else datetime.utcnow().isoformat(),
-            'alpaca_order_id': alpaca_order.id
+            'alpaca_order_id': str(alpaca_order.id)  # Convert UUID to string for JSON serialization
         }
 
         # Send to Portfolio

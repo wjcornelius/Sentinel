@@ -33,7 +33,10 @@ import logging
 import sqlite3
 import yfinance as yf
 import pandas as pd
-from datetime import datetime, timedelta
+import json
+import yaml
+import uuid
+from datetime import datetime, timedelta, timezone
 from typing import List, Dict, Optional, Tuple
 from pathlib import Path
 
@@ -184,17 +187,18 @@ class ResearchDepartment:
             return []
 
         try:
-            positions = self.alpaca.get_all_positions()
+            positions = self.alpaca.get_current_positions()
 
             holdings = []
             for pos in positions:
                 holdings.append({
-                    'ticker': pos.symbol,
-                    'qty': float(pos.qty),
-                    'value': float(pos.market_value),
-                    'current_price': float(pos.current_price),
-                    'cost_basis': float(pos.cost_basis),
-                    'unrealized_pl': float(pos.unrealized_pl)
+                    'ticker': pos['symbol'],
+                    'quantity': float(pos['qty']),
+                    'market_value': float(pos['market_value']),
+                    'current_price': float(pos['current_price']),
+                    'cost_basis': float(pos['cost_basis']),
+                    'unrealized_pl': float(pos['unrealized_pl']),
+                    'unrealized_plpc': float(pos['unrealized_plpc'])
                 })
 
             logger.info(f"Fetched {len(holdings)} positions from Alpaca")
@@ -510,8 +514,8 @@ class ResearchDepartment:
             # Technical score
             tech_score = self._calculate_technical_score(data)
 
-            # Fundamental score (simplified)
-            fund_score = 50.0  # Placeholder - implement if needed
+            # Fundamental score - fetch and analyze fundamentals
+            fund_score, sector = self._calculate_fundamental_score(ticker)
 
             # Sentiment = 50 (placeholder for News Dept)
             sent_score = 50.0
@@ -527,7 +531,7 @@ class ResearchDepartment:
                 'research_composite_score': composite,
                 'context': context,
                 'current_price': float(data['Close'].iloc[-1]),
-                'sector': 'Unknown'  # Fetch if needed
+                'sector': sector
             })
 
         return scored
@@ -600,6 +604,110 @@ class ResearchDepartment:
         except:
             return 'NEUTRAL'
 
+    def _calculate_fundamental_score(self, ticker: str) -> tuple[float, str]:
+        """
+        Calculate fundamental score (0-100) using yfinance fundamental data
+
+        Analyzes:
+        - Profitability (ROE, Profit Margins)
+        - Valuation (P/E, P/B ratios)
+        - Growth (Revenue growth, Earnings growth)
+        - Financial Health (Debt ratios, Current ratio)
+
+        Returns:
+            (score, sector) tuple
+        """
+        try:
+            stock = yf.Ticker(ticker)
+            info = stock.info
+
+            score = 0.0
+            sector = info.get('sector', 'Unknown')
+
+            # Component 1: Profitability (0-25 points)
+            roe = info.get('returnOnEquity')
+            profit_margin = info.get('profitMargins')
+
+            if roe and roe > 0.15:  # ROE > 15%
+                score += 15
+            elif roe and roe > 0.10:  # ROE > 10%
+                score += 10
+            elif roe and roe > 0.05:  # ROE > 5%
+                score += 5
+
+            if profit_margin and profit_margin > 0.15:  # Margin > 15%
+                score += 10
+            elif profit_margin and profit_margin > 0.10:  # Margin > 10%
+                score += 6
+            elif profit_margin and profit_margin > 0.05:  # Margin > 5%
+                score += 3
+
+            # Component 2: Valuation (0-25 points)
+            pe_ratio = info.get('trailingPE')
+            pb_ratio = info.get('priceToBook')
+
+            if pe_ratio and 10 < pe_ratio < 20:  # Reasonable P/E
+                score += 15
+            elif pe_ratio and 5 < pe_ratio < 30:  # Acceptable P/E
+                score += 10
+            elif pe_ratio and pe_ratio > 0:  # Has earnings
+                score += 5
+
+            if pb_ratio and pb_ratio < 3:  # P/B < 3
+                score += 10
+            elif pb_ratio and pb_ratio < 5:  # P/B < 5
+                score += 5
+
+            # Component 3: Growth (0-25 points)
+            revenue_growth = info.get('revenueGrowth')
+            earnings_growth = info.get('earningsGrowth')
+
+            if revenue_growth and revenue_growth > 0.10:  # Revenue growth > 10%
+                score += 12
+            elif revenue_growth and revenue_growth > 0.05:  # Revenue growth > 5%
+                score += 8
+            elif revenue_growth and revenue_growth > 0:  # Positive growth
+                score += 4
+
+            if earnings_growth and earnings_growth > 0.10:  # Earnings growth > 10%
+                score += 13
+            elif earnings_growth and earnings_growth > 0.05:  # Earnings growth > 5%
+                score += 8
+            elif earnings_growth and earnings_growth > 0:  # Positive growth
+                score += 4
+
+            # Component 4: Financial Health (0-25 points)
+            debt_to_equity = info.get('debtToEquity')
+            current_ratio = info.get('currentRatio')
+
+            if debt_to_equity is not None:
+                if debt_to_equity < 0.5:  # Low debt
+                    score += 15
+                elif debt_to_equity < 1.0:  # Moderate debt
+                    score += 10
+                elif debt_to_equity < 2.0:  # Acceptable debt
+                    score += 5
+            else:
+                score += 5  # No debt data, assume neutral
+
+            if current_ratio and current_ratio > 2.0:  # Strong liquidity
+                score += 10
+            elif current_ratio and current_ratio > 1.5:  # Good liquidity
+                score += 7
+            elif current_ratio and current_ratio > 1.0:  # Adequate liquidity
+                score += 4
+
+            # Ensure score is between 0-100
+            score = min(100.0, max(0.0, score))
+
+            logger.debug(f"{ticker} fundamental score: {score:.1f}/100 (sector: {sector})")
+            return score, sector
+
+        except Exception as e:
+            logger.debug(f"Fundamental score calculation failed for {ticker}: {e}")
+            # Return neutral score and Unknown sector on failure
+            return 50.0, 'Unknown'
+
     def _get_market_conditions(self) -> Dict:
         """Get current market conditions (SPY, VIX, etc.)"""
         try:
@@ -632,3 +740,138 @@ class ResearchDepartment:
                 'vix_status': 'UNKNOWN',
                 'date': datetime.now().date().isoformat()
             }
+
+    def generate_daily_briefing(self) -> str:
+        """
+        Generate DailyBriefing message for Operations Manager
+
+        This method wraps generate_daily_candidate_universe() and produces
+        a message in the format expected by Operations Manager:
+        - YAML frontmatter with metadata
+        - Markdown summary
+        - JSON payload with candidates
+
+        Returns:
+            message_id of generated briefing
+        """
+        logger.info("=" * 80)
+        logger.info("GENERATING DAILY BRIEFING (Research v3.0)")
+        logger.info("=" * 80)
+
+        # Step 1: Get candidate universe using two-stage filtering
+        universe_data = self.generate_daily_candidate_universe()
+
+        candidates = universe_data['buy_candidates']
+        holdings = universe_data.get('current_holdings', [])
+        market_conditions = universe_data.get('market_conditions', {})
+
+        logger.info(f"Candidates: {len(candidates)}, Holdings: {len(holdings)}")
+
+        # Step 2: Format candidates for message payload
+        formatted_candidates = []
+        for candidate in candidates:
+            formatted_candidates.append({
+                'ticker': candidate['ticker'],
+                'technical': {
+                    'score': candidate['technical_score'],
+                    'rsi': None,  # Available but not needed for now
+                    'macd': None,
+                    'details': candidate.get('context', 'buy_candidate')
+                },
+                'fundamental': {
+                    'score': candidate['fundamental_score'],
+                    'sector': candidate.get('sector', 'Unknown')
+                },
+                'sentiment': {
+                    'score': candidate['sentiment_score'],  # 50.0 placeholder
+                    'summary': 'Pending News Department analysis',
+                    'news_count': 0
+                },
+                'composite_score': candidate['research_composite_score'],
+                'current_price': candidate['current_price']
+            })
+
+        # Step 3: Create message metadata
+        timestamp = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')
+        msg_id = f"MSG_RESEARCH_{timestamp}_{uuid.uuid4().hex[:8]}"
+
+        metadata = {
+            'message_id': msg_id,
+            'from': 'RESEARCH',
+            'to': 'PORTFOLIO',
+            'timestamp': datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z'),
+            'message_type': 'DailyBriefing',
+            'priority': 'routine',
+            'requires_response': False
+        }
+
+        # Step 4: Create markdown body
+        body_lines = [
+            f"# Daily Market Briefing - {market_conditions.get('date', datetime.now().date().isoformat())}",
+            "",
+            "## Research Department v3.0 - Two-Stage Filtering",
+            "",
+            "### Market Conditions",
+            f"- **SPY Change**: {market_conditions.get('spy_change_pct', 0.0):+.2f}%",
+            f"- **VIX**: {market_conditions.get('vix', 20.0):.1f} ({market_conditions.get('vix_status', 'UNKNOWN')})",
+            "",
+            f"### Candidate Summary",
+            f"- **Buy Candidates**: {len(candidates)} swing-suitable stocks",
+            f"- **Current Holdings**: {len(holdings)} positions from Alpaca",
+            f"- **Total Scored**: {len(candidates) + len(holdings)} stocks",
+            "",
+            "### Filtering Process",
+            "1. Stage 1: Swing suitability scoring (volatility, liquidity, ATR)",
+            "2. Stage 2: Technical analysis (RSI, MACD, trend)",
+            "3. Output: Candidates with BOTH swing suitability AND technical setups",
+            "",
+            "### Note on Sentiment",
+            "All stocks have sentiment_score = 50.0 (neutral placeholder)",
+            "News Department will enrich with Perplexity sentiment analysis",
+            ""
+        ]
+
+        if len(candidates) > 0:
+            body_lines.append("### Top Candidates")
+            for i, candidate in enumerate(formatted_candidates[:5], 1):
+                body_lines.append(f"{i}. **{candidate['ticker']}** - Composite: {candidate['composite_score']:.1f}/100")
+                body_lines.append(f"   - Technical: {candidate['technical']['score']:.1f}, Fundamental: {candidate['fundamental']['score']:.1f}")
+
+        body = "\n".join(body_lines)
+
+        # Step 5: Create JSON payload
+        data_payload = {
+            'market_conditions': market_conditions,
+            'candidates': formatted_candidates,
+            'current_holdings': holdings,  # Include for News Department
+            'screening': {
+                'universe_size': universe_data.get('total_count', 0),
+                'candidates_found': len(candidates),
+                'holdings_count': len(holdings),
+                'filtering_method': 'two_stage_swing_suitability',
+                'version': '3.0'
+            }
+        }
+
+        # Step 6: Write message to outbox
+        outbox_path = Path("Messages_Between_Departments/Outbox/RESEARCH")
+        outbox_path.mkdir(parents=True, exist_ok=True)
+
+        message_content = "---\n"
+        message_content += yaml.dump(metadata, default_flow_style=False)
+        message_content += "---\n\n"
+        message_content += body
+        message_content += "\n\n```json\n"
+        message_content += json.dumps(data_payload, indent=2)
+        message_content += "\n```\n"
+
+        message_file = outbox_path / f"{msg_id}.md"
+        with open(message_file, 'w', encoding='utf-8') as f:
+            f.write(message_content)
+
+        logger.info(f"DailyBriefing message written: {msg_id}")
+        logger.info(f"File: {message_file}")
+        logger.info(f"Candidates: {len(candidates)}, Holdings: {len(holdings)}")
+        logger.info("=" * 80)
+
+        return msg_id

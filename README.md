@@ -1,348 +1,552 @@
 # Sentinel Corporation
 
-**Inter-day swing trading system powered by AI-driven portfolio optimization**
+**AI-Powered Swing Trading System with Intelligent Portfolio Optimization**
 
 > "We are breeding a racehorse, not a pony that gives rides at a carnival."
 
----
-
-## Overview
-
-Sentinel Corporation is an **AI-powered swing trading system** designed to profit from market momentum over 1-4 week hold periods. The system maintains approximately **60 positions** that constantly rotate to capture the best-performing stocks in the current market environment.
-
-### Key Features
-
-- **GPT-5 Portfolio Optimizer**: Holistic decision-making for both buys AND sells
-- **Multi-Department Architecture**: Research, News, Risk, Portfolio, Compliance, Trading
-- **Swing Trading Philosophy**: High volatility (20-40%) = opportunity, not danger
-- **Adaptive Filtering**: Automatically adjusts technical filters to find ~50 candidates daily
-- **Ground Truth Principle**: Alpaca API as source of truth for position data
-- **16-Hour Data Freshness**: All cached data expires within 16 hours
+[![Status](https://img.shields.io/badge/Status-Live%20Paper%20Trading-success)]()
+[![Python](https://img.shields.io/badge/Python-3.11+-blue)]()
+[![License](https://img.shields.io/badge/License-Private-red)]()
 
 ---
 
-## Architecture
+## 🎯 Overview
 
-### Current State: Phase 1.5 Complete
+Sentinel Corporation is an **AI-powered swing trading system** that executes 1-5 day momentum trades using GPT-5 for portfolio optimization. The system maintains **8-10 positions** with bracket orders (stop-loss + take-profit) for disciplined risk management.
+
+### Current Status (November 3, 2025)
+
+- ✅ **Live Trading**: 8 positions with bracket orders active
+- ✅ **GPT-5 Optimization**: Intelligent stock selection and capital allocation
+- ✅ **Bracket Orders**: 8% stop-loss, 16% take-profit (2:1 R/R ratio)
+- ✅ **Wide Brackets Philosophy**: "Room to run" for volatile swing candidates
+- ✅ **Duplicate Prevention**: UUID handling and retry logic fixed
+- ✅ **Real-Time Execution**: Orders submitted to Alpaca paper trading
+
+---
+
+## 🏗️ Architecture
+
+### Departmental Structure
 
 ```
-Research Department (Technical Analysis)
-    ├─> Adaptive filtering (RSI, Volume, Price)
-    ├─> yfinance for price/volume data
-    └─> Output: ~50 buy candidates
-
-News Department (Sentiment Analysis)
-    ├─> Perplexity AI batch fetching (10 concurrent)
-    ├─> 16-hour sentiment cache
-    └─> Output: Sentiment scores (0-100)
-
-Risk Department (Advisory)
-    ├─> Calculate risk metrics (ATR, volatility, R:R)
-    ├─> Assign risk_score (0-100, HIGHER = BETTER SWING TRADE)
-    ├─> Generate warnings (not rejections)
-    └─> Output: All candidates with risk assessment
-
-                        ↓
-
-Portfolio Optimizer (GPT-5) [Phase 2+]
-    ├─> Receives ~110 stocks (50 candidates + 60 holdings)
-    ├─> Decides BOTH sells and buys
-    └─> Output: Executable trading plan
-
-                        ↓
-
-Compliance Department [Phase 2+]
-    ├─> Reviews trading plan
-    ├─> Sends feedback to Portfolio Optimizer
-    └─> Iterates until plan passes
-
-                        ↓
-
-Trading Department [Phase 2+]
-    ├─> Executes approved trades via Alpaca
-    └─> Logs all transactions
+┌─────────────────────────────────────────────────────────────────┐
+│                      USER (Control Panel)                        │
+│                   sentinel_control_panel.py                      │
+└─────────────────────────────────────────────────────────────────┘
+                              ↓
+┌─────────────────────────────────────────────────────────────────┐
+│                      CEO (Orchestrator)                          │
+│         ceo.py - Workflow Coordination & User Interface          │
+└─────────────────────────────────────────────────────────────────┘
+                              ↓
+┌─────────────────────────────────────────────────────────────────┐
+│                   OPERATIONS MANAGER                             │
+│           operations_manager.py - 3-Stage Workflow               │
+└─────────────────────────────────────────────────────────────────┘
+                              ↓
+        ┌─────────────┬───────────────┬────────────────┐
+        ↓             ↓               ↓                ↓
+┌──────────────┐ ┌──────────┐ ┌────────────┐ ┌──────────────┐
+│   RESEARCH   │ │   NEWS   │ │   GPT-5    │ │  COMPLIANCE  │
+│              │ │          │ │ OPTIMIZER  │ │   ADVISORY   │
+│ Stage 1      │ │ Stage 2  │ │  Stage 3   │ │   Stage 4    │
+│ ~50 stocks   │ │ Sentiment│ │ 8-10 picks │ │ Pre-check    │
+│ Swing-suited │ │ Perplexity│ │ OpenAI    │ │ Position size│
+└──────────────┘ └──────────┘ └────────────┘ └──────────────┘
+                              ↓
+                    ┌─────────────────┐
+                    │      CEO        │
+                    │   Approval &    │
+                    │   Execution     │
+                    └─────────────────┘
+                              ↓
+                    ┌─────────────────┐
+                    │    TRADING      │
+                    │   Department    │
+                    │ Bracket Orders  │
+                    │  to Alpaca API  │
+                    └─────────────────┘
 ```
 
----
+### Three-Stage Workflow
 
-## Sentinel Corporation's Risk Philosophy
+**Stage 1: Research Department (v3.0)**
+- Two-stage filtering: Swing scoring → Technical filters
+- Universe: S&P 500 + Nasdaq 100 (~600 stocks)
+- Output: ~50 swing-suitable candidates
+- Metrics: Technical score, fundamental score, composite score
+- Data source: yfinance (60-day lookback)
 
-**Traditional finance says**: High volatility = danger, wide stops = over-exposed
+**Stage 2: News Department**
+- Batch sentiment analysis via Perplexity AI
+- 16-hour cache for cost optimization
+- Output: Sentiment scores (0-100) + news summaries
+- Concurrent processing (10 tickers at a time)
 
-**Sentinel Corporation says**:
-- ✓ **High volatility (20-40%)** = Motion of the ocean (GOOD)
-- ✓ **Wide stops (5-10%)** = Room to run (GOOD)
-- ✓ **Momentum stocks** = Trending moves (GOOD)
-- ✗ **Low volatility (<15%)** = Stagnation risk (BAD)
-- ✗ **Tight stops (<3%)** = Death by 1000 cuts (BAD)
+**Stage 3: GPT-5 Portfolio Optimizer**
+- Analyzes all 50 candidates holistically
+- Considers market conditions (VIX, SPY trend)
+- Decides which to buy and capital allocation
+- Target: 8-10 positions, 90-100% capital deployment
+- Output: Executable trading plan with reasoning
 
-### What "Risk" Means at SC
-
-1. **Stagnation Risk**: Stock doesn't move → capital eroded by inflation
-2. **Opportunity Cost Risk**: Boring stock clogs slot → missing better movers
-3. **Time Risk**: Takes >1 month to profit → wasted position
-4. **Illiquidity Risk**: Can't exit when needed → trapped capital
-5. **Excessive Leverage Risk**: Over-positioned → account destruction
-
-**See [SENTINEL_RISK_PHILOSOPHY.md](SENTINEL_RISK_PHILOSOPHY.md) for complete philosophy**
-
----
-
-## Risk Score Interpretation
-
-All departments use **0-100 scoring** where **HIGHER = BETTER**:
-
-| Score | Grade | Meaning |
-|-------|-------|---------|
-| **90-100** | A+ | EXCELLENT swing trade - strong buy |
-| **80-89** | A | VERY GOOD swing trade - good buy |
-| **70-79** | B | GOOD swing trade - buy |
-| **60-69** | C | ACCEPTABLE - consider if limited alternatives |
-| **50-59** | D | MARGINAL - either too boring OR borderline risky |
-| **0-49** | F | POOR/REJECT - not suitable for swing trading |
-
-### Department Scores
-
-- **Research** (Technical): 100 = excellent setup, 0 = poor technicals
-- **News** (Sentiment): 100 = very bullish, 50 = neutral, 0 = very bearish
-- **Risk** (Swing Suitability): 100 = excellent swing trade, 0 = unsuitable
-- **Portfolio** (Overall): Weighted combination of all scores
+**Stage 4: Compliance Advisory**
+- Reviews proposed trades for constraint violations
+- Flags (but doesn't block) oversized positions
+- Max position: 10% of portfolio
+- Max sector: 30% of portfolio
+- Advisory mode: CEO sees flags but makes final call
 
 ---
 
-## Installation
+## 🎲 Trading Philosophy
+
+### Swing Trading Principles
+
+- **Holding Period**: 1-5 days (not day trading, not long-term)
+- **Position Count**: 8-10 concurrent positions
+- **Capital Deployment**: 90-100% invested
+- **Volatility = Opportunity**: We WANT volatile stocks (creates swing moves)
+- **Room to Run**: Wide brackets allow normal volatility without stopping out
+
+### Risk Management
+
+**Bracket Orders (Every Position)**
+- **Stop-Loss**: 8% below entry
+  - Protects against large losses
+  - Wide enough for intraday volatility
+  - Automated execution (no emotions)
+
+- **Take-Profit**: 16% above entry
+  - Captures meaningful swing moves
+  - 2:1 reward-to-risk ratio
+  - Automatic profit-taking
+
+**Position Sizing**
+- Hard constraint: 10% max per position
+- Sector constraint: 30% max per sector
+- Compliance flags violations (advisory mode)
+
+**Portfolio Heat**
+- Total capital at risk: 8-10 positions × 8% stop = 64-80% max exposure
+- Conservative for swing trading volatility
+
+---
+
+## 🚀 Quick Start
 
 ### Prerequisites
 
 ```bash
-Python 3.10+
-Windows (current deployment environment)
+Python 3.11+
+Alpaca Paper Trading Account
+OpenAI API Key (GPT-5 access)
+Perplexity API Key
 ```
 
-### Setup
+### Installation
 
 ```bash
 # Clone repository
-git clone <repo-url>
+git clone [repository-url]
 cd Sentinel
-
-# Create virtual environment
-python -m venv venv
-.\venv\Scripts\activate  # Windows
 
 # Install dependencies
 pip install -r requirements.txt
+
+# Configure API keys
+cp config.py.example config.py
+# Edit config.py with your API keys
 ```
 
 ### Configuration
 
-1. **API Keys**: Set environment variables
-   ```bash
-   ALPACA_API_KEY=<your-alpaca-key>
-   ALPACA_SECRET_KEY=<your-alpaca-secret>
-   PERPLEXITY_API_KEY=<your-perplexity-key>  # Optional
-   ```
+Edit `config.py`:
 
-2. **Config Files**:
-   - `Config/portfolio_config.yaml` - Portfolio settings
-   - `Config/research_config.yaml` - Research parameters
-   - `Config/risk_config.yaml` - Risk limits
+```python
+# Alpaca Paper Trading
+APCA_API_KEY_ID = "your_alpaca_key"
+APCA_API_SECRET_KEY = "your_alpaca_secret"
+APCA_API_BASE_URL = "https://paper-api.alpaca.markets"
 
----
+# OpenAI (GPT-5)
+OPENAI_API_KEY = "your_openai_key"
 
-## Usage
+# Perplexity (News Sentiment)
+PERPLEXITY_API_KEY = "your_perplexity_key"
+```
 
-### Run Individual Departments
+### Daily Execution
 
 ```bash
-# Test News Department (sentiment analysis)
-python test_news_department.py
+# Run the control panel (interactive UI)
+python sentinel_control_panel.py
 
-# Test Research Department (technical analysis)
-python test_research_quick.py  # 25 tickers (fast)
-python test_research_department.py  # Full universe (~600 tickers)
-
-# Test Risk Department (risk assessment)
-python test_risk_department.py
+# Main menu options:
+# [1] Request Trading Plan  - Generate new plan
+# [2] Execute Approved Plan - Execute previously approved plan
+# [3] View Plan Status      - See current plan details
+# [4] Exit                  - Quit system
 ```
 
-### Run Full System (Phase 2+)
+---
 
+## 📊 System Components
+
+### Research Department (v3.0)
+**Location**: `Departments/Research/research_department.py`
+
+**Features**:
+- Two-stage filtering (swing suitability → technical filters)
+- Adaptive thresholds (auto-adjusts to find ~50 candidates)
+- 16-hour data cache (market close to next run)
+- yfinance integration for price/volume data
+
+**Outputs**:
+- Composite score (0-100)
+- Technical score (RSI, MACD, moving averages)
+- Fundamental score (profitability, valuation, growth)
+- Swing suitability score (volatility, liquidity, momentum)
+
+### News Department
+**Location**: `Departments/News/news_department.py`
+
+**Features**:
+- Perplexity AI sentiment analysis
+- Batch processing (10 concurrent requests)
+- 16-hour cache per ticker
+- Graceful fallback to neutral (50.0) on errors
+
+**Outputs**:
+- Sentiment score (0-100)
+- News summary (key headlines)
+- Sentiment reasoning (why bullish/bearish/neutral)
+
+### GPT-5 Portfolio Optimizer
+**Location**: `Departments/Executive/gpt5_portfolio_optimizer.py`
+
+**Features**:
+- OpenAI GPT-5 API integration
+- Holistic portfolio analysis (all candidates at once)
+- Market condition awareness (VIX, SPY trend)
+- Conviction-weighted allocation
+- Strategic reasoning output
+
+**Outputs**:
+- Selected tickers (8-10 stocks)
+- Capital allocation per ticker
+- Reasoning for each selection
+- Portfolio-level strategy explanation
+
+### Trading Department
+**Location**: `Departments/Trading/trading_department.py`
+
+**Features**:
+- Bracket order execution (stop-loss + take-profit)
+- Real-time price query from Alpaca
+- Duplicate order prevention
+- UUID to string conversion (database compatibility)
+- Retry logic (database only, not Alpaca submission)
+- Hard constraint validation before submission
+
+**Order Flow**:
+1. Receive order from CEO
+2. Validate hard constraints (position size, portfolio value)
+3. Query current market price from Alpaca
+4. Calculate bracket prices (8% stop, 16% target)
+5. Submit market order with bracket orders to Alpaca
+6. Store in database (with retry on failure)
+7. Send confirmation to Portfolio & Compliance
+
+---
+
+## 🎮 Control Panel Features
+
+### Main Menu
+
+```
+1. Request Trading Plan
+   - Runs 3-stage workflow
+   - GPT-5 optimization
+   - Displays proposed trades with scores
+   - Shows compliance advisory notes
+
+2. Execute Approved Plan
+   - Submits orders to Trading Department
+   - Bracket orders automatically attached
+   - Real-time execution logging
+   - Confirmation messages
+
+3. View Plan Status
+   - Current plan details
+   - Stage quality scores
+   - Trade breakdown
+   - Compliance notes
+
+4. Exit
+   - Clean shutdown
+```
+
+### Plan Display
+
+```
+TRADING PLAN SUMMARY
+────────────────────
+Total Trades: 8
+Research Candidates: 50
+GPT-5 Selected: 8
+Compliance Flagged: 0
+Overall Quality: 96/100
+
+WORKFLOW STAGES
+────────────────
+✓ Research: 50 candidates (avg score: 48.0)
+✓ News: 50/50 sentiment coverage (100%)
+✓ GPT-5: 8 positions, $91,000 allocated
+✓ Compliance: Advisory review (0 violations)
+
+PROPOSED TRADES
+────────────────
+1. CARR - 168 shares @ $59.49 = $10,000
+   Composite: 60.2/100
+   Sector: Industrials
+
+2. CCL - 485 shares @ $28.83 = $14,000
+   Composite: 69.2/100
+   Sector: Consumer Cyclical
+   [COMPLIANCE FLAG: 14% position > 10% limit]
+
+...
+```
+
+---
+
+## 📈 Performance Monitoring
+
+### Current Positions (Live)
+
+```
+Portfolio Value: $100,200
+Daily P/L: +$174 (+0.17%)
+Cash: $11,052
+Buying Power: $111,226
+
+Active Positions: 8
+- IBKR: $15,372 (+$206)
+- CCL: $13,803 (-$19)
+- FITB: $11,904 (-$13)
+- GLW: $9,905 (+$19)
+- CARR: $9,738 (-$13)
+- HPQ: $9,736 (+$36)
+- ODFL: $9,668 (-$9)
+- COP: $8,953 (+$10)
+
+Bracket Orders: 16 active
+- 8 stop-loss orders (held)
+- 8 take-profit orders (pending)
+```
+
+---
+
+## 🔧 Configuration Files
+
+### `config.py`
+API keys and environment settings (not in Git)
+
+### `Config/hard_constraints.yaml`
+Trading rules enforced by Trading Department
+
+```yaml
+max_position_size_pct: 10.0    # Max 10% per position
+max_sector_exposure_pct: 30.0  # Max 30% per sector
+max_daily_loss_pct: 3.0        # Stop trading if down 3% today
+min_account_value: 1000        # Emergency brake
+```
+
+### `Config/compliance_config.yaml`
+Compliance Department advisory thresholds
+
+### `Config/risk_config.yaml`
+Risk scoring parameters (deprecated - absorbed into Research v3.0)
+
+---
+
+## 🗄️ Database Schema
+
+### `sentinel.db` (SQLite)
+
+**Tables**:
+- `trading_orders`: Order execution history
+- `research_cache`: 16-hour data cache
+- `news_sentiment_cache`: Sentiment analysis cache
+- `daily_reports`: Performance tracking
+- `compliance_logs`: Advisory notes
+
+**Key Fields** (`trading_orders`):
+- `order_id`: Internal tracking ID
+- `alpaca_order_id`: Alpaca's UUID (converted to string)
+- `ticker`, `action`, `quantity`, `limit_price`
+- `status`: SUBMITTED, FILLED, CANCELLED, FAILED
+- `submitted_timestamp`, `filled_timestamp`
+- `executive_approval_msg_id`: Message chain tracking
+
+---
+
+## 🧪 Testing
+
+### Unit Tests
 ```bash
-# Not yet implemented - awaiting CEO Orchestration Layer
-python main_script.py
+# Test bracket order calculations
+python test_bracket_orders.py
+
+# Test workflow execution
+python test_workflow_execution.py
+
+# Test CEO trading plan generation
+python test_ceo_trading_plan.py
 ```
 
----
-
-## Testing
-
-All Phase 1 departments tested and passing:
-
-| Department | Status | Test File | Key Metrics |
-|------------|--------|-----------|-------------|
-| News | ✓ PASSING | `test_news_department.py` | 25 tickers in 1.0s |
-| Research | ✓ PASSING | `test_research_quick.py` | Adaptive filtering works |
-| Risk v2.1 | ✓ PASSING | `test_risk_department.py` | Swing scoring correct |
-
+### Integration Tests
 ```bash
-# Run all tests
-python test_news_department.py
-python test_research_quick.py
-python test_risk_department.py
+# Test full pipeline (no actual orders)
+python sentinel_control_panel.py
+# Select option 1 (Request Trading Plan)
+# Review plan but DON'T execute
 ```
 
 ---
 
-## Project Structure
+## 📚 Documentation
 
-```
-Sentinel/
-├── Departments/
-│   ├── News/
-│   │   ├── __init__.py
-│   │   └── news_department.py
-│   ├── Research/
-│   │   ├── __init__.py
-│   │   └── research_department.py
-│   ├── Risk/
-│   │   ├── __init__.py
-│   │   └── risk_department.py
-│   ├── Portfolio/
-│   ├── Compliance/
-│   └── Trading/
-├── Config/
-│   ├── portfolio_config.yaml
-│   ├── research_config.yaml
-│   └── risk_config.yaml
-├── Messages_Between_Departments/
-│   ├── Inbox/
-│   └── Outbox/
-├── test_news_department.py
-├── test_research_quick.py
-├── test_risk_department.py
-├── sentinel.db
-├── SENTINEL_RISK_PHILOSOPHY.md
-├── PHASE1_SUMMARY.md
-├── CHANGELOG.md
-└── README.md
-```
+- **FUTURE_DIRECTIONS.md**: Roadmap and improvement priorities
+- **CHANGELOG.md**: Version history and recent changes
+- **Documentation_Dev/**: Detailed technical documentation
+  - Architecture diagrams
+  - Department specifications
+  - API integration guides
+  - Phase completion summaries
 
 ---
 
-## Database Schema
+## 🛡️ Safety Features
 
-### `news_sentiment_cache`
-```sql
-CREATE TABLE news_sentiment_cache (
-    ticker TEXT PRIMARY KEY,
-    sentiment_score REAL NOT NULL,      -- 0-100 (higher = more bullish)
-    news_summary TEXT,
-    sentiment_reasoning TEXT,
-    fetched_at TEXT NOT NULL,
-    expires_at TEXT NOT NULL            -- 16-hour TTL
-)
-```
+### Duplicate Order Prevention
+- UUID-based order tracking
+- Retry logic separated (Alpaca once, database can retry)
+- Duplicate detection before submission
+- Message archiving after execution
 
-### `research_table` (existing)
-- Price/volume data
-- Technical indicators (RSI, SMA, etc.)
-- 16-hour cache
+### Risk Constraints
+- Hard constraints enforced before execution
+- Position size limits (10% max)
+- Sector concentration limits (30% max)
+- Portfolio value minimums
 
----
-
-## Development Roadmap
-
-### ✓ Phase 1: Department Refactoring (COMPLETE)
-- [x] News Department (sentiment analysis)
-- [x] Research Department (technical analysis)
-- [x] Risk Department v2.0 (advisory mode)
-
-### ✓ Phase 1.5: Risk Scoring Fix (COMPLETE)
-- [x] Fix risk_score to align with swing trading philosophy
-- [x] Create SENTINEL_RISK_PHILOSOPHY.md
-- [x] Update Risk Department v2.0 → v2.1
-- [x] Test swing trading scoring
-
-### Phase 2: CEO Orchestration (NEXT)
-- [ ] Main control loop
-- [ ] Department coordination
-- [ ] Workflow management
-
-### Phase 3: GPT-5 Portfolio Optimizer
-- [ ] Receives ~110 stocks (candidates + holdings)
-- [ ] Decides BOTH sells and buys
-- [ ] Outputs executable trading plan
-
-### Phase 4: Compliance Feedback Loop
-- [ ] Reviews trading plan
-- [ ] Sends feedback to Portfolio Optimizer
-- [ ] Iterates until plan passes
-
-### Phase 5: Integration Testing
-- [ ] End-to-end workflow
-- [ ] Live trading simulation
-- [ ] Performance validation
+### Mode Management (Planned)
+- Auto-detect market hours
+- Prevent trading twice in one day
+- Simulation mode after hours
+- Manual override controls
 
 ---
 
-## Configuration
+## 🐛 Known Issues
 
-### Risk Limits
-- **Max risk per trade**: 1.0% of capital
-- **Max portfolio heat**: 5.0% of capital
-- **ATR multiplier**: 2.0x for stop-loss
-- **Target positions**: ~60 (variable size)
-- **Max positions**: 70 (hard limit)
+1. **Real-Time Price API**: Method name incorrect (`get_latest_trade` → needs correct Alpaca SDK method)
+   - Impact: Falls back to 16-hour-old prices for bracket calculation
+   - Workaround: Using estimated prices (works fine in normal market conditions)
+   - Fix: Update to correct Alpaca SDK method (TBD)
 
-### Data Freshness
-- **All cached data**: 16-hour TTL
-- **News sentiment**: 16 hours
-- **Price/volume data**: 16 hours
-- **Market fundamentals**: 16 hours (when implemented)
+2. **Mode Manager Not Integrated**: Can trade multiple times per day
+   - Impact: Risk of duplicate trading on same day
+   - Mitigation: Duplicate detector prevents duplicate orders
+   - Fix: Integrate mode_manager.py into control panel (Priority 1)
 
-### Batch Processing
-- **Perplexity sentiment**: 10 concurrent requests
-- **Research filtering**: Adaptive (5 presets)
+3. **No Position Monitoring**: Manual Alpaca dashboard checking required
+   - Impact: No real-time P&L visibility during trading day
+   - Fix: Build position monitor dashboard (Priority 2)
 
 ---
 
-## Known Issues
+## 📝 Recent Changes
 
-1. **yfinance Warnings**: FutureWarning about `auto_adjust` - cosmetic, no impact
-2. **Perplexity 401**: Expected when API key not set - graceful fallback to neutral 50.0
-3. **BRK.B / BF.B**: Yahoo Finance data issues - stocks skipped correctly
-4. **Weekend Testing**: Market closed, may return 0 candidates - correct behavior
-5. **Risk __init__.py**: Docstring still says "higher = safer" - needs update
+### November 3, 2025 - Bracket Orders & Duplicate Prevention
 
----
+**Added**:
+- Bracket orders with 8% stop-loss, 16% take-profit
+- Real-time price query from Alpaca (with fallback)
+- Wide brackets philosophy for volatile swing stocks
+- GPT-5 prompt updated to reflect bracket strategy
 
-## Contributing
+**Fixed**:
+- UUID to string conversion for database compatibility
+- Retry logic separated (Alpaca submission once only)
+- Duplicate order prevention (tested and working)
+- Database storage with proper UUID handling
 
-This is a private trading system. Contributions are not currently accepted.
+**Live Trading Results**:
+- 8 positions executed successfully
+- All bracket orders active (stop + target)
+- No duplicate orders (verified)
+- Portfolio: $100,200 (+$200 first day)
 
----
+### November 2, 2025 - CEO Orchestration Complete
 
-## License
-
-Proprietary - All rights reserved
-
----
-
-## Documentation
-
-- **[SENTINEL_RISK_PHILOSOPHY.md](SENTINEL_RISK_PHILOSOPHY.md)** - Complete risk philosophy and scoring rubric
-- **[PHASE1_SUMMARY.md](PHASE1_SUMMARY.md)** - Phase 1 & 1.5 implementation details
-- **[CHANGELOG.md](CHANGELOG.md)** - Version history and changes
-
----
-
-## Contact
-
-For questions or issues, contact the Sentinel Corporation development team.
+**Added**:
+- CEO orchestration layer (3-stage workflow)
+- Operations Manager (workflow execution)
+- Advisory compliance (non-blocking reviews)
+- Message-based inter-department communication
 
 ---
 
-**Version**: Phase 1.5 (Risk v2.1, News/Research v1.0)
-**Last Updated**: November 2, 2025
-**Status**: Phase 1 Complete, Phase 2 Development Starting
+## 🚧 Future Roadmap
+
+See [FUTURE_DIRECTIONS.md](Documentation_Dev/FUTURE_DIRECTIONS.md) for detailed improvement plans.
+
+**Immediate Priorities**:
+1. Integrate Mode Manager (prevent duplicate trading days)
+2. Build Position Monitor (real-time P&L tracking)
+3. Fix real-time price API (correct Alpaca SDK method)
+
+**Short-Term**:
+4. Trade outcome tracker (win rates, hold times)
+5. Daily performance reports (automated summaries)
+6. Market regime detector (VIX-based adaptation)
+
+**Long-Term**:
+7. Universe expansion (add Russell 2000)
+8. Bracket optimization (data-driven percentages)
+9. Advanced position management (trailing stops)
+
+---
+
+## 📞 Contact & Support
+
+**Repository**: [GitHub URL]
+**Author**: WJC
+**Version**: Phase 1 Complete - Live Paper Trading
+**Last Updated**: November 3, 2025
+
+---
+
+## ⚖️ License
+
+Private - All Rights Reserved
+
+This software is proprietary and confidential. Unauthorized copying, distribution, or use is strictly prohibited.
+
+---
+
+## 🙏 Acknowledgments
+
+- **OpenAI GPT-5**: Portfolio optimization intelligence
+- **Perplexity AI**: News sentiment analysis
+- **Alpaca Markets**: Paper trading platform
+- **yfinance**: Market data
+- **Claude (Anthropic)**: Development assistance
+
+---
+
+**Remember**: "We are breeding a racehorse, not a pony that gives rides at a carnival."

@@ -121,9 +121,8 @@ class SentinelControlPanel:
         summary = plan['summary']
         print(f"  Total Trades Proposed: {summary['total_trades']}")
         print(f"  Research Candidates Analyzed: {summary['research_candidates']}")
-        print(f"  Risk Department Approved: {summary['risk_approved']}")
-        print(f"  Portfolio Department Selected: {summary['portfolio_selected']}")
-        print(f"  Compliance Department Validated: {summary['compliance_approved']}")
+        print(f"  GPT-5 Selected: {summary.get('gpt5_selected', 0)}")
+        print(f"  Compliance Flagged: {summary.get('compliance_flagged', 0)} (advisory notes)")
         print(f"  Overall Quality Score: {summary['overall_quality_score']}/100")
 
         # Workflow Summary
@@ -131,7 +130,7 @@ class SentinelControlPanel:
         print("WORKFLOW SUMMARY:")
         print("-" * 80)
         for stage in plan['workflow_summary']:
-            status = "✓" if not stage['issues'] else "⚠"
+            status = "[OK]" if not stage['issues'] else "[!]"
             print(f"  {status} {stage['stage'].upper()}: {stage['message']}")
             if stage['issues']:
                 for issue in stage['issues']:
@@ -146,18 +145,26 @@ class SentinelControlPanel:
             for i, trade in enumerate(trades, 1):
                 ticker = trade.get('ticker', trade.get('symbol', 'N/A'))
                 shares = trade.get('shares', trade.get('qty', 0))
-                price = trade.get('price', trade.get('current_price', 0))
-                stop = trade.get('stop_loss', trade.get('stop', 0))
-                target = trade.get('target_price', trade.get('target', 0))
-                risk = trade.get('total_risk', 0)
-                rr = trade.get('risk_reward_ratio', 0)
+                price = trade.get('entry_price', trade.get('current_price', trade.get('price', 0)))
+                allocated = trade.get('allocated_capital', shares * price if shares and price else 0)
 
-                print(f"\n  Trade #{i}: {ticker}")
-                print(f"    Shares: {shares:.2f} @ ${price:.2f} = ${shares * price:,.2f}")
-                print(f"    Stop-Loss: ${stop:.2f} | Target: ${target:.2f} | R/R: {rr:.2f}:1")
-                print(f"    Risk: ${risk:.2f}")
+                # Show compliance flag if present
+                flagged = trade.get('compliance_flagged', False)
+                flag_note = " [COMPLIANCE FLAG]" if flagged else ""
+
+                print(f"\n  Trade #{i}: {ticker}{flag_note}")
+                print(f"    Shares: {shares:.0f} @ ${price:.2f} = ${allocated:,.2f}")
+
+                # Show scores if available
+                if 'composite_score' in trade:
+                    print(f"    Composite Score: {trade['composite_score']:.1f}/100")
+
                 if 'sector' in trade:
                     print(f"    Sector: {trade['sector']}")
+
+                # Show compliance note if flagged
+                if flagged and 'compliance_note' in trade:
+                    print(f"    Note: {trade['compliance_note']}")
 
         # CEO's Strengths and Concerns
         if ceo_review['strengths']:

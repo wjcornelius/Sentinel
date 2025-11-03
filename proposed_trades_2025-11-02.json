@@ -1,0 +1,49 @@
+{
+  "plan_id": "PLAN_20251102_231820",
+  "generated_at": "2025-11-03T07:18:20.525149Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 0,
+    "research_candidates": 50,
+    "risk_approved": 0,
+    "portfolio_selected": 0,
+    "compliance_approved": 0,
+    "overall_quality_score": 95
+  },
+  "stage_quality": {
+    "research": 100,
+    "risk": 100,
+    "portfolio": 100,
+    "compliance": 80
+  },
+  "trades": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 50 candidates (avg score: 48.0)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 50/50 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "gpt5_optimizer",
+      "message": "GPT-5 created trading plan: 0 SELLs, 8 BUYs ($90,000 allocated)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "compliance_advisory",
+      "message": "Compliance reviewed plan: 8 BUYs, 0 SELLs (4 suggestions)",
+      "quality_score": 80,
+      "issues": [
+        "4 orders flagged with advisory notes"
+      ]
+    }
+  ],
+  "approved_at": "2025-11-03T07:32:10.709716Z"
+}
