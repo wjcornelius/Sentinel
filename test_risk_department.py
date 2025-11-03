@@ -1,12 +1,17 @@
 """
-Test Risk Department v2.0 - Advisory Role
+Test Risk Department v2.1 - Swing Trading Risk Assessment
 
 Tests:
 1. Create mock candidates
 2. Assess risk for all candidates
-3. Verify risk_score (0-100)
-4. Verify risk_warnings list
+3. Verify risk_score (0-100, HIGHER = BETTER SWING TRADE)
+4. Verify risk_warnings list (too boring, excessive risk, poor setup)
 5. Verify ALL candidates pass through (no rejections)
+
+Expected Scoring (Post Phase 1.5):
+- High volatility stocks (TSLA, NVDA) should score HIGHER (better for swing trading)
+- Low volatility stocks (boring) should score LOWER
+- This is OPPOSITE of traditional "safety" scoring
 """
 
 import sys
@@ -17,9 +22,9 @@ logging.basicConfig(level=logging.WARNING)  # Suppress INFO logs
 logger = logging.getLogger(__name__)
 
 def test_risk_department():
-    """Test Risk Department advisory assessment"""
+    """Test Risk Department swing trading risk assessment"""
     print("=" * 80)
-    print("RISK DEPARTMENT v2.0 TEST - Advisory Assessment")
+    print("RISK DEPARTMENT v2.1 TEST - Swing Trading Assessment")
     print("=" * 80)
     print()
 
@@ -121,21 +126,21 @@ def test_risk_department():
 
     # Summary
     print("=" * 80)
-    print("TEST RESULTS - RISK DEPARTMENT v2.0")
+    print("TEST RESULTS - RISK DEPARTMENT v2.1 (SWING TRADING)")
     print("=" * 80)
     print(f"[OK] Advisory assessment: Working ({len(assessed)} candidates assessed)")
     print(f"[OK] No rejections: All candidates passed through")
-    print(f"[OK] Risk scores: Valid (0-100 range)")
-    print(f"[OK] Risk warnings: Generated for each candidate")
+    print(f"[OK] Risk scores: Valid (0-100 range, higher = better swing trade)")
+    print(f"[OK] Risk warnings: Generated (too boring, excessive risk, poor setup)")
     print()
 
-    print("Risk Score Distribution:")
+    print("Risk Score Distribution (Higher = Better for Swing Trading):")
     for c in sorted(assessed, key=lambda x: -x['risk_score']):
         print(f"  {c['ticker']:6s}: {c['risk_score']:5.1f}/100")
     print()
 
     print("=" * 80)
-    print("[OK] Risk Department v2.0: WORKING")
+    print("[OK] Risk Department v2.1: WORKING (Swing Trading Philosophy)")
     print("=" * 80)
 
     return True
