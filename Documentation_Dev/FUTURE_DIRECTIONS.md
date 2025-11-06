@@ -1,8 +1,8 @@
 # Sentinel Corporation - Future Directions & Improvement Roadmap
 
-**Document Date:** November 3, 2025
-**Current Version:** Phase 1 Complete - Bracket Orders with Wide Brackets Implemented
-**Status:** Live trading with 8 positions, bracket orders active
+**Document Date:** November 6, 2025
+**Current Version:** Phase 1.2 Complete - Position Lifecycle & Database Fixes Implemented
+**Status:** Live trading with 20 positions, all systems operational
 
 ---
 
@@ -92,9 +92,41 @@ Sentinel Corporation's core trading workflow is now operational with intelligent
 
 ## Implementation Roadmap
 
-### Priority 1: IMMEDIATE (Do Today - Market Hours)
+### Priority 1: CRITICAL (Do First)
 
-#### 1.1 Mode Manager Integration 🚨 **CRITICAL SAFETY**
+#### 1.1 Cloud Migration to Oracle 🚨 **HIGHEST PRIORITY**
+**Problem:** Laptop is unreliable (crashes, RAM failure, possible forced sleep by Monitoring)
+**Impact:** Cannot guarantee 8:00 AM PT execution, system may be down when needed
+**Effort:** 2-3 hours initial setup, then maintenance-free
+**Owner:** Engineering
+**Cost:** $0 (Oracle Cloud Free Tier)
+
+**Benefits:**
+- 100% uptime guarantee (no laptop dependency)
+- Scheduled cron jobs (guaranteed 8:00 AM PT execution)
+- Runs 24/7 even if laptop off/crashed/asleep
+- Immune to monitoring software sleep modes
+- No more database lock issues (dedicated resources)
+
+**See:** `Documentation_Dev/ORACLE_CLOUD_MIGRATION_COMPLETE_PLAN.md` for full details
+
+#### 1.2 Market Regime Filter 🚨 **PREVENT BAD DAYS**
+**Problem:** No pre-execution market check (today's -2.33% loss in 3 hours)
+**Impact:** Buys into gap-down opens and bearish days
+**Effort:** 30-45 minutes
+**Owner:** Engineering
+
+**Features:**
+- Check SPY pre-market/intraday trend before execution
+- If SPY down >0.5% or VIX >20, delay or skip day
+- Adaptive execution timing (wait for bounces)
+
+**Success Criteria:**
+- Avoid 30-40% of losing days
+- Better entry timing
+- Reduced immediate drawdowns
+
+#### 1.3 Mode Manager Integration 🚨 **CRITICAL SAFETY**
 **Problem:** SC can trade multiple times per day, no automatic simulation mode
 **Impact:** Could accidentally duplicate trades, violate broker rules
 **Effort:** 30-45 minutes
