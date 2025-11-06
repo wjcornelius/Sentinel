@@ -12,15 +12,16 @@
 
 ## 🎯 Overview
 
-Sentinel Corporation is an **AI-powered swing trading system** that executes 1-5 day momentum trades using GPT-5 for portfolio optimization. The system maintains **8-10 positions** with bracket orders (stop-loss + take-profit) for disciplined risk management.
+Sentinel Corporation is an **AI-powered swing trading system** that executes 1-5 day momentum trades using configurable AI models (GPT-4o-mini, GPT-4o, or GPT-5) for portfolio optimization. The system maintains **15-20 positions** with bracket orders (stop-loss + take-profit) for disciplined risk management.
 
-### Current Status (November 3, 2025)
+### Current Status (November 6, 2025)
 
-- ✅ **Live Trading**: 8 positions with bracket orders active
-- ✅ **GPT-5 Optimization**: Intelligent stock selection and capital allocation
+- ✅ **Live Trading**: 20 positions with bracket orders active
+- ✅ **Configurable AI Models**: Choose GPT-4o-mini, GPT-4o, or GPT-5 for optimization
+- ✅ **Position Targets**: 15-20 positions for optimal diversification
 - ✅ **Bracket Orders**: 8% stop-loss, 16% take-profit (2:1 R/R ratio)
-- ✅ **Wide Brackets Philosophy**: "Room to run" for volatile swing candidates
-- ✅ **Duplicate Prevention**: UUID handling and retry logic fixed
+- ✅ **Position Lifecycle Management**: Automatic PENDING → OPEN tracking
+- ✅ **Database Resilience**: 30-second timeouts prevent lock contention
 - ✅ **Real-Time Execution**: Orders submitted to Alpaca paper trading
 
 ---
@@ -84,11 +85,12 @@ Sentinel Corporation is an **AI-powered swing trading system** that executes 1-5
 - Output: Sentiment scores (0-100) + news summaries
 - Concurrent processing (10 tickers at a time)
 
-**Stage 3: GPT-5 Portfolio Optimizer**
-- Analyzes all 50 candidates holistically
+**Stage 3: AI Portfolio Optimizer**
+- Configurable models: GPT-4o-mini, GPT-4o, or GPT-5
+- Analyzes up to 40 candidates holistically
 - Considers market conditions (VIX, SPY trend)
 - Decides which to buy and capital allocation
-- Target: 8-10 positions, 90-100% capital deployment
+- Target: 15-20 positions, 90-100% capital deployment
 - Output: Executable trading plan with reasoning
 
 **Stage 4: Compliance Advisory**
@@ -105,7 +107,7 @@ Sentinel Corporation is an **AI-powered swing trading system** that executes 1-5
 ### Swing Trading Principles
 
 - **Holding Period**: 1-5 days (not day trading, not long-term)
-- **Position Count**: 8-10 concurrent positions
+- **Position Count**: 15-20 concurrent positions (updated Nov 6)
 - **Capital Deployment**: 90-100% invested
 - **Volatility = Opportunity**: We WANT volatile stocks (creates swing moves)
 - **Room to Run**: Wide brackets allow normal volatility without stopping out
@@ -129,8 +131,8 @@ Sentinel Corporation is an **AI-powered swing trading system** that executes 1-5
 - Compliance flags violations (advisory mode)
 
 **Portfolio Heat**
-- Total capital at risk: 8-10 positions × 8% stop = 64-80% max exposure
-- Conservative for swing trading volatility
+- Total capital at risk: 15-20 positions × 8% stop = 120-160% max exposure
+- Appropriate for diversified swing portfolio with wide brackets
 
 ---
 
@@ -223,18 +225,19 @@ python sentinel_control_panel.py
 - News summary (key headlines)
 - Sentiment reasoning (why bullish/bearish/neutral)
 
-### GPT-5 Portfolio Optimizer
+### AI Portfolio Optimizer
 **Location**: `Departments/Executive/gpt5_portfolio_optimizer.py`
 
 **Features**:
-- OpenAI GPT-5 API integration
-- Holistic portfolio analysis (all candidates at once)
+- Configurable OpenAI models (GPT-4o-mini, GPT-4o, GPT-5)
+- Holistic portfolio analysis (up to 40 candidates)
 - Market condition awareness (VIX, SPY trend)
 - Conviction-weighted allocation
 - Strategic reasoning output
+- Dynamic model name display in output
 
 **Outputs**:
-- Selected tickers (8-10 stocks)
+- Selected tickers (15-20 stocks)
 - Capital allocation per ticker
 - Reasoning for each selection
 - Portfolio-level strategy explanation
@@ -245,10 +248,11 @@ python sentinel_control_panel.py
 **Features**:
 - Bracket order execution (stop-loss + take-profit)
 - Real-time price query from Alpaca
-- Duplicate order prevention
-- UUID to string conversion (database compatibility)
-- Retry logic (database only, not Alpaca submission)
+- Duplicate order prevention (24-hour cache)
+- Position lifecycle management (PENDING → OPEN tracking)
+- Database resilience (30-second timeouts, retry logic)
 - Hard constraint validation before submission
+- Reconciliation with Alpaca positions
 
 **Order Flow**:
 1. Receive order from CEO
@@ -256,8 +260,9 @@ python sentinel_control_panel.py
 3. Query current market price from Alpaca
 4. Calculate bracket prices (8% stop, 16% target)
 5. Submit market order with bracket orders to Alpaca
-6. Store in database (with retry on failure)
-7. Send confirmation to Portfolio & Compliance
+6. Create PENDING position entry in database
+7. Store order details (with retry on failure)
+8. Reconciliation process updates PENDING → OPEN
 
 ---
 
@@ -471,33 +476,41 @@ python sentinel_control_panel.py
 
 ## 📝 Recent Changes
 
+### November 6, 2025 - Trading Plan Fixes & Position Lifecycle
+
+**Fixed**:
+- Capital calculation bug (now fetches real Alpaca account data)
+- NVDA duplicate warning (filters pending orders before optimization)
+- Perplexity API rate limiting (reduced batch size, exponential backoff)
+- Hardcoded "GPT-5" references (now shows actual selected model)
+- Position count target (increased MAX_CANDIDATES 30→40)
+- Database lock issues (added 30-second timeouts globally)
+- NOT NULL constraint (added risk calculations to PENDING positions)
+
+**Added**:
+- Position lifecycle management (Trading creates PENDING, reconciles to OPEN)
+- Reconciliation process (syncs database with Alpaca positions)
+- Backfill capability (recover from database failures)
+- Configurable AI models (GPT-4o-mini, GPT-4o, GPT-5)
+- Dynamic model name display throughout output
+
+**Live Trading Results**:
+- 20 positions active (up from 8)
+- 7 orders executed Nov 6 (5 BUY, 2 SELL)
+- All positions properly tracked in database
+- Position lifecycle working end-to-end
+
 ### November 3, 2025 - Bracket Orders & Duplicate Prevention
 
 **Added**:
 - Bracket orders with 8% stop-loss, 16% take-profit
 - Real-time price query from Alpaca (with fallback)
 - Wide brackets philosophy for volatile swing stocks
-- GPT-5 prompt updated to reflect bracket strategy
 
 **Fixed**:
 - UUID to string conversion for database compatibility
 - Retry logic separated (Alpaca submission once only)
 - Duplicate order prevention (tested and working)
-- Database storage with proper UUID handling
-
-**Live Trading Results**:
-- 8 positions executed successfully
-- All bracket orders active (stop + target)
-- No duplicate orders (verified)
-- Portfolio: $100,200 (+$200 first day)
-
-### November 2, 2025 - CEO Orchestration Complete
-
-**Added**:
-- CEO orchestration layer (3-stage workflow)
-- Operations Manager (workflow execution)
-- Advisory compliance (non-blocking reviews)
-- Message-based inter-department communication
 
 ---
 
@@ -527,7 +540,7 @@ See [FUTURE_DIRECTIONS.md](Documentation_Dev/FUTURE_DIRECTIONS.md) for detailed 
 **Repository**: [GitHub URL]
 **Author**: WJC
 **Version**: Phase 1 Complete - Live Paper Trading
-**Last Updated**: November 3, 2025
+**Last Updated**: November 6, 2025
 
 ---
 

@@ -104,7 +104,8 @@ class CEO:
         self.logger.info(f"\n[CEO] User request received: {request}")
 
         if request == "generate_plan":
-            return self.generate_trading_plan()
+            ai_model = kwargs.get('ai_model', 'gpt-4o-mini')  # Default to budget model
+            return self.generate_trading_plan(ai_model=ai_model)
 
         elif request == "view_dashboard":
             return self.get_dashboard_data()
@@ -121,10 +122,13 @@ class CEO:
                 'message': f"Unknown request type: {request}"
             }
 
-    def generate_trading_plan(self) -> Dict:
+    def generate_trading_plan(self, ai_model: str = 'gpt-4o-mini') -> Dict:
         """
         User requested a trading plan
         Delegate to Operations Manager, review quality, present to user
+
+        Args:
+            ai_model: AI model to use for portfolio optimization (default: gpt-4o-mini)
 
         Returns:
             Dict with plan or escalation
@@ -132,10 +136,11 @@ class CEO:
         self.logger.info("\n" + "=" * 80)
         self.logger.info("[CEO] GENERATING TRADING PLAN")
         self.logger.info("=" * 80)
+        self.logger.info(f"[CEO] Using AI model: {ai_model}")
         self.logger.info("[CEO] Delegating to Operations Manager...")
 
-        # Delegate to Operations Manager
-        result = self.operations_manager.generate_trading_plan()
+        # Delegate to Operations Manager with selected model
+        result = self.operations_manager.generate_trading_plan(ai_model=ai_model)
 
         # Handle different outcomes
         if result['status'] == 'SUCCESS':
@@ -396,11 +401,57 @@ class CEO:
         self.logger.info(f"[CEO] Approved plan saved to {plan_file}")
 
     def get_dashboard_data(self) -> Dict:
-        """Get real-time dashboard data from Executive Department"""
+        """Get real-time dashboard data from Alpaca"""
         self.logger.info("[CEO] Retrieving dashboard data...")
 
         try:
-            dashboard_data = self.executive_dept.get_realtime_dashboard_data()
+            # Import Alpaca client
+            from alpaca.trading.client import TradingClient
+            import os
+
+            # Get API keys from environment
+            api_key = os.getenv('APCA_API_KEY_ID')
+            api_secret = os.getenv('APCA_API_SECRET_KEY')
+
+            if not api_key or not api_secret:
+                return {
+                    'status': 'ERROR',
+                    'message': '[CEO] Alpaca API keys not found in environment'
+                }
+
+            # Initialize Alpaca client
+            trading_client = TradingClient(api_key, api_secret, paper=True)
+
+            # Get account info
+            account = trading_client.get_account()
+
+            # Get positions
+            positions = trading_client.get_all_positions()
+
+            # Store snapshot
+            self._store_portfolio_snapshot(account, positions, source='dashboard_query')
+
+            # Format dashboard data
+            dashboard_data = {
+                'performance': {
+                    'portfolio_value': float(account.portfolio_value),
+                    'equity': float(account.equity),
+                    'cash': float(account.cash),
+                    'buying_power': float(account.buying_power),
+                    'daily_pl': float(account.equity) - float(account.last_equity),
+                    'daily_pl_pct': ((float(account.equity) - float(account.last_equity)) / float(account.last_equity) * 100) if float(account.last_equity) > 0 else 0,
+                    'positions_count': len(positions)
+                },
+                'open_positions': [{
+                    'ticker': p.symbol,
+                    'shares': float(p.qty),
+                    'entry_price': float(p.avg_entry_price),
+                    'current_price': float(p.current_price),
+                    'market_value': float(p.market_value),
+                    'unrealized_pl': float(p.unrealized_pl),
+                    'unrealized_plpc': float(p.unrealized_plpc) * 100  # Convert to percentage
+                } for p in positions]
+            }
 
             return {
                 'status': 'SUCCESS',
@@ -416,27 +467,57 @@ class CEO:
             }
 
     def get_portfolio_summary(self) -> Dict:
-        """Get quick portfolio summary"""
+        """Get quick portfolio summary from Alpaca"""
         try:
-            positions = self.data_source.get_open_positions()
-            cash = self.data_source.get_account_balance()
-            portfolio_value = self.data_source.get_portfolio_value()
+            # Import Alpaca client
+            from alpaca.trading.client import TradingClient
+            import os
+
+            # Get API keys from environment
+            api_key = os.getenv('APCA_API_KEY_ID')
+            api_secret = os.getenv('APCA_API_SECRET_KEY')
+
+            if not api_key or not api_secret:
+                return {
+                    'status': 'ERROR',
+                    'message': '[CEO] Alpaca API keys not found in environment'
+                }
+
+            # Initialize Alpaca client
+            trading_client = TradingClient(api_key, api_secret, paper=True)
+
+            # Get account info
+            account = trading_client.get_account()
+
+            # Get positions
+            positions = trading_client.get_all_positions()
+
+            # Store snapshot
+            self._store_portfolio_snapshot(account, positions, source='control_panel_query')
 
             return {
                 'status': 'SUCCESS',
                 'summary': {
                     'position_count': len(positions),
-                    'cash_balance': cash,
-                    'portfolio_value': portfolio_value,
-                    'positions': positions[:5]  # Top 5
+                    'cash_balance': float(account.cash),
+                    'portfolio_value': float(account.portfolio_value),
+                    'buying_power': float(account.buying_power),
+                    'equity': float(account.equity),
+                    'positions': [{
+                        'ticker': p.symbol,
+                        'shares': float(p.qty),
+                        'market_value': float(p.market_value),
+                        'unrealized_pl': float(p.unrealized_pl),
+                        'unrealized_plpc': float(p.unrealized_plpc)
+                    } for p in positions[:5]]  # Top 5
                 }
             }
 
         except Exception as e:
-            self.logger.error(f"[CEO] Failed to get portfolio summary: {e}")
+            self.logger.error(f"[CEO] Failed to get portfolio summary: {e}", exc_info=True)
             return {
                 'status': 'ERROR',
-                'message': str(e)
+                'message': f'[CEO] Unable to fetch portfolio data: {str(e)}'
             }
 
     def execute_approved_plan(self) -> Dict:
@@ -566,6 +647,59 @@ class CEO:
         self.logger.info(f"[CEO] Sent {action} order for {ticker} to Trading (msg: {msg_id})")
 
         return msg_id
+
+    def _store_portfolio_snapshot(self, account, positions, source='unknown'):
+        """Store portfolio snapshot in database for tracking"""
+        try:
+            import sqlite3
+
+            # Generate snapshot ID
+            snapshot_id = f"SNAP_{datetime.now().strftime('%Y%m%d_%H%M%S')}_{uuid.uuid4().hex[:8]}"
+            timestamp = datetime.now().isoformat()
+
+            # Extract account data
+            total_value = float(account.portfolio_value)
+            cash_balance = float(account.cash)
+            equity_value = float(account.equity)
+            buying_power = float(account.buying_power)
+
+            # Calculate daily P&L
+            daily_pl = float(account.equity) - float(account.last_equity)
+            daily_pl_pct = (daily_pl / float(account.last_equity) * 100) if float(account.last_equity) > 0 else 0
+
+            # Get positions count
+            positions_count = len(positions)
+
+            # TODO: Fetch SPY data for comparison (future enhancement)
+            spy_close = None
+            spy_change_pct = None
+
+            # Connect to database
+            db_path = self.project_root / "sentinel_corporation.db"
+            conn = sqlite3.connect(db_path)
+            cursor = conn.cursor()
+
+            # Insert snapshot
+            cursor.execute("""
+                INSERT INTO portfolio_snapshots (
+                    snapshot_id, timestamp, total_value, cash_balance, equity_value,
+                    buying_power, margin_used, positions_count, daily_pl, daily_pl_pct,
+                    spy_close, spy_change_pct, source, notes
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, (
+                snapshot_id, timestamp, total_value, cash_balance, equity_value,
+                buying_power, None,  # margin_used (calculate if needed)
+                positions_count, daily_pl, daily_pl_pct,
+                spy_close, spy_change_pct, source, None
+            ))
+
+            conn.commit()
+            conn.close()
+
+            self.logger.info(f"[CEO] Stored portfolio snapshot: {snapshot_id}")
+
+        except Exception as e:
+            self.logger.warning(f"[CEO] Failed to store portfolio snapshot: {e}")
 
 
 if __name__ == "__main__":

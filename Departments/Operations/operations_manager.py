@@ -110,9 +110,12 @@ class OperationsManager:
         self.logger.info(f"Project root: {project_root}")
         self.logger.info(f"Database: {self.db_path}")
 
-    def generate_trading_plan(self) -> Dict:
+    def generate_trading_plan(self, ai_model: str = 'gpt-4o-mini') -> Dict:
         """
         Coordinate all departments to generate complete trading plan
+
+        Args:
+            ai_model: AI model for portfolio optimization (default: gpt-4o-mini)
 
         Returns:
             Dict with:
@@ -121,9 +124,13 @@ class OperationsManager:
             - escalation: Escalation details (if ESCALATED)
             - stage_results: Results from each stage
         """
+        # Store model choice for GPT-5 optimizer stage
+        self.ai_model = ai_model
+
         self.logger.info("=" * 80)
         self.logger.info("GENERATING TRADING PLAN - WORKFLOW START")
         self.logger.info("=" * 80)
+        self.logger.info(f"AI Model: {ai_model}")
 
         stage_results = []
 
@@ -144,9 +151,10 @@ class OperationsManager:
             if not news_result.success:
                 return self._handle_stage_failure('news', news_result, stage_results)
 
-            # STAGE 3: GPT-5 Portfolio Optimizer (creates proposed trading plan from all scored stocks)
-            self.logger.info("\n[STAGE 3/3] GPT-5 Portfolio Optimizer - Creating Proposed Trading Plan")
-            self.logger.info("  (Portfolio + CEO working with GPT-5 to create intelligent allocation...)")
+            # STAGE 3: Portfolio Optimizer (creates proposed trading plan from all scored stocks)
+            model_display = ai_model.upper() if ai_model else 'GPT-4O-MINI'
+            self.logger.info(f"\n[STAGE 3/3] {model_display} Portfolio Optimizer - Creating Proposed Trading Plan")
+            self.logger.info(f"  (Portfolio + CEO working with {model_display} to create intelligent allocation...)")
             gpt5_result = self._run_gpt5_optimization_stage(news_result)
             stage_results.append(gpt5_result)
 
@@ -234,6 +242,7 @@ class OperationsManager:
                 raise ValueError("No JSON payload found in Research message")
 
             candidates = data.get('candidates', [])
+            holdings = data.get('current_holdings', [])  # Extract holdings from Research
             candidate_count = len(candidates)
 
             # Quality validation
@@ -246,11 +255,19 @@ class OperationsManager:
                 avg_score = sum(c.get('composite_score', 0) for c in candidates) / len(candidates)
                 quality_score = min(100, int((candidate_count / max(self.min_research_candidates, 5)) * 50 + (avg_score / 100) * 50))
             else:
+                avg_score = 0
                 quality_score = 0
 
-            success = candidate_count >= self.min_research_candidates
+            # Allow proceeding with just holdings if we have some (evaluate for potential sells)
+            # Only fail if we have BOTH no candidates AND no holdings
+            if candidate_count == 0 and len(holdings) > 0:
+                self.logger.warning(f"  No new candidates found, but we have {len(holdings)} holdings to evaluate")
+                self.logger.warning(f"  Proceeding with holdings-only analysis (may result in sell decisions)")
+                success = True  # Allow to proceed
+            else:
+                success = candidate_count >= self.min_research_candidates
 
-            self.logger.info(f"  Research completed: {candidate_count} candidates found")
+            self.logger.info(f"  Research completed: {candidate_count} candidates found, {len(holdings)} holdings")
             if candidates:
                 top_3 = sorted(candidates, key=lambda x: x.get('composite_score', 0), reverse=True)[:3]
                 self.logger.info(f"  Top candidates:")
@@ -269,6 +286,7 @@ class OperationsManager:
                 data={
                     'message_id': message_id,
                     'candidates': candidates,
+                    'current_holdings': holdings,  # Pass holdings forward to News stage
                     'candidate_count': candidate_count,
                     'avg_score': avg_score
                 },
@@ -618,12 +636,25 @@ class OperationsManager:
         - How much capital to allocate to each
         """
         try:
-            # Initialize GPT-5 Optimizer
+            # Initialize Portfolio Optimizer
             if not self._gpt5_optimizer:
-                self.logger.info("  Initializing GPT-5 Portfolio Optimizer (OpenAI GPT-5)...")
-                # Get OpenAI API key from config
+                # Use selected model from user choice (or default to gpt-4o-mini)
+                selected_model = getattr(self, 'ai_model', 'gpt-4o-mini')
+                cost_map = {
+                    'gpt-4o-mini': '$0.50/run - Budget friendly',
+                    'gpt-4o': '$2-3/run - Balanced performance',
+                    'gpt-5': '$10-20/run - Premium quality'
+                }
+                self.logger.info(f"  Initializing Portfolio Optimizer (OpenAI {selected_model})...")
+                self.logger.info(f"  Cost: {cost_map.get(selected_model, 'Unknown')}")
                 import config as app_config
-                self._gpt5_optimizer = GPT5PortfolioOptimizer(api_key=app_config.OPENAI_API_KEY)
+                self._gpt5_optimizer = GPT5PortfolioOptimizer(
+                    api_key=app_config.OPENAI_API_KEY,
+                    model=selected_model
+                )
+
+            # Get display name for logging
+            model_display = getattr(self, 'ai_model', 'gpt-4o-mini').upper()
 
             # Get ALL stocks from News stage (candidates + holdings with scores/sentiment)
             candidates = news_result.data.get('candidates', [])
@@ -632,11 +663,25 @@ class OperationsManager:
             if not candidates:
                 raise ValueError("No candidates from News stage to optimize")
 
-            self.logger.info(f"  GPT-5 analyzing complete portfolio:")
+            # Filter out candidates with PENDING orders to prevent duplicates
+            conn = sqlite3.connect(self.db_path)
+            cursor = conn.cursor()
+            cursor.execute("SELECT DISTINCT ticker FROM portfolio_positions WHERE status = 'PENDING'")
+            pending_tickers = {row[0] for row in cursor.fetchall()}
+            conn.close()
+
+            original_count = len(candidates)
+            if pending_tickers:
+                candidates = [c for c in candidates if c.get('ticker') not in pending_tickers]
+                filtered_count = original_count - len(candidates)
+                if filtered_count > 0:
+                    self.logger.info(f"  Filtered {filtered_count} candidates with PENDING orders: {', '.join(sorted(pending_tickers))}")
+
+            self.logger.info(f"  {model_display} analyzing complete portfolio:")
             self.logger.info(f"    - {len(candidates)} buy candidates (with scores & sentiment)")
             self.logger.info(f"    - {len(holdings)} current holdings (with scores & sentiment)")
             self.logger.info(f"    - Total stocks under consideration: {len(candidates) + len(holdings)}")
-            self.logger.info("  (GPT-5 will decide which to BUY, which to SELL, and allocation amounts...)")
+            self.logger.info(f"  ({model_display} will decide which to BUY, which to SELL, and allocation amounts...)")
 
             # Get portfolio state and market conditions from News result
             market_conditions = news_result.data.get('market_conditions', {
@@ -645,25 +690,36 @@ class OperationsManager:
                 'market_sentiment': 'NEUTRAL'
             })
 
-            # TODO: Get available capital from Alpaca
-            available_capital = 100000.0  # $100K default
-            current_positions = len(holdings)
-            max_positions = 10
+            # Get REAL buying power from Alpaca (ground truth)
+            try:
+                from Utils.alpaca_client import AlpacaClient
+                alpaca = AlpacaClient()
+                account = alpaca.trading_client.get_account()
+                available_capital = float(account.buying_power)
+                self.logger.info(f"  Alpaca buying power: ${available_capital:,.2f}")
+            except Exception as e:
+                self.logger.warning(f"  Could not fetch Alpaca buying power: {e}")
+                available_capital = 100000.0  # Fallback
+                self.logger.info(f"  Using fallback capital: ${available_capital:,.2f}")
 
-            # Call GPT-5 optimizer with BOTH candidates and holdings
-            # GPT-5 will decide which to BUY and which to SELL
+            current_positions = len(holdings)
+            max_positions = 20
+
+            # Call portfolio optimizer with BOTH candidates and holdings
+            # Optimizer will decide which to BUY and which to SELL
             optimized_candidates, reasoning = self._gpt5_optimizer.optimize_portfolio(
                 candidates=candidates,
+                holdings=holdings,  # Pass current holdings for SELL decisions
                 available_capital=available_capital,
                 market_conditions=market_conditions,
                 current_positions=current_positions,
                 max_positions=max_positions
             )
 
-            self.logger.info(f"  GPT-5 optimization completed: {len(optimized_candidates)} positions selected")
+            self.logger.info(f"  {model_display} optimization completed: {len(optimized_candidates)} positions selected")
 
-            # Log GPT-5's reasoning (first 15 lines)
-            self.logger.info("  GPT-5 Chief Investment Officer Analysis:")
+            # Log optimizer's reasoning (first 15 lines)
+            self.logger.info(f"  {model_display} Chief Investment Officer Analysis:")
             for line in reasoning.split('\n')[:15]:
                 if line.strip():
                     self.logger.info(f"    {line.strip()}")
@@ -698,27 +754,61 @@ class OperationsManager:
                         'sentiment_summary': candidate.get('sentiment', {}).get('summary', 'No data'),
                         'sector': candidate.get('sector', 'Unknown'),
                         'gpt5_reasoning': candidate.get('gpt5_reasoning', 'Selected by GPT-5'),
-                        'gpt5_allocated': True
+                        'gpt5_allocated': True,
+                        'is_position_adjustment': candidate.get('is_position_adjustment', False)
                     }
                     buy_orders.append(buy_order)
 
-            # Identify SELLs: holdings that GPT-5 didn't select
-            selected_tickers = {c['ticker'] for c in optimized_candidates if c.get('allocated_capital', 0) > 0}
-            for holding in holdings:
-                ticker = holding.get('ticker')
-                if ticker and ticker not in selected_tickers:
-                    # GPT-5 wants to sell this holding
+            # Get SELL decisions from optimizer (if available)
+            # Optimizer now explicitly tells us which holdings to SELL
+            gpt5_sell_decisions = []
+            if optimized_candidates and len(optimized_candidates) > 0:
+                # SELL decisions are attached to the first candidate
+                gpt5_sell_decisions = optimized_candidates[0].get('gpt5_sell_decisions', [])
+
+            if gpt5_sell_decisions:
+                # Use optimizer's explicit SELL decisions
+                self.logger.info(f"  Using {model_display}'s {len(gpt5_sell_decisions)} SELL decisions")
+                for sell_decision in gpt5_sell_decisions:
                     sell_order = {
-                        'ticker': ticker,
+                        'ticker': sell_decision['ticker'],
                         'action': 'SELL',
-                        'shares': holding.get('quantity', 0),
-                        'composite_score': holding.get('composite_score', 0),
-                        'sentiment_score': holding.get('sentiment', {}).get('score', 50),
-                        'sentiment_summary': holding.get('sentiment', {}).get('summary', 'No data'),
-                        'gpt5_reasoning': 'Position underperforming - reallocate capital',
-                        'current_value': holding.get('market_value', 0)
+                        'shares': sell_decision['shares'],
+                        'sell_pct': sell_decision.get('sell_pct', 100),
+                        'composite_score': sell_decision.get('composite_score', 0),
+                        'current_price': sell_decision.get('current_price', 0),
+                        'gpt5_reasoning': sell_decision.get('gpt5_reasoning', 'GPT-5 recommended sell'),
+                        'sentiment_score': 50,  # Default
+                        'sentiment_summary': 'GPT-5 SELL decision',
+                        'current_value': sell_decision.get('current_value', 0)
                     }
                     sell_orders.append(sell_order)
+            else:
+                # Fallback: ONLY sell holdings with poor scores (< 55)
+                # Holdings with good scores (≥ 55) are KEPT automatically
+                self.logger.info(f"  No explicit SELL decisions from {model_display} - checking for underperformers")
+                for holding in holdings:
+                    ticker = holding.get('ticker')
+                    composite = holding.get('research_composite_score', holding.get('composite_score', 0))
+
+                    # Only sell if score is genuinely poor (< 55)
+                    if composite < 55:
+                        self.logger.warning(f"  Auto-selling {ticker} (score: {composite:.1f} < 55 threshold)")
+                        sell_order = {
+                            'ticker': ticker,
+                            'action': 'SELL',
+                            'shares': holding.get('quantity', 0),
+                            'sell_pct': 100,
+                            'composite_score': composite,
+                            'current_price': holding.get('current_price', 0),
+                            'sentiment_score': holding.get('sentiment_score', holding.get('sentiment', {}).get('score', 50)),
+                            'sentiment_summary': holding.get('sentiment_summary', holding.get('sentiment', {}).get('summary', 'No data')),
+                            'gpt5_reasoning': f'Automatic sell: Composite score {composite:.1f} below 55 threshold',
+                            'current_value': holding.get('market_value', 0)
+                        }
+                        sell_orders.append(sell_order)
+                    else:
+                        self.logger.info(f"  Keeping {ticker} (score: {composite:.1f} ≥ 55 threshold)")
 
             total_orders = len(buy_orders) + len(sell_orders)
             self.logger.info(f"  Trading Plan: {len(sell_orders)} SELLs, {len(buy_orders)} BUYs")
@@ -732,8 +822,8 @@ class OperationsManager:
             issues = []
             if capital_deployment_pct < 80:
                 issues.append(f"Capital deployment {capital_deployment_pct:.1f}% (target 90%+)")
-            if len(buy_orders) < 5:
-                issues.append(f"Limited diversification: {len(buy_orders)} positions (target 5+)")
+            if len(buy_orders) < 15:
+                issues.append(f"Limited diversification: {len(buy_orders)} positions (target 15-20)")
 
             success = total_orders > 0
 
@@ -749,13 +839,13 @@ class OperationsManager:
                     'gpt5_reasoning': reasoning,
                     'optimized_candidates': optimized_candidates
                 },
-                message=f"GPT-5 created trading plan: {len(sell_orders)} SELLs, {len(buy_orders)} BUYs (${total_allocated:,.0f} allocated)",
+                message=f"{model_display} created trading plan: {len(sell_orders)} SELLs, {len(buy_orders)} BUYs (${total_allocated:,.0f} allocated)",
                 quality_score=int(quality_score),
                 issues=issues
             )
 
         except Exception as e:
-            self.logger.error(f"  GPT-5 Optimizer stage FAILED: {e}", exc_info=True)
+            self.logger.error(f"  Portfolio Optimizer stage FAILED: {e}", exc_info=True)
 
             # FALLBACK: Simple equal-weight allocation to top candidates
             self.logger.warning("  Falling back to simple equal-weight allocation...")
@@ -985,7 +1075,8 @@ class OperationsManager:
                     'total_risk': buy_order.get('total_risk', 0),
                     'sector': buy_order.get('sector', 'Unknown'),
                     'stop_loss': buy_order.get('stop_loss', 0),
-                    'target': buy_order.get('target_price', 0)
+                    'target': buy_order.get('target_price', 0),
+                    'is_position_adjustment': buy_order.get('is_position_adjustment', False)
                 }
 
                 is_approved, rejection_reason, rejection_category, check_results = \
@@ -1101,7 +1192,8 @@ class OperationsManager:
                     'total_risk': order.get('total_risk', 0),
                     'sector': order.get('sector', 'Unknown'),
                     'stop_loss': order.get('stop_loss', order.get('stop', 0)),
-                    'target': order.get('target_price', order.get('target', 0))
+                    'target': order.get('target_price', order.get('target', 0)),
+                    'is_position_adjustment': order.get('is_position_adjustment', False)
                 }
 
                 # Validate trade

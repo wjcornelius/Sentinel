@@ -3,7 +3,7 @@ last_updated: 2025-10-31
 
 # Position Limits
 limits:
-  max_positions: 10  # Maximum concurrent positions
+  max_positions: 20  # Maximum concurrent positions (target 15-20 for diversification)
   max_capital_deployed_pct: 1.0  # Deploy up to 100% of capital
 
 # Entry Filters

@@ -384,7 +384,7 @@ class DuplicateDetector:
         """
         cutoff_time = datetime.utcnow() - timedelta(minutes=5)
 
-        conn = sqlite3.connect(self.db_path)
+        conn = sqlite3.connect(self.db_path, timeout=30.0)
         cursor = conn.cursor()
 
         cursor.execute("""
@@ -404,7 +404,7 @@ class DuplicateDetector:
 
     def record_submission(self, order: ExecutionOrder, order_id: int):
         """Record order submission in duplicate cache"""
-        conn = sqlite3.connect(self.db_path)
+        conn = sqlite3.connect(self.db_path, timeout=30.0)
         cursor = conn.cursor()
 
         expires_at = datetime.utcnow() + timedelta(minutes=5)
@@ -422,7 +422,7 @@ class DuplicateDetector:
 
     def cleanup_expired(self):
         """Remove expired entries from cache"""
-        conn = sqlite3.connect(self.db_path)
+        conn = sqlite3.connect(self.db_path, timeout=30.0)
         cursor = conn.cursor()
 
         cursor.execute("""
@@ -730,7 +730,7 @@ class TradingDepartment:
 
     def _store_order_in_database(self, order: ExecutionOrder, alpaca_order, metadata: Dict) -> int:
         """Store order in database with message chain tracking"""
-        conn = sqlite3.connect(self.db_path)
+        conn = sqlite3.connect(self.db_path, timeout=30.0)
         cursor = conn.cursor()
 
         # Generate internal order ID
@@ -762,7 +762,65 @@ class TradingDepartment:
         conn.close()
 
         logger.info(f"Stored order in database: {internal_order_id}")
+
+        # Create PENDING position entry for BUY orders (Phase 2 architecture)
+        if order.action.upper() == 'BUY':
+            self._create_pending_position(order, alpaca_order, internal_order_id)
+
         return order_db_id
+
+    def _create_pending_position(self, order: ExecutionOrder, alpaca_order, internal_order_id: str):
+        """
+        Create PENDING entry in portfolio_positions for tracking
+        This replaces Portfolio Department's role in Phase 2 architecture
+        """
+        try:
+            conn = sqlite3.connect(self.db_path, timeout=30.0)
+            cursor = conn.cursor()
+
+            position_id = f"POS_{datetime.utcnow().strftime('%Y%m%d_%H%M%S')}_{uuid.uuid4().hex[:8]}"
+
+            # Calculate stop-loss and target prices (8% stop, 16% target per system design)
+            entry_price = order.limit_price if order.limit_price else 0
+            stop_loss = entry_price * 0.92  # 8% below entry
+            target = entry_price * 1.16  # 16% above entry
+            risk_per_share = entry_price - stop_loss  # Risk per share
+            total_risk = risk_per_share * order.quantity  # Total position risk
+
+            cursor.execute("""
+                INSERT INTO portfolio_positions (
+                    position_id,
+                    ticker,
+                    status,
+                    intended_entry_price,
+                    intended_shares,
+                    intended_stop_loss,
+                    intended_target,
+                    risk_per_share,
+                    total_risk,
+                    entry_order_message_id,
+                    created_at,
+                    updated_at
+                ) VALUES (?, ?, 'PENDING', ?, ?, ?, ?, ?, ?, ?, datetime('now'), datetime('now'))
+            """, (
+                position_id,
+                order.ticker,
+                entry_price,
+                order.quantity,
+                stop_loss,
+                target,
+                risk_per_share,
+                total_risk,
+                internal_order_id
+            ))
+
+            conn.commit()
+            conn.close()
+
+            logger.info(f"Created PENDING position: {order.ticker} ({position_id}) - Risk: ${total_risk:.2f}")
+
+        except Exception as e:
+            logger.error(f"Failed to create PENDING position for {order.ticker}: {e}")
 
     def _send_execution_confirmation(self, order: ExecutionOrder, alpaca_order, metadata: Dict):
         """Send execution confirmation to Portfolio and Compliance"""
@@ -889,7 +947,7 @@ class TradingDepartment:
 
     def _store_rejection(self, order: ExecutionOrder, metadata: Dict, rejection_source: str, rejection_reason: str):
         """Store order rejection in database"""
-        conn = sqlite3.connect(self.db_path)
+        conn = sqlite3.connect(self.db_path, timeout=30.0)
         cursor = conn.cursor()
 
         # First, create order record with REJECTED status
@@ -948,6 +1006,120 @@ class TradingDepartment:
                  f"**Action Required:** Review logs and investigate.",
             priority='critical'
         )
+
+    def reconcile_positions(self, max_age_hours: int = 24) -> Dict:
+        """
+        Reconcile portfolio_positions with actual Alpaca positions
+
+        This method:
+        1. Checks all PENDING orders in portfolio_positions
+        2. Queries Alpaca for actual fills
+        3. Updates PENDING → OPEN for filled orders
+        4. Marks old PENDING orders as REJECTED if never filled
+
+        Args:
+            max_age_hours: Maximum age for PENDING orders before marking as stale
+
+        Returns:
+            Dict with reconciliation summary
+        """
+        logger.info("=" * 80)
+        logger.info("POSITION RECONCILIATION - Syncing with Alpaca")
+        logger.info("=" * 80)
+
+        conn = sqlite3.connect(self.db_path, timeout=30.0)
+        cursor = conn.cursor()
+
+        # Get all PENDING positions
+        cursor.execute("""
+            SELECT position_id, ticker, intended_shares, created_at
+            FROM portfolio_positions
+            WHERE status = 'PENDING'
+            ORDER BY created_at DESC
+        """)
+
+        pending_positions = cursor.fetchall()
+        logger.info(f"Found {len(pending_positions)} PENDING positions to reconcile")
+
+        if not pending_positions:
+            conn.close()
+            return {
+                'status': 'SUCCESS',
+                'pending_count': 0,
+                'updated_to_open': 0,
+                'marked_stale': 0
+            }
+
+        # Get actual positions from Alpaca
+        try:
+            alpaca_positions = self.trading_client.get_all_positions()
+            alpaca_tickers = {pos.symbol: pos for pos in alpaca_positions}
+            logger.info(f"Fetched {len(alpaca_positions)} actual positions from Alpaca")
+        except Exception as e:
+            logger.error(f"Failed to fetch Alpaca positions: {e}")
+            conn.close()
+            return {
+                'status': 'ERROR',
+                'message': f'Failed to fetch Alpaca positions: {str(e)}'
+            }
+
+        updated_to_open = 0
+        marked_stale = 0
+
+        for position_id, ticker, intended_shares, created_at in pending_positions:
+            # Calculate age
+            created_dt = datetime.fromisoformat(created_at)
+            age_hours = (datetime.now() - created_dt).total_seconds() / 3600
+
+            # Check if position exists in Alpaca
+            if ticker in alpaca_tickers:
+                # Position filled! Update to OPEN
+                alpaca_pos = alpaca_tickers[ticker]
+                cursor.execute("""
+                    UPDATE portfolio_positions
+                    SET status = 'OPEN',
+                        actual_shares = ?,
+                        actual_entry_price = ?,
+                        actual_entry_date = date('now'),
+                        updated_at = datetime('now')
+                    WHERE position_id = ?
+                """, (
+                    float(alpaca_pos.qty),
+                    float(alpaca_pos.avg_entry_price),
+                    position_id
+                ))
+                logger.info(f"  {ticker}: PENDING → OPEN ({alpaca_pos.qty} shares @ ${float(alpaca_pos.avg_entry_price):.2f})")
+                updated_to_open += 1
+
+            elif age_hours > max_age_hours:
+                # Order too old and never filled - mark as REJECTED
+                cursor.execute("""
+                    UPDATE portfolio_positions
+                    SET status = 'REJECTED',
+                        exit_reason = 'Never filled - stale order cleanup',
+                        exit_date = date('now'),
+                        updated_at = datetime('now')
+                    WHERE position_id = ?
+                """, (position_id,))
+                logger.warning(f"  {ticker}: PENDING → REJECTED (age: {age_hours:.1f}h, never filled)")
+                marked_stale += 1
+            else:
+                # Still pending and not too old - leave it
+                logger.info(f"  {ticker}: Still PENDING (age: {age_hours:.1f}h < {max_age_hours}h threshold)")
+
+        conn.commit()
+        conn.close()
+
+        logger.info("=" * 80)
+        logger.info(f"Reconciliation complete: {updated_to_open} opened, {marked_stale} rejected")
+        logger.info("=" * 80)
+
+        return {
+            'status': 'SUCCESS',
+            'pending_count': len(pending_positions),
+            'updated_to_open': updated_to_open,
+            'marked_stale': marked_stale
+        }
 
 
 if __name__ == "__main__":

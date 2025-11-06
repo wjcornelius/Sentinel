@@ -64,6 +64,9 @@ class SentinelControlPanel:
         print("  [4] Quick Portfolio Summary")
         print("      (Fast overview of current positions)")
         print()
+        print("  [5] Select AI Model")
+        print(f"      (Current: {getattr(self, 'selected_model', 'gpt-4o-mini')} - Change before generating plan)")
+        print()
         print("  [0] Exit")
         print()
         print("=" * 80)
@@ -75,13 +78,14 @@ class SentinelControlPanel:
         print(" " * 25 + "REQUEST TRADING PLAN")
         print("=" * 80)
         print("\n[CEO] Understood. I'll have my team prepare a trading plan for you.")
+        print(f"[CEO] Using AI model: {self.selected_model}")
         print("[CEO] This will take a moment while we coordinate all departments...\n")
 
         input("Press Enter to begin...")
         print()
 
-        # Request plan from CEO
-        result = self.ceo.handle_user_request("generate_plan")
+        # Request plan from CEO with selected model
+        result = self.ceo.handle_user_request("generate_plan", ai_model=self.selected_model)
 
         # Handle different outcomes
         if result['status'] == 'READY_FOR_USER_APPROVAL':
@@ -125,6 +129,65 @@ class SentinelControlPanel:
         print(f"  Compliance Flagged: {summary.get('compliance_flagged', 0)} (advisory notes)")
         print(f"  Overall Quality Score: {summary['overall_quality_score']}/100")
 
+        # Capital Flow Summary
+        print(f"\n" + "-" * 80)
+        print("CAPITAL FLOW SUMMARY:")
+        print("-" * 80)
+
+        # Calculate capital from SELLs and BUYs
+        trades = plan.get('trades', [])
+        total_sell_value = 0
+        total_buy_value = 0
+
+        for trade in trades:
+            action = trade.get('action', 'BUY').upper()
+            if action == 'SELL':
+                sell_value = trade.get('current_value', trade.get('market_value', 0))
+                total_sell_value += sell_value
+            else:  # BUY
+                buy_value = trade.get('allocated_capital', 0)
+                total_buy_value += buy_value
+
+        net_capital_change = total_sell_value - total_buy_value
+
+        # Get actual account data from Alpaca for accurate capital calculations
+        from alpaca.trading.client import TradingClient
+        api_key = os.getenv('APCA_API_KEY_ID')
+        api_secret = os.getenv('APCA_API_SECRET_KEY')
+
+        if api_key and api_secret:
+            try:
+                trading_client = TradingClient(api_key, api_secret, paper=True)
+                account = trading_client.get_account()
+                cash_value = float(account.cash)
+                equity_value = float(account.equity)
+                buying_power = float(account.buying_power)
+                portfolio_value = float(account.portfolio_value)
+            except Exception as e:
+                # Fallback to approximation if Alpaca fetch fails
+                buying_power = summary.get('available_capital', 0)
+                cash_value = buying_power / 2  # Approximate
+                equity_value = cash_value
+                portfolio_value = cash_value
+        else:
+            # Fallback if no API keys
+            buying_power = summary.get('available_capital', 0)
+            cash_value = buying_power / 2
+            equity_value = cash_value
+            portfolio_value = cash_value
+
+        # After trades
+        projected_cash = cash_value + net_capital_change
+        projected_leverage_used = total_buy_value / equity_value if equity_value > 0 else 0
+
+        print(f"  Capital from Liquidations: ${total_sell_value:,.2f}")
+        print(f"  Capital for New Positions: ${total_buy_value:,.2f}")
+        print(f"  Net Capital Change: ${net_capital_change:+,.2f}")
+        print(f"")
+        print(f"  Current Buying Power: ${buying_power:,.2f} (includes 2x margin)")
+        print(f"  Projected Cash After Trades: ${projected_cash:,.2f}")
+        print(f"  Leverage Used: {projected_leverage_used:.1%} of portfolio value")
+
         # Workflow Summary
         print(f"\n" + "-" * 80)
         print("WORKFLOW SUMMARY:")
@@ -146,13 +209,37 @@ class SentinelControlPanel:
                 ticker = trade.get('ticker', trade.get('symbol', 'N/A'))
                 shares = trade.get('shares', trade.get('qty', 0))
                 price = trade.get('entry_price', trade.get('current_price', trade.get('price', 0)))
-                allocated = trade.get('allocated_capital', shares * price if shares and price else 0)
+
+                # Determine action label
+                action = trade.get('action', 'BUY').upper()
+
+                # For SELL orders, use current_value or market_value instead of allocated_capital
+                if action == 'SELL':
+                    allocated = trade.get('current_value', trade.get('market_value', shares * price if shares and price else 0))
+                else:
+                    allocated = trade.get('allocated_capital', shares * price if shares and price else 0)
+                is_position_adjustment = trade.get('is_position_adjustment', False)
+                sell_pct = trade.get('sell_pct', 100)
+
+                # Create descriptive action label
+                if action == 'SELL':
+                    if sell_pct == 100:
+                        action_label = "LIQUIDATE"
+                    else:
+                        action_label = f"TRIM ({sell_pct}%)"
+                elif action == 'BUY':
+                    if is_position_adjustment:
+                        action_label = "INCREASE"
+                    else:
+                        action_label = "BUY"
+                else:
+                    action_label = action
 
                 # Show compliance flag if present
                 flagged = trade.get('compliance_flagged', False)
                 flag_note = " [COMPLIANCE FLAG]" if flagged else ""
 
-                print(f"\n  Trade #{i}: {ticker}{flag_note}")
+                print(f"\n  Trade #{i}: {action_label} {ticker}{flag_note}")
                 print(f"    Shares: {shares:.0f} @ ${price:.2f} = ${allocated:,.2f}")
 
                 # Show scores if available
@@ -364,8 +451,56 @@ class SentinelControlPanel:
 
         input("\nPress Enter to continue...")
 
+    def select_ai_model(self):
+        """Allow user to select AI model for portfolio optimization"""
+        self.clear_screen()
+        print("\n" + "=" * 80)
+        print(" " * 25 + "SELECT AI MODEL")
+        print("=" * 80)
+        print("\n[CEO] Choose the AI model for portfolio analysis:\n")
+
+        models = {
+            '1': {'name': 'gpt-4o-mini', 'cost': '$0.50/run', 'speed': 'Fast (2-3 min)', 'quality': 'Good'},
+            '2': {'name': 'gpt-4o', 'cost': '$2-3/run', 'speed': 'Fast (2-3 min)', 'quality': 'Excellent'},
+            '3': {'name': 'gpt-5', 'cost': '$10-20/run', 'speed': 'Slow (10-15 min)', 'quality': 'Best'}
+        }
+
+        print("  [1] GPT-4o-mini (Budget) - $0.50/run")
+        print("      Fast, efficient, good for daily trading")
+        print("      Monthly cost: ~$10-20 (20 trading days)")
+        print()
+        print("  [2] GPT-4o (Balanced) - $2-3/run")
+        print("      Fast, excellent reasoning, best balance")
+        print("      Monthly cost: ~$40-60 (20 trading days)")
+        print()
+        print("  [3] GPT-5 (Premium) - $10-20/run")
+        print("      Extended reasoning, best quality, very slow")
+        print("      Monthly cost: ~$200-400 (20 trading days)")
+        print()
+        print(f"Current selection: {getattr(self, 'selected_model', 'gpt-4o-mini')}")
+        print()
+
+        choice = input("Select model (1-3, or press Enter to keep current): ").strip()
+
+        if choice in models:
+            model_info = models[choice]
+            self.selected_model = model_info['name']
+            print(f"\n[CEO] Model set to {model_info['name']}")
+            print(f"     Cost: {model_info['cost']}, Speed: {model_info['speed']}")
+            print(f"     This will be used for your next trading plan request.")
+        elif choice == '':
+            print(f"\n[CEO] Keeping current model: {getattr(self, 'selected_model', 'gpt-4o-mini')}")
+        else:
+            print("\n[CEO] Invalid choice. Keeping current model.")
+
+        input("\nPress Enter to continue...")
+
     def run(self):
         """Main control panel loop"""
+        # Initialize default model
+        if not hasattr(self, 'selected_model'):
+            self.selected_model = 'gpt-4o-mini'  # Budget-friendly default
+
         while self.running:
             self.clear_screen()
             self.display_header()
@@ -384,6 +519,9 @@ class SentinelControlPanel:
 
             elif choice == '4':
                 self.quick_portfolio_summary()
+
+            elif choice == '5':
+                self.select_ai_model()
 
             elif choice == '0':
                 self.clear_screen()
