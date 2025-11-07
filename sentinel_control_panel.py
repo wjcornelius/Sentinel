@@ -24,6 +24,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 
 # Import CEO (our single interface)
 from Departments.Executive.ceo import CEO
+from Departments.Research.market_regime import MarketRegimeAnalyzer
 
 
 class SentinelControlPanel:
@@ -34,6 +35,7 @@ class SentinelControlPanel:
     def __init__(self):
         self.project_root = Path(__file__).parent
         self.ceo = CEO(self.project_root)
+        self.regime_analyzer = MarketRegimeAnalyzer(self.project_root)
         self.running = True
 
     def clear_screen(self):
@@ -61,15 +63,126 @@ class SentinelControlPanel:
         print("  [3] Execute Approved Plan")
         print("      (Submit approved trades to market - available when market is open)")
         print()
-        print("  [4] Quick Portfolio Summary")
-        print("      (Fast overview of current positions)")
-        print()
-        print("  [5] Select AI Model")
+        print("  [4] Select AI Model")
         print(f"      (Current: {getattr(self, 'selected_model', 'gpt-4o-mini')} - Change before generating plan)")
         print()
         print("  [0] Exit")
         print()
         print("=" * 80)
+
+    def check_market_regime(self):
+        """Check market regime and get user decision to proceed"""
+        print("\n" + "=" * 120)
+        print(" " * 45 + "MARKET REGIME ANALYSIS")
+        print("=" * 120)
+
+        print("\n[CEO] Analyzing current market conditions before generating plan...")
+        print()
+
+        # Check for recent assessment (< 3 hours old)
+        recent = self.regime_analyzer.get_latest_assessment(max_age_hours=3)
+
+        if recent:
+            print(f"[CEO] Using recent market assessment from {recent['timestamp']}")
+            assessment = recent
+        else:
+            print("[CEO] Fetching fresh market data...")
+            result = self.regime_analyzer.analyze_regime()
+
+            if result['status'] != 'SUCCESS':
+                print(f"\n[CEO] {result['message']}")
+                return False
+
+            assessment = result
+
+        # Display regime analysis
+        print("\n" + "-" * 120)
+        print("MARKET INDICATORS:")
+        print(f"  SPY:  ${assessment['spy_price']:.2f}  {assessment['spy_change_pct']:+.2f}%  {'✓' if assessment['spy_change_pct'] > 0 else '✗'}")
+        print(f"  VIX:  {assessment['vix_level']:.2f}   {assessment['vix_change_pct']:+.2f}%   {'✓ LOW' if assessment['vix_level'] < 20 else '⚠ ELEVATED'}")
+        print()
+
+        # Show regime assessment
+        regime_icon = "✓" if assessment['regime'] == "BULLISH" else ("⚠" if assessment['regime'] == "BEARISH" else "~")
+        print(f"REGIME ASSESSMENT: {assessment['regime']} {regime_icon} ({assessment.get('confidence', 'MEDIUM')} CONFIDENCE)")
+        print()
+
+        # Show reasoning
+        print("ANALYSIS:")
+        for reason in assessment['reasoning'].split(' • '):
+            print(f"  • {reason}")
+        print()
+
+        # Show recommendation
+        print(f"RECOMMENDATION: {assessment['recommendation']}")
+
+        if assessment['regime'] == "BULLISH":
+            print("  Market conditions appear favorable for initiating new positions.")
+        elif assessment['regime'] == "BEARISH":
+            print("  Market conditions suggest caution. Consider skipping today or reducing exposure.")
+        else:
+            print("  Market conditions are mixed. Normal trading protocols apply.")
+
+        print("-" * 120)
+
+        # Get user decision
+        print()
+        proceed = input("\nWould you like to proceed with generating a trading plan? (y/n): ").strip().lower()
+
+        # Record decision
+        if 'assessment_id' in assessment:
+            decision = "PROCEED" if proceed == 'y' else "SKIP"
+            self.regime_analyzer.record_user_decision(assessment['assessment_id'], decision)
+
+        # Send regime message to all departments
+        if proceed == 'y':
+            self._broadcast_regime_message(assessment)
+
+        return proceed == 'y'
+
+    def _broadcast_regime_message(self, assessment):
+        """Send market regime message to all departments"""
+        print("\n[CEO] Broadcasting market regime assessment to all departments...")
+
+        message_dir = self.project_root / "Messages_Between_Departments" / "Inbox"
+        timestamp = datetime.now().strftime("%Y%m%dT%H%M%SZ")
+
+        for dept in ["RESEARCH", "RISK", "PORTFOLIO", "COMPLIANCE", "TRADING"]:
+            dept_dir = message_dir / dept
+            dept_dir.mkdir(parents=True, exist_ok=True)
+
+            msg_id = f"MSG_REGIME_{timestamp}_{dept.lower()[:4]}"
+            msg_file = dept_dir / f"{msg_id}.md"
+
+            content = f"""# Market Regime Assessment
+
+**From:** CEO / Market Regime Analyzer
+**To:** {dept} Department
+**Date:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+**Assessment ID:** {assessment.get('assessment_id', 'N/A')}
+
+## Market Regime: {assessment['regime']}
+
+**Confidence:** {assessment.get('confidence', 'MEDIUM')}
+**Recommendation:** {assessment['recommendation']}
+
+## Current Indicators:
+- **SPY:** ${assessment['spy_price']:.2f} ({assessment['spy_change_pct']:+.2f}%)
+- **VIX:** {assessment['vix_level']:.2f} ({assessment['vix_change_pct']:+.2f}%)
+
+## Analysis:
+{assessment['reasoning']}
+
+## User Decision:
+Proceeding with trading plan generation.
+
+---
+*This is an informational message. Departments should be aware of current market conditions but continue normal operations for now. Future phases will implement regime-responsive behavior.*
+"""
+
+            msg_file.write_text(content)
+
+        print("[CEO] Market regime assessment delivered to all departments.")
 
     def request_trading_plan(self):
         """Request trading plan from CEO"""
@@ -77,6 +190,13 @@ class SentinelControlPanel:
         print("\n" + "=" * 80)
         print(" " * 25 + "REQUEST TRADING PLAN")
         print("=" * 80)
+
+        # Check market regime first
+        if not self.check_market_regime():
+            print("\n[CEO] Understood. Skipping trading plan generation for today.")
+            input("\nPress Enter to continue...")
+            return
+
         print("\n[CEO] Understood. I'll have my team prepare a trading plan for you.")
         print(f"[CEO] Using AI model: {self.selected_model}")
         print("[CEO] This will take a moment while we coordinate all departments...\n")
@@ -385,14 +505,34 @@ class SentinelControlPanel:
             if 'open_positions' in dashboard:
                 positions = dashboard['open_positions']
                 print(f"\nOPEN POSITIONS ({len(positions)}):")
-                print("-" * 80)
-                for pos in positions[:10]:  # Show first 10
+                print("-" * 120)
+                print(f"  {'TICKER':<6} {'QTY':>7} {'ENTRY':>9} {'CURRENT':>9} {'COST BASIS':>12} {'MKT VALUE':>12} {'P&L':>10}")
+                print("-" * 120)
+
+                total_cost_basis = 0
+                total_market_value = 0
+                total_pnl = 0
+
+                for pos in positions:  # Show all positions
                     ticker = pos.get('ticker', 'N/A')
                     shares = pos.get('shares', 0)
                     entry = pos.get('entry_price', 0)
                     current = pos.get('current_price', 0)
                     pnl = pos.get('unrealized_pl', 0)
-                    print(f"  {ticker:6} x{shares:7.2f} @ ${entry:7.2f} → ${current:7.2f} | P&L: ${pnl:+7.2f}")
+
+                    cost_basis = shares * entry
+                    market_value = shares * current
+
+                    total_cost_basis += cost_basis
+                    total_market_value += market_value
+                    total_pnl += pnl
+
+                    print(f"  {ticker:<6} {shares:>7.2f} ${entry:>8.2f} ${current:>8.2f} ${cost_basis:>11.2f} ${market_value:>11.2f} ${pnl:>+9.2f}")
+
+                # Print totals
+                print("-" * 120)
+                print(f"  {'TOTAL':<6} {'':<7} {'':<9} {'':<9} ${total_cost_basis:>11.2f} ${total_market_value:>11.2f} ${total_pnl:>+9.2f}")
+                print("-" * 120)
 
             print(f"\n[CEO] Dashboard displayed. {result['message']}")
 
@@ -518,9 +658,6 @@ class SentinelControlPanel:
                 self.execute_approved_plan()
 
             elif choice == '4':
-                self.quick_portfolio_summary()
-
-            elif choice == '5':
                 self.select_ai_model()
 
             elif choice == '0':
