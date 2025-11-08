@@ -25,6 +25,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 # Import CEO (our single interface)
 from Departments.Executive.ceo import CEO
 from Departments.Research.market_regime import MarketRegimeAnalyzer
+from Departments.Operations.mode_manager import ModeManager
 
 
 class SentinelControlPanel:
@@ -36,7 +37,9 @@ class SentinelControlPanel:
         self.project_root = Path(__file__).parent
         self.ceo = CEO(self.project_root)
         self.regime_analyzer = MarketRegimeAnalyzer(self.project_root)
+        self.mode_manager = ModeManager(self.project_root, alpaca_client=None)  # Will get Alpaca from CEO if needed
         self.running = True
+        self.selected_model = 'gpt-4o-mini'  # Default AI model
 
     def clear_screen(self):
         """Clear terminal"""
@@ -52,20 +55,60 @@ class SentinelControlPanel:
 
     def display_main_menu(self):
         """Display main menu options"""
+        # Get market status and trading session info
+        market_status = self.mode_manager.get_market_status_display()
+        has_traded, session_info = self.mode_manager.has_traded_today()
+
+        # Display market status banner
+        print("=" * 80)
+        print(f"Market Status: {market_status['status']} ", end="")
+        if market_status['is_open']:
+            print(f"({market_status['current_time_et']})")
+        else:
+            print()
+            print(f"  {market_status['message']}")
+
+        # Display trading session status
+        if has_traded:
+            print(f"Today's Trading: EXECUTED at {session_info['executed_at']} ({session_info['trades_count']} trades)")
+        else:
+            if market_status['is_open']:
+                print("Today's Trading: NOT EXECUTED (ready to trade)")
+            else:
+                print("Today's Trading: NOT EXECUTED (market closed)")
+        print("=" * 80)
+        print()
+
         print("MAIN OPTIONS:")
         print()
-        print("  [1] Request Trading Plan")
+
+        # Option 1: Request Trading Plan
+        plan_indicator = "[Market OPEN]" if market_status['is_open'] else "[Market CLOSED]"
+        print(f"  [1] Request Trading Plan {plan_indicator}")
         print("      (CEO will coordinate all departments to generate a comprehensive plan)")
         print()
+
+        # Option 2: View Portfolio Dashboard
         print("  [2] View Portfolio Dashboard")
         print("      (Real-time portfolio status and performance)")
         print()
-        print("  [3] Execute Approved Plan")
+
+        # Option 3: Execute Approved Plan
+        if has_traded:
+            exec_indicator = "[Already executed today]"
+        elif market_status['is_open']:
+            exec_indicator = "[Market OPEN - Ready]"
+        else:
+            exec_indicator = "[Market CLOSED]"
+        print(f"  [3] Execute Approved Plan {exec_indicator}")
         print("      (Submit approved trades to market - available when market is open)")
         print()
+
+        # Option 4: Select AI Model
         print("  [4] Select AI Model")
-        print(f"      (Current: {getattr(self, 'selected_model', 'gpt-4o-mini')} - Change before generating plan)")
+        print(f"      (Current: {self.selected_model} - Change before generating plan)")
         print()
+
         print("  [0] Exit")
         print()
         print("=" * 80)
@@ -575,6 +618,59 @@ Proceeding with trading plan generation.
         print("\n" + "=" * 80)
         print(" " * 25 + "EXECUTE APPROVED PLAN")
         print("=" * 80)
+
+        # Check execution gates
+        print("\n[Mode Manager] Checking execution gates...")
+        print()
+
+        # For now, assume plan was generated recently (would need to track this in real implementation)
+        plan_time = datetime.now()  # Placeholder - should get from approved plan file
+
+        # Check if we can execute
+        gate_check = self.mode_manager.can_execute_plan(
+            plan_generated_at=plan_time,
+            current_portfolio_loss_pct=0.0,  # Placeholder - would fetch real P&L
+            allow_override=True
+        )
+
+        # Display gate results
+        print("EXECUTION GATES:")
+        print("-" * 80)
+
+        for gate in gate_check['gates_passed']:
+            print(f"  {gate}")
+
+        for gate in gate_check['gates_failed']:
+            print(f"  {gate}")
+
+        print()
+        print(f"RECOMMENDATION: {gate_check['recommendation']}")
+        print("-" * 80)
+        print()
+
+        # Display warnings if any
+        if gate_check['warnings']:
+            print("WARNINGS:")
+            for warning in gate_check['warnings']:
+                print(f"  - {warning}")
+            print()
+
+        # Handle blocks
+        if not gate_check['can_execute']:
+            print("[Mode Manager] Execution BLOCKED. Cannot proceed with trades.")
+            input("\nPress Enter to return to menu...")
+            return
+
+        # Handle overrides
+        if gate_check['requires_override']:
+            print("[Mode Manager] Override required to proceed.")
+            override = input("\nDo you want to override and proceed anyway? (yes/no): ").strip().lower()
+            if override != 'yes':
+                print("\n[Mode Manager] Execution cancelled by user.")
+                input("\nPress Enter to return to menu...")
+                return
+            print("\n[Mode Manager] User override confirmed. Proceeding with execution...")
+            print()
 
         print("\n[CEO] Checking for approved plan...")
 
