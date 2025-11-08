@@ -533,16 +533,28 @@ Proceeding with trading plan generation.
                 perf = dashboard['performance']
                 print("\nPORTFOLIO PERFORMANCE:")
                 print("-" * 80)
-                for key, value in list(perf.items())[:10]:  # Show first 10 metrics
-                    if isinstance(value, (int, float)):
-                        if 'pct' in key.lower() or 'rate' in key.lower():
-                            print(f"  {key}: {value:.2f}%")
-                        elif 'pnl' in key.lower() or 'value' in key.lower() or 'capital' in key.lower():
-                            print(f"  {key}: ${value:,.2f}")
-                        else:
-                            print(f"  {key}: {value:.2f}")
-                    else:
-                        print(f"  {key}: {value}")
+
+                # Primary metrics (always show these first)
+                print(f"  Starting Capital:    ${perf.get('starting_capital', 100000):>12,.2f}")
+                print(f"  Current Equity:      ${perf.get('current_equity', 0):>12,.2f}")
+                print(f"  Total Return:        ${perf.get('total_return_dollars', 0):>12,.2f}  ({perf.get('total_return_pct', 0):+.2f}%)")
+                print()
+                print(f"  Today's P/L:         ${perf.get('daily_pl', 0):>12,.2f}  ({perf.get('daily_pl_pct', 0):+.2f}%)")
+                print(f"  Cash Available:      ${perf.get('cash', 0):>12,.2f}")
+                print(f"  Buying Power:        ${perf.get('buying_power', 0):>12,.2f}")
+                print(f"  Open Positions:      {perf.get('positions_count', 0):>12}")
+                print()
+
+                # Circuit breaker status indicator
+                daily_loss_pct = abs(perf.get('daily_pl_pct', 0)) if perf.get('daily_pl_pct', 0) < 0 else 0
+                if daily_loss_pct >= 15:
+                    print(f"  Circuit Breaker:     RED ALERT ({daily_loss_pct:.1f}% loss today)")
+                elif daily_loss_pct >= 10:
+                    print(f"  Circuit Breaker:     ORANGE ({daily_loss_pct:.1f}% loss today - new BUYs blocked)")
+                elif daily_loss_pct >= 5:
+                    print(f"  Circuit Breaker:     YELLOW ({daily_loss_pct:.1f}% loss today - monitor)")
+                else:
+                    print(f"  Circuit Breaker:     NORMAL")
 
             # Display open positions
             if 'open_positions' in dashboard:

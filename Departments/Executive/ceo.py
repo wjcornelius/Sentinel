@@ -405,18 +405,18 @@ class CEO:
         self.logger.info("[CEO] Retrieving dashboard data...")
 
         try:
-            # Import Alpaca client
+            # Import Alpaca client and credentials
             from alpaca.trading.client import TradingClient
-            import os
+            from config import APCA_API_KEY_ID, APCA_API_SECRET_KEY
 
-            # Get API keys from environment
-            api_key = os.getenv('APCA_API_KEY_ID')
-            api_secret = os.getenv('APCA_API_SECRET_KEY')
+            # Get API keys from config
+            api_key = APCA_API_KEY_ID
+            api_secret = APCA_API_SECRET_KEY
 
             if not api_key or not api_secret:
                 return {
                     'status': 'ERROR',
-                    'message': '[CEO] Alpaca API keys not found in environment'
+                    'message': '[CEO] Alpaca API keys not found in config.py'
                 }
 
             # Initialize Alpaca client
@@ -431,15 +431,29 @@ class CEO:
             # Store snapshot
             self._store_portfolio_snapshot(account, positions, source='dashboard_query')
 
+            # Calculate performance metrics
+            starting_capital = 100000.00  # Initial account value
+            current_equity = float(account.equity)
+            total_return_dollars = current_equity - starting_capital
+            total_return_pct = (total_return_dollars / starting_capital) * 100
+
+            # Today's P/L (for circuit breaker monitoring)
+            last_equity = float(account.last_equity)
+            daily_pl = current_equity - last_equity
+            daily_pl_pct = (daily_pl / last_equity * 100) if last_equity > 0 else 0
+
             # Format dashboard data
             dashboard_data = {
                 'performance': {
+                    'starting_capital': starting_capital,
+                    'current_equity': current_equity,
+                    'total_return_dollars': total_return_dollars,
+                    'total_return_pct': total_return_pct,
                     'portfolio_value': float(account.portfolio_value),
-                    'equity': float(account.equity),
                     'cash': float(account.cash),
                     'buying_power': float(account.buying_power),
-                    'daily_pl': float(account.equity) - float(account.last_equity),
-                    'daily_pl_pct': ((float(account.equity) - float(account.last_equity)) / float(account.last_equity) * 100) if float(account.last_equity) > 0 else 0,
+                    'daily_pl': daily_pl,
+                    'daily_pl_pct': daily_pl_pct,
                     'positions_count': len(positions)
                 },
                 'open_positions': [{
@@ -469,18 +483,18 @@ class CEO:
     def get_portfolio_summary(self) -> Dict:
         """Get quick portfolio summary from Alpaca"""
         try:
-            # Import Alpaca client
+            # Import Alpaca client and credentials
             from alpaca.trading.client import TradingClient
-            import os
+            from config import APCA_API_KEY_ID, APCA_API_SECRET_KEY
 
-            # Get API keys from environment
-            api_key = os.getenv('APCA_API_KEY_ID')
-            api_secret = os.getenv('APCA_API_SECRET_KEY')
+            # Get API keys from config
+            api_key = APCA_API_KEY_ID
+            api_secret = APCA_API_SECRET_KEY
 
             if not api_key or not api_secret:
                 return {
                     'status': 'ERROR',
-                    'message': '[CEO] Alpaca API keys not found in environment'
+                    'message': '[CEO] Alpaca API keys not found in config.py'
                 }
 
             # Initialize Alpaca client
