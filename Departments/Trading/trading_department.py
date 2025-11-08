@@ -35,6 +35,8 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from alpaca.trading.client import TradingClient
 from alpaca.trading.requests import MarketOrderRequest, LimitOrderRequest
 from alpaca.trading.enums import OrderSide, TimeInForce, OrderType
+from alpaca.data.historical import StockHistoricalDataClient
+from alpaca.data.requests import StockLatestBarRequest
 
 # Import configuration
 from config import APCA_API_KEY_ID, APCA_API_SECRET_KEY, APCA_API_BASE_URL
@@ -454,8 +456,9 @@ class TradingDepartment:
         self.constraint_validator = HardConstraintValidator()
         self.duplicate_detector = DuplicateDetector(db_path)
 
-        # Initialize Alpaca client (using existing credentials from config.py)
+        # Initialize Alpaca clients (using existing credentials from config.py)
         self.trading_client = TradingClient(APCA_API_KEY_ID, APCA_API_SECRET_KEY, paper=True)
+        self.data_client = StockHistoricalDataClient(APCA_API_KEY_ID, APCA_API_SECRET_KEY)
 
         logger.info("Trading Department initialized")
         logger.info(f"Using Alpaca paper trading endpoint: {APCA_API_BASE_URL}")
@@ -677,8 +680,9 @@ class TradingDepartment:
         if order.action == 'BUY':
             # Get CURRENT market price from Alpaca (not 16-hour-old research data)
             try:
-                latest_trade = self.trading_client.get_latest_trade(order.ticker)
-                current_price = float(latest_trade.price)
+                request = StockLatestBarRequest(symbol_or_symbols=order.ticker)
+                latest_bar = self.data_client.get_stock_latest_bar(request)
+                current_price = float(latest_bar[order.ticker].close)
                 logger.info(f"Current market price for {order.ticker}: ${current_price:.2f}")
             except Exception as e:
                 logger.warning(f"Could not fetch current price for {order.ticker}: {e}")
