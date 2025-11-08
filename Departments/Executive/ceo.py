@@ -689,8 +689,7 @@ class CEO:
             spy_change_pct = None
 
             # Connect to database
-            db_path = self.project_root / "sentinel_corporation.db"
-            conn = sqlite3.connect(db_path)
+            conn = sqlite3.connect(self.db_path, timeout=30)
             cursor = conn.cursor()
 
             # Insert snapshot

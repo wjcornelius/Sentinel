@@ -20,7 +20,7 @@ class MarketRegimeAnalyzer:
 
     def __init__(self, project_root: Path):
         self.project_root = project_root
-        self.db_path = project_root / "sentinel_corporation.db"
+        self.db_path = project_root / "sentinel.db"
         self._ensure_table_exists()
 
     def _ensure_table_exists(self):
