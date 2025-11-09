@@ -1,0 +1,94 @@
+================================================================================
+DISABLE WI-FI POWER MANAGEMENT - MANUAL INSTRUCTIONS
+================================================================================
+
+Purpose: Prevent Windows from turning off Wi-Fi adapter to save power
+Safe: YES - Keeps Wi-Fi always on (better for monitoring software)
+Date: November 7, 2025
+
+================================================================================
+WHY THIS HELPS
+================================================================================
+
+Problem: Windows may turn off your Wi-Fi adapter to save power, causing:
+  - Internet connection to drop
+  - Monitoring software to lose connectivity
+  - Need to reboot to restore connection
+
+Solution: Disable power management so Wi-Fi stays on 24/7
+
+This is SAFE for monitoring:
+  - Wi-Fi will NEVER sleep
+  - Monitoring stays connected continuously
+  - Standard setting used by servers and business laptops
+
+================================================================================
+STEP-BY-STEP INSTRUCTIONS
+================================================================================
+
+1. Press Windows key + X
+2. Click "Device Manager"
+
+3. In Device Manager:
+   - Scroll down and expand "Network adapters"
+   - Find: "Realtek 8821CE Wireless LAN 802.11ac PCI-E NIC"
+   - RIGHT-CLICK on it
+   - Select "Properties"
+
+4. In the Properties window:
+   - Click the "Power Management" tab
+
+5. Power Management settings:
+   - UNCHECK the box: "Allow the computer to turn off this device to save power"
+   - Click "OK"
+
+6. DONE! You should see this message or the window will just close.
+
+================================================================================
+VERIFICATION
+================================================================================
+
+To verify the setting was applied:
+
+1. Go back to Device Manager
+2. Right-click the Realtek adapter again
+3. Properties → Power Management tab
+4. The checkbox should now be UNCHECKED
+
+================================================================================
+WHAT THIS DOES
+================================================================================
+
+BEFORE: Windows can turn off Wi-Fi when idle (causes connectivity loss)
+AFTER:  Wi-Fi stays on 24/7 (reliable connectivity for all software)
+
+Result:
+  - No more Wi-Fi sleep
+  - Monitoring software stays connected
+  - Fewer unexpected internet disconnections
+  - Trade-off: Slightly higher battery usage (laptop is usually plugged in)
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+If you don't see a "Power Management" tab:
+  - This is okay, it means the driver doesn't support power management
+  - Or it's already disabled at the system level
+  - Move on to the next fix (TCP port range)
+
+If the setting keeps reverting:
+  - Windows Update may be overwriting it
+  - Re-apply after each major Windows update
+  - Or disable automatic driver updates for this device
+
+================================================================================
+NEXT STEPS
+================================================================================
+
+After completing this:
+1. Run Fix_Network_Settings.bat (as Administrator)
+2. Reboot your computer
+3. Test for 24 hours to see if connectivity improves
+
+================================================================================

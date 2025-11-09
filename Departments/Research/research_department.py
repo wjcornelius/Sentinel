@@ -115,10 +115,10 @@ class ResearchDepartment:
         current_holdings = self._get_current_holdings()
         logger.info(f"Current portfolio: {len(current_holdings)} positions")
 
-        # Step 3: TWO-STAGE FILTERING for ~50 buy candidates
+        # Step 3: TWO-STAGE FILTERING for ~80 buy candidates (target 15-20 positions)
         buy_candidates = self._two_stage_filter(
             universe_tickers,
-            target_count=50,
+            target_count=80,
             exclude=[h['ticker'] for h in current_holdings]
         )
         logger.info(f"Buy candidates found: {len(buy_candidates)} tickers (all swing-suitable)")
@@ -191,14 +191,15 @@ class ResearchDepartment:
 
             holdings = []
             for pos in positions:
+                # Position is an object, not a dict - use attributes
                 holdings.append({
-                    'ticker': pos['symbol'],
-                    'quantity': float(pos['qty']),
-                    'market_value': float(pos['market_value']),
-                    'current_price': float(pos['current_price']),
-                    'cost_basis': float(pos['cost_basis']),
-                    'unrealized_pl': float(pos['unrealized_pl']),
-                    'unrealized_plpc': float(pos['unrealized_plpc'])
+                    'ticker': pos.symbol,
+                    'quantity': float(pos.qty),
+                    'market_value': float(pos.market_value),
+                    'current_price': float(pos.current_price),
+                    'cost_basis': float(pos.cost_basis),
+                    'unrealized_pl': float(pos.unrealized_pl),
+                    'unrealized_plpc': float(pos.unrealized_plpc)
                 })
 
             logger.info(f"Fetched {len(holdings)} positions from Alpaca")
@@ -208,7 +209,7 @@ class ResearchDepartment:
             logger.error(f"Failed to fetch Alpaca positions: {e}")
             return []
 
-    def _two_stage_filter(self, universe: List[str], target_count: int = 50,
+    def _two_stage_filter(self, universe: List[str], target_count: int = 80,
                           exclude: List[str] = None) -> List[str]:
         """
         TWO-STAGE FILTERING: Swing suitability → Technical analysis
@@ -236,19 +237,30 @@ class ResearchDepartment:
         logger.info("STAGE 1: Scoring swing suitability for all tickers...")
 
         swing_scores = []
+        failed_count = 0
+        no_data_count = 0
+        insufficient_data_count = 0
+
         for ticker in universe:
             if ticker in exclude:
                 continue
 
             data = self._get_cached_price_data(ticker)
-            if data is None or len(data) < 20:
+            if data is None:
+                no_data_count += 1
+                logger.debug(f"{ticker}: No data available")
+                continue
+
+            if len(data) < 20:
+                insufficient_data_count += 1
+                logger.debug(f"{ticker}: Insufficient data ({len(data)} days)")
                 continue
 
             # Calculate swing suitability metrics
             try:
                 returns = data['Close'].pct_change().dropna()
-                volatility = returns.std() * np.sqrt(252) * 100  # Annualized %
-                avg_volume = data['Volume'].mean()
+                volatility = float(returns.std() * np.sqrt(252) * 100)  # Annualized %
+                avg_volume = float(data['Volume'].mean())
                 current_price = float(data['Close'].iloc[-1])
 
                 # ATR for stop distance assessment
@@ -256,7 +268,8 @@ class ResearchDepartment:
                 high_close = abs(data['High'] - data['Close'].shift(1))
                 low_close = abs(data['Low'] - data['Close'].shift(1))
                 atr = pd.concat([high_low, high_close, low_close], axis=1).max(axis=1).rolling(14).mean()
-                atr_pct = (atr.iloc[-1] / current_price) * 100 if not pd.isna(atr.iloc[-1]) else 0
+                atr_value = float(atr.iloc[-1]) if not pd.isna(atr.iloc[-1]) else 0
+                atr_pct = (atr_value / current_price) * 100 if current_price > 0 else 0
 
                 # Score swing suitability (0-100)
                 # Volatility score (want 20-40%)
@@ -313,8 +326,23 @@ class ResearchDepartment:
                 })
 
             except Exception as e:
-                logger.debug(f"Failed to score {ticker}: {e}")
+                failed_count += 1
+                logger.warning(f"{ticker}: Scoring failed - {str(e)}")
                 continue
+
+        # Log statistics
+        total_processed = len(universe) - len(exclude)
+        successful = len(swing_scores)
+        logger.info(f"  Stage 1 processed {total_processed} tickers:")
+        logger.info(f"    - Successfully scored: {successful}")
+        logger.info(f"    - No data: {no_data_count}")
+        logger.info(f"    - Insufficient data (<20 days): {insufficient_data_count}")
+        logger.info(f"    - Calculation errors: {failed_count}")
+
+        if len(swing_scores) == 0:
+            logger.error("  CRITICAL: No tickers were successfully scored!")
+            logger.error("  Check yfinance connectivity and data cache integrity")
+            return []
 
         # Sort by swing score and take top 15%
         swing_scores.sort(key=lambda x: -x['swing_score'])
@@ -356,8 +384,8 @@ class ResearchDepartment:
             logger.info(f"  {preset['name']:15s}: {len(candidates)} candidates")
 
             # Check if close to target
-            target_min = int(target_count * 0.8)  # 40 if target=50
-            target_max = int(target_count * 1.2)  # 60 if target=50
+            target_min = int(target_count * 0.8)  # 64 if target=80
+            target_max = int(target_count * 1.2)  # 96 if target=80
 
             if target_min <= len(candidates) <= target_max:
                 logger.info(f"  Stage 2 complete: Target reached with {preset['name']} preset")
@@ -442,6 +470,10 @@ class ResearchDepartment:
             if data.empty:
                 return None
 
+            # Flatten MultiIndex columns if present (yfinance returns MultiIndex for single ticker)
+            if isinstance(data.columns, pd.MultiIndex):
+                data.columns = [col[0] if isinstance(col, tuple) else col for col in data.columns]
+
             # Cache for 16 hours
             try:
                 self._cache_price_data(ticker, data)
@@ -452,7 +484,7 @@ class ResearchDepartment:
             return data
 
         except Exception as e:
-            logger.debug(f"{ticker}: Failed to fetch - {e}")
+            logger.warning(f"{ticker}: Failed to fetch from yfinance - {e}")
             return None
 
     def _cache_price_data(self, ticker: str, data: pd.DataFrame):
@@ -523,16 +555,29 @@ class ResearchDepartment:
             # Composite
             composite = (tech_score * 0.4) + (fund_score * 0.4) + (sent_score * 0.2)
 
-            scored.append({
+            # Get current price safely (avoid FutureWarning)
+            close_value = data['Close'].iloc[-1]
+            current_price = float(close_value.iloc[0] if hasattr(close_value, 'iloc') else close_value)
+
+            result = {
                 'ticker': ticker,
                 'technical_score': tech_score,
                 'fundamental_score': fund_score,
                 'sentiment_score': sent_score,
                 'research_composite_score': composite,
                 'context': context,
-                'current_price': float(data['Close'].iloc[-1]),
+                'current_price': current_price,
                 'sector': sector
-            })
+            }
+
+            # CRITICAL FIX: Preserve position data for holdings
+            if context == 'holdings' and isinstance(item, dict):
+                # Copy over Alpaca position data if it exists
+                for key in ['quantity', 'market_value', 'cost_basis', 'unrealized_pl', 'unrealized_plpc']:
+                    if key in item:
+                        result[key] = item[key]
+
+            scored.append(result)
 
         return scored
 
@@ -583,7 +628,9 @@ class ResearchDepartment:
             loss = (-delta.where(delta < 0, 0)).rolling(window=period).mean()
             rs = gain / loss
             rsi = 100 - (100 / (1 + rs))
-            return float(rsi.iloc[-1])
+            # Use .iloc[0] to avoid FutureWarning
+            rsi_value = rsi.iloc[-1]
+            return float(rsi_value.iloc[0] if hasattr(rsi_value, 'iloc') else rsi_value)
         except:
             return 50.0
 
@@ -712,10 +759,25 @@ class ResearchDepartment:
         """Get current market conditions (SPY, VIX, etc.)"""
         try:
             spy_data = yf.download('SPY', period='5d', progress=False)
-            spy_change = ((spy_data['Close'].iloc[-1] / spy_data['Close'].iloc[-2]) - 1) * 100
+
+            # Handle MultiIndex columns
+            if isinstance(spy_data.columns, pd.MultiIndex):
+                spy_data.columns = [col[0] if isinstance(col, tuple) else col for col in spy_data.columns]
+
+            spy_close_curr = spy_data['Close'].iloc[-1]
+            spy_close_prev = spy_data['Close'].iloc[-2]
+            spy_close_curr = float(spy_close_curr.iloc[0] if hasattr(spy_close_curr, 'iloc') else spy_close_curr)
+            spy_close_prev = float(spy_close_prev.iloc[0] if hasattr(spy_close_prev, 'iloc') else spy_close_prev)
+            spy_change = ((spy_close_curr / spy_close_prev) - 1) * 100
 
             vix_data = yf.download('^VIX', period='5d', progress=False)
-            vix_level = float(vix_data['Close'].iloc[-1])
+
+            # Handle MultiIndex columns
+            if isinstance(vix_data.columns, pd.MultiIndex):
+                vix_data.columns = [col[0] if isinstance(col, tuple) else col for col in vix_data.columns]
+
+            vix_close = vix_data['Close'].iloc[-1]
+            vix_level = float(vix_close.iloc[0] if hasattr(vix_close, 'iloc') else vix_close)
 
             if vix_level < 15:
                 vix_status = 'LOW'
@@ -727,7 +789,7 @@ class ResearchDepartment:
                 vix_status = 'HIGH'
 
             return {
-                'spy_change_pct': float(spy_change),
+                'spy_change_pct': spy_change,  # Already a scalar
                 'vix': vix_level,
                 'vix_status': vix_status,
                 'date': datetime.now().date().isoformat()

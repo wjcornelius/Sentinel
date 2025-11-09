@@ -214,7 +214,7 @@ print("SCENARIO B: FULL PORTFOLIO -> CAPACITY REJECTIONS")
 print("=" * 100)
 print()
 
-print("[B.1] SETUP: Fill portfolio to max capacity (10 positions)")
+print("[B.1] SETUP: Fill portfolio to max capacity (20 positions)")
 print("-" * 100)
 
 # Create 7 more OPEN positions (already have 3 PENDING from Scenario A)

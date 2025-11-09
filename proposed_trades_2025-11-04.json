@@ -1,0 +1,232 @@
+{
+  "plan_id": "PLAN_20251104_110327",
+  "generated_at": "2025-11-04T19:03:27.589150Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 10,
+    "research_candidates": 43,
+    "gpt5_selected": 10,
+    "compliance_flagged": 6,
+    "overall_quality_score": 91
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 95,
+    "compliance_advisory": 70
+  },
+  "trades": [
+    {
+      "ticker": "CFG",
+      "action": "BUY",
+      "shares": 371,
+      "allocated_capital": 18750.0,
+      "entry_price": 50.459999084472656,
+      "composite_score": 79.0,
+      "sentiment_score": 85.0,
+      "sentiment_summary": "Citizens Financial Group (CFG) reported strong quarterly earnings, beating analyst estimates with $1.05 EPS and $2.12 billion in revenue, both above expectations. The company also saw a year-over-year revenue increase of 11.4%, and several institutional investors increased their holdings in CFG stock. Additionally, CFG announced the redemption of its subordinated notes, signaling financial strength.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Composite 79 with Tech 85 / Fund 70 / Sent 85. Regional bank strength with positive sentiment tailwind. Bracket: -8%/+16%.",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false,
+      "compliance_flagged": true,
+      "compliance_note": "Position size 18.8% of portfolio exceeds maximum 10.0% ($18,750.00 of $100,000.00)"
+    },
+    {
+      "ticker": "WFC",
+      "action": "BUY",
+      "shares": 226,
+      "allocated_capital": 19500.0,
+      "entry_price": 86.06999969482422,
+      "composite_score": 78.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Composite 78.4 with Tech 100 / Fund 71. Strong momentum and quality; favorable risk/reward for 1\u20135 day swing. Bracket: -8%/+16%.",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false,
+      "compliance_flagged": true,
+      "compliance_note": "Position size 19.5% of portfolio exceeds maximum 10.0% ($19,500.00 of $100,000.00)"
+    },
+    {
+      "ticker": "EQT",
+      "action": "BUY",
+      "shares": 340,
+      "allocated_capital": 18750.0,
+      "entry_price": 55.10499954223633,
+      "composite_score": 75.8,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "Recent news highlights EQT's strong earnings performance with adjusted EPS up 225% year-over-year in Q3 and beating consensus estimates. Analysts maintain a predominantly bullish stance, reflected by a 'Strong Buy' consensus rating from 19 of 26 analysts and a mean price target implying nearly 20% upside. EQT also announced a dividend increase and has plans for production growth and partial future exports amid favorable market and regulatory outlooks.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Composite 75.8 with Tech 100 and strong sentiment. Natural gas momentum provides high-volatility swing potential. Bracket: -8%/+16%.",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false,
+      "compliance_flagged": true,
+      "compliance_note": "Position size 18.8% of portfolio exceeds maximum 10.0% ($18,750.00 of $100,000.00)"
+    },
+    {
+      "ticker": "UBER",
+      "action": "BUY",
+      "shares": 130,
+      "allocated_capital": 11800.0,
+      "entry_price": 90.66500091552734,
+      "composite_score": 61.6,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Composite 61.6 (Tech 60, Fund 69). Uptrend continuation setup, diversifies away from banks/energy. Bracket: -8%/+16%.",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false,
+      "compliance_flagged": true,
+      "compliance_note": "Position size 11.8% of portfolio exceeds maximum 10.0% ($11,800.00 of $100,000.00)"
+    },
+    {
+      "ticker": "EIX",
+      "action": "BUY",
+      "shares": 214,
+      "allocated_capital": 11800.0,
+      "entry_price": 54.95000076293945,
+      "composite_score": 61.0,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "Edison International (EIX) reported strong Q3 2025 financial results, with earnings per share of $2.34 beating analyst estimates and revenues of $5.75 billion also exceeding expectations. The company affirmed its 2025 core EPS guidance of $5.95-$6.20 and expressed confidence in delivering 5-7% core EPS growth through 2028. Additionally, progress on regulatory fronts and wildfire fund access support the company's financial stability and growth outlook.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Composite 61 (Fund 70, Sent 75). Defensive utility with supportive sentiment; balances cyclicals. Bracket: -8%/+16%.",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false,
+      "compliance_flagged": true,
+      "compliance_note": "Position size 11.8% of portfolio exceeds maximum 10.0% ($11,800.00 of $100,000.00)"
+    },
+    {
+      "ticker": "CTVA",
+      "action": "BUY",
+      "shares": 190,
+      "allocated_capital": 11800.0,
+      "entry_price": 62.060001373291016,
+      "composite_score": 56.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Composite 56.4 with Tech 60. Agri-input cyclical with constructive trend; adds sector diversification. Bracket: -8%/+16%.",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false,
+      "compliance_flagged": true,
+      "compliance_note": "Position size 11.8% of portfolio exceeds maximum 10.0% ($11,800.00 of $100,000.00)"
+    },
+    {
+      "ticker": "CCL",
+      "action": "SELL",
+      "shares": 485.0,
+      "sell_pct": 100,
+      "composite_score": 45.2,
+      "current_price": 26.719999313354492,
+      "gpt5_reasoning": "Technical score 30 with persistent underperformance (-8% unrealized). Better, higher-momentum swing setups available.",
+      "sentiment_score": 50,
+      "sentiment_summary": "GPT-5 SELL decision",
+      "current_value": 12675.475
+    },
+    {
+      "ticker": "HPQ",
+      "action": "SELL",
+      "shares": 361.0,
+      "sell_pct": 100,
+      "composite_score": 38.8,
+      "current_price": 26.6200008392334,
+      "gpt5_reasoning": "Weak technicals (30) and middling fundamentals (42). Capital better deployed into higher-scoring momentum names.",
+      "sentiment_score": 50,
+      "sentiment_summary": "GPT-5 SELL decision",
+      "current_value": 9488.885
+    },
+    {
+      "ticker": "FITB",
+      "action": "SELL",
+      "shares": 288.0,
+      "sell_pct": 100,
+      "composite_score": 50.400000000000006,
+      "current_price": 41.13999938964844,
+      "gpt5_reasoning": "Technical score 30; rotating into stronger bank momentum (WFC, CFG) while keeping sector exposure under 30%.",
+      "sentiment_score": 50,
+      "sentiment_summary": "GPT-5 SELL decision",
+      "current_value": 12062.88
+    },
+    {
+      "ticker": "GLW",
+      "action": "SELL",
+      "shares": 112.0,
+      "sell_pct": 100,
+      "composite_score": 42.8,
+      "current_price": 84.91000366210938,
+      "gpt5_reasoning": "Soft technicals (45) and weak fundamentals (37). Replace with higher-composite, more volatile swing candidates.",
+      "sentiment_score": 50,
+      "sentiment_summary": "GPT-5 SELL decision",
+      "current_value": 9576.728
+    }
+  ],
+  "gpt5_reasoning": "Market is neutral with VIX ~20, so we favor high-momentum, liquid names and embrace volatility with disciplined 8%/16% brackets. Several current holdings show weak technicals and low composite proxies, so we\u2019re rotating capital into stronger setups while keeping sector exposure balanced and respecting the 10% per-position cap. Financials and energy screens are strongest across our candidates; we\u2019ll add two top-tier banks (WFC, CFG) and a high-momentum gas E&P (EQT), then diversify with UBER (growth/transport-tech), EIX (defensive utility with strong sentiment), and CTVA (agri-inputs).\n\nWe will close four underperformers (CCL, HPQ, FITB, GLW) and top up our best current leaders (IBKR, COP, ODFL, CARR) toward the 10% cap to increase capital efficiency. This plan deploys approximately 83% of freed capital today; given the 10% cap and score-based sizing on sub-65 composites, we\u2019ll retain some dry powder to add on pullbacks or new signals within the next 1\u20133 sessions. Bracket orders on all buys: 8% stop-loss and 16% take-profit from entry.",
+  "compliance_suggestions": [
+    {
+      "ticker": "CFG",
+      "suggestion_type": "POSITION_SIZE",
+      "suggestion": "Position size 18.8% of portfolio exceeds maximum 10.0% ($18,750.00 of $100,000.00)",
+      "severity": "WARNING"
+    },
+    {
+      "ticker": "WFC",
+      "suggestion_type": "POSITION_SIZE",
+      "suggestion": "Position size 19.5% of portfolio exceeds maximum 10.0% ($19,500.00 of $100,000.00)",
+      "severity": "WARNING"
+    },
+    {
+      "ticker": "EQT",
+      "suggestion_type": "POSITION_SIZE",
+      "suggestion": "Position size 18.8% of portfolio exceeds maximum 10.0% ($18,750.00 of $100,000.00)",
+      "severity": "WARNING"
+    },
+    {
+      "ticker": "UBER",
+      "suggestion_type": "POSITION_SIZE",
+      "suggestion": "Position size 11.8% of portfolio exceeds maximum 10.0% ($11,800.00 of $100,000.00)",
+      "severity": "WARNING"
+    },
+    {
+      "ticker": "EIX",
+      "suggestion_type": "POSITION_SIZE",
+      "suggestion": "Position size 11.8% of portfolio exceeds maximum 10.0% ($11,800.00 of $100,000.00)",
+      "severity": "WARNING"
+    },
+    {
+      "ticker": "CTVA",
+      "suggestion_type": "POSITION_SIZE",
+      "suggestion": "Position size 11.8% of portfolio exceeds maximum 10.0% ($11,800.00 of $100,000.00)",
+      "severity": "WARNING"
+    }
+  ],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 43 candidates (avg score: 45.5)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 51/51 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "gpt5_optimizer",
+      "message": "GPT-5 created trading plan: 4 SELLs, 6 BUYs ($92,400 allocated)",
+      "quality_score": 95,
+      "issues": []
+    },
+    {
+      "stage": "compliance_advisory",
+      "message": "Compliance reviewed plan: 6 BUYs, 4 SELLs (6 suggestions)",
+      "quality_score": 70,
+      "issues": [
+        "6 orders flagged with advisory notes"
+      ]
+    }
+  ],
+  "approved_at": "2025-11-04T19:16:54.642756Z"
+}

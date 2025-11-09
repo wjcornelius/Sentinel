@@ -140,13 +140,18 @@ class PreTradeValidator:
             self.logger.warning(f"REJECTED: {ticker} - {reason}")
             return False, reason, 'RISK_LIMIT', check_results
 
-        # Check 5: Duplicate Orders
-        is_duplicate, reason = self._check_duplicate_order(ticker)
-        check_results['duplicate_order_check'] = 'FAIL' if is_duplicate else 'PASS'
+        # Check 5: Duplicate Orders (skip if this is a position adjustment)
+        is_position_adjustment = proposal.get('is_position_adjustment', False)
+        if is_position_adjustment:
+            self.logger.info(f"SKIPPING duplicate check for {ticker} - marked as position adjustment (adding to existing position)")
+            check_results['duplicate_order_check'] = 'SKIP'
+        else:
+            is_duplicate, reason = self._check_duplicate_order(ticker)
+            check_results['duplicate_order_check'] = 'FAIL' if is_duplicate else 'PASS'
 
-        if is_duplicate:
-            self.logger.warning(f"REJECTED: {ticker} - {reason}")
-            return False, reason, 'DUPLICATE', check_results
+            if is_duplicate:
+                self.logger.warning(f"REJECTED: {ticker} - {reason}")
+                return False, reason, 'DUPLICATE', check_results
 
         # All checks passed
         self.logger.info(f"APPROVED: {ticker} - All compliance checks passed")

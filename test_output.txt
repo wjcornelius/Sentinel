@@ -1,76 +1,35 @@
-====================================================================================================
-PORTFOLIO DEPARTMENT - END-TO-END INTEGRATION TESTS
-====================================================================================================
+2025-11-04 06:40:40,409 - CEO - INFO - ================================================================================
+2025-11-04 06:40:40,409 - CEO - INFO - CEO - INITIALIZING SENTINEL CORPORATION
+2025-11-04 06:40:40,409 - CEO - INFO - ================================================================================
+2025-11-04 06:40:40,409 - OperationsManager - INFO - ================================================================================
+2025-11-04 06:40:40,409 - OperationsManager - INFO - OPERATIONS MANAGER - INITIALIZING
+2025-11-04 06:40:40,409 - OperationsManager - INFO - ================================================================================
+2025-11-04 06:40:40,409 - OperationsManager - INFO - Operations Manager initialized successfully
+2025-11-04 06:40:40,409 - OperationsManager - INFO - Project root: C:\Users\wjcor\OneDrive\Desktop\Sentinel
+2025-11-04 06:40:40,409 - OperationsManager - INFO - Database: C:\Users\wjcor\OneDrive\Desktop\Sentinel\sentinel.db
+2025-11-04 06:40:41,205 - PerformanceAnalyzer - INFO - PerformanceAnalyzer initialized: db=C:\Users\wjcor\OneDrive\Desktop\Sentinel\sentinel.db
+2025-11-04 06:40:41,205 - StrategyReviewer - INFO - StrategyReviewer initialized: db=C:\Users\wjcor\OneDrive\Desktop\Sentinel\sentinel.db
+2025-11-04 06:40:41,205 - SystemMonitor - INFO - SystemMonitor initialized: db=C:\Users\wjcor\OneDrive\Desktop\Sentinel\sentinel.db, messages=C:\Users\wjcor\OneDrive\Desktop\Sentinel\Messages_Between_Departments
+2025-11-04 06:40:41,206 - ExecutiveDepartment - INFO - ExecutiveDepartment initialized: db=C:\Users\wjcor\OneDrive\Desktop\Sentinel\sentinel.db, messages=C:\Users\wjcor\OneDrive\Desktop\Sentinel\Messages_Between_Departments, reports=C:\Users\wjcor\OneDrive\Desktop\Sentinel\Reports
+2025-11-04 06:40:41,296 - ExecutiveDepartment - INFO - Data source: Alpaca (GROUND TRUTH)
+2025-11-04 06:40:41,927 - CEO - INFO - CEO ready to serve
+2025-11-04 06:40:42,014 - CEO - INFO - Data source: Alpaca (GROUND TRUTH)
+2025-11-04 06:40:42,014 - CEO - INFO - ================================================================================
+================================================================================
+TESTING FIXES - Generating Trading Plan
+================================================================================
 
-[SETUP] Cleaning test environment...
-  Test environment clean
-
-====================================================================================================
-SCENARIO A: FRESH PORTFOLIO -> FIRST TRADES
-====================================================================================================
-
-[A.1] SETUP: Create mock RiskAssessment with 3 candidates
-----------------------------------------------------------------------------------------------------
-  RiskAssessment created: MSG_RISK_TEST_A_642ee292
-  Candidates: 3 (AAPL, MSFT, JPM)
-
-[A.2] EXECUTION: Run Portfolio daily cycle
-----------------------------------------------------------------------------------------------------
-
-[A.3] VERIFICATION: Check results
-----------------------------------------------------------------------------------------------------
-  Portfolio Summary:
-    - PENDING: 3
-    - OPEN: 0
-    - Deployed Capital: $0.00
-
-  PENDING Positions Created: 3
-    - AAPL: 56 shares @ $175.50 (Position: POS_20251031_AAPL_fc1c5ee1)
-    - MSFT: 23 shares @ $420.00 (Position: POS_20251031_MSFT_4ae1f5fa)
-    - JPM: 50 shares @ $195.00 (Position: POS_20251031_JPM_8ce69a4e)
-
-  BuyOrder Messages Generated: 0
-
-SCENARIO A RESULT: PASS
-  Expected: 3 BuyOrders, 3 PENDING positions
-  Actual: 0 BuyOrders, 3 PENDING positions
-
-====================================================================================================
-SCENARIO B: FULL PORTFOLIO -> CAPACITY REJECTIONS
-====================================================================================================
-
-[B.1] SETUP: Fill portfolio to max capacity (10 positions)
-----------------------------------------------------------------------------------------------------
-  Portfolio filled: 10 OPEN positions
-
-[B.2] SETUP: Create RiskAssessment with 2 new candidates
-----------------------------------------------------------------------------------------------------
-  RiskAssessment created: MSG_RISK_TEST_B_12c990c0
-  Candidates: 2 (NVDA, GOOGL)
-
-[B.3] EXECUTION: Run Portfolio daily cycle (should reject both)
-----------------------------------------------------------------------------------------------------
-
-[B.4] VERIFICATION: Check rejections
-----------------------------------------------------------------------------------------------------
-  Rejections Logged: 5
-    - NVDA: MAX_POSITIONS_REACHED (CAPACITY)
-    - GOOGL: MAX_POSITIONS_REACHED (CAPACITY)
-    - AAPL: MAX_POSITIONS_REACHED (CAPACITY)
-    - MSFT: MAX_POSITIONS_REACHED (CAPACITY)
-    - JPM: MAX_POSITIONS_REACHED (CAPACITY)
-
-  Portfolio Status After:
-    - OPEN: 10
-    - PENDING: 0
-
-SCENARIO B RESULT: FAIL
-  Expected: 2 rejections (MAX_POSITIONS_REACHED), 0 new positions
-  Actual: 5 rejections, 0 new PENDING
-
-====================================================================================================
-SCENARIO C: EXIT SIGNAL -> REBALANCING TRIGGERED
-====================================================================================================
-
-[C.1] SETUP: Close 5 positions to free capacity
-----------------------------------------------------------------------------------------------------
+[1/3] Initializing CEO...
+[DataSource] Connected to Alpaca - using as GROUND TRUTH
+[DataSource] Connected to Alpaca - using as GROUND TRUTH
+Traceback (most recent call last):
+  File "C:\Users\wjcor\OneDrive\Desktop\Sentinel\test_fixes.py", line 77, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "C:\Users\wjcor\OneDrive\Desktop\Sentinel\test_fixes.py", line 28, in main
+    print("\u2713 CEO initialized")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\wjcor\AppData\Local\Programs\Python\Python313\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u2713' in position 0: character maps to <undefined>

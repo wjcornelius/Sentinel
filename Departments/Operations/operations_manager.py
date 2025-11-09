@@ -813,17 +813,117 @@ class OperationsManager:
             total_orders = len(buy_orders) + len(sell_orders)
             self.logger.info(f"  Trading Plan: {len(sell_orders)} SELLs, {len(buy_orders)} BUYs")
 
+            # ============================================================================
+            # TIER 1 FIX: CAPITAL DEPLOYMENT VALIDATION (90% MINIMUM)
+            # ============================================================================
+            # This is a CRITICAL profitability improvement - idle capital earns nothing!
+            #
+            # Problem: GPT-4o was only selecting 5 positions ($33K of $100K = 33% deployed)
+            # Impact: 67% of capital sitting idle = massive profit opportunity loss
+            # Fix: Enforce 90% minimum deployment OR auto-fill with next-best candidates
+
+            MIN_DEPLOYMENT_PCT = 90.0
+            MIN_POSITIONS = 12  # Reduced from 15 to allow some flexibility
+
+            # Check if plan meets minimum standards
+            deployment_ok = capital_deployment_pct >= MIN_DEPLOYMENT_PCT
+            diversification_ok = len(buy_orders) >= MIN_POSITIONS
+
+            if not deployment_ok or not diversification_ok:
+                self.logger.warning("=" * 80)
+                self.logger.warning("CAPITAL DEPLOYMENT VALIDATION FAILED")
+                self.logger.warning("=" * 80)
+                self.logger.warning(f"  Current deployment: {capital_deployment_pct:.1f}% (minimum: {MIN_DEPLOYMENT_PCT}%)")
+                self.logger.warning(f"  Current positions: {len(buy_orders)} (minimum: {MIN_POSITIONS})")
+                self.logger.warning("")
+                self.logger.warning(f"  This plan would leave ${available_capital - total_allocated:,.0f} idle!")
+                self.logger.warning("  Idle capital = lost profit opportunity.")
+                self.logger.warning("")
+                self.logger.warning("  AUTO-CORRECTION: Adding next-highest-scoring candidates...")
+
+                # Auto-fill with next-best candidates to reach 90% deployment
+                # Sort candidates by composite score (descending)
+                selected_tickers = {order['ticker'] for order in buy_orders}
+                remaining_candidates = [
+                    c for c in candidates
+                    if c['ticker'] not in selected_tickers and c.get('composite_score', 0) >= 55
+                ]
+                remaining_candidates.sort(key=lambda x: -x.get('composite_score', 0))
+
+                remaining_capital = available_capital - total_allocated
+                target_deployment = available_capital * (MIN_DEPLOYMENT_PCT / 100.0)
+                capital_needed = target_deployment - total_allocated
+
+                added_count = 0
+                for candidate in remaining_candidates:
+                    if total_allocated >= target_deployment:
+                        break
+                    if len(buy_orders) >= 20:  # Hard cap at 20 positions
+                        break
+
+                    # Calculate position size (aim for equal weighting of remaining capital)
+                    positions_to_add = min(MIN_POSITIONS - len(buy_orders), len(remaining_candidates))
+                    if positions_to_add <= 0:
+                        break
+
+                    position_size = min(
+                        capital_needed / positions_to_add,  # Equal distribution
+                        available_capital * 0.08  # But never more than 8% per position
+                    )
+
+                    entry_price = candidate.get('current_price', candidate.get('entry_price', 0))
+                    if entry_price <= 0:
+                        continue
+
+                    shares = int(position_size / entry_price)
+                    if shares == 0:
+                        continue
+
+                    allocated = shares * entry_price
+
+                    buy_order = {
+                        'ticker': candidate['ticker'],
+                        'action': 'BUY',
+                        'shares': shares,
+                        'allocated_capital': allocated,
+                        'entry_price': entry_price,
+                        'composite_score': candidate.get('composite_score', 0),
+                        'sentiment_score': candidate.get('sentiment', {}).get('score', 50),
+                        'sentiment_summary': candidate.get('sentiment', {}).get('summary', 'No data'),
+                        'sector': candidate.get('sector', 'Unknown'),
+                        'gpt5_reasoning': f'Auto-added for capital efficiency (score: {candidate.get("composite_score", 0):.1f})',
+                        'gpt5_allocated': False,  # Mark as auto-added
+                        'is_position_adjustment': False
+                    }
+                    buy_orders.append(buy_order)
+                    total_allocated += allocated
+                    added_count += 1
+                    selected_tickers.add(candidate['ticker'])
+
+                    self.logger.info(f"    + Added {candidate['ticker']} (score: {candidate.get('composite_score', 0):.1f}): ${allocated:,.0f}")
+
+                # Recalculate metrics
+                capital_deployment_pct = (total_allocated / available_capital * 100) if available_capital > 0 else 0
+
+                self.logger.warning("")
+                self.logger.warning(f"  AUTO-CORRECTION COMPLETE:")
+                self.logger.warning(f"    - Added {added_count} positions")
+                self.logger.warning(f"    - New deployment: {capital_deployment_pct:.1f}%")
+                self.logger.warning(f"    - New position count: {len(buy_orders)}")
+                self.logger.warning(f"    - Remaining idle capital: ${available_capital - total_allocated:,.0f}")
+                self.logger.warning("=" * 80)
+
             # Quality score based on deployment and diversification
             quality_score = min(100, int(
                 (capital_deployment_pct / 90.0 * 70) +  # 70% weight on deployment
-                (min(len(buy_orders) / 5.0, 1.0) * 30)  # 30% weight on diversification
+                (min(len(buy_orders) / 15.0, 1.0) * 30)  # 30% weight on diversification (target 15)
             ))
 
             issues = []
-            if capital_deployment_pct < 80:
-                issues.append(f"Capital deployment {capital_deployment_pct:.1f}% (target 90%+)")
-            if len(buy_orders) < 15:
-                issues.append(f"Limited diversification: {len(buy_orders)} positions (target 15-20)")
+            if capital_deployment_pct < MIN_DEPLOYMENT_PCT:
+                issues.append(f"Capital deployment {capital_deployment_pct:.1f}% (target {MIN_DEPLOYMENT_PCT}%+)")
+            if len(buy_orders) < MIN_POSITIONS:
+                issues.append(f"Limited diversification: {len(buy_orders)} positions (target {MIN_POSITIONS}-20)")
 
             success = total_orders > 0
 
