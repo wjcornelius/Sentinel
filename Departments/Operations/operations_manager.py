@@ -681,7 +681,77 @@ class OperationsManager:
             self.logger.info(f"    - {len(candidates)} buy candidates (with scores & sentiment)")
             self.logger.info(f"    - {len(holdings)} current holdings (with scores & sentiment)")
             self.logger.info(f"    - Total stocks under consideration: {len(candidates) + len(holdings)}")
+
+            # ============================================================================
+            # AUTOMATED POSITION QUALITY CHECK (Tier 1 Fix - Integrated)
+            # ============================================================================
+            # Flag underperforming holdings that MUST be sold
+            # This ensures GPT-5 can't ignore deteriorating positions
+
+            MANDATORY_EXIT_THRESHOLD = 55  # Same as GPT-5's minimum acceptable score
+            TIME_BASED_EXIT_DAYS = 5       # Exit after 5 days if not profitable
+
+            mandatory_sells = []
+            holdings_to_keep = []
+
+            if holdings:
+                self.logger.info("")
+                self.logger.info("  POSITION QUALITY CHECK (Automated):")
+
+                for holding in holdings:
+                    ticker = holding.get('ticker')
+                    score = holding.get('research_composite_score', holding.get('composite_score', 50))
+                    unrealized_plpc = holding.get('unrealized_plpc', 0)
+
+                    # Check entry date for time-based exits
+                    entry_date = holding.get('entry_date')
+                    days_held = 999  # Default to high number if unknown
+                    if entry_date:
+                        try:
+                            from datetime import datetime, date
+                            if isinstance(entry_date, str):
+                                entry = datetime.strptime(entry_date, '%Y-%m-%d').date()
+                            else:
+                                entry = entry_date
+                            days_held = (date.today() - entry).days
+                        except:
+                            pass
+
+                    # Determine if this position MUST be sold
+                    must_sell = False
+                    sell_reason = None
+
+                    # Rule 1: Score deteriorated below threshold AND position losing
+                    if score < MANDATORY_EXIT_THRESHOLD and unrealized_plpc < 0:
+                        must_sell = True
+                        sell_reason = f"Score {score:.1f} < {MANDATORY_EXIT_THRESHOLD} threshold, losing {unrealized_plpc:.1f}%"
+
+                    # Rule 2: Time-based exit (held > 5 days and not profitable)
+                    elif days_held > TIME_BASED_EXIT_DAYS and unrealized_plpc <= 2.0:
+                        must_sell = True
+                        sell_reason = f"Held {days_held} days with only {unrealized_plpc:.1f}% gain - freeing capital"
+
+                    if must_sell:
+                        self.logger.warning(f"    ❌ {ticker}: MANDATORY SELL - {sell_reason}")
+                        # Mark holding for mandatory exit
+                        holding['MANDATORY_SELL'] = True
+                        holding['MANDATORY_SELL_REASON'] = sell_reason
+                        mandatory_sells.append(ticker)
+                    else:
+                        self.logger.info(f"    ✓ {ticker}: Eligible to hold (Score: {score:.1f}, P&L: {unrealized_plpc:+.1f}%)")
+                        holdings_to_keep.append(ticker)
+
+                if mandatory_sells:
+                    self.logger.warning(f"  MANDATORY SELLS: {len(mandatory_sells)} positions flagged for exit")
+                    self.logger.warning(f"    Tickers: {', '.join(mandatory_sells)}")
+                else:
+                    self.logger.info(f"  All {len(holdings)} holdings meet quality standards")
+
+                self.logger.info("")
+
             self.logger.info(f"  ({model_display} will decide which to BUY, which to SELL, and allocation amounts...)")
+            if mandatory_sells:
+                self.logger.info(f"  ({len(mandatory_sells)} holdings flagged as MANDATORY SELL)")
 
             # Get portfolio state and market conditions from News result
             market_conditions = news_result.data.get('market_conditions', {
@@ -759,8 +829,33 @@ class OperationsManager:
                     }
                     buy_orders.append(buy_order)
 
-            # Get SELL decisions from optimizer (if available)
-            # Optimizer now explicitly tells us which holdings to SELL
+            # ============================================================================
+            # PROCESS SELL DECISIONS (GPT-5 + Mandatory Automated Exits)
+            # ============================================================================
+
+            # First: Process MANDATORY automated exits (always execute these)
+            mandatory_sell_tickers = set()
+            for holding in holdings:
+                if holding.get('MANDATORY_SELL'):
+                    ticker = holding.get('ticker')
+                    mandatory_sell_tickers.add(ticker)
+
+                    self.logger.warning(f"  Enforcing MANDATORY SELL: {ticker}")
+                    sell_order = {
+                        'ticker': ticker,
+                        'action': 'SELL',
+                        'shares': holding.get('quantity', 0),
+                        'sell_pct': 100,
+                        'composite_score': holding.get('research_composite_score', holding.get('composite_score', 0)),
+                        'current_price': holding.get('current_price', 0),
+                        'sentiment_score': holding.get('sentiment_score', holding.get('sentiment', {}).get('score', 50)),
+                        'sentiment_summary': holding.get('sentiment_summary', holding.get('sentiment', {}).get('summary', 'No data')),
+                        'gpt5_reasoning': f'AUTOMATED EXIT: {holding.get("MANDATORY_SELL_REASON")}',
+                        'current_value': holding.get('market_value', 0)
+                    }
+                    sell_orders.append(sell_order)
+
+            # Second: Process GPT-5's explicit SELL decisions (if any)
             gpt5_sell_decisions = []
             if optimized_candidates and len(optimized_candidates) > 0:
                 # SELL decisions are attached to the first candidate
@@ -768,10 +863,17 @@ class OperationsManager:
 
             if gpt5_sell_decisions:
                 # Use optimizer's explicit SELL decisions
-                self.logger.info(f"  Using {model_display}'s {len(gpt5_sell_decisions)} SELL decisions")
+                self.logger.info(f"  Processing {model_display}'s {len(gpt5_sell_decisions)} SELL recommendations")
                 for sell_decision in gpt5_sell_decisions:
+                    ticker = sell_decision['ticker']
+
+                    # Skip if already in mandatory sells (don't duplicate)
+                    if ticker in mandatory_sell_tickers:
+                        self.logger.info(f"    {ticker}: Already in mandatory sells, skipping GPT-5 recommendation")
+                        continue
+
                     sell_order = {
-                        'ticker': sell_decision['ticker'],
+                        'ticker': ticker,
                         'action': 'SELL',
                         'shares': sell_decision['shares'],
                         'sell_pct': sell_decision.get('sell_pct', 100),
@@ -783,17 +885,18 @@ class OperationsManager:
                         'current_value': sell_decision.get('current_value', 0)
                     }
                     sell_orders.append(sell_order)
-            else:
-                # Fallback: ONLY sell holdings with poor scores (< 55)
-                # Holdings with good scores (≥ 55) are KEPT automatically
-                self.logger.info(f"  No explicit SELL decisions from {model_display} - checking for underperformers")
+
+            # Third: Fallback for any remaining underperformers not caught above
+            # (This should rarely trigger now that we have automated checks)
+            if not gpt5_sell_decisions and not mandatory_sell_tickers:
+                self.logger.info(f"  No SELL decisions from {model_display} or automation - checking remaining holdings")
                 for holding in holdings:
                     ticker = holding.get('ticker')
                     composite = holding.get('research_composite_score', holding.get('composite_score', 0))
 
-                    # Only sell if score is genuinely poor (< 55)
-                    if composite < 55:
-                        self.logger.warning(f"  Auto-selling {ticker} (score: {composite:.1f} < 55 threshold)")
+                    # Only sell if score is genuinely poor (< 55) AND not already processed
+                    if composite < 55 and ticker not in mandatory_sell_tickers:
+                        self.logger.warning(f"  Fallback auto-sell: {ticker} (score: {composite:.1f} < 55 threshold)")
                         sell_order = {
                             'ticker': ticker,
                             'action': 'SELL',
@@ -803,11 +906,12 @@ class OperationsManager:
                             'current_price': holding.get('current_price', 0),
                             'sentiment_score': holding.get('sentiment_score', holding.get('sentiment', {}).get('score', 50)),
                             'sentiment_summary': holding.get('sentiment_summary', holding.get('sentiment', {}).get('summary', 'No data')),
-                            'gpt5_reasoning': f'Automatic sell: Composite score {composite:.1f} below 55 threshold',
+                            'gpt5_reasoning': f'Fallback automatic sell: Score {composite:.1f} below 55 threshold',
                             'current_value': holding.get('market_value', 0)
                         }
                         sell_orders.append(sell_order)
-                    else:
+                        mandatory_sell_tickers.add(ticker)  # Track to avoid duplicates
+                    elif composite >= 55:
                         self.logger.info(f"  Keeping {ticker} (score: {composite:.1f} ≥ 55 threshold)")
 
             total_orders = len(buy_orders) + len(sell_orders)

@@ -73,39 +73,48 @@ if capital_deployment_pct < MIN_DEPLOYMENT_PCT or len(buy_orders) < MIN_POSITION
 Portfolio Department has `ExitSignalGenerator` class but it wasn't being called daily.
 
 ### Solution Implemented
-**File:** [daily_position_monitor.py](../daily_position_monitor.py)
+**File:** [operations_manager.py:685-755](../Departments/Operations/operations_manager.py#L685-L755) **[INTEGRATED]**
 
-**New Script:**
-- `DailyPositionMonitor` class for active position monitoring
-- Fetches current positions from Alpaca (ground truth)
-- Rescores all holdings using Research Department logic
-- Generates exit signals when:
-  - Composite score drops below 55 (GPT-5's minimum threshold)
-  - Position is losing money (unrealized P&L < 0%)
-  - Won't exit winners just because score dipped
-- Creates SELL order messages for Trading Department
+**Automated Position Quality Check:**
+- Runs automatically **before every GPT-5 optimization**
+- No manual intervention required
+- Flags underperforming holdings as "MANDATORY SELL"
+- Ensures GPT-5 can't ignore deteriorating positions
+
+**Exit Rules (Automated):**
+1. **Score-based:** Score < 55 AND position losing money → MANDATORY SELL
+2. **Time-based:** Held > 5 days with ≤ 2% gain → MANDATORY SELL (free up capital)
 
 **Key Logic:**
 ```python
-DOWNGRADE_THRESHOLD = 55  # Same as GPT-5 minimum
+MANDATORY_EXIT_THRESHOLD = 55  # Same as GPT-5 minimum
+TIME_BASED_EXIT_DAYS = 5       # Exit after 5 days if not profitable
 
-for holding in rescored_holdings:
+for holding in holdings:
     score = holding.get('composite_score', 50)
-    current_pl_pct = holding.get('unrealized_plpc', 0)
+    unrealized_plpc = holding.get('unrealized_plpc', 0)
+    days_held = calculate_days_held(holding)
 
-    # Exit if score deteriorated AND position losing
-    if score < DOWNGRADE_THRESHOLD and current_pl_pct < 0:
-        # Generate exit signal
-        # Exit now at -6% instead of waiting for -8% stop-loss
+    # Rule 1: Score deteriorated below threshold AND position losing
+    if score < MANDATORY_EXIT_THRESHOLD and unrealized_plpc < 0:
+        holding['MANDATORY_SELL'] = True
+        reason = f"Score {score:.1f} < 55, losing {unrealized_plpc:.1f}%"
+
+    # Rule 2: Time-based exit (held > 5 days and not profitable)
+    elif days_held > TIME_BASED_EXIT_DAYS and unrealized_plpc <= 2.0:
+        holding['MANDATORY_SELL'] = True
+        reason = f"Held {days_held} days with only {unrealized_plpc:.1f}% gain"
 ```
 
-**Usage:**
-```bash
-# Run once (manual):
-python daily_position_monitor.py
-
-# Run continuously (every 4 hours):
-python daily_position_monitor.py --continuous
+**Workflow Integration:**
+```
+Trading Plan Generation (Automated):
+1. Research → Score 600 stocks, output candidates + holdings
+2. News → Add sentiment
+3. **→ POSITION QUALITY CHECK** (NEW - flags underperformers)
+4. GPT-5 → Makes decisions (respects mandatory sells)
+5. **→ ENFORCE MANDATORY SELLS** (NEW - always executes)
+6. Trading → Executes orders
 ```
 
 ### Expected Impact
