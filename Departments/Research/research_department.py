@@ -192,15 +192,29 @@ class ResearchDepartment:
             holdings = []
             for pos in positions:
                 # Position is an object, not a dict - use attributes
-                holdings.append({
+                holding_dict = {
                     'ticker': pos.symbol,
                     'quantity': float(pos.qty),
                     'market_value': float(pos.market_value),
                     'current_price': float(pos.current_price),
                     'cost_basis': float(pos.cost_basis),
                     'unrealized_pl': float(pos.unrealized_pl),
-                    'unrealized_plpc': float(pos.unrealized_plpc)
-                })
+                    'unrealized_plpc': float(pos.unrealized_plpc) * 100,  # Convert to percentage
+                    'avg_entry_price': float(pos.avg_entry_price)
+                }
+
+                # Extract entry date if available (for position monitoring)
+                if hasattr(pos, 'created_at') and pos.created_at:
+                    try:
+                        # Alpaca returns datetime, convert to date string
+                        if hasattr(pos.created_at, 'date'):
+                            holding_dict['entry_date'] = pos.created_at.date().isoformat()
+                        else:
+                            holding_dict['entry_date'] = str(pos.created_at)[:10]
+                    except:
+                        pass  # If extraction fails, position monitoring will skip time-based check
+
+                holdings.append(holding_dict)
 
             logger.info(f"Fetched {len(holdings)} positions from Alpaca")
             return holdings
