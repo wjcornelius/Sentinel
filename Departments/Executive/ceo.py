@@ -559,27 +559,80 @@ class CEO:
                     'message': '[CEO] Approved plan contains no trades to execute.'
                 }
 
-            self.logger.info(f"[CEO] Submitting {len(trades)} orders to Trading Department")
-
-            # Send each trade to Trading Department via message
-            execution_results = []
+            # CRITICAL: Execute SELLs before BUYs to free up cash
+            # Separate trades by action
+            sells = []
+            buys = []
             for trade in trades:
-                # Create execution message for Trading Department
-                message_id = self._send_trade_to_trading_dept(trade)
-                execution_results.append({
-                    'ticker': trade.get('ticker'),
-                    'message_id': message_id
-                })
+                # SELLs have 'position_id' or no 'allocated_capital'
+                # BUYs have 'allocated_capital'
+                if 'allocated_capital' in trade:
+                    buys.append(trade)
+                else:
+                    sells.append(trade)
 
-            # Process inbox to execute the orders
-            self.logger.info("[CEO] Trading Department processing orders...")
-            trading_dept.process_inbox()
+            self.logger.info(f"[CEO] Submitting {len(sells)} SELL orders + {len(buys)} BUY orders")
+            self.logger.info(f"[CEO] Sequencing: SELLs first (free cash), then BUYs")
+
+            execution_results = []
+
+            # STEP 1: Execute all SELL orders first
+            if sells:
+                self.logger.info(f"[CEO] === STEP 1: Executing {len(sells)} SELL orders ===")
+                sell_results = []
+                for trade in sells:
+                    message_id = self._send_trade_to_trading_dept(trade)
+                    sell_results.append({
+                        'ticker': trade.get('ticker'),
+                        'action': 'SELL',
+                        'message_id': message_id
+                    })
+                    execution_results.append(sell_results[-1])
+
+                # Process SELL orders
+                self.logger.info("[CEO] Trading Department processing SELL orders...")
+                trading_dept.process_inbox()
+
+                # Wait for SELL orders to fill
+                sell_tickers = [r['ticker'] for r in sell_results]
+                self.logger.info(f"[CEO] Waiting for SELL orders to fill: {', '.join(sell_tickers)}")
+                if not self._wait_for_orders_to_fill(sell_tickers, timeout=60):
+                    self.logger.warning("[CEO] Some SELL orders did not fill within timeout")
+                else:
+                    self.logger.info("[CEO] All SELL orders filled successfully")
+
+            # STEP 2: Execute all BUY orders
+            if buys:
+                self.logger.info(f"[CEO] === STEP 2: Executing {len(buys)} BUY orders ===")
+                buy_results = []
+                for trade in buys:
+                    message_id = self._send_trade_to_trading_dept(trade)
+                    buy_results.append({
+                        'ticker': trade.get('ticker'),
+                        'action': 'BUY',
+                        'message_id': message_id
+                    })
+                    execution_results.append(buy_results[-1])
+
+                # Process BUY orders
+                self.logger.info("[CEO] Trading Department processing BUY orders...")
+                trading_dept.process_inbox()
+
+                # Wait for BUY orders to fill
+                buy_tickers = [r['ticker'] for r in buy_results]
+                self.logger.info(f"[CEO] Waiting for BUY orders to fill: {', '.join(buy_tickers)}")
+                if not self._wait_for_orders_to_fill(buy_tickers, timeout=60):
+                    self.logger.warning("[CEO] Some BUY orders did not fill within timeout")
+                else:
+                    self.logger.info("[CEO] All BUY orders filled successfully")
 
             return {
                 'status': 'EXECUTION_INITIATED',
                 'plan_id': self.current_plan['plan_id'],
-                'message': '[CEO] Orders submitted to Trading Department for execution. Execution complete.',
+                'message': f'[CEO] Orders submitted and executed. {len(sells)} SELLs, {len(buys)} BUYs processed.',
                 'trades_submitted': len(trades),
+                'sells_submitted': len(sells),
+                'buys_submitted': len(buys),
                 'execution_results': execution_results
             }
 
@@ -661,6 +714,66 @@ class CEO:
         self.logger.info(f"[CEO] Sent {action} order for {ticker} to Trading (msg: {msg_id})")
 
         return msg_id
+
+    def _wait_for_orders_to_fill(self, tickers: List[str], timeout: int = 60) -> bool:
+        """
+        Poll Alpaca API until all orders for given tickers are filled.
+
+        Args:
+            tickers: List of ticker symbols to check
+            timeout: Maximum seconds to wait
+
+        Returns:
+            True if all orders filled, False if timeout
+        """
+        import time
+        import config
+        from alpaca.trading.client import TradingClient
+        from alpaca.trading.enums import QueryOrderStatus
+
+        # Initialize Alpaca client
+        trading_client = TradingClient(
+            api_key=config.APCA_API_KEY_ID,
+            secret_key=config.APCA_API_SECRET_KEY,
+            paper=True
+        )
+
+        start_time = time.time()
+        check_interval = 2  # Check every 2 seconds
+
+        while time.time() - start_time < timeout:
+            pending_orders = []
+
+            # Check each ticker for pending orders
+            for ticker in tickers:
+                try:
+                    # Get open orders for this symbol
+                    orders = trading_client.get_orders(
+                        status=QueryOrderStatus.OPEN,
+                        symbols=[ticker]
+                    )
+
+                    if orders:
+                        pending_orders.append(ticker)
+
+                except Exception as e:
+                    self.logger.warning(f"[CEO] Error checking orders for {ticker}: {e}")
+                    continue
+
+            # If no pending orders, all filled!
+            if not pending_orders:
+                elapsed = time.time() - start_time
+                self.logger.info(f"[CEO] All orders filled in {elapsed:.1f}s: {', '.join(tickers)}")
+                return True
+
+            # Still waiting
+            elapsed = time.time() - start_time
+            self.logger.info(f"[CEO] Waiting for {len(pending_orders)} orders to fill ({elapsed:.0f}s elapsed): {', '.join(pending_orders)}")
+            time.sleep(check_interval)
+
+        # Timeout
+        self.logger.warning(f"[CEO] Timeout waiting for orders to fill after {timeout}s")
+        return False
 
     def _store_portfolio_snapshot(self, account, positions, source='unknown'):
         """Store portfolio snapshot in database for tracking"""

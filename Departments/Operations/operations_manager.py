@@ -959,11 +959,23 @@ class OperationsManager:
                 target_deployment = available_capital * (MIN_DEPLOYMENT_PCT / 100.0)
                 capital_needed = target_deployment - total_allocated
 
+                # Load compliance config to get minimum position size
+                import yaml
+                compliance_config_path = self.project_root / "Config" / "compliance_config.yaml"
+                MIN_POSITION_VALUE = 500  # Default fallback
+                try:
+                    with open(compliance_config_path) as f:
+                        compliance_cfg = yaml.safe_load(f)
+                        MIN_POSITION_VALUE = compliance_cfg.get('position_sizing', {}).get('min_position_value', 500)
+                except Exception as e:
+                    self.logger.warning(f"Could not load compliance config, using default min_position_value=${MIN_POSITION_VALUE}")
+
                 added_count = 0
+                skipped_count = 0
                 for candidate in remaining_candidates:
                     if total_allocated >= target_deployment:
                         break
-                    if len(buy_orders) >= 20:  # Hard cap at 20 positions
+                    if len(buy_orders) >= 30:  # Hard cap at 30 positions (raised from 20)
                         break
 
                     # Calculate position size (aim for equal weighting of remaining capital)
@@ -980,11 +992,27 @@ class OperationsManager:
                     if entry_price <= 0:
                         continue
 
-                    shares = int(position_size / entry_price)
+                    # Calculate shares needed to meet MINIMUM position size
+                    import math
+                    min_shares = math.ceil(MIN_POSITION_VALUE / entry_price) if entry_price > 0 else 0
+                    shares = max(min_shares, int(position_size / entry_price))
+
                     if shares == 0:
                         continue
 
                     allocated = shares * entry_price
+
+                    # VALIDATION: Skip if position would be below minimum OR above 8% max
+                    if allocated < MIN_POSITION_VALUE:
+                        self.logger.debug(f"    - Skipped {candidate['ticker']}: ${allocated:,.0f} < ${MIN_POSITION_VALUE} minimum")
+                        skipped_count += 1
+                        continue
+
+                    max_position_value = available_capital * 0.08
+                    if allocated > max_position_value:
+                        self.logger.debug(f"    - Skipped {candidate['ticker']}: ${allocated:,.0f} > ${max_position_value:,.0f} maximum (8%)")
+                        skipped_count += 1
+                        continue
 
                     buy_order = {
                         'ticker': candidate['ticker'],
@@ -1013,6 +1041,8 @@ class OperationsManager:
                 self.logger.warning("")
                 self.logger.warning(f"  AUTO-CORRECTION COMPLETE:")
                 self.logger.warning(f"    - Added {added_count} positions")
+                if skipped_count > 0:
+                    self.logger.warning(f"    - Skipped {skipped_count} candidates (position size constraints)")
                 self.logger.warning(f"    - New deployment: {capital_deployment_pct:.1f}%")
                 self.logger.warning(f"    - New position count: {len(buy_orders)}")
                 self.logger.warning(f"    - Remaining idle capital: ${available_capital - total_allocated:,.0f}")

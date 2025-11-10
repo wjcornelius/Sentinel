@@ -6,7 +6,7 @@ last_updated: 2025-10-31
 # ============================================================================
 position_sizing:
   max_position_pct: 0.10  # Maximum 10% of portfolio in single position
-  min_position_value: 1000  # Minimum $1,000 position size
+  min_position_value: 500  # Minimum $500 position size (lowered from $1000 to capture more opportunities)
   max_position_value: 50000  # Maximum $50,000 position size (safety limit)
 
   # Enforcement
