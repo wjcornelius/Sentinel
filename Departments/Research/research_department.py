@@ -204,15 +204,25 @@ class ResearchDepartment:
                 }
 
                 # Extract entry date if available (for position monitoring)
-                if hasattr(pos, 'created_at') and pos.created_at:
-                    try:
-                        # Alpaca returns datetime, convert to date string
-                        if hasattr(pos.created_at, 'date'):
-                            holding_dict['entry_date'] = pos.created_at.date().isoformat()
-                        else:
-                            holding_dict['entry_date'] = str(pos.created_at)[:10]
-                    except:
-                        pass  # If extraction fails, position monitoring will skip time-based check
+                # Try multiple possible attribute names (different Alpaca library versions)
+                entry_date_found = False
+                for attr_name in ['created_at', 'entry_time', 'opened_at', 'purchase_date', 'filled_at']:
+                    if hasattr(pos, attr_name):
+                        attr_value = getattr(pos, attr_name)
+                        if attr_value:
+                            try:
+                                # Alpaca returns datetime, convert to date string
+                                if hasattr(attr_value, 'date'):
+                                    holding_dict['entry_date'] = attr_value.date().isoformat()
+                                else:
+                                    holding_dict['entry_date'] = str(attr_value)[:10]
+                                entry_date_found = True
+                                break
+                            except:
+                                continue
+
+                # If no entry date found, don't set entry_date field at all
+                # Position monitoring will skip time-based checks for positions without entry_date
 
                 holdings.append(holding_dict)
 

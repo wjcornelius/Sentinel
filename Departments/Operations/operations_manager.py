@@ -705,7 +705,7 @@ class OperationsManager:
 
                     # Check entry date for time-based exits
                     entry_date = holding.get('entry_date')
-                    days_held = 999  # Default to high number if unknown
+                    days_held = None  # None means unknown, skip time-based checks
                     if entry_date:
                         try:
                             from datetime import datetime, date
@@ -715,7 +715,7 @@ class OperationsManager:
                                 entry = entry_date
                             days_held = (date.today() - entry).days
                         except:
-                            pass
+                            pass  # If parsing fails, days_held stays None
 
                     # Determine if this position MUST be sold
                     must_sell = False
@@ -727,7 +727,8 @@ class OperationsManager:
                         sell_reason = f"Score {score:.1f} < {MANDATORY_EXIT_THRESHOLD} threshold, losing {unrealized_plpc:.1f}%"
 
                     # Rule 2: Time-based exit (held > 5 days and not profitable)
-                    elif days_held > TIME_BASED_EXIT_DAYS and unrealized_plpc <= 2.0:
+                    # ONLY check if we have a valid days_held value
+                    elif days_held is not None and days_held > TIME_BASED_EXIT_DAYS and unrealized_plpc <= 2.0:
                         must_sell = True
                         sell_reason = f"Held {days_held} days with only {unrealized_plpc:.1f}% gain - freeing capital"
 
