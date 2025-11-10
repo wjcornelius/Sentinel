@@ -34,6 +34,9 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 # Import Operations Manager
 from Departments.Operations.operations_manager import OperationsManager
 
+# Import Realism Simulator (for paper trading constraints)
+from Departments.Operations.realism_simulator import RealismSimulator
+
 # Import Executive Department (for dashboards and reporting)
 from Departments.Executive.executive_department import ExecutiveDepartment
 
@@ -72,6 +75,9 @@ class CEO:
         # Initialize Operations Manager (coordinates departments)
         self.operations_manager = OperationsManager(project_root)
 
+        # Initialize Realism Simulator (paper trading constraints)
+        self.realism_sim = RealismSimulator(project_root)
+
         # Initialize Executive Department (reporting and dashboards)
         self.executive_dept = ExecutiveDepartment(
             db_path=self.db_path,
@@ -88,6 +94,14 @@ class CEO:
 
         self.logger.info("CEO ready to serve")
         self.logger.info(f"Data source: {self.data_source.get_data_source_info()['data_source']}")
+
+        # Log simulation status
+        sim_summary = self.realism_sim.get_simulation_summary([])
+        if sim_summary['enabled']:
+            self.logger.info(f"Realism Simulation: {sim_summary['message']}")
+        else:
+            self.logger.info(f"Realism Simulation: DISABLED (live mode)")
+
         self.logger.info("=" * 80)
 
     def handle_user_request(self, request: str, **kwargs) -> Dict:
@@ -601,6 +615,19 @@ class CEO:
             self.logger.info(f"[CEO] Submitting {len(sells)} SELL orders + {len(buys)} BUY orders")
             self.logger.info(f"[CEO] Sequencing: SELLs first (free cash), then BUYs")
 
+            # PDT CHECK: Verify we're not violating pattern day trader rules
+            if self.realism_sim.is_simulation_enabled():
+                pdt_violation, pdt_message = self.realism_sim.check_pdt_violation()
+                self.logger.info(f"[CEO] {pdt_message}")
+
+                if pdt_violation:
+                    self.logger.error(f"[CEO] EXECUTION BLOCKED: {pdt_message}")
+                    return {
+                        'status': 'BLOCKED',
+                        'reason': 'PDT_VIOLATION',
+                        'message': pdt_message
+                    }
+
             execution_results = []
 
             # STEP 1: Execute all SELL orders first
@@ -628,6 +655,12 @@ class CEO:
                 else:
                     self.logger.info("[CEO] All SELL orders filled successfully")
 
+                    # REALISM: Remove entry dates for sold positions
+                    for ticker in sell_tickers:
+                        self.realism_sim.remove_entry_date(ticker)
+                        # Record SELL for PDT tracking
+                        self.realism_sim.record_trade(ticker, 'SELL')
+
             # STEP 2: Execute all BUY orders
             if buys:
                 self.logger.info(f"[CEO] === STEP 2: Executing {len(buys)} BUY orders ===")
@@ -652,6 +685,31 @@ class CEO:
                     self.logger.warning("[CEO] Some BUY orders did not fill within timeout")
                 else:
                     self.logger.info("[CEO] All BUY orders filled successfully")
+
+                    # REALISM: Record entry dates for new positions
+                    import config
+                    from alpaca.trading.client import TradingClient
+
+                    try:
+                        trading_client = TradingClient(
+                            api_key=config.APCA_API_KEY_ID,
+                            secret_key=config.APCA_API_SECRET_KEY,
+                            paper=True
+                        )
+
+                        for trade in buys:
+                            ticker = trade.get('ticker')
+                            shares = trade.get('shares', 0)
+                            price = trade.get('price', 0)
+
+                            # Record entry date (now)
+                            self.realism_sim.record_entry_date(ticker, shares, price)
+
+                            # Record BUY for PDT tracking
+                            self.realism_sim.record_trade(ticker, 'BUY')
+
+                    except Exception as e:
+                        self.logger.error(f"[CEO] Failed to record entry dates: {e}")
 
             # POST-EXECUTION VERIFICATION
             self.logger.info("[CEO] === POST-EXECUTION VERIFICATION ===")

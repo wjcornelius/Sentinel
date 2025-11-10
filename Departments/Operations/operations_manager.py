@@ -37,6 +37,7 @@ from Departments.Risk.risk_department import RiskDepartment
 from Departments.Portfolio.portfolio_department import PortfolioDepartment
 from Departments.Compliance.compliance_department import ComplianceDepartment
 from Departments.Executive.gpt5_portfolio_optimizer import GPT5PortfolioOptimizer
+from Departments.Operations.realism_simulator import RealismSimulator
 
 # Import config
 import config
@@ -105,6 +106,9 @@ class OperationsManager:
         self._portfolio_dept = None
         self._compliance_dept = None
         self._gpt5_optimizer = None
+
+        # Initialize Realism Simulator
+        self.realism_sim = RealismSimulator(project_root)
 
         self.logger.info("Operations Manager initialized successfully")
         self.logger.info(f"Project root: {project_root}")
@@ -703,19 +707,14 @@ class OperationsManager:
                     score = holding.get('research_composite_score', holding.get('composite_score', 50))
                     unrealized_plpc = holding.get('unrealized_plpc', 0)
 
-                    # Check entry date for time-based exits
-                    entry_date = holding.get('entry_date')
-                    days_held = None  # None means unknown, skip time-based checks
-                    if entry_date:
-                        try:
-                            from datetime import datetime, date
-                            if isinstance(entry_date, str):
-                                entry = datetime.strptime(entry_date, '%Y-%m-%d').date()
-                            else:
-                                entry = entry_date
-                            days_held = (date.today() - entry).days
-                        except:
-                            pass  # If parsing fails, days_held stays None
+                    # REALISM: Get entry date from RealismSimulator database
+                    days_held = self.realism_sim.calculate_days_held(ticker)
+
+                    # Log if we successfully retrieved entry date
+                    if days_held is not None:
+                        self.logger.debug(f"    {ticker}: Held for {days_held} days (from entry date tracking)")
+                    else:
+                        self.logger.debug(f"    {ticker}: No entry date found (time-based exits disabled)")
 
                     # Determine if this position MUST be sold
                     must_sell = False
