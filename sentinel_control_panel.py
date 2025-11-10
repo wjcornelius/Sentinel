@@ -791,10 +791,13 @@ Proceeding with trading plan generation.
         print("Expected time: 10-20 minutes")
         print()
 
-        # Run refresh script
+        # Run refresh script using virtual environment Python
         try:
+            # Use the same Python interpreter that's running this script
+            python_exe = sys.executable
+
             result = subprocess.run(
-                ['python', 'refresh_universe.py'],
+                [python_exe, 'refresh_universe.py'],
                 capture_output=False,
                 text=True
             )
