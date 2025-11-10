@@ -25,14 +25,11 @@ import json
 import sqlite3
 import yfinance as yf
 import pandas as pd
+import yaml
+import alpaca_trade_api as tradeapi
 from datetime import datetime, timedelta, date
 from pathlib import Path
 from typing import List, Dict, Tuple
-
-# Add project root to path
-sys.path.insert(0, str(Path(__file__).parent))
-
-from Departments.Executive.alpaca_client import AlpacaClient
 
 
 class UniverseRefresher:
@@ -40,7 +37,9 @@ class UniverseRefresher:
 
     def __init__(self, db_path: str = "sentinel.db"):
         self.db_path = db_path
-        self.alpaca = AlpacaClient()
+
+        # Load Alpaca credentials from config
+        self._load_alpaca_config()
 
         # Swing trading criteria
         self.MIN_MARKET_CAP = 2_000_000_000  # $2B
@@ -54,6 +53,20 @@ class UniverseRefresher:
         self.EXCLUDED_KEYWORDS = ['PREFERRED', 'WARRANT', 'UNIT', 'RIGHT', 'NOTE']
 
         self._init_database()
+
+    def _load_alpaca_config(self):
+        """Load Alpaca API credentials from config file"""
+        try:
+            config_path = Path(__file__).parent / "Config" / "alpaca_config.yaml"
+            with open(config_path, 'r') as f:
+                config = yaml.safe_load(f)
+
+            self.api_key = config['api_key']
+            self.secret_key = config['secret_key']
+            self.base_url = config['base_url']
+
+        except Exception as e:
+            raise RuntimeError(f"Failed to load Alpaca config: {e}")
 
     def _init_database(self):
         """Create table for universe history"""
@@ -99,11 +112,10 @@ class UniverseRefresher:
 
         try:
             # Get all active stocks from Alpaca
-            import alpaca_trade_api as tradeapi
             api = tradeapi.REST(
-                key_id=self.alpaca.api_key,
-                secret_key=self.alpaca.secret_key,
-                base_url=self.alpaca.base_url
+                key_id=self.api_key,
+                secret_key=self.secret_key,
+                base_url=self.base_url
             )
 
             assets = api.list_assets(status='active', asset_class='us_equity')
