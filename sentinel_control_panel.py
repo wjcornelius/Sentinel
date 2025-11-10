@@ -109,6 +109,11 @@ class SentinelControlPanel:
         print(f"      (Current: {self.selected_model} - Change before generating plan)")
         print()
 
+        # Option 5: Refresh Universe (Weekends only)
+        print("  [5] Refresh Trading Universe [Weekend Only]")
+        print("      (Generate optimized swing trading stock universe for upcoming week)")
+        print()
+
         print("  [0] Exit")
         print()
         print("=" * 80)
@@ -743,6 +748,68 @@ Proceeding with trading plan generation.
 
         input("\nPress Enter to continue...")
 
+    def refresh_universe(self):
+        """Run weekly universe refresh script"""
+        from datetime import date
+        import subprocess
+
+        self.clear_screen()
+        print("\n" + "=" * 80)
+        print(" " * 20 + "WEEKLY UNIVERSE REFRESH")
+        print("=" * 80)
+        print("\n[CEO] This will generate an optimized swing trading universe for the week.\n")
+
+        # Check if weekend
+        today = date.today()
+        day_name = today.strftime('%A')
+        is_weekend = today.weekday() >= 5
+
+        if not is_weekend:
+            print(f"[CEO] Today is {day_name} - Universe refresh should run on weekends only.")
+            print()
+            print("This operation screens thousands of stocks and takes 10-20 minutes.")
+            print("It's recommended to run this on Saturday or Sunday when markets are closed.")
+            print()
+            response = input("Run anyway? (yes/no): ").strip().lower()
+
+            if response not in ['yes', 'y']:
+                print("\n[CEO] Understood. Cancelled.")
+                input("\nPress Enter to return to main menu...")
+                return
+        else:
+            print(f"[CEO] Today is {day_name} - Perfect time for universe refresh!")
+            print()
+
+        print("[CEO] Starting universe refresh...")
+        print()
+        print("This will:")
+        print("  1. Screen all tradeable US stocks (~8000)")
+        print("  2. Apply swing trading filters (market cap, volume, volatility)")
+        print("  3. Generate optimized universe (~800 stocks)")
+        print("  4. Update ticker_universe.txt for Monday's trading")
+        print()
+        print("Expected time: 10-20 minutes")
+        print()
+
+        # Run refresh script
+        try:
+            result = subprocess.run(
+                ['python', 'refresh_universe.py'],
+                capture_output=False,
+                text=True
+            )
+
+            if result.returncode == 0:
+                print("\n[CEO] Universe refresh completed successfully!")
+                print("     New universe will be used starting Monday.")
+            else:
+                print("\n[CEO] Universe refresh encountered issues. Please check the output above.")
+
+        except Exception as e:
+            print(f"\n[CEO] ERROR running refresh script: {e}")
+
+        input("\nPress Enter to return to main menu...")
+
     def run(self):
         """Main control panel loop"""
         # Initialize default model
@@ -767,6 +834,9 @@ Proceeding with trading plan generation.
 
             elif choice == '4':
                 self.select_ai_model()
+
+            elif choice == '5':
+                self.refresh_universe()
 
             elif choice == '0':
                 self.clear_screen()

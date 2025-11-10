@@ -627,10 +627,10 @@ class OperationsManager:
 
     def _run_gpt5_optimization_stage(self, news_result: WorkflowStageResult) -> WorkflowStageResult:
         """
-        Run GPT-5 Portfolio Optimizer for intelligent capital allocation
+        Run AI Portfolio Optimizer for intelligent capital allocation
 
         This stage receives ALL scored stocks from News (candidates + holdings)
-        and uses GPT-5 to create a complete proposed trading plan:
+        and uses AI (model selected by user) to create a complete proposed trading plan:
         - Which positions to SELL (from holdings)
         - Which stocks to BUY (from candidates)
         - How much capital to allocate to each
@@ -686,9 +686,9 @@ class OperationsManager:
             # AUTOMATED POSITION QUALITY CHECK (Tier 1 Fix - Integrated)
             # ============================================================================
             # Flag underperforming holdings that MUST be sold
-            # This ensures GPT-5 can't ignore deteriorating positions
+            # This ensures AI optimizer can't ignore deteriorating positions
 
-            MANDATORY_EXIT_THRESHOLD = 55  # Same as GPT-5's minimum acceptable score
+            MANDATORY_EXIT_THRESHOLD = 55  # Portfolio optimizer's minimum acceptable score
             TIME_BASED_EXIT_DAYS = 5       # Exit after 5 days if not profitable
 
             mandatory_sells = []
@@ -879,9 +879,9 @@ class OperationsManager:
                         'sell_pct': sell_decision.get('sell_pct', 100),
                         'composite_score': sell_decision.get('composite_score', 0),
                         'current_price': sell_decision.get('current_price', 0),
-                        'gpt5_reasoning': sell_decision.get('gpt5_reasoning', 'GPT-5 recommended sell'),
+                        'gpt5_reasoning': sell_decision.get('gpt5_reasoning', f'{model_display} recommended sell'),
                         'sentiment_score': 50,  # Default
-                        'sentiment_summary': 'GPT-5 SELL decision',
+                        'sentiment_summary': f'{model_display} SELL decision',
                         'current_value': sell_decision.get('current_value', 0)
                     }
                     sell_orders.append(sell_order)
@@ -1073,7 +1073,7 @@ class OperationsManager:
                     'allocated_capital': per_position,
                     'entry_price': entry_price,
                     'composite_score': candidate.get('composite_score', 0),
-                    'gpt5_reasoning': 'Fallback allocation - GPT-5 unavailable'
+                    'gpt5_reasoning': 'Fallback allocation - AI optimizer unavailable'
                 })
 
             return WorkflowStageResult(
@@ -1085,9 +1085,9 @@ class OperationsManager:
                     'total_orders': len(fallback_orders),
                     'fallback_mode': True
                 },
-                message=f"GPT-5 failed - using fallback allocation ({len(fallback_orders)} orders)",
+                message=f"AI optimizer failed - using fallback allocation ({len(fallback_orders)} orders)",
                 quality_score=50,
-                issues=[f"GPT-5 optimization failed: {str(e)}", "Using fallback equal-weight allocation"]
+                issues=[f"AI optimization failed: {str(e)}", "Using fallback equal-weight allocation"]
             )
 
     def _generate_risk_assessment_message(self, candidates: List[Dict], available_capital: float) -> str:

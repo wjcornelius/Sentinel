@@ -157,8 +157,8 @@ class ResearchDepartment:
         universe_path = Path(self.universe_file)
 
         if not universe_path.exists():
-            logger.warning(f"{self.universe_file} not found - using default S&P500+Nasdaq100")
-            # Fallback to hardcoded universe (you can edit later)
+            logger.warning(f"{self.universe_file} not found - using fallback universe")
+            # Fallback to existing universe file
             return self._get_default_universe()
 
         with open(universe_path, 'r') as f:
