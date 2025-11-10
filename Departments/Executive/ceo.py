@@ -137,6 +137,14 @@ class CEO:
         self.logger.info("[CEO] GENERATING TRADING PLAN")
         self.logger.info("=" * 80)
         self.logger.info(f"[CEO] Using AI model: {ai_model}")
+
+        # PRE-FLIGHT CHECK: Run execution fixes test suite
+        self.logger.info("[CEO] Running pre-flight checks...")
+        preflight_passed = self._run_preflight_checks()
+        if not preflight_passed:
+            self.logger.warning("[CEO] Pre-flight checks failed - review test output above")
+            self.logger.warning("[CEO] Proceeding with plan generation, but execution may have issues")
+
         self.logger.info("[CEO] Delegating to Operations Manager...")
 
         # Delegate to Operations Manager with selected model
@@ -171,17 +179,36 @@ class CEO:
         """
         self.logger.info("\n[CEO] Reviewing plan quality...")
 
+        # AUTOMATED VALIDATION: Check position constraints
+        validation = self._validate_plan_constraints(plan)
+
         # CEO's quality assessment
         ceo_review = {
             'overall_assessment': '',
             'quality_rating': '',  # EXCELLENT, GOOD, ACCEPTABLE, CONCERNS
             'strengths': [],
             'concerns': [],
-            'recommendation': ''
+            'recommendation': '',
+            'constraint_validation': validation  # Include validation results
         }
 
         quality_score = plan['summary']['overall_quality_score']
         trade_count = plan['summary']['total_trades']
+
+        # If validation failed, downgrade recommendation
+        if not validation['passed']:
+            ceo_review['concerns'].extend(validation['errors'])
+            self.logger.error("[CEO] Plan REJECTED - constraint violations detected")
+            return {
+                'status': 'REJECTED',
+                'message': f"Plan rejected due to {len(validation['errors'])} constraint violation(s)",
+                'validation_errors': validation['errors'],
+                'plan': plan  # Include plan for review
+            }
+
+        # Add warnings to concerns if any
+        if validation['warnings']:
+            ceo_review['concerns'].extend(validation['warnings'])
 
         # Assess quality
         if quality_score >= 85:
@@ -626,6 +653,10 @@ class CEO:
                 else:
                     self.logger.info("[CEO] All BUY orders filled successfully")
 
+            # POST-EXECUTION VERIFICATION
+            self.logger.info("[CEO] === POST-EXECUTION VERIFICATION ===")
+            verification = self._verify_execution(sells, buys)
+
             return {
                 'status': 'EXECUTION_INITIATED',
                 'plan_id': self.current_plan['plan_id'],
@@ -633,7 +664,8 @@ class CEO:
                 'trades_submitted': len(trades),
                 'sells_submitted': len(sells),
                 'buys_submitted': len(buys),
-                'execution_results': execution_results
+                'execution_results': execution_results,
+                'post_execution_verification': verification
             }
 
         except Exception as e:
@@ -774,6 +806,234 @@ class CEO:
         # Timeout
         self.logger.warning(f"[CEO] Timeout waiting for orders to fill after {timeout}s")
         return False
+
+    def _run_preflight_checks(self) -> bool:
+        """
+        Run automated pre-flight checks before plan generation.
+        Tests order sequencing, position constraints, and validation logic.
+
+        Returns:
+            True if all checks pass, False otherwise
+        """
+        import subprocess
+        import sys
+
+        test_script = self.project_root / "test_execution_fixes.py"
+
+        if not test_script.exists():
+            self.logger.warning(f"[CEO] Pre-flight test script not found: {test_script}")
+            return True  # Don't block if test file missing
+
+        try:
+            # Run test script
+            result = subprocess.run(
+                [sys.executable, str(test_script)],
+                capture_output=True,
+                text=True,
+                timeout=30
+            )
+
+            # Check if all tests passed
+            if "ALL TESTS PASSED" in result.stdout:
+                self.logger.info("[CEO] ✓ Pre-flight checks PASSED")
+                return True
+            else:
+                self.logger.error("[CEO] ✗ Pre-flight checks FAILED")
+                # Print last 20 lines of test output for debugging
+                lines = result.stdout.split('\n')
+                for line in lines[-20:]:
+                    if line.strip():
+                        self.logger.error(f"     {line}")
+                return False
+
+        except subprocess.TimeoutExpired:
+            self.logger.error("[CEO] Pre-flight checks timed out after 30s")
+            return False
+        except Exception as e:
+            self.logger.error(f"[CEO] Pre-flight checks failed with error: {e}")
+            return False
+
+    def _validate_plan_constraints(self, plan: Dict) -> Dict:
+        """
+        Validate that trading plan meets all position constraints.
+        Checks position sizes, position count, and other hard limits.
+
+        Args:
+            plan: Trading plan dict with 'trades' list
+
+        Returns:
+            Dict with validation results: {'passed': bool, 'warnings': [], 'errors': []}
+        """
+        import yaml
+
+        validation = {
+            'passed': True,
+            'warnings': [],
+            'errors': []
+        }
+
+        # Load constraints
+        try:
+            compliance_path = self.project_root / "Config" / "compliance_config.yaml"
+            with open(compliance_path) as f:
+                compliance_cfg = yaml.safe_load(f)
+            min_position_value = compliance_cfg['position_sizing']['min_position_value']
+
+            hard_constraints_path = self.project_root / "Config" / "hard_constraints.yaml"
+            with open(hard_constraints_path) as f:
+                hard_cfg = yaml.safe_load(f)
+            max_positions = hard_cfg['position_limits']['max_positions_total']
+
+        except Exception as e:
+            validation['errors'].append(f"Failed to load constraints: {e}")
+            validation['passed'] = False
+            return validation
+
+        # Get trades
+        trades = plan.get('trades', [])
+        buys = [t for t in trades if 'allocated_capital' in t]
+        sells = [t for t in trades if 'allocated_capital' not in t]
+
+        self.logger.info(f"[CEO] Validating plan: {len(buys)} BUYs, {len(sells)} SELLs")
+
+        # Check 1: Position sizes meet minimum
+        for trade in buys:
+            allocated = trade.get('allocated_capital', 0)
+            ticker = trade.get('ticker', 'UNKNOWN')
+
+            if allocated < min_position_value:
+                error = f"BUY {ticker}: ${allocated:,.0f} < ${min_position_value} minimum"
+                validation['errors'].append(error)
+                validation['passed'] = False
+                self.logger.error(f"[CEO] ✗ {error}")
+
+        # Check 2: Total position count after execution
+        # Get current positions count
+        try:
+            positions = self.data_source.get_current_positions()
+            current_count = len(positions)
+        except:
+            current_count = 0
+
+        final_count = current_count - len(sells) + len(buys)
+
+        if final_count > max_positions:
+            error = f"Final position count {final_count} > {max_positions} maximum"
+            validation['errors'].append(error)
+            validation['passed'] = False
+            self.logger.error(f"[CEO] ✗ {error}")
+        elif final_count > max_positions * 0.9:
+            warning = f"Final position count {final_count} near maximum ({max_positions})"
+            validation['warnings'].append(warning)
+            self.logger.warning(f"[CEO] ⚠ {warning}")
+
+        # Check 3: SELLs listed before BUYs (for clarity, not enforcement)
+        if buys and sells:
+            # Find indices of first BUY and last SELL
+            first_buy_idx = next((i for i, t in enumerate(trades) if 'allocated_capital' in t), None)
+            last_sell_idx = next((len(trades) - 1 - i for i, t in enumerate(reversed(trades))
+                                 if 'allocated_capital' not in t), None)
+
+            if first_buy_idx is not None and last_sell_idx is not None:
+                if first_buy_idx < last_sell_idx:
+                    warning = "BUYs listed before SELLs in plan (execution will still be correct)"
+                    validation['warnings'].append(warning)
+                    self.logger.warning(f"[CEO] ⚠ {warning}")
+
+        # Summary
+        if validation['passed']:
+            self.logger.info(f"[CEO] ✓ Plan validation PASSED")
+        else:
+            self.logger.error(f"[CEO] ✗ Plan validation FAILED with {len(validation['errors'])} error(s)")
+
+        if validation['warnings']:
+            self.logger.warning(f"[CEO] ⚠ {len(validation['warnings'])} warning(s)")
+
+        return validation
+
+    def _verify_execution(self, sells: List[Dict], buys: List[Dict]) -> Dict:
+        """
+        Verify execution results by querying Alpaca for current state.
+        Checks position count, fills, and buying power usage.
+
+        Args:
+            sells: List of SELL trades executed
+            buys: List of BUY trades executed
+
+        Returns:
+            Dict with verification results
+        """
+        verification = {
+            'passed': True,
+            'issues': [],
+            'summary': {}
+        }
+
+        try:
+            # Query Alpaca for current positions
+            positions = self.data_source.get_current_positions()
+            position_count = len(positions)
+
+            self.logger.info(f"[CEO] Current position count: {position_count}")
+            verification['summary']['position_count'] = position_count
+
+            # Check if position count is reasonable
+            import yaml
+            hard_constraints_path = self.project_root / "Config" / "hard_constraints.yaml"
+            with open(hard_constraints_path) as f:
+                hard_cfg = yaml.safe_load(f)
+            max_positions = hard_cfg['position_limits']['max_positions_total']
+
+            if position_count > max_positions:
+                issue = f"Position count {position_count} exceeds maximum {max_positions}"
+                verification['issues'].append(issue)
+                verification['passed'] = False
+                self.logger.error(f"[CEO] ✗ {issue}")
+            else:
+                self.logger.info(f"[CEO] ✓ Position count within limits ({position_count}/{max_positions})")
+
+            # Check if SELLs actually closed
+            sell_tickers = {s['ticker'] for s in sells}
+            still_holding = [p['ticker'] for p in positions if p['ticker'] in sell_tickers]
+
+            if still_holding:
+                issue = f"Still holding positions that should have been sold: {', '.join(still_holding)}"
+                verification['issues'].append(issue)
+                verification['passed'] = False
+                self.logger.error(f"[CEO] ✗ {issue}")
+            else:
+                self.logger.info(f"[CEO] ✓ All SELL orders confirmed closed")
+
+            # Check if BUYs actually opened
+            buy_tickers = {b['ticker'] for b in buys}
+            now_holding = {p['ticker'] for p in positions}
+            missing_buys = buy_tickers - now_holding
+
+            if missing_buys:
+                issue = f"Expected positions not found: {', '.join(missing_buys)}"
+                verification['issues'].append(issue)
+                verification['passed'] = False
+                self.logger.error(f"[CEO] ✗ {issue}")
+            else:
+                self.logger.info(f"[CEO] ✓ All BUY orders confirmed opened")
+
+            # Summary
+            verification['summary']['sells_executed'] = len(sells)
+            verification['summary']['buys_executed'] = len(buys)
+            verification['summary']['expected_count_change'] = len(buys) - len(sells)
+
+        except Exception as e:
+            verification['passed'] = False
+            verification['issues'].append(f"Verification failed: {str(e)}")
+            self.logger.error(f"[CEO] Verification error: {e}")
+
+        # Final status
+        if verification['passed']:
+            self.logger.info("[CEO] ✓ POST-EXECUTION VERIFICATION PASSED")
+        else:
+            self.logger.error(f"[CEO] ✗ POST-EXECUTION VERIFICATION FAILED ({len(verification['issues'])} issues)")
+
+        return verification
 
     def _store_portfolio_snapshot(self, account, positions, source='unknown'):
         """Store portfolio snapshot in database for tracking"""
