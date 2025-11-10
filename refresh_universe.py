@@ -25,11 +25,14 @@ import json
 import sqlite3
 import yfinance as yf
 import pandas as pd
-import yaml
 import alpaca_trade_api as tradeapi
 from datetime import datetime, timedelta, date
 from pathlib import Path
 from typing import List, Dict, Tuple
+
+# Add project root to path
+sys.path.insert(0, str(Path(__file__).parent))
+import config
 
 
 class UniverseRefresher:
@@ -55,18 +58,14 @@ class UniverseRefresher:
         self._init_database()
 
     def _load_alpaca_config(self):
-        """Load Alpaca API credentials from config file"""
+        """Load Alpaca API credentials from config.py"""
         try:
-            config_path = Path(__file__).parent / "Config" / "alpaca_config.yaml"
-            with open(config_path, 'r') as f:
-                config = yaml.safe_load(f)
-
-            self.api_key = config['api_key']
-            self.secret_key = config['secret_key']
-            self.base_url = config['base_url']
+            self.api_key = config.APCA_API_KEY_ID
+            self.secret_key = config.APCA_API_SECRET_KEY
+            self.base_url = config.APCA_API_BASE_URL
 
         except Exception as e:
-            raise RuntimeError(f"Failed to load Alpaca config: {e}")
+            raise RuntimeError(f"Failed to load Alpaca config from config.py: {e}")
 
     def _init_database(self):
         """Create table for universe history"""
