@@ -1008,7 +1008,29 @@ class OperationsManager:
 
                 # Step 3: Equal-weight allocation across selected candidates
                 if len(selected_candidates) > 0:
+                    # Load compliance position sizing limits
+                    import yaml
+                    compliance_config_path = self.project_root / "Config" / "compliance_config.yaml"
+                    try:
+                        with open(compliance_config_path) as f:
+                            compliance_cfg = yaml.safe_load(f)
+                        max_position_value = compliance_cfg['position_sizing'].get('max_position_value', 50000)
+                        max_position_pct = compliance_cfg['position_sizing'].get('max_position_pct', 0.10)
+                    except Exception as e:
+                        self.logger.warning(f"  Could not load compliance limits: {e}, using defaults")
+                        max_position_value = 50000
+                        max_position_pct = 0.10
+
+                    # Calculate max position size (smaller of absolute limit or percentage limit)
+                    max_position_from_pct = available_capital * max_position_pct
+                    max_allowed_position = min(max_position_value, max_position_from_pct)
+
+                    # Calculate equal-weight per position, capped at compliance limits
                     capital_per_position = available_capital / len(selected_candidates)
+                    capital_per_position = min(capital_per_position, max_allowed_position)
+
+                    self.logger.info(f"  Position sizing limits: ${max_position_value:,.0f} absolute, {max_position_pct:.0%} of portfolio (${max_position_from_pct:,.0f})")
+                    self.logger.info(f"  Max allowed per position: ${max_allowed_position:,.0f}")
 
                     for candidate in selected_candidates:
                         entry_price = candidate.get('current_price', candidate.get('entry_price', 0))
@@ -1246,16 +1268,25 @@ class OperationsManager:
                 target_deployment = available_capital * (MIN_DEPLOYMENT_PCT / 100.0)
                 capital_needed = target_deployment - total_allocated
 
-                # Load compliance config to get minimum position size
+                # Load compliance config to get position sizing limits
                 import yaml
                 compliance_config_path = self.project_root / "Config" / "compliance_config.yaml"
                 MIN_POSITION_VALUE = 500  # Default fallback
+                MAX_POSITION_VALUE = 50000  # Default fallback
+                MAX_POSITION_PCT = 0.10  # Default fallback
                 try:
                     with open(compliance_config_path) as f:
                         compliance_cfg = yaml.safe_load(f)
-                        MIN_POSITION_VALUE = compliance_cfg.get('position_sizing', {}).get('min_position_value', 500)
+                        position_sizing = compliance_cfg.get('position_sizing', {})
+                        MIN_POSITION_VALUE = position_sizing.get('min_position_value', 500)
+                        MAX_POSITION_VALUE = position_sizing.get('max_position_value', 50000)
+                        MAX_POSITION_PCT = position_sizing.get('max_position_pct', 0.10)
                 except Exception as e:
-                    self.logger.warning(f"Could not load compliance config, using default min_position_value=${MIN_POSITION_VALUE}")
+                    self.logger.warning(f"Could not load compliance config, using defaults")
+
+                # Calculate max allowed position (smaller of absolute or percentage limit)
+                max_position_from_pct = available_capital * MAX_POSITION_PCT
+                max_allowed_position = min(MAX_POSITION_VALUE, max_position_from_pct)
 
                 added_count = 0
                 skipped_count = 0
@@ -1272,7 +1303,7 @@ class OperationsManager:
 
                     position_size = min(
                         capital_needed / positions_to_add,  # Equal distribution
-                        available_capital * 0.08  # But never more than 8% per position
+                        max_allowed_position  # But never more than compliance max
                     )
 
                     entry_price = candidate.get('current_price', candidate.get('entry_price', 0))
@@ -1289,15 +1320,14 @@ class OperationsManager:
 
                     allocated = shares * entry_price
 
-                    # VALIDATION: Skip if position would be below minimum OR above 8% max
+                    # VALIDATION: Skip if position would be below minimum OR above compliance max
                     if allocated < MIN_POSITION_VALUE:
                         self.logger.debug(f"    - Skipped {candidate['ticker']}: ${allocated:,.0f} < ${MIN_POSITION_VALUE} minimum")
                         skipped_count += 1
                         continue
 
-                    max_position_value = available_capital * 0.08
-                    if allocated > max_position_value:
-                        self.logger.debug(f"    - Skipped {candidate['ticker']}: ${allocated:,.0f} > ${max_position_value:,.0f} maximum (8%)")
+                    if allocated > max_allowed_position:
+                        self.logger.debug(f"    - Skipped {candidate['ticker']}: ${allocated:,.0f} > ${max_allowed_position:,.0f} maximum")
                         skipped_count += 1
                         continue
 
