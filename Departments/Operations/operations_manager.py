@@ -155,23 +155,23 @@ class OperationsManager:
             if not news_result.success:
                 return self._handle_stage_failure('news', news_result, stage_results)
 
-            # STAGE 3: Portfolio Optimizer (creates proposed trading plan from all scored stocks)
-            model_display = ai_model.upper() if ai_model else 'GPT-4O-MINI'
-            self.logger.info(f"\n[STAGE 3/3] {model_display} Portfolio Optimizer - Creating Proposed Trading Plan")
-            self.logger.info(f"  (Portfolio + CEO working with {model_display} to create intelligent allocation...)")
-            gpt5_result = self._run_gpt5_optimization_stage(news_result)
+            # STAGE 3: Portfolio Allocator (creates proposed trading plan from all scored stocks)
+            model_display = "DETERMINISTIC"
+            self.logger.info(f"\n[STAGE 3/3] Portfolio Allocator - Creating Proposed Trading Plan")
+            self.logger.info(f"  (Using deterministic logic based on comparative ranking...)")
+            gpt5_result = self._run_gpt5_optimization_stage(news_result)  # Function name kept for compatibility
             stage_results.append(gpt5_result)
 
             if not gpt5_result.success:
                 return self._handle_stage_failure('gpt5_optimizer', gpt5_result, stage_results)
 
-            # ITERATIVE COMPLIANCE REVIEW (advisory - not filtering)
-            self.logger.info("\n[COMPLIANCE REVIEW] Compliance Department - Advisory Feedback Loop")
-            self.logger.info("  (CEO <-> Portfolio <-> Compliance iterating until all satisfied...)")
+            # COMPLIANCE ENFORCEMENT - Reject trades that violate rules
+            self.logger.info("\n[COMPLIANCE ENFORCEMENT] Compliance Department - Enforcing Risk Limits")
+            self.logger.info("  (Validating all proposed trades against position sizing and risk rules...)")
             compliance_result = self._run_compliance_advisory_loop(gpt5_result)
             stage_results.append(compliance_result)
 
-            # Note: Compliance is advisory, so we proceed even with suggestions
+            # Note: Compliance now ENFORCES rules - rejected trades are blocked
             # The final plan incorporates all agreed-upon improvements
 
             # ALL STAGES COMPLETE - Aggregate final plan for CEO presentation
@@ -631,34 +631,29 @@ class OperationsManager:
 
     def _run_gpt5_optimization_stage(self, news_result: WorkflowStageResult) -> WorkflowStageResult:
         """
-        Run AI Portfolio Optimizer for intelligent capital allocation
+        Run Deterministic Portfolio Allocator (GPT optimizer disabled)
 
         This stage receives ALL scored stocks from News (candidates + holdings)
-        and uses AI (model selected by user) to create a complete proposed trading plan:
-        - Which positions to SELL (from holdings)
-        - Which stocks to BUY (from candidates)
-        - How much capital to allocate to each
+        and creates a trading plan using pure deterministic logic:
+        - SELL: Holdings below rank threshold or score < 60 (quality floor)
+        - BUY: Top-ranked candidates scoring 60+ to fill open slots
+        - ALLOCATION: Equal-weight across new positions
+
+        Note: GPT-4o-mini optimizer code preserved but commented out for potential future use.
         """
         try:
-            # Initialize Portfolio Optimizer
-            if not self._gpt5_optimizer:
-                # Use selected model from user choice (or default to gpt-4o-mini)
-                selected_model = getattr(self, 'ai_model', 'gpt-4o-mini')
-                cost_map = {
-                    'gpt-4o-mini': '$0.50/run - Budget friendly',
-                    'gpt-4o': '$2-3/run - Balanced performance',
-                    'gpt-5': '$10-20/run - Premium quality'
-                }
-                self.logger.info(f"  Initializing Portfolio Optimizer (OpenAI {selected_model})...")
-                self.logger.info(f"  Cost: {cost_map.get(selected_model, 'Unknown')}")
-                import config as app_config
-                self._gpt5_optimizer = GPT5PortfolioOptimizer(
-                    api_key=app_config.OPENAI_API_KEY,
-                    model=selected_model
-                )
+            # COMMENTED OUT: GPT optimizer initialization (no longer needed in deterministic mode)
+            # if not self._gpt5_optimizer:
+            #     selected_model = getattr(self, 'ai_model', 'gpt-4o-mini')
+            #     self.logger.info(f"  Initializing Portfolio Optimizer (OpenAI {selected_model})...")
+            #     import config as app_config
+            #     self._gpt5_optimizer = GPT5PortfolioOptimizer(
+            #         api_key=app_config.OPENAI_API_KEY,
+            #         model=selected_model
+            #     )
 
-            # Get display name for logging
-            model_display = getattr(self, 'ai_model', 'gpt-4o-mini').upper()
+            # Set display name for logging
+            model_display = "DETERMINISTIC"
 
             # Get ALL stocks from News stage (candidates + holdings with scores/sentiment)
             candidates = news_result.data.get('candidates', [])
@@ -687,66 +682,224 @@ class OperationsManager:
             self.logger.info(f"    - Total stocks under consideration: {len(candidates) + len(holdings)}")
 
             # ============================================================================
-            # AUTOMATED POSITION QUALITY CHECK (Tier 1 Fix - Integrated)
+            # MARKET REGIME ANALYSIS - Active Strategy Adjustment
             # ============================================================================
-            # Flag underperforming holdings that MUST be sold
-            # This ensures AI optimizer can't ignore deteriorating positions
+            # Fetch latest market regime assessment and adjust strategy parameters
 
-            MANDATORY_EXIT_THRESHOLD = 55  # Portfolio optimizer's minimum acceptable score
-            TIME_BASED_EXIT_DAYS = 5       # Exit after 5 days if not profitable
+            regime_info = self._get_latest_regime_assessment()
+
+            if regime_info:
+                regime = regime_info.get('regime', 'NEUTRAL')
+                confidence = regime_info.get('confidence', 'MEDIUM')
+                vix_level = regime_info.get('vix_level', 20.0)
+
+                self.logger.info("")
+                self.logger.info("=" * 80)
+                self.logger.info("  MARKET REGIME ASSESSMENT (ACTIVE MODE)")
+                self.logger.info("=" * 80)
+                self.logger.info(f"  Regime: {regime} (Confidence: {confidence})")
+                self.logger.info(f"  VIX Level: {vix_level:.1f}")
+                self.logger.info(f"  SPY Change: {regime_info.get('spy_change_pct', 0):.2f}%")
+                self.logger.info("")
+
+                # Adjust strategy based on regime
+                if regime == 'BEARISH' and confidence == 'HIGH':
+                    # High-confidence bearish: Defensive posture
+                    TARGET_PORTFOLIO_SIZE = 15
+                    POSITION_SIZE_MULTIPLIER = 0.6  # Smaller positions
+                    self.logger.warning("  BEARISH REGIME (HIGH CONFIDENCE) → Defensive Mode")
+                    self.logger.warning(f"    - Target positions: 15 (reduced from 28)")
+                    self.logger.warning(f"    - Position sizing: 60% of normal")
+
+                elif regime == 'BEARISH':
+                    # Medium/low-confidence bearish: Moderate caution
+                    TARGET_PORTFOLIO_SIZE = 20
+                    POSITION_SIZE_MULTIPLIER = 0.75
+                    self.logger.info("  BEARISH REGIME → Cautious Mode")
+                    self.logger.info(f"    - Target positions: 20 (reduced from 28)")
+                    self.logger.info(f"    - Position sizing: 75% of normal")
+
+                elif regime == 'BULLISH' and vix_level < 15:
+                    # Low volatility bull market: Slightly aggressive
+                    TARGET_PORTFOLIO_SIZE = 28
+                    POSITION_SIZE_MULTIPLIER = 1.1  # Slightly larger positions
+                    self.logger.info("  BULLISH REGIME + LOW VIX → Aggressive Mode")
+                    self.logger.info(f"    - Target positions: 28 (full deployment)")
+                    self.logger.info(f"    - Position sizing: 110% of normal")
+
+                else:
+                    # NEUTRAL or normal BULLISH: Standard strategy
+                    TARGET_PORTFOLIO_SIZE = 28
+                    POSITION_SIZE_MULTIPLIER = 1.0
+                    self.logger.info("  NEUTRAL/NORMAL REGIME → Standard Mode")
+                    self.logger.info(f"    - Target positions: 28")
+                    self.logger.info(f"    - Position sizing: 100% (normal)")
+
+                self.logger.info("=" * 80)
+                self.logger.info("")
+            else:
+                # No regime data available - use defaults
+                TARGET_PORTFOLIO_SIZE = 28
+                POSITION_SIZE_MULTIPLIER = 1.0
+                self.logger.warning("  No regime data available - using default parameters")
+                self.logger.info("")
+
+            # ============================================================================
+            # COMPARATIVE RANKING ANALYSIS (Option B Implementation)
+            # ============================================================================
+            # Compare all holdings vs candidates to determine optimal portfolio composition
+            # Philosophy: Portfolio should hold the top N stocks by score (N adjusted by regime)
+
+            ABSOLUTE_SCORE_FLOOR = 60   # Never hold anything below this score (quality threshold)
 
             mandatory_sells = []
             holdings_to_keep = []
 
             if holdings:
                 self.logger.info("")
-                self.logger.info("  POSITION QUALITY CHECK (Automated):")
+                self.logger.info("=" * 80)
+                self.logger.info("  COMPARATIVE RANKING ANALYSIS")
+                self.logger.info("=" * 80)
+                self.logger.info(f"  Quality threshold: {ABSOLUTE_SCORE_FLOOR} (only buy/hold stocks scoring {ABSOLUTE_SCORE_FLOOR}+)")
+                self.logger.info("")
+
+                # Step 1: Combine all holdings + candidates into unified ranking
+                all_stocks = []
+
+                # Add current holdings
+                for holding in holdings:
+                    ticker = holding.get('ticker')
+                    score = holding.get('research_composite_score', holding.get('composite_score', 50))
+                    unrealized_plpc = holding.get('unrealized_plpc', 0)
+                    market_value = holding.get('market_value', 0)
+                    days_held = self.realism_sim.calculate_days_held(ticker)
+
+                    all_stocks.append({
+                        'ticker': ticker,
+                        'composite_score': score,
+                        'type': 'HOLDING',
+                        'market_value': market_value,
+                        'unrealized_plpc': unrealized_plpc,
+                        'days_held': days_held,
+                        'data': holding
+                    })
+
+                # Add new candidates
+                for candidate in candidates:
+                    ticker = candidate.get('ticker')
+                    score = candidate.get('composite_score', candidate.get('research_composite_score', 0))
+
+                    all_stocks.append({
+                        'ticker': ticker,
+                        'composite_score': score,
+                        'type': 'CANDIDATE',
+                        'data': candidate
+                    })
+
+                # Step 2: Sort by composite score (highest first)
+                all_stocks.sort(key=lambda x: x['composite_score'], reverse=True)
+
+                # Step 3: Analyze ranking and identify swaps needed
+                self.logger.info(f"  Total universe: {len(all_stocks)} stocks ({len(holdings)} holdings + {len(candidates)} candidates)")
+                self.logger.info(f"  Target portfolio size: {TARGET_PORTFOLIO_SIZE} positions")
+                self.logger.info(f"  Absolute score floor: {ABSOLUTE_SCORE_FLOOR} (never hold below this)")
+                self.logger.info("")
+
+                # Determine keeper threshold
+                keeper_threshold_rank = TARGET_PORTFOLIO_SIZE
+
+                # Log top performers and identify actions needed
+                self.logger.info("  TOP 30 RANKED STOCKS:")
+                self.logger.info("  " + "-" * 76)
+                self.logger.info(f"  {'Rank':<6} {'Ticker':<8} {'Score':<8} {'Type':<12} {'Action':<20}")
+                self.logger.info("  " + "-" * 76)
+
+                holdings_in_top_n = 0
+                candidates_in_top_n = 0
+                holdings_below_threshold = []
+
+                for i, stock in enumerate(all_stocks[:30]):  # Show top 30 for visibility
+                    rank = i + 1
+                    ticker = stock['ticker']
+                    score = stock['composite_score']
+                    stock_type = stock['type']
+
+                    # Determine action based on rank and type
+                    if rank <= keeper_threshold_rank:
+                        if stock_type == 'HOLDING':
+                            action = "✓ KEEP (top performer)"
+                            holdings_in_top_n += 1
+                        else:
+                            action = "→ BUY (top opportunity)"
+                            candidates_in_top_n += 1
+                    else:
+                        if stock_type == 'HOLDING':
+                            action = "✗ SELL (below threshold)"
+                            holdings_below_threshold.append(stock)
+                        else:
+                            action = "- Pass (not in top 28)"
+
+                    # Check absolute floor
+                    if stock_type == 'HOLDING' and score < ABSOLUTE_SCORE_FLOOR:
+                        action = f"✗ SELL (score < {ABSOLUTE_SCORE_FLOOR})"
+                        if stock not in holdings_below_threshold:
+                            holdings_below_threshold.append(stock)
+
+                    self.logger.info(f"  {rank:<6} {ticker:<8} {score:<8.1f} {stock_type:<12} {action:<20}")
+
+                self.logger.info("  " + "-" * 76)
+                self.logger.info("")
+
+                # Step 4: Process holdings for mandatory sells
+                self.logger.info("  POSITION QUALITY CHECK:")
+                self.logger.info("")
 
                 for holding in holdings:
                     ticker = holding.get('ticker')
                     score = holding.get('research_composite_score', holding.get('composite_score', 50))
                     unrealized_plpc = holding.get('unrealized_plpc', 0)
-
-                    # REALISM: Get entry date from RealismSimulator database
                     days_held = self.realism_sim.calculate_days_held(ticker)
 
-                    # Log if we successfully retrieved entry date
-                    if days_held is not None:
-                        self.logger.debug(f"    {ticker}: Held for {days_held} days (from entry date tracking)")
-                    else:
-                        self.logger.debug(f"    {ticker}: No entry date found (time-based exits disabled)")
+                    # Find this holding's rank
+                    holding_rank = next((i+1 for i, s in enumerate(all_stocks) if s['ticker'] == ticker), None)
 
                     # Determine if this position MUST be sold
                     must_sell = False
                     sell_reason = None
 
-                    # Rule 1: Score deteriorated below threshold AND position losing
-                    if score < MANDATORY_EXIT_THRESHOLD and unrealized_plpc < 0:
+                    # Rule 1: Score below absolute floor
+                    if score < ABSOLUTE_SCORE_FLOOR:
                         must_sell = True
-                        sell_reason = f"Score {score:.1f} < {MANDATORY_EXIT_THRESHOLD} threshold, losing {unrealized_plpc:.1f}%"
+                        sell_reason = f"Score {score:.1f} < {ABSOLUTE_SCORE_FLOOR} absolute minimum"
 
-                    # Rule 2: Time-based exit (held > 5 days and not profitable)
-                    # ONLY check if we have a valid days_held value
-                    elif days_held is not None and days_held > TIME_BASED_EXIT_DAYS and unrealized_plpc <= 2.0:
+                    # Rule 2: Ranked below keeper threshold (fell out of top 28)
+                    elif holding_rank is not None and holding_rank > keeper_threshold_rank:
                         must_sell = True
-                        sell_reason = f"Held {days_held} days with only {unrealized_plpc:.1f}% gain - freeing capital"
+                        sell_reason = f"Rank #{holding_rank} (below top {keeper_threshold_rank}), score {score:.1f}"
 
                     if must_sell:
                         self.logger.warning(f"    ❌ {ticker}: MANDATORY SELL - {sell_reason}")
-                        # Mark holding for mandatory exit
                         holding['MANDATORY_SELL'] = True
                         holding['MANDATORY_SELL_REASON'] = sell_reason
                         mandatory_sells.append(ticker)
                     else:
-                        self.logger.info(f"    ✓ {ticker}: Eligible to hold (Score: {score:.1f}, P&L: {unrealized_plpc:+.1f}%)")
+                        rank_display = f"Rank #{holding_rank}" if holding_rank else "Not ranked"
+                        self.logger.info(f"    ✓ {ticker}: KEEP - {rank_display}, Score {score:.1f}, P&L {unrealized_plpc:+.1f}%")
                         holdings_to_keep.append(ticker)
 
-                if mandatory_sells:
-                    self.logger.warning(f"  MANDATORY SELLS: {len(mandatory_sells)} positions flagged for exit")
-                    self.logger.warning(f"    Tickers: {', '.join(mandatory_sells)}")
-                else:
-                    self.logger.info(f"  All {len(holdings)} holdings meet quality standards")
+                self.logger.info("")
+                self.logger.info(f"  SUMMARY:")
+                self.logger.info(f"    Holdings in top {keeper_threshold_rank}: {holdings_in_top_n}")
+                self.logger.info(f"    Candidates in top {keeper_threshold_rank}: {candidates_in_top_n}")
+                self.logger.info(f"    Holdings to sell (below threshold): {len(mandatory_sells)}")
+                self.logger.info(f"    Open slots for new positions: {len(mandatory_sells)}")
 
+                if mandatory_sells:
+                    self.logger.warning(f"  MANDATORY SELLS: {', '.join(mandatory_sells)}")
+                else:
+                    self.logger.info(f"  All {len(holdings)} holdings are top performers - no sells needed")
+
+                self.logger.info("=" * 80)
                 self.logger.info("")
 
             self.logger.info(f"  ({model_display} will decide which to BUY, which to SELL, and allocation amounts...)")
@@ -765,34 +918,115 @@ class OperationsManager:
                 from Utils.alpaca_client import AlpacaClient
                 alpaca = AlpacaClient()
                 account = alpaca.trading_client.get_account()
-                available_capital = float(account.buying_power)
-                self.logger.info(f"  Alpaca buying power: ${available_capital:,.2f}")
+                buying_power = float(account.buying_power)
+                self.logger.info(f"  Alpaca buying power: ${buying_power:,.2f}")
             except Exception as e:
                 self.logger.warning(f"  Could not fetch Alpaca buying power: {e}")
-                available_capital = 100000.0  # Fallback
-                self.logger.info(f"  Using fallback capital: ${available_capital:,.2f}")
+                buying_power = 100000.0  # Fallback
+                self.logger.info(f"  Using fallback capital: ${buying_power:,.2f}")
+
+            # CRITICAL FIX: Calculate proceeds from MANDATORY sells
+            # These positions MUST be sold, so their proceeds are guaranteed capital
+            mandatory_sell_proceeds = 0.0
+            for holding in holdings:
+                if holding.get('MANDATORY_SELL'):
+                    proceeds = holding.get('market_value', 0)
+                    mandatory_sell_proceeds += proceeds
+                    self.logger.info(f"    {holding.get('ticker')}: +${proceeds:,.2f} from mandatory sell")
+
+            # Total available capital = buying power + guaranteed sell proceeds
+            available_capital = buying_power + mandatory_sell_proceeds
+
+            if mandatory_sell_proceeds > 0:
+                self.logger.info(f"  Mandatory sell proceeds: ${mandatory_sell_proceeds:,.2f}")
+                self.logger.info(f"  Total available capital: ${available_capital:,.2f} (buying power + sell proceeds)")
+            else:
+                self.logger.info(f"  Total available capital: ${available_capital:,.2f} (no mandatory sells)")
 
             current_positions = len(holdings)
             max_positions = 20
 
-            # Call portfolio optimizer with BOTH candidates and holdings
-            # Optimizer will decide which to BUY and which to SELL
-            optimized_candidates, reasoning = self._gpt5_optimizer.optimize_portfolio(
-                candidates=candidates,
-                holdings=holdings,  # Pass current holdings for SELL decisions
-                available_capital=available_capital,
-                market_conditions=market_conditions,
-                current_positions=current_positions,
-                max_positions=max_positions
-            )
+            # ============================================================================
+            # GPT OPTIMIZER (DISABLED - COMMENTED OUT FOR DETERMINISTIC MODE)
+            # ============================================================================
+            # Reason: GPT-4o-mini was making poor decisions (selling high-scoring holdings,
+            # hallucinating facts). Replaced with deterministic logic that strictly follows
+            # comparative ranking. GPT code preserved for potential future use in:
+            # - Report generation / narrative synthesis
+            # - Risk assessment commentary
+            # - User-facing explanations
+            # ============================================================================
 
-            self.logger.info(f"  {model_display} optimization completed: {len(optimized_candidates)} positions selected")
+            # COMMENTED OUT: GPT optimizer call
+            # optimized_candidates, reasoning = self._gpt5_optimizer.optimize_portfolio(
+            #     candidates=candidates,
+            #     holdings=holdings,
+            #     available_capital=available_capital,
+            #     market_conditions=market_conditions,
+            #     current_positions=current_positions,
+            #     max_positions=max_positions
+            # )
 
-            # Log optimizer's reasoning (first 15 lines)
-            self.logger.info(f"  {model_display} Chief Investment Officer Analysis:")
-            for line in reasoning.split('\n')[:15]:
-                if line.strip():
-                    self.logger.info(f"    {line.strip()}")
+            # ============================================================================
+            # DETERMINISTIC ALLOCATION (ACTIVE)
+            # ============================================================================
+            # Pure logic-based allocation following comparative ranking
+            # No AI hallucinations, no overrides, just clean ranking-based decisions
+
+            self.logger.info("")
+            self.logger.info("  Using deterministic allocation (comparative ranking only)")
+
+            # Step 1: Determine how many positions to add
+            holdings_to_keep_count = len([h for h in holdings if not h.get('MANDATORY_SELL', False)])
+            open_slots = TARGET_PORTFOLIO_SIZE - holdings_to_keep_count
+
+            self.logger.info(f"  Holdings to keep: {holdings_to_keep_count}")
+            self.logger.info(f"  Open slots for new positions: {open_slots}")
+
+            # Step 2: Select top candidates by rank to fill open slots
+            # Candidates are already sorted by rank in comparative ranking
+            optimized_candidates = []
+
+            if open_slots > 0:
+                # Take top N candidates that aren't already held AND meet quality threshold
+                held_tickers = {h['ticker'] for h in holdings}
+                available_candidates = [
+                    c for c in candidates
+                    if c['ticker'] not in held_tickers
+                    and c.get('composite_score', 0) >= ABSOLUTE_SCORE_FLOOR
+                ]
+
+                # Sort by composite score (descending)
+                available_candidates.sort(key=lambda x: -x.get('composite_score', 0))
+
+                # Select top candidates to fill slots (may be fewer than open_slots if quality is scarce)
+                selected_candidates = available_candidates[:open_slots]
+
+                if len(selected_candidates) < open_slots:
+                    self.logger.warning(f"  Only {len(selected_candidates)} candidates meet quality threshold (score ≥ {ABSOLUTE_SCORE_FLOOR})")
+                    self.logger.warning(f"  Will leave {open_slots - len(selected_candidates)} slots unfilled rather than buy low-quality stocks")
+
+                # Step 3: Equal-weight allocation across selected candidates
+                if len(selected_candidates) > 0:
+                    capital_per_position = available_capital / len(selected_candidates)
+
+                    for candidate in selected_candidates:
+                        entry_price = candidate.get('current_price', candidate.get('entry_price', 0))
+                        if entry_price <= 0:
+                            continue
+
+                        allocated_capital = capital_per_position
+                        shares = int(allocated_capital / entry_price)
+
+                        if shares > 0:
+                            candidate['allocated_capital'] = allocated_capital
+                            optimized_candidates.append(candidate)
+
+                    self.logger.info(f"  Selected {len(optimized_candidates)} candidates (equal-weight: ${capital_per_position:,.2f} each)")
+                else:
+                    self.logger.info("  No candidates available for purchase")
+            else:
+                self.logger.info("  Portfolio is full - no new positions needed")
 
             # Calculate metrics
             total_allocated = sum(c.get('allocated_capital', 0) for c in optimized_candidates)
@@ -800,7 +1034,9 @@ class OperationsManager:
 
             self.logger.info(f"  Capital Deployment: ${total_allocated:,.2f} / ${available_capital:,.2f} ({capital_deployment_pct:.1f}%)")
 
-            # Build buy orders and sell orders from GPT-5's decisions
+            reasoning = "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted."
+
+            # Build buy orders and sell orders from deterministic allocation
             buy_orders = []
             sell_orders = []
 
@@ -830,6 +1066,31 @@ class OperationsManager:
                     buy_orders.append(buy_order)
 
             # ============================================================================
+            # APPLY REGIME-BASED POSITION SIZING
+            # ============================================================================
+            # Adjust position sizes based on market regime
+
+            if 'POSITION_SIZE_MULTIPLIER' in locals() and POSITION_SIZE_MULTIPLIER != 1.0:
+                self.logger.info("")
+                self.logger.info(f"  Applying regime-based position sizing: {POSITION_SIZE_MULTIPLIER:.0%} of normal")
+
+                for order in buy_orders:
+                    old_capital = order['allocated_capital']
+                    new_capital = old_capital * POSITION_SIZE_MULTIPLIER
+                    order['allocated_capital'] = new_capital
+
+                    # Recalculate shares
+                    entry_price = order['entry_price']
+                    order['shares'] = int(new_capital / entry_price) if entry_price > 0 else 0
+
+                    self.logger.debug(f"    {order['ticker']}: ${old_capital:,.0f} → ${new_capital:,.0f} ({order['shares']} shares)")
+
+                # Recalculate total
+                total_allocated = sum(o['allocated_capital'] for o in buy_orders)
+                self.logger.info(f"  Adjusted total allocation: ${total_allocated:,.2f}")
+                self.logger.info("")
+
+            # ============================================================================
             # PROCESS SELL DECISIONS (GPT-5 + Mandatory Automated Exits)
             # ============================================================================
 
@@ -855,48 +1116,33 @@ class OperationsManager:
                     }
                     sell_orders.append(sell_order)
 
-            # Second: Process GPT-5's explicit SELL decisions (if any)
-            gpt5_sell_decisions = []
-            if optimized_candidates and len(optimized_candidates) > 0:
-                # SELL decisions are attached to the first candidate
-                gpt5_sell_decisions = optimized_candidates[0].get('gpt5_sell_decisions', [])
+            # Second: Process GPT-5's explicit SELL decisions (DISABLED IN DETERMINISTIC MODE)
+            # COMMENTED OUT: GPT sell recommendations
+            # In deterministic mode, we only sell based on comparative ranking (MANDATORY_SELL flag)
+            # No AI override of ranking decisions
 
-            if gpt5_sell_decisions:
-                # Use optimizer's explicit SELL decisions
-                self.logger.info(f"  Processing {model_display}'s {len(gpt5_sell_decisions)} SELL recommendations")
-                for sell_decision in gpt5_sell_decisions:
-                    ticker = sell_decision['ticker']
+            # gpt5_sell_decisions = []
+            # if optimized_candidates and len(optimized_candidates) > 0:
+            #     gpt5_sell_decisions = optimized_candidates[0].get('gpt5_sell_decisions', [])
+            #
+            # if gpt5_sell_decisions:
+            #     self.logger.info(f"  Processing {model_display}'s {len(gpt5_sell_decisions)} SELL recommendations")
+            #     [... GPT sell validation code omitted ...]
+            #     sell_orders.append(sell_order)
 
-                    # Skip if already in mandatory sells (don't duplicate)
-                    if ticker in mandatory_sell_tickers:
-                        self.logger.info(f"    {ticker}: Already in mandatory sells, skipping GPT-5 recommendation")
-                        continue
+            # DETERMINISTIC MODE: Only mandatory sells (already processed above)
 
-                    sell_order = {
-                        'ticker': ticker,
-                        'action': 'SELL',
-                        'shares': sell_decision['shares'],
-                        'sell_pct': sell_decision.get('sell_pct', 100),
-                        'composite_score': sell_decision.get('composite_score', 0),
-                        'current_price': sell_decision.get('current_price', 0),
-                        'gpt5_reasoning': sell_decision.get('gpt5_reasoning', f'{model_display} recommended sell'),
-                        'sentiment_score': 50,  # Default
-                        'sentiment_summary': f'{model_display} SELL decision',
-                        'current_value': sell_decision.get('current_value', 0)
-                    }
-                    sell_orders.append(sell_order)
-
-            # Third: Fallback for any remaining underperformers not caught above
-            # (This should rarely trigger now that we have automated checks)
-            if not gpt5_sell_decisions and not mandatory_sell_tickers:
-                self.logger.info(f"  No SELL decisions from {model_display} or automation - checking remaining holdings")
+            # Third: Fallback safety check for any remaining underperformers
+            # (Should be unnecessary since comparative ranking catches everything, but kept as safeguard)
+            if not mandatory_sell_tickers:
+                self.logger.info(f"  No mandatory sells - checking for any stragglers below score threshold")
                 for holding in holdings:
                     ticker = holding.get('ticker')
                     composite = holding.get('research_composite_score', holding.get('composite_score', 0))
 
-                    # Only sell if score is genuinely poor (< 55) AND not already processed
-                    if composite < 55 and ticker not in mandatory_sell_tickers:
-                        self.logger.warning(f"  Fallback auto-sell: {ticker} (score: {composite:.1f} < 55 threshold)")
+                    # Only sell if score is genuinely poor (< 60) AND not already processed
+                    if composite < ABSOLUTE_SCORE_FLOOR and ticker not in mandatory_sell_tickers:
+                        self.logger.warning(f"  Fallback auto-sell: {ticker} (score: {composite:.1f} < {ABSOLUTE_SCORE_FLOOR} threshold)")
                         sell_order = {
                             'ticker': ticker,
                             'action': 'SELL',
@@ -906,16 +1152,54 @@ class OperationsManager:
                             'current_price': holding.get('current_price', 0),
                             'sentiment_score': holding.get('sentiment_score', holding.get('sentiment', {}).get('score', 50)),
                             'sentiment_summary': holding.get('sentiment_summary', holding.get('sentiment', {}).get('summary', 'No data')),
-                            'gpt5_reasoning': f'Fallback automatic sell: Score {composite:.1f} below 55 threshold',
+                            'gpt5_reasoning': f'Fallback automatic sell: Score {composite:.1f} below {ABSOLUTE_SCORE_FLOOR} threshold',
                             'current_value': holding.get('market_value', 0)
                         }
                         sell_orders.append(sell_order)
                         mandatory_sell_tickers.add(ticker)  # Track to avoid duplicates
-                    elif composite >= 55:
-                        self.logger.info(f"  Keeping {ticker} (score: {composite:.1f} ≥ 55 threshold)")
+                    elif composite >= ABSOLUTE_SCORE_FLOOR:
+                        self.logger.info(f"  Keeping {ticker} (score: {composite:.1f} ≥ {ABSOLUTE_SCORE_FLOOR} threshold)")
 
             total_orders = len(buy_orders) + len(sell_orders)
             self.logger.info(f"  Trading Plan: {len(sell_orders)} SELLs, {len(buy_orders)} BUYs")
+
+            # ============================================================================
+            # VALIDATION: CHECK FOR OVER-ALLOCATION (CRITICAL BUG PREVENTION)
+            # ============================================================================
+            MAX_DEPLOYMENT_PCT = 105.0  # Allow 5% overage for rounding, but no more
+
+            if capital_deployment_pct > MAX_DEPLOYMENT_PCT:
+                self.logger.error("=" * 80)
+                self.logger.error("CRITICAL ERROR: GPT OVER-ALLOCATED CAPITAL")
+                self.logger.error("=" * 80)
+                self.logger.error(f"  Requested: ${total_allocated:,.2f}")
+                self.logger.error(f"  Available: ${available_capital:,.2f}")
+                self.logger.error(f"  Over-allocation: {capital_deployment_pct:.1f}% (max: {MAX_DEPLOYMENT_PCT}%)")
+                self.logger.error(f"  Shortfall: ${total_allocated - available_capital:,.2f}")
+                self.logger.error("")
+                self.logger.error("  This plan CANNOT be executed - insufficient funds!")
+                self.logger.error("  Scaling down all positions proportionally...")
+
+                # Scale down all positions to fit within available capital
+                scale_factor = (available_capital * 0.95) / total_allocated  # Use 95% to be safe
+                self.logger.error(f"  Applying scale factor: {scale_factor:.3f}")
+
+                for order in buy_orders:
+                    old_capital = order['allocated_capital']
+                    new_capital = old_capital * scale_factor
+                    order['allocated_capital'] = new_capital
+
+                    # Recalculate shares
+                    entry_price = order['entry_price']
+                    order['shares'] = int(new_capital / entry_price) if entry_price > 0 else 0
+
+                    self.logger.error(f"    {order['ticker']}: ${old_capital:,.0f} → ${new_capital:,.0f} ({order['shares']} shares)")
+
+                # Recalculate totals after scaling
+                total_allocated = sum(o['allocated_capital'] for o in buy_orders)
+                capital_deployment_pct = (total_allocated / available_capital * 100) if available_capital > 0 else 0
+                self.logger.error(f"  After scaling: ${total_allocated:,.2f} ({capital_deployment_pct:.1f}%)")
+                self.logger.error("=" * 80)
 
             # ============================================================================
             # TIER 1 FIX: CAPITAL DEPLOYMENT VALIDATION (90% MINIMUM)
@@ -929,6 +1213,9 @@ class OperationsManager:
             MIN_DEPLOYMENT_PCT = 90.0
             MIN_POSITIONS = 12  # Reduced from 15 to allow some flexibility
 
+            # Calculate final position count after all trades execute
+            positions_after_trades = current_positions - len(sell_orders) + len(buy_orders)
+
             # Check if plan meets minimum standards
             deployment_ok = capital_deployment_pct >= MIN_DEPLOYMENT_PCT
             diversification_ok = len(buy_orders) >= MIN_POSITIONS
@@ -938,7 +1225,8 @@ class OperationsManager:
                 self.logger.warning("CAPITAL DEPLOYMENT VALIDATION FAILED")
                 self.logger.warning("=" * 80)
                 self.logger.warning(f"  Current deployment: {capital_deployment_pct:.1f}% (minimum: {MIN_DEPLOYMENT_PCT}%)")
-                self.logger.warning(f"  Current positions: {len(buy_orders)} (minimum: {MIN_POSITIONS})")
+                self.logger.warning(f"  New BUY positions: {len(buy_orders)} (minimum: {MIN_POSITIONS})")
+                self.logger.warning(f"  Total positions after trades: {positions_after_trades}")
                 self.logger.warning("")
                 self.logger.warning(f"  This plan would leave ${available_capital - total_allocated:,.0f} idle!")
                 self.logger.warning("  Idle capital = lost profit opportunity.")
@@ -950,7 +1238,7 @@ class OperationsManager:
                 selected_tickers = {order['ticker'] for order in buy_orders}
                 remaining_candidates = [
                     c for c in candidates
-                    if c['ticker'] not in selected_tickers and c.get('composite_score', 0) >= 55
+                    if c['ticker'] not in selected_tickers and c.get('composite_score', 0) >= ABSOLUTE_SCORE_FLOOR
                 ]
                 remaining_candidates.sort(key=lambda x: -x.get('composite_score', 0))
 
@@ -1036,6 +1324,7 @@ class OperationsManager:
 
                 # Recalculate metrics
                 capital_deployment_pct = (total_allocated / available_capital * 100) if available_capital > 0 else 0
+                positions_after_trades = current_positions - len(sell_orders) + len(buy_orders)
 
                 self.logger.warning("")
                 self.logger.warning(f"  AUTO-CORRECTION COMPLETE:")
@@ -1043,7 +1332,8 @@ class OperationsManager:
                 if skipped_count > 0:
                     self.logger.warning(f"    - Skipped {skipped_count} candidates (position size constraints)")
                 self.logger.warning(f"    - New deployment: {capital_deployment_pct:.1f}%")
-                self.logger.warning(f"    - New position count: {len(buy_orders)}")
+                self.logger.warning(f"    - New BUY positions: {len(buy_orders)}")
+                self.logger.warning(f"    - Total positions after trades: {positions_after_trades}")
                 self.logger.warning(f"    - Remaining idle capital: ${available_capital - total_allocated:,.0f}")
                 self.logger.warning("=" * 80)
 
@@ -1053,16 +1343,19 @@ class OperationsManager:
                 (min(len(buy_orders) / 15.0, 1.0) * 30)  # 30% weight on diversification (target 15)
             ))
 
+            # Recalculate final position count one more time (in case auto-correction changed it)
+            positions_after_trades = current_positions - len(sell_orders) + len(buy_orders)
+
             issues = []
             if capital_deployment_pct < MIN_DEPLOYMENT_PCT:
                 issues.append(f"Capital deployment {capital_deployment_pct:.1f}% (target {MIN_DEPLOYMENT_PCT}%+)")
             if len(buy_orders) < MIN_POSITIONS:
-                issues.append(f"Limited diversification: {len(buy_orders)} positions (target {MIN_POSITIONS}-20)")
+                issues.append(f"Limited diversification: {len(buy_orders)} new positions (target {MIN_POSITIONS}-20). Total after trades: {positions_after_trades}")
 
             success = total_orders > 0
 
             return WorkflowStageResult(
-                stage='gpt5_optimizer',
+                stage='portfolio_allocator',
                 success=success,
                 data={
                     'buy_orders': buy_orders,
@@ -1070,10 +1363,10 @@ class OperationsManager:
                     'total_orders': total_orders,
                     'total_allocated': total_allocated,
                     'capital_deployment_pct': capital_deployment_pct,
-                    'gpt5_reasoning': reasoning,
+                    'gpt5_reasoning': reasoning,  # Keep key name for compatibility
                     'optimized_candidates': optimized_candidates
                 },
-                message=f"{model_display} created trading plan: {len(sell_orders)} SELLs, {len(buy_orders)} BUYs (${total_allocated:,.0f} allocated)",
+                message=f"Deterministic allocator created trading plan: {len(sell_orders)} SELLs, {len(buy_orders)} BUYs (${total_allocated:,.0f} allocated)",
                 quality_score=int(quality_score),
                 issues=issues
             )
@@ -1319,52 +1612,48 @@ class OperationsManager:
                 if is_approved:
                     approved_buys.append(buy_order)
                 else:
-                    # Compliance flagged this - add advisory note but DON'T reject
+                    # Compliance REJECTED this - actually reject it
                     flagged_buys.append(buy_order)
                     compliance_suggestions.append({
                         'ticker': buy_order['ticker'],
                         'suggestion_type': rejection_category,
                         'suggestion': rejection_reason,
-                        'severity': 'WARNING'  # Advisory, not blocking
+                        'severity': 'REJECTED'  # Actually block the trade
                     })
-
-                    # Still include it, but mark as flagged
-                    buy_order['compliance_flagged'] = True
-                    buy_order['compliance_note'] = rejection_reason
-                    approved_buys.append(buy_order)
+                    self.logger.warning(f"    ✗ REJECTED: {buy_order['ticker']} - {rejection_reason}")
 
             # SELLs don't need pre-trade validation (closing positions)
             approved_sells = sell_orders
 
-            self.logger.info(f"  Compliance Advisory Summary:")
-            self.logger.info(f"    - {len(approved_buys)} BUYs reviewed ({len(flagged_buys)} with advisory notes)")
+            self.logger.info(f"  Compliance Enforcement Summary:")
+            self.logger.info(f"    - {len(approved_buys)} BUYs APPROVED")
+            self.logger.info(f"    - {len(flagged_buys)} BUYs REJECTED by compliance")
             self.logger.info(f"    - {len(approved_sells)} SELLs approved (no validation needed)")
-            self.logger.info(f"    - {len(compliance_suggestions)} total suggestions provided")
 
             if compliance_suggestions:
-                self.logger.info("  Compliance Suggestions:")
+                self.logger.warning("  Compliance REJECTIONS:")
                 for suggestion in compliance_suggestions[:5]:  # Show first 5
-                    self.logger.info(f"    - {suggestion['ticker']}: {suggestion['suggestion']}")
+                    self.logger.warning(f"    - {suggestion['ticker']}: {suggestion['suggestion']}")
 
             # Quality score: 100 if no flags, reduced if there are suggestions
             quality_score = max(70, 100 - (len(compliance_suggestions) * 5))
 
             return WorkflowStageResult(
-                stage='compliance_advisory',
-                success=True,  # Always success in advisory mode
+                stage='compliance_enforcement',
+                success=True,
                 data={
                     'buy_orders': approved_buys,
                     'sell_orders': approved_sells,
                     'total_orders': len(approved_buys) + len(approved_sells),
-                    'compliance_suggestions': compliance_suggestions,
-                    'flagged_count': len(flagged_buys),
+                    'compliance_rejections': compliance_suggestions,
+                    'rejected_count': len(flagged_buys),
                     'gpt5_reasoning': gpt5_result.data.get('gpt5_reasoning', ''),
                     'total_allocated': gpt5_result.data.get('total_allocated', 0),
                     'capital_deployment_pct': gpt5_result.data.get('capital_deployment_pct', 0)
                 },
-                message=f"Compliance reviewed plan: {len(approved_buys)} BUYs, {len(approved_sells)} SELLs ({len(compliance_suggestions)} suggestions)",
+                message=f"Compliance enforced: {len(approved_buys)} BUYs approved, {len(flagged_buys)} rejected, {len(approved_sells)} SELLs",
                 quality_score=int(quality_score),
-                issues=[f"{len(flagged_buys)} orders flagged with advisory notes"] if flagged_buys else []
+                issues=[f"{len(flagged_buys)} orders REJECTED by compliance"] if flagged_buys else []
             )
 
         except Exception as e:
@@ -1651,6 +1940,48 @@ class OperationsManager:
             'options': escalation.options,
             'recommendation': escalation.recommendation
         }
+
+    def _get_latest_regime_assessment(self) -> Optional[Dict]:
+        """
+        Fetch the latest market regime assessment from database
+
+        Returns:
+            Dict with regime info or None if not available
+        """
+        try:
+            import sqlite3
+            conn = sqlite3.connect(self.project_root / "sentinel.db", timeout=30)
+            cursor = conn.cursor()
+
+            # Get most recent assessment
+            cursor.execute("""
+                SELECT regime, confidence, spy_price, spy_change_pct, vix_level, vix_change_pct,
+                       recommendation, reasoning, timestamp
+                FROM market_regime_assessments
+                ORDER BY timestamp DESC
+                LIMIT 1
+            """)
+
+            row = cursor.fetchone()
+            conn.close()
+
+            if row:
+                return {
+                    'regime': row[0],
+                    'confidence': row[1],
+                    'spy_price': row[2],
+                    'spy_change_pct': row[3],
+                    'vix_level': row[4],
+                    'vix_change_pct': row[5],
+                    'recommendation': row[6],
+                    'reasoning': row[7],
+                    'timestamp': row[8]
+                }
+            return None
+
+        except Exception as e:
+            self.logger.warning(f"Could not fetch regime assessment: {e}")
+            return None
 
 
 if __name__ == "__main__":
