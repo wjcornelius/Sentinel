@@ -33,10 +33,13 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 # Import Alpaca SDK
 from alpaca.trading.client import TradingClient
-from alpaca.trading.requests import MarketOrderRequest, LimitOrderRequest
-from alpaca.trading.enums import OrderSide, TimeInForce, OrderType
+from alpaca.trading.requests import MarketOrderRequest, LimitOrderRequest, TrailingStopOrderRequest, GetOrdersRequest
+from alpaca.trading.enums import OrderSide, TimeInForce, OrderType, QueryOrderStatus
 from alpaca.data.historical import StockHistoricalDataClient
 from alpaca.data.requests import StockLatestBarRequest
+
+# Import ATR calculator for volatility-based trailing stops
+from Utils.atr_calculator import calculate_trailing_stop_percent
 
 # Import configuration
 from config import APCA_API_KEY_ID, APCA_API_SECRET_KEY, APCA_API_BASE_URL
@@ -219,6 +222,9 @@ class HardConstraintValidator:
         # Check position limits
         violations.extend(self._check_position_limits(order, portfolio_state))
 
+        # Check cash/buying power for BUY orders (NO MARGIN)
+        violations.extend(self._check_buying_power(order, portfolio_state))
+
         # Check liquidity requirements
         violations.extend(self._check_liquidity(order, market_data))
 
@@ -268,14 +274,69 @@ class HardConstraintValidator:
                 limit_value=max_position
             ))
 
-        # Check min position
-        min_position = self.constraints['position_limits']['min_position_pct']
-        if position_pct < min_position:
+        # Check min position - only applies to BUY orders
+        # SELL orders should always be allowed (we want to exit small/losing positions)
+        if order.action == 'BUY':
+            min_position = self.constraints['position_limits']['min_position_pct']
+            if position_pct < min_position:
+                violations.append(HardConstraintViolation(
+                    constraint_name="min_position_pct",
+                    violation_reason=f"Position would be {position_pct:.1%} of portfolio (too small)",
+                    violating_value=position_pct,
+                    limit_value=min_position
+                ))
+
+        return violations
+
+    def _check_buying_power(self, order: ExecutionOrder, portfolio_state: Dict) -> List[HardConstraintViolation]:
+        """
+        Check that BUY orders have sufficient CASH (not margin).
+        Enforces min_cash_reserve_pct from hard_constraints.yaml.
+
+        CRITICAL: This prevents margin usage by requiring actual cash for purchases.
+        """
+        violations = []
+
+        # Only check BUY orders
+        if order.action != 'BUY':
+            return violations
+
+        # Get current cash and portfolio value
+        cash = portfolio_state.get('cash', 0)
+        portfolio_value = portfolio_state.get('portfolio_value', 0)
+
+        # Get price and calculate order cost
+        current_price = portfolio_state.get('current_prices', {}).get(order.ticker, 0)
+        if current_price == 0:
+            return violations  # Price check handled elsewhere
+
+        order_cost = order.quantity * current_price
+
+        # Get min cash reserve requirement (default 10%)
+        min_cash_reserve_pct = self.constraints.get('portfolio_risk', {}).get('min_cash_reserve_pct', 0.10)
+        min_cash_reserve = portfolio_value * min_cash_reserve_pct
+
+        # Calculate available cash for trading (cash minus required reserve)
+        available_for_trading = cash - min_cash_reserve
+
+        # HARD CONSTRAINT: Cannot use margin (negative cash after purchase)
+        cash_after_purchase = cash - order_cost
+        if cash_after_purchase < 0:
             violations.append(HardConstraintViolation(
-                constraint_name="min_position_pct",
-                violation_reason=f"Position would be {position_pct:.1%} of portfolio (too small)",
-                violating_value=position_pct,
-                limit_value=min_position
+                constraint_name="no_margin_trading",
+                violation_reason=f"Order would require margin (cash after: ${cash_after_purchase:,.2f})",
+                violating_value=cash_after_purchase,
+                limit_value=0
+            ))
+            return violations  # No point checking reserve if we'd go negative
+
+        # HARD CONSTRAINT: Must maintain cash reserve
+        if cash_after_purchase < min_cash_reserve:
+            violations.append(HardConstraintViolation(
+                constraint_name="min_cash_reserve_pct",
+                violation_reason=f"Order would leave only ${cash_after_purchase:,.2f} cash ({cash_after_purchase/portfolio_value:.1%}), below {min_cash_reserve_pct:.0%} reserve",
+                violating_value=cash_after_purchase / portfolio_value if portfolio_value > 0 else 0,
+                limit_value=min_cash_reserve_pct
             ))
 
         return violations
@@ -471,6 +532,12 @@ class TradingDepartment:
 
         for message_path in messages:
             try:
+                # Skip regime notification messages silently - they're informational only
+                if 'MSG_REGIME_' in message_path.name:
+                    logger.debug(f"Skipping regime notification: {message_path.name}")
+                    self.message_handler.archive_message(message_path)
+                    continue
+
                 metadata, body = self.message_handler.read_message(message_path)
 
                 # Validate message is for us
@@ -664,21 +731,28 @@ class TradingDepartment:
 
     def _submit_to_alpaca(self, order: ExecutionOrder, metadata: Dict):
         """
-        Submit order to Alpaca API with bracket orders for risk management
+        Submit order to Alpaca API with ATR-based GTC trailing stops.
 
-        For BUY orders, creates bracket orders with:
-        - Stop-loss: 8% below current market price (room to run for volatile swing trades)
-        - Take-profit: 16% above current market price (capture meaningful swing moves)
+        For BUY orders:
+        1. Submit simple market order to buy shares
+        2. Immediately submit GTC trailing stop sell order for protection
 
-        This implements swing trading philosophy: fewer, larger wins rather than many small stops.
-        Wide brackets accommodate the volatility that makes these stocks good swing candidates.
+        Key improvements over previous bracket orders:
+        - GTC orders provide 24/7 protection (not just during market hours)
+        - Trailing stops ratchet up as price rises (locks in profits)
+        - ATR-based percentages adapt to each stock's volatility
+        - No more positions falling 22% without triggering stops (CLSK incident)
+
+        Trailing stop calculation:
+        - Uses 2x ATR (14-day Average True Range)
+        - Floor: 3% (avoids whipsaws on stable stocks)
+        - Ceiling: 15% (limits max loss on volatile stocks)
         """
         # Determine order side
         side = OrderSide.BUY if order.action == 'BUY' else OrderSide.SELL
 
-        # For BUY orders, use bracket orders with stop-loss and take-profit
         if order.action == 'BUY':
-            # Get CURRENT market price from Alpaca (not 16-hour-old research data)
+            # Get CURRENT market price from Alpaca
             try:
                 request = StockLatestBarRequest(symbol_or_symbols=order.ticker)
                 latest_bar = self.data_client.get_stock_latest_bar(request)
@@ -686,51 +760,109 @@ class TradingDepartment:
                 logger.info(f"Current market price for {order.ticker}: ${current_price:.2f}")
             except Exception as e:
                 logger.warning(f"Could not fetch current price for {order.ticker}: {e}")
-                # Fallback to Executive's price estimate
                 current_price = metadata.get('price', 0)
                 if current_price <= 0:
-                    logger.error(f"No price available for {order.ticker}, cannot calculate brackets")
+                    logger.error(f"No price available for {order.ticker}")
                     raise ValueError(f"Cannot determine current price for {order.ticker}")
                 logger.info(f"Using estimated price for {order.ticker}: ${current_price:.2f}")
 
-            # Calculate bracket prices with wider ranges for swing trading
-            # 8% stop-loss gives "room to run" for volatile stocks
-            # 16% take-profit captures meaningful swing moves (not just noise)
-            stop_loss_price = round(current_price * 0.92, 2)  # 8% below current
-            take_profit_price = round(current_price * 1.16, 2)  # 16% above current
+            # Calculate ATR-based trailing stop percentage
+            atr_result = calculate_trailing_stop_percent(order.ticker, current_price)
+            trail_percent = atr_result['trail_percent']
 
-            logger.info(f"Bracket order for {order.ticker}: Entry ~${current_price:.2f}, Stop ${stop_loss_price:.2f} (-8%), Target ${take_profit_price:.2f} (+16%)")
+            # Store trailing stop info in metadata for later use
+            metadata['trail_percent'] = trail_percent
+            metadata['atr_method'] = atr_result['method']
+            metadata['price'] = current_price
 
-            # Create bracket market order
-            order_request = MarketOrderRequest(
+            logger.info(
+                f"ATR trailing stop for {order.ticker}: {trail_percent}% "
+                f"(method: {atr_result['method']}, ATR%: {atr_result.get('atr_percent', 'N/A')})"
+            )
+
+            # Step 1: Submit simple market order for the BUY
+            buy_request = MarketOrderRequest(
                 symbol=order.ticker,
                 qty=order.quantity,
-                side=side,
-                time_in_force=TimeInForce.DAY,
-                order_class="bracket",
-                stop_loss={"stop_price": stop_loss_price},
-                take_profit={"limit_price": take_profit_price}
+                side=OrderSide.BUY,
+                time_in_force=TimeInForce.DAY  # Buy order is DAY (fills immediately during market hours)
             )
+
+            alpaca_order = self.trading_client.submit_order(buy_request)
+            logger.info(f"BUY order submitted: {order.ticker} x{order.quantity} (Order ID: {alpaca_order.id})")
+
+            # Step 2: Submit GTC trailing stop sell order for protection
+            # This order will persist until filled or cancelled (90-day GTC expiration)
+            try:
+                trailing_stop_request = TrailingStopOrderRequest(
+                    symbol=order.ticker,
+                    qty=order.quantity,
+                    side=OrderSide.SELL,
+                    time_in_force=TimeInForce.GTC,  # Good-Til-Canceled = 24/7 protection
+                    trail_percent=trail_percent
+                )
+
+                trailing_order = self.trading_client.submit_order(trailing_stop_request)
+                logger.info(
+                    f"GTC trailing stop submitted: {order.ticker} @ -{trail_percent}% "
+                    f"(Order ID: {trailing_order.id})"
+                )
+
+                # Store trailing stop order ID in metadata for tracking
+                metadata['trailing_stop_order_id'] = str(trailing_order.id)
+
+            except Exception as e:
+                # If trailing stop fails, the position is unprotected - this is critical
+                logger.error(f"CRITICAL: Failed to submit trailing stop for {order.ticker}: {e}")
+                logger.error("Position is UNPROTECTED - manual intervention required!")
+                # Don't fail the whole order, but flag the issue
+                metadata['trailing_stop_error'] = str(e)
+                metadata['position_protected'] = False
+
+            return alpaca_order
 
         elif order.action == 'SELL':
-            # For SELL orders (closing positions), use simple market orders
-            # No bracket needed as we're exiting
-            logger.info(f"Simple SELL order for {order.ticker} (closing position)")
+            # For SELL orders (closing positions), first cancel any existing trailing stops
+            self._cancel_existing_stops(order.ticker)
+
+            # Submit simple market sell order
+            logger.info(f"SELL order for {order.ticker} (closing position)")
             order_request = MarketOrderRequest(
                 symbol=order.ticker,
                 qty=order.quantity,
-                side=side,
+                side=OrderSide.SELL,
                 time_in_force=TimeInForce.DAY
             )
+
+            alpaca_order = self.trading_client.submit_order(order_request)
+            logger.info(f"SELL order submitted: {order.ticker} x{order.quantity} (Order ID: {alpaca_order.id})")
+            return alpaca_order
 
         else:
             logger.error(f"Unknown order action: {order.action}")
             raise ValueError(f"Invalid order action: {order.action}")
 
-        # Submit to Alpaca
-        alpaca_order = self.trading_client.submit_order(order_request)
-        logger.info(f"Submitted order to Alpaca: {alpaca_order.id}")
-        return alpaca_order
+    def _cancel_existing_stops(self, ticker: str):
+        """Cancel any existing trailing stop or stop orders for a ticker before selling."""
+        try:
+            # Get all open orders for this ticker
+            orders_request = GetOrdersRequest(
+                status=QueryOrderStatus.OPEN,
+                symbols=[ticker]
+            )
+            open_orders = self.trading_client.get_orders(filter=orders_request)
+
+            for open_order in open_orders:
+                # Cancel trailing stops and stop orders
+                if open_order.order_type in ['trailing_stop', 'stop', 'stop_limit']:
+                    try:
+                        self.trading_client.cancel_order_by_id(open_order.id)
+                        logger.info(f"Cancelled {open_order.order_type} order for {ticker}: {open_order.id}")
+                    except Exception as e:
+                        logger.warning(f"Could not cancel order {open_order.id}: {e}")
+
+        except Exception as e:
+            logger.warning(f"Error checking for existing stops on {ticker}: {e}")
 
     def _store_order_in_database(self, order: ExecutionOrder, alpaca_order, metadata: Dict) -> int:
         """Store order in database with message chain tracking"""
@@ -769,14 +901,14 @@ class TradingDepartment:
 
         # Create PENDING position entry for BUY orders (Phase 2 architecture)
         if order.action.upper() == 'BUY':
-            self._create_pending_position(order, alpaca_order, internal_order_id)
+            self._create_pending_position(order, alpaca_order, internal_order_id, metadata)
 
         return order_db_id
 
-    def _create_pending_position(self, order: ExecutionOrder, alpaca_order, internal_order_id: str):
+    def _create_pending_position(self, order: ExecutionOrder, alpaca_order, internal_order_id: str, metadata: Dict = None):
         """
-        Create PENDING entry in portfolio_positions for tracking
-        This replaces Portfolio Department's role in Phase 2 architecture
+        Create PENDING entry in portfolio_positions for tracking.
+        Uses ATR-based trailing stop percentage from metadata if available.
         """
         try:
             conn = sqlite3.connect(self.db_path, timeout=30.0)
@@ -784,12 +916,18 @@ class TradingDepartment:
 
             position_id = f"POS_{datetime.utcnow().strftime('%Y%m%d_%H%M%S')}_{uuid.uuid4().hex[:8]}"
 
-            # Calculate stop-loss and target prices (8% stop, 16% target per system design)
-            entry_price = order.limit_price if order.limit_price else 0
-            stop_loss = entry_price * 0.92  # 8% below entry
-            target = entry_price * 1.16  # 16% above entry
-            risk_per_share = entry_price - stop_loss  # Risk per share
-            total_risk = risk_per_share * order.quantity  # Total position risk
+            # Get entry price from metadata (set by _submit_to_alpaca) or fallback
+            metadata = metadata or {}
+            entry_price = metadata.get('price', order.limit_price or 0)
+
+            # Get ATR-based trailing stop percentage (default to 8% if not available)
+            trail_percent = metadata.get('trail_percent', 8.0)
+
+            # Calculate stop-loss using ATR-based percentage
+            stop_loss = entry_price * (1 - trail_percent / 100)
+            target = entry_price * 1.16  # Keep 16% target for profit taking
+            risk_per_share = entry_price - stop_loss
+            total_risk = risk_per_share * order.quantity
 
             cursor.execute("""
                 INSERT INTO portfolio_positions (
