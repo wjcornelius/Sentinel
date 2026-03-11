@@ -1,0 +1,138 @@
+{
+  "plan_id": "PLAN_20260304_080808",
+  "generated_at": "2026-03-04T16:08:08.947025Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 6,
+    "research_candidates": 71,
+    "gpt5_selected": 6,
+    "compliance_flagged": 0,
+    "overall_quality_score": 88
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 60,
+    "compliance_advisory": 95
+  },
+  "trades": [
+    {
+      "ticker": "ADMA",
+      "action": "BUY",
+      "shares": 606,
+      "allocated_capital": 10000,
+      "entry_price": 16.479999542236328,
+      "composite_score": 73.8,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "ADMA Biologics announced a $200M capital return plan for 2026, including a $125M accelerated share repurchase agreement with JPMorgan, as part of a broader $500M program, leading to a 0.83% premarket stock rise to $15.7[1]. The company was upgraded to Zacks Rank #1 (Strong Buy) due to upward earnings estimate revisions over the past three months[2]. Financial metrics show strong health with high profitability margins and liquidity, though one analyst rates it Hold at $17[1][3][4].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CPRT",
+      "action": "BUY",
+      "shares": 259,
+      "allocated_capital": 10000,
+      "entry_price": 38.47999954223633,
+      "composite_score": 68.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "I cannot provide the requested JSON analysis because the search results do not contain news from the last 24 hours (March 3-4, 2026). The most recent dated articles in the search results are from Marc",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CTSH",
+      "action": "BUY",
+      "shares": 153,
+      "allocated_capital": 10000,
+      "entry_price": 65.20999908447266,
+      "composite_score": 67.6,
+      "sentiment_score": 72.0,
+      "sentiment_summary": "Cognizant exceeded Q4 2025 earnings expectations with Non-GAAP EPS of $1.35 versus $1.32 estimates and revenue of $5.33 billion, beating projections by $20 million[1][2]. The company provided strong 2026 guidance projecting revenue growth of 4.9-7.4% and adjusted EPS of $5.56-$5.70, while announcing a 6.5% dividend increase and $1.6 billion in shareholder returns[1][2].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CAVA",
+      "action": "BUY",
+      "shares": 129,
+      "allocated_capital": 10000,
+      "entry_price": 77.06999969482422,
+      "composite_score": 64.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "I cannot provide the JSON analysis as requested because the search results do not contain news from the last 24 hours. The most recent article [1] discusses TD Cowen's price target raise and fourth-qu",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CENX",
+      "action": "BUY",
+      "shares": 177,
+      "allocated_capital": 10000,
+      "entry_price": 56.369998931884766,
+      "composite_score": 63.4,
+      "sentiment_score": 85.0,
+      "sentiment_summary": "Century Aluminum announced plans to expand U.S. primary aluminum production by nearly 10% at its Mt. Holly facility and build the first new American aluminum smelter in close to 50 years in Oklahoma with partner EGA, a project expected to create over 1,000 permanent jobs. The announcement follows a favorable U.S. Supreme Court decision on IEEPA tariffs and represents a multi-billion dollar investment commitment.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "DASH",
+      "action": "BUY",
+      "shares": 56,
+      "allocated_capital": 10000,
+      "entry_price": 176.21749877929688,
+      "composite_score": 61.2,
+      "sentiment_score": 42.0,
+      "sentiment_summary": "DASH experienced a 21% surge in the past 24 hours, reaching approximately $74.90, outpacing other privacy coins like Zcash and Monero[3]. However, this recent rally conflicts with broader market underperformance, as DASH has declined 25% this month while the total crypto market fell only 14%, indicating a lack of sustained bullish catalysts[2].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 71 candidates (avg score: 43.9)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 81/81 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 0 SELLs, 7 BUYs ($70,000 allocated)",
+      "quality_score": 60,
+      "issues": [
+        "Capital deployment 60.3% (target 90.0%+)",
+        "Limited diversification: 7 new positions (target 12-20). Total after trades: 17"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 6 BUYs approved, 1 rejected, 0 SELLs",
+      "quality_score": 95,
+      "issues": [
+        "1 orders REJECTED by compliance"
+      ]
+    }
+  ],
+  "approved_at": "2026-03-04T16:08:10.586796Z"
+}

@@ -1,0 +1,251 @@
+{
+  "date": "2025-12-17",
+  "start_time": "2025-12-17T08:00:06.741197",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "11:00 AM ET",
+    "current_date": "Wednesday, December 17, 2025"
+  },
+  "regime_analysis": {
+    "regime": "NEUTRAL",
+    "confidence": "MEDIUM",
+    "spy_price": 674.6599731445312,
+    "spy_change_pct": -0.620151428541117,
+    "vix_level": 17.15999984741211,
+    "recommendation": "NORMAL CONDITIONS"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "status": "SKIPPED",
+      "reason": "Asset not tradeable: AssetStatus.INACTIVE"
+    },
+    {
+      "ticker": "EMR",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20251217T160935Z_eb9a44a8"
+    },
+    {
+      "ticker": "GEHC",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20251217T160935Z_4cad5179"
+    },
+    {
+      "ticker": "KDP",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20251217T160935Z_cf6191f8"
+    },
+    {
+      "ticker": "ONB",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251217T160937Z_3efba1db"
+    },
+    {
+      "ticker": "NVST",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251217T160937Z_cdf9d5f8"
+    },
+    {
+      "ticker": "CG",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251217T160937Z_44809a20",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "FLEX",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251217T160937Z_0c26ba38",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "GSK",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251217T160937Z_c01f4728",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2025-12-17T08:09:42.541835",
+    "equity": 99106.84,
+    "cash": 11973.96,
+    "buying_power": 102341.09,
+    "portfolio_value": 99106.84,
+    "starting_capital": 100000.0,
+    "total_return": -893.1600000000035,
+    "total_return_pct": -0.8931600000000034,
+    "daily_pl": 4479.580000000002,
+    "daily_pl_pct": 4.733921282302797,
+    "total_unrealized_pl": 3473.1800000000003,
+    "position_count": 15,
+    "positions": [
+      {
+        "ticker": "CWAN",
+        "shares": 1151.0,
+        "entry_price": 19.6,
+        "current_price": 21.965,
+        "market_value": 25281.715,
+        "unrealized_pl": 2722.115,
+        "unrealized_pl_pct": 12.06632653061224
+      },
+      {
+        "ticker": "GEO",
+        "shares": 319.0,
+        "entry_price": 15.590188,
+        "current_price": 16.82,
+        "market_value": 5365.58,
+        "unrealized_pl": 392.31,
+        "unrealized_pl_pct": 7.88837123260953
+      },
+      {
+        "ticker": "CDE",
+        "shares": 295.0,
+        "entry_price": 16.651627,
+        "current_price": 17.125,
+        "market_value": 5051.875,
+        "unrealized_pl": 139.645,
+        "unrealized_pl_pct": 2.8428025560692403
+      },
+      {
+        "ticker": "ONB",
+        "shares": 218.0,
+        "entry_price": 23.12,
+        "current_price": 23.11,
+        "market_value": 5037.98,
+        "unrealized_pl": -2.18,
+        "unrealized_pl_pct": -0.04325259515571
+      },
+      {
+        "ticker": "AG",
+        "shares": 308.0,
+        "entry_price": 16.07,
+        "current_price": 16.33,
+        "market_value": 5029.64,
+        "unrealized_pl": 80.08,
+        "unrealized_pl_pct": 1.61792159303049
+      },
+      {
+        "ticker": "MAS",
+        "shares": 77.0,
+        "entry_price": 64.47,
+        "current_price": 64.75,
+        "market_value": 4985.75,
+        "unrealized_pl": 21.56,
+        "unrealized_pl_pct": 0.43431053203040004
+      },
+      {
+        "ticker": "NVST",
+        "shares": 229.0,
+        "entry_price": 21.75,
+        "current_price": 21.735,
+        "market_value": 4977.315,
+        "unrealized_pl": -3.435,
+        "unrealized_pl_pct": -0.06896551724138
+      },
+      {
+        "ticker": "HL",
+        "shares": 255.0,
+        "entry_price": 15.58,
+        "current_price": 19.325,
+        "market_value": 4927.875,
+        "unrealized_pl": 954.975,
+        "unrealized_pl_pct": 24.03722721437741
+      },
+      {
+        "ticker": "DT",
+        "shares": 109.0,
+        "entry_price": 45.6,
+        "current_price": 44.48,
+        "market_value": 4848.32,
+        "unrealized_pl": -122.08,
+        "unrealized_pl_pct": -2.45614035087719
+      },
+      {
+        "ticker": "LKQ",
+        "shares": 160.0,
+        "entry_price": 31.18,
+        "current_price": 29.73,
+        "market_value": 4756.8,
+        "unrealized_pl": -232.0,
+        "unrealized_pl_pct": -4.65041693393201
+      },
+      {
+        "ticker": "HRL",
+        "shares": 158.0,
+        "entry_price": 23.99,
+        "current_price": 24.03,
+        "market_value": 3796.74,
+        "unrealized_pl": 6.32,
+        "unrealized_pl_pct": 0.16673614005836
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.7700831024930697
+      },
+      {
+        "ticker": "JCI",
+        "shares": 31.0,
+        "entry_price": 116.52,
+        "current_price": 116.94,
+        "market_value": 3625.14,
+        "unrealized_pl": 13.02,
+        "unrealized_pl_pct": 0.36045314109166
+      },
+      {
+        "ticker": "IVZ",
+        "shares": 125.0,
+        "entry_price": 24.57,
+        "current_price": 26.65,
+        "market_value": 3331.25,
+        "unrealized_pl": 260.0,
+        "unrealized_pl_pct": 8.46560846560847
+      },
+      {
+        "ticker": "CLSK",
+        "shares": 202.0,
+        "entry_price": 15.14,
+        "current_price": 11.915,
+        "market_value": 2406.83,
+        "unrealized_pl": -651.45,
+        "unrealized_pl_pct": -21.301188903566707
+      }
+    ]
+  },
+  "warnings": [
+    "Verification: Expected positions not found: CG, FLEX, GSK"
+  ],
+  "errors": [],
+  "plan_summary": {
+    "plan_id": "PLAN_20251217_080931",
+    "total_trades": 9,
+    "quality_score": 81,
+    "ceo_rating": "GOOD",
+    "ceo_recommendation": "RECOMMEND APPROVAL"
+  },
+  "sells_count": 3,
+  "buys_count": 5,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: CG, FLEX, GSK"
+    ],
+    "summary": {
+      "position_count": 15,
+      "sells_executed": 3,
+      "buys_executed": 5,
+      "expected_count_change": 2
+    }
+  },
+  "end_time": "2025-12-17T08:09:45.566343",
+  "duration_seconds": 578.825158
+}

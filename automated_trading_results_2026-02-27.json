@@ -1,0 +1,274 @@
+{
+  "date": "2026-02-27",
+  "start_time": "2026-02-27T08:00:03.094180",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "11:00 AM ET",
+    "current_date": "Friday, February 27, 2026"
+  },
+  "regime_analysis": {
+    "regime": "BEARISH",
+    "confidence": "MEDIUM",
+    "spy_price": 685.2100219726562,
+    "spy_change_pct": -0.593350630022196,
+    "vix_level": 19.989999771118164,
+    "recommendation": "PROCEED WITH CAUTION"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "AG",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260227T160826Z_1c566e8d"
+    },
+    {
+      "ticker": "SN",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260227T160826Z_2899175c"
+    },
+    {
+      "ticker": "EQT",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260227T160828Z_230cf56b",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "DXCM",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260227T160828Z_e77d98d6",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ELAN",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260227T160828Z_1167850a",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "GTX",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260227T160828Z_25f1c97d",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "EXEL",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260227T160828Z_938a46f1",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CAVA",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260227T160828Z_001b3c88",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BROS",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260227T160828Z_ae58f07c"
+    },
+    {
+      "ticker": "BRO",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260227T160828Z_ef3919bb"
+    },
+    {
+      "ticker": "CHWY",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260227T160828Z_b838e0f7",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "FIS",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260227T160828Z_fec52d78",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CELH",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260227T160828Z_a8215044",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "COIN",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260227T160828Z_61ef7c63",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-02-27T08:08:49.898672",
+    "equity": 108978.01,
+    "cash": 6530.06,
+    "buying_power": 111798.0,
+    "portfolio_value": 108978.01,
+    "starting_capital": 100000.0,
+    "total_return": 8978.009999999995,
+    "total_return_pct": 8.978009999999994,
+    "daily_pl": 6101.709999999992,
+    "daily_pl_pct": 5.931113385687463,
+    "total_unrealized_pl": 10841.5232,
+    "position_count": 12,
+    "positions": [
+      {
+        "ticker": "AGI",
+        "shares": 224.0,
+        "entry_price": 44.8,
+        "current_price": 53.38,
+        "market_value": 11957.12,
+        "unrealized_pl": 1921.92,
+        "unrealized_pl_pct": 19.152
+      },
+      {
+        "ticker": "CDE",
+        "shares": 423.0,
+        "entry_price": 23.77,
+        "current_price": 26.535,
+        "market_value": 11224.305,
+        "unrealized_pl": 1169.595,
+        "unrealized_pl_pct": 11.632000000000001
+      },
+      {
+        "ticker": "CF",
+        "shares": 107.0,
+        "entry_price": 92.61,
+        "current_price": 98.7076,
+        "market_value": 10561.7132,
+        "unrealized_pl": 652.4432,
+        "unrealized_pl_pct": 6.584
+      },
+      {
+        "ticker": "B",
+        "shares": 205.0,
+        "entry_price": 46.84,
+        "current_price": 50.82,
+        "market_value": 10418.1,
+        "unrealized_pl": 815.9,
+        "unrealized_pl_pct": 8.497
+      },
+      {
+        "ticker": "DELL",
+        "shares": 67.0,
+        "entry_price": 122.94,
+        "current_price": 145.3,
+        "market_value": 9735.1,
+        "unrealized_pl": 1498.12,
+        "unrealized_pl_pct": 18.188
+      },
+      {
+        "ticker": "AU",
+        "shares": 71.0,
+        "entry_price": 106.66,
+        "current_price": 127.65,
+        "market_value": 9063.15,
+        "unrealized_pl": 1490.29,
+        "unrealized_pl_pct": 19.679
+      },
+      {
+        "ticker": "AEM",
+        "shares": 31.0,
+        "entry_price": 189.73,
+        "current_price": 250.675,
+        "market_value": 7770.925,
+        "unrealized_pl": 1889.295,
+        "unrealized_pl_pct": 32.122
+      },
+      {
+        "ticker": "BROS",
+        "shares": 141.0,
+        "entry_price": 53.46,
+        "current_price": 53.37,
+        "market_value": 7525.17,
+        "unrealized_pl": -12.69,
+        "unrealized_pl_pct": -0.168
+      },
+      {
+        "ticker": "BRO",
+        "shares": 104.0,
+        "entry_price": 71.61,
+        "current_price": 71.64,
+        "market_value": 7450.56,
+        "unrealized_pl": 3.12,
+        "unrealized_pl_pct": 0.042
+      },
+      {
+        "ticker": "RRC",
+        "shares": 167.0,
+        "entry_price": 35.81,
+        "current_price": 40.5,
+        "market_value": 6763.5,
+        "unrealized_pl": 783.23,
+        "unrealized_pl_pct": 13.097
+      },
+      {
+        "ticker": "ABNB",
+        "shares": 46.0,
+        "entry_price": 120.22,
+        "current_price": 136.22,
+        "market_value": 6266.12,
+        "unrealized_pl": 736.0,
+        "unrealized_pl_pct": 13.309000000000001
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [
+    "Verification: Expected positions not found: CAVA, EXEL, CELH, FIS, GTX, ELAN, COIN, EQT, DXCM, CHWY"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 12,
+    "db_positions_before": 11,
+    "stale_closed": 0,
+    "in_sync": 11
+  },
+  "position_drift": {
+    "positions_checked": 12,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260227_080823",
+    "total_trades": 14,
+    "quality_score": 96,
+    "ceo_rating": "EXCELLENT",
+    "ceo_recommendation": "STRONGLY RECOMMEND APPROVAL"
+  },
+  "sells_count": 2,
+  "buys_count": 12,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: CAVA, EXEL, CELH, FIS, GTX, ELAN, COIN, EQT, DXCM, CHWY"
+    ],
+    "summary": {
+      "position_count": 12,
+      "sells_executed": 2,
+      "buys_executed": 12,
+      "expected_count_change": 10
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 4,
+    "fills_recorded": 4,
+    "orders_updated": 4,
+    "already_recorded": 0,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-02-27T08:08:51.784383",
+  "duration_seconds": 528.690209
+}

@@ -1,0 +1,145 @@
+{
+  "plan_id": "PLAN_20251117_085033",
+  "generated_at": "2025-11-17T16:50:33.639396Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 7,
+    "research_candidates": 68,
+    "gpt5_selected": 7,
+    "compliance_flagged": 0,
+    "overall_quality_score": 96
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 87,
+    "compliance_advisory": 100
+  },
+  "trades": [
+    {
+      "ticker": "COLB",
+      "action": "BUY",
+      "shares": 317,
+      "allocated_capital": 8561.371,
+      "entry_price": 26.93000030517578,
+      "composite_score": 75.2,
+      "sentiment_score": 70.0,
+      "sentiment_summary": "Columbia Banking System (COLB) recently announced a 3% increase in its quarterly cash dividend to $0.37 per share, payable on December 15, 2025. Additionally, the company authorized a significant $700 million share repurchase program, reflecting confidence in its capital position and future profitability. The CEO highlighted the recent acquisition of Pacific Premier to expand its footprint and emphasized strong core profitability and balance sheet optimization.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ACI",
+      "action": "BUY",
+      "shares": 471,
+      "allocated_capital": 8561.371,
+      "entry_price": 18.174999237060547,
+      "composite_score": 74.8,
+      "sentiment_score": 70.0,
+      "sentiment_summary": "Albertsons Companies (NYSE: ACI) recently announced a $1.5 billion debt refinancing through senior notes, enhancing its financial flexibility and supporting growth initiatives. The company also reported solid Q2 fiscal 2025 results, including 2.2% identical sales growth, 23% digital sales increase, and a $750 million accelerated share repurchase program, alongside a raised buyback authorization to $2.75 billion. Additionally, earnings guidance for fiscal 2025 was raised with anticipated adjusted EBITDA between $3.8B and $3.9B, and positive analyst sentiment with a price target suggesting roughly 28% upside.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "APG",
+      "action": "BUY",
+      "shares": 228,
+      "allocated_capital": 8561.371,
+      "entry_price": 37.540000915527344,
+      "composite_score": 70.6,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "APi Group has demonstrated strong operational momentum with Q3 2025 results showing $2.085 billion in sales and $93 million in net income, alongside raised full-year guidance to $7.83-7.93 billion. The company achieved a new 52-week high on November 10, 2025, and the Police & Firemen's Retirement System of New Jersey recently boosted its stake in the company on November 16-17, 2025. However, insider selling activity by a major 10% shareholder (Franklin Martin E. sold 900,000 shares in early November) has tempered enthusiasm despite the positive financial outlook.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CADE",
+      "action": "BUY",
+      "shares": 223,
+      "allocated_capital": 8561.371,
+      "entry_price": 38.369998931884766,
+      "composite_score": 67.8,
+      "sentiment_score": 55.0,
+      "sentiment_summary": "Recent news for Cadence Bank (CADE) includes minor institutional trading activity, with Boston Partners selling a small portion of its holdings and Bank of New York Mellon Corp acquiring additional shares. There are no major announcements or earnings releases in the last 24 hours, and the stock price remains relatively stable.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "EBC",
+      "action": "BUY",
+      "shares": 485,
+      "allocated_capital": 8561.371,
+      "entry_price": 17.6299991607666,
+      "composite_score": 62.0,
+      "sentiment_score": 70.0,
+      "sentiment_summary": "Eastern Bankshares (EBC) recently gained 3.4% in a session following an activist investor taking a 3% stake and pushing for a sale to a larger institution. The company reported a 44% increase in operating earnings for Q3 2025 and secured regulatory approval for a strategic merger with HarborOne Bancorp, expected to close November 1, 2025. Despite some mixed financial results with earnings misses, revenue beats and record wealth management assets underpin a positive operational outlook.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BRO",
+      "action": "SELL",
+      "shares": 55.0,
+      "sell_pct": 100,
+      "composite_score": 56.400000000000006,
+      "current_price": 80.73999786376953,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Brown & Brown reported strong Q3 2025 financial results with $1.6B in revenue (up 35.4% YoY) and improved margins, but the stock has experienced a significant 17% decline over the past month as investors reassess valuation amid mixed analyst outlooks. Recent institutional activity shows continued buying interest from entities like Allworth Financial LP and the Police & Firemen's Retirement System of New Jersey.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 56.4 < 60 absolute minimum",
+      "current_value": 4450.05
+    },
+    {
+      "ticker": "DAL",
+      "action": "SELL",
+      "shares": 373.0,
+      "sell_pct": 100,
+      "composite_score": 57.6,
+      "current_price": 57.540000915527344,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Recent news for Delta Air Lines (DAL) includes a slight reduction in Wolfe's price target to $70 from $72, but the firm maintains an 'Outperform' rating. There were notable institutional transactions, with Sanders Capital selling shares and the Police & Firemen's Retirement System of New Jersey buying DAL stock. Delta's latest earnings beat analyst expectations, and there are ongoing shifts in index holdings involving DAL.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 57.6 < 60 absolute minimum",
+      "current_value": 21423.255
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 68 candidates (avg score: 44.2)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 86/86 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 2 SELLs, 5 BUYs ($42,807 allocated)",
+      "quality_score": 87,
+      "issues": [
+        "Limited diversification: 5 new positions (target 12-20). Total after trades: 21"
+      ]
+    },
+    {
+      "stage": "compliance_advisory",
+      "message": "Compliance reviewed plan: 5 BUYs, 2 SELLs (0 suggestions)",
+      "quality_score": 100,
+      "issues": []
+    }
+  ],
+  "approved_at": "2025-11-17T16:52:09.418713Z"
+}

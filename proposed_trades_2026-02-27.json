@@ -1,0 +1,243 @@
+{
+  "plan_id": "PLAN_20260227_080823",
+  "generated_at": "2026-02-27T16:08:23.017875Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 14,
+    "research_candidates": 73,
+    "gpt5_selected": 14,
+    "compliance_flagged": 0,
+    "overall_quality_score": 96
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 84,
+    "compliance_advisory": 100
+  },
+  "trades": [
+    {
+      "ticker": "EQT",
+      "action": "BUY",
+      "shares": 122,
+      "allocated_capital": 7500.0,
+      "entry_price": 61.099998474121094,
+      "composite_score": 81.0,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "Zacks Equity Research highlighted EQT Corporation as a top momentum stock for the long term, citing its Momentum Style Score of A and a 6.1% share price increase over the past four weeks[1]. Four analysts revised fiscal 2026 earnings estimates upwards in the last 60 days, boosting the Zacks Consensus Estimate to $4.35 per share, with EQT showing an average earnings surprise of +13%[1]. EQT's investor relations page lists recent stock prices around $54-56 as of late January 2026, with no new releases in the last 24 hours[2].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "DXCM",
+      "action": "BUY",
+      "shares": 102,
+      "allocated_capital": 7500.0,
+      "entry_price": 73.41500091552734,
+      "composite_score": 79.2,
+      "sentiment_score": 72.0,
+      "sentiment_summary": "DexCom reported strong Q4 2025 earnings on February 12th, beating analyst estimates with $0.68 EPS (vs. $0.65 expected) and $1.26B in revenue (up 13.1% year-over-year).[1][2] The company reaffirmed its 2026 revenue guidance of $5.16\u2013$5.25 billion and completed a $500 million share buyback program.[3] Analyst consensus remains bullish with 21 analysts rating the stock as a 'Buy' and a consensus price target of $85.[4]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ELAN",
+      "action": "BUY",
+      "shares": 285,
+      "allocated_capital": 7500.0,
+      "entry_price": 26.309999465942383,
+      "composite_score": 71.2,
+      "sentiment_score": 82.0,
+      "sentiment_summary": "Elanco Animal Health (NYSE:ELAN) reported strong Q4 2025 results with revenue of $1.144B (+12% YoY) and adjusted EPS of $0.13, beating estimates, alongside raised 2026 guidance for revenue ($4.95\u20135.02B), innovation revenue ($1.15B), and adjusted EPS ($1.00\u20131.06).[1][2][3] The stock surged up to 8.2% and hit 52-week highs following the earnings release on February 24, 2026, with analysts like KeyCorp raising the price target to $29 (overweight) and Leerink to $30 (outperform).[1][2] While full-year 2026 EBITDA guidance slightly missed expectations, the market reaction emphasized the quarterly beat and positive outlook.[2][3]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "GTX",
+      "action": "BUY",
+      "shares": 367,
+      "allocated_capital": 7500.0,
+      "entry_price": 20.420000076293945,
+      "composite_score": 69.4,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "Garrett Motion announced a partnership with Cling Systems for EV HVAC compressors, linking its turbocharger expertise to growth in China's electric bus and truck markets, with production starting in 2027[3]. This deal highlights expansion into electrification amid ongoing analyst buy ratings and positive price targets[2][4]. However, an insider sale by a director on February 24 and concerns over high debt and reliance on internal combustion engines temper the outlook[2][3].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "EXEL",
+      "action": "BUY",
+      "shares": 168,
+      "allocated_capital": 7500.0,
+      "entry_price": 44.52000045776367,
+      "composite_score": 69.4,
+      "sentiment_score": 35.0,
+      "sentiment_summary": "Exelixis EVP of Research and Development Dana Aftab sold 47,918 shares of EXEL stock at $44.50 per share on February 24, 2026, totaling approximately $2.1 million, as reported in SEC Form 4 filings. No other significant news events, such as earnings releases or clinical trial updates, appear in the last 24 hours. Analyst consensus remains at Buy from 16 analysts as of February 27, 2026, though this predates the insider sale.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CAVA",
+      "action": "BUY",
+      "shares": 92,
+      "allocated_capital": 7500.0,
+      "entry_price": 80.67500305175781,
+      "composite_score": 69.0,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "CAVA stock surged approximately 25% on February 25, 2026, following a Q4 earnings beat with EPS of $0.04 versus $0.03 expected, revenue of $275 million topping estimates, and strong 2026 guidance for 3-5% same-store sales growth and 74-76 new restaurants[1][2][3]. Multiple analysts raised price targets (e.g., UBS to $75, TD Cowen to $90, Piper Sandler to $85), supporting a Moderate Buy consensus with an $82.45 average target, though Argus issued a Hold rating on February 27[2][4][5]. Concerns linger over high valuation (P/E ~74-157), execution risks, and potential traffic slowdowns from premium pricing[1][2][6].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BROS",
+      "action": "BUY",
+      "shares": 141,
+      "allocated_capital": 7500.0,
+      "entry_price": 53.064998626708984,
+      "composite_score": 66.6,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "Dutch Bros Inc. (NYSE:BROS) received a consensus 'Moderate Buy' recommendation from brokerages, with an average 12-month price target of $77.05, amid shares trading near $53.97[4]. The company recently reported strong quarterly results, beating EPS estimates at $0.17 versus $0.10 expected and revenue of $443.6M versus $424.4M anticipated, up 29.4% year-over-year[4]. Earlier in February, BROS stock soared 27% following phenomenal fourth-quarter results and expansion past 1,000 stores[3].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BRO",
+      "action": "BUY",
+      "shares": 104,
+      "allocated_capital": 7500.0,
+      "entry_price": 71.52999877929688,
+      "composite_score": 66.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "I cannot provide the requested JSON analysis because the search results do not contain sufficient recent news sentiment data for Brown & Brown Inc (BRO) stock from the last 24 hours.\n\nThe available in",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CHWY",
+      "action": "BUY",
+      "shares": 274,
+      "allocated_capital": 7500.0,
+      "entry_price": 27.309999465942383,
+      "composite_score": 65.4,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "Zacks highlights Chewy (CHWY) as a strong growth stock with a Growth Style Score of A, 23.1% forecasted year-over-year earnings growth, and positive analyst revisions for fiscal 2026[1]. The company appointed Christopher Deppe, a operations-focused finance veteran, as its new CFO, aligning with goals to improve profitability margins to 5.6-5.7% in 2025 and 10% longer-term[4]. After-hours trading shows minor decline to $24.67, down 0.15% from regular close[2].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "FIS",
+      "action": "BUY",
+      "shares": 148,
+      "allocated_capital": 7500.0,
+      "entry_price": 50.45000076293945,
+      "composite_score": 62.8,
+      "sentiment_score": 72.0,
+      "sentiment_summary": "FIS reported strong 2025 results and issued aggressive 2026 guidance, projecting 30-31% adjusted revenue growth, 34-35% EBITDA growth, and 8-10% EPS growth, driven by the Total Issuing Solutions acquisition and AI initiatives[1][3]. The stock rose 4.0% on Friday amid this positive outlook, though some analysts cut price targets while maintaining buy or outperform ratings[2][3][6]. Institutional sales occurred, but short interest dropped sharply, and debt refinancing plans aim to reduce near-term risks[3][8].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CELH",
+      "action": "BUY",
+      "shares": 142,
+      "allocated_capital": 7500.0,
+      "entry_price": 52.7599983215332,
+      "composite_score": 62.6,
+      "sentiment_score": 85.0,
+      "sentiment_summary": "Celsius Holdings (CELH) shares surged after reporting Q4 2025 results with revenue of $721.6 million, up 117% year-over-year, and adjusted EPS of $0.26-$0.42, both beating analyst expectations.[1][2][5] Bank of America upgraded the stock to Buy with a $65 price target, citing strong growth from brands like Alani Nu and PepsiCo partnership.[2][3] Full-year 2025 revenue hit a record $2.5 billion, though some note margin pressures from a one-off loss and integration costs.[4][5]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "COIN",
+      "action": "BUY",
+      "shares": 56,
+      "allocated_capital": 9845.35986328125,
+      "entry_price": 175.80999755859375,
+      "composite_score": 61.0,
+      "sentiment_score": 55.0,
+      "sentiment_summary": "Coinbase launched US stock and ETF trading for all users, enabling 24/7 trades funded by dollars or USDC, alongside a partnership with Yahoo Finance[5]. Institutional moves include HB Wealth Management buying shares and Aristotle Core Equity Fund highlighting COIN's growth in derivatives, international expansion, and regulatory tailwinds like the GENIUS Act[3][4]. However, recent earnings misses, downward analyst revisions, and sharply declining earnings estimates persist in coverage[1][2].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Auto-added for capital efficiency (score: 61.0)",
+      "gpt5_allocated": false,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "AG",
+      "action": "SELL",
+      "shares": 275.0,
+      "sell_pct": 100,
+      "composite_score": 61.2,
+      "current_price": 31.489999771118164,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "First Majestic Silver Corp. (AG) reported record Q4 2025 free cash flow of $250.4 million, up 153% from the prior quarter, with cash equivalents at $793.4 million and record working capital of $733.6 million. The company raised its quarterly dividend target from 1% to 2% of net quarterly revenues. AG stock has surged 104.2% in the past three months, outperforming the industry, and holds a Zacks Rank #1 (Strong Buy).[8]",
+      "gpt5_reasoning": "AUTOMATED EXIT: Rank #21 (below top 20), score 61.2",
+      "current_value": 8621.25
+    },
+    {
+      "ticker": "SN",
+      "action": "SELL",
+      "shares": 48.0,
+      "sell_pct": 100,
+      "composite_score": 52.400000000000006,
+      "current_price": 122.2300033569336,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "SharkNinja (SN) reported strong Q4 and FY2025 results with net sales up 15.7% to $6,399.2M and net income up 59.9% to $701.4M, alongside 2026 guidance projecting 10-11% sales growth and Adjusted EPS of $5.90-$6.00[1][2]. The company announced a $750M share repurchase program, and valuation analyses indicate the stock is undervalued with fair value estimates of $139.82 to $190.8 per share[1]. Recent stock prices show some fluctuation, trading around $122-131 as of late February 2026[2][3][4].",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 52.4 < 60 absolute minimum",
+      "current_value": 5859.84
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 73 candidates (avg score: 46.8)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 84/84 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 2 SELLs, 12 BUYs ($92,345 allocated)",
+      "quality_score": 84,
+      "issues": [
+        "Capital deployment 78.2% (target 90.0%+)"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 12 BUYs approved, 0 rejected, 2 SELLs",
+      "quality_score": 100,
+      "issues": []
+    }
+  ],
+  "approved_at": "2026-02-27T16:08:24.880501Z"
+}

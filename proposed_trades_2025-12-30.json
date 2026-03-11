@@ -1,0 +1,102 @@
+{
+  "plan_id": "PLAN_20251230_080909",
+  "generated_at": "2025-12-30T16:09:09.625212Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 4,
+    "research_candidates": 71,
+    "gpt5_selected": 4,
+    "compliance_flagged": 0,
+    "overall_quality_score": 75
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 16,
+    "compliance_advisory": 85
+  },
+  "trades": [
+    {
+      "ticker": "AG",
+      "action": "SELL",
+      "shares": 308.0,
+      "sell_pct": 100,
+      "composite_score": 52.0,
+      "current_price": 16.990100860595703,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Based on the search results provided, I cannot deliver the JSON analysis you requested because the available data is insufficient and ambiguous regarding \"AG stock.\"\n\nThe search results contain two di",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 52.0 < 60 absolute minimum",
+      "current_value": 5251.8928
+    },
+    {
+      "ticker": "CARR",
+      "action": "SELL",
+      "shares": 93.0,
+      "sell_pct": 100,
+      "composite_score": 57.2,
+      "current_price": 53.5099983215332,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Carrier Global Corporation (CARR) announced a definitive agreement to sell its Riello business to Ariston Group for approximately $430 million, with proceeds intended for general corporate purposes including share repurchases; the deal is expected to close in the first half of 2026.[1] Recent institutional activity includes Alpine Woods Capital Investors selling CARR shares and Brookstone Capital Management acquiring 35,691 shares, reported on December 25 and 28, 2025, respectively.[2][3] No other major news items from the last 24 hours (December 29-30, 2025) appear in the results.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 57.2 < 60 absolute minimum",
+      "current_value": 4976.43
+    },
+    {
+      "ticker": "HRL",
+      "action": "SELL",
+      "shares": 158.0,
+      "sell_pct": 100,
+      "composite_score": 53.6,
+      "current_price": 23.989999771118164,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No news articles specifically dated within the last 24 hours (since December 29, 2025, 4 PM UTC) were found in the search results for HRL stock. The most recent items include a StockStory analysis highlighting concerns over shrinking unit sales, low margins, and declining profitability, alongside Hormel Foods' Q4 and full-year fiscal 2025 earnings report showing net sales of $12.1 billion (up 2% organically) but with noted operational risks. JP Morgan maintained an Overweight recommendation approximately two days prior.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 53.6 < 60 absolute minimum",
+      "current_value": 3792.79
+    },
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "shares": 151.0,
+      "sell_pct": 100,
+      "composite_score": 56.0,
+      "current_price": 24.56999969482422,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Omnicom has completed a $2.95 billion exchange offer for Interpublic Group (IPG) notes, following European Commission approval of their $13.25 billion all-stock acquisition, with the merger expected to close soon.[1] IPG's Initiative agency secured the #1 global position in new business rankings, winning $1.4 billion in value including Volvo's $500 million account.[2] Stock trading shows quiet consolidation around $29.70 with a split Wall Street verdict on 2026 ad spend.[3]",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 56.0 < 60 absolute minimum",
+      "current_value": 3710.07
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 71 candidates (avg score: 49.7)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 85/85 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 4 SELLs, 3 BUYs ($16,500 allocated)",
+      "quality_score": 16,
+      "issues": [
+        "Capital deployment 13.2% (target 90.0%+)",
+        "Limited diversification: 3 new positions (target 12-20). Total after trades: 13"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 0 BUYs approved, 3 rejected, 4 SELLs",
+      "quality_score": 85,
+      "issues": [
+        "3 orders REJECTED by compliance"
+      ]
+    }
+  ],
+  "approved_at": "2025-12-30T16:09:11.127366Z"
+}

@@ -1,0 +1,166 @@
+{
+  "date": "2026-01-06",
+  "start_time": "2026-01-06T08:00:06.154710",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "11:00 AM ET",
+    "current_date": "Tuesday, January 06, 2026"
+  },
+  "regime_analysis": {
+    "regime": "BULLISH",
+    "confidence": "MEDIUM",
+    "spy_price": 688.875,
+    "spy_change_pct": 0.16795052435282604,
+    "vix_level": 15.039999961853027,
+    "recommendation": "FAVORABLE CONDITIONS"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "status": "SKIPPED",
+      "reason": "Asset not tradeable: AssetStatus.INACTIVE"
+    },
+    {
+      "ticker": "CWAN",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260106T160754Z_c8977620",
+      "_unfilled_reason": "Position still held"
+    },
+    {
+      "ticker": "F",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260106T160755Z_e33faaf9"
+    },
+    {
+      "ticker": "APTV",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260106T160755Z_e9e6d886"
+    },
+    {
+      "ticker": "ESI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260106T160755Z_53272927"
+    },
+    {
+      "ticker": "KKR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260106T160755Z_f0b686af"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-01-06T08:08:14.782062",
+    "equity": 101095.04,
+    "cash": 37059.5,
+    "buying_power": 134444.47,
+    "portfolio_value": 101095.04,
+    "starting_capital": 100000.0,
+    "total_return": 1095.0399999999936,
+    "total_return_pct": 1.0950399999999936,
+    "daily_pl": 3370.0899999999965,
+    "daily_pl_pct": 3.448546149166612,
+    "total_unrealized_pl": 3659.8480000000004,
+    "position_count": 6,
+    "positions": [
+      {
+        "ticker": "CWAN",
+        "shares": 839.0,
+        "entry_price": 19.6,
+        "current_price": 24.125,
+        "market_value": 20240.875,
+        "unrealized_pl": 3796.475,
+        "unrealized_pl_pct": 23.08673469387755
+      },
+      {
+        "ticker": "KKR",
+        "shares": 74.0,
+        "entry_price": 136.14,
+        "current_price": 136.02,
+        "market_value": 10065.48,
+        "unrealized_pl": -8.88,
+        "unrealized_pl_pct": -0.0881445570736
+      },
+      {
+        "ticker": "F",
+        "shares": 738.0,
+        "entry_price": 13.59,
+        "current_price": 13.5885,
+        "market_value": 10028.313,
+        "unrealized_pl": -1.107,
+        "unrealized_pl_pct": -0.01103752759382
+      },
+      {
+        "ticker": "ESI",
+        "shares": 372.0,
+        "entry_price": 26.94,
+        "current_price": 26.93,
+        "market_value": 10017.96,
+        "unrealized_pl": -3.72,
+        "unrealized_pl_pct": -0.03711952487008
+      },
+      {
+        "ticker": "APTV",
+        "shares": 123.0,
+        "entry_price": 81.22,
+        "current_price": 81.08,
+        "market_value": 9972.84,
+        "unrealized_pl": -17.22,
+        "unrealized_pl_pct": -0.17237133710909
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.7700831024930697
+      }
+    ]
+  },
+  "warnings": [
+    "Verification: Still holding positions that should have been sold: CWAN"
+  ],
+  "errors": [],
+  "position_drift": {
+    "positions_checked": 2,
+    "oversized_count": 1,
+    "trim_recommendations": 1
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260106_080750",
+    "total_trades": 6,
+    "quality_score": 81,
+    "ceo_rating": "GOOD",
+    "ceo_recommendation": "RECOMMEND APPROVAL"
+  },
+  "sells_count": 1,
+  "buys_count": 4,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Still holding positions that should have been sold: CWAN"
+    ],
+    "summary": {
+      "position_count": 6,
+      "sells_executed": 1,
+      "buys_executed": 4,
+      "expected_count_change": 3
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 8,
+    "fills_recorded": 5,
+    "orders_updated": 5,
+    "already_recorded": 2,
+    "no_match_in_db": 1,
+    "errors": []
+  },
+  "end_time": "2026-01-06T08:08:17.413363",
+  "duration_seconds": 491.258667
+}

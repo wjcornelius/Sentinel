@@ -1,0 +1,285 @@
+{
+  "plan_id": "PLAN_20251212_080753",
+  "generated_at": "2025-12-12T16:07:53.802773Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 17,
+    "research_candidates": 69,
+    "gpt5_selected": 17,
+    "compliance_flagged": 0,
+    "overall_quality_score": 93
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 79,
+    "compliance_advisory": 95
+  },
+  "trades": [
+    {
+      "ticker": "MARA",
+      "action": "BUY",
+      "shares": 422,
+      "allocated_capital": 5000,
+      "entry_price": 11.84000015258789,
+      "composite_score": 67.8,
+      "sentiment_score": 45.0,
+      "sentiment_summary": "Meteora Capital LLC recently took a position in Marathon Digital Holdings (MARA), signaling some institutional interest[2]. The stock opened at $11.84 and traded down 0.7% on Friday, December 12, 2025, amid ongoing analyst coverage with mixed price target adjustments[2]. Historical data shows after-hours trading at $11.86 on December 11[5].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "FTNT",
+      "action": "BUY",
+      "shares": 60,
+      "allocated_capital": 5000,
+      "entry_price": 82.25,
+      "composite_score": 65.4,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "Options market activity shows high implied volatility for Fortinet's Jan 2026 $25 call, signaling expectations of a significant stock price move, amid analysts raising current quarter earnings estimates from 66 to 74 cents per share with no downward revisions. Fortinet presented at the Barclays Global Technology Conference on December 12, 2025, with a transcript available. Stock traded flat around $82.45 with low volume on December 12.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "JD",
+      "action": "BUY",
+      "shares": 169,
+      "allocated_capital": 5000,
+      "entry_price": 29.56999969482422,
+      "composite_score": 65.0,
+      "sentiment_score": 63.0,
+      "sentiment_summary": "JD.com announced a large social-welfare style commitment \u2014 a 22 billion yuan (~$3.12 billion) investment to provide housing for 150,000 delivery riders over five years \u2014 signaling heavy spending to support its logistics workforce and compete in instant delivery markets[2]. Separately, JD\u2019s supply\u2011chain spin\u2011off Jingdong Industrials had a mixed Hong Kong debut after raising HK$2.8 billion in an IPO, with shares opening below the offering price before trimming losses, indicating investor interest but some near\u2011term volatility in affiliated units[1]. Market data shows modestly negative near\u2011term trading and mixed options activity while at least one institutional holder increased JD exposure, suggesting divergent investor views[3][4].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "GLXY",
+      "action": "BUY",
+      "shares": 176,
+      "allocated_capital": 5000,
+      "entry_price": 28.350000381469727,
+      "composite_score": 63.4,
+      "sentiment_score": 85.0,
+      "sentiment_summary": "Galaxy Digital (GLXY) shares rallied 13% on December 9 amid a crypto market recovery with Bitcoin exceeding $94,000. Citizens analyst Devin Ryan initiated coverage with a bullish outlook, projecting shares could double to $60 in the next year due to growth in crypto, AI, and digital asset ETFs. Technicals suggest upside potential above the 100-day moving average near $30.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "EOSE",
+      "action": "BUY",
+      "shares": 329,
+      "allocated_capital": 5000,
+      "entry_price": 15.1899995803833,
+      "composite_score": 62.0,
+      "sentiment_score": 72.0,
+      "sentiment_summary": "Over the past 24 hours EOSE has seen bullish market activity driven by recent capital-raising news and institutional buying: reports note a large equity/capital raise completed in November and follow-on offerings (and a proposed convertible-note offering) that management says will shore up liquidity and repurchase existing convertible debt, and filings show NewEdge Advisors increased its stake which coincided with a >10% intraday rally for the stock in the most recent session[2][6][5]. Social and analyst commentary remains mixed\u2014market chatter highlights policy tailwinds for grid-storage and the company\u2019s zinc-based battery technology, while some note insider sales and widened net losses as cautionary factors[3][4][7].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "EWY",
+      "action": "BUY",
+      "shares": 53,
+      "allocated_capital": 5000,
+      "entry_price": 93.04000091552734,
+      "composite_score": 60.8,
+      "sentiment_score": 44.0,
+      "sentiment_summary": "EWY (iShares MSCI South Korea ETF) traded lower in the most recent session, closing down about 1.8% on Dec 12, 2025 with elevated volume reported for the day[2]. Market commentary shows modest near-term technical weakness and mixed signals from price/volume patterns in recent weeks[1]. Broader macro notes indicate continued export strength for South Korea in 2025 (supportive for the market longer term), but that hasn\u2019t offset today\u2019s short-term downside[5].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "EMR",
+      "action": "BUY",
+      "shares": 36,
+      "allocated_capital": 5000,
+      "entry_price": 137.8166046142578,
+      "composite_score": 60.6,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "Emerson Electric (EMR) stock surged 2.73% intraday to $140.75, driven by institutional buying, a dividend increase to $0.555 quarterly, and Representative Richard McCormick's share purchase, with analysts maintaining a 'Moderate Buy' rating and $147.67 average target.[1][3] The stock outperformed the S&P 500 with a 1.87% gain to $139.57 and 3.45% monthly rise, though Jefferies downgraded it to Hold with a $145 target.[2][4] A share buyback approval on December 10 led to a stock fall, amid some underperformance concerns.[5][7]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "HRL",
+      "action": "BUY",
+      "shares": 206,
+      "allocated_capital": 5000,
+      "entry_price": 24.15999984741211,
+      "composite_score": 60.6,
+      "sentiment_score": 45.0,
+      "sentiment_summary": "State Street Corp acquired 354,340 shares of Hormel Foods (HRL) on December 12, 2025, signaling institutional interest[3]. Recent analyst actions include a downgrade to Sell Candidate on December 11, 2025, alongside mixed views with some 'buy' ratings and a consensus 'Hold'[2][3]. Earlier Q4 2025 earnings beat EPS expectations but missed revenue, with reiterated 2026 turnaround guidance amid ongoing cost pressures[1][4][5].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "MGY",
+      "action": "BUY",
+      "shares": 215,
+      "allocated_capital": 5000,
+      "entry_price": 23.235000610351562,
+      "composite_score": 60.6,
+      "sentiment_score": 55.0,
+      "sentiment_summary": "Mizuho upgraded Magnolia Oil & Gas (MGY) to Outperform with a $29 price target, citing strong balance sheet, cash returns, low breakeven inventory, and future gas price benefits.[3] KeyCorp maintains an Overweight rating at $29, while institutional moves include Arrowstreet buying shares and sales by Osterweis and First Trust.[4][5][6] Recent stock price dipped 1-1.43% to around $22.73 amid sell signals, despite solid Q3 earnings meeting EPS estimates and beating revenue.[2][5]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "AG",
+      "action": "BUY",
+      "shares": 307,
+      "allocated_capital": 5000,
+      "entry_price": 16.274999618530273,
+      "composite_score": 60.4,
+      "sentiment_score": 52.0,
+      "sentiment_summary": "Jenoptik AG issued its annual declaration of conformity with the German Corporate Governance Code on December 12, 2025, confirming compliance with most recommendations from December 11, 2024, to November 26, 2025, except for minor precautionary deviations. The company plans full compliance starting December 30, 2025, following the resignation of Supervisory Board Chairman Matthias Wierlacher on December 29, 2025.[1] No other AG stock-related news appears in the last 24 hours.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "GSK",
+      "action": "BUY",
+      "shares": 102,
+      "allocated_capital": 5000,
+      "entry_price": 48.68370056152344,
+      "composite_score": 60.2,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "GSK's share price passed above its 200-day moving average, signaling positive technical momentum. The company announced a block listing of 250,000 new ordinary shares for its employee Share Save Plan and updated its ongoing share buyback program with treasury shares reaching 238.6 million. Executives acquired shares under a reward plan, and Arexvy received EU approval for an expanded indication.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "JCI",
+      "action": "BUY",
+      "shares": 42,
+      "allocated_capital": 5000,
+      "entry_price": 118.05999755859375,
+      "composite_score": 60.2,
+      "sentiment_score": 45.0,
+      "sentiment_summary": "Within the last 24 hours, Johnson Controls International (JCI) saw mixed insider activity including a sale of 21,595 shares by the EVP & General Counsel on December 10 and purchases by institutional investors like Quantinno Capital Management LP, offset by a sale from Nebula Research & Development LLC.[1][2][5] The stock opened at $117.87 and traded between $117.77 and $118.09, showing modest gains amid new insider activity reported on December 11.[1][3] Separate news noted foreign investors buying gold stocks with 'JCI' rising 0.45%, though this likely refers to a different entity.[7]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CARR",
+      "action": "BUY",
+      "shares": 93,
+      "allocated_capital": 5000,
+      "entry_price": 53.650001525878906,
+      "composite_score": 60.0,
+      "sentiment_score": 64.0,
+      "sentiment_summary": "In the past 24 hours, institutional buying and analyst activity have been reported: SEI Investments acquired 983,197 shares of Carrier Global (CARR), and MarketBeat noted a modest intraday share-price uptick accompanying that filing[3]. Recent analyst coverage shows Barclays slightly lowered its price target to $72 but maintained an Overweight rating, while outlets continue to highlight Carrier\u2019s $5.0B buyback, dividend increase, and recent Q3 beat with mixed revenue trends[6][4][1].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "JBS",
+      "action": "BUY",
+      "shares": 350,
+      "allocated_capital": 5000,
+      "entry_price": 14.25,
+      "composite_score": 60.0,
+      "sentiment_score": 42.0,
+      "sentiment_summary": "In the past 24 hours, coverage on JBS focused on its NYSE-listed shares trading around the low-to-mid $14 range and continued market pressure after recent weekly and monthly declines, while company commentary about its dual-listing and global strategy remains part of the narrative[2][3][4]. Market data services report short-term price weakness (weekly and monthly declines) and mixed recent fundamentals (quarterly earnings beat but revenue slightly below estimates), contributing to cautious investor sentiment[2][4].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "shares": 151.0,
+      "sell_pct": 100,
+      "composite_score": 56.0,
+      "current_price": 24.56999969482422,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "The Omnicom-IPG merger, completed last month, will result in approximately 4,000 layoffs by year-end to achieve cost synergies, following prior job cuts at both firms. Omnicom announced a new stock incentive plan requiring shareholder approval in January 2026 amid a skeptical market response, with the combined entity's valuation at low multiples reminiscent of the subprime crisis. Bayesian Capital acquired IPG shares, but analyst consensus remains a Hold rating.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 56.0 < 60 absolute minimum",
+      "current_value": 3710.07
+    },
+    {
+      "ticker": "MNST",
+      "action": "SELL",
+      "shares": 83.0,
+      "sell_pct": 100,
+      "composite_score": 58.0,
+      "current_price": 72.48999786376953,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Stifel raised its price target on Monster Beverage (MNST) to $82 from $78 while maintaining a Buy rating, citing expectations for advantaged growth in 2026 from U.S. energy drinks, international expansion, and price realization.[4][7] Zacks highlighted MNST as the Bull of the Day, noting record 2025 revenue, strong demand, and Zacks #1 Rank (Strong Buy).[2][5] Institutional filings show new holdings acquisitions, with the stock opening at $72.49 above its moving averages.[1][3]",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 58.0 < 60 absolute minimum",
+      "current_value": 6085.56
+    },
+    {
+      "ticker": "MRVL",
+      "action": "SELL",
+      "shares": 56.0,
+      "sell_pct": 100,
+      "composite_score": 44.8,
+      "current_price": 85.0999984741211,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "The Manufacturers Life Insurance Company decreased its stock position in Marvell Technology on December 12, 2025, amid a 3.3% drop in MRVL shares, which opened at $89.43. Recent financials show strong performance with Q3 EPS of $0.76 beating estimates by $0.02 and revenue of $2.07 billion exceeding expectations by $10 million. Analyst updates include Morgan Stanley's $112 target, TD Cowen's raise to $100 (Hold), and a consensus leaning positive with many Buy ratings.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 44.8 < 60 absolute minimum",
+      "current_value": 4807.32
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 69 candidates (avg score: 55.9)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 85/85 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 3 SELLs, 15 BUYs ($75,000 allocated)",
+      "quality_score": 79,
+      "issues": [
+        "Capital deployment 63.7% (target 90.0%+)"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 14 BUYs approved, 1 rejected, 3 SELLs",
+      "quality_score": 95,
+      "issues": [
+        "1 orders REJECTED by compliance"
+      ]
+    }
+  ],
+  "approved_at": "2025-12-12T16:07:55.325158Z"
+}

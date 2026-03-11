@@ -1,0 +1,109 @@
+{
+  "date": "2026-01-16",
+  "start_time": "2026-01-16T08:00:05.443193",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "11:00 AM ET",
+    "current_date": "Friday, January 16, 2026"
+  },
+  "regime_analysis": {
+    "regime": "NEUTRAL",
+    "confidence": "MEDIUM",
+    "spy_price": 691.8599853515625,
+    "spy_change_pct": -0.05489496246581188,
+    "vix_level": 16.149999618530273,
+    "recommendation": "NORMAL CONDITIONS"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "status": "SKIPPED",
+      "reason": "Asset not tradeable: AssetStatus.INACTIVE"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-01-16T08:09:09.516180",
+    "equity": 101889.85,
+    "cash": 77178.76,
+    "buying_power": 175358.54,
+    "portfolio_value": 101889.85,
+    "starting_capital": 100000.0,
+    "total_return": 1889.8500000000058,
+    "total_return_pct": 1.8898500000000058,
+    "daily_pl": 4047.6900000000023,
+    "daily_pl_pct": 4.136958955117101,
+    "total_unrealized_pl": 844.2199999999999,
+    "position_count": 3,
+    "positions": [
+      {
+        "ticker": "ESI",
+        "shares": 372.0,
+        "entry_price": 26.94,
+        "current_price": 29.315,
+        "market_value": 10905.18,
+        "unrealized_pl": 883.5,
+        "unrealized_pl_pct": 8.81588715664439
+      },
+      {
+        "ticker": "F",
+        "shares": 738.0,
+        "entry_price": 13.59,
+        "current_price": 13.68,
+        "market_value": 10095.84,
+        "unrealized_pl": 66.42,
+        "unrealized_pl_pct": 0.66225165562914
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.7700831024930697
+      }
+    ]
+  },
+  "warnings": [],
+  "errors": [],
+  "position_drift": {
+    "positions_checked": 3,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260116_080851",
+    "total_trades": 1,
+    "quality_score": 78,
+    "ceo_rating": "GOOD",
+    "ceo_recommendation": "RECOMMEND APPROVAL"
+  },
+  "sells_count": 0,
+  "buys_count": 0,
+  "verification": {
+    "passed": true,
+    "issues": [],
+    "summary": {
+      "position_count": 3,
+      "sells_executed": 0,
+      "buys_executed": 0,
+      "expected_count_change": 0
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 0,
+    "fills_recorded": 0,
+    "orders_updated": 0,
+    "already_recorded": 0,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-01-16T08:09:11.161605",
+  "duration_seconds": 545.718426
+}

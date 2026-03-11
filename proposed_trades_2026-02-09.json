@@ -1,0 +1,231 @@
+{
+  "plan_id": "PLAN_20260209_080928",
+  "generated_at": "2026-02-09T16:09:28.201187Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 13,
+    "research_candidates": 66,
+    "gpt5_selected": 13,
+    "compliance_flagged": 0,
+    "overall_quality_score": 100
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 100,
+    "compliance_advisory": 100
+  },
+  "trades": [
+    {
+      "ticker": "ALKS",
+      "action": "BUY",
+      "shares": 244,
+      "allocated_capital": 8502.17,
+      "entry_price": 34.834999084472656,
+      "composite_score": 76.6,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "Recent news highlights Alkermes (ALKS) receiving a 'Moderate Buy' consensus from brokerages with a $44.69 price target, alongside institutional buying like Allianz Asset Management acquiring 511,702 shares[1][2]. Insider sales occurred on February 2, 2026, including EVP Craig Hopkinson selling 9,000 shares under a 10b5-1 plan and Director Shane Cooke selling 61,200 shares via Rule 144[1][3][4]. No major operational news emerged in the last 24 hours, with upcoming earnings on February 10 noted[5].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ALAB",
+      "action": "BUY",
+      "shares": 45,
+      "allocated_capital": 8502.17,
+      "entry_price": 185.50900268554688,
+      "composite_score": 75.8,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "Astera Labs announced the opening of a new research and development design center in Israel on February 9, 2026, focusing on AI scale-up fabrics, high-bandwidth connectivity, and addressing memory bottlenecks in AI training and inference[3]. The stock rose 18.93% amid this news, outperforming peers, with elevated trading volume 27% above the 20-day average[3]. Allianz Asset Management purchased a new stake in the company[4].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "WPM",
+      "action": "BUY",
+      "shares": 60,
+      "allocated_capital": 8502.17,
+      "entry_price": 140.0050048828125,
+      "composite_score": 71.0,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "Wheaton Precious Metals stock opened up 4.0% on Monday with institutional buying activity from multiple funds. However, analyst sentiment is mixed, with a consensus 'Buy' rating tempered by valuation concerns, as the stock trades at a P/E ratio of 61.7x\u2014nearly double peer averages\u2014suggesting significant upside may already be priced in.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ANET",
+      "action": "BUY",
+      "shares": 60,
+      "allocated_capital": 8502.17,
+      "entry_price": 140.52999877929688,
+      "composite_score": 70.4,
+      "sentiment_score": 72.0,
+      "sentiment_summary": "Arista Networks (ANET) shows bullish momentum with pre-market trading at $137.23 and opening up 6.9% at $137.50, supported by institutional buying from Profund Advisors ($7.10M position) and Large Capital Growth Fund (9,142 shares).[3][4][6] Analyst consensus remains 'Moderate Buy' with an average price target of $164.44, highlighting AI revenue growth to $2.75B in 2026 and strong positioning in AI infrastructure.[1][2][4] Recent analyses note high P/E concerns but emphasize upside potential to $184 by 2027 despite a 16% drop from highs.[1][2]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "AGI",
+      "action": "BUY",
+      "shares": 197,
+      "allocated_capital": 8502.17,
+      "entry_price": 43.1150016784668,
+      "composite_score": 67.8,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "Alamos Gold Inc. (AGI) opened at $40.19 on February 9, 2026, with reports of a 6.7% increase, continuing positive momentum amid strong analyst support including 'Buy' ratings and price targets up to $60 from Scotiabank.[5] Forecasts predict slight upward movement to around $40.2, backed by 70% bullish technical indicators, while institutional adjustments like a position cut by Ashton Thomas were noted but overshadowed by broader optimism.[2][5] Analyst consensus remains 'Buy' with an average target of $45.50.[5]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "AU",
+      "action": "BUY",
+      "shares": 79,
+      "allocated_capital": 8502.17,
+      "entry_price": 106.81999969482422,
+      "composite_score": 67.0,
+      "sentiment_score": 55.0,
+      "sentiment_summary": "Recent news highlights positive momentum in ASX 200 financials, with banks like ANZ, Westpac, and QBE gaining, alongside broker buy recommendations for ANZ and upgrades for lithium miner PLS[1][2]. Insider buying at First Au (ASX:FAU) signals confidence in the gold explorer, while AU Small Finance Bank saw a slight price gain amid investor interest[3][5]. Tech and mining sectors faltered last week, but upbeat bank earnings outlooks and selective buy calls provide mild optimism[1][2].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "AR",
+      "action": "BUY",
+      "shares": 247,
+      "allocated_capital": 8502.17,
+      "entry_price": 34.290000915527344,
+      "composite_score": 66.2,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "ARKK shares traded between $66.30 and $70.58 on February 9, 2026, closing at $70.55 with elevated volume of 11.26M shares versus an average of 8.9M. Stock analysis sites report mixed short-term signals but have upgraded ARKK to a buy candidate due to positive trends and short-term buying opportunities. No major negative news events were reported in the last 24 hours.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BEKE",
+      "action": "BUY",
+      "shares": 452,
+      "allocated_capital": 8502.17,
+      "entry_price": 18.80500030517578,
+      "composite_score": 65.4,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "Goldman Sachs raised its price target for KE Holdings (BEKE) from $18.60 to $19 on February 8, 2026, while downgrading the rating from Buy to Neutral due to the need for further visibility into property market stabilization.[1] Despite the downgrade, overall analyst consensus remains strongly bullish with a median 1-year price target of $21.02 implying 14% upside, and no Sell ratings among covering analysts.[1] Institutional activity shows mixed signals, including a large share sale by C WorldWide Group, but ongoing buybacks from November 2025 to January 2026 highlight active capital management.[2][6]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "AS",
+      "action": "BUY",
+      "shares": 217,
+      "allocated_capital": 8502.17,
+      "entry_price": 39.099998474121094,
+      "composite_score": 64.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "U.S. stocks opened slightly lower on February 9, 2026, with the S&P 500 slipping 0.2% and the Dow down 0.1% in early trading after Friday's strong rally[1][4]. Broader market news highlights positive earnings momentum, especially in tech driving 61% of EPS growth, alongside mentions of stocks like Palantir as top performers[1][3]. No specific news on AS stock (likely Amer Sports) appears in the last 24 hours[1][2][3][4].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "B",
+      "action": "BUY",
+      "shares": 183,
+      "allocated_capital": 8502.17,
+      "entry_price": 46.375,
+      "composite_score": 62.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No significant news articles specifically about Berkshire Hathaway Class B (BRK.B) stock were published in the last 24 hours as of February 9, 2026, 4 PM UTC. Available data shows recent trading activity with shares around $501-$509 on February 8, and Morningstar noting it trades at a premium to its $965 fair value estimate from October 2025. Options trading for Barrick Mining (B) was mentioned but is unrelated to BRK.B.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "AXTA",
+      "action": "BUY",
+      "shares": 251,
+      "allocated_capital": 8502.17,
+      "entry_price": 33.76499938964844,
+      "composite_score": 61.4,
+      "sentiment_score": 45.0,
+      "sentiment_summary": "Axalta Coating Systems (AXTA) faces upcoming earnings on February 10, expected to show flat EPS on lower revenues amid sequential declines, with consensus estimates revised lower recently.[1][3] Coverage highlights a pending merger with AkzoNobel targeting mid-2026 shareholder vote and year-end close, promising $600M synergies, though it prompted some analyst downgrades to Hold in January.[3][5] Recent stock performance shows short-term gains contrasting longer-term declines, with analysts maintaining a neutral-to-Buy consensus and fair value suggesting undervaluation.[2][4]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BILL",
+      "action": "BUY",
+      "shares": 169,
+      "allocated_capital": 8502.17,
+      "entry_price": 50.15999984741211,
+      "composite_score": 60.6,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "BILL Holdings reported strong Q2 2026 results, beating revenue and EPS estimates with $414.7M revenue and $0.64 EPS, leading to a 37% stock surge post-earnings. Analysts maintain a 'Moderate Buy' consensus with an average price target around $61, supported by raised FY26 guidance and positive notes on profitability and growth. Some price target cuts and minor insider selling provide slight counterbalance.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CENX",
+      "action": "BUY",
+      "shares": 156,
+      "allocated_capital": 8502.17,
+      "entry_price": 54.380001068115234,
+      "composite_score": 60.6,
+      "sentiment_score": 45.0,
+      "sentiment_summary": "No specific news articles about Century Aluminum (CENX) from the last 24 hours (Feb 8-9, 2026) were identified in the search results. The most recent items include a Feb 6 report of CENX hitting a new 52-week high of $52.78 and analyst consensus ratings as of Feb 8 showing a 'Buy' recommendation[1][6]. Earlier developments, such as the Hawesville site sale and new smelter plans on Feb 2 and Jan 26, have been positively received with stock gains[3][5][7].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 66 candidates (avg score: 46.0)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 77/77 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 0 SELLs, 13 BUYs ($110,528 allocated)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 13 BUYs approved, 0 rejected, 0 SELLs",
+      "quality_score": 100,
+      "issues": []
+    }
+  ],
+  "approved_at": "2026-02-09T16:09:30.022844Z"
+}

@@ -1,0 +1,247 @@
+{
+  "date": "2026-02-16",
+  "start_time": "2026-02-16T08:00:02.221148",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "11:00 AM ET",
+    "current_date": "Monday, February 16, 2026"
+  },
+  "regime_analysis": {
+    "regime": "NEUTRAL",
+    "confidence": "MEDIUM",
+    "spy_price": 681.75,
+    "spy_change_pct": 0.07045377823616135,
+    "vix_level": 21.56999969482422,
+    "recommendation": "NORMAL CONDITIONS"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "CART",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260216T160800Z_c903ffa8",
+      "_unfilled_reason": "Position still held"
+    },
+    {
+      "ticker": "AU",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260216T160800Z_ad082f4c",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ANET",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260216T160800Z_b75b1622",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "APG",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260216T160800Z_047f701d",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ACI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260216T160800Z_ea245798",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "B",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260216T160800Z_522c2162",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "COMM",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260216T160800Z_a57e9eee",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "AS",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260216T160800Z_1328b6d0",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BILL",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260216T160800Z_a896d39b",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "AXTA",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260216T160800Z_e605b5b6",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-02-16T08:08:18.533616",
+    "equity": 103962.95,
+    "cash": 16711.78,
+    "buying_power": 116964.66,
+    "portfolio_value": 103962.95,
+    "starting_capital": 100000.0,
+    "total_return": 3962.949999999997,
+    "total_return_pct": 3.962949999999997,
+    "daily_pl": 3710.0699999999924,
+    "daily_pl_pct": 3.7007116404037395,
+    "total_unrealized_pl": 3764.4300000000003,
+    "position_count": 11,
+    "positions": [
+      {
+        "ticker": "DOCN",
+        "shares": 167.0,
+        "entry_price": 60.11,
+        "current_price": 68.16,
+        "market_value": 11382.72,
+        "unrealized_pl": 1344.35,
+        "unrealized_pl_pct": 13.392000000000001
+      },
+      {
+        "ticker": "AGI",
+        "shares": 224.0,
+        "entry_price": 44.8,
+        "current_price": 45.25,
+        "market_value": 10136.0,
+        "unrealized_pl": 100.8,
+        "unrealized_pl_pct": 1.004
+      },
+      {
+        "ticker": "CF",
+        "shares": 107.0,
+        "entry_price": 92.61,
+        "current_price": 94.66,
+        "market_value": 10128.62,
+        "unrealized_pl": 219.35,
+        "unrealized_pl_pct": 2.214
+      },
+      {
+        "ticker": "CNM",
+        "shares": 173.0,
+        "entry_price": 57.6,
+        "current_price": 58.18,
+        "market_value": 10065.14,
+        "unrealized_pl": 100.34,
+        "unrealized_pl_pct": 1.0070000000000001
+      },
+      {
+        "ticker": "CART",
+        "shares": 265.0,
+        "entry_price": 37.65,
+        "current_price": 36.3,
+        "market_value": 9619.5,
+        "unrealized_pl": -357.75,
+        "unrealized_pl_pct": -3.5860000000000003
+      },
+      {
+        "ticker": "ARM",
+        "shares": 54.0,
+        "entry_price": 109.33,
+        "current_price": 125.28,
+        "market_value": 6765.12,
+        "unrealized_pl": 861.3,
+        "unrealized_pl_pct": 14.588999999999999
+      },
+      {
+        "ticker": "AEM",
+        "shares": 31.0,
+        "entry_price": 189.73,
+        "current_price": 216.59,
+        "market_value": 6714.29,
+        "unrealized_pl": 832.66,
+        "unrealized_pl_pct": 14.157
+      },
+      {
+        "ticker": "RRC",
+        "shares": 167.0,
+        "entry_price": 35.81,
+        "current_price": 37.57,
+        "market_value": 6274.19,
+        "unrealized_pl": 293.92,
+        "unrealized_pl_pct": 4.915
+      },
+      {
+        "ticker": "AES",
+        "shares": 385.0,
+        "entry_price": 15.56,
+        "current_price": 16.28,
+        "market_value": 6267.8,
+        "unrealized_pl": 277.2,
+        "unrealized_pl_pct": 4.627
+      },
+      {
+        "ticker": "CMCSA",
+        "shares": 196.0,
+        "entry_price": 30.56,
+        "current_price": 31.57,
+        "market_value": 6187.72,
+        "unrealized_pl": 197.96,
+        "unrealized_pl_pct": 3.305
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [
+    "Verification: Still holding positions that should have been sold: CART",
+    "Verification: Expected positions not found: COMM, AU, APG, ACI, B, AS, ANET, BILL, AXTA"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 11,
+    "db_positions_before": 10,
+    "stale_closed": 0,
+    "in_sync": 10
+  },
+  "position_drift": {
+    "positions_checked": 11,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260216_080750",
+    "total_trades": 10,
+    "quality_score": 93,
+    "ceo_rating": "EXCELLENT",
+    "ceo_recommendation": "STRONGLY RECOMMEND APPROVAL"
+  },
+  "sells_count": 1,
+  "buys_count": 9,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Still holding positions that should have been sold: CART",
+      "Expected positions not found: COMM, AU, APG, ACI, B, AS, ANET, BILL, AXTA"
+    ],
+    "summary": {
+      "position_count": 11,
+      "sells_executed": 1,
+      "buys_executed": 9,
+      "expected_count_change": 8
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 0,
+    "fills_recorded": 0,
+    "orders_updated": 0,
+    "already_recorded": 0,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-02-16T08:08:20.041141",
+  "duration_seconds": 497.820007
+}

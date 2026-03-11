@@ -1,0 +1,135 @@
+{
+  "plan_id": "PLAN_20260106_080750",
+  "generated_at": "2026-01-06T16:07:50.053848Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 6,
+    "research_candidates": 70,
+    "gpt5_selected": 6,
+    "compliance_flagged": 0,
+    "overall_quality_score": 81
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 32,
+    "compliance_advisory": 95
+  },
+  "trades": [
+    {
+      "ticker": "F",
+      "action": "BUY",
+      "shares": 738,
+      "allocated_capital": 10000,
+      "entry_price": 13.545700073242188,
+      "composite_score": 66.4,
+      "sentiment_score": 72.0,
+      "sentiment_summary": "Ford reported a 6% increase in 2025 U.S. sales to 2.2 million vehicles, driven by record hybrid demand and strong Maverick pickup sales, marking its best annual performance since 2019[2][3]. However, the company announced a $19.5 billion EV writedown and plans to scrap several EV models due to weakening electric vehicle demand and policy headwinds[2].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "APTV",
+      "action": "BUY",
+      "shares": 123,
+      "allocated_capital": 10000,
+      "entry_price": 81.08000183105469,
+      "composite_score": 61.0,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "Aptiv announced that a top global commercial vehicle OEM, specifically an Indian manufacturer, selected its Gen 6 ADAS for future trucks and buses, highlighting expansion in India with recent investments in technical and manufacturing facilities.[4][7][8] The company is showcasing advanced edge AI, Gen 8 radars, sensors, and 5G C-V2X at CES 2026, alongside sessions on mobility innovations.[5] Aptiv also scheduled its Q4 2025 earnings release and reiterated positive analyst targets, including TD Cowen's Buy at $107.[2][4][6]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ESI",
+      "action": "BUY",
+      "shares": 372,
+      "allocated_capital": 10000,
+      "entry_price": 26.829999923706055,
+      "composite_score": 60.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "json\n{\n  \"sentiment_score\": 75,\n  \"news_summary\": \"Element Solutions Inc. (ESI) completed the acquisition of Electronic Fluorocarbons (EFC) on January 5, 2026, expanding its portfolio in high-purity s",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "KKR",
+      "action": "BUY",
+      "shares": 74,
+      "allocated_capital": 10000,
+      "entry_price": 134.57000732421875,
+      "composite_score": 60.2,
+      "sentiment_score": 55.0,
+      "sentiment_summary": "KKR is actively pursuing a $2 billion acquisition of TPG's XCL Education in Southeast Asia, competing with other firms, which signals strategic expansion.[3][5] The firm released a constructive 2026 Global Macro Outlook highlighting robust opportunities in operational improvements, international markets, and raised GDP forecasts.[4][7] However, valuation concerns persist with shares deemed overvalued by 104.9% in one analysis, alongside financial risks like a low Altman Z-Score.[2][3]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "shares": 151.0,
+      "sell_pct": 100,
+      "composite_score": 56.0,
+      "current_price": 24.56999969482422,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Bank of America downgraded Omnicom Group (IPG's acquirer) to 'Underperform' on January 5, 2026, citing significant risks in the $13 billion acquisition of IPG.[3] The downgrade specifically highlighted concerns about weaker organic growth prospects, potential earnings dilution from asset sales, and underinvestment in IPG's operations.[4]",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 56.0 < 60 absolute minimum",
+      "current_value": 3710.07
+    },
+    {
+      "ticker": "CWAN",
+      "action": "SELL",
+      "shares": 312,
+      "sell_pct": 27,
+      "composite_score": 67.6,
+      "current_price": 24.125,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Position drift trim",
+      "gpt5_reasoning": "Position drift trim: Position at 27.5% exceeds 25% limit",
+      "current_value": 7527.0,
+      "source": "position_drift_monitor"
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 70 candidates (avg score: 53.2)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 72/72 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 2 SELLs, 5 BUYs ($50,000 allocated)",
+      "quality_score": 32,
+      "issues": [
+        "Capital deployment 29.3% (target 90.0%+)",
+        "Limited diversification: 5 new positions (target 12-20). Total after trades: 5"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 4 BUYs approved, 1 rejected, 2 SELLs",
+      "quality_score": 95,
+      "issues": [
+        "1 orders REJECTED by compliance"
+      ]
+    }
+  ],
+  "approved_at": "2026-01-06T16:07:51.661989Z"
+}

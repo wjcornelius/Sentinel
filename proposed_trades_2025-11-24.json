@@ -1,0 +1,132 @@
+{
+  "plan_id": "PLAN_20251124_064305",
+  "generated_at": "2025-11-24T14:43:05.812628Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 6,
+    "research_candidates": 73,
+    "gpt5_selected": 6,
+    "compliance_flagged": 0,
+    "overall_quality_score": 80
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 23,
+    "compliance_advisory": 100
+  },
+  "trades": [
+    {
+      "ticker": "FOXA",
+      "action": "BUY",
+      "shares": 76,
+      "allocated_capital": 5000,
+      "entry_price": 64.95999908447266,
+      "composite_score": 68.0,
+      "sentiment_score": 80.0,
+      "sentiment_summary": "Fox Corporation reported strong Q1 Fiscal Year 2025 results including a 21% EBITDA increase and 11% revenue growth, driven by successful content and strategic digital investments such as the rapidly growing Tubi streaming service. The company showed strong sports programming viewership and expects continued growth despite challenges from the pandemic and media competition. Investor sentiment is overall positive, supported by strong earnings and growing digital platforms, though some mixed technical signals advise caution.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "IONS",
+      "action": "BUY",
+      "shares": 64,
+      "allocated_capital": 5000,
+      "entry_price": 77.26000213623047,
+      "composite_score": 63.8,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "Ionis Pharmaceuticals (IONS) saw positive momentum with its stock trading up 4.1% and closing at $76.09, supported by strong Q3 2025 results and raised full-year guidance. Recent analyst upgrades and increased price targets, especially following positive Phase 3 trial results for zilganersen, have further bolstered investor confidence.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "DNOW",
+      "action": "BUY",
+      "shares": 370,
+      "allocated_capital": 5000,
+      "entry_price": 13.489999771118164,
+      "composite_score": 61.8,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "Susquehanna upgraded DNOW's rating from Neutral to Positive with a price target of $16, citing the completed MRC Global acquisition which strengthens DNOW's position in energy and industrial solutions. The company recently reported strong Q3 2025 financials with $634 million in revenue and a non-GAAP net income of $28 million, highlighting robust cash flow and zero long-term debt. While the stock price rose approximately 7.4% following the upgrade, some concerns remain regarding contracting profit margins compared to the previous year.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BZ",
+      "action": "BUY",
+      "shares": 241,
+      "allocated_capital": 5000,
+      "entry_price": 20.670000076293945,
+      "composite_score": 61.0,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "Recent news for Kanzhun Limited (BZ) highlights strong financial performance, including robust Q3 2025 results with double-digit revenue and user growth, a share repurchase program extension, and a new annual dividend policy. Institutional investors, including Prudential PLC, have increased their holdings, and analyst ratings remain mostly positive with a consensus of 'Moderate Buy'.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "AR",
+      "action": "SELL",
+      "shares": 100.0,
+      "sell_pct": 100,
+      "composite_score": 57.2,
+      "current_price": 33.470001220703125,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Antero Resources (AR) stock has declined by approximately 9.5% over the past 10 days with recent trading volumes dropping, signaling some investor caution. Despite this, institutional investors like Sierra Summit Advisors and insider Brendan E. Krueger have recently made notable purchases, suggesting some confidence in the stock. Analyst consensus remains moderately positive with a 'Moderate Buy' rating and average price targets around $44, though some brokerage price targets have been lowered recently.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 57.2 < 60 absolute minimum",
+      "current_value": 3323.0
+    },
+    {
+      "ticker": "DHI",
+      "action": "SELL",
+      "shares": 33.0,
+      "sell_pct": 100,
+      "composite_score": 54.400000000000006,
+      "current_price": 143.3249969482422,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "D.R. Horton reported fiscal 2025 results with a 10% increase in revenues to $34.3 billion but experienced a 17-24% decline in net income across various reporting periods. Despite earnings misses on the recent quarter, the company demonstrated strong liquidity, raised its quarterly dividend to $0.45, and engaged in $1.2 billion share repurchases. The stock price has shown positive momentum recently, supported by buy signals from technical indicators and an upgraded dividend, though some caution remains due to earnings shortfall.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 54.4 < 60 absolute minimum",
+      "current_value": 4797.21
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 73 candidates (avg score: 46.8)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 85/85 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 2 SELLs, 4 BUYs ($20,000 allocated)",
+      "quality_score": 23,
+      "issues": [
+        "Capital deployment 19.7% (target 90.0%+)",
+        "Limited diversification: 4 new positions (target 12-20). Total after trades: 14"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 4 BUYs approved, 0 rejected, 2 SELLs",
+      "quality_score": 100,
+      "issues": []
+    }
+  ],
+  "approved_at": "2025-11-24T14:43:57.764832Z"
+}

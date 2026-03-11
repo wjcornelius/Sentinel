@@ -1,0 +1,216 @@
+{
+  "plan_id": "PLAN_20251125_075006",
+  "generated_at": "2025-11-25T15:50:06.193584Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 12,
+    "research_candidates": 74,
+    "gpt5_selected": 12,
+    "compliance_flagged": 0,
+    "overall_quality_score": 88
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 58,
+    "compliance_advisory": 95
+  },
+  "trades": [
+    {
+      "ticker": "GEO",
+      "action": "BUY",
+      "shares": 319,
+      "allocated_capital": 4970.9132500000005,
+      "entry_price": 15.539999961853027,
+      "composite_score": 75.0,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "Recent news on GEO Group (GEO) highlights strong Q3 2025 financial results with $682.3 million in revenue and $173.9 million net income, supported by substantial gains from asset divestitures and new ICE contracts. The company reduced net debt by approximately $275 million, amended its credit agreement to improve financial flexibility, and announced a significant $300 million share repurchase program through 2028.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "GEHC",
+      "action": "BUY",
+      "shares": 60,
+      "allocated_capital": 4970.9132500000005,
+      "entry_price": 81.6500015258789,
+      "composite_score": 72.2,
+      "sentiment_score": 85.0,
+      "sentiment_summary": "GE HealthCare declared a quarterly cash dividend of $0.035 per share for Q4 2025, payable February 13, 2026, continuing its trend of dividend growth. The company also unveiled its new Genesis Radiology Workspace to optimize radiology workflows and announced the acquisition of Intelerad for $2.3 billion to strengthen its cloud-based imaging capabilities. Analysts have reiterated Buy ratings with elevated price targets following these developments.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ELAN",
+      "action": "BUY",
+      "shares": 211,
+      "allocated_capital": 4970.9132500000005,
+      "entry_price": 23.459999084472656,
+      "composite_score": 69.8,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "Elanco Animal Health (ELAN) has shown strong recent earnings performance with Q3 2025 EPS of $0.19, beating consensus estimates, and revenue of $1.14 billion, exceeding guidance. Analysts from KeyCorp, UBS, and others maintain positive outlooks with upgraded price targets around $25-$27 and a consensus 'Moderate Buy' rating. The stock has recently traded near its 52-week high around $22.25 to $23.09, supported by margin expansion, revenue growth driven by innovation products, and improvements in the balance sheet.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "GNTX",
+      "action": "BUY",
+      "shares": 218,
+      "allocated_capital": 4970.9132500000005,
+      "entry_price": 22.764999389648438,
+      "composite_score": 65.6,
+      "sentiment_score": 52.0,
+      "sentiment_summary": "Gentex (GNTX) recently acquired Toronto-based BioConnect, signaling expansion into new technology areas. The company reported Q3 2025 earnings that slightly missed analyst estimates, with revenue and EPS below expectations, but showed year-over-year growth. Analyst ratings remain mixed, with several maintaining 'Hold' and a few raising price targets, while the stock has seen modest technical gains and increased trading volume.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "DLTR",
+      "action": "BUY",
+      "shares": 47,
+      "allocated_capital": 4970.9132500000005,
+      "entry_price": 103.69499969482422,
+      "composite_score": 64.6,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "Dollar Tree stock experienced a decline of 1.54% on Monday, November 24, 2025, closing at $100.25, after a recent surge driven by Federal Reserve comments suggesting potential interest rate cuts. The stock remains up 32.5% year-to-date and is supported by strong Q2 2025 performance with 12.3% revenue growth and positive analyst outlooks, though it trades 13.5% below its 52-week high.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BRBR",
+      "action": "BUY",
+      "shares": 160,
+      "allocated_capital": 4970.9132500000005,
+      "entry_price": 30.8799991607666,
+      "composite_score": 64.0,
+      "sentiment_score": 40.0,
+      "sentiment_summary": "Recent news on BellRing Brands (BRBR) highlights mixed financial results and cautious analyst views. The company reported a Q4 earnings miss but solid revenue growth of 16.6% year-over-year, accompanied by a $400 million share repurchase program. Several analysts downgraded price targets, reflecting concerns over margin pressures and lowered 2026 sales guidance, although some maintain 'Outperform' or 'Overweight' ratings with moderate upside potential.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "EQT",
+      "action": "BUY",
+      "shares": 86,
+      "allocated_capital": 4970.9132500000005,
+      "entry_price": 57.47999954223633,
+      "composite_score": 63.8,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "EQT Real Estate completed the largest U.S. industrial transaction of 2025, selling a 25-property logistics portfolio totaling 8.7 million square feet across major distribution hubs.[4][5] The transaction represents the successful culmination of EQT's multi-year strategy to build and scale a national logistics platform with resilient cash flows.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "FIS",
+      "action": "BUY",
+      "shares": 75,
+      "allocated_capital": 4970.9132500000005,
+      "entry_price": 66.16999816894531,
+      "composite_score": 63.4,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "Fidelity National Information Services (FIS) recently beat Q3 2025 earnings expectations with an EPS of $1.51 versus the forecasted $1.48, marking a 2.03% surprise. The company continues to demonstrate strong growth in its Banking Solutions segment, highlighted by a major deployment with BMW Bank in Germany, where over 300,000 deposit accounts transitioned to FIS's deposit-as-a-service platform in Q2 2025.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "FOUR",
+      "action": "BUY",
+      "shares": 71,
+      "allocated_capital": 4970.9132500000005,
+      "entry_price": 69.29000091552734,
+      "composite_score": 62.0,
+      "sentiment_score": 72.0,
+      "sentiment_summary": "Shift4 Payments (FOUR) experienced a significant positive market movement on November 24, 2025, closing up $3.41 or 5.20% at $69.01. The stock has recovered from earlier weakness in the year, reflecting investor confidence in the company's payment processing business and growth prospects.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CVE",
+      "action": "SELL",
+      "shares": 265.0,
+      "sell_pct": 100,
+      "composite_score": 45.2,
+      "current_price": 17.350000381469727,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Recent news for Cenovus Energy (CVE) is highly positive, with major institutional investors like the Swiss National Bank and Picton Mahoney Asset Management increasing their holdings. Multiple analyst upgrades, including a 'strong-buy' rating from National Bank Financial and a consensus target price well above the current share price, have further boosted sentiment. Additionally, Cenovus renewed its share buyback program, signaling confidence in its future prospects.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 45.2 < 60 absolute minimum",
+      "current_value": 4591.125
+    },
+    {
+      "ticker": "FOXA",
+      "action": "SELL",
+      "shares": 76.0,
+      "sell_pct": 100,
+      "composite_score": 52.0,
+      "current_price": 64.88999938964844,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "FOXA stock saw a slight decline of -2.12% on November 24, 2025, closing at $64.30. Despite this dip, analysts have modestly raised the price target to $71.53, citing strong advertising and distribution revenue growth, robust earnings, and moderating subscriber declines. The stock was also added to the Zacks Rank #1 (Strong Buy) list, reflecting renewed analyst confidence.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 52.0 < 60 absolute minimum",
+      "current_value": 4926.32
+    },
+    {
+      "ticker": "IONS",
+      "action": "SELL",
+      "shares": 64.0,
+      "sell_pct": 100,
+      "composite_score": 58.8,
+      "current_price": 79.72000122070312,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Ionis Pharmaceuticals (IONS) reported strong Q3 2025 earnings beating revenue and sales estimates, driven by robust Tryngolza product sales and Wainua royalties, with total revenue up 17% year-over-year to $157 million. The company raised its full-year 2025 revenue guidance to $875\u2013900 million and improved operating loss projections, also confirming over $2.1 billion in cash. Analysts remain bullish with multiple buy ratings and a price target suggesting upside potential, despite some insider selling activity.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 58.8 < 60 absolute minimum",
+      "current_value": 5091.2
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 74 candidates (avg score: 50.6)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 88/88 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 3 SELLs, 10 BUYs ($49,709 allocated)",
+      "quality_score": 58,
+      "issues": [
+        "Capital deployment 50.0% (target 90.0%+)",
+        "Limited diversification: 10 new positions (target 12-20). Total after trades: 21"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 9 BUYs approved, 1 rejected, 3 SELLs",
+      "quality_score": 95,
+      "issues": [
+        "1 orders REJECTED by compliance"
+      ]
+    }
+  ],
+  "approved_at": "2025-11-25T15:50:54.474902Z"
+}

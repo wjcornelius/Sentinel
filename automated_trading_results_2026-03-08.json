@@ -1,0 +1,28 @@
+{
+  "date": "2026-03-08",
+  "start_time": "2026-03-08T09:00:03.929190",
+  "status": "MARKET_CLOSED",
+  "market_status": {
+    "is_open": false,
+    "status": "CLOSED",
+    "message": "Weekend - Market opens Monday, Mar 09 at 9:30 AM ET",
+    "current_time_et": "12:00 PM ET",
+    "current_date": "Sunday, March 08, 2026",
+    "next_open": "Monday, Mar 09 at 9:30 AM ET"
+  },
+  "regime_analysis": null,
+  "plan_generated": false,
+  "plan_approved": false,
+  "trades_executed": [],
+  "portfolio_state": null,
+  "warnings": [],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 9,
+    "db_positions_before": 8,
+    "stale_closed": 0,
+    "in_sync": 8
+  },
+  "end_time": "2026-03-08T09:00:20.328997",
+  "duration_seconds": 16.399818
+}

@@ -1,0 +1,22 @@
+{
+  "date": "2026-01-03",
+  "start_time": "2026-01-03T08:00:04.512492",
+  "status": "MARKET_CLOSED",
+  "market_status": {
+    "is_open": false,
+    "status": "CLOSED",
+    "message": "Weekend - Market opens Monday, Jan 05 at 9:30 AM ET",
+    "current_time_et": "11:00 AM ET",
+    "current_date": "Saturday, January 03, 2026",
+    "next_open": "Monday, Jan 05 at 9:30 AM ET"
+  },
+  "regime_analysis": null,
+  "plan_generated": false,
+  "plan_approved": false,
+  "trades_executed": [],
+  "portfolio_state": null,
+  "warnings": [],
+  "errors": [],
+  "end_time": "2026-01-03T08:00:23.929530",
+  "duration_seconds": 19.41705
+}

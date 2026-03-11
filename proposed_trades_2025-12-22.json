@@ -1,0 +1,78 @@
+{
+  "plan_id": "PLAN_20251222_080932",
+  "generated_at": "2025-12-22T16:09:32.396195Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 2,
+    "research_candidates": 70,
+    "gpt5_selected": 2,
+    "compliance_flagged": 0,
+    "overall_quality_score": 80
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 52,
+    "compliance_advisory": 70
+  },
+  "trades": [
+    {
+      "ticker": "CLSK",
+      "action": "SELL",
+      "shares": 202.0,
+      "sell_pct": 100,
+      "composite_score": 50.8,
+      "current_price": 12.668299674987793,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "CleanSpark (CLSK) shares dropped over 13% to $12.20 amid broader market decline, following a recent -4.21% fall on July 25, 2025, despite a positive short-term rising trend forecast of 49.05% over 3 months[1][4]. Institutional holding by Exchange Traded Concepts LLC stands at $20.55 million, with mixed analyst ratings averaging 'Moderate Buy' at $23.20 target[3]. Transformative FY 2025 results reported record $766.3M revenue and $1.2B bitcoin holdings, but no new articles confirm coverage in the last 24 hours[2].",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 50.8 < 60 absolute minimum",
+      "current_value": 2549.2198
+    },
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "shares": 151.0,
+      "sell_pct": 100,
+      "composite_score": 56.0,
+      "current_price": 24.56999969482422,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Omnicom completed its acquisition of Interpublic Group (IPG) on November 26, 2025, in a stock-for-stock deal where IPG shareholders received 0.344 Omnicom shares per IPG share, creating a combined company with over $25 billion in revenue trading under OMC.[6] No other news articles from the last 24 hours (December 21-22, 2025) were identified in the search results. Earlier reports noted mixed Q3 earnings with EPS beat but revenue miss, alongside a 'Hold' consensus and bearish technical sentiment.[1][2]",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 56.0 < 60 absolute minimum",
+      "current_value": 3710.07
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 70 candidates (avg score: 52.1)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 85/85 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 2 SELLs, 9 BUYs ($49,500 allocated)",
+      "quality_score": 52,
+      "issues": [
+        "Capital deployment 44.0% (target 90.0%+)",
+        "Limited diversification: 9 new positions (target 12-20). Total after trades: 22"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 0 BUYs approved, 9 rejected, 2 SELLs",
+      "quality_score": 70,
+      "issues": [
+        "9 orders REJECTED by compliance"
+      ]
+    }
+  ],
+  "approved_at": "2025-12-22T16:09:34.143054Z"
+}

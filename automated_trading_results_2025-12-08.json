@@ -1,0 +1,287 @@
+{
+  "date": "2025-12-08",
+  "start_time": "2025-12-08T08:00:04.913745",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "11:00 AM ET",
+    "current_date": "Monday, December 08, 2025"
+  },
+  "regime_analysis": {
+    "regime": "NEUTRAL",
+    "confidence": "MEDIUM",
+    "spy_price": 683.4415283203125,
+    "spy_change_pct": -0.3279140884493043,
+    "vix_level": 16.59000015258789,
+    "recommendation": "NORMAL CONDITIONS"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "status": "SKIPPED",
+      "reason": "Asset not tradeable: AssetStatus.INACTIVE"
+    },
+    {
+      "ticker": "BKR",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20251208T160859Z_6d228aa1"
+    },
+    {
+      "ticker": "OPCH",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20251208T160859Z_d3f6558c"
+    },
+    {
+      "ticker": "HAYW",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251208T160900Z_1a3831b1"
+    },
+    {
+      "ticker": "HSAI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251208T160900Z_91e8867a"
+    },
+    {
+      "ticker": "GPN",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251208T160900Z_c3cc1644"
+    },
+    {
+      "ticker": "FTNT",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251208T160900Z_5e994d1d",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "AG",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251208T160900Z_b1d1329b",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CNM",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251208T160900Z_9b519c6f",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "JBS",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251208T160901Z_26b0419f",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "JD",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251208T160901Z_2af6f222",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BLSH",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251208T160901Z_0f8dad9d",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "DT",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251208T160901Z_4f2862e2",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "GSK",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251208T160901Z_ff88bffc",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "EWY",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251208T160901Z_161aad61",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2025-12-08T08:09:09.117346",
+    "equity": 100352.15,
+    "cash": 6617.21,
+    "buying_power": 103259.29,
+    "portfolio_value": 100352.15,
+    "starting_capital": 100000.0,
+    "total_return": 352.1499999999942,
+    "total_return_pct": 0.3521499999999942,
+    "daily_pl": 3110.7399999999907,
+    "daily_pl_pct": 3.19898693365305,
+    "total_unrealized_pl": 3924.4496999999997,
+    "position_count": 15,
+    "positions": [
+      {
+        "ticker": "CWAN",
+        "shares": 1151.0,
+        "entry_price": 19.6,
+        "current_price": 21.6,
+        "market_value": 24861.6,
+        "unrealized_pl": 2302.0,
+        "unrealized_pl_pct": 10.20408163265306
+      },
+      {
+        "ticker": "FTI",
+        "shares": 175.0,
+        "entry_price": 43.4,
+        "current_price": 45.43,
+        "market_value": 7950.25,
+        "unrealized_pl": 355.25,
+        "unrealized_pl_pct": 4.67741935483871
+      },
+      {
+        "ticker": "MNST",
+        "shares": 83.0,
+        "entry_price": 71.871084,
+        "current_price": 74.0,
+        "market_value": 6142.0,
+        "unrealized_pl": 176.7,
+        "unrealized_pl_pct": 2.96213099089736
+      },
+      {
+        "ticker": "GEO",
+        "shares": 319.0,
+        "entry_price": 15.590188,
+        "current_price": 17.1082,
+        "market_value": 5457.5158,
+        "unrealized_pl": 484.2458,
+        "unrealized_pl_pct": 9.73696984076875
+      },
+      {
+        "ticker": "BZ",
+        "shares": 241.0,
+        "entry_price": 20.57,
+        "current_price": 21.66,
+        "market_value": 5220.06,
+        "unrealized_pl": 262.69,
+        "unrealized_pl_pct": 5.29897909577054
+      },
+      {
+        "ticker": "DNOW",
+        "shares": 370.0,
+        "entry_price": 13.48,
+        "current_price": 14.015,
+        "market_value": 5185.55,
+        "unrealized_pl": 197.95,
+        "unrealized_pl_pct": 3.9688427299703304
+      },
+      {
+        "ticker": "GEHC",
+        "shares": 60.0,
+        "entry_price": 81.8,
+        "current_price": 84.48,
+        "market_value": 5068.8,
+        "unrealized_pl": 160.8,
+        "unrealized_pl_pct": 3.27628361858191
+      },
+      {
+        "ticker": "KDP",
+        "shares": 175.0,
+        "entry_price": 28.43,
+        "current_price": 28.945,
+        "market_value": 5065.375,
+        "unrealized_pl": 90.125,
+        "unrealized_pl_pct": 1.8114667604643
+      },
+      {
+        "ticker": "HAYW",
+        "shares": 311.0,
+        "entry_price": 16.1,
+        "current_price": 16.09,
+        "market_value": 5003.99,
+        "unrealized_pl": -3.11,
+        "unrealized_pl_pct": -0.06211180124223999
+      },
+      {
+        "ticker": "HSAI",
+        "shares": 254.0,
+        "entry_price": 19.7,
+        "current_price": 19.6971,
+        "market_value": 5003.0634,
+        "unrealized_pl": -0.7366,
+        "unrealized_pl_pct": -0.01472081218274
+      },
+      {
+        "ticker": "GPN",
+        "shares": 64.0,
+        "entry_price": 77.5,
+        "current_price": 77.48,
+        "market_value": 4958.72,
+        "unrealized_pl": -1.28,
+        "unrealized_pl_pct": -0.025806451612900003
+      },
+      {
+        "ticker": "HL",
+        "shares": 255.0,
+        "entry_price": 15.58,
+        "current_price": 16.1901,
+        "market_value": 4128.4755,
+        "unrealized_pl": 155.5755,
+        "unrealized_pl_pct": 3.91591784338896
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.7700831024930697
+      },
+      {
+        "ticker": "IVZ",
+        "shares": 125.0,
+        "entry_price": 24.57,
+        "current_price": 25.64,
+        "market_value": 3205.0,
+        "unrealized_pl": 133.75,
+        "unrealized_pl_pct": 4.35490435490435
+      },
+      {
+        "ticker": "CLSK",
+        "shares": 202.0,
+        "entry_price": 15.14,
+        "current_price": 13.735,
+        "market_value": 2774.47,
+        "unrealized_pl": -283.81,
+        "unrealized_pl_pct": -9.28005284015852
+      }
+    ]
+  },
+  "warnings": [
+    "Verification: Expected positions not found: BLSH, DT, GSK, AG, EWY, CNM, JBS, FTNT, JD"
+  ],
+  "errors": [],
+  "plan_summary": {
+    "plan_id": "PLAN_20251208_080855",
+    "total_trades": 15,
+    "quality_score": 90,
+    "ceo_rating": "EXCELLENT",
+    "ceo_recommendation": "STRONGLY RECOMMEND APPROVAL"
+  },
+  "sells_count": 2,
+  "buys_count": 12,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: BLSH, DT, GSK, AG, EWY, CNM, JBS, FTNT, JD"
+    ],
+    "summary": {
+      "position_count": 15,
+      "sells_executed": 2,
+      "buys_executed": 12,
+      "expected_count_change": 10
+    }
+  },
+  "end_time": "2025-12-08T08:09:11.170634",
+  "duration_seconds": 546.256903
+}

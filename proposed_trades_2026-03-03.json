@@ -1,0 +1,148 @@
+{
+  "plan_id": "PLAN_20260303_081417",
+  "generated_at": "2026-03-03T16:14:17.431027Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 7,
+    "research_candidates": 71,
+    "gpt5_selected": 7,
+    "compliance_flagged": 0,
+    "overall_quality_score": 84
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 38,
+    "compliance_advisory": 100
+  },
+  "trades": [
+    {
+      "ticker": "ADMA",
+      "action": "BUY",
+      "shares": 366,
+      "allocated_capital": 6000.0,
+      "entry_price": 16.389999389648438,
+      "composite_score": 75.2,
+      "sentiment_score": 82.0,
+      "sentiment_summary": "ADMA Biologics announced a $200 million capital return plan for 2026, including a $125 million accelerated share repurchase agreement with JPMorgan, building on $160 million already repurchased since May 2025[1][2][4]. The stock rose up to 1.99% in pre-market trading to $15.88, supported by strong financial metrics like high current ratio and positive analyst targets around $25-28[1][2][3]. Additional news includes institutional buying by Rafferty Asset Management and favorable Wall Street views, with a minor tax-related share withholding by the CEO[3][5][6].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CAVA",
+      "action": "BUY",
+      "shares": 79,
+      "allocated_capital": 6000.0,
+      "entry_price": 75.56999969482422,
+      "composite_score": 69.0,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "KeyCorp raised its price target for CAVA stock from $65 to $95 while maintaining an overweight rating, signaling strong upside potential of 21% from recent levels. Champlain Investment Partners acquired additional shares, reflecting institutional confidence. Recent insider activity includes sales following option exercises but also RSU grants to executives, amid positive Q4 earnings beats from late February.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CHWY",
+      "action": "BUY",
+      "shares": 224,
+      "allocated_capital": 6000.0,
+      "entry_price": 26.69499969482422,
+      "composite_score": 63.4,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "Champlain Investment Partners acquired over 2.2 million CHWY shares, while analysts maintain a 'Moderate Buy' consensus with a $46.25 target, though some trimmed fair value estimates slightly to $44.45 amid focus on 2026 margin gains. Recent conference highlights exceeded profitability and customer growth targets, with vet clinics, AI, and loyalty programs driving future efficiency. A minor insider Form 144 sale of 3,043 shares was noted, alongside stock trading down 1.1% to open at $27.11.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "COIN",
+      "action": "BUY",
+      "shares": 33,
+      "allocated_capital": 6000.0,
+      "entry_price": 179.02999877929688,
+      "composite_score": 61.0,
+      "sentiment_score": 55.0,
+      "sentiment_summary": "Recent news highlights Coinbase's strong positioning as infrastructure for the on-chain economy, with bullish Wall Street sentiment including a median price target of $285 from analysts like J.P. Morgan and Goldman Sachs, alongside robust financials such as 12 consecutive profitable quarters and $6 billion in cash[1][5]. However, counterpoints include Zacks Rank #5 (Strong Sell) due to sharp EPS estimate cuts, high valuation at 51.25 P/E, and YTD stock declines of 18.4% amid expansion into stocks[3]. Other coverage notes participation in conferences and valuation debates framing the stock as overvalued at current levels around $175-185[2][4][8].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "LYV",
+      "action": "BUY",
+      "shares": 38,
+      "allocated_capital": 6000.0,
+      "entry_price": 155.75,
+      "composite_score": 60.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No substantive news articles or events specific to Live Nation Entertainment (LYV) were reported in the last 24 hours as of March 3, 2026, 4 PM UTC. Available data shows minor pre-market trading activity on March 2 with the stock at approximately $162, flat to slightly down from prior sessions[1][5]. Recent analyst updates from February 26 indicate a positive 'Moderate Buy' rating with a $180 target, but these fall outside the 24-hour window[2].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "GRND",
+      "action": "BUY",
+      "shares": 900,
+      "allocated_capital": 9998.999691009521,
+      "entry_price": 11.109999656677246,
+      "composite_score": 60.0,
+      "sentiment_score": 72.0,
+      "sentiment_summary": "Grindr delivered strong 2025 financial results with 28% revenue growth and net income of $95 million, while announcing a $400 million increase to its share repurchase program.[2] However, Goldman Sachs lowered its price target from $20.00 to $17.00 on March 2, though it maintained a 'buy' rating with 45.55% upside potential from the stock's previous close.[1]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Auto-added for capital efficiency (score: 60.0)",
+      "gpt5_allocated": false,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BROS",
+      "action": "SELL",
+      "shares": 141.0,
+      "sell_pct": 100,
+      "composite_score": 51.6,
+      "current_price": 51.3650016784668,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Goldman Sachs upgraded Dutch Bros (BROS) from Neutral to Buy on March 2, 2026, with analyst consensus across 18 firms also rating it a Buy and an average price target of $77.47 implying 44.52% upside[1][3]. CEO Christine Barone received 46,633 RSUs on March 1, 2026, vesting through 2029, signaling long-term confidence[4]. An article notes anticipated front-loaded COGS pressures in Q1 2026 due to elevated coffee costs, easing later in the year[2].",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 51.6 < 60 absolute minimum",
+      "current_value": 7164.21
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 71 candidates (avg score: 42.3)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 82/82 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 1 SELLs, 6 BUYs ($39,999 allocated)",
+      "quality_score": 38,
+      "issues": [
+        "Capital deployment 34.6% (target 90.0%+)",
+        "Limited diversification: 6 new positions (target 12-20). Total after trades: 16"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 6 BUYs approved, 0 rejected, 1 SELLs",
+      "quality_score": 100,
+      "issues": []
+    }
+  ],
+  "approved_at": "2026-03-03T16:14:19.334474Z"
+}

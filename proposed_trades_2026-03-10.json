@@ -1,0 +1,186 @@
+{
+  "plan_id": "PLAN_20260310_090924",
+  "generated_at": "2026-03-10T16:09:24.115870Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 10,
+    "research_candidates": 64,
+    "gpt5_selected": 10,
+    "compliance_flagged": 0,
+    "overall_quality_score": 88
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 53,
+    "compliance_advisory": 100
+  },
+  "trades": [
+    {
+      "ticker": "INDV",
+      "action": "BUY",
+      "shares": 300,
+      "allocated_capital": 10000,
+      "entry_price": 33.244998931884766,
+      "composite_score": 73.0,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "Indivior reported strong Q4 2025 results with sales of $358 million and net income of $102 million, reaffirming its 2026 revenue outlook of $1.13-1.20 billion and announcing a $400 million share buyback program over 18 months[3]. Analysts maintain a Strong Buy consensus with price targets around $35-45, citing growth in Sublocade patients and prescribers[4][5]. Recent technical indicators show positive short-term trends and rising volume[2].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CDE",
+      "action": "BUY",
+      "shares": 417,
+      "allocated_capital": 10000,
+      "entry_price": 23.969999313354492,
+      "composite_score": 73.0,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "Analysts maintain a 'Moderate Buy' consensus on Coeur Mining (CDE) with an average price target of $20.88, supported by five buy ratings, two strong buys, and despite one recent downgrade.[2] Zacks highlights CDE's strong financials, including doubled cash reserves, robust earnings growth projections of 406% for 2025, and a Zacks Rank #1 (Strong Buy), recommending investors buy the stock.[1] The stock recently popped 5.7% following positive year-end mineral reserves updates.[3]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BROS",
+      "action": "BUY",
+      "shares": 190,
+      "allocated_capital": 10000,
+      "entry_price": 52.45000076293945,
+      "composite_score": 66.6,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "Analysts maintain a strong Buy consensus on Dutch Bros (BROS) stock with a 2026 price target of $77.58, citing improved same-store sales estimates at 3.8%, rising EBITDA, and growth potential from unit expansion and morning daypart sales[2]. Options trading highlights interest in March 2026 contracts, including attractive put premiums at $42.50 strike and covered calls at $55.00 offering up to 29.89% return[1]. Recent reports emphasize real customer demand driving 4.7% systemwide transaction growth[4].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BBY",
+      "action": "BUY",
+      "shares": 152,
+      "allocated_capital": 10000,
+      "entry_price": 65.36000061035156,
+      "composite_score": 64.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "I cannot provide a JSON analysis based on the search results because they do not contain news from the last 24 hours. The most recent news item in the results is from March 5, 2026 (5 days ago), which",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "SLM",
+      "action": "BUY",
+      "shares": 497,
+      "allocated_capital": 10000,
+      "entry_price": 20.104999542236328,
+      "composite_score": 63.6,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "SLM Corp is set to go ex-dividend on March 5th, 2026, with shareholders of record receiving $0.13 per share on March 16th, a routine positive event for income-focused investors. Analyst consensus as of March 10, 2026, rates SLM as a Hold with a price target of $30.67, implying no expected price change. No other major news events reported in the last 24 hours.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ALAB",
+      "action": "BUY",
+      "shares": 83,
+      "allocated_capital": 10000,
+      "entry_price": 119.5363998413086,
+      "composite_score": 61.0,
+      "sentiment_score": 55.0,
+      "sentiment_summary": "Astera Labs announced participation in Q1 2026 financial conferences on January 12, triggering a +4.63% stock price increase and $1.37B valuation boost, with positive peer performance in semiconductors[1]. As of March 10, 2026, 18 analysts maintain a Buy consensus rating (83% Buy/Strong Buy) and $193.44 price target[2]. Recent stock price shows volatility, declining -3.08% on March 9 to $115.53 amid no specific negative news in the last 24 hours[4].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CRDO",
+      "action": "BUY",
+      "shares": 87,
+      "allocated_capital": 10000,
+      "entry_price": 114.05000305175781,
+      "composite_score": 61.0,
+      "sentiment_score": 35.0,
+      "sentiment_summary": "Credo Technology Group Holding Ltd (CRDO) reported strong Q3 fiscal 2026 results on March 2, 2026, with revenue of $407 million (up 201.5% YoY and beating estimates), adjusted EPS of $1.07 (above consensus), and Q4 guidance of $425-435 million (exceeding expectations).[1][2][4][5] Despite these beats, the stock tumbled 7-15% in after-hours and subsequent trading as investors focused on minor misses like GAAP EPS and broader AI sector weakness.[1][2][3]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ADMA",
+      "action": "SELL",
+      "shares": 478.0,
+      "sell_pct": 100,
+      "composite_score": 56.8,
+      "current_price": 15.954999923706055,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "ADMA Biologics announced a major $200 million capital return plan for 2026, including a $125 million accelerated share repurchase (ASR) agreement with JPMorgan Chase, as part of a broader $500 million repurchase program that has already deployed $160 million since May 2025.[1][5] The company was recently upgraded to a Zacks Rank #1 (Strong Buy) due to upward earnings estimate revisions, with analysts maintaining unanimous buy ratings and a target price of $25.67, suggesting 59.52% upside potential.[2][3]",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 56.8 < 60 absolute minimum",
+      "current_value": 7638.4878
+    },
+    {
+      "ticker": "BRO",
+      "action": "SELL",
+      "shares": 104.0,
+      "sell_pct": 100,
+      "composite_score": 56.400000000000006,
+      "current_price": 69.05999755859375,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No news articles about Brown & Brown (BRO) stock were found from the last 24 hours (March 10, 2026, 4 PM UTC). The most recent available news is the 2026 Market Trends Report released on February 11, 2026, which highlighted softer commercial rates and increased capacity favoring prepared buyers, leading to a +3.75% stock gain on that day[1]. Historical stock data shows trading activity in early March 2026 with closing prices around $72-73[4][5].",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 56.4 < 60 absolute minimum",
+      "current_value": 7194.2
+    },
+    {
+      "ticker": "DASH",
+      "action": "SELL",
+      "shares": 32.0,
+      "sell_pct": 100,
+      "composite_score": 52.8,
+      "current_price": 172.02999877929688,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Dash (DASH) price declined 2.05% in the last 24 hours amid broader market pressures, with the cryptocurrency trading around $33 and facing heavy sell-side dominance from traders targeting lower supports near $30[1][4]. Recent announcements include the upcoming March 2026 integration of Zcash's shielded pool into Dash's Evolution sidechain following audits, though short-term technical selling persists[1]. Mixed trader views highlight bearish momentum but note potential long-term bullish patterns[1].",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 52.8 < 60 absolute minimum",
+      "current_value": 5502.88
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 64 candidates (avg score: 43.4)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 74/74 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 3 SELLs, 7 BUYs ($70,000 allocated)",
+      "quality_score": 53,
+      "issues": [
+        "Capital deployment 50.6% (target 90.0%+)",
+        "Limited diversification: 7 new positions (target 12-20). Total after trades: 14"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 7 BUYs approved, 0 rejected, 3 SELLs",
+      "quality_score": 100,
+      "issues": []
+    }
+  ],
+  "approved_at": "2026-03-10T16:09:25.597677Z"
+}

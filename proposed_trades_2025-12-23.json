@@ -1,0 +1,90 @@
+{
+  "plan_id": "PLAN_20251223_080907",
+  "generated_at": "2025-12-23T16:09:07.988057Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 3,
+    "research_candidates": 70,
+    "gpt5_selected": 3,
+    "compliance_flagged": 0,
+    "overall_quality_score": 78
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 44,
+    "compliance_advisory": 70
+  },
+  "trades": [
+    {
+      "ticker": "GEO",
+      "action": "SELL",
+      "shares": 319.0,
+      "sell_pct": 100,
+      "composite_score": 56.0,
+      "current_price": 16.3799991607666,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "GEO Group stock rose 3.7% on Monday after its subsidiary BI Incorporated secured a $121 million contract with U.S. Immigration and Customs Enforcement (ICE) for skip tracing services on the non-detained docket.[1][2] The two-year contract highlights BI's 21-year relationship with ICE and is viewed positively amid retail bullish sentiment on Stocktwits.[1][2] Options trading shows strong call interest with a 28:1 call-put ratio.[3]",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 56.0 < 60 absolute minimum",
+      "current_value": 5244.36
+    },
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "shares": 151.0,
+      "sell_pct": 100,
+      "composite_score": 56.0,
+      "current_price": 24.56999969482422,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No news articles about IPG stock were published in the last 24 hours (since Monday, December 22, 2025, 4 PM UTC). The most recent coverage from late November 2025 focuses on IPG's delisting from the NYSE after its acquisition by Omnicom, removal from the S&P 500 Communication Services sector, and earlier Q3 revenue declines of 5.1%.[1][3][4]",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 56.0 < 60 absolute minimum",
+      "current_value": 3710.07
+    },
+    {
+      "ticker": "LKQ",
+      "action": "SELL",
+      "shares": 160.0,
+      "sell_pct": 100,
+      "composite_score": 52.400000000000006,
+      "current_price": 29.489999771118164,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "LKQ announced a formal process to sell its Keystone Automotive specialty parts division for $500 million to $1 billion, following earlier activist pressure to simplify its portfolio. The company completed a $410 million sale of its Pick Your Part business and is pursuing cost reduction and margin improvement efforts, with analysts maintaining a 'Moderate Buy' rating and a $41.19 mean price target suggesting 35-40% upside potential.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 52.4 < 60 absolute minimum",
+      "current_value": 4730.4
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 70 candidates (avg score: 50.5)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 84/84 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 3 SELLs, 8 BUYs ($44,000 allocated)",
+      "quality_score": 44,
+      "issues": [
+        "Capital deployment 36.2% (target 90.0%+)",
+        "Limited diversification: 8 new positions (target 12-20). Total after trades: 19"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 0 BUYs approved, 8 rejected, 3 SELLs",
+      "quality_score": 70,
+      "issues": [
+        "8 orders REJECTED by compliance"
+      ]
+    }
+  ],
+  "approved_at": "2025-12-23T16:09:09.775456Z"
+}

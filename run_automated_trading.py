@@ -91,6 +91,9 @@ class AutomatedTradingRunner:
             if not self._preflight_checks():
                 return self._finalize_results('PREFLIGHT_FAILED')
 
+            # Step 1.5: Reconcile database with Alpaca (prevents stale record buildup)
+            self._reconcile_database()
+
             # Step 2: Check market status
             if not self._check_market_status():
                 return self._finalize_results('MARKET_CLOSED')
@@ -107,8 +110,11 @@ class AutomatedTradingRunner:
                 logger.warning("[AutoTrader] Market regime unfavorable - proceeding with caution")
                 self.results['warnings'].append("Unfavorable market regime - trading anyway")
 
-            # Step 5: Generate trading plan
-            plan = self._generate_trading_plan()
+            # Step 4.5: Check position drift and get mandatory trim orders
+            drift_trims = self._check_position_drift()
+
+            # Step 5: Generate trading plan (with any mandatory drift trims)
+            plan = self._generate_trading_plan(mandatory_sells=drift_trims)
             if not plan:
                 return self._finalize_results('PLAN_GENERATION_FAILED')
 
@@ -181,6 +187,50 @@ class AutomatedTradingRunner:
             self.results['errors'].append(f"Pre-flight check failed: {str(e)}")
             logger.error(f"[AutoTrader] Pre-flight check failed: {e}")
             return False
+
+    def _reconcile_database(self):
+        """
+        Reconcile database with Alpaca to prevent stale record buildup.
+
+        This step is CRITICAL - it ensures portfolio_positions table matches reality
+        before compliance runs risk calculations. Without this, stale OPEN/PENDING
+        records accumulate and block all buys.
+        """
+        logger.info("\n[AutoTrader] Reconciling database with Alpaca...")
+
+        try:
+            from Utils.db_reconciler import DBReconciler
+
+            reconciler = DBReconciler()
+            results = reconciler.reconcile(dry_run=False)
+
+            # Log results
+            logger.info(f"[AutoTrader] Alpaca positions: {results['alpaca_positions']}")
+            logger.info(f"[AutoTrader] DB records (before): {results['db_open_positions']}")
+
+            if results['stale_closed'] > 0:
+                logger.warning(f"[AutoTrader] Cleaned up {results['stale_closed']} stale DB records")
+                self.results['warnings'].append(f"Reconciliation cleaned {results['stale_closed']} stale records")
+
+            if results['orphan_alpaca']:
+                logger.info(f"[AutoTrader] {len(results['orphan_alpaca'])} Alpaca position(s) not in DB (OK)")
+
+            # Store reconciliation results
+            self.results['db_reconciliation'] = {
+                'alpaca_positions': results['alpaca_positions'],
+                'db_positions_before': results['db_open_positions'],
+                'stale_closed': results['stale_closed'],
+                'in_sync': results['in_sync']
+            }
+
+            logger.info("[AutoTrader] Database reconciliation complete")
+
+        except ImportError:
+            logger.warning("[AutoTrader] DB reconciler not available - skipping")
+        except Exception as e:
+            logger.error(f"[AutoTrader] Database reconciliation error: {e}")
+            self.results['warnings'].append(f"DB reconciliation failed: {str(e)}")
+            # Don't fail the workflow - just log the warning
 
     def _check_market_status(self) -> bool:
         """Check if market is open for trading"""
@@ -306,14 +356,76 @@ class AutomatedTradingRunner:
 """
             msg_file.write_text(content)
 
-    def _generate_trading_plan(self) -> Optional[Dict]:
-        """Generate trading plan via CEO"""
+    def _check_position_drift(self) -> List[Dict]:
+        """
+        Check for oversized positions that need trimming.
+
+        Returns:
+            List of mandatory sell orders for positions exceeding limits
+        """
+        logger.info("\n[AutoTrader] Checking position drift...")
+
+        try:
+            from Utils.position_drift_monitor import PositionDriftMonitor
+
+            monitor = PositionDriftMonitor()
+            results = monitor.check_position_drift()
+
+            self.results['position_drift'] = {
+                'positions_checked': results['positions_checked'],
+                'oversized_count': len(results['oversized_positions']),
+                'trim_recommendations': len(results['trim_recommendations'])
+            }
+
+            if results['oversized_positions']:
+                logger.warning(f"[AutoTrader] Found {len(results['oversized_positions'])} oversized position(s):")
+                for pos in results['oversized_positions']:
+                    logger.warning(f"  - {pos['ticker']}: {pos['position_pct_display']} of portfolio")
+
+            if results['trim_recommendations']:
+                logger.info(f"[AutoTrader] Generated {len(results['trim_recommendations'])} trim order(s)")
+                for rec in results['trim_recommendations']:
+                    logger.info(f"  - SELL {rec['shares_to_sell']} shares of {rec['ticker']} ({rec['reason']})")
+
+                # Convert to sell order format expected by CEO
+                mandatory_sells = []
+                for rec in results['trim_recommendations']:
+                    mandatory_sells.append({
+                        'ticker': rec['ticker'],
+                        'action': 'SELL',
+                        'shares': rec['shares_to_sell'],
+                        'reason': f"Position drift trim: {rec['reason']}",
+                        'source': 'position_drift_monitor'
+                    })
+                return mandatory_sells
+            else:
+                logger.info("[AutoTrader] No position drift issues - all positions within limits")
+                return []
+
+        except Exception as e:
+            logger.error(f"[AutoTrader] Position drift check failed: {e}")
+            self.results['warnings'].append(f"Position drift check failed: {str(e)}")
+            return []  # Don't block trading if drift check fails
+
+    def _generate_trading_plan(self, mandatory_sells: List[Dict] = None) -> Optional[Dict]:
+        """Generate trading plan via CEO
+
+        Args:
+            mandatory_sells: Optional list of mandatory sell orders (e.g., from drift monitor)
+        """
         logger.info("\n[AutoTrader] Generating trading plan...")
         logger.info("[AutoTrader] Using AI model: gpt-4o-mini (budget)")
+
+        if mandatory_sells:
+            logger.info(f"[AutoTrader] Including {len(mandatory_sells)} mandatory sell order(s) from drift monitor")
 
         try:
             from Departments.Executive.ceo import CEO
             ceo = CEO(self.project_root)
+
+            # Inject mandatory sells (drift trims) if any
+            if mandatory_sells:
+                ceo.set_mandatory_sells(mandatory_sells)
 
             # Generate plan with budget model
             result = ceo.handle_user_request("generate_plan", ai_model='gpt-4o-mini')

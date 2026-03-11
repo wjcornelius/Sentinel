@@ -1,0 +1,162 @@
+{
+  "plan_id": "PLAN_20251219_080957",
+  "generated_at": "2025-12-19T16:09:57.677008Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 8,
+    "research_candidates": 70,
+    "gpt5_selected": 8,
+    "compliance_flagged": 0,
+    "overall_quality_score": 83
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 44,
+    "compliance_advisory": 90
+  },
+  "trades": [
+    {
+      "ticker": "CNM",
+      "action": "BUY",
+      "shares": 93,
+      "allocated_capital": 5000,
+      "entry_price": 53.619998931884766,
+      "composite_score": 71.4,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "Over the past 24 hours there were no new earnings misses or negative operational events for Core & Main (CNM); the most relevant recent items remain the company\u2019s expanded $1.0 billion share buyback program announced earlier and management guidance for fiscal\u20112025 sales in the $7.6B\u2013$7.7B range, both reported in the prior week and reiterated across investor channels[3][4]. Major quote/IR pages and market news aggregators show neutral-to-moderately positive analyst tone and technical indicators around CNM (mixed short\u2011term moving averages and a neutral RSI), with no fresh adverse headlines in the last 24 hours[1][2][5].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BWA",
+      "action": "BUY",
+      "shares": 108,
+      "allocated_capital": 5000,
+      "entry_price": 45.880001068115234,
+      "composite_score": 64.6,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "BorgWarner (BWA) stock has surged 42% year-to-date, outperforming auto sector peers amid investor optimism for its electrification pivot and improving margins from restructuring.[1][2] Analyst sentiment is positive with a Zacks Rank #2 (Buy), upward earnings revisions, and price target hikes to $53.[2][3] Technical forecasts signal short-term rising trends with buy signals from moving averages, despite minor volume dips and risks in battery systems.[4]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BLSH",
+      "action": "BUY",
+      "shares": 113,
+      "allocated_capital": 5000,
+      "entry_price": 44.0525016784668,
+      "composite_score": 61.8,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "Recent coverage in the last 24 hours highlights Bullish (BLSH) reporting strong Q3 2025 results with record adjusted revenue and adjusted EBITDA, expansion of product offerings (crypto options and U.S. spot trading after NY BitLicense approval), and continued growth in liquidity partnerships and trading volumes[2][1]. After\u2011hours market posts show modest upside in the share price following the results and momentum (after\u2011hours ~ $43 vs close ~$43)[3].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "GSK",
+      "action": "BUY",
+      "shares": 102,
+      "allocated_capital": 5000,
+      "entry_price": 48.560001373291016,
+      "composite_score": 61.6,
+      "sentiment_score": 72.0,
+      "sentiment_summary": "In the last 24 hours GSK announced FDA approval of Exdensur (depemokimab) for severe eosinophilic asthma, reported ongoing share buybacks including a 235,000-share repurchase, and resubmitted a New Drug Application for a partnered Spero Therapeutics asset\u2014while markets noted the stock crossing above its 200\u2011day moving average as a bullish technical signal.[5][4][6][2]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "MGM",
+      "action": "BUY",
+      "shares": 133,
+      "allocated_capital": 5000,
+      "entry_price": 37.32500076293945,
+      "composite_score": 61.2,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "{\n  \"sentiment_score\":  sixty,\n  \"news_summary\": \"Two timely items surfaced in the past 24 hours: MGM Resorts announced it surpassed 2,000 GameSense responsible-gaming advisors as part of ongoing oper",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "APTV",
+      "action": "BUY",
+      "shares": 63,
+      "allocated_capital": 5000,
+      "entry_price": 78.49500274658203,
+      "composite_score": 60.4,
+      "sentiment_score": 72.0,
+      "sentiment_summary": "Recent 24-hour news around Aptiv (APTV) is moderately positive: coverage highlights an insider purchase by an Aptiv director on December 16, 2025 and analyst/upside commentary including Morgan Stanley\u2019s earlier price-target lift and industry coverage of Aptiv\u2019s expansion into autonomous warehouse and perception-software opportunities (reported December 19, 2025).[3][4][5] Options-flow commentary and routine MarketBeat aggregator updates were also published but contain no new negative events within the last day.[1][2]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CLSK",
+      "action": "SELL",
+      "shares": 202.0,
+      "sell_pct": 100,
+      "composite_score": 50.8,
+      "current_price": 11.729999542236328,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "In the past 24 hours coverage of CleanSpark (CLSK) has been mixed: MarketBeat reported a consensus \u201cModerate Buy\u201d from 12 analysts with an average 12\u2011month price target near $23.20, implying upside from recent levels[3]. However, recent fundamentals and trading updates remain headwinds \u2014 prior earnings missed expectations and shares have experienced notable declines in recent sessions, with commentary highlighting revenue slightly below forecasts and insider sales/SEC filings that have weighed on sentiment[2][3].",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 50.8 < 60 absolute minimum",
+      "current_value": 2362.39
+    },
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "shares": 151.0,
+      "sell_pct": 100,
+      "composite_score": 56.0,
+      "current_price": 24.56999969482422,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Omnicom completed its merger with IPG on November 26, 2025, creating the largest advertising agency by revenue exceeding $25 billion, with post-merger updates including a successful $2.95 billion senior notes exchange offer (93.7% tendered) settling on December 2 and Morgan Stanley resuming coverage of Omnicom with an Equalweight rating on December 16, citing enhanced scale and over $1 billion in expected cost synergies.[4][5][6] S&P Global Ratings withdrew IPG's Local Currency LT credit rating (previously 'BBB') on December 17, 2025, as a post-merger procedural step.[7] Omnicom also announced a 14% quarterly dividend increase to $0.80 per share, effective for shareholders of record on December 19.[6]",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 56.0 < 60 absolute minimum",
+      "current_value": 3710.07
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 70 candidates (avg score: 49.5)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 85/85 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 2 SELLs, 8 BUYs ($40,000 allocated)",
+      "quality_score": 44,
+      "issues": [
+        "Capital deployment 36.7% (target 90.0%+)",
+        "Limited diversification: 8 new positions (target 12-20). Total after trades: 21"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 6 BUYs approved, 2 rejected, 2 SELLs",
+      "quality_score": 90,
+      "issues": [
+        "2 orders REJECTED by compliance"
+      ]
+    }
+  ],
+  "approved_at": "2025-12-19T16:09:59.392664Z"
+}

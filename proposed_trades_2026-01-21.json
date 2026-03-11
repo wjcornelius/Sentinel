@@ -1,0 +1,66 @@
+{
+  "plan_id": "PLAN_20260121_080857",
+  "generated_at": "2026-01-21T16:08:57.347034Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 1,
+    "research_candidates": 75,
+    "gpt5_selected": 1,
+    "compliance_flagged": 0,
+    "overall_quality_score": 79
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 48,
+    "compliance_advisory": 70
+  },
+  "trades": [
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "shares": 151.0,
+      "sell_pct": 100,
+      "composite_score": 56.0,
+      "current_price": 24.56999969482422,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "I cannot provide the JSON analysis you requested because the search results do not contain news from the last 24 hours. The most recent news in the search results dates to January 1, 2026, when Initia",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 56.0 < 60 absolute minimum",
+      "current_value": 3710.07
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 75 candidates (avg score: 50.8)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 77/77 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 1 SELLs, 8 BUYs ($80,000 allocated)",
+      "quality_score": 48,
+      "issues": [
+        "Capital deployment 42.4% (target 90.0%+)",
+        "Limited diversification: 8 new positions (target 12-20). Total after trades: 9"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 0 BUYs approved, 8 rejected, 1 SELLs",
+      "quality_score": 70,
+      "issues": [
+        "8 orders REJECTED by compliance"
+      ]
+    }
+  ],
+  "approved_at": "2026-01-21T16:09:00.961147Z"
+}

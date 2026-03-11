@@ -1,0 +1,368 @@
+{
+  "date": "2025-11-28",
+  "start_time": "2025-11-28T08:00:09.155323",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "11:00 AM ET",
+    "current_date": "Friday, November 28, 2025"
+  },
+  "regime_analysis": {
+    "regime": "BULLISH",
+    "confidence": "MEDIUM",
+    "spy_price": 682.47998046875,
+    "spy_change_pct": 0.4119567771806387,
+    "vix_level": 17.0,
+    "recommendation": "FAVORABLE CONDITIONS"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "ENPH",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20251128T160843Z_d1429037"
+    },
+    {
+      "ticker": "GPK",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20251128T160843Z_4b45359f"
+    },
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20251128T160843Z_a2b9026f"
+    },
+    {
+      "ticker": "IVZ",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251128T160845Z_078bf7e5"
+    },
+    {
+      "ticker": "CLSK",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251128T160845Z_f6ac5a37"
+    },
+    {
+      "ticker": "GPN",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251128T160845Z_f435eea3"
+    },
+    {
+      "ticker": "COHR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251128T160845Z_8aea42c7"
+    },
+    {
+      "ticker": "IR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251128T160845Z_e782a575"
+    },
+    {
+      "ticker": "CX",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251128T160845Z_c40b9580"
+    },
+    {
+      "ticker": "KD",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251128T160845Z_b2c4ac53"
+    },
+    {
+      "ticker": "CCL",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251128T160846Z_175ac628"
+    },
+    {
+      "ticker": "GSK",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251128T160846Z_20e36d8c"
+    },
+    {
+      "ticker": "CG",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251128T160846Z_7f246bc5"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2025-11-28T08:08:53.467582",
+    "equity": 101503.5,
+    "cash": -58314.19,
+    "buying_power": 39479.24,
+    "portfolio_value": 101503.5,
+    "starting_capital": 100000.0,
+    "total_return": 1503.5,
+    "total_return_pct": 1.5035,
+    "daily_pl": 958.9499999999971,
+    "daily_pl_pct": 0.9537563199596567,
+    "total_unrealized_pl": 8885.9939,
+    "position_count": 26,
+    "positions": [
+      {
+        "ticker": "CWAN",
+        "shares": 1151.0,
+        "entry_price": 19.6,
+        "current_price": 22.15,
+        "market_value": 25494.65,
+        "unrealized_pl": 2935.05,
+        "unrealized_pl_pct": 13.01020408163265
+      },
+      {
+        "ticker": "ADMA",
+        "shares": 911.0,
+        "entry_price": 16.38,
+        "current_price": 19.12,
+        "market_value": 17418.32,
+        "unrealized_pl": 2496.14,
+        "unrealized_pl_pct": 16.72771672771673
+      },
+      {
+        "ticker": "EIX",
+        "shares": 214.0,
+        "entry_price": 55.44,
+        "current_price": 58.935,
+        "market_value": 12612.09,
+        "unrealized_pl": 747.93,
+        "unrealized_pl_pct": 6.30411255411255
+      },
+      {
+        "ticker": "FTI",
+        "shares": 175.0,
+        "entry_price": 43.4,
+        "current_price": 45.4,
+        "market_value": 7945.0,
+        "unrealized_pl": 350.0,
+        "unrealized_pl_pct": 4.60829493087558
+      },
+      {
+        "ticker": "AZN",
+        "shares": 80.0,
+        "entry_price": 84.63,
+        "current_price": 92.48,
+        "market_value": 7398.4,
+        "unrealized_pl": 628.0,
+        "unrealized_pl_pct": 9.275670565993149
+      },
+      {
+        "ticker": "MNST",
+        "shares": 83.0,
+        "entry_price": 71.871084,
+        "current_price": 75.02,
+        "market_value": 6226.66,
+        "unrealized_pl": 261.36,
+        "unrealized_pl_pct": 4.38133874239351
+      },
+      {
+        "ticker": "BZ",
+        "shares": 241.0,
+        "entry_price": 20.57,
+        "current_price": 21.96,
+        "market_value": 5292.36,
+        "unrealized_pl": 334.99,
+        "unrealized_pl_pct": 6.7574137092853706
+      },
+      {
+        "ticker": "DLTR",
+        "shares": 47.0,
+        "entry_price": 104.26,
+        "current_price": 111.43,
+        "market_value": 5237.21,
+        "unrealized_pl": 336.99,
+        "unrealized_pl_pct": 6.877038173796279
+      },
+      {
+        "ticker": "DNOW",
+        "shares": 370.0,
+        "entry_price": 13.48,
+        "current_price": 14.0,
+        "market_value": 5180.0,
+        "unrealized_pl": 192.4,
+        "unrealized_pl_pct": 3.85756676557864
+      },
+      {
+        "ticker": "GEO",
+        "shares": 319.0,
+        "entry_price": 15.590188,
+        "current_price": 15.8317,
+        "market_value": 5050.3123,
+        "unrealized_pl": 77.0423,
+        "unrealized_pl_pct": 1.54912763634389
+      },
+      {
+        "ticker": "GNTX",
+        "shares": 218.0,
+        "entry_price": 22.73,
+        "current_price": 22.9174,
+        "market_value": 4995.9932,
+        "unrealized_pl": 40.8532,
+        "unrealized_pl_pct": 0.8244610646722401
+      },
+      {
+        "ticker": "BRBR",
+        "shares": 160.0,
+        "entry_price": 30.82,
+        "current_price": 30.96,
+        "market_value": 4953.6,
+        "unrealized_pl": 22.4,
+        "unrealized_pl_pct": 0.45425048669695
+      },
+      {
+        "ticker": "ELAN",
+        "shares": 211.0,
+        "entry_price": 23.41,
+        "current_price": 23.115,
+        "market_value": 4877.265,
+        "unrealized_pl": -62.245,
+        "unrealized_pl_pct": -1.26014523707817
+      },
+      {
+        "ticker": "OPCH",
+        "shares": 154.0,
+        "entry_price": 28.03,
+        "current_price": 31.12,
+        "market_value": 4792.48,
+        "unrealized_pl": 475.86,
+        "unrealized_pl_pct": 11.02390296111309
+      },
+      {
+        "ticker": "GEHC",
+        "shares": 60.0,
+        "entry_price": 81.8,
+        "current_price": 79.8,
+        "market_value": 4788.0,
+        "unrealized_pl": -120.0,
+        "unrealized_pl_pct": -2.44498777506112
+      },
+      {
+        "ticker": "HL",
+        "shares": 255.0,
+        "entry_price": 15.58,
+        "current_price": 16.83,
+        "market_value": 4291.65,
+        "unrealized_pl": 318.75,
+        "unrealized_pl_pct": 8.02310654685494
+      },
+      {
+        "ticker": "INCY",
+        "shares": 36.0,
+        "entry_price": 105.57,
+        "current_price": 104.4,
+        "market_value": 3758.4,
+        "unrealized_pl": -42.12,
+        "unrealized_pl_pct": -1.10826939471441
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.7700831024930697
+      },
+      {
+        "ticker": "HALO",
+        "shares": 52.0,
+        "entry_price": 72.91,
+        "current_price": 70.8992,
+        "market_value": 3686.7584,
+        "unrealized_pl": -104.5616,
+        "unrealized_pl_pct": -2.7579207241805
+      },
+      {
+        "ticker": "BKR",
+        "shares": 73.0,
+        "entry_price": 48.95,
+        "current_price": 50.36,
+        "market_value": 3676.28,
+        "unrealized_pl": 102.93,
+        "unrealized_pl_pct": 2.8804902962206302
+      },
+      {
+        "ticker": "CX",
+        "shares": 289.0,
+        "entry_price": 10.71,
+        "current_price": 10.71,
+        "market_value": 3095.19,
+        "unrealized_pl": 0.0,
+        "unrealized_pl_pct": 0.0
+      },
+      {
+        "ticker": "CCL",
+        "shares": 119.0,
+        "entry_price": 25.86,
+        "current_price": 25.855,
+        "market_value": 3076.745,
+        "unrealized_pl": -0.595,
+        "unrealized_pl_pct": -0.01933488012374
+      },
+      {
+        "ticker": "KD",
+        "shares": 119.0,
+        "entry_price": 25.85,
+        "current_price": 25.83,
+        "market_value": 3073.77,
+        "unrealized_pl": -2.38,
+        "unrealized_pl_pct": -0.07736943907157
+      },
+      {
+        "ticker": "IVZ",
+        "shares": 125.0,
+        "entry_price": 24.57,
+        "current_price": 24.57,
+        "market_value": 3071.25,
+        "unrealized_pl": 0.0,
+        "unrealized_pl_pct": 0.0
+      },
+      {
+        "ticker": "CLSK",
+        "shares": 202.0,
+        "entry_price": 15.14,
+        "current_price": 15.16,
+        "market_value": 3062.32,
+        "unrealized_pl": 4.04,
+        "unrealized_pl_pct": 0.13210039630119
+      },
+      {
+        "ticker": "IR",
+        "shares": 38.0,
+        "entry_price": 80.37,
+        "current_price": 80.34,
+        "market_value": 3052.92,
+        "unrealized_pl": -1.14,
+        "unrealized_pl_pct": -0.03732736095558
+      }
+    ]
+  },
+  "warnings": [
+    "Verification: Still holding positions that should have been sold: IPG",
+    "Verification: Expected positions not found: GSK, CG, GPN, COHR"
+  ],
+  "errors": [],
+  "plan_summary": {
+    "plan_id": "PLAN_20251128_080842",
+    "total_trades": 13,
+    "quality_score": 90,
+    "ceo_rating": "EXCELLENT",
+    "ceo_recommendation": "STRONGLY RECOMMEND APPROVAL"
+  },
+  "sells_count": 3,
+  "buys_count": 10,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Still holding positions that should have been sold: IPG",
+      "Expected positions not found: GSK, CG, GPN, COHR"
+    ],
+    "summary": {
+      "position_count": 26,
+      "sells_executed": 3,
+      "buys_executed": 10,
+      "expected_count_change": 7
+    }
+  },
+  "end_time": "2025-11-28T08:08:56.245047",
+  "duration_seconds": 527.089741
+}

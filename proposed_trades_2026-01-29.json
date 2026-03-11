@@ -1,0 +1,66 @@
+{
+  "plan_id": "PLAN_20260129_080750",
+  "generated_at": "2026-01-29T16:07:50.295724Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 1,
+    "research_candidates": 67,
+    "gpt5_selected": 1,
+    "compliance_flagged": 0,
+    "overall_quality_score": 78
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 45,
+    "compliance_advisory": 70
+  },
+  "trades": [
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "shares": 151.0,
+      "sell_pct": 100,
+      "composite_score": 44.0,
+      "current_price": 24.56999969482422,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No specific news articles from the last 24 hours (January 29, 2026, up to 4 PM UTC) are present in the search results for IPG stock. Recent mentions include a 3.31% stock price gain on July 23, 2025, positive agency wins like $1.4 billion in new business for Initiative in H1 2025, and anticipation of Q3 2025 results amid the pending Omnicom merger expected in Q4 2025. Price data shows mixed trends with current levels around $24.57-$26.54 and analyst targets up to $32.27.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 44.0 < 60 absolute minimum",
+      "current_value": 3710.07
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 67 candidates (avg score: 48.1)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 69/69 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 1 SELLs, 9 BUYs ($67,500 allocated)",
+      "quality_score": 45,
+      "issues": [
+        "Capital deployment 35.8% (target 90.0%+)",
+        "Limited diversification: 9 new positions (target 12-20). Total after trades: 10"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 0 BUYs approved, 9 rejected, 1 SELLs",
+      "quality_score": 70,
+      "issues": [
+        "9 orders REJECTED by compliance"
+      ]
+    }
+  ],
+  "approved_at": "2026-01-29T16:07:52.744642Z"
+}

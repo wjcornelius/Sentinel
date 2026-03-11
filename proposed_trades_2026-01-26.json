@@ -1,0 +1,66 @@
+{
+  "plan_id": "PLAN_20260126_080749",
+  "generated_at": "2026-01-26T16:07:49.652002Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 1,
+    "research_candidates": 69,
+    "gpt5_selected": 1,
+    "compliance_flagged": 0,
+    "overall_quality_score": 84
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 67,
+    "compliance_advisory": 70
+  },
+  "trades": [
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "shares": 151.0,
+      "sell_pct": 100,
+      "composite_score": 44.0,
+      "current_price": 24.56999969482422,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Recent news highlights the near-completion of Omnicom's acquisition of Interpublic (IPG), with regulatory clearances, extended exchange offers, and merger completion, transitioning IPG to a wholly owned subsidiary.[1] Initiative, an IPG agency, secured the #1 global position in new business with $1.4 billion in value for H1 2025, including major wins like Volvo's $500 million account.[1] A new integrated agency structure leveraging GenAI tools is set to launch on January 1, 2026.[1]",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 44.0 < 60 absolute minimum",
+      "current_value": 3710.07
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 69 candidates (avg score: 49.7)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 71/71 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 1 SELLs, 11 BUYs ($110,000 allocated)",
+      "quality_score": 67,
+      "issues": [
+        "Capital deployment 58.3% (target 90.0%+)",
+        "Limited diversification: 11 new positions (target 12-20). Total after trades: 12"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 0 BUYs approved, 11 rejected, 1 SELLs",
+      "quality_score": 70,
+      "issues": [
+        "11 orders REJECTED by compliance"
+      ]
+    }
+  ],
+  "approved_at": "2026-01-26T16:07:51.370450Z"
+}

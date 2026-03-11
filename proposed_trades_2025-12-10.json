@@ -1,0 +1,233 @@
+{
+  "plan_id": "PLAN_20251210_080741",
+  "generated_at": "2025-12-10T16:07:41.766783Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 13,
+    "research_candidates": 71,
+    "gpt5_selected": 13,
+    "compliance_flagged": 0,
+    "overall_quality_score": 91
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 71,
+    "compliance_advisory": 95
+  },
+  "trades": [
+    {
+      "ticker": "DT",
+      "action": "BUY",
+      "shares": 110,
+      "allocated_capital": 5000,
+      "entry_price": 45.31999969482422,
+      "composite_score": 72.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "I don't have information about a stock ticker \"DT\" in the search results provided. The search results discuss Trump administration policies, tariffs, and their effects on the broader stock market (S&P",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BMNR",
+      "action": "BUY",
+      "shares": 127,
+      "allocated_capital": 5000,
+      "entry_price": 39.29999923706055,
+      "composite_score": 71.2,
+      "sentiment_score": 72.0,
+      "sentiment_summary": "BitMine Immersion Technologies announced ETH holdings exceeding 3.86 million tokens (over 3% of the Ethereum network) with total crypto and cash holdings of $13.2 billion, while maintaining strong institutional backing from prominent investors including Cathie Wood and Founders Fund. The company continues its aggressive acquisition strategy, purchasing hundreds of millions in ETH weekly, and recently engaged Tom DeMark as a strategic advisor to optimize its path toward a 5% ETH network goal.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "HUT",
+      "action": "BUY",
+      "shares": 111,
+      "allocated_capital": 5000,
+      "entry_price": 44.709999084472656,
+      "composite_score": 71.0,
+      "sentiment_score": 55.0,
+      "sentiment_summary": "Hut 8 (HUT) stock experienced a notable 10% drop recently with significant trading volume, despite a backdrop of strong analyst buy ratings and raised price targets. The company is advancing its power capacity expansion plans, aiming to more than double to over 2.5 GW, which has previously driven positive stock surges. Recent quarterly results beat expectations on EPS and revenue, and multiple analysts have increased price targets, signaling long-term bullish potential despite short-term sell-offs.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "AG",
+      "action": "BUY",
+      "shares": 329,
+      "allocated_capital": 5000,
+      "entry_price": 15.180000305175781,
+      "composite_score": 69.0,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "First Majestic Silver (AG) reported record Q3 2025 production with 3.9 million silver ounces, a 96% year-over-year increase, and announced a share repurchase program of up to 24.5 million shares. The company continues executing its 2025 operational plans with strong performance across its portfolio, including the near-completion of Los Gatos integration.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "MARA",
+      "action": "BUY",
+      "shares": 421,
+      "allocated_capital": 5000,
+      "entry_price": 11.854999542236328,
+      "composite_score": 66.8,
+      "sentiment_score": 40.0,
+      "sentiment_summary": "MARA stock has faced notable volatility with a recent decline around 6-7% due to market uncertainties and rumors affecting investor confidence. Insider selling continues at significant levels, although several analysts maintain buy or outperform ratings and some bullish options activity was observed. Institutional investors notably increased their holdings in Q3 2025 despite the short-term price declines.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "FTNT",
+      "action": "BUY",
+      "shares": 61,
+      "allocated_capital": 5000,
+      "entry_price": 81.83000183105469,
+      "composite_score": 65.4,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "Recent news on Fortinet (FTNT) highlights strong quarterly results beating earnings and revenue estimates, with Q3 2025 non-GAAP EPS of $0.74 and revenues of $1.72 billion, showing 14.4% year-over-year growth. State Street Corp has increased its stake in Fortinet, indicating institutional confidence, while the company launched its Secure AI Data Center solution, a notable innovation in AI workload security. However, some analysts have downgraded or lowered price targets, reflecting mixed analyst sentiment despite the positive operational results.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "EWY",
+      "action": "BUY",
+      "shares": 52,
+      "allocated_capital": 5000,
+      "entry_price": 95.05999755859375,
+      "composite_score": 65.0,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "Recent news on EWY stock shows mixed technical signals but a prevailing near-term strong positive sentiment with institutional strategies favoring long positions. Momentum indicators suggest a potential upward move beginning December 3, 2025, though some bearish signs from earlier months point to possible pullbacks. Institutional AI models indicate strong long-term bias and trading strategies with defined entry and exit zones, despite a currently neutral mid-term outlook.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BLSH",
+      "action": "BUY",
+      "shares": 110,
+      "allocated_capital": 5000,
+      "entry_price": 45.119998931884766,
+      "composite_score": 63.8,
+      "sentiment_score": 85.0,
+      "sentiment_summary": "Recent news on Bullish (BLSH) highlights strong financial performance with record Q3 2025 results including adjusted revenue of $76.5M and a positive net income turnaround to $18.5M. The company successfully launched crypto options trading with 14 leading partners and surpassed $1.5 trillion in cumulative trading volume. Additionally, BLSH is expected to open its IPO significantly above initial pricing and will soon join the Russell 1000 and 3000 indexes.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "HRL",
+      "action": "BUY",
+      "shares": 213,
+      "allocated_capital": 5000,
+      "entry_price": 23.40999984741211,
+      "composite_score": 62.6,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "Recent news on Hormel Foods (HRL) highlights a mixed earnings report for the fourth quarter and fiscal year 2025, with revenue slightly below estimates but profitability and operating income ahead of expectations. Management reiterated a 2026 turnaround plan focusing on growth and cost savings, supported by ongoing product innovation aimed at health-conscious consumers. Additionally, a hedge fund recently purchased a significant number of shares, indicating institutional interest, although some analysts maintain cautious price targets.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "GSK",
+      "action": "BUY",
+      "shares": 103,
+      "allocated_capital": 5000,
+      "entry_price": 48.16999816894531,
+      "composite_score": 62.2,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "GSK reported a strong Q3 2025 performance, with sales growth across Specialty Medicines, Vaccines, and General Medicines sectors leading to an upgraded 2025 guidance. Additionally, the US FDA granted orphan drug designation to GSK's small-cell lung cancer drug risvutatug rezetecan, supporting its pipeline in oncology. Despite a slight intraday stock price drop, the company's robust earnings and positive regulatory news indicate solid momentum.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "GLXY",
+      "action": "BUY",
+      "shares": 173,
+      "allocated_capital": 5000,
+      "entry_price": 28.799999237060547,
+      "composite_score": 61.4,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "Galaxy Digital's stock has surged recently, up 8.9%, following its acquisition of staking software firm Alluvial Finance, which positions it as the Development Company for Liquid Collective, a leading institutional liquid staking protocol. The move is seen as strengthening Galaxy\u2019s role in institutional onchain infrastructure and expanding its multi\u2011engine growth model across crypto and data center ecosystems.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "EOSE",
+      "action": "BUY",
+      "shares": 341,
+      "allocated_capital": 5000,
+      "entry_price": 14.654999732971191,
+      "composite_score": 60.6,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "Eos Energy Enterprises recently completed a $458 million equity capital raise in November 2025, which has been positively received as it supports expansion amid strong policy-driven demand for zinc-based grid batteries and clean energy tax incentives. The company reaffirmed its 2025 revenue guidance of $150-160 million while reporting a significant revenue increase but also wider net losses and missed quarterly earnings expectations. Insider selling activity totaling over $12 million in recent days has introduced some caution among investors, although the overall market and analyst sentiment remains optimistic with several price targets above $20.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "shares": 151.0,
+      "sell_pct": 100,
+      "composite_score": 56.0,
+      "current_price": 24.56999969482422,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Omnicom's $9-$13 billion acquisition of Interpublic Group (IPG) completed recently, creating the world's largest advertising holding company by revenue. The merger combines a range of agencies and advanced AI-driven platforms, aiming to drive intelligent growth, though it has led to significant job cuts and concerns about integration risks. Market reaction is cautiously optimistic, with leadership emphasizing future benefits and client support amidst industry shifts.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 56.0 < 60 absolute minimum",
+      "current_value": 3710.07
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 71 candidates (avg score: 52.7)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 85/85 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 1 SELLs, 13 BUYs ($65,000 allocated)",
+      "quality_score": 71,
+      "issues": [
+        "Capital deployment 58.1% (target 90.0%+)"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 12 BUYs approved, 1 rejected, 1 SELLs",
+      "quality_score": 95,
+      "issues": [
+        "1 orders REJECTED by compliance"
+      ]
+    }
+  ],
+  "approved_at": "2025-12-10T16:07:43.247420Z"
+}

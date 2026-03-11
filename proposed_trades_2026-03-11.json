@@ -1,0 +1,210 @@
+{
+  "plan_id": "PLAN_20260311_090835",
+  "generated_at": "2026-03-11T16:08:35.109511Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 12,
+    "research_candidates": 67,
+    "gpt5_selected": 12,
+    "compliance_flagged": 0,
+    "overall_quality_score": 84
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 41,
+    "compliance_advisory": 95
+  },
+  "trades": [
+    {
+      "ticker": "DHT",
+      "action": "BUY",
+      "shares": 421,
+      "allocated_capital": 7500.0,
+      "entry_price": 17.795000076293945,
+      "composite_score": 77.4,
+      "sentiment_score": 85.0,
+      "sentiment_summary": "DHT Holdings stock recently hit new 52-week highs at 14.49 USD and 18.41 USD, reflecting strong upward momentum and investor confidence amid a 76% yearly gain. The company reported Q4 2025 earnings beating expectations with EPS of $0.41 and revenue of $117.8 million, alongside new vessel charters like DHT Redwood at $105,000/day and positive spot market bookings. Recent fleet expansions include the delivery of VLCC newbuilding DHT Antelope.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ALAB",
+      "action": "BUY",
+      "shares": 58,
+      "allocated_capital": 7500.0,
+      "entry_price": 127.29000091552734,
+      "composite_score": 70.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No news articles or events reported in the last 24 hours for Astera Labs (ALAB) stock. Available data shows intraday trading activity on March 11, 2026, with the stock up approximately 5.60% to $123.00 as of mid-morning EDT amid market open. Recent price history indicates volatility, with a decline on March 10 followed by a rebound today.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CRDO",
+      "action": "BUY",
+      "shares": 64,
+      "allocated_capital": 7500.0,
+      "entry_price": 116.86499786376953,
+      "composite_score": 67.0,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "Credo Technology Group (CRDO) reported exceptional Q3 2026 earnings on March 3, with revenue of $407 million (up 51.9% sequentially and 201.5% YoY) and EPS of $1.07, beating expectations, alongside a 68.6% gross margin and strong cash flow. Despite these robust results and positive guidance, the stock declined sharply post-earnings, dropping 14.81% to $97.30 on March 3 and continuing volatility, closing at $112.33 on March 10 after a 3.15% decline. Recent analyses highlight bullish fundamentals driven by AI demand but note investor concerns over high customer concentration and operating expenses.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BMNR",
+      "action": "BUY",
+      "shares": 361,
+      "allocated_capital": 7500.0,
+      "entry_price": 20.760000228881836,
+      "composite_score": 61.8,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "Recent updates highlight Bitmine Immersion Technologies (BMNR) aggressively accumulating Ethereum, with holdings reaching 4.53 million ETH and cash at a record $1.2 billion as of March 9, positioning it for AI agents in the digital economy[2]. A March 10 video discussion notes a strategic shift including record ETH purchases and cash raises, though trading at low multiples to net asset value (MNAV), suggesting undervaluation[4]. Stock forecasts predict a 72.74% rise over 3 months to $40.87-$259.65, with a fair opening at $20.85 on March 11[1].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ABNB",
+      "action": "BUY",
+      "shares": 56,
+      "allocated_capital": 7500.0,
+      "entry_price": 132.02999877929688,
+      "composite_score": 61.4,
+      "sentiment_score": 45.0,
+      "sentiment_summary": "Airbnb's CFO Elinor Mertz sold 4,308 shares on March 5, 2026, under a pre-arranged 10b5-1 plan, valued at approximately $585,000, flagged as negative sentiment in filings[4]. No other major news events reported in the last 24 hours as of March 11, 2026. Analyst consensus remains a Buy with a $151.82 price target, though not tied to breaking news[1][5].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "SLM",
+      "action": "BUY",
+      "shares": 380,
+      "allocated_capital": 7500.0,
+      "entry_price": 19.709999084472656,
+      "composite_score": 60.6,
+      "sentiment_score": 35.0,
+      "sentiment_summary": "Wells Fargo lowered its price target on SLM Corp. to $30 from $35, citing lower gain-on-sale margins and higher operating expenses, while maintaining an Overweight rating[1]. Compass Point downgraded SLM from Buy to Sell with a $23 price target following the Investor Forum and updated earnings outlook[1]. SLM announced a $200 million accelerated share repurchase on March 9, 2026, and its CEO is speaking at the RBC conference today[4].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "AGI",
+      "action": "SELL",
+      "shares": 224.0,
+      "sell_pct": 100,
+      "composite_score": 58.0,
+      "current_price": 48.654998779296875,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "I cannot provide the requested JSON analysis because the search results do not contain recent news articles or sentiment data from the last 24 hours for AGI (Alamos Gold) stock.\n\nThe search results pr",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 58.0 < 60 absolute minimum",
+      "current_value": 10915.52
+    },
+    {
+      "ticker": "BBY",
+      "action": "SELL",
+      "shares": 152.0,
+      "sell_pct": 100,
+      "composite_score": 54.8,
+      "current_price": 62.849998474121094,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Best Buy (BBY) stock jumped 12% after Q4 earnings beat EPS expectations at $2.61 versus forecasts of $2.46-$2.47, driving shares up to $66.01 amid high trading volume[1][2]. However, revenue slightly missed at $13.81 billion and annual guidance disappointed with EPS projected at $6.30-$6.60 below consensus of $6.66, alongside flat-to-negative comparable sales outlook[1]. Management cited a mixed macro environment with consumer pressures from tariffs and employment uncertainty[1].",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 54.8 < 60 absolute minimum",
+      "current_value": 9547.12
+    },
+    {
+      "ticker": "BROS",
+      "action": "SELL",
+      "shares": 190.0,
+      "sell_pct": 100,
+      "composite_score": 51.6,
+      "current_price": 50.992698669433594,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "New put and call options for Dutch Bros (BROS) began trading for March 2026 expiration, highlighting investor interest in potential downside protection at $42.50 strike (19% below current $52.20 price) and covered calls at $55 strike offering 29.89% return if exercised[1]. Analyst consensus from 19 analysts rates BROS as a Buy with a $77.58 price target as of March 10, 2026, supported by improved same-store sales estimates and growth potential, though challenges like brand expansion and food margins persist[2]. Recent stock prices show stability around $52-53 in early March 2026[3].",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 51.6 < 60 absolute minimum",
+      "current_value": 9695.7
+    },
+    {
+      "ticker": "CCI",
+      "action": "SELL",
+      "shares": 84.0,
+      "sell_pct": 100,
+      "composite_score": 38.4,
+      "current_price": 88.16000366210938,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Crown Castle (CCI) stock declined to $88.84 on March 10, 2026, amid a slump in real estate stocks driven by Iran conflict pushing Treasury yields higher and complicating rate cuts, as reported on March 7. Recent data shows CCI underperforming the market over the past year but outperforming in the last 3 months and 2 weeks. Analyst consensus remains Moderate Buy with a $113 price target, though news sentiment score is 0.63 over the last seven days.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 38.4 < 60 absolute minimum",
+      "current_value": 7413.0
+    },
+    {
+      "ticker": "CDE",
+      "action": "SELL",
+      "shares": 417.0,
+      "sell_pct": 100,
+      "composite_score": 52.0,
+      "current_price": 21.846099853515625,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No news articles from the last 24 hours (since March 10, 2026, 4 PM UTC) were found in the search results. The most recent item is from March 3, 2026, reporting a CDE stock price drop due to falling silver and gold prices, broader market weakness, and high valuation vulnerability[1]. Earlier reports include shareholder approval of the New Gold acquisition (January 27, 2026) with a mild negative market reaction and positive earnings estimate revisions[2][3].",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 52.0 < 60 absolute minimum",
+      "current_value": 9123.96
+    },
+    {
+      "ticker": "CHWY",
+      "action": "SELL",
+      "shares": 230.0,
+      "sell_pct": 100,
+      "composite_score": 50.400000000000006,
+      "current_price": 25.229999542236328,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Chewy's recent Q3 FY2026 results show strong performance with profits, free cash flow, share buybacks reducing share count by 1.6% YTD, and institutional buying outpacing selling at a 3:1 ratio, supporting a bullish outlook for 2026.[1] Despite this, the stock dropped 4.96% to $25.51 in a recent session, underperforming broader market gains.[2][5] Analysts and institutions maintain strong support with reaffirmed ratings, and the company continues to grow faster than competitors.[1]",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 50.4 < 60 absolute minimum",
+      "current_value": 5812.1
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 67 candidates (avg score: 41.8)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 78/78 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 6 SELLs, 7 BUYs ($52,500 allocated)",
+      "quality_score": 41,
+      "issues": [
+        "Capital deployment 35.2% (target 90.0%+)",
+        "Limited diversification: 7 new positions (target 12-20). Total after trades: 12"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 6 BUYs approved, 1 rejected, 6 SELLs",
+      "quality_score": 95,
+      "issues": [
+        "1 orders REJECTED by compliance"
+      ]
+    }
+  ],
+  "approved_at": "2026-03-11T16:08:36.823291Z"
+}

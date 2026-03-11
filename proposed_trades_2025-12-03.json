@@ -1,0 +1,217 @@
+{
+  "plan_id": "PLAN_20251203_081053",
+  "generated_at": "2025-12-03T16:10:53.395810Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 12,
+    "research_candidates": 75,
+    "gpt5_selected": 12,
+    "compliance_flagged": 0,
+    "overall_quality_score": 90
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 75,
+    "compliance_advisory": 85
+  },
+  "trades": [
+    {
+      "ticker": "GSK",
+      "action": "BUY",
+      "shares": 101,
+      "allocated_capital": 5000,
+      "entry_price": 49.15999984741211,
+      "composite_score": 74.2,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "GSK stock reached a new 12-month high, trading as high as GBX 1,847 and closing at GBX 1,846 on strong volume. The company also announced a share buyback of 200,000 shares, signaling confidence in its value. Analysts remain mixed but have recently raised price targets, with an average 'Hold' rating and a consensus target of GBX 1,762.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "GPN",
+      "action": "BUY",
+      "shares": 62,
+      "allocated_capital": 5000,
+      "entry_price": 80.0999984741211,
+      "composite_score": 71.8,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "Global Payments (GPN) reported strong third-quarter 2025 results, with adjusted EPS of $3.26, beating consensus estimates, and reaffirmed its full-year outlook. The company received regulatory clearance for its Worldpay acquisition, positioning it for a 2026 close, and announced a dividend of $0.25 per share, signaling confidence in its financial health.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "KDP",
+      "action": "BUY",
+      "shares": 177,
+      "allocated_capital": 5000,
+      "entry_price": 28.21500015258789,
+      "composite_score": 70.8,
+      "sentiment_score": 58.0,
+      "sentiment_summary": "Recent news for Keurig Dr Pepper (KDP) reflects mixed but slightly positive sentiment. The stock has seen minor declines on the day, trading around $28.13\u2013$28.17, and is underperforming the broader market over the past year. However, analysts remain moderately optimistic, with a consensus 'Moderate Buy' rating and a mean price target suggesting potential upside, despite some recent downgrades and profit-taking by institutional investors.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "COHR",
+      "action": "BUY",
+      "shares": 29,
+      "allocated_capital": 5000,
+      "entry_price": 167.8000030517578,
+      "composite_score": 70.4,
+      "sentiment_score": 88.0,
+      "sentiment_summary": "Coherent (COHR) surged to a fresh all-time high following a strong Q3 earnings report, with revenue up 17% year-over-year to $1.581 billion and net income jumping 769%. Analysts have responded positively, raising price targets, and the company provided optimistic guidance for the next quarter, citing continued demand from AI data centers and communications.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "DELL",
+      "action": "BUY",
+      "shares": 37,
+      "allocated_capital": 5000,
+      "entry_price": 134.5,
+      "composite_score": 69.2,
+      "sentiment_score": 60.0,
+      "sentiment_summary": "Dell Technologies recently experienced mixed sentiment in the last 24 hours. Morgan Stanley downgraded Dell stock due to concerns about AI server mix, rising component costs, and margin pressures, which impacted the stock negatively. However, positive developments include strong institutional buying, better-than-expected Q3 earnings, increased price targets from Evercore ISI and Raymond James, and a significant $6.25 billion charitable donation announced by Michael and Susan Dell, which was publicly praised and contributed to a 2-3% stock rise.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "HRL",
+      "action": "BUY",
+      "shares": 215,
+      "allocated_capital": 5000,
+      "entry_price": 23.21500015258789,
+      "composite_score": 68.0,
+      "sentiment_score": 68.0,
+      "sentiment_summary": "Hormel Foods (HRL) is set to report Q3 earnings on Thursday, December 4, 2025, with the stock up 7.9% over the past month and currently trading at $23.19, above its analyst price target of $26.69. The company has been recognized on Fast Company's 2025 Brands That Matter list for its successful multi-brand marketing campaigns, demonstrating strong brand relevance and cultural engagement.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CNM",
+      "action": "BUY",
+      "shares": 100,
+      "allocated_capital": 5000,
+      "entry_price": 49.5099983215332,
+      "composite_score": 67.6,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "There is no direct news or significant updates regarding CNM (Core & Main, Inc.) stock in the last 24 hours. The most recent available information is standard stock data and investor alert options on the company's investor relations page, with no new developments or market-moving announcements.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "DT",
+      "action": "BUY",
+      "shares": 112,
+      "allocated_capital": 5000,
+      "entry_price": 44.26499938964844,
+      "composite_score": 62.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Recent news does not mention DT stock specifically, focusing instead on broader market trends, Federal Reserve leadership speculation, and macroeconomic data. US equities showed modest gains, with sectors like AI and software performing well, but there was no direct coverage or catalyst for DT stock.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "FTNT",
+      "action": "BUY",
+      "shares": 61,
+      "allocated_capital": 5000,
+      "entry_price": 81.52999877929688,
+      "composite_score": 62.8,
+      "sentiment_score": 52.0,
+      "sentiment_summary": "Fortinet (FTNT) recently reported strong Q3 2025 results, with revenue up 14% year-over-year and earnings beating expectations. The company secured new partnerships with Climb and TERAGO, expanding its SASE and SD-WAN offerings through new distribution channels. However, analysts remain cautious, maintaining a consensus 'Hold' rating and citing concerns over near-term growth momentum and sector valuation pressures.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "APTV",
+      "action": "BUY",
+      "shares": 63,
+      "allocated_capital": 5000,
+      "entry_price": 78.26499938964844,
+      "composite_score": 61.0,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "Recent news for Aptiv PLC (APTV) highlights strong financial performance with record Q2 2025 revenue of $5.2 billion and adjusted earnings per share guidance of $7.30-$7.60 for the full year. Aptiv announced strategic cooperation with Robust.AI to develop AI-powered collaborative robots and completed a $3 billion share repurchase program. Additionally, notable institutional buying occurred alongside analyst upgrades and positive valuation comparisons versus peers.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "EIX",
+      "action": "SELL",
+      "shares": 214.0,
+      "sell_pct": 100,
+      "composite_score": 56.0,
+      "current_price": 57.13750076293945,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Edison International reported strong third-quarter earnings for 2025, with GAAP EPS of $2.16 and core EPS of $2.34, exceeding analyst expectations. The company reiterated its 2025 core EPS guidance of $5.95\u2013$6.20 and maintained confidence in delivering 5\u20137% core EPS growth through 2028. Notable developments include CPUC approval for most of Southern California Edison's capital investments and a $1.66 billion preferred stock buyback initiative to optimize capital structure.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 56.0 < 60 absolute minimum",
+      "current_value": 12253.64
+    },
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "shares": 151.0,
+      "sell_pct": 100,
+      "composite_score": 56.0,
+      "current_price": 24.56999969482422,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Omnicom has completed its $13.25 billion acquisition of Interpublic Group, forming the world's largest marketing and sales company with combined revenues exceeding $25 billion. The merger involves significant restructuring, including approximately 4,000 layoffs, and the exchange of $2.95 billion in IPG notes for new Omnicom debt. While the deal is expected to create strategic growth opportunities, analyst sentiment remains cautious, with several neutral or hold ratings and slightly reduced price targets for IPG shares.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 56.0 < 60 absolute minimum",
+      "current_value": 3710.07
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 75 candidates (avg score: 56.4)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 92/92 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 2 SELLs, 13 BUYs ($65,000 allocated)",
+      "quality_score": 75,
+      "issues": [
+        "Capital deployment 64.2% (target 90.0%+)"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 10 BUYs approved, 3 rejected, 2 SELLs",
+      "quality_score": 85,
+      "issues": [
+        "3 orders REJECTED by compliance"
+      ]
+    }
+  ],
+  "approved_at": "2025-12-03T16:10:55.726645Z"
+}

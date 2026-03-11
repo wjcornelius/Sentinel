@@ -1,0 +1,22 @@
+{
+  "date": "2025-12-03",
+  "start_time": "2025-12-03T20:57:23.181763",
+  "status": "MARKET_CLOSED",
+  "market_status": {
+    "is_open": false,
+    "status": "CLOSED",
+    "message": "After hours - Market opens Thursday, Dec 04 at 9:30 AM ET",
+    "current_time_et": "11:57 PM ET",
+    "current_date": "Wednesday, December 03, 2025",
+    "next_open": "Thursday, Dec 04 at 9:30 AM ET"
+  },
+  "regime_analysis": null,
+  "plan_generated": false,
+  "plan_approved": false,
+  "trades_executed": [],
+  "portfolio_state": null,
+  "warnings": [],
+  "errors": [],
+  "end_time": "2025-12-03T20:57:45.574877",
+  "duration_seconds": 22.393125
+}

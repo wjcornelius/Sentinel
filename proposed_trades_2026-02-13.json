@@ -1,0 +1,243 @@
+{
+  "plan_id": "PLAN_20260213_080701",
+  "generated_at": "2026-02-13T16:07:01.889830Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 14,
+    "research_candidates": 68,
+    "gpt5_selected": 14,
+    "compliance_flagged": 0,
+    "overall_quality_score": 95
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 87,
+    "compliance_advisory": 95
+  },
+  "trades": [
+    {
+      "ticker": "CART",
+      "action": "BUY",
+      "shares": 265,
+      "allocated_capital": 10000,
+      "entry_price": 37.689998626708984,
+      "composite_score": 81.4,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "Instacart (CART) reported strong Q4 CY2025 results today, with revenue of $992 million beating estimates by 2% and adjusted EPS of $0.97 exceeding expectations by 2.8%, driving the stock up roughly 15% to around $38.[2][3] Analysts responded positively, with Needham raising its price target to $55 (Buy) and Benchmark to $55 (Buy), amid highlights of accelerating multi-engine growth and expanding grocery tech partnerships.[1][3][4][5] The stock gapped up on heavy volume following these upgrades, though consensus remains Hold with a $51.54 average target.[3][4]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "AGI",
+      "action": "BUY",
+      "shares": 224,
+      "allocated_capital": 10000,
+      "entry_price": 44.59000015258789,
+      "composite_score": 77.8,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "Scotiabank raised its FY2027 EPS estimates for Alamos Gold (AGI) from $4.11 to $4.13, signaling positive analyst outlook[1]. Van Eck Associates reported a significant 9.96% passive stake in AGI as of December 31, 2025, indicating strong institutional confidence[3]. No other major news events for AGI appeared in the last 24 hours, with one unrelated mention of a Brazilian fintech IPO under a different ticker[2].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CNM",
+      "action": "BUY",
+      "shares": 173,
+      "allocated_capital": 10000,
+      "entry_price": 57.630001068115234,
+      "composite_score": 69.4,
+      "sentiment_score": 55.0,
+      "sentiment_summary": "Core & Main closed its acquisition of Pioneer Supply, adding locations in Oklahoma and Texas to expand its waterworks distribution network. The stock is trading steadily around $57.63-$57.84 with minimal change. Analyst consensus remains Moderate Buy with targets up to $65, supported by growth catalysts like infrastructure spending and projected EPS increases.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "COMM",
+      "action": "BUY",
+      "shares": 533,
+      "allocated_capital": 10000,
+      "entry_price": 18.739999771118164,
+      "composite_score": 67.8,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "CommScope Holding Company (COMM) stock rose 3.89% to 18.50 in recent trading, indicating positive price momentum. Analyst consensus from three analysts rates COMM as a Buy, with a 2026 price target of $16, though 67% recommend holding. No specific negative news or events directly impacted COMM in the last 24 hours amid broader market declines in communication services.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "APH",
+      "action": "BUY",
+      "shares": 67,
+      "allocated_capital": 10000,
+      "entry_price": 147.3300018310547,
+      "composite_score": 67.0,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "Public Sector Pension Investment Board bought 15,610 shares of Amphenol Corporation (APH) on February 13, 2026, signaling institutional confidence[1]. Xtrackers Russell US Multifactor ETF also purchased 150 shares, while older filings note some sales by other funds like Longbow Finance SA and Cookson Peirce & Co[2][4][6]. APH stock opened at $143.81 with strong fundamentals including recent earnings beats and positive analyst ratings reiterated in prior weeks[1][2].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "APG",
+      "action": "BUY",
+      "shares": 223,
+      "allocated_capital": 10000,
+      "entry_price": 44.689998626708984,
+      "composite_score": 65.6,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No news articles from the last 24 hours (since February 12, 2026, 4 PM UTC) are available in the search results. The most recent mentions include a 'Moderate Buy' analyst consensus from approximately 32-34 minutes before the query time on October 24, 2025, and a stock price gain of 1.33% on July 25, 2025, with positive technical signals like rising volume and buy signals from MACD.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "AS",
+      "action": "BUY",
+      "shares": 253,
+      "allocated_capital": 10000,
+      "entry_price": 39.43000030517578,
+      "composite_score": 65.0,
+      "sentiment_score": 55.0,
+      "sentiment_summary": "Analyst consensus for AS (Amer Sports Inc) remains positive with a Buy rating from 14 analysts, including 50% Strong Buy and 43% Buy, and a price target of $46.29 as of February 13, 2026.[3] No specific company news, earnings reports, or negative developments for AS appear in the last 24 hours' coverage.[1][2][4][5][6][7][8] Broader market sentiment shows mixed tones with US stocks higher early in the day amid earnings anticipation, while tech faces pressure.[2][7]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ACI",
+      "action": "BUY",
+      "shares": 545,
+      "allocated_capital": 10000,
+      "entry_price": 18.325000762939453,
+      "composite_score": 64.6,
+      "sentiment_score": 45.0,
+      "sentiment_summary": "Albertsons Companies (ACI) announced the pricing of $2.1 billion in senior notes to refinance existing debt, signaling ongoing financial management efforts[6]. Technical indicators show sell signals from moving averages, with the stock recently oversold on RSI14 and exhibiting negative short-term forecasts[1]. Analyst consensus leans toward Buy from 12 analysts, though options market activity suggests high volatility with no recent earnings estimate upgrades[2][5].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "AU",
+      "action": "BUY",
+      "shares": 95,
+      "allocated_capital": 10000,
+      "entry_price": 104.7300033569336,
+      "composite_score": 64.4,
+      "sentiment_score": 42.0,
+      "sentiment_summary": "The ASX 200 is set to open lower by 0.6% following US market declines, with oil and gold prices sinking, pressuring energy and gold stocks[2]. Austal shares plunged 22.8% after cutting earnings guidance due to an accounting error on a US Navy contract[4][5]. Positive notes include Bell Potter's buy rating on Cogstate with 34% upside potential and a reaffirmed buy on Temple & Webster[1][2].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BZ",
+      "action": "BUY",
+      "shares": 577,
+      "allocated_capital": 10000,
+      "entry_price": 17.30500030517578,
+      "composite_score": 61.6,
+      "sentiment_score": 78.0,
+      "sentiment_summary": "Kanzhun Limited (BZ) announced on February 11, 2026, the repurchase of 650,180 shares for over RMB40 million on February 9-10, continuing its 2026 buyback program totaling nearly RMB260 million. On February 12, 2026, the company's Post-IPO Share Scheme trustee purchased 343,304 Class A ordinary shares at an average of US$8.73 per share for employee awards. A February 2026 analysis rates BZ as a Strong Buy with a 75.7/100 composite score, highlighting strong fundamentals including 20% revenue growth and superior margins.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "B",
+      "action": "BUY",
+      "shares": 210,
+      "allocated_capital": 10000,
+      "entry_price": 47.40999984741211,
+      "composite_score": 61.0,
+      "sentiment_score": 45.0,
+      "sentiment_summary": "B stock (Barrick Gold Corp) is trading at $44.19 in after-hours sessions, down 3.75% from the regular market close of $45.91.[1] The stock has experienced recent declines with limited positive catalysts reported in available market news.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "AMKR",
+      "action": "SELL",
+      "shares": 192.0,
+      "sell_pct": 100,
+      "composite_score": 51.2,
+      "current_price": 48.349998474121094,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Amkor Technology (AMKR) stock dropped 8.2% on Friday after the Kim family, its largest shareholder, sold 10 million shares at $48.75 each in a secondary offering, causing a 6.8% premarket decline.[1][3][7] Despite the sell-off, recent analyst actions are positive, with JPMorgan raising its price target to $65 (overweight), Goldman Sachs to $43 (neutral), and Morgan Stanley to $45 (equal weight), alongside a recent earnings beat.[1][2] The options market shows high implied volatility suggesting potential upside, while institutional holdings like Thrivent's $1.69M position persist amid mixed ratings.[2][4]",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 51.2 < 60 absolute minimum",
+      "current_value": 9288.96
+    },
+    {
+      "ticker": "CRBG",
+      "action": "SELL",
+      "shares": 321.0,
+      "sell_pct": 100,
+      "composite_score": 58.8,
+      "current_price": 31.260000228881836,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Corebridge Financial announced a $750 million share repurchase from parent company AIG at $30.42 per share, expected to close on February 17, 2026[1]. The company also increased its quarterly dividend to $0.25[4]. Q4 2025 earnings showed revenue of $6.34 billion (26.4% year-over-year growth) and beat consensus estimates by 25.3%[2].",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 58.8 < 60 absolute minimum",
+      "current_value": 9991.125
+    },
+    {
+      "ticker": "FLR",
+      "action": "SELL",
+      "shares": 214.0,
+      "sell_pct": 100,
+      "composite_score": 45.6,
+      "current_price": 45.66999816894531,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Fluor (FLR) announced a partnership with Centrus Energy to serve as EPC contractor for uranium enrichment expansion in Ohio, driving premarket gains amid rising demand for low-enriched uranium. Upcoming Q2 earnings on February 17, 2026, show lowered EPS estimates but a value-oriented P/E ratio, with analysts maintaining a consensus Buy rating and $49.57 average price target. Positive backlog growth and nuclear capacity projects support long-term optimism, though class action lawsuits introduce some uncertainty.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 45.6 < 60 absolute minimum",
+      "current_value": 9783.01
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 68 candidates (avg score: 44.8)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 78/78 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 3 SELLs, 12 BUYs ($120,000 allocated)",
+      "quality_score": 87,
+      "issues": [
+        "Capital deployment 81.7% (target 90.0%+)"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 11 BUYs approved, 1 rejected, 3 SELLs",
+      "quality_score": 95,
+      "issues": [
+        "1 orders REJECTED by compliance"
+      ]
+    }
+  ],
+  "approved_at": "2026-02-13T16:07:03.649137Z"
+}

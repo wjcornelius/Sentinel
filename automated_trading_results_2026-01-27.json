@@ -1,0 +1,100 @@
+{
+  "date": "2026-01-27",
+  "start_time": "2026-01-27T08:00:06.717526",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "11:00 AM ET",
+    "current_date": "Tuesday, January 27, 2026"
+  },
+  "regime_analysis": {
+    "regime": "BULLISH",
+    "confidence": "MEDIUM",
+    "spy_price": 696.0999755859375,
+    "spy_change_pct": 0.48648033320387307,
+    "vix_level": 15.800000190734863,
+    "recommendation": "FAVORABLE CONDITIONS"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "status": "SKIPPED",
+      "reason": "Asset not tradeable: AssetStatus.INACTIVE"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-01-27T08:08:01.810969",
+    "equity": 101714.32,
+    "cash": 87112.09,
+    "buying_power": 185116.34,
+    "portfolio_value": 101714.32,
+    "starting_capital": 100000.0,
+    "total_return": 1714.320000000007,
+    "total_return_pct": 1.714320000000007,
+    "daily_pl": 3628.2300000000105,
+    "daily_pl_pct": 3.699026029073042,
+    "total_unrealized_pl": 764.78,
+    "position_count": 2,
+    "positions": [
+      {
+        "ticker": "ESI",
+        "shares": 372.0,
+        "entry_price": 26.94,
+        "current_price": 29.28,
+        "market_value": 10892.16,
+        "unrealized_pl": 870.48,
+        "unrealized_pl_pct": 8.685968819599111
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.7700831024930697
+      }
+    ]
+  },
+  "warnings": [],
+  "errors": [],
+  "position_drift": {
+    "positions_checked": 2,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260127_080741",
+    "total_trades": 1,
+    "quality_score": 78,
+    "ceo_rating": "GOOD",
+    "ceo_recommendation": "RECOMMEND APPROVAL"
+  },
+  "sells_count": 0,
+  "buys_count": 0,
+  "verification": {
+    "passed": true,
+    "issues": [],
+    "summary": {
+      "position_count": 2,
+      "sells_executed": 0,
+      "buys_executed": 0,
+      "expected_count_change": 0
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 0,
+    "fills_recorded": 0,
+    "orders_updated": 0,
+    "already_recorded": 0,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-01-27T08:08:03.620009",
+  "duration_seconds": 476.902497
+}

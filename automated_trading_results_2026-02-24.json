@@ -1,0 +1,213 @@
+{
+  "date": "2026-02-24",
+  "start_time": "2026-02-24T08:00:01.934993",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "11:00 AM ET",
+    "current_date": "Tuesday, February 24, 2026"
+  },
+  "regime_analysis": {
+    "regime": "BULLISH",
+    "confidence": "HIGH",
+    "spy_price": 685.3800048828125,
+    "spy_change_pct": 0.4381644177363032,
+    "vix_level": 19.81999969482422,
+    "recommendation": "GOOD DAY TO TRADE"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "CRDO",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260224T160710Z_409e4e6e",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "SFM",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260224T160710Z_b9926333",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ADMA",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260224T160710Z_2fc4a1d8",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-02-24T08:07:25.826740",
+    "equity": 103966.6,
+    "cash": 12167.06,
+    "buying_power": 112423.59,
+    "portfolio_value": 103966.6,
+    "starting_capital": 100000.0,
+    "total_return": 3966.600000000006,
+    "total_return_pct": 3.9666000000000055,
+    "daily_pl": 4031.350000000006,
+    "daily_pl_pct": 4.033961990388782,
+    "total_unrealized_pl": 5562.705,
+    "position_count": 12,
+    "positions": [
+      {
+        "ticker": "AGI",
+        "shares": 224.0,
+        "entry_price": 44.8,
+        "current_price": 50.46,
+        "market_value": 11303.04,
+        "unrealized_pl": 1267.84,
+        "unrealized_pl_pct": 12.634
+      },
+      {
+        "ticker": "CDE",
+        "shares": 423.0,
+        "entry_price": 23.77,
+        "current_price": 24.26,
+        "market_value": 10261.98,
+        "unrealized_pl": 207.27,
+        "unrealized_pl_pct": 2.061
+      },
+      {
+        "ticker": "CF",
+        "shares": 107.0,
+        "entry_price": 92.61,
+        "current_price": 95.17,
+        "market_value": 10183.19,
+        "unrealized_pl": 273.92,
+        "unrealized_pl_pct": 2.7640000000000002
+      },
+      {
+        "ticker": "B",
+        "shares": 205.0,
+        "entry_price": 46.84,
+        "current_price": 49.39,
+        "market_value": 10124.95,
+        "unrealized_pl": 522.75,
+        "unrealized_pl_pct": 5.444
+      },
+      {
+        "ticker": "AU",
+        "shares": 71.0,
+        "entry_price": 106.66,
+        "current_price": 124.1,
+        "market_value": 8811.1,
+        "unrealized_pl": 1238.24,
+        "unrealized_pl_pct": 16.351
+      },
+      {
+        "ticker": "AEM",
+        "shares": 31.0,
+        "entry_price": 189.73,
+        "current_price": 241.495,
+        "market_value": 7486.345,
+        "unrealized_pl": 1604.715,
+        "unrealized_pl_pct": 27.284000000000002
+      },
+      {
+        "ticker": "RRC",
+        "shares": 167.0,
+        "entry_price": 35.81,
+        "current_price": 38.03,
+        "market_value": 6351.01,
+        "unrealized_pl": 370.74,
+        "unrealized_pl_pct": 6.199000000000001
+      },
+      {
+        "ticker": "SN",
+        "shares": 48.0,
+        "entry_price": 123.69,
+        "current_price": 127.03,
+        "market_value": 6097.44,
+        "unrealized_pl": 160.32,
+        "unrealized_pl_pct": 2.7
+      },
+      {
+        "ticker": "MTCH",
+        "shares": 191.0,
+        "entry_price": 31.2,
+        "current_price": 31.05,
+        "market_value": 5930.55,
+        "unrealized_pl": -28.65,
+        "unrealized_pl_pct": -0.481
+      },
+      {
+        "ticker": "AS",
+        "shares": 148.0,
+        "entry_price": 40.26,
+        "current_price": 39.015,
+        "market_value": 5774.22,
+        "unrealized_pl": -184.26,
+        "unrealized_pl_pct": -3.092
+      },
+      {
+        "ticker": "ABNB",
+        "shares": 46.0,
+        "entry_price": 120.22,
+        "current_price": 125.34,
+        "market_value": 5765.64,
+        "unrealized_pl": 235.52,
+        "unrealized_pl_pct": 4.259
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [
+    "Reconciliation cleaned 4 stale records",
+    "Verification: Expected positions not found: CRDO, ADMA, SFM"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 12,
+    "db_positions_before": 15,
+    "stale_closed": 4,
+    "in_sync": 11
+  },
+  "position_drift": {
+    "positions_checked": 12,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260224_080708",
+    "total_trades": 3,
+    "quality_score": 81,
+    "ceo_rating": "GOOD",
+    "ceo_recommendation": "RECOMMEND APPROVAL"
+  },
+  "sells_count": 0,
+  "buys_count": 3,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: CRDO, ADMA, SFM"
+    ],
+    "summary": {
+      "position_count": 12,
+      "sells_executed": 0,
+      "buys_executed": 3,
+      "expected_count_change": 3
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 8,
+    "fills_recorded": 0,
+    "orders_updated": 0,
+    "already_recorded": 8,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-02-24T08:07:27.390302",
+  "duration_seconds": 445.455321
+}

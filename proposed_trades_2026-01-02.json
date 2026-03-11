@@ -1,0 +1,114 @@
+{
+  "plan_id": "PLAN_20260102_080825",
+  "generated_at": "2026-01-02T16:08:25.555816Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 5,
+    "research_candidates": 68,
+    "gpt5_selected": 5,
+    "compliance_flagged": 0,
+    "overall_quality_score": 74
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 19,
+    "compliance_advisory": 80
+  },
+  "trades": [
+    {
+      "ticker": "CART",
+      "action": "SELL",
+      "shares": 110.0,
+      "sell_pct": 100,
+      "composite_score": 58.400000000000006,
+      "current_price": 43.97999954223633,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "CART stock is trading around $44.98-$45.12 with a slight 0.31% gain early on January 2, 2026, amid a short-term rising trend projecting 12.07% upside over three months[1][2]. Analysts maintain predominantly 'buy' ratings with price targets ranging $26-$61, averaging optimistic levels above current prices[3][5]. Recent after-hours activity showed minor declines to $44.69 on January 1, but no major negative news emerged in the last 24 hours[4].",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 58.4 < 60 absolute minimum",
+      "current_value": 4846.6
+    },
+    {
+      "ticker": "GTM",
+      "action": "SELL",
+      "shares": 491.0,
+      "sell_pct": 100,
+      "composite_score": 38.0,
+      "current_price": 9.574999809265137,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "ZoomInfo Technologies (GTM) stock shows positive technical momentum, with a 10% rise over the past two weeks, increased trading volume, and a predicted opening price of $10.12, amid a broken upward trend suggesting further gains[1]. Recent analyst actions include BTIG initiating coverage with a 'buy' rating and $13 target, alongside an average brokerage recommendation of 'Hold' and price targets averaging $11.07[3][7]. The stock experienced a minor 1.96% intraday dip to $10.01, while the company focuses on AI-driven products and maintained 2025 guidance despite mixed quarterly results[2][5].",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 38.0 < 60 absolute minimum",
+      "current_value": 4706.235
+    },
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "shares": 151.0,
+      "sell_pct": 100,
+      "composite_score": 56.0,
+      "current_price": 24.56999969482422,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No news articles from the last 24 hours (since Thursday, January 1, 2026, 4 PM UTC) were identified in the search results for IPG stock. Recent coverage from prior periods highlights the completed Omnicom acquisition of IPG in late November 2025, ongoing note exchange offers, and positive developments like Initiative agency's #1 global new business ranking in H1 2025 with $1.4 billion in wins.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 56.0 < 60 absolute minimum",
+      "current_value": 3710.07
+    },
+    {
+      "ticker": "IREN",
+      "action": "SELL",
+      "shares": 132.0,
+      "sell_pct": 100,
+      "composite_score": 58.8,
+      "current_price": 40.665000915527344,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "IREN stock rose 2% today with $36 million in trading volume and ranked as the 30th most-searched ticker, amid ongoing analyst bullishness with a consensus target of $67-$75 implying significant upside from current levels around $37-$40.[1][2][3] Short interest has spiked following a 50% price crash from November highs, but Wall Street remains optimistic due to strong Bitcoin mining revenue growth and AI cloud expansion, including a $9.7B Microsoft deal.[2] Institutional investors like Calamos Advisors initiated new positions, and articles highlight potential for further gains in 2026 post a 311% prior rally and positive Q1 2026 earnings.[4][5][6]",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 58.8 < 60 absolute minimum",
+      "current_value": 5356.56
+    },
+    {
+      "ticker": "JBS",
+      "action": "SELL",
+      "shares": 344.0,
+      "sell_pct": 100,
+      "composite_score": 51.6,
+      "current_price": 14.175000190734863,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No specific news articles from the last 24 hours (since Thursday, January 1, 2026, 4 PM UTC) were identified in the search results. Recent coverage highlights analyst upgrades to 'Outperform' with a $17 price target, strong Q3 2025 financials including $22.6B in sales, and JBS's new NYSE listing completion, alongside a stable 'BBB-' credit rating from S&P Global.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 51.6 < 60 absolute minimum",
+      "current_value": 4883.08
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 68 candidates (avg score: 48.1)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 78/78 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 5 SELLs, 4 BUYs ($22,000 allocated)",
+      "quality_score": 19,
+      "issues": [
+        "Capital deployment 14.5% (target 90.0%+)",
+        "Limited diversification: 4 new positions (target 12-20). Total after trades: 9"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 0 BUYs approved, 4 rejected, 5 SELLs",
+      "quality_score": 80,
+      "issues": [
+        "4 orders REJECTED by compliance"
+      ]
+    }
+  ],
+  "approved_at": "2026-01-02T16:08:27.253087Z"
+}

@@ -1,0 +1,78 @@
+{
+  "plan_id": "PLAN_20260119_080750",
+  "generated_at": "2026-01-19T16:07:50.557375Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 2,
+    "research_candidates": 73,
+    "gpt5_selected": 2,
+    "compliance_flagged": 0,
+    "overall_quality_score": 79
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 48,
+    "compliance_advisory": 70
+  },
+  "trades": [
+    {
+      "ticker": "F",
+      "action": "SELL",
+      "shares": 738.0,
+      "sell_pct": 100,
+      "composite_score": 52.0,
+      "current_price": 13.600000381469727,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Recent news highlights institutional investors like Fjarde AP Fonden increasing their Ford stakes significantly, alongside positive analyst actions such as UBS and TD Cowen raising price targets to $15 and Zacks issuing a Strong Buy rating with upward EPS revisions[1][3]. Ford is reportedly in talks with BYD for hybrid batteries to enhance flexibility amid softer EV demand, while its Europe strategy shows narrowing losses to $52 million in Q3 2025[1][3]. Analyst consensus remains Hold with modest price targets around $13-14, amid recent stock price declines[1][2].",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 52.0 < 60 absolute minimum",
+      "current_value": 10036.8
+    },
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "shares": 151.0,
+      "sell_pct": 100,
+      "composite_score": 56.0,
+      "current_price": 24.56999969482422,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Omnicom has closed its acquisition of Interpublic Group (IPG) for a final purchase price of $9 billion in an all-stock deal, creating a combined company with over $25 billion in annual revenue, surpassing rival Publicis Group.[1][7] The deal received final EU regulatory approval, marking the completion of the merger first announced earlier.[1][2] No other significant IPG-specific news appears in the last 24 hours.[2]",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 56.0 < 60 absolute minimum",
+      "current_value": 3710.07
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 73 candidates (avg score: 53.2)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 76/76 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 2 SELLs, 8 BUYs ($80,000 allocated)",
+      "quality_score": 48,
+      "issues": [
+        "Capital deployment 42.3% (target 90.0%+)",
+        "Limited diversification: 8 new positions (target 12-20). Total after trades: 9"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 0 BUYs approved, 8 rejected, 2 SELLs",
+      "quality_score": 70,
+      "issues": [
+        "8 orders REJECTED by compliance"
+      ]
+    }
+  ],
+  "approved_at": "2026-01-19T16:07:52.299873Z"
+}

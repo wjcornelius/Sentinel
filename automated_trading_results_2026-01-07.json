@@ -1,0 +1,124 @@
+{
+  "date": "2026-01-07",
+  "start_time": "2026-01-07T08:00:03.254518",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "11:00 AM ET",
+    "current_date": "Wednesday, January 07, 2026"
+  },
+  "regime_analysis": {
+    "regime": "BULLISH",
+    "confidence": "MEDIUM",
+    "spy_price": 692.614990234375,
+    "spy_change_pct": 0.11636037042281541,
+    "vix_level": 15.130000114440918,
+    "recommendation": "FAVORABLE CONDITIONS"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "status": "SKIPPED",
+      "reason": "Asset not tradeable: AssetStatus.INACTIVE"
+    },
+    {
+      "ticker": "APTV",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260107T160746Z_1136132a"
+    },
+    {
+      "ticker": "CWAN",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260107T160746Z_75da56b4"
+    },
+    {
+      "ticker": "KKR",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260107T160746Z_6c0cdbf9"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-01-07T08:08:02.929583",
+    "equity": 101180.66,
+    "cash": 77178.97,
+    "buying_power": 174649.56,
+    "portfolio_value": 101180.66,
+    "starting_capital": 100000.0,
+    "total_return": 1180.6600000000035,
+    "total_return_pct": 1.1806600000000036,
+    "daily_pl": 3281.8300000000017,
+    "daily_pl_pct": 3.3522668248435674,
+    "total_unrealized_pl": 134.8172,
+    "position_count": 3,
+    "positions": [
+      {
+        "ticker": "ESI",
+        "shares": 372.0,
+        "entry_price": 26.94,
+        "current_price": 27.4576,
+        "market_value": 10214.2272,
+        "unrealized_pl": 192.5472,
+        "unrealized_pl_pct": 1.92130660727543
+      },
+      {
+        "ticker": "F",
+        "shares": 738.0,
+        "entry_price": 13.59,
+        "current_price": 13.655,
+        "market_value": 10077.39,
+        "unrealized_pl": 47.97,
+        "unrealized_pl_pct": 0.47829286239882
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.7700831024930697
+      }
+    ]
+  },
+  "warnings": [],
+  "errors": [],
+  "position_drift": {
+    "positions_checked": 6,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260107_080743",
+    "total_trades": 4,
+    "quality_score": 75,
+    "ceo_rating": "GOOD",
+    "ceo_recommendation": "RECOMMEND APPROVAL"
+  },
+  "sells_count": 3,
+  "buys_count": 0,
+  "verification": {
+    "passed": true,
+    "issues": [],
+    "summary": {
+      "position_count": 3,
+      "sells_executed": 3,
+      "buys_executed": 0,
+      "expected_count_change": -3
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 9,
+    "fills_recorded": 3,
+    "orders_updated": 3,
+    "already_recorded": 5,
+    "no_match_in_db": 1,
+    "errors": []
+  },
+  "end_time": "2026-01-07T08:08:04.619876",
+  "duration_seconds": 481.365372
+}

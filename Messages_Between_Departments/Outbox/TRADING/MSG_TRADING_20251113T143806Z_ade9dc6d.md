@@ -1,0 +1,36 @@
+---
+from: TRADING
+message_id: MSG_TRADING_20251113T143806Z_ade9dc6d
+message_type: log
+priority: routine
+requires_response: false
+timestamp: '2025-11-13T14:38:06.274984Z'
+to: COMPLIANCE
+---
+
+# Trade Executed: SLB SELL 185.0
+
+## Execution Log
+
+Trade executed via Alpaca.
+
+- **Ticker:** SLB
+- **Action:** SELL
+- **Quantity:** 185.0
+- **Alpaca Order ID:** a3cc5a13-7c4c-4c25-b3c0-1af3067cc0a8
+
+
+## Data Payload
+
+```json
+{
+  "order_id": "a3cc5a13-7c4c-4c25-b3c0-1af3067cc0a8",
+  "ticker": "SLB",
+  "action": "SELL",
+  "shares": 185.0,
+  "order_type": "MARKET",
+  "status": "SUBMITTED",
+  "submitted_at": "2025-11-13T14:38:06.273103+00:00",
+  "alpaca_order_id": "a3cc5a13-7c4c-4c25-b3c0-1af3067cc0a8"
+}
+```

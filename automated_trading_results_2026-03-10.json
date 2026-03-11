@@ -1,0 +1,247 @@
+{
+  "date": "2026-03-10",
+  "start_time": "2026-03-10T09:00:02.994291",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "12:00 PM ET",
+    "current_date": "Tuesday, March 10, 2026"
+  },
+  "regime_analysis": {
+    "regime": "BULLISH",
+    "confidence": "MEDIUM",
+    "spy_price": 681.2000122070312,
+    "spy_change_pct": 0.4319802720760321,
+    "vix_level": 22.700000762939453,
+    "recommendation": "FAVORABLE CONDITIONS"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "ADMA",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260310T160927Z_932492fd"
+    },
+    {
+      "ticker": "BRO",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260310T160927Z_13d2e436"
+    },
+    {
+      "ticker": "DASH",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260310T160927Z_8bc48840"
+    },
+    {
+      "ticker": "INDV",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260310T160930Z_7e040b75"
+    },
+    {
+      "ticker": "CDE",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260310T160930Z_52ce7fd6"
+    },
+    {
+      "ticker": "BROS",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260310T160930Z_91436881"
+    },
+    {
+      "ticker": "BBY",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260310T160930Z_632679c4"
+    },
+    {
+      "ticker": "SLM",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260310T160930Z_8f240744",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ALAB",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260310T160930Z_bbfad213",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CRDO",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260310T160930Z_c338505f",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-03-10T09:09:51.022178",
+    "equity": 103014.53,
+    "cash": -903.65,
+    "buying_power": 98400.81,
+    "portfolio_value": 103014.53,
+    "starting_capital": 100000.0,
+    "total_return": 3014.529999999999,
+    "total_return_pct": 3.014529999999999,
+    "daily_pl": 3213.050000000003,
+    "daily_pl_pct": 3.2194412347392074,
+    "total_unrealized_pl": 6897.865000000001,
+    "position_count": 12,
+    "positions": [
+      {
+        "ticker": "CF",
+        "shares": 107.0,
+        "entry_price": 92.61,
+        "current_price": 111.14,
+        "market_value": 11891.98,
+        "unrealized_pl": 1982.71,
+        "unrealized_pl_pct": 20.009
+      },
+      {
+        "ticker": "AGI",
+        "shares": 224.0,
+        "entry_price": 44.8,
+        "current_price": 51.2,
+        "market_value": 11468.8,
+        "unrealized_pl": 1433.6,
+        "unrealized_pl_pct": 14.285999999999998
+      },
+      {
+        "ticker": "CDE",
+        "shares": 417.0,
+        "entry_price": 23.95,
+        "current_price": 23.955,
+        "market_value": 9989.235,
+        "unrealized_pl": 2.085,
+        "unrealized_pl_pct": 0.021
+      },
+      {
+        "ticker": "INDV",
+        "shares": 300.0,
+        "entry_price": 33.24,
+        "current_price": 33.22,
+        "market_value": 9966.0,
+        "unrealized_pl": -6.0,
+        "unrealized_pl_pct": -0.06
+      },
+      {
+        "ticker": "BBY",
+        "shares": 152.0,
+        "entry_price": 65.19,
+        "current_price": 65.19,
+        "market_value": 9908.88,
+        "unrealized_pl": 0.0,
+        "unrealized_pl_pct": 0.0
+      },
+      {
+        "ticker": "BROS",
+        "shares": 190.0,
+        "entry_price": 52.06,
+        "current_price": 52.0,
+        "market_value": 9880.0,
+        "unrealized_pl": -11.4,
+        "unrealized_pl_pct": -0.11499999999999999
+      },
+      {
+        "ticker": "DELL",
+        "shares": 67.0,
+        "entry_price": 122.94,
+        "current_price": 144.32,
+        "market_value": 9669.44,
+        "unrealized_pl": 1432.46,
+        "unrealized_pl_pct": 17.391000000000002
+      },
+      {
+        "ticker": "CCI",
+        "shares": 84.0,
+        "entry_price": 89.34,
+        "current_price": 88.57,
+        "market_value": 7439.88,
+        "unrealized_pl": -64.68,
+        "unrealized_pl_pct": -0.8619999999999999
+      },
+      {
+        "ticker": "AEM",
+        "shares": 31.0,
+        "entry_price": 189.73,
+        "current_price": 229.02,
+        "market_value": 7099.62,
+        "unrealized_pl": 1217.99,
+        "unrealized_pl_pct": 20.708
+      },
+      {
+        "ticker": "RRC",
+        "shares": 167.0,
+        "entry_price": 35.81,
+        "current_price": 41.21,
+        "market_value": 6882.07,
+        "unrealized_pl": 901.8,
+        "unrealized_pl_pct": 15.079999999999998
+      },
+      {
+        "ticker": "CHWY",
+        "shares": 230.0,
+        "entry_price": 25.64,
+        "current_price": 26.14,
+        "market_value": 6012.2,
+        "unrealized_pl": 115.0,
+        "unrealized_pl_pct": 1.95
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [
+    "Verification: Expected positions not found: SLM, CRDO, ALAB"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 11,
+    "db_positions_before": 10,
+    "stale_closed": 0,
+    "in_sync": 10
+  },
+  "position_drift": {
+    "positions_checked": 11,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260310_090924",
+    "total_trades": 10,
+    "quality_score": 88,
+    "ceo_rating": "EXCELLENT",
+    "ceo_recommendation": "STRONGLY RECOMMEND APPROVAL"
+  },
+  "sells_count": 3,
+  "buys_count": 7,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: SLM, CRDO, ALAB"
+    ],
+    "summary": {
+      "position_count": 12,
+      "sells_executed": 3,
+      "buys_executed": 7,
+      "expected_count_change": 4
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 9,
+    "fills_recorded": 7,
+    "orders_updated": 7,
+    "already_recorded": 2,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-03-10T09:09:52.840295",
+  "duration_seconds": 589.846017
+}

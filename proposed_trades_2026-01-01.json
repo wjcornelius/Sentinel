@@ -1,0 +1,130 @@
+{
+  "plan_id": "PLAN_20260101_080738",
+  "generated_at": "2026-01-01T16:07:38.916259Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 6,
+    "research_candidates": 64,
+    "gpt5_selected": 6,
+    "compliance_flagged": 0,
+    "overall_quality_score": 78
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 14,
+    "compliance_advisory": 100
+  },
+  "trades": [
+    {
+      "ticker": "GTM",
+      "action": "BUY",
+      "shares": 491,
+      "allocated_capital": 5000,
+      "entry_price": 10.170000076293945,
+      "composite_score": 64.4,
+      "sentiment_score": 72.0,
+      "sentiment_summary": "BTIG analyst Allan Verkhovski recently initiated coverage on ZoomInfo Technologies ($GTM) with a $13 price target and a strong-buy rating upgrade. The stock has shown positive momentum, rising 1.40% to close at $10.17 on December 31, 2025, with increased trading volume and a broken short-term upward trend indicating potential for further gains. Recent financial highlights include Q3 2025 revenue of $318M, up 4.74% year-over-year, and strong analyst targets averaging around $11.79.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "IREN",
+      "action": "BUY",
+      "shares": 132,
+      "allocated_capital": 5000,
+      "entry_price": 37.77000045776367,
+      "composite_score": 63.8,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "Recent coverage highlights IREN's strong Q1 2026 earnings, turning a prior loss into $1.07 per share profit, alongside aggressive AI revenue targets of $500 million by early 2026 scaling to $3.4 billion by year-end with GPU expansion to 140,000 units[1][3]. Analysts project significant upside with a consensus price target of $67.64 (79% from recent levels) and forecasts up to $136, fueled by AI cloud growth and a Microsoft contract[2][4][6]. Articles predict potential 150% stock soar and market-beating performance in 2026 as past issues fade[4][5].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "EWY",
+      "action": "BUY",
+      "shares": 51,
+      "allocated_capital": 5000,
+      "entry_price": 97.22000122070312,
+      "composite_score": 62.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No news articles from the last 24 hours (since January 1, 2026, 4 PM UTC yesterday) were found in the search results for EWY stock. Available data includes a long-term 2026 price forecast averaging $86.53, below the recent price around $97-98, and a minor price drop noted on July 25, 2025.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CG",
+      "action": "SELL",
+      "shares": 82.0,
+      "sell_pct": 100,
+      "composite_score": 52.8,
+      "current_price": 59.11000061035156,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Based on the search results provided, I cannot deliver a reliable sentiment analysis for the last 24 hours because the available data does not contain news specifically from that timeframe.\n\nThe most ",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 52.8 < 60 absolute minimum",
+      "current_value": 4847.02
+    },
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "shares": 151.0,
+      "sell_pct": 100,
+      "composite_score": 56.0,
+      "current_price": 24.56999969482422,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Omnicom has received final regulatory approval from the European Commission for its acquisition of IPG, marking the last clearance needed to complete the merger, with related note exchange offers recently finalized. IPG's Initiative agency achieved the #1 global position in new business rankings for H1 2025, securing $1.4 billion in new business. However, IPG announced 3,200 job cuts and vacated over 700,000 sq ft of office space in preparation for the merger.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 56.0 < 60 absolute minimum",
+      "current_value": 3710.07
+    },
+    {
+      "ticker": "IVZ",
+      "action": "SELL",
+      "shares": 125.0,
+      "sell_pct": 100,
+      "composite_score": 52.400000000000006,
+      "current_price": 26.270000457763672,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Invesco released its 2026 Investment Outlook on January 1, 2026, projecting resilient global markets, weaker U.S. dollar, support for emerging market assets, and opportunities in non-US equities, which prompted a mild positive stock reaction of 0.62% on the publication day[1]. Cwm LLC significantly boosted its holdings in IVZ by 57.2% during Q3, increasing to 197,987 shares worth $4.54 million[2]. Invesco's recent strategist comments highlight Fed rate cuts boosting equities in 2026[7].",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 52.4 < 60 absolute minimum",
+      "current_value": 3283.75
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 64 candidates (avg score: 45.6)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 74/74 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 3 SELLs, 3 BUYs ($15,000 allocated)",
+      "quality_score": 14,
+      "issues": [
+        "Capital deployment 10.5% (target 90.0%+)",
+        "Limited diversification: 3 new positions (target 12-20). Total after trades: 10"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 3 BUYs approved, 0 rejected, 3 SELLs",
+      "quality_score": 100,
+      "issues": []
+    }
+  ],
+  "approved_at": "2026-01-01T16:07:40.591106Z"
+}

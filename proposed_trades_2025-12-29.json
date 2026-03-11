@@ -1,0 +1,146 @@
+{
+  "plan_id": "PLAN_20251229_081301",
+  "generated_at": "2025-12-29T16:13:01.976714Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 7,
+    "research_candidates": 70,
+    "gpt5_selected": 7,
+    "compliance_flagged": 0,
+    "overall_quality_score": 81
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 24,
+    "compliance_advisory": 100
+  },
+  "trades": [
+    {
+      "ticker": "CART",
+      "action": "BUY",
+      "shares": 110,
+      "allocated_capital": 5000,
+      "entry_price": 45.31999969482422,
+      "composite_score": 69.4,
+      "sentiment_score": 55.0,
+      "sentiment_summary": "No specific news articles about CART stock from the last 24 hours (since Dec 28, 2025, 4 PM UTC) appear in the search results. Available updates include a Dec 29, 2025, forecast from CoinCodex indicating bullish technical sentiment despite a predicted long-term drop and current Fear & Greed Index at 39[1]. Analyst consensus remains a Buy rating with price targets up to $57[2][4].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CG",
+      "action": "BUY",
+      "shares": 82,
+      "allocated_capital": 5000,
+      "entry_price": 60.5,
+      "composite_score": 67.8,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "FFG Partners LLC initiated a new investment in Carlyle Group (CG), purchasing 27,315 shares valued at $1.713 million in Q3 2025, representing 0.5% of their portfolio. CG stock is trading around $61.09, with analyst consensus leaning towards Hold but with a $66.14 target price and some Buy ratings. Recent portfolio company updates include NEP Group's $700 million equity investment and Carlyle's $800 million senior notes issuance, though not from the last 24 hours.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BX",
+      "action": "BUY",
+      "shares": 32,
+      "allocated_capital": 5000,
+      "entry_price": 154.83999633789062,
+      "composite_score": 64.0,
+      "sentiment_score": 52.0,
+      "sentiment_summary": "Cwm LLC increased its position in Blackstone Inc. (BX) by 28.6% during the third quarter, signaling institutional confidence. Blackstone recently raised its quarterly dividend to $1.29, annualizing to $5.16 with a 3.3% yield. Analyst consensus remains a 'Moderate Buy' with an average price target of $179.95, above the current price near $155.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "JBS",
+      "action": "BUY",
+      "shares": 344,
+      "allocated_capital": 5000,
+      "entry_price": 14.494999885559082,
+      "composite_score": 63.6,
+      "sentiment_score": 60.0,
+      "sentiment_summary": "BMO Capital raised its price target on JBS stock to $18 from $17 while maintaining an Outperform rating on Monday.[2] Recent stock price history shows a decline to $13.60, down 5.23% as of October 6, 2025.[3] Earnings data from August 2025 indicates positive price movements post-reports, with gains up to 3.63%.[1]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CARR",
+      "action": "BUY",
+      "shares": 93,
+      "allocated_capital": 5000,
+      "entry_price": 53.58000183105469,
+      "composite_score": 60.2,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "Institutional investors Brookstone Capital Management and Pacer Advisors Inc. increased their positions in Carrier Global (CARR) stock on December 28 and 29, 2025, signaling confidence amid recent earnings.[2][3] Coverage highlights the company's $5 billion share repurchase authorization, dividend increase to $0.24 quarterly, and Q3 2025 EPS beat ($0.67 vs. $0.57 expected), despite revenue decline.[1][2][3] Analyst consensus remains 'Hold' with a $72 price target, above the recent open of $53.59.[2][3]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "shares": 151.0,
+      "sell_pct": 100,
+      "composite_score": 56.0,
+      "current_price": 24.56999969482422,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Omnicom completed a $2.95 billion exchange offer for Interpublic Group (IPG) notes, with 93.7% participation, exchanging $2.76 billion for new Omnicom notes and retiring the rest, as part of the merger closed on November 26, 2025.[2][5] Settlement of the exchange is expected on December 2, 2025, consolidating IPG's debt under Omnicom following European Commission approval.[2][5] A technical analysis article on IPG trends appeared on December 29, 2025, but provided no specific sentiment details.[6]",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 56.0 < 60 absolute minimum",
+      "current_value": 3710.07
+    },
+    {
+      "ticker": "NVST",
+      "action": "SELL",
+      "shares": 229.0,
+      "sell_pct": 100,
+      "composite_score": 48.8,
+      "current_price": 21.905000686645508,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Marathon Asset Management sold shares of Envista Holdings (NVST) as reported on December 29, 2025, amid a backdrop of recent strong Q3 2025 earnings where the company beat expectations with $670 million in sales (up 9.4% core growth) and adjusted EPS of $0.32.[1][2][4] Analyst consensus remains 'Hold' with a $21.77 price target, though some recent upgrades like Zacks to Strong Buy reflect optimism on earnings prospects.[2][5] No other major news events occurred in the last 24 hours.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 48.8 < 60 absolute minimum",
+      "current_value": 5007.085
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 70 candidates (avg score: 50.9)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 81/81 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 2 SELLs, 5 BUYs ($25,000 allocated)",
+      "quality_score": 24,
+      "issues": [
+        "Capital deployment 19.1% (target 90.0%+)",
+        "Limited diversification: 5 new positions (target 12-20). Total after trades: 14"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 5 BUYs approved, 0 rejected, 2 SELLs",
+      "quality_score": 100,
+      "issues": []
+    }
+  ],
+  "approved_at": "2025-12-29T16:13:03.748125Z"
+}

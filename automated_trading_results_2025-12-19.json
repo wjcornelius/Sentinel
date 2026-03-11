@@ -1,0 +1,252 @@
+{
+  "date": "2025-12-19",
+  "start_time": "2025-12-19T08:00:08.974074",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "11:00 AM ET",
+    "current_date": "Friday, December 19, 2025"
+  },
+  "regime_analysis": {
+    "regime": "BULLISH",
+    "confidence": "HIGH",
+    "spy_price": 678.780029296875,
+    "spy_change_pct": 0.3414872342890429,
+    "vix_level": 15.529999732971191,
+    "recommendation": "GOOD DAY TO TRADE"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "status": "SKIPPED",
+      "reason": "Asset not tradeable: AssetStatus.INACTIVE"
+    },
+    {
+      "ticker": "CLSK",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20251219T161001Z_323dcffd",
+      "_unfilled_reason": "Position still held"
+    },
+    {
+      "ticker": "CNM",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251219T161002Z_0670de50",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BWA",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251219T161002Z_9398d20d",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BLSH",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251219T161002Z_a55526c6",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "GSK",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251219T161002Z_852a8775",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "MGM",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251219T161002Z_36d8c41d",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "APTV",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251219T161002Z_f87bf9a8",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2025-12-19T08:10:06.968666",
+    "equity": 99721.82,
+    "cash": 11973.89,
+    "buying_power": 102775.82,
+    "portfolio_value": 99721.82,
+    "starting_capital": 100000.0,
+    "total_return": -278.179999999993,
+    "total_return_pct": -0.27817999999999304,
+    "daily_pl": 4597.350000000006,
+    "daily_pl_pct": 4.832983563535236,
+    "total_unrealized_pl": 4088.2325000000005,
+    "position_count": 15,
+    "positions": [
+      {
+        "ticker": "CWAN",
+        "shares": 1151.0,
+        "entry_price": 19.6,
+        "current_price": 21.885,
+        "market_value": 25189.635,
+        "unrealized_pl": 2630.035,
+        "unrealized_pl_pct": 11.65816326530612
+      },
+      {
+        "ticker": "CDE",
+        "shares": 295.0,
+        "entry_price": 16.651627,
+        "current_price": 18.43,
+        "market_value": 5436.85,
+        "unrealized_pl": 524.62,
+        "unrealized_pl_pct": 10.67987451727627
+      },
+      {
+        "ticker": "AG",
+        "shares": 308.0,
+        "entry_price": 16.07,
+        "current_price": 16.915,
+        "market_value": 5209.82,
+        "unrealized_pl": 260.26,
+        "unrealized_pl_pct": 5.2582451773491
+      },
+      {
+        "ticker": "GEO",
+        "shares": 319.0,
+        "entry_price": 15.590188,
+        "current_price": 16.27,
+        "market_value": 5190.13,
+        "unrealized_pl": 216.86,
+        "unrealized_pl_pct": 4.36051129337438
+      },
+      {
+        "ticker": "HL",
+        "shares": 255.0,
+        "entry_price": 15.58,
+        "current_price": 20.2765,
+        "market_value": 5170.5075,
+        "unrealized_pl": 1197.6075,
+        "unrealized_pl_pct": 30.144415917843393
+      },
+      {
+        "ticker": "NVST",
+        "shares": 229.0,
+        "entry_price": 21.75,
+        "current_price": 22.105,
+        "market_value": 5062.045,
+        "unrealized_pl": 81.295,
+        "unrealized_pl_pct": 1.63218390804598
+      },
+      {
+        "ticker": "ONB",
+        "shares": 218.0,
+        "entry_price": 23.12,
+        "current_price": 23.12,
+        "market_value": 5040.16,
+        "unrealized_pl": 0.0,
+        "unrealized_pl_pct": 0.0
+      },
+      {
+        "ticker": "MAS",
+        "shares": 77.0,
+        "entry_price": 64.47,
+        "current_price": 64.355,
+        "market_value": 4955.335,
+        "unrealized_pl": -8.855,
+        "unrealized_pl_pct": -0.17837753994105998
+      },
+      {
+        "ticker": "DT",
+        "shares": 109.0,
+        "entry_price": 45.6,
+        "current_price": 44.15,
+        "market_value": 4812.35,
+        "unrealized_pl": -158.05,
+        "unrealized_pl_pct": -3.1798245614035103
+      },
+      {
+        "ticker": "LKQ",
+        "shares": 160.0,
+        "entry_price": 31.18,
+        "current_price": 29.86,
+        "market_value": 4777.6,
+        "unrealized_pl": -211.2,
+        "unrealized_pl_pct": -4.233483001924309
+      },
+      {
+        "ticker": "HRL",
+        "shares": 158.0,
+        "entry_price": 23.99,
+        "current_price": 23.95,
+        "market_value": 3784.1,
+        "unrealized_pl": -6.32,
+        "unrealized_pl_pct": -0.16673614005836
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.7700831024930697
+      },
+      {
+        "ticker": "JCI",
+        "shares": 31.0,
+        "entry_price": 116.52,
+        "current_price": 118.91,
+        "market_value": 3686.21,
+        "unrealized_pl": 74.09,
+        "unrealized_pl_pct": 2.05115001716444
+      },
+      {
+        "ticker": "IVZ",
+        "shares": 125.0,
+        "entry_price": 24.57,
+        "current_price": 26.7,
+        "market_value": 3337.5,
+        "unrealized_pl": 266.25,
+        "unrealized_pl_pct": 8.66910866910867
+      },
+      {
+        "ticker": "CLSK",
+        "shares": 202.0,
+        "entry_price": 15.14,
+        "current_price": 11.81,
+        "market_value": 2385.62,
+        "unrealized_pl": -672.66,
+        "unrealized_pl_pct": -21.994715984147952
+      }
+    ]
+  },
+  "warnings": [
+    "Verification: Still holding positions that should have been sold: CLSK",
+    "Verification: Expected positions not found: GSK, APTV, MGM, BLSH, CNM, BWA"
+  ],
+  "errors": [],
+  "plan_summary": {
+    "plan_id": "PLAN_20251219_080957",
+    "total_trades": 8,
+    "quality_score": 83,
+    "ceo_rating": "GOOD",
+    "ceo_recommendation": "RECOMMEND APPROVAL"
+  },
+  "sells_count": 1,
+  "buys_count": 6,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Still holding positions that should have been sold: CLSK",
+      "Expected positions not found: GSK, APTV, MGM, BLSH, CNM, BWA"
+    ],
+    "summary": {
+      "position_count": 15,
+      "sells_executed": 1,
+      "buys_executed": 6,
+      "expected_count_change": 5
+    }
+  },
+  "end_time": "2025-12-19T08:10:08.803505",
+  "duration_seconds": 599.829443
+}

@@ -1,0 +1,195 @@
+{
+  "date": "2025-12-30",
+  "start_time": "2025-12-30T08:00:09.825951",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "11:00 AM ET",
+    "current_date": "Tuesday, December 30, 2025"
+  },
+  "regime_analysis": {
+    "regime": "BULLISH",
+    "confidence": "MEDIUM",
+    "spy_price": 687.7000122070312,
+    "spy_change_pct": -0.021801756811651456,
+    "vix_level": 14.329999923706055,
+    "recommendation": "FAVORABLE CONDITIONS"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "status": "SKIPPED",
+      "reason": "Asset not tradeable: AssetStatus.INACTIVE"
+    },
+    {
+      "ticker": "AG",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20251230T160912Z_1a158c95"
+    },
+    {
+      "ticker": "CARR",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20251230T160912Z_70114b3a"
+    },
+    {
+      "ticker": "HRL",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20251230T160912Z_41addb58"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2025-12-30T08:09:19.097760",
+    "equity": 101897.46,
+    "cash": 28321.61,
+    "buying_power": 126509.0,
+    "portfolio_value": 101897.46,
+    "starting_capital": 100000.0,
+    "total_return": 1897.4600000000064,
+    "total_return_pct": 1.8974600000000064,
+    "daily_pl": 3602.4000000000087,
+    "daily_pl_pct": 3.6648840745404794,
+    "total_unrealized_pl": 5751.391799999999,
+    "position_count": 11,
+    "positions": [
+      {
+        "ticker": "CWAN",
+        "shares": 1151.0,
+        "entry_price": 19.6,
+        "current_price": 24.09,
+        "market_value": 27727.59,
+        "unrealized_pl": 5167.99,
+        "unrealized_pl_pct": 22.90816326530612
+      },
+      {
+        "ticker": "CDE",
+        "shares": 295.0,
+        "entry_price": 16.651627,
+        "current_price": 18.285,
+        "market_value": 5394.075,
+        "unrealized_pl": 481.845,
+        "unrealized_pl_pct": 9.80908874380882
+      },
+      {
+        "ticker": "CART",
+        "shares": 110.0,
+        "entry_price": 45.28,
+        "current_price": 45.23,
+        "market_value": 4975.3,
+        "unrealized_pl": -5.5,
+        "unrealized_pl_pct": -0.11042402826855001
+      },
+      {
+        "ticker": "BX",
+        "shares": 32.0,
+        "entry_price": 155.14,
+        "current_price": 155.4399,
+        "market_value": 4974.0768,
+        "unrealized_pl": 9.5968,
+        "unrealized_pl_pct": 0.19330926904731002
+      },
+      {
+        "ticker": "JBS",
+        "shares": 344.0,
+        "entry_price": 14.5,
+        "current_price": 14.45,
+        "market_value": 4970.8,
+        "unrealized_pl": -17.2,
+        "unrealized_pl_pct": -0.3448275862069
+      },
+      {
+        "ticker": "MAS",
+        "shares": 77.0,
+        "entry_price": 64.47,
+        "current_price": 64.3,
+        "market_value": 4951.1,
+        "unrealized_pl": -13.09,
+        "unrealized_pl_pct": -0.26368853730416997
+      },
+      {
+        "ticker": "CG",
+        "shares": 82.0,
+        "entry_price": 60.73,
+        "current_price": 60.35,
+        "market_value": 4948.7,
+        "unrealized_pl": -31.16,
+        "unrealized_pl_pct": -0.62572040177836
+      },
+      {
+        "ticker": "DT",
+        "shares": 109.0,
+        "entry_price": 45.6,
+        "current_price": 44.2,
+        "market_value": 4817.8,
+        "unrealized_pl": -152.6,
+        "unrealized_pl_pct": -3.07017543859649
+      },
+      {
+        "ticker": "JCI",
+        "shares": 31.0,
+        "entry_price": 116.52,
+        "current_price": 121.43,
+        "market_value": 3764.33,
+        "unrealized_pl": 152.21,
+        "unrealized_pl_pct": 4.21386886371438
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.7700831024930697
+      },
+      {
+        "ticker": "IVZ",
+        "shares": 125.0,
+        "entry_price": 24.57,
+        "current_price": 26.69,
+        "market_value": 3336.25,
+        "unrealized_pl": 265.0,
+        "unrealized_pl_pct": 8.62840862840863
+      }
+    ]
+  },
+  "warnings": [
+    "Verification: Still holding positions that should have been sold: CARR, HRL"
+  ],
+  "errors": [],
+  "plan_summary": {
+    "plan_id": "PLAN_20251230_080909",
+    "total_trades": 4,
+    "quality_score": 75,
+    "ceo_rating": "GOOD",
+    "ceo_recommendation": "RECOMMEND APPROVAL"
+  },
+  "sells_count": 3,
+  "buys_count": 0,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Still holding positions that should have been sold: CARR, HRL"
+    ],
+    "summary": {
+      "position_count": 13,
+      "sells_executed": 3,
+      "buys_executed": 0,
+      "expected_count_change": -3
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 11,
+    "fills_recorded": 3,
+    "orders_updated": 3,
+    "already_recorded": 6,
+    "no_match_in_db": 2,
+    "errors": []
+  },
+  "end_time": "2025-12-30T08:09:20.949199",
+  "duration_seconds": 551.123263
+}

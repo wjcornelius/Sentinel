@@ -1,0 +1,53 @@
+{
+  "plan_id": "PLAN_20260203_080727",
+  "generated_at": "2026-02-03T16:07:27.603679Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 0,
+    "research_candidates": 71,
+    "gpt5_selected": 0,
+    "compliance_flagged": 0,
+    "overall_quality_score": 78
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 43,
+    "compliance_advisory": 70
+  },
+  "trades": [],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 71 candidates (avg score: 47.9)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 72/72 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 0 SELLs, 7 BUYs ($70,000 allocated)",
+      "quality_score": 43,
+      "issues": [
+        "Capital deployment 37.8% (target 90.0%+)",
+        "Limited diversification: 7 new positions (target 12-20). Total after trades: 8"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 0 BUYs approved, 7 rejected, 0 SELLs",
+      "quality_score": 70,
+      "issues": [
+        "7 orders REJECTED by compliance"
+      ]
+    }
+  ],
+  "approved_at": "2026-02-03T16:07:29.350437Z"
+}

@@ -1,0 +1,170 @@
+{
+  "plan_id": "PLAN_20251216_081131",
+  "generated_at": "2025-12-16T16:11:31.902067Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 9,
+    "research_candidates": 77,
+    "gpt5_selected": 9,
+    "compliance_flagged": 0,
+    "overall_quality_score": 80
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 26,
+    "compliance_advisory": 95
+  },
+  "trades": [
+    {
+      "ticker": "CDE",
+      "action": "BUY",
+      "shares": 295,
+      "allocated_capital": 5000,
+      "entry_price": 16.90999984741211,
+      "composite_score": 71.8,
+      "sentiment_score": 45.0,
+      "sentiment_summary": "Coeur Mining (CDE) stock declined 1.97% to $16.91 on December 15, 2025, with reduced trading volume, amid a short-term rising trend but a sell signal from a recent pivot top[2][5][6]. Recent options activity shows mixed signals with bullish call surges countered by bearish trades and insider selling, while analysts maintain a 'Moderate Buy' rating[4]. No major company announcements or earnings releases occurred in the last 24 hours, with prior Q3 2025 results remaining positive but not new[1].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "EMR",
+      "action": "BUY",
+      "shares": 36,
+      "allocated_capital": 5000,
+      "entry_price": 135.73500061035156,
+      "composite_score": 66.6,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "KeyBanc reiterated its Overweight rating and $155 price target for EMR stock on December 16, 2025, citing the company's Investor Day where it introduced ambitious 2028 targets including 4-7% organic growth, 30% EBITA margins, $8 EPS, and a $10 billion shareholder return plan.[3] Wolfe Research and Mizuho also maintained positive Outperform ratings with elevated targets.[3] The stock closed at around $137 on December 15, showing resilience despite earlier dips after buyback approval.[5][6]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "AG",
+      "action": "BUY",
+      "shares": 308,
+      "allocated_capital": 5000,
+      "entry_price": 16.19499969482422,
+      "composite_score": 64.4,
+      "sentiment_score": 72.0,
+      "sentiment_summary": "Recent 24-hour news about ticker 'AG' predominantly concerns First Majestic Silver (TSX:AG) reporting positive exploration and expansion developments at its Santa Elena mine and related analysis highlighting strong share-price momentum and planned processing expansion into 2026, alongside commentary on its $300 million convertible notes financing supporting growth plans[2]. There was also a separate, positive corporate update from AG Mortgage Investment Trust (ticker AG) announcing a 9.5% increase in its quarterly common-share dividend for Q4 2025, payable in January 2026[3].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "GSK",
+      "action": "BUY",
+      "shares": 102,
+      "allocated_capital": 5000,
+      "entry_price": 48.86000061035156,
+      "composite_score": 61.6,
+      "sentiment_score": 72.0,
+      "sentiment_summary": "Over the past 24 hours GSK announced regulatory progress for its asthma drug Exdensur with UK approval for patients aged 12+ and an ongoing FDA review decision expected imminently, and the company executed further share buybacks as part of its repurchase program on 15 December 2025.[1][1]  Regulatory approval plus continued buybacks were reported across market news and filings, and company investor pages show ongoing corporate communications and stable share-price context.[1][2][5]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BMNR",
+      "action": "SELL",
+      "shares": 129.0,
+      "sell_pct": 100,
+      "composite_score": 56.8,
+      "current_price": 31.3700008392334,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "BMNR stock has fallen under $30 amid a cryptocurrency market selloff, with Ethereum slipping below $3,000 and the stock dropping 11.2% to around $30.95, influenced by broader crypto weakness despite intact long-term fundamentals. Positive developments include Ark Invest and Cathie Wood boosting stakes in BMNR and BitMine adding $320 million in Ether holdings. However, a shareholder investigation by Purcell & Lefkowitz LLP into potential fiduciary duty breaches adds uncertainty.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 56.8 < 60 absolute minimum",
+      "current_value": 4059.63
+    },
+    {
+      "ticker": "HUT",
+      "action": "SELL",
+      "shares": 115.0,
+      "sell_pct": 100,
+      "composite_score": 52.0,
+      "current_price": 35.31999969482422,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Hut 8 shares dropped 12% on December 12, 2025, closing near $41.31, as Bitcoin prices fell below $90K, erasing most yearly gains and highlighting the stock's tie to BTC volatility despite diversification efforts into AI and data centers[3][2]. Issues with a spinoff (ABTC) distracted focus, leading some analysts to cut targets, though the company maintains strong fundamentals like revenue growth and a large development pipeline[3]. No other news articles from December 15-16, 2025, were identified.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 52.0 < 60 absolute minimum",
+      "current_value": 4066.4
+    },
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "shares": 151.0,
+      "sell_pct": 100,
+      "composite_score": 56.0,
+      "current_price": 24.56999969482422,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Omnicom Group has completed its $13.25 billion acquisition of Interpublic Group (IPG), forming a combined entity with over $25 billion in pro forma revenue, following regulatory approvals including from the EU Commission.[2][4] The merger includes a completed $2.95 billion exchange offer for IPG notes and a new leadership structure with five strategic divisions.[2][3][4] Analysts like Morgan Stanley highlight enhanced scale for AI and retail media investments, raised cost synergies over $1 billion, and forecast 2.9% organic revenue growth for Omnicom in 2026.[3]",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 56.0 < 60 absolute minimum",
+      "current_value": 3710.07
+    },
+    {
+      "ticker": "LTH",
+      "action": "SELL",
+      "shares": 143.0,
+      "sell_pct": 100,
+      "composite_score": 45.2,
+      "current_price": 25.799999237060547,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Hudson Bay Capital Management LP purchased 200,000 shares of Life Time Group Holdings, Inc. (LTH) on December 16, 2025, signaling institutional interest.[2] An EVP reported a routine tax-related disposition of 1,425 shares on December 9, 2025, retaining significant holdings.[4] No other major news events reported in the last 24 hours, with stock trading around $25.83.[2][5]",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 45.2 < 60 absolute minimum",
+      "current_value": 3778.06
+    },
+    {
+      "ticker": "MTCH",
+      "action": "SELL",
+      "shares": 114.0,
+      "sell_pct": 100,
+      "composite_score": 46.400000000000006,
+      "current_price": 32.650001525878906,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Analysts maintain a consensus 'Hold' rating on Match Group (MTCH) stock with 16 holds and 3 buys, setting an average 12-month price target of $35.15 amid recent insider buying by CEO Spencer Rascoff and a declared quarterly dividend of $0.19 per share.[4][5] No major company announcements or earnings reports appear in the last 24 hours as of December 16, 2025. Current stock price hovers around $33.19 with minimal change.[7][8]",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 46.4 < 60 absolute minimum",
+      "current_value": 3722.1
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 77 candidates (avg score: 50.4)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 94/94 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 5 SELLs, 5 BUYs ($25,000 allocated)",
+      "quality_score": 26,
+      "issues": [
+        "Capital deployment 20.7% (target 90.0%+)",
+        "Limited diversification: 5 new positions (target 12-20). Total after trades: 17"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 4 BUYs approved, 1 rejected, 5 SELLs",
+      "quality_score": 95,
+      "issues": [
+        "1 orders REJECTED by compliance"
+      ]
+    }
+  ],
+  "approved_at": "2025-12-16T16:11:33.542112Z"
+}

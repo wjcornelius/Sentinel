@@ -208,6 +208,27 @@ CANDIDATE #{i}: {c['ticker']} ({c.get('sector', 'Unknown')}) @ ${c.get('current_
 
         candidates_text = "\n".join(candidates_data)
 
+        # Calculate position limits based on current holdings
+        hard_constraint_max = 30  # From compliance config
+        available_slots = hard_constraint_max - current_positions
+
+        # Determine target new positions based on scenario
+        if available_slots <= 0:
+            # Portfolio is at or over limit - need to trim down
+            # We need to sell at least abs(available_slots) MORE than we buy
+            # Strategy: Sell the mandatory + extra to get under limit
+            # Then we can buy SOME positions with the freed capital, but net is negative
+            # Example: 33 positions, need to get to 30 = sell 3 more than we buy
+            # If we have $23K capital and sell 5, buy 2: 33 - 5 + 2 = 30 ✓
+            # So target buys = at least 1-2 to deploy the capital, but keep net reduction
+            target_new_positions = max(1, abs(available_slots))  # At least 1 to deploy capital
+        elif available_slots < 10:
+            # Close to limit - add what we can, but aim for good capital deployment
+            target_new_positions = min(available_slots, 8)
+        else:
+            # Plenty of room - aim for good diversification (12-15 positions)
+            target_new_positions = min(available_slots, 15)
+
         prompt = f"""You are the Chief Investment Officer for Sentinel Corporation, an expert hedge fund manager specializing in SWING TRADING.
 
 ===== COMPANY PHILOSOPHY & TRADING STRATEGY =====
@@ -218,12 +239,9 @@ Your firm practices swing trading with these core principles:
   * Stop-loss: 8% below entry (volatile stocks need breathing room)
   * Take-profit: 16% above entry (capture meaningful swing moves, not noise)
   * Philosophy: Fewer, larger wins rather than many small stops
-- CAPITAL EFFICIENCY: Deploy 90-100% of capital across 15-20 positions (NOT NEGOTIABLE - use the capital!)
-- DIVERSIFICATION: Target 15-20 positions to spread risk effectively
-  * With $100K+ capital and 2x margin, we can handle 20 positions of $5K-$10K each
-  * More positions = less impact from any single loser = smoother equity curve
-  * This is a DIVERSIFIED portfolio, not a concentrated bet on 5-10 stocks
-- SECTOR DIVERSIFICATION: Don't over-concentrate in any single sector
+- CAPITAL EFFICIENCY: Deploy 90-100% of available capital (NOT NEGOTIABLE - use the capital!)
+- DIVERSIFICATION: Spread risk across multiple positions to smooth equity curve
+- SECTOR DIVERSIFICATION: Don't over-concentrate in any single sector (max 30%)
 - SCORE-DRIVEN: Trust the technical, fundamental, and sentiment analysis
 - ADAPTIVE: Sell underperformers (< 55 score), buy better opportunities
 - VOLATILITY IS GOOD: We WANT volatile stocks - that's what creates swing opportunities
@@ -232,7 +250,7 @@ Your firm practices swing trading with these core principles:
 ===== YOUR ROLE IN THE WORKFLOW =====
 
 1. You analyze all available stocks and create a PROPOSED TRADING PLAN
-2. Your plan goes to the CEO (also GPT-5) for executive review
+2. Your plan goes to the CEO for executive review
 3. Together with Compliance, you refine the plan to meet Alpaca's rules
 4. Once finalized, CEO presents to the User for Y/N approval
 5. If approved, Trading Department executes in proper sequence:
@@ -243,10 +261,29 @@ Your firm practices swing trading with these core principles:
 ===== CURRENT MARKET CONDITIONS =====
 {market_summary}
 
-===== PORTFOLIO STATE =====
-- Available Capital: ${available_capital:,.2f}
-- Current Holdings: {current_positions} positions
-- Max Positions: {max_positions} (target: 15-20 for diversified swing trading)
+===== CRITICAL: UNDERSTAND YOUR CONSTRAINTS =====
+
+This is an EXISTING PORTFOLIO with positions already held. You are ADDING new capital to it.
+
+**AVAILABLE CAPITAL TO DEPLOY**: ${available_capital:,.2f}
+  - This includes: Buying power + proceeds from mandatory sells
+  - This is ALL the cash you have - DO NOT exceed this amount!
+
+**CURRENT PORTFOLIO STATE**:
+  - Current holdings: {current_positions} positions
+  - Hard position limit: {hard_constraint_max} positions maximum (compliance rule)
+  - Positions available: {available_slots} slots remaining{"" if available_slots > 0 else f" (OVER LIMIT by {abs(available_slots)} - must sell to get under {hard_constraint_max})"}
+
+**POSITION COUNT MATH** (CRITICAL):
+  - Formula: Final positions = {current_positions} (current) - SELLs + BUYs
+  - HARD LIMIT: Final positions MUST be ≤ {hard_constraint_max}
+  - Current status: {"Portfolio OVER LIMIT - MUST net reduce position count" if available_slots < 0 else f"Can add up to {available_slots} net new positions"}
+
+  {"**IMMEDIATE ACTION REQUIRED**: You MUST sell at least " + str(abs(available_slots)) + " positions to get under the limit!" if available_slots < 0 else ""}
+
+  - Example calculation:
+    * If you sell {2 if available_slots >= 0 else abs(available_slots) + 2} and buy {target_new_positions}: Final = {current_positions} - {2 if available_slots >= 0 else abs(available_slots) + 2} + {target_new_positions} = {current_positions - (2 if available_slots >= 0 else abs(available_slots) + 2) + target_new_positions}
+    * This {"VIOLATES" if current_positions - (2 if available_slots >= 0 else abs(available_slots) + 2) + target_new_positions > hard_constraint_max else "SATISFIES"} the ≤ {hard_constraint_max} constraint
 
 ===== CURRENT HOLDINGS =====
 {self._format_holdings(holdings) if holdings else "No current holdings - fresh portfolio"}
@@ -263,46 +300,67 @@ You have {len(candidates)} stocks to consider, each with:
 
 ===== YOUR TASK =====
 
+**IMPORTANT CONTEXT**: Our system has already performed COMPARATIVE RANKING of all stocks.
+- All holdings + candidates were ranked together by composite score
+- Portfolio goal: Hold the top 28 stocks by score (max 30 allowed)
+- Holdings ranked below #28 have been automatically flagged for MANDATORY SELL
+- Candidates ranked in top 28 are prioritized for BUY
+
+Your job is to allocate capital optimally among the top-ranked buy opportunities.
+
 Create a PROPOSED TRADING PLAN by deciding:
 
-1. **WHICH TO SELL** (if any current holdings are underperforming)
-   - Low composite scores (< 55/100)
-   - Poor sentiment or deteriorating technicals
-   - Better opportunities available
+1. **SELLS (Pre-Identified)**
+   - Holdings flagged as MANDATORY_SELL have already been identified by ranking system
+   - These will be AUTOMATICALLY sold - you don't need to justify them
+   - Your only decision: Should you recommend any ADDITIONAL sells? (rare - only if you see major red flags)
+   - Criteria for additional sells:
+     * Score < 55 (absolute minimum threshold)
+     * Severe negative catalyst not reflected in scoring
+     * Sector over-concentration requiring rebalancing
 
-2. **WHICH TO BUY** (from candidates)
-   - High composite scores (65+/100)
-   - Strong technical + fundamental + sentiment alignment
-   - Sector diversification
-   - Appropriate risk/reward
+2. **BUYS (Your Primary Focus)**
+   - Select from top-ranked candidates (those in top 28 by composite score)
+   - Prioritize: High scores (65+/100 preferred, minimum 55/100)
+   - Consider: Technical + fundamental + sentiment alignment
+   - Diversify: No more than 30% in any single sector
+   - Risk/reward: Appropriate volatility for swing trading
 
-3. **HOW MUCH TO ALLOCATE** (to each BUY)
-   - **MANDATORY**: Select 15-20 positions (MINIMUM 15, TARGET 20)
-   - **MANDATORY**: Total deployment MUST be 90-100% of available capital
-   - With 20 positions and $100K capital, typical position size: $5K-$6K (5-6% each)
-   - Higher conviction stocks: Up to 8-10% (but NEVER exceed 10% - HARD LIMIT!)
-   - Lower conviction stocks: 4-5% (still meaningful, but smaller)
+3. **CAPITAL ALLOCATION (Critical Task)**
+   - **MANDATORY**: Deploy 90-100% of available capital (${available_capital:,.2f})
+   - **TARGET**: Select {target_new_positions} new positions (adjust based on slots available)
+   - **HARD LIMITS**:
+     * Total capital deployed MUST be ≤ ${available_capital:,.2f}
+     * Final position count MUST be ≤ {hard_constraint_max}
+     * No single position > 10% of available capital
+   - **Sizing Strategy**: Bigger allocations to higher-conviction (higher-scoring) opportunities
 
 ===== ALLOCATION GUIDELINES =====
 
-**CRITICAL COMPLIANCE RULE**: NO SINGLE POSITION MAY EXCEED 10% OF PORTFOLIO VALUE
-Positions above 10% will be REJECTED by Compliance. Respect this limit!
+**YOUR CAPITAL TO DEPLOY**: ${available_capital:,.2f}
+  - Minimum deployment: ${available_capital * 0.90:,.2f} (90%)
+  - Maximum deployment: ${available_capital:,.2f} (100%)
+  - DO NOT EXCEED THIS AMOUNT - you will be auto-scaled down if you do!
 
-**TARGET ALLOCATION FOR 20-POSITION PORTFOLIO**:
-- Composite 75+: Allocate 7-10% (high conviction, 3-5 positions)
-- Composite 65-74: Allocate 5-7% (moderate conviction, 8-12 positions)
-- Composite 55-64: Allocate 4-5% (low conviction, 3-5 positions)
-- Composite <55: Generally avoid (unless special situation)
+**POSITION SIZING** (based on your actual capital):
+  - Target {target_new_positions} positions{f" = ~${available_capital / target_new_positions:,.2f} per position" if target_new_positions > 0 else " (TRIM MODE - portfolio over limit)"}
+  - Higher conviction (composite 75+): ${available_capital * 0.08:,.2f} to ${available_capital * 0.10:,.2f} (8-10%)
+  - Moderate conviction (composite 65-74): ${available_capital * 0.06:,.2f} to ${available_capital * 0.08:,.2f} (6-8%)
+  - Lower conviction (composite 55-64): ${available_capital * 0.04:,.2f} to ${available_capital * 0.06:,.2f} (4-6%)
 
-**EXAMPLE ALLOCATION** (20 positions, $100K capital, ~$5K average):
-- 3 high-conviction (8% each) = $24K
-- 12 moderate (5.5% each) = $66K
-- 5 lower-conviction (4% each) = $20K
-- Total: $110K deployed (110% using 2x margin) ✓
+**EXAMPLE ALLOCATION** (using YOUR actual capital of ${available_capital:,.2f}):
+  {"- Portfolio is OVER LIMIT - you must sell MORE than you buy to trim position count" if target_new_positions == 0 else f'''- If selecting {target_new_positions} positions with mixed conviction:
+  - 3 high-conviction @ 8% each = ${available_capital * 0.24:,.2f}
+  - 6 moderate @ 6% each = ${available_capital * 0.36:,.2f}
+  - 3 lower @ 5% each = ${available_capital * 0.15:,.2f}
+  - Total: ${available_capital * 0.75:,.2f} (75% deployed - needs more to hit 90%!)
+  - **Better**: Add 3-5 more positions to reach 90-100% deployment'''}
 
-- Diversify across sectors (max 30% in any single sector)
-- Favor stocks with balanced scores (not just one dimension strong)
-- Consider market conditions (defensive in high VIX, aggressive in low VIX)
+**POSITION COUNT CONSTRAINT**:
+  - Current holdings: {current_positions}
+  - If you sell X positions and buy Y positions: Final = {current_positions} - X + Y
+  - Final MUST be ≤ {hard_constraint_max}
+  - Therefore: Y - X ≤ {hard_constraint_max - current_positions} (net adds limited)
 
 ===== OUTPUT FORMAT =====
 
@@ -333,21 +391,37 @@ Provide your strategic analysis (2-3 paragraphs), then output a JSON object with
 ```
 
 **CRITICAL NOTES**:
-- "sells": List any holdings you want to SELL (sell_pct: 100 = full close, 50 = trim half, etc.)
-- "buys": List any tickers you want to BUY (new position OR add to existing)
-- "is_position_adjustment": Set to true if buying more of an already-held ticker
-- If a holding has good scores and no better opportunities exist, don't include it in "sells" (it will be held automatically)
+- "sells": Usually empty - mandatory sells are handled automatically by ranking system
+  * Only add to "sells" if you see major red flags NOT captured by scoring (rare)
+  * Examples: Breaking news scandal, sudden liquidity crisis, sector over-concentration
+- "buys": List tickers you want to BUY (new positions only - cannot add to existing holdings)
+  * Focus on top-ranked candidates (shown in ranking analysis above)
+  * Prioritize candidates with rank ≤ 28 (these are replacing weaker holdings)
+- "is_position_adjustment": Always set to false (we don't add to existing positions)
 
-Think like an expert swing trader:
-1. Scan all stocks - rank by composite score
-2. Select 15-20 positions (MINIMUM 15, TARGET 20!) to diversify risk across volatile swing trades
-3. Check sector balance - don't over-concentrate in any single sector
-4. Match conviction to allocation - bigger bets on better setups (but never >10% per position)
-5. **VERIFY YOU'RE DEPLOYING 90-100% OF CAPITAL** - if not, add more positions!
-6. **VERIFY YOU HAVE 15-20 TOTAL POSITIONS** - with $100K+ capital, we can handle 20 positions of $5K-$6K each
-7. Provide clear reasoning for each selection
+Think like an expert portfolio manager with a RANKING MINDSET:
+1. **Understand the ranking**: Holdings ranked > 28 are being sold automatically
+2. **Focus on top candidates**: Look for candidates ranked in top 28 (these earned their spot)
+3. **Allocate intelligently**:
+   - Select {target_new_positions} positions to fill the open slots
+   - Match allocation to conviction: Higher scores = Bigger allocations
+   - But never >10% in a single position
+4. **Verify capital deployment**:
+   - Total allocated MUST be ${available_capital * 0.90:,.2f} to ${available_capital:,.2f}
+   - If sum < 90%, add more positions or increase allocations!
+5. **Verify position count**:
+   - Current: {current_positions} positions
+   - After sells: {current_positions} - (number of sells)
+   - After buys: (result) + (number of buys)
+   - Final MUST be ≤ {hard_constraint_max}
+6. **Sector diversification**: No sector > 30% of portfolio
 
-**REMINDER**: Your job is to DEPLOY CAPITAL aggressively across 15-20 positions (MINIMUM 15, TARGET 20). If you're only selecting 5-10 positions or deploying <90% of capital, you're not doing your job correctly. More positions = smoother equity curve with volatile swing trades. Be bold!
+**CRITICAL REMINDERS**:
+- Available capital: ${available_capital:,.2f} (NOT $100K!)
+- MUST deploy: ${available_capital * 0.90:,.2f} to ${available_capital:,.2f} (90-100%)
+- CANNOT exceed: ${available_capital:,.2f} total allocation
+- Final position count: MUST be ≤ {hard_constraint_max} (current: {current_positions})
+- Trust the ranking: Candidates in top 28 have earned their spot via scoring
 
 Begin your analysis:"""
 

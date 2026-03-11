@@ -1,0 +1,248 @@
+{
+  "plan_id": "PLAN_20251113_063406",
+  "generated_at": "2025-11-13T14:34:06.422466Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 14,
+    "research_candidates": 66,
+    "gpt5_selected": 14,
+    "compliance_flagged": 2,
+    "overall_quality_score": 92
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 80,
+    "compliance_advisory": 90
+  },
+  "trades": [
+    {
+      "ticker": "CF",
+      "action": "BUY",
+      "shares": 235,
+      "allocated_capital": 20000,
+      "entry_price": 84.75,
+      "composite_score": 82.0,
+      "sentiment_score": 70.0,
+      "sentiment_summary": "CF Industries Holdings reported strong Q3 2025 earnings with EPS of $2.19, beating estimates of $2.06, and revenue growing 21.1% year-over-year to $1.66 billion. The company declared a quarterly dividend of $0.50 and maintained solid profitability metrics, including a net margin of 20.19% and a return on equity of 17.10%. Despite some mixed analyst target price adjustments, several major financial institutions maintain 'hold' or 'sector perform' ratings with price targets generally around $90-$95.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "High composite and strong technical and fundamental scores, making it a top candidate.",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false,
+      "compliance_flagged": true,
+      "compliance_note": "Position size 20.0% of portfolio exceeds maximum 10.0% ($20,000.00 of $100,000.00)"
+    },
+    {
+      "ticker": "ADMA",
+      "action": "BUY",
+      "shares": 911,
+      "allocated_capital": 15000,
+      "entry_price": 16.459999084472656,
+      "composite_score": 72.8,
+      "sentiment_score": 70.0,
+      "sentiment_summary": "Recent news around ADMA Biologics shows generally positive signals, including strong Q3 earnings with revenue and EPS beating estimates, a 9% stock price rise following these results, and a bullish technical indicator called the golden cross. Institutional investors have also increased their stakes, supporting confidence in the stock. Analysts maintain a buy consensus, with price targets significantly above current trading levels.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Good scores with growth potential and lower volatility, contributing to sector diverse portfolio.",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false,
+      "compliance_flagged": true,
+      "compliance_note": "Position size 15.0% of portfolio exceeds maximum 10.0% ($15,000.00 of $100,000.00)"
+    },
+    {
+      "ticker": "BROS",
+      "action": "BUY",
+      "shares": 116,
+      "allocated_capital": 6722.81,
+      "entry_price": 57.619998931884766,
+      "composite_score": 69.8,
+      "sentiment_score": 85.0,
+      "sentiment_summary": "Dutch Bros (BROS) stock rose 2.87% on November 12, 2025, gaining from $56.01 to $57.62 following strong Q3 2025 earnings results that beat expectations with 25.2% revenue growth to $423.6 million, 5.7% systemwide same-shop sales growth, and 38 new shop openings. The company raised its full-year 2025 guidance and maintained ambitious expansion targets of 160 shops for 2025 and approximately 175 for 2026.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Moderate conviction score, but market sentiment indicates potential upside.",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ESI",
+      "action": "BUY",
+      "shares": 19,
+      "allocated_capital": 522.8800086975098,
+      "entry_price": 27.520000457763672,
+      "composite_score": 65.2,
+      "sentiment_score": 42.0,
+      "sentiment_summary": "Recent news for ESI (Element Solutions) shows mixed sentiment, with a director selling a significant amount of shares, which typically signals insider caution. Analysts note a short-term sell signal based on technical indicators, and while the stock remains in a broader rising trend, near-term momentum is weak. There are no major positive developments reported in the last 24 hours.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Auto-added for capital efficiency (score: 65.2)",
+      "gpt5_allocated": false,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "FOUR",
+      "action": "BUY",
+      "shares": 7,
+      "allocated_capital": 512.2600021362305,
+      "entry_price": 73.18000030517578,
+      "composite_score": 60.6,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "Shift4 Payments (FOUR) showed a solid quarterly earnings beat with $1.47 per share, slightly above estimates, and robust payment volumes exceeding expectations, driving a 7.5% premarket share rise. The company also announced a $1 billion stock buyback program signaling confidence, though net income decline and integration challenges persist. Market analysts provide a mixed valuation outlook ranging from $45.84 to $105.99, emphasizing growth potential but acknowledging risks related to acquisitions and leverage.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Auto-added for capital efficiency (score: 60.6)",
+      "gpt5_allocated": false,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "AAL",
+      "action": "SELL",
+      "shares": 270.0,
+      "sell_pct": 100,
+      "composite_score": 63.6,
+      "current_price": 13.460000038146973,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "American Airlines (AAL) recently reported stronger-than-expected Q3 2025 earnings, with an EPS loss of -$0.17 beating estimates and record revenue of about $13.7 billion. Analysts like TD Cowen raised the price target from $13 to $18, reflecting optimism about improved full-year EPS guidance ($0.65 to $0.95) and favorable market conditions, despite some valuation concerns. The stock has gained around 3.8% in the last trading session, supported by strategic initiatives, improved revenue management, and resilience in a challenging environment.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Rank #34 (below top 28), score 63.6",
+      "current_value": 3615.057
+    },
+    {
+      "ticker": "BMY",
+      "action": "SELL",
+      "shares": 109.0,
+      "sell_pct": 100,
+      "composite_score": 64.8,
+      "current_price": 49.08000183105469,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Bristol Myers Squibb has seen institutional investor interest with Geode Capital Management acquiring 723,459 shares on November 13, 2025, while Tobam also increased its stake. The stock is trading at $48.72 with analyst consensus holding at a $55.45 target price and a 5.1% dividend yield.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Rank #31 (below top 28), score 64.8",
+      "current_value": 5357.35
+    },
+    {
+      "ticker": "EMN",
+      "action": "SELL",
+      "shares": 72.0,
+      "sell_pct": 100,
+      "composite_score": 52.0,
+      "current_price": 60.939998626708984,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Recent news on Eastman Chemical (EMN) shows mixed signals: Bank of America raised its price target to $75 and maintained a Buy rating citing cost savings and higher asset utilization expected in 2026. However, Citi downgraded EMN to Neutral due to cash flow deterioration in Q2 2025, cyclical pressures, and challenges with the Kingsport project, casting doubt on near-term liquidity and growth prospects. Despite solid operating cash flow and dividends, the stock price has declined, and EMN was also dropped from the S&P 500 Materials sector.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 52.0 < 55 absolute minimum",
+      "current_value": 4387.68
+    },
+    {
+      "ticker": "EQT",
+      "action": "SELL",
+      "shares": 89.0,
+      "sell_pct": 100,
+      "composite_score": 62.8,
+      "current_price": 60.84000015258789,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "EQT reported strong Q3 2025 results with higher sales volumes and improved natural gas pricing, generating significant cash flow and raising its annualized dividend by 5%. The completion of the Equitrans acquisition enhanced operational efficiencies and added valuable midstream assets like the Mountain Valley Pipeline, supporting higher realized prices and lower costs. Analysts have mixed revisions, with some raising earnings estimates while others cut them, but the overall outlook remains supported by steady demand and large LNG contract agreements.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Rank #35 (below top 28), score 62.8",
+      "current_value": 5387.17
+    },
+    {
+      "ticker": "HST",
+      "action": "SELL",
+      "shares": 432.0,
+      "sell_pct": 100,
+      "composite_score": 64.8,
+      "current_price": 18.059999465942383,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Host Hotels & Resorts raised its 2025 guidance following stronger-than-expected Q3 results with net income nearly doubling year-over-year to $161 million. The company achieved strong RevPAR growth in October and priced a $400 million offering of senior notes, while also receiving a Moody's credit upgrade and a rating upgrade from Compass Point to 'Buy' with a $22.00 price target.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Rank #32 (below top 28), score 64.8",
+      "current_value": 7801.92
+    },
+    {
+      "ticker": "NVDA",
+      "action": "SELL",
+      "shares": 37.0,
+      "sell_pct": 100,
+      "composite_score": 64.0,
+      "current_price": 193.8000030517578,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Recent news highlights strong bullish sentiment for Nvidia (NVDA) stock, with analysts projecting significant revenue growth of about 60% in 2025 and optimistic valuation estimates reaching up to $412 billion. The anticipation of continued rapid revenue expansion supports positive investor sentiment ahead of November 19.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Rank #33 (below top 28), score 64.0",
+      "current_value": 7058.49
+    },
+    {
+      "ticker": "PDD",
+      "action": "SELL",
+      "shares": 44.0,
+      "sell_pct": 100,
+      "composite_score": 65.2,
+      "current_price": 136.0399932861328,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "PDD Holdings is scheduled to report Q3 2025 financial results on November 18, 2025. The stock is trading at $137.81 in pre-market on November 13, up 1.30% from the previous close. Recent insider activity shows decreased stakes by institutional investors M&G PLC and Greenwoods Asset Management.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Rank #29 (below top 28), score 65.2",
+      "current_value": 6034.6
+    },
+    {
+      "ticker": "ROKU",
+      "action": "SELL",
+      "shares": 42.0,
+      "sell_pct": 100,
+      "composite_score": 58.8,
+      "current_price": 105.91999816894531,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Roku stock rose 2.9% recently, driven by optimism over U.S.-China trade talks and Federal Reserve interest rate cut expectations. However, CEO Anthony J. Wood sold approximately $5.2 million worth of shares on November 10, 2025, which could signal insider caution despite the recent rally.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Rank #38 (below top 28), score 58.8",
+      "current_value": 4392.36
+    },
+    {
+      "ticker": "SLB",
+      "action": "SELL",
+      "shares": 185.0,
+      "sell_pct": 100,
+      "composite_score": 70.0,
+      "current_price": 36.06999969482422,
+      "gpt5_reasoning": "Composite score of 50.0 signifies marginal progress and better opportunities exist.",
+      "sentiment_score": 50,
+      "sentiment_summary": "GPT-4O-MINI SELL decision",
+      "current_value": 6685.8815
+    }
+  ],
+  "gpt5_reasoning": "Given the current portfolio state and market conditions, it is essential to conduct a strategic review of our holdings and identify appropriate actions in line with our trading philosophy and constraints.\n\n**Sell Strategy:**\nThe ranking system has flagged mandatory sells for positions with scores below the acceptable threshold. Specifically, the following holdings must be sold: \n- **ROKU**: Composite score 22.0\n- **SLB**: Composite score 50.0\n- **AAL**: Composite score 34.0 (Fundamental score 34.0 indicates weakness)\n\nThese holdings represent opportunities to free up capital for more promising entries while remaining compliant with our portfolio limits. Additional sells are also considered from the current holdings, where **ROKU** is notably underperforming with a composite score of 22.0 and both a low fundamental and sentiment score. The recommendation is to liquidate a total of 3 positions to bring our count to 30 or below.\n\n**Buy Strategy:**\nAfter completing the sell recommendations, we shift the focus to the eligible buy candidates. The top opportunities based on the ranking system include:\n\n1. **CF (Composite: 82.0)** - This candidate has high scores across technical and fundamental metrics and reflects strong market sentiment. We shall allocate approximately $20,000 to this position.\n\n2. **ADMA (Composite: 72.8)** - Following CF, this candidate presents low risk with good growth potential, diversifying across sectors. Allocation will be around $15,000.\n\n3. **BROS (Composite: 69.8)** - It is close to our minimum target score and shows promise from market sentiment but should only get the remaining balance of the capital.\n\nBy implementing this proposed trading plan, we will achieve a more optimized portfolio that aligns with our growth objectives while ensuring compliance with the maximum position count and effective capital deployment.\n\nHere\u2019s the structured recommendation in JSON format:",
+  "compliance_suggestions": [
+    {
+      "ticker": "CF",
+      "suggestion_type": "POSITION_SIZE",
+      "suggestion": "Position size 20.0% of portfolio exceeds maximum 10.0% ($20,000.00 of $100,000.00)",
+      "severity": "WARNING"
+    },
+    {
+      "ticker": "ADMA",
+      "suggestion_type": "POSITION_SIZE",
+      "suggestion": "Position size 15.0% of portfolio exceeds maximum 10.0% ($15,000.00 of $100,000.00)",
+      "severity": "WARNING"
+    }
+  ],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 66 candidates (avg score: 41.1)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 99/99 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "gpt5_optimizer",
+      "message": "GPT-4O-MINI created trading plan: 9 SELLs, 5 BUYs ($42,758 allocated)",
+      "quality_score": 80,
+      "issues": [
+        "Limited diversification: 5 new positions (target 12-20). Total after trades: 29"
+      ]
+    },
+    {
+      "stage": "compliance_advisory",
+      "message": "Compliance reviewed plan: 5 BUYs, 9 SELLs (2 suggestions)",
+      "quality_score": 90,
+      "issues": [
+        "2 orders flagged with advisory notes"
+      ]
+    }
+  ],
+  "approved_at": "2025-11-13T14:37:48.665622Z"
+}

@@ -1,0 +1,90 @@
+{
+  "date": "2026-02-04",
+  "start_time": "2026-02-04T08:00:04.847111",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "11:00 AM ET",
+    "current_date": "Wednesday, February 04, 2026"
+  },
+  "regime_analysis": {
+    "regime": "NEUTRAL",
+    "confidence": "MEDIUM",
+    "spy_price": 688.4400024414062,
+    "spy_change_pct": -0.15808257931569247,
+    "vix_level": 18.479999542236328,
+    "recommendation": "NORMAL CONDITIONS"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "ESI",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260204T160753Z_b501be1a"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-02-04T08:08:09.411221",
+    "equity": 101881.72,
+    "cash": 98171.65,
+    "buying_power": 196343.3,
+    "portfolio_value": 101881.72,
+    "starting_capital": 100000.0,
+    "total_return": 1881.7200000000012,
+    "total_return_pct": 1.8817200000000014,
+    "daily_pl": 4007.6699999999983,
+    "daily_pl_pct": 4.094721736762705,
+    "total_unrealized_pl": -105.7,
+    "position_count": 1,
+    "positions": [
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [],
+  "errors": [],
+  "position_drift": {
+    "positions_checked": 2,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260204_080749",
+    "total_trades": 1,
+    "quality_score": 82,
+    "ceo_rating": "GOOD",
+    "ceo_recommendation": "RECOMMEND APPROVAL"
+  },
+  "sells_count": 1,
+  "buys_count": 0,
+  "verification": {
+    "passed": true,
+    "issues": [],
+    "summary": {
+      "position_count": 1,
+      "sells_executed": 1,
+      "buys_executed": 0,
+      "expected_count_change": -1
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 1,
+    "fills_recorded": 1,
+    "orders_updated": 1,
+    "already_recorded": 0,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-02-04T08:08:11.571264",
+  "duration_seconds": 486.724168
+}

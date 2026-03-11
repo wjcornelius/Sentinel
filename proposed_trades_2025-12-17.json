@@ -1,0 +1,172 @@
+{
+  "plan_id": "PLAN_20251217_080931",
+  "generated_at": "2025-12-17T16:09:31.936803Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 9,
+    "research_candidates": 68,
+    "gpt5_selected": 9,
+    "compliance_flagged": 0,
+    "overall_quality_score": 81
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 32,
+    "compliance_advisory": 95
+  },
+  "trades": [
+    {
+      "ticker": "ONB",
+      "action": "BUY",
+      "shares": 218,
+      "allocated_capital": 5000,
+      "entry_price": 22.889999389648438,
+      "composite_score": 74.8,
+      "sentiment_score": 52.0,
+      "sentiment_summary": "UBS initiated coverage on Old National Bancorp (ONB) with a Neutral rating and $25 price target on December 17, 2025, highlighting a shift to organic growth and strong ROTCE of 16-17% expected in 2026[1][3]. Truist Financial lowered its price target from $27 to $26 but maintained a Buy rating, while overall analyst consensus remains Moderate Buy with a $26 average target[1]. A director sold 6,508 shares worth $150.2K on December 15, 2025, amid neutral to mildly positive analyst updates[4].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "NVST",
+      "action": "BUY",
+      "shares": 229,
+      "allocated_capital": 5000,
+      "entry_price": 21.815000534057617,
+      "composite_score": 69.8,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "Envista Holdings (NVST) reported Q3 2025 earnings that beat EPS estimates, with core growth of roughly 5% in the quarter, improved gross margins of 56.1%, and updates to the top end of full-year guidance for growth and EPS. The stock rose following the earnings release, supported by positive market traction from new product launches and strategic portfolio shifts. JP Morgan raised its price target to $22 while maintaining a Neutral rating.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CG",
+      "action": "BUY",
+      "shares": 86,
+      "allocated_capital": 5000,
+      "entry_price": 57.525001525878906,
+      "composite_score": 67.8,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "Union Bancaire Privee acquired 83,100 shares of Carlyle Group (CG) as reported on December 17, 2025, signaling institutional interest. Barclays maintained an Overweight rating on December 15, 2025, while lowering the price target. UBS initiated a Buy rating with a $74 target earlier in December, citing strong growth in management fees and fee-related earnings.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "FLEX",
+      "action": "BUY",
+      "shares": 79,
+      "allocated_capital": 5000,
+      "entry_price": 63.20000076293945,
+      "composite_score": 62.2,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "Flex (FLEX) stock recently hit a fresh 52-week high, driven by AI-fueled data center demand, margin expansion, robust cash flow of $1.1 billion in fiscal 2025, and upward revised fiscal 2026 guidance to $26.7-$27.3 billion in revenue.[1] However, shares fell 4.2% yesterday amid weak U.S. jobs data (unemployment at 4.6%), tech sector concerns, and AI bubble fears, trading at $64.99, down 3.7%.[2][4] A chief accounting officer sold $719k in shares on December 11 under a pre-planned Rule 10b5-1, while analysts maintain overweight ratings and raised price targets.[3][6]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "GSK",
+      "action": "BUY",
+      "shares": 101,
+      "allocated_capital": 5000,
+      "entry_price": 49.150001525878906,
+      "composite_score": 62.2,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "GSK received FDA approval for Exdensur (depemokimab), a twice-yearly biologic treatment for severe eosinophilic asthma, reducing exacerbations by up to 58% in trials and boosting the stock by 1%.[2][4][6] The company also repurchased 13,851,733 shares on December 17, 2025, as part of its buyback program.[3] Recent stock performance shows a minor 0.79% decline on December 16 but overall positive momentum from drug approvals.[1][3]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "EMR",
+      "action": "SELL",
+      "shares": 36.0,
+      "sell_pct": 100,
+      "composite_score": 39.6,
+      "current_price": 132.7050018310547,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Emerson Electric (EMR) stock outperformed the market, closing up 1.87% at $139.57, beating the S&P 500's gain amid positive analyst ratings like 'outperform' from Evercore ISI and Royal Bank of Canada.[1][2][3] One institutional investor reduced holdings while another increased, signaling mixed institutional sentiment on December 17.[2][3] Recent company announcements include 2028 growth targets and a dividend payment, though older news noted stock declines post-buyback and earnings misses.[4][5][6]",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 39.6 < 60 absolute minimum",
+      "current_value": 4765.32
+    },
+    {
+      "ticker": "GEHC",
+      "action": "SELL",
+      "shares": 60.0,
+      "sell_pct": 100,
+      "composite_score": 59.2,
+      "current_price": 83.17500305175781,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "In the last 24 hours GE HealthCare was reported to have extended its long-running sales representation agreement with VasoHealthcare through December 31, 2030, renewing a partnership that began in 2010 and expands coverage including ultrasound products[1][5]. Separate coverage noted GE HealthCare will supply over 300 CT scanners in a recent contract announcement, reflecting continued commercial demand for its imaging equipment[3].",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 59.2 < 60 absolute minimum",
+      "current_value": 4989.6
+    },
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "shares": 151.0,
+      "sell_pct": 100,
+      "composite_score": 56.0,
+      "current_price": 24.56999969482422,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Interpublic Group (IPG) has completed its merger with Omnicom, announced on December 16, 2025, enhancing scale for investments in retail media and AI, with Morgan Stanley raising cost synergy estimates to over $1 billion and forecasting 2.9% organic revenue growth in 2026[4]. Omnicom issued a 14% dividend increase post-merger, and analysts like UBS and Citi maintain positive ratings on the combined entity[4]. Earlier Q2 2025 earnings showed an EPS beat and stock rise, alongside strong new business wins by IPG's Initiative agency[1][2].",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 56.0 < 60 absolute minimum",
+      "current_value": 3710.07
+    },
+    {
+      "ticker": "KDP",
+      "action": "SELL",
+      "shares": 175.0,
+      "sell_pct": 100,
+      "composite_score": 57.2,
+      "current_price": 28.325000762939453,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Jefferies downgraded Keurig Dr Pepper (KDP) from Buy to Hold on December 17, 2025, lowering its price target from $39 to $32 due to concerns over integration risks from the planned company split, heavy debt load, coffee price volatility, and financing structure.[5][6][4] Oak Thistle LLC purchased KDP shares, while the company declared a regular quarterly dividend of $0.23 per share.[3][7] Earlier positive Q3 results showed 10.7% net sales growth and raised full-year guidance, but recent focus is on split uncertainties.[1]",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 57.2 < 60 absolute minimum",
+      "current_value": 4967.375
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 68 candidates (avg score: 51.0)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 84/84 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 4 SELLs, 6 BUYs ($30,000 allocated)",
+      "quality_score": 32,
+      "issues": [
+        "Capital deployment 25.8% (target 90.0%+)",
+        "Limited diversification: 6 new positions (target 12-20). Total after trades: 18"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 5 BUYs approved, 1 rejected, 4 SELLs",
+      "quality_score": 95,
+      "issues": [
+        "1 orders REJECTED by compliance"
+      ]
+    }
+  ],
+  "approved_at": "2025-12-17T16:09:33.589197Z"
+}

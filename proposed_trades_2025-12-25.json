@@ -1,0 +1,65 @@
+{
+  "plan_id": "PLAN_20251225_080906",
+  "generated_at": "2025-12-25T16:09:06.233562Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 1,
+    "research_candidates": 72,
+    "gpt5_selected": 1,
+    "compliance_flagged": 0,
+    "overall_quality_score": 84
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 66,
+    "compliance_advisory": 70
+  },
+  "trades": [
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "shares": 151.0,
+      "sell_pct": 100,
+      "composite_score": 56.0,
+      "current_price": 24.56999969482422,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Omnicom's exchange offer for IPG senior notes expired with strong 93.7% participation ($2.76 billion tendered), leaving only $185 million outstanding, with settlement expected on December 2, 2025, as part of the completed IPG acquisition.[3] IPG is being removed from the S&P 500 index, replaced by Sandisk, due to the Omnicom merger effective November 28, 2025.[4] Stock price data shows IPG trading around $24-25 with recent positive weekly and monthly returns amid broader market highs.[2]",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 56.0 < 60 absolute minimum",
+      "current_value": 3710.07
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 72 candidates (avg score: 52.0)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 84/84 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 1 SELLs, 12 BUYs ($66,000 allocated)",
+      "quality_score": 66,
+      "issues": [
+        "Capital deployment 54.1% (target 90.0%+)"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 0 BUYs approved, 12 rejected, 1 SELLs",
+      "quality_score": 70,
+      "issues": [
+        "12 orders REJECTED by compliance"
+      ]
+    }
+  ],
+  "approved_at": "2025-12-25T16:09:07.966221Z"
+}

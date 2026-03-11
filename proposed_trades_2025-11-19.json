@@ -1,0 +1,88 @@
+{
+  "plan_id": "PLAN_20251119_075738",
+  "generated_at": "2025-11-19T15:57:38.073115Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 3,
+    "research_candidates": 64,
+    "gpt5_selected": 3,
+    "compliance_flagged": 0,
+    "overall_quality_score": 75
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 0,
+    "compliance_advisory": 100
+  },
+  "trades": [
+    {
+      "ticker": "ACI",
+      "action": "SELL",
+      "shares": 471.0,
+      "sell_pct": 100,
+      "composite_score": 54.8,
+      "current_price": 17.934999465942383,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Albertsons (ACI) recently announced the pricing of a $1.5 billion senior notes offering, which will be used to refinance existing debt and strengthen its balance sheet. The company also saw positive analyst reactions following its strong Q2 earnings beat and continued expansion of its share buyback program, including a $750 million accelerated share repurchase. Additionally, Albertsons launched a new rewards partnership with Uber, enhancing customer loyalty and engagement.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 54.8 < 60 absolute minimum",
+      "current_value": 8430.9
+    },
+    {
+      "ticker": "APH",
+      "action": "SELL",
+      "shares": 130.0,
+      "sell_pct": 100,
+      "composite_score": 54.0,
+      "current_price": 135.81500244140625,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Amphenol Corporation (APH) is experiencing strong positive momentum fueled by an aggressive acquisition strategy that is driving growth across key markets and improving competitive positioning. Recent analyses highlight solid earnings growth expectations, buy signals from technical indicators, and notable institutional buying activity by investment firms like Westwood Holdings and Nomura Asset Management.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 54.0 < 60 absolute minimum",
+      "current_value": 17677.4
+    },
+    {
+      "ticker": "DD",
+      "action": "SELL",
+      "shares": 445.0,
+      "sell_pct": 100,
+      "composite_score": 49.2,
+      "current_price": 38.5099983215332,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "DuPont announced early results of its tender offer for $739.3 million of senior notes due 2048, with settlement scheduled for November 19, 2025, as part of its $4 billion debt repayment plan following the Electronics separation. However, analysts have sharply revised DuPont's fair value estimate downward from $93.69 to $53.25, with revenue growth projections shifting from +2.85% to -16.09%, and the company lowered full-year 2025 earnings guidance.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 49.2 < 60 absolute minimum",
+      "current_value": 17194.8
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 64 candidates (avg score: 42.1)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 79/79 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 3 SELLs, 0 BUYs ($0 allocated)",
+      "quality_score": 0,
+      "issues": [
+        "Capital deployment 0.0% (target 90.0%+)",
+        "Limited diversification: 0 new positions (target 12-20). Total after trades: 12"
+      ]
+    },
+    {
+      "stage": "compliance_advisory",
+      "message": "Compliance reviewed plan: 0 BUYs, 3 SELLs (0 suggestions)",
+      "quality_score": 100,
+      "issues": []
+    }
+  ],
+  "approved_at": "2025-11-19T16:01:05.976077Z"
+}

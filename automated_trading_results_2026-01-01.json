@@ -1,0 +1,203 @@
+{
+  "date": "2026-01-01",
+  "start_time": "2026-01-01T08:00:03.943307",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "11:00 AM ET",
+    "current_date": "Thursday, January 01, 2026"
+  },
+  "regime_analysis": {
+    "regime": "NEUTRAL",
+    "confidence": "MEDIUM",
+    "spy_price": 681.9199829101562,
+    "spy_change_pct": -0.7408955885817768,
+    "vix_level": 14.949999809265137,
+    "recommendation": "NORMAL CONDITIONS"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "status": "SKIPPED",
+      "reason": "Asset not tradeable: AssetStatus.INACTIVE"
+    },
+    {
+      "ticker": "CG",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260101T160743Z_f0f287ec",
+      "_unfilled_reason": "Position still held"
+    },
+    {
+      "ticker": "IVZ",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260101T160743Z_b521e124",
+      "_unfilled_reason": "Position still held"
+    },
+    {
+      "ticker": "GTM",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260101T160744Z_f1e68044",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "IREN",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260101T160744Z_e3d7526e",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "EWY",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260101T160744Z_122389ce",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-01-01T08:07:51.328487",
+    "equity": 101366.2,
+    "cash": 33226.32,
+    "buying_power": 115929.83,
+    "portfolio_value": 101366.2,
+    "starting_capital": 100000.0,
+    "total_return": 1366.199999999997,
+    "total_return_pct": 1.3661999999999972,
+    "daily_pl": 3710.0699999999924,
+    "daily_pl_pct": 3.7991163483541612,
+    "total_unrealized_pl": 5285.37,
+    "position_count": 10,
+    "positions": [
+      {
+        "ticker": "CWAN",
+        "shares": 1151.0,
+        "entry_price": 19.6,
+        "current_price": 24.12,
+        "market_value": 27762.12,
+        "unrealized_pl": 5202.52,
+        "unrealized_pl_pct": 23.06122448979592
+      },
+      {
+        "ticker": "CDE",
+        "shares": 295.0,
+        "entry_price": 16.651627,
+        "current_price": 17.83,
+        "market_value": 5259.85,
+        "unrealized_pl": 347.62,
+        "unrealized_pl_pct": 7.076623040859239
+      },
+      {
+        "ticker": "JBS",
+        "shares": 344.0,
+        "entry_price": 14.5,
+        "current_price": 14.42,
+        "market_value": 4960.48,
+        "unrealized_pl": -27.52,
+        "unrealized_pl_pct": -0.55172413793103
+      },
+      {
+        "ticker": "CART",
+        "shares": 110.0,
+        "entry_price": 45.28,
+        "current_price": 44.98,
+        "market_value": 4947.8,
+        "unrealized_pl": -33.0,
+        "unrealized_pl_pct": -0.6625441696113099
+      },
+      {
+        "ticker": "BX",
+        "shares": 32.0,
+        "entry_price": 155.14,
+        "current_price": 154.14,
+        "market_value": 4932.48,
+        "unrealized_pl": -32.0,
+        "unrealized_pl_pct": -0.64457908985433
+      },
+      {
+        "ticker": "CG",
+        "shares": 82.0,
+        "entry_price": 60.73,
+        "current_price": 59.11,
+        "market_value": 4847.02,
+        "unrealized_pl": -132.84,
+        "unrealized_pl_pct": -2.66754487073934
+      },
+      {
+        "ticker": "DT",
+        "shares": 109.0,
+        "entry_price": 45.6,
+        "current_price": 43.34,
+        "market_value": 4724.06,
+        "unrealized_pl": -246.34,
+        "unrealized_pl_pct": -4.95614035087719
+      },
+      {
+        "ticker": "JCI",
+        "shares": 31.0,
+        "entry_price": 116.52,
+        "current_price": 119.75,
+        "market_value": 3712.25,
+        "unrealized_pl": 100.13,
+        "unrealized_pl_pct": 2.7720562993477498
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.7700831024930697
+      },
+      {
+        "ticker": "IVZ",
+        "shares": 125.0,
+        "entry_price": 24.57,
+        "current_price": 26.27,
+        "market_value": 3283.75,
+        "unrealized_pl": 212.5,
+        "unrealized_pl_pct": 6.91900691900692
+      }
+    ]
+  },
+  "warnings": [
+    "Verification: Still holding positions that should have been sold: CG, IVZ",
+    "Verification: Expected positions not found: GTM, IREN, EWY"
+  ],
+  "errors": [],
+  "plan_summary": {
+    "plan_id": "PLAN_20260101_080738",
+    "total_trades": 6,
+    "quality_score": 78,
+    "ceo_rating": "GOOD",
+    "ceo_recommendation": "RECOMMEND APPROVAL"
+  },
+  "sells_count": 2,
+  "buys_count": 3,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Still holding positions that should have been sold: CG, IVZ",
+      "Expected positions not found: GTM, IREN, EWY"
+    ],
+    "summary": {
+      "position_count": 10,
+      "sells_executed": 2,
+      "buys_executed": 3,
+      "expected_count_change": 1
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 1,
+    "fills_recorded": 0,
+    "orders_updated": 0,
+    "already_recorded": 1,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-01-01T08:07:53.065411",
+  "duration_seconds": 469.122121
+}

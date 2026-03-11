@@ -1,0 +1,252 @@
+{
+  "date": "2026-03-11",
+  "start_time": "2026-03-11T09:00:03.162710",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "12:00 PM ET",
+    "current_date": "Wednesday, March 11, 2026"
+  },
+  "regime_analysis": {
+    "regime": "BEARISH",
+    "confidence": "MEDIUM",
+    "spy_price": 673.8699951171875,
+    "spy_change_pct": -0.48879139880000905,
+    "vix_level": 25.59000015258789,
+    "recommendation": "PROCEED WITH CAUTION"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "AGI",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260311T160838Z_f99c21b5"
+    },
+    {
+      "ticker": "BBY",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260311T160838Z_bc7e8f1f"
+    },
+    {
+      "ticker": "BROS",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260311T160838Z_2af88d80"
+    },
+    {
+      "ticker": "CCI",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260311T160838Z_b6463a64"
+    },
+    {
+      "ticker": "CDE",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260311T160838Z_7201ee36"
+    },
+    {
+      "ticker": "CHWY",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260311T160838Z_1e95ac5f"
+    },
+    {
+      "ticker": "DHT",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260311T160841Z_e9d2dbf9"
+    },
+    {
+      "ticker": "ALAB",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260311T160841Z_febd9b05"
+    },
+    {
+      "ticker": "CRDO",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260311T160841Z_32185f82"
+    },
+    {
+      "ticker": "BMNR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260311T160841Z_665d1120"
+    },
+    {
+      "ticker": "ABNB",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260311T160841Z_5c13b4e8"
+    },
+    {
+      "ticker": "SLM",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260311T160841Z_95720c51"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-03-11T09:09:02.099108",
+    "equity": 101403.61,
+    "cash": 6924.79,
+    "buying_power": 97151.04,
+    "portfolio_value": 101403.61,
+    "starting_capital": 100000.0,
+    "total_return": 1403.6100000000006,
+    "total_return_pct": 1.4036100000000007,
+    "daily_pl": 2908.6300000000047,
+    "daily_pl_pct": 2.953074359728795,
+    "total_unrealized_pl": 6080.244820000001,
+    "position_count": 12,
+    "positions": [
+      {
+        "ticker": "CF",
+        "shares": 107.0,
+        "entry_price": 92.61,
+        "current_price": 117.43,
+        "market_value": 12565.01,
+        "unrealized_pl": 2655.74,
+        "unrealized_pl_pct": 26.801000000000002
+      },
+      {
+        "ticker": "INDV",
+        "shares": 300.0,
+        "entry_price": 33.24,
+        "current_price": 33.2993,
+        "market_value": 9989.79,
+        "unrealized_pl": 17.79,
+        "unrealized_pl_pct": 0.178
+      },
+      {
+        "ticker": "DELL",
+        "shares": 67.0,
+        "entry_price": 122.94,
+        "current_price": 146.79,
+        "market_value": 9834.93,
+        "unrealized_pl": 1597.95,
+        "unrealized_pl_pct": 19.400000000000002
+      },
+      {
+        "ticker": "DHT",
+        "shares": 421.0,
+        "entry_price": 17.87,
+        "current_price": 17.865,
+        "market_value": 7521.165,
+        "unrealized_pl": -2.105,
+        "unrealized_pl_pct": -0.027999999999999997
+      },
+      {
+        "ticker": "SLM",
+        "shares": 380.0,
+        "entry_price": 19.68,
+        "current_price": 19.67,
+        "market_value": 7474.6,
+        "unrealized_pl": -3.8,
+        "unrealized_pl_pct": -0.051000000000000004
+      },
+      {
+        "ticker": "BMNR",
+        "shares": 361.0,
+        "entry_price": 20.68338,
+        "current_price": 20.685,
+        "market_value": 7467.285,
+        "unrealized_pl": 0.58482,
+        "unrealized_pl_pct": 0.008
+      },
+      {
+        "ticker": "CRDO",
+        "shares": 64.0,
+        "entry_price": 116.2,
+        "current_price": 116.1,
+        "market_value": 7430.4,
+        "unrealized_pl": -6.4,
+        "unrealized_pl_pct": -0.086
+      },
+      {
+        "ticker": "ABNB",
+        "shares": 56.0,
+        "entry_price": 132.1,
+        "current_price": 132.005,
+        "market_value": 7392.28,
+        "unrealized_pl": -5.32,
+        "unrealized_pl_pct": -0.07200000000000001
+      },
+      {
+        "ticker": "ALAB",
+        "shares": 58.0,
+        "entry_price": 125.86,
+        "current_price": 125.77,
+        "market_value": 7294.66,
+        "unrealized_pl": -5.22,
+        "unrealized_pl_pct": -0.07200000000000001
+      },
+      {
+        "ticker": "RRC",
+        "shares": 167.0,
+        "entry_price": 35.81,
+        "current_price": 41.855,
+        "market_value": 6989.785,
+        "unrealized_pl": 1009.515,
+        "unrealized_pl_pct": 16.881
+      },
+      {
+        "ticker": "AEM",
+        "shares": 31.0,
+        "entry_price": 189.73,
+        "current_price": 219.64,
+        "market_value": 6808.84,
+        "unrealized_pl": 927.21,
+        "unrealized_pl_pct": 15.765
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [
+    "Reconciliation cleaned 3 stale records"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 12,
+    "db_positions_before": 14,
+    "stale_closed": 3,
+    "in_sync": 11
+  },
+  "position_drift": {
+    "positions_checked": 12,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260311_090835",
+    "total_trades": 12,
+    "quality_score": 84,
+    "ceo_rating": "GOOD",
+    "ceo_recommendation": "RECOMMEND APPROVAL"
+  },
+  "sells_count": 6,
+  "buys_count": 6,
+  "verification": {
+    "passed": true,
+    "issues": [],
+    "summary": {
+      "position_count": 12,
+      "sells_executed": 6,
+      "buys_executed": 6,
+      "expected_count_change": 0
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 19,
+    "fills_recorded": 12,
+    "orders_updated": 12,
+    "already_recorded": 7,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-03-11T09:09:03.772121",
+  "duration_seconds": 540.609427
+}

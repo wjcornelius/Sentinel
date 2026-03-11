@@ -1,0 +1,316 @@
+{
+  "date": "2025-12-02",
+  "start_time": "2025-12-02T08:00:10.397677",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "11:00 AM ET",
+    "current_date": "Tuesday, December 02, 2025"
+  },
+  "regime_analysis": {
+    "regime": "BULLISH",
+    "confidence": "MEDIUM",
+    "spy_price": 683.219970703125,
+    "spy_change_pct": 0.43364415411217255,
+    "vix_level": 16.530000686645508,
+    "recommendation": "FAVORABLE CONDITIONS"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "status": "SKIPPED",
+      "reason": "Asset not tradeable: AssetStatus.INACTIVE"
+    },
+    {
+      "ticker": "ADMA",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20251202T161317Z_24f49e24"
+    },
+    {
+      "ticker": "CCL",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20251202T161317Z_17326fdd"
+    },
+    {
+      "ticker": "CX",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20251202T161317Z_df5e7367"
+    },
+    {
+      "ticker": "ELAN",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20251202T161317Z_b327933f"
+    },
+    {
+      "ticker": "GNTX",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20251202T161317Z_c822ff98"
+    },
+    {
+      "ticker": "HALO",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20251202T161317Z_37e5ad2c"
+    },
+    {
+      "ticker": "INCY",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20251202T161317Z_43bfd0e1"
+    },
+    {
+      "ticker": "IR",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20251202T161317Z_5df04e73"
+    },
+    {
+      "ticker": "KD",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20251202T161317Z_c720f365"
+    },
+    {
+      "ticker": "DELL",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251202T161322Z_e3a7487d"
+    },
+    {
+      "ticker": "KDP",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251202T161322Z_47054f53"
+    },
+    {
+      "ticker": "GPN",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251202T161322Z_d222eb9e"
+    },
+    {
+      "ticker": "DLO",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251202T161322Z_60024f26"
+    },
+    {
+      "ticker": "CNM",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251202T161322Z_3098762c"
+    },
+    {
+      "ticker": "COHR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251202T161322Z_ccb076dc"
+    },
+    {
+      "ticker": "EXE",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251202T161322Z_f77656b3"
+    },
+    {
+      "ticker": "FTNT",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251202T161322Z_d49f5e81"
+    },
+    {
+      "ticker": "HRL",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251202T161322Z_8a64adf3"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2025-12-02T08:13:27.516864",
+    "equity": 99561.49,
+    "cash": -11388.56,
+    "buying_power": 84462.86,
+    "portfolio_value": 99561.49,
+    "starting_capital": 100000.0,
+    "total_return": -438.50999999999476,
+    "total_return_pct": -0.43850999999999474,
+    "daily_pl": 3296.100000000006,
+    "daily_pl_pct": 3.423972000736719,
+    "total_unrealized_pl": 4728.824500000001,
+    "position_count": 17,
+    "positions": [
+      {
+        "ticker": "CWAN",
+        "shares": 1151.0,
+        "entry_price": 19.6,
+        "current_price": 21.08,
+        "market_value": 24263.08,
+        "unrealized_pl": 1703.48,
+        "unrealized_pl_pct": 7.55102040816327
+      },
+      {
+        "ticker": "EIX",
+        "shares": 214.0,
+        "entry_price": 55.44,
+        "current_price": 58.17,
+        "market_value": 12448.38,
+        "unrealized_pl": 584.22,
+        "unrealized_pl_pct": 4.92424242424242
+      },
+      {
+        "ticker": "FTI",
+        "shares": 175.0,
+        "entry_price": 43.4,
+        "current_price": 45.445,
+        "market_value": 7952.875,
+        "unrealized_pl": 357.875,
+        "unrealized_pl_pct": 4.71198156682028
+      },
+      {
+        "ticker": "AZN",
+        "shares": 80.0,
+        "entry_price": 84.63,
+        "current_price": 90.67,
+        "market_value": 7253.6,
+        "unrealized_pl": 483.2,
+        "unrealized_pl_pct": 7.136949072432939
+      },
+      {
+        "ticker": "MNST",
+        "shares": 83.0,
+        "entry_price": 71.871084,
+        "current_price": 74.86,
+        "market_value": 6213.38,
+        "unrealized_pl": 248.08,
+        "unrealized_pl_pct": 4.15871791862941
+      },
+      {
+        "ticker": "BZ",
+        "shares": 241.0,
+        "entry_price": 20.57,
+        "current_price": 22.21,
+        "market_value": 5352.61,
+        "unrealized_pl": 395.24,
+        "unrealized_pl_pct": 7.9727758872143895
+      },
+      {
+        "ticker": "GEO",
+        "shares": 319.0,
+        "entry_price": 15.590188,
+        "current_price": 16.6055,
+        "market_value": 5297.1545,
+        "unrealized_pl": 323.8845,
+        "unrealized_pl_pct": 6.512505856307819
+      },
+      {
+        "ticker": "DNOW",
+        "shares": 370.0,
+        "entry_price": 13.48,
+        "current_price": 13.935,
+        "market_value": 5155.95,
+        "unrealized_pl": 168.35,
+        "unrealized_pl_pct": 3.37537091988131
+      },
+      {
+        "ticker": "DLTR",
+        "shares": 47.0,
+        "entry_price": 104.26,
+        "current_price": 108.41,
+        "market_value": 5095.27,
+        "unrealized_pl": 195.05,
+        "unrealized_pl_pct": 3.9804335315557298
+      },
+      {
+        "ticker": "BRBR",
+        "shares": 160.0,
+        "entry_price": 30.82,
+        "current_price": 30.32,
+        "market_value": 4851.2,
+        "unrealized_pl": -80.0,
+        "unrealized_pl_pct": -1.6223231667748201
+      },
+      {
+        "ticker": "GEHC",
+        "shares": 60.0,
+        "entry_price": 81.8,
+        "current_price": 80.53,
+        "market_value": 4831.8,
+        "unrealized_pl": -76.2,
+        "unrealized_pl_pct": -1.55256723716381
+      },
+      {
+        "ticker": "OPCH",
+        "shares": 154.0,
+        "entry_price": 28.03,
+        "current_price": 31.31,
+        "market_value": 4821.74,
+        "unrealized_pl": 505.12,
+        "unrealized_pl_pct": 11.701748127006779
+      },
+      {
+        "ticker": "HL",
+        "shares": 255.0,
+        "entry_price": 15.58,
+        "current_price": 16.525,
+        "market_value": 4213.875,
+        "unrealized_pl": 240.975,
+        "unrealized_pl_pct": 6.06546854942234
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.7700831024930697
+      },
+      {
+        "ticker": "BKR",
+        "shares": 73.0,
+        "entry_price": 48.95,
+        "current_price": 48.66,
+        "market_value": 3552.18,
+        "unrealized_pl": -21.17,
+        "unrealized_pl_pct": -0.59244126659857
+      },
+      {
+        "ticker": "IVZ",
+        "shares": 125.0,
+        "entry_price": 24.57,
+        "current_price": 24.5,
+        "market_value": 3062.5,
+        "unrealized_pl": -8.75,
+        "unrealized_pl_pct": -0.28490028490028
+      },
+      {
+        "ticker": "CLSK",
+        "shares": 202.0,
+        "entry_price": 15.14,
+        "current_price": 14.225,
+        "market_value": 2873.45,
+        "unrealized_pl": -184.83,
+        "unrealized_pl_pct": -6.04359313077939
+      }
+    ]
+  },
+  "warnings": [
+    "Verification: Expected positions not found: DELL, CNM, EXE, KDP, GPN, DLO, HRL, FTNT, COHR"
+  ],
+  "errors": [],
+  "plan_summary": {
+    "plan_id": "PLAN_20251202_081311",
+    "total_trades": 19,
+    "quality_score": 88,
+    "ceo_rating": "EXCELLENT",
+    "ceo_recommendation": "STRONGLY RECOMMEND APPROVAL"
+  },
+  "sells_count": 9,
+  "buys_count": 9,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: DELL, CNM, EXE, KDP, GPN, DLO, HRL, FTNT, COHR"
+    ],
+    "summary": {
+      "position_count": 17,
+      "sells_executed": 9,
+      "buys_executed": 9,
+      "expected_count_change": 0
+    }
+  },
+  "end_time": "2025-12-02T08:13:31.250284",
+  "duration_seconds": 800.852619
+}

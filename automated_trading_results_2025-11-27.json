@@ -1,0 +1,349 @@
+{
+  "date": "2025-11-27",
+  "start_time": "2025-11-27T08:00:04.259758",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "11:00 AM ET",
+    "current_date": "Thursday, November 27, 2025"
+  },
+  "regime_analysis": {
+    "regime": "BULLISH",
+    "confidence": "HIGH",
+    "spy_price": 679.6799926757812,
+    "spy_change_pct": 0.6903459171132801,
+    "vix_level": 17.31999969482422,
+    "recommendation": "GOOD DAY TO TRADE"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "BAH",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20251127T160852Z_04a75fe1"
+    },
+    {
+      "ticker": "CIEN",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20251127T160852Z_19bf7197"
+    },
+    {
+      "ticker": "CRBG",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20251127T160852Z_bbd6baad"
+    },
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20251127T160852Z_a78de693"
+    },
+    {
+      "ticker": "IVZ",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251127T160856Z_594080ef"
+    },
+    {
+      "ticker": "KDP",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251127T160856Z_230809f7"
+    },
+    {
+      "ticker": "IR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251127T160856Z_7b695448"
+    },
+    {
+      "ticker": "CG",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251127T160856Z_a695209e"
+    },
+    {
+      "ticker": "GPN",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251127T160856Z_4eab7be9"
+    },
+    {
+      "ticker": "EMR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251127T160856Z_4ff65842"
+    },
+    {
+      "ticker": "GSK",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251127T160856Z_46b93fdc"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2025-11-27T08:09:00.537038",
+    "equity": 100544.55,
+    "cash": -59096.77,
+    "buying_power": 41447.78,
+    "portfolio_value": 100544.55,
+    "starting_capital": 100000.0,
+    "total_return": 544.5500000000029,
+    "total_return_pct": 0.544550000000003,
+    "daily_pl": 0.0,
+    "daily_pl_pct": 0.0,
+    "total_unrealized_pl": 8046.95,
+    "position_count": 25,
+    "positions": [
+      {
+        "ticker": "CWAN",
+        "shares": 1151.0,
+        "entry_price": 19.6,
+        "current_price": 21.73,
+        "market_value": 25011.23,
+        "unrealized_pl": 2451.63,
+        "unrealized_pl_pct": 10.86734693877551
+      },
+      {
+        "ticker": "ADMA",
+        "shares": 911.0,
+        "entry_price": 16.38,
+        "current_price": 19.14,
+        "market_value": 17436.54,
+        "unrealized_pl": 2514.36,
+        "unrealized_pl_pct": 16.84981684981685
+      },
+      {
+        "ticker": "EIX",
+        "shares": 214.0,
+        "entry_price": 55.44,
+        "current_price": 59.11,
+        "market_value": 12649.54,
+        "unrealized_pl": 785.38,
+        "unrealized_pl_pct": 6.61976911976912
+      },
+      {
+        "ticker": "FTI",
+        "shares": 175.0,
+        "entry_price": 43.4,
+        "current_price": 45.24,
+        "market_value": 7917.0,
+        "unrealized_pl": 322.0,
+        "unrealized_pl_pct": 4.239631336405529
+      },
+      {
+        "ticker": "AZN",
+        "shares": 80.0,
+        "entry_price": 84.63,
+        "current_price": 93.32,
+        "market_value": 7465.6,
+        "unrealized_pl": 695.2,
+        "unrealized_pl_pct": 10.26822639725866
+      },
+      {
+        "ticker": "MNST",
+        "shares": 83.0,
+        "entry_price": 71.871084,
+        "current_price": 75.04,
+        "market_value": 6228.32,
+        "unrealized_pl": 263.02,
+        "unrealized_pl_pct": 4.40916634536402
+      },
+      {
+        "ticker": "BZ",
+        "shares": 241.0,
+        "entry_price": 20.57,
+        "current_price": 21.92,
+        "market_value": 5282.72,
+        "unrealized_pl": 325.35,
+        "unrealized_pl_pct": 6.56295576081672
+      },
+      {
+        "ticker": "DLTR",
+        "shares": 47.0,
+        "entry_price": 104.26,
+        "current_price": 109.75,
+        "market_value": 5158.25,
+        "unrealized_pl": 258.03,
+        "unrealized_pl_pct": 5.26568194897372
+      },
+      {
+        "ticker": "DNOW",
+        "shares": 370.0,
+        "entry_price": 13.48,
+        "current_price": 13.87,
+        "market_value": 5131.9,
+        "unrealized_pl": 144.3,
+        "unrealized_pl_pct": 2.89317507418398
+      },
+      {
+        "ticker": "GEO",
+        "shares": 319.0,
+        "entry_price": 15.590188,
+        "current_price": 15.58,
+        "market_value": 4970.02,
+        "unrealized_pl": -3.25,
+        "unrealized_pl_pct": -0.06534935766608
+      },
+      {
+        "ticker": "GNTX",
+        "shares": 218.0,
+        "entry_price": 22.73,
+        "current_price": 22.73,
+        "market_value": 4955.14,
+        "unrealized_pl": 0.0,
+        "unrealized_pl_pct": 0.0
+      },
+      {
+        "ticker": "ELAN",
+        "shares": 211.0,
+        "entry_price": 23.41,
+        "current_price": 23.31,
+        "market_value": 4918.41,
+        "unrealized_pl": -21.1,
+        "unrealized_pl_pct": -0.42716787697565
+      },
+      {
+        "ticker": "BRBR",
+        "shares": 160.0,
+        "entry_price": 30.82,
+        "current_price": 30.59,
+        "market_value": 4894.4,
+        "unrealized_pl": -36.8,
+        "unrealized_pl_pct": -0.74626865671642
+      },
+      {
+        "ticker": "GEHC",
+        "shares": 60.0,
+        "entry_price": 81.8,
+        "current_price": 80.63,
+        "market_value": 4837.8,
+        "unrealized_pl": -70.2,
+        "unrealized_pl_pct": -1.43031784841076
+      },
+      {
+        "ticker": "OPCH",
+        "shares": 154.0,
+        "entry_price": 28.03,
+        "current_price": 31.02,
+        "market_value": 4777.08,
+        "unrealized_pl": 460.46,
+        "unrealized_pl_pct": 10.66714234748484
+      },
+      {
+        "ticker": "HL",
+        "shares": 255.0,
+        "entry_price": 15.58,
+        "current_price": 15.97,
+        "market_value": 4072.35,
+        "unrealized_pl": 99.45,
+        "unrealized_pl_pct": 2.5032092426187402
+      },
+      {
+        "ticker": "ENPH",
+        "shares": 138.0,
+        "entry_price": 27.82,
+        "current_price": 27.82,
+        "market_value": 3839.16,
+        "unrealized_pl": 0.0,
+        "unrealized_pl_pct": 0.0
+      },
+      {
+        "ticker": "GPK",
+        "shares": 237.0,
+        "entry_price": 16.15,
+        "current_price": 16.13,
+        "market_value": 3822.81,
+        "unrealized_pl": -4.74,
+        "unrealized_pl_pct": -0.12383900928793
+      },
+      {
+        "ticker": "CRBG",
+        "shares": 127.0,
+        "entry_price": 30.16,
+        "current_price": 30.03,
+        "market_value": 3813.81,
+        "unrealized_pl": -16.51,
+        "unrealized_pl_pct": -0.43103448275862
+      },
+      {
+        "ticker": "CIEN",
+        "shares": 19.0,
+        "entry_price": 200.303158,
+        "current_price": 200.29,
+        "market_value": 3805.51,
+        "unrealized_pl": -0.25,
+        "unrealized_pl_pct": -0.00656899016228
+      },
+      {
+        "ticker": "INCY",
+        "shares": 36.0,
+        "entry_price": 105.57,
+        "current_price": 105.65,
+        "market_value": 3803.4,
+        "unrealized_pl": 2.88,
+        "unrealized_pl_pct": 0.07577910391210001
+      },
+      {
+        "ticker": "HALO",
+        "shares": 52.0,
+        "entry_price": 72.91,
+        "current_price": 72.66,
+        "market_value": 3778.32,
+        "unrealized_pl": -13.0,
+        "unrealized_pl_pct": -0.34288849266219
+      },
+      {
+        "ticker": "BAH",
+        "shares": 45.0,
+        "entry_price": 84.27,
+        "current_price": 83.25,
+        "market_value": 3746.25,
+        "unrealized_pl": -45.9,
+        "unrealized_pl_pct": -1.21039515841937
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.7700831024930697
+      },
+      {
+        "ticker": "BKR",
+        "shares": 73.0,
+        "entry_price": 48.95,
+        "current_price": 49.53,
+        "market_value": 3615.69,
+        "unrealized_pl": 42.34,
+        "unrealized_pl_pct": 1.18488253319714
+      }
+    ]
+  },
+  "warnings": [
+    "Verification: Still holding positions that should have been sold: BAH, CIEN, CRBG, IPG",
+    "Verification: Expected positions not found: EMR, GSK, IR, KDP, GPN, CG, IVZ"
+  ],
+  "errors": [],
+  "plan_summary": {
+    "plan_id": "PLAN_20251127_080849",
+    "total_trades": 11,
+    "quality_score": 85,
+    "ceo_rating": "EXCELLENT",
+    "ceo_recommendation": "STRONGLY RECOMMEND APPROVAL"
+  },
+  "sells_count": 4,
+  "buys_count": 7,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Still holding positions that should have been sold: BAH, CIEN, CRBG, IPG",
+      "Expected positions not found: EMR, GSK, IR, KDP, GPN, CG, IVZ"
+    ],
+    "summary": {
+      "position_count": 25,
+      "sells_executed": 4,
+      "buys_executed": 7,
+      "expected_count_change": 3
+    }
+  },
+  "end_time": "2025-11-27T08:09:02.694408",
+  "duration_seconds": 538.434663
+}

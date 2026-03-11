@@ -1,0 +1,30 @@
+{
+  "date": "2026-02-14",
+  "start_time": "2026-02-14T08:00:03.294400",
+  "status": "MARKET_CLOSED",
+  "market_status": {
+    "is_open": false,
+    "status": "CLOSED",
+    "message": "Weekend - Market opens Monday, Feb 16 at 9:30 AM ET",
+    "current_time_et": "11:00 AM ET",
+    "current_date": "Saturday, February 14, 2026",
+    "next_open": "Monday, Feb 16 at 9:30 AM ET"
+  },
+  "regime_analysis": null,
+  "plan_generated": false,
+  "plan_approved": false,
+  "trades_executed": [],
+  "portfolio_state": null,
+  "warnings": [
+    "Reconciliation cleaned 3 stale records"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 11,
+    "db_positions_before": 13,
+    "stale_closed": 3,
+    "in_sync": 10
+  },
+  "end_time": "2026-02-14T08:00:19.840092",
+  "duration_seconds": 16.545703
+}

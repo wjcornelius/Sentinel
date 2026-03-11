@@ -1,0 +1,65 @@
+{
+  "plan_id": "PLAN_20260123_080738",
+  "generated_at": "2026-01-23T16:07:38.364472Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 1,
+    "research_candidates": 74,
+    "gpt5_selected": 1,
+    "compliance_flagged": 0,
+    "overall_quality_score": 87
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 79,
+    "compliance_advisory": 70
+  },
+  "trades": [
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "shares": 151.0,
+      "sell_pct": 100,
+      "composite_score": 56.0,
+      "current_price": 24.56999969482422,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Interpublic Group (IPG) stock gained 3.31% on January 22, 2026, closing at $26.54 amid fluctuating trading, though with declining volume signaling potential caution. A SWOT analysis highlights IPG's transitional phase ahead of its $750 million acquisition by Omnicom, with recent organic revenue misses offset by strong margin improvements and upward EPS revisions for 2025-2026. No major news events reported in the last 24 hours as of January 23, 2026.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 56.0 < 60 absolute minimum",
+      "current_value": 3710.07
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 74 candidates (avg score: 51.7)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 76/76 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 1 SELLs, 13 BUYs ($130,000 allocated)",
+      "quality_score": 79,
+      "issues": [
+        "Capital deployment 68.9% (target 90.0%+)"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 0 BUYs approved, 13 rejected, 1 SELLs",
+      "quality_score": 70,
+      "issues": [
+        "13 orders REJECTED by compliance"
+      ]
+    }
+  ],
+  "approved_at": "2026-01-23T16:07:39.916054Z"
+}

@@ -1,0 +1,200 @@
+{
+  "plan_id": "PLAN_20251127_080849",
+  "generated_at": "2025-11-27T16:08:49.203704Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 11,
+    "research_candidates": 72,
+    "gpt5_selected": 11,
+    "compliance_flagged": 0,
+    "overall_quality_score": 85
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 58,
+    "compliance_advisory": 85
+  },
+  "trades": [
+    {
+      "ticker": "IVZ",
+      "action": "BUY",
+      "shares": 115,
+      "allocated_capital": 2826.1710000000003,
+      "entry_price": 24.530000686645508,
+      "composite_score": 77.4,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "Invesco (IVZ) shares have seen a recent rally, up 2% over the past day and 7% in the past week, driven by strategic partnerships and increased institutional interest. Analysts highlight strong year-to-date performance, with a fair value estimate above the current price, suggesting upside potential. However, some caution remains due to competitive pressures and sector-wide mixed signals.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "KDP",
+      "action": "BUY",
+      "shares": 102,
+      "allocated_capital": 2826.1710000000003,
+      "entry_price": 27.68000030517578,
+      "composite_score": 72.2,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "Recent news for Keurig Dr Pepper (KDP) highlights strong Q3 2025 earnings, with net sales up 10.7% to $4.31 billion and adjusted EPS at $0.54, meeting analyst expectations. The company also announced strategic investments and leadership changes supporting its planned acquisition of JDE Peet's and subsequent separation into two independent companies, while analysts note potential upside due to business transformation and improved valuation narratives.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "IR",
+      "action": "BUY",
+      "shares": 35,
+      "allocated_capital": 2826.1710000000003,
+      "entry_price": 79.87000274658203,
+      "composite_score": 65.2,
+      "sentiment_score": 58.0,
+      "sentiment_summary": "Ingersoll Rand stock showed modest positive momentum on November 26-27, 2025, with institutional investors including Coldstream Capital Management and Charles Schwab Investment Management increasing their positions. The stock traded up 2.2% and maintained analyst coverage with an overall 'Hold' rating, supported by solid Q3 2025 earnings that met revenue expectations with 5.1% year-over-year growth.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CG",
+      "action": "BUY",
+      "shares": 52,
+      "allocated_capital": 2826.1710000000003,
+      "entry_price": 53.5,
+      "composite_score": 63.8,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "Recent news for CG (Carlyle Group) indicates strong near-term sentiment, with the stock showing a positive price movement and a significant risk-reward setup favoring gains. Analysts highlight a bullish technical pattern and institutional strategies leaning toward long positions, supported by positive multi-timeframe signals and a resilient portfolio outlook.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "GPN",
+      "action": "BUY",
+      "shares": 37,
+      "allocated_capital": 2773.8900451660156,
+      "entry_price": 74.97000122070312,
+      "composite_score": 61.8,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "Recent news on Global Payments (GPN) highlights a strong third quarter with earnings surpassing expectations, driven by robust growth in the merchant solutions segment and solid free cash flow generation. Analyst upgrades, including Citigroup and Wells Fargo initiating and raising price targets to as high as $125, emphasize confidence in GPN's strategic initiatives, global expansion, and cash flow outlook, despite a slight revenue miss and muted short-term trading volume. Additionally, the company reaffirmed its 2025 growth outlook and continues to execute share repurchases and dividends, supporting shareholder value.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Auto-added for capital efficiency (score: 61.8)",
+      "gpt5_allocated": false,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "EMR",
+      "action": "BUY",
+      "shares": 21,
+      "allocated_capital": 2760.2400512695312,
+      "entry_price": 131.44000244140625,
+      "composite_score": 60.6,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "Recent news for Emerson Electric (EMR) highlights positive analyst sentiment, with several major firms upgrading or maintaining bullish ratings and raising price targets. The company also announced a 5% dividend increase and a new share repurchase program, signaling confidence in its financial health and future growth. Stock performance remains stable, trading near its 50-day and 200-day moving averages.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Auto-added for capital efficiency (score: 60.6)",
+      "gpt5_allocated": false,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "GSK",
+      "action": "BUY",
+      "shares": 58,
+      "allocated_capital": 2785.160026550293,
+      "entry_price": 48.02000045776367,
+      "composite_score": 60.2,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "GSK recently reported strong quarterly earnings, beating expectations with $1.48 EPS and $11.35 billion in revenue, while also raising its FY2025 guidance. Analysts have mixed but generally positive sentiment, with several maintaining or upgrading their ratings to 'buy' or 'strong-buy,' though the overall consensus remains a 'hold.' The stock is trading below its estimated fair value, and there is continued institutional interest.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Auto-added for capital efficiency (score: 60.2)",
+      "gpt5_allocated": false,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BAH",
+      "action": "SELL",
+      "shares": 45.0,
+      "sell_pct": 100,
+      "composite_score": 50.0,
+      "current_price": 83.25,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Booz Allen Hamilton secured a $99 million U.S. Navy contract for advanced ship connectivity, demonstrating continued momentum in federal technology contracts. However, the stock has experienced significant recent declines, with shares down 42.27% over the past year and 23% in the last 90 days, while major analysts including JPMorgan Chase and Goldman Sachs have issued bearish ratings with reduced price targets.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 50.0 < 60 absolute minimum",
+      "current_value": 3746.25
+    },
+    {
+      "ticker": "CIEN",
+      "action": "SELL",
+      "shares": 19.0,
+      "sell_pct": 100,
+      "composite_score": 54.0,
+      "current_price": 200.2899932861328,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Ciena's stock has surged to a new 52-week high, driven by strong investor confidence and recent strategic moves, including a major acquisition and significant contracts in AI data center networking. The company continues to benefit from robust demand for high-speed networking solutions and has received multiple analyst upgrades and raised price targets.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 54.0 < 60 absolute minimum",
+      "current_value": 3805.51
+    },
+    {
+      "ticker": "CRBG",
+      "action": "SELL",
+      "shares": 127.0,
+      "sell_pct": 100,
+      "composite_score": 61.6,
+      "current_price": 30.030000686645508,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Corebridge Financial reported Q3 2025 earnings with revenue of $5.63 billion, beating estimates, but EPS of $0.96 missed consensus by $0.12. The stock declined slightly in premarket trading following the earnings miss, though analysts highlight strong premium growth and a solid balance sheet. Recent analyst ratings have been mixed, with some lowering price targets but maintaining positive outlooks.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Rank #30 (below top 28), score 61.6",
+      "current_value": 3813.81
+    },
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "shares": 151.0,
+      "sell_pct": 100,
+      "composite_score": 56.0,
+      "current_price": 24.56999969482422,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Omnicom completed its $13.5 billion acquisition of Interpublic Group on November 26, 2025, creating the world's largest advertising and marketing holding company with pro forma revenue exceeding $25 billion. IPG shareholders received 0.344 Omnicom shares for each IPG share, with the combined entity to trade under the OMC ticker on the NYSE, while the full leadership team will be announced on December 1, 2025.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 56.0 < 60 absolute minimum",
+      "current_value": 3710.07
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 72 candidates (avg score: 50.5)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 97/97 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 4 SELLs, 10 BUYs ($28,102 allocated)",
+      "quality_score": 58,
+      "issues": [
+        "Capital deployment 49.7% (target 90.0%+)",
+        "Limited diversification: 10 new positions (target 12-20). Total after trades: 31"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 7 BUYs approved, 3 rejected, 4 SELLs",
+      "quality_score": 85,
+      "issues": [
+        "3 orders REJECTED by compliance"
+      ]
+    }
+  ],
+  "approved_at": "2025-11-27T16:08:51.189622Z"
+}

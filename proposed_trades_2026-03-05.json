@@ -1,0 +1,198 @@
+{
+  "plan_id": "PLAN_20260305_080758",
+  "generated_at": "2026-03-05T16:07:58.544194Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 11,
+    "research_candidates": 70,
+    "gpt5_selected": 11,
+    "compliance_flagged": 0,
+    "overall_quality_score": 85
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 41,
+    "compliance_advisory": 100
+  },
+  "trades": [
+    {
+      "ticker": "DASH",
+      "action": "BUY",
+      "shares": 40,
+      "allocated_capital": 7500.0,
+      "entry_price": 184.17999267578125,
+      "composite_score": 67.8,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "Recent news highlights Dash (DASH) cryptocurrency's strong bullish momentum from a 125% price surge in early January 2026, driven by short liquidations, a golden cross technical signal, and partnerships like Alchemy Pay for fiat on-ramps. Expert forecasts project prices from $85-$90 conservatively to $1,200 in bullish scenarios by year-end, amid rising privacy coin interest. No news from the last 24 hours was identified, with coverage focusing on early 2026 developments.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ADMA",
+      "action": "BUY",
+      "shares": 470,
+      "allocated_capital": 7500.0,
+      "entry_price": 15.925000190734863,
+      "composite_score": 65.8,
+      "sentiment_score": 85.0,
+      "sentiment_summary": "ADMA Biologics announced a $200M capital return plan for 2026, including a $125M accelerated share repurchase with JPMorgan, as part of a broader $500M program, leading to a 0.83% premarket stock rise to $15.7[1][4]. The stock was upgraded to Zacks Rank #1 (Strong Buy) due to upward earnings estimate revisions, positioning it in the top 5% for potential outperformance[2]. Despite mixed recent price performance with short-term gains but YTD declines, analyses highlight strong financial health and undervaluation[1][3].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BMNR",
+      "action": "BUY",
+      "shares": 366,
+      "allocated_capital": 7500.0,
+      "entry_price": 20.469900131225586,
+      "composite_score": 65.8,
+      "sentiment_score": 85.0,
+      "sentiment_summary": "BMNR stock has surged recently, with gains of 8-11% driven by BitMine Immersion Technologies announcing expanded Ethereum holdings to 4.47 million ETH (3.71% of supply), $9.9 billion in total crypto/cash holdings, and $172 million annualized staking revenue[1][2][3][6]. The stock benefited from strengthening Bitcoin and Ethereum prices, high trading volume, and positive market reactions adding $670 million to valuation[3][4]. ARK Investment's $388 million stake adds institutional confidence[5].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CG",
+      "action": "BUY",
+      "shares": 147,
+      "allocated_capital": 7500.0,
+      "entry_price": 51.02000045776367,
+      "composite_score": 65.8,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "Carlyle Group (CG) stock rose up to 5.9% today following the announcement of new three-year financial growth targets through 2028 and a $2 billion share repurchase program during its 2026 Shareholder Update[1][2]. The positive reaction came despite recent short-term declines, with shares cooling to a 1.8% gain at $52.50[1]. Analysts view the stock as undervalued with a fair value of $66[2].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BROS",
+      "action": "BUY",
+      "shares": 139,
+      "allocated_capital": 7500.0,
+      "entry_price": 53.845001220703125,
+      "composite_score": 64.6,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "Goldman Sachs upgraded Dutch Bros (BROS) from Neutral to Buy on March 2, 2026, with analyst price targets indicating up to 44.52% upside from recent levels around $53.61[1]. Institutional sentiment shows a bullish put/call ratio of 0.46, though some funds reduced holdings[1]. Recent share price declined 3.1% weekly to around $50.82-$52.64, with valuation models suggesting slight overvaluation[3][4].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CPRT",
+      "action": "BUY",
+      "shares": 197,
+      "allocated_capital": 7500.0,
+      "entry_price": 38.025001525878906,
+      "composite_score": 63.0,
+      "sentiment_score": 25.0,
+      "sentiment_summary": "Copart (CPRT) stock recently hit a new 52-week low around $34 amid disappointing Q2 earnings that missed estimates on EPS ($0.36 vs. $0.39) and revenue ($1.12B vs. $1.15B), with declining volumes pressuring growth.[1][3] Analyst consensus remains a Hold with a $44.40 price target, while some positive notes include investments in AI and land capacity for long-term growth and a new $1.25B credit facility.[1][2][3]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "AG",
+      "action": "BUY",
+      "shares": 277,
+      "allocated_capital": 7500.0,
+      "entry_price": 26.979999542236328,
+      "composite_score": 60.2,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "First Majestic Silver Corp reported a profitable 2025 with $211M net income and $0.34 EPS, a turnaround from a $101.9M loss in 2024, driven by higher silver prices and production. H.C. Wainwright raised its price target to $30 from $24.50 while maintaining a Buy rating, citing value from the company's minting facility. Shares hit an all-time high of $27.55, with retail sentiment on Stocktwits shifting to bullish and over 413% gains in the last 12 months.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ABNB",
+      "action": "SELL",
+      "shares": 46.0,
+      "sell_pct": 100,
+      "composite_score": 58.400000000000006,
+      "current_price": 135.4600067138672,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Recent filings show institutional investors like Amova Asset Management and Victory Capital Management acquiring ABNB shares, alongside Motley Fool 100 Index ETF buying 7,455 shares[1][2][5]. However, Airbnb CFO Elinor Mertz sold 3,750 shares at $130 under a pre-arranged 10b5-1 plan[4]. Analyst consensus remains a Hold to Buy with average price targets around $149-152, amid a stock price rise to $135.54[1][3][6][7].",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 58.4 < 60 absolute minimum",
+      "current_value": 6232.54
+    },
+    {
+      "ticker": "AU",
+      "action": "SELL",
+      "shares": 71.0,
+      "sell_pct": 100,
+      "composite_score": 56.0,
+      "current_price": 108.26000213623047,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "The ASX is poised for a sharp rally on March 5 following a Wall Street rebound, steady oil prices, and positive commodity movements like copper up 1.4% and aluminum at four-year highs amid Middle East tensions[1]. Brokers recommend buying specific ASX shares including Capstone Copper, Life360, and Newmont due to strong results, guidance, and gold price strength[3]. Yesterday's market update highlighted mixed earnings with gains in resources like BHP and Woodside, though tech faced pressure from AI developments[2].",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 56.0 < 60 absolute minimum",
+      "current_value": 7716.99
+    },
+    {
+      "ticker": "B",
+      "action": "SELL",
+      "shares": 205.0,
+      "sell_pct": 100,
+      "composite_score": 56.0,
+      "current_price": 45.310001373291016,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Barrick Gold Corp (B) holds a Buy consensus rating from 8 analysts as of March 5, 2026, with 38% Strong Buy and 50% Buy recommendations, though the price target of $51.12 implies no upside from current levels.[2] Analyst concerns include high EBITDA multiples, delayed projects like Fourmile and Reko Diq, undervalued non-core assets, and geopolitical risks in operations.[2] No specific news articles from the last 24 hours were identified, with monthly stock rankings mentioning other 'B' tickers like BW but not Barrick Gold.[1]",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 56.0 < 60 absolute minimum",
+      "current_value": 9317.25
+    },
+    {
+      "ticker": "CDE",
+      "action": "SELL",
+      "shares": 423.0,
+      "sell_pct": 100,
+      "composite_score": 58.0,
+      "current_price": 22.846200942993164,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Coeur Mining (NYSE:CDE) shares dropped 13.6% on March 3, 2026, closing at $23.28 after trading as low as $23.20, with volume significantly below average.[1] The decline followed a quarterly earnings report where EPS of $0.35 missed estimates of $0.43, despite revenue of $674.85M beating expectations and surging 120.9% year-over-year.[1] No additional CDE-specific news appears in the last 24 hours from March 5, 2026, 4 PM UTC.[1][2][3]",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 58.0 < 60 absolute minimum",
+      "current_value": 9722.655
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 70 candidates (avg score: 43.3)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 80/80 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 4 SELLs, 7 BUYs ($52,500 allocated)",
+      "quality_score": 41,
+      "issues": [
+        "Capital deployment 35.6% (target 90.0%+)",
+        "Limited diversification: 7 new positions (target 12-20). Total after trades: 13"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 7 BUYs approved, 0 rejected, 4 SELLs",
+      "quality_score": 100,
+      "issues": []
+    }
+  ],
+  "approved_at": "2026-03-05T16:08:00.053359Z"
+}

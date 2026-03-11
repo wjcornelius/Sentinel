@@ -1,0 +1,273 @@
+{
+  "date": "2026-02-20",
+  "start_time": "2026-02-20T08:00:02.897800",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "11:00 AM ET",
+    "current_date": "Friday, February 20, 2026"
+  },
+  "regime_analysis": {
+    "regime": "BULLISH",
+    "confidence": "HIGH",
+    "spy_price": 688.7999877929688,
+    "spy_change_pct": 0.6311371329312355,
+    "vix_level": 19.219999313354492,
+    "recommendation": "GOOD DAY TO TRADE"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "APG",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260220T160804Z_07c68c7b"
+    },
+    {
+      "ticker": "CMCSA",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260220T160804Z_47aa806b"
+    },
+    {
+      "ticker": "DNOW",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260220T160804Z_5f66aa3e"
+    },
+    {
+      "ticker": "CDE",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260220T160805Z_08414f3e"
+    },
+    {
+      "ticker": "B",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260220T160806Z_44438bad"
+    },
+    {
+      "ticker": "CAVA",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260220T160806Z_c31e7173",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "MTCH",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260220T160806Z_29a414ab",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "AS",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260220T160806Z_276746b5",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "AXTA",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260220T160806Z_02d5ff1f"
+    },
+    {
+      "ticker": "ACI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260220T160806Z_24dddd1d",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ADMA",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260220T160806Z_b1653ddf",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "MGM",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260220T160806Z_3bca55a5",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ABNB",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260220T160806Z_cd92b5f3",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "AKAM",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260220T160806Z_8d27d7c2",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-02-20T08:08:26.569123",
+    "equity": 102973.72,
+    "cash": 3017.38,
+    "buying_power": 102281.03,
+    "portfolio_value": 102973.72,
+    "starting_capital": 100000.0,
+    "total_return": 2973.720000000001,
+    "total_return_pct": 2.973720000000001,
+    "daily_pl": 1888.9300000000076,
+    "daily_pl_pct": 1.8686589743125623,
+    "total_unrealized_pl": 3537.68,
+    "position_count": 12,
+    "positions": [
+      {
+        "ticker": "DOCN",
+        "shares": 167.0,
+        "entry_price": 60.11,
+        "current_price": 66.04,
+        "market_value": 11028.68,
+        "unrealized_pl": 990.31,
+        "unrealized_pl_pct": 9.865
+      },
+      {
+        "ticker": "CF",
+        "shares": 107.0,
+        "entry_price": 92.61,
+        "current_price": 96.66,
+        "market_value": 10342.62,
+        "unrealized_pl": 433.35,
+        "unrealized_pl_pct": 4.373
+      },
+      {
+        "ticker": "AGI",
+        "shares": 224.0,
+        "entry_price": 44.8,
+        "current_price": 45.83,
+        "market_value": 10265.92,
+        "unrealized_pl": 230.72,
+        "unrealized_pl_pct": 2.299
+      },
+      {
+        "ticker": "CDE",
+        "shares": 423.0,
+        "entry_price": 23.77,
+        "current_price": 23.73,
+        "market_value": 10037.79,
+        "unrealized_pl": -16.92,
+        "unrealized_pl_pct": -0.168
+      },
+      {
+        "ticker": "AXTA",
+        "shares": 288.0,
+        "entry_price": 34.73,
+        "current_price": 34.675,
+        "market_value": 9986.4,
+        "unrealized_pl": -15.84,
+        "unrealized_pl_pct": -0.158
+      },
+      {
+        "ticker": "B",
+        "shares": 205.0,
+        "entry_price": 46.84,
+        "current_price": 46.83,
+        "market_value": 9600.15,
+        "unrealized_pl": -2.05,
+        "unrealized_pl_pct": -0.021
+      },
+      {
+        "ticker": "AU",
+        "shares": 71.0,
+        "entry_price": 106.66,
+        "current_price": 111.69,
+        "market_value": 7929.99,
+        "unrealized_pl": 357.13,
+        "unrealized_pl_pct": 4.716
+      },
+      {
+        "ticker": "ANET",
+        "shares": 53.0,
+        "entry_price": 142.18,
+        "current_price": 137.875,
+        "market_value": 7307.375,
+        "unrealized_pl": -228.165,
+        "unrealized_pl_pct": -3.028
+      },
+      {
+        "ticker": "AEM",
+        "shares": 31.0,
+        "entry_price": 189.73,
+        "current_price": 223.73,
+        "market_value": 6935.63,
+        "unrealized_pl": 1054.0,
+        "unrealized_pl_pct": 17.919999999999998
+      },
+      {
+        "ticker": "RRC",
+        "shares": 167.0,
+        "entry_price": 35.81,
+        "current_price": 38.92,
+        "market_value": 6499.64,
+        "unrealized_pl": 519.37,
+        "unrealized_pl_pct": 8.685
+      },
+      {
+        "ticker": "AES",
+        "shares": 385.0,
+        "entry_price": 15.56,
+        "current_price": 16.395,
+        "market_value": 6312.075,
+        "unrealized_pl": 321.475,
+        "unrealized_pl_pct": 5.366
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [
+    "Reconciliation cleaned 1 stale records",
+    "Verification: Expected positions not found: ACI, MTCH, MGM, ADMA, CAVA, ABNB, AKAM, AS"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 12,
+    "db_positions_before": 12,
+    "stale_closed": 1,
+    "in_sync": 11
+  },
+  "position_drift": {
+    "positions_checked": 12,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260220_080800",
+    "total_trades": 14,
+    "quality_score": 96,
+    "ceo_rating": "EXCELLENT",
+    "ceo_recommendation": "STRONGLY RECOMMEND APPROVAL"
+  },
+  "sells_count": 3,
+  "buys_count": 11,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: ACI, MTCH, MGM, ADMA, CAVA, ABNB, AKAM, AS"
+    ],
+    "summary": {
+      "position_count": 12,
+      "sells_executed": 3,
+      "buys_executed": 11,
+      "expected_count_change": 8
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 7,
+    "fills_recorded": 6,
+    "orders_updated": 6,
+    "already_recorded": 1,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-02-20T08:08:28.237653",
+  "duration_seconds": 505.339867
+}

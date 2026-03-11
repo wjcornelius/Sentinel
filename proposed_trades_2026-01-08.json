@@ -1,0 +1,66 @@
+{
+  "plan_id": "PLAN_20260108_081033",
+  "generated_at": "2026-01-08T16:10:33.219204Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 1,
+    "research_candidates": 68,
+    "gpt5_selected": 1,
+    "compliance_flagged": 0,
+    "overall_quality_score": 76
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 25,
+    "compliance_advisory": 80
+  },
+  "trades": [
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "shares": 151.0,
+      "sell_pct": 100,
+      "composite_score": 56.0,
+      "current_price": 24.56999969482422,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Recent coverage focuses on Omnicom\u2019s completion and integration of its acquisition of Interpublic, including a $2.95 billion exchange offer for IPG notes and the rollout of a unified, AI\u2011driven Omni marketing platform that combines Omnicom and Interpublic assets.[6][7][8] While these steps highlight strategic value and long\u2011term potential from IPG\u2019s capabilities, Bank of America has flagged growth and integration risks tied to the deal, including possible earnings dilution, asset disposals, and the need for new investment in legacy IPG operations.[5] Overall tone in the last day is mildly positive on the strategic rationale but tempered by concerns about future growth and profitability for the combined business.[5][6]",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 56.0 < 60 absolute minimum",
+      "current_value": 3710.07
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 68 candidates (avg score: 53.7)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 71/71 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 1 SELLs, 4 BUYs ($40,000 allocated)",
+      "quality_score": 25,
+      "issues": [
+        "Capital deployment 22.3% (target 90.0%+)",
+        "Limited diversification: 4 new positions (target 12-20). Total after trades: 6"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 0 BUYs approved, 4 rejected, 1 SELLs",
+      "quality_score": 80,
+      "issues": [
+        "4 orders REJECTED by compliance"
+      ]
+    }
+  ],
+  "approved_at": "2026-01-08T16:10:35.594158Z"
+}

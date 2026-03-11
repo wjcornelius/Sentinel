@@ -1,0 +1,30 @@
+{
+  "date": "2025-12-01",
+  "start_time": "2025-12-01T08:00:11.566976",
+  "status": "PLAN_GENERATION_FAILED",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "11:00 AM ET",
+    "current_date": "Monday, December 01, 2025"
+  },
+  "regime_analysis": {
+    "regime": "NEUTRAL",
+    "confidence": "MEDIUM",
+    "spy_price": 681.6300048828125,
+    "spy_change_pct": -0.25754104214273865,
+    "vix_level": 17.389999389648438,
+    "recommendation": "NORMAL CONDITIONS"
+  },
+  "plan_generated": false,
+  "plan_approved": false,
+  "trades_executed": [],
+  "portfolio_state": null,
+  "warnings": [],
+  "errors": [
+    "Plan rejected: Plan rejected due to 1 constraint violation(s)"
+  ],
+  "end_time": "2025-12-01T08:10:42.377424",
+  "duration_seconds": 630.810474
+}

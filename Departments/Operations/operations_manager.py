@@ -110,9 +110,27 @@ class OperationsManager:
         # Initialize Realism Simulator
         self.realism_sim = RealismSimulator(project_root)
 
+        # Mandatory sells (injected from external sources like drift monitor)
+        self.mandatory_sells = []
+
         self.logger.info("Operations Manager initialized successfully")
         self.logger.info(f"Project root: {project_root}")
         self.logger.info(f"Database: {self.db_path}")
+
+    def set_mandatory_sells(self, sells: List[Dict]):
+        """
+        Set mandatory sell orders that must be included in the trading plan.
+        These bypass the normal sell decision logic (e.g., position drift trims).
+
+        Args:
+            sells: List of sell orders with ticker, shares, reason, source
+        """
+        self.mandatory_sells = sells
+        if sells:
+            self.logger.info(f"[OpsManager] Registered {len(sells)} mandatory sell order(s)")
+            for sell in sells:
+                self.logger.info(f"  - {sell.get('ticker')}: SELL {sell.get('shares')} shares")
+                self.logger.info(f"    Source: {sell.get('source', 'unknown')}")
 
     def generate_trading_plan(self, ai_model: str = 'gpt-4o-mini') -> Dict:
         """
@@ -977,10 +995,19 @@ class OperationsManager:
             self.logger.info("  Using deterministic allocation (comparative ranking only)")
 
             # Step 1: Determine how many positions to add
-            holdings_to_keep_count = len([h for h in holdings if not h.get('MANDATORY_SELL', False)])
+            # IMPORTANT: Exclude untradeable positions (mergers, halts) from active count
+            tradeable_holdings = [h for h in holdings if h.get('tradeable', True)]
+            untradeable_holdings = [h for h in holdings if not h.get('tradeable', True)]
+
+            if untradeable_holdings:
+                self.logger.warning(f"  {len(untradeable_holdings)} FROZEN positions (not counted against limit):")
+                for h in untradeable_holdings:
+                    self.logger.warning(f"    - {h['ticker']}: ${h.get('market_value', 0):,.2f} (status: {h.get('asset_status', 'UNKNOWN')})")
+
+            holdings_to_keep_count = len([h for h in tradeable_holdings if not h.get('MANDATORY_SELL', False)])
             open_slots = TARGET_PORTFOLIO_SIZE - holdings_to_keep_count
 
-            self.logger.info(f"  Holdings to keep: {holdings_to_keep_count}")
+            self.logger.info(f"  Tradeable holdings to keep: {holdings_to_keep_count}")
             self.logger.info(f"  Open slots for new positions: {open_slots}")
 
             # Step 2: Select top candidates by rank to fill open slots
@@ -1181,6 +1208,47 @@ class OperationsManager:
                         mandatory_sell_tickers.add(ticker)  # Track to avoid duplicates
                     elif composite >= ABSOLUTE_SCORE_FLOOR:
                         self.logger.info(f"  Keeping {ticker} (score: {composite:.1f} ≥ {ABSOLUTE_SCORE_FLOOR} threshold)")
+
+            # Fourth: Process externally-injected mandatory sells (e.g., position drift trims)
+            if self.mandatory_sells:
+                self.logger.info(f"  Processing {len(self.mandatory_sells)} externally-injected mandatory sell(s)")
+                for ext_sell in self.mandatory_sells:
+                    ticker = ext_sell.get('ticker')
+                    shares_to_sell = ext_sell.get('shares', 0)
+
+                    # Skip if already being sold
+                    if ticker in mandatory_sell_tickers:
+                        self.logger.info(f"    Skipping {ticker} - already in sell orders")
+                        continue
+
+                    # Find the holding to get current price
+                    holding = next((h for h in holdings if h.get('ticker') == ticker), None)
+                    if holding:
+                        current_price = holding.get('current_price', 0)
+                        current_shares = holding.get('quantity', 0)
+
+                        # Don't sell more than we have
+                        actual_shares = min(shares_to_sell, current_shares)
+
+                        if actual_shares > 0:
+                            self.logger.warning(f"    DRIFT TRIM: {ticker} - SELL {actual_shares} of {current_shares} shares")
+                            sell_order = {
+                                'ticker': ticker,
+                                'action': 'SELL',
+                                'shares': actual_shares,
+                                'sell_pct': int((actual_shares / current_shares) * 100) if current_shares > 0 else 100,
+                                'composite_score': holding.get('research_composite_score', holding.get('composite_score', 0)),
+                                'current_price': current_price,
+                                'sentiment_score': holding.get('sentiment_score', 50),
+                                'sentiment_summary': 'Position drift trim',
+                                'gpt5_reasoning': ext_sell.get('reason', 'Position exceeds size limit - trimming'),
+                                'current_value': actual_shares * current_price,
+                                'source': ext_sell.get('source', 'position_drift_monitor')
+                            }
+                            sell_orders.append(sell_order)
+                            mandatory_sell_tickers.add(ticker)
+                    else:
+                        self.logger.warning(f"    Cannot find holding for {ticker} - skipping drift trim")
 
             total_orders = len(buy_orders) + len(sell_orders)
             self.logger.info(f"  Trading Plan: {len(sell_orders)} SELLs, {len(buy_orders)} BUYs")

@@ -1,0 +1,176 @@
+{
+  "plan_id": "PLAN_20251218_081005",
+  "generated_at": "2025-12-18T16:10:05.034353Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 9,
+    "research_candidates": 71,
+    "gpt5_selected": 9,
+    "compliance_flagged": 0,
+    "overall_quality_score": 84
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 44,
+    "compliance_advisory": 95
+  },
+  "trades": [
+    {
+      "ticker": "ARES",
+      "action": "BUY",
+      "shares": 29,
+      "allocated_capital": 5000,
+      "entry_price": 169.76499938964844,
+      "composite_score": 77.4,
+      "sentiment_score": 85.0,
+      "sentiment_summary": "Ares Management announced two significant data center investments in Northern Virginia on December 18, 2025, expanding its digital infrastructure portfolio with a 314-acre development site for up to 200 MW capacity.[1][2][4][5][6] This move aligns with the company's strategy in high-growth 'New Economy sectors' and follows strong Q3 earnings that beat expectations.[2] Analyst consensus remains 'Moderate Buy' with an average price target of $190.64, despite a minor 3% stock dip today.[3]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "HWM",
+      "action": "BUY",
+      "shares": 25,
+      "allocated_capital": 5000,
+      "entry_price": 198.7449951171875,
+      "composite_score": 73.0,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "On December 16, 2025, Advisory Services Network LLC purchased shares of Howmet Aerospace (HWM), signaling institutional interest amid strong Q3 results with $0.95 EPS beating estimates and 13.8% YoY revenue growth to $2.09B[1][2][4]. On December 17, Texas Permanent School Fund Corp sold shares, but overall Wall Street consensus remains 'Moderate Buy' with an average price target of $218.75, supported by recent analyst upgrades and positive FY2025 guidance of 3.660\u20133.680 EPS[1][4]. No major negative developments reported in the last 24 hours.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "FLEX",
+      "action": "BUY",
+      "shares": 78,
+      "allocated_capital": 5000,
+      "entry_price": 63.80500030517578,
+      "composite_score": 70.8,
+      "sentiment_score": 78.0,
+      "sentiment_summary": "Recent headlines are predominantly positive after Flex Ltd. reported stronger-than-expected quarterly results and revenue growth, helped by strength in data-center and higher-value segments, which pushed the stock to new highs and prompted price-target upgrades from analysts[3][4]. Analysts at multiple firms have raised price targets and maintained Buy/Overweight ratings, and coverage highlights strategic wins such as expanded facilities and technology deployments that support growth narratives[3][5].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "JBS",
+      "action": "BUY",
+      "shares": 348,
+      "allocated_capital": 5000,
+      "entry_price": 14.345000267028809,
+      "composite_score": 64.8,
+      "sentiment_score": 66.0,
+      "sentiment_summary": "Over the past 24 hours coverage of JBS has been mixed but tilted positive as analysts have reiterated upgrades and bullish price targets following strong quarterly results, while reporting continues about JBS closing its Swift Beef facility in Riverside, California amid tight cattle supplies and operational optimization[2][3][6]. Market trackers also note analyst consensus remains generally favorable with above-neutral SmartScore/price-targets and some downgrades/price target trims by a few banks cited in recent coverage[4][5].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "DBRG",
+      "action": "BUY",
+      "shares": 375,
+      "allocated_capital": 5000,
+      "entry_price": 13.300000190734863,
+      "composite_score": 64.4,
+      "sentiment_score": 72.0,
+      "sentiment_summary": "In the past 24 hours, news coverage focused on DigitalBridge-related asset sales and portfolio moves: InfraBridge (a DigitalBridge division) agreed to sell a 51% stake in companies owning Leeds Bradford and Newcastle airports to Aena for \u00a3270M, and related reports highlighted DigitalBridge\u2019s large fund (DBP III) and continued deployments into data centers and AI infrastructure; market commentary shows the stock trading near its 52-week high with bullish technical indicators (moving averages, MACD) and positive analyst interest in recent weeks[5][4][2]. Some outlets noted recent price volatility and prior pullbacks, but the dominant headlines emphasize asset monetizations and fundraising that support growth and balance-sheet progress[1][4].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BWA",
+      "action": "BUY",
+      "shares": 109,
+      "allocated_capital": 5000,
+      "entry_price": 45.65999984741211,
+      "composite_score": 61.6,
+      "sentiment_score": 80.0,
+      "sentiment_summary": "BorgWarner (BWA) stock has surged 42% year-to-date, reaching $44.66, with analysts viewing it as undervalued based on low P/E and P/B ratios compared to industry averages[1][2]. Recent articles highlight positive momentum from electrification shifts, operational improvements, and increased 2025 guidance for sales and market outgrowth[1][3]. Institutional buying by Thrivent and a 'Moderate Buy' consensus with a $46.46 target price further support optimism[4].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "GSK",
+      "action": "BUY",
+      "shares": 103,
+      "allocated_capital": 5000,
+      "entry_price": 48.45000076293945,
+      "composite_score": 60.2,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "GSK announced the acquisition of 14,086,733 shares in its ongoing buyback program on December 18, 2025, increasing treasury shares to 5.88% of voting rights.[1] The company secured exclusive global rights from Syndivia to a promising prostate cancer antibody-drug conjugate for up to \u00a3268 million ($357 million), following positive preclinical results, which drove a share price rise.[1] Additional recent buybacks include 230,000 shares on December 12 and 235,000 shares shortly after.[3][4]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CLSK",
+      "action": "SELL",
+      "shares": 202.0,
+      "sell_pct": 100,
+      "composite_score": 50.8,
+      "current_price": 11.748900413513184,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "In the last 24 hours coverage of CleanSpark (CLSK) has been mostly negative, highlighting recent share declines after mixed financials and crypto headwinds, including analyst downgrades and price weakness tied to Bitcoin volatility and falling short-term production metrics[7][5][4]. Some outlets note the company\u2019s strategic push into AI/HPC and capital raises (convertible notes/repurchases) as potential longer\u2011term positives, but these items have so far coincided with dilution concerns and downward pressure on the stock[1][3].",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 50.8 < 60 absolute minimum",
+      "current_value": 2371.48
+    },
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "shares": 151.0,
+      "sell_pct": 100,
+      "composite_score": 56.0,
+      "current_price": 24.56999969482422,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Omnicom has recently completed its merger with IPG, with analysts like Morgan Stanley resuming coverage with an Equalweight rating, raising cost synergy expectations to over $1 billion, and forecasting improved revenue growth for 2026 despite integration challenges. Omnicom announced a 14% dividend increase to $0.80 per share and implemented stricter return-to-office policies amid workforce restructuring expected to continue into 2026. Positive notes include Initiative, an IPG agency, securing the #1 global position in new business with $1.4 billion in value.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 56.0 < 60 absolute minimum",
+      "current_value": 3710.07
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 71 candidates (avg score: 50.3)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 86/86 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 2 SELLs, 8 BUYs ($40,000 allocated)",
+      "quality_score": 44,
+      "issues": [
+        "Capital deployment 36.7% (target 90.0%+)",
+        "Limited diversification: 8 new positions (target 12-20). Total after trades: 21"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 7 BUYs approved, 1 rejected, 2 SELLs",
+      "quality_score": 95,
+      "issues": [
+        "1 orders REJECTED by compliance"
+      ]
+    }
+  ],
+  "approved_at": "2025-12-18T16:10:06.888377Z"
+}

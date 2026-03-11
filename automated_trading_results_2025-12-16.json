@@ -1,0 +1,258 @@
+{
+  "date": "2025-12-16",
+  "start_time": "2025-12-16T08:00:07.706246",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "11:01 AM ET",
+    "current_date": "Tuesday, December 16, 2025"
+  },
+  "regime_analysis": {
+    "regime": "NEUTRAL",
+    "confidence": "MEDIUM",
+    "spy_price": 679.1400146484375,
+    "spy_change_pct": -0.23356776782736247,
+    "vix_level": 16.809999465942383,
+    "recommendation": "NORMAL CONDITIONS"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "status": "SKIPPED",
+      "reason": "Asset not tradeable: AssetStatus.INACTIVE"
+    },
+    {
+      "ticker": "BMNR",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20251216T161137Z_55e2e061"
+    },
+    {
+      "ticker": "HUT",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20251216T161137Z_d10fc8a8"
+    },
+    {
+      "ticker": "LTH",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20251216T161137Z_f6f6be02"
+    },
+    {
+      "ticker": "MTCH",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20251216T161137Z_a9f2b338"
+    },
+    {
+      "ticker": "CDE",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251216T161139Z_ae066717"
+    },
+    {
+      "ticker": "EMR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251216T161139Z_1a2ac7fe"
+    },
+    {
+      "ticker": "AG",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251216T161139Z_0b470782"
+    },
+    {
+      "ticker": "GSK",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251216T161139Z_a29c4d6a",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2025-12-16T08:11:45.657983",
+    "equity": 98542.05,
+    "cash": 7281.41,
+    "buying_power": 97154.59,
+    "portfolio_value": 98542.05,
+    "starting_capital": 100000.0,
+    "total_return": -1457.949999999997,
+    "total_return_pct": -1.4579499999999972,
+    "daily_pl": 3965.770000000004,
+    "daily_pl_pct": 4.193197279486996,
+    "total_unrealized_pl": 2862.04,
+    "position_count": 16,
+    "positions": [
+      {
+        "ticker": "CWAN",
+        "shares": 1151.0,
+        "entry_price": 19.6,
+        "current_price": 21.515,
+        "market_value": 24763.765,
+        "unrealized_pl": 2204.165,
+        "unrealized_pl_pct": 9.770408163265309
+      },
+      {
+        "ticker": "GEO",
+        "shares": 319.0,
+        "entry_price": 15.590188,
+        "current_price": 16.91,
+        "market_value": 5394.29,
+        "unrealized_pl": 421.02,
+        "unrealized_pl_pct": 8.46565740448437
+      },
+      {
+        "ticker": "KDP",
+        "shares": 175.0,
+        "entry_price": 28.43,
+        "current_price": 28.875,
+        "market_value": 5053.125,
+        "unrealized_pl": 77.875,
+        "unrealized_pl_pct": 1.5652479774885701
+      },
+      {
+        "ticker": "MAS",
+        "shares": 77.0,
+        "entry_price": 64.47,
+        "current_price": 65.07,
+        "market_value": 5010.39,
+        "unrealized_pl": 46.2,
+        "unrealized_pl_pct": 0.9306654257794301
+      },
+      {
+        "ticker": "AG",
+        "shares": 308.0,
+        "entry_price": 16.07,
+        "current_price": 16.1,
+        "market_value": 4958.8,
+        "unrealized_pl": 9.24,
+        "unrealized_pl_pct": 0.18668326073429
+      },
+      {
+        "ticker": "GEHC",
+        "shares": 60.0,
+        "entry_price": 81.8,
+        "current_price": 82.605,
+        "market_value": 4956.3,
+        "unrealized_pl": 48.3,
+        "unrealized_pl_pct": 0.9841075794621
+      },
+      {
+        "ticker": "CDE",
+        "shares": 295.0,
+        "entry_price": 16.651627,
+        "current_price": 16.67,
+        "market_value": 4917.65,
+        "unrealized_pl": 5.42,
+        "unrealized_pl_pct": 0.11033685311965999
+      },
+      {
+        "ticker": "EMR",
+        "shares": 36.0,
+        "entry_price": 135.46,
+        "current_price": 135.415,
+        "market_value": 4874.94,
+        "unrealized_pl": -1.62,
+        "unrealized_pl_pct": -0.033220138786359994
+      },
+      {
+        "ticker": "DT",
+        "shares": 109.0,
+        "entry_price": 45.6,
+        "current_price": 44.64,
+        "market_value": 4865.76,
+        "unrealized_pl": -104.64,
+        "unrealized_pl_pct": -2.10526315789474
+      },
+      {
+        "ticker": "LKQ",
+        "shares": 160.0,
+        "entry_price": 31.18,
+        "current_price": 30.24,
+        "market_value": 4838.4,
+        "unrealized_pl": -150.4,
+        "unrealized_pl_pct": -3.01475304682489
+      },
+      {
+        "ticker": "HL",
+        "shares": 255.0,
+        "entry_price": 15.58,
+        "current_price": 18.8,
+        "market_value": 4794.0,
+        "unrealized_pl": 821.1,
+        "unrealized_pl_pct": 20.66752246469833
+      },
+      {
+        "ticker": "HRL",
+        "shares": 158.0,
+        "entry_price": 23.99,
+        "current_price": 23.805,
+        "market_value": 3761.19,
+        "unrealized_pl": -29.23,
+        "unrealized_pl_pct": -0.7711546477699
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.7700831024930697
+      },
+      {
+        "ticker": "JCI",
+        "shares": 31.0,
+        "entry_price": 116.52,
+        "current_price": 119.26,
+        "market_value": 3697.06,
+        "unrealized_pl": 84.94,
+        "unrealized_pl_pct": 2.3515276347408203
+      },
+      {
+        "ticker": "IVZ",
+        "shares": 125.0,
+        "entry_price": 24.57,
+        "current_price": 26.21,
+        "market_value": 3276.25,
+        "unrealized_pl": 205.0,
+        "unrealized_pl_pct": 6.67480667480667
+      },
+      {
+        "ticker": "CLSK",
+        "shares": 202.0,
+        "entry_price": 15.14,
+        "current_price": 11.825,
+        "market_value": 2388.65,
+        "unrealized_pl": -669.63,
+        "unrealized_pl_pct": -21.89564068692206
+      }
+    ]
+  },
+  "warnings": [
+    "Verification: Expected positions not found: GSK"
+  ],
+  "errors": [],
+  "plan_summary": {
+    "plan_id": "PLAN_20251216_081131",
+    "total_trades": 9,
+    "quality_score": 80,
+    "ceo_rating": "GOOD",
+    "ceo_recommendation": "RECOMMEND APPROVAL"
+  },
+  "sells_count": 4,
+  "buys_count": 4,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: GSK"
+    ],
+    "summary": {
+      "position_count": 16,
+      "sells_executed": 4,
+      "buys_executed": 4,
+      "expected_count_change": 0
+    }
+  },
+  "end_time": "2025-12-16T08:11:49.542941",
+  "duration_seconds": 701.836707
+}

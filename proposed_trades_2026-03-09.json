@@ -1,0 +1,80 @@
+{
+  "plan_id": "PLAN_20260309_090804",
+  "generated_at": "2026-03-09T16:08:04.082179Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 2,
+    "research_candidates": 65,
+    "gpt5_selected": 2,
+    "compliance_flagged": 0,
+    "overall_quality_score": 78
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 12,
+    "compliance_advisory": 100
+  },
+  "trades": [
+    {
+      "ticker": "CCI",
+      "action": "BUY",
+      "shares": 84,
+      "allocated_capital": 7500.0,
+      "entry_price": 89.20999908447266,
+      "composite_score": 65.4,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "Crown Castle is refocusing on its core tower business ahead of a 2026 divestiture of non-core assets, which is shaping its valuation positively according to recent analysis. Bernstein initiated coverage with an Outperform rating and $102 price target, while institutional investors like AlphaQuest, Sage Mountain Advisors, and Sumitomo Mitsui Trust continue to increase holdings. The stock shows slight gains amid broader positive analyst updates and earnings momentum from prior quarters.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ADMA",
+      "action": "BUY",
+      "shares": 478,
+      "allocated_capital": 7500.0,
+      "entry_price": 15.65999984741211,
+      "composite_score": 61.8,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "ADMA Biologics announced a $200 million 2026 capital return initiative, including a $125 million accelerated share repurchase with JPMorgan, signaling strong confidence in future cash flows. Analyst reports highlight unanimous buy ratings, a 59.52% upside potential to $25.67, and robust Q3 2025 results with raised 2026 guidance to over $630M in revenue. Recent stock price remains around $15.39 amid some valuation scrutiny following share price weakness.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 65 candidates (avg score: 41.2)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 73/73 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 0 SELLs, 2 BUYs ($15,000 allocated)",
+      "quality_score": 12,
+      "issues": [
+        "Capital deployment 11.3% (target 90.0%+)",
+        "Limited diversification: 2 new positions (target 12-20). Total after trades: 10"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 2 BUYs approved, 0 rejected, 0 SELLs",
+      "quality_score": 100,
+      "issues": []
+    }
+  ],
+  "approved_at": "2026-03-09T16:08:05.436343Z"
+}

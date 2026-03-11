@@ -1,0 +1,154 @@
+{
+  "plan_id": "PLAN_20260306_080909",
+  "generated_at": "2026-03-06T16:09:09.737317Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 8,
+    "research_candidates": 73,
+    "gpt5_selected": 8,
+    "compliance_flagged": 0,
+    "overall_quality_score": 77
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 16,
+    "compliance_advisory": 95
+  },
+  "trades": [
+    {
+      "ticker": "DASH",
+      "action": "BUY",
+      "shares": 32,
+      "allocated_capital": 6000.0,
+      "entry_price": 183.47999572753906,
+      "composite_score": 67.8,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "Recent analyses highlight Dash (DASH) surging 125% in January 2026 due to short liquidations, institutional interest in privacy coins, and technical indicators like a golden cross and positive MACD signaling sustained bullish momentum[1][2]. Strategic partnerships, such as with Alchemy Pay, enhance global accessibility, while experts forecast price targets from $85 to $1,200 by year-end, driven by privacy sector outperformance[1][2]. No major negative news from the last 24 hours, with predictions remaining optimistic despite some YouTube mentions of short-term downtrends[3].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CHWY",
+      "action": "BUY",
+      "shares": 230,
+      "allocated_capital": 6000.0,
+      "entry_price": 26.06999969482422,
+      "composite_score": 65.4,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "Chewy appointed Amazon veteran Chris Deppe as Chief Financial Officer on March 3, 2026, signaling confidence in leadership continuity and operational strength. The appointment follows positive analyst coverage, with 16 of 18 analysts assigning Buy ratings and a median 1-year price target of $47.19, suggesting approximately 49% upside potential.[1]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ADMA",
+      "action": "SELL",
+      "shares": 470.0,
+      "sell_pct": 100,
+      "composite_score": 56.8,
+      "current_price": 15.40999984741211,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "ADMA Biologics was upgraded to Zacks Rank #1 (Strong Buy) due to upward revisions in earnings estimates, with the consensus estimate for 2026 increasing 6.1% over the past three months. The stock has gained 17.2% in the last three months, outperforming the industry, supported by raised 2025-2026 revenue guidance to over $500 million and $625 million respectively. Recent technical signals show a 4.04% price gain on the last trading day with rising volume and buy signals from MACD.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 56.8 < 60 absolute minimum",
+      "current_value": 7238.0
+    },
+    {
+      "ticker": "AG",
+      "action": "SELL",
+      "shares": 277.0,
+      "sell_pct": 100,
+      "composite_score": 55.2,
+      "current_price": 26.270000457763672,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "First Majestic Silver Corp. (AG) reported strong 2025 full-year profit of $211M ($0.34 EPS) versus a $101.9M loss in 2024, driven by higher silver prices and output, with Q4 revenue up 169% to $463.9M and profit of $105.2M. H.C. Wainwright raised its price target to $30 from $24.50 while maintaining a 'Buy' rating, citing value from the company's minting facility amid strong bullion production. Shares hit an all-time high of $27.55, up 11% on Friday, with retail sentiment on Stocktwits turning bullish and high message volume.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 55.2 < 60 absolute minimum",
+      "current_value": 7258.785
+    },
+    {
+      "ticker": "BMNR",
+      "action": "SELL",
+      "shares": 366.0,
+      "sell_pct": 100,
+      "composite_score": 58.8,
+      "current_price": 20.350000381469727,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Bitmine Immersion Technologies (BMNR) announced ETH holdings reaching 4.285 million tokens, with staked ETH at 2.87 million generating $188 million annualized revenues, up 18% weekly, and total crypto/cash holdings of $10.7 billion.[1][4] The stock rallied 7.48% amid optimistic investor sentiment driven by staking growth and the upcoming MAVAN platform launch in Q1 2026.[1][3][4] A YouTube analysis highlighted recent purchases of over 50,000 ETH and strong profitability metrics.[3]",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 58.8 < 60 absolute minimum",
+      "current_value": 7076.61
+    },
+    {
+      "ticker": "BROS",
+      "action": "SELL",
+      "shares": 139.0,
+      "sell_pct": 100,
+      "composite_score": 51.6,
+      "current_price": 51.72999954223633,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Goldman Sachs upgraded Dutch Bros (BROS) from Neutral to Buy on March 2, 2026, with analyst price targets suggesting a 44.52% upside to an average of $77.47 per share.[1] Institutional ownership shows mixed signals, with a bullish put/call ratio of 0.46 but a 3% decrease in total shares held last quarter.[1] No major news emerged in the last 24 hours as of March 6, 2026, with stock trading slightly down to 52.64 intraday on March 4.[2]",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 51.6 < 60 absolute minimum",
+      "current_value": 7205.76
+    },
+    {
+      "ticker": "CG",
+      "action": "SELL",
+      "shares": 147.0,
+      "sell_pct": 100,
+      "composite_score": 48.8,
+      "current_price": 49.584999084472656,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Carlyle Group (CG) stock rose significantly today following the announcement of new three-year financial targets and a $2 billion share repurchase program during its 2026 Shareholder Update, with shares jumping 5.9% initially and settling up 1.8% at $52.50.[1] Earlier in February 2026, shares gapped up sharply in pre-market trading to $61.48 from a $55.41 close after reporting quarterly revenue that beat estimates by 84.1% year-over-year.[2] Recent analyst consensus remains mixed but leans positive, with a 'Buy' rating and $65.86 average price target as of early March.[4]",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 48.8 < 60 absolute minimum",
+      "current_value": 7290.465
+    },
+    {
+      "ticker": "CPRT",
+      "action": "SELL",
+      "shares": 197.0,
+      "sell_pct": 100,
+      "composite_score": 58.0,
+      "current_price": 37.31999969482422,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Copart (CPRT) shares fell sharply after a disappointing Q2 fiscal 2026 earnings miss, reporting EPS of $0.36 versus expectations of $0.39, closing at $40.37 with a -2.82% decline amid a market uptick[2][4]. The stock also closed at $37.92 on March 4, 2026, reflecting ongoing pressure[5]. Upcoming earnings are projected to show a 2.5% year-over-year EPS decline, though full-year estimates remain modestly positive[2].",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 58.0 < 60 absolute minimum",
+      "current_value": 7349.085
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 73 candidates (avg score: 41.5)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 85/85 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 6 SELLs, 3 BUYs ($18,000 allocated)",
+      "quality_score": 16,
+      "issues": [
+        "Capital deployment 13.0% (target 90.0%+)",
+        "Limited diversification: 3 new positions (target 12-20). Total after trades: 9"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 2 BUYs approved, 1 rejected, 6 SELLs",
+      "quality_score": 95,
+      "issues": [
+        "1 orders REJECTED by compliance"
+      ]
+    }
+  ],
+  "approved_at": "2026-03-06T16:09:11.458962Z"
+}

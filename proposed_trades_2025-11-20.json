@@ -1,0 +1,64 @@
+{
+  "plan_id": "PLAN_20251120_100234",
+  "generated_at": "2025-11-20T18:02:34.449166Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 1,
+    "research_candidates": 68,
+    "gpt5_selected": 1,
+    "compliance_flagged": 0,
+    "overall_quality_score": 75
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 0,
+    "compliance_advisory": 100
+  },
+  "trades": [
+    {
+      "ticker": "ADM",
+      "action": "SELL",
+      "shares": 283.0,
+      "sell_pct": 100,
+      "composite_score": 52.400000000000006,
+      "current_price": 58.41999816894531,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "ADM stock dropped sharply, falling over 5% after JPMorgan downgraded the company to 'Underweight' and slashed its EPS forecast by 33%, citing weak earnings and collapsing processing margins in its Agricultural Services and Oilseeds division. The stock is now near its 200-day moving average and 52-week low, with heightened volatility and bearish options activity signaling further downside risk.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 52.4 < 60 absolute minimum",
+      "current_value": 16530.03
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 68 candidates (avg score: 42.4)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 80/80 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 1 SELLs, 0 BUYs ($0 allocated)",
+      "quality_score": 0,
+      "issues": [
+        "Capital deployment 0.0% (target 90.0%+)",
+        "Limited diversification: 0 new positions (target 12-20). Total after trades: 11"
+      ]
+    },
+    {
+      "stage": "compliance_advisory",
+      "message": "Compliance reviewed plan: 0 BUYs, 1 SELLs (0 suggestions)",
+      "quality_score": 100,
+      "issues": []
+    }
+  ],
+  "approved_at": "2025-11-20T18:04:10.843793Z"
+}

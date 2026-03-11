@@ -1,0 +1,90 @@
+{
+  "plan_id": "PLAN_20260105_080837",
+  "generated_at": "2026-01-05T16:08:37.333391Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 3,
+    "research_candidates": 74,
+    "gpt5_selected": 3,
+    "compliance_flagged": 0,
+    "overall_quality_score": 74
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 22,
+    "compliance_advisory": 75
+  },
+  "trades": [
+    {
+      "ticker": "BX",
+      "action": "SELL",
+      "shares": 32.0,
+      "sell_pct": 100,
+      "composite_score": 59.6,
+      "current_price": 162.13499450683594,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Blackstone (BX) shares have outperformed over the past week, trading around $159, prompting a fresh valuation review that deems the stock undervalued with a fair value of $179.78 amid fast revenue growth and improving margins. Analyst consensus remains a Buy rating from 14 analysts as of January 5, 2026, despite some risks from trade tensions and construction costs.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 59.6 < 60 absolute minimum",
+      "current_value": 5190.24
+    },
+    {
+      "ticker": "EWY",
+      "action": "SELL",
+      "shares": 51.0,
+      "sell_pct": 100,
+      "composite_score": 54.0,
+      "current_price": 105.00499725341797,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Based on the search results provided, I cannot deliver a complete JSON analysis with the requested format because the available news data is insufficient for a robust sentiment analysis from the last ",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 54.0 < 60 absolute minimum",
+      "current_value": 5351.94
+    },
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "shares": 151.0,
+      "sell_pct": 100,
+      "composite_score": 56.0,
+      "current_price": 24.56999969482422,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "I cannot provide a JSON analysis of IPG stock news sentiment from the last 24 hours because the search results do not contain news from that timeframe. The most recent news in the results is from late",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 56.0 < 60 absolute minimum",
+      "current_value": 3710.07
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 74 candidates (avg score: 53.4)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 79/79 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 3 SELLs, 5 BUYs ($27,500 allocated)",
+      "quality_score": 22,
+      "issues": [
+        "Capital deployment 16.4% (target 90.0%+)",
+        "Limited diversification: 5 new positions (target 12-20). Total after trades: 7"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 0 BUYs approved, 5 rejected, 3 SELLs",
+      "quality_score": 75,
+      "issues": [
+        "5 orders REJECTED by compliance"
+      ]
+    }
+  ],
+  "approved_at": "2026-01-05T16:08:38.938652Z"
+}

@@ -1,0 +1,228 @@
+{
+  "plan_id": "PLAN_20260212_080740",
+  "generated_at": "2026-02-12T16:07:40.339788Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 13,
+    "research_candidates": 66,
+    "gpt5_selected": 13,
+    "compliance_flagged": 0,
+    "overall_quality_score": 94
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 76,
+    "compliance_advisory": 100
+  },
+  "trades": [
+    {
+      "ticker": "AMKR",
+      "action": "BUY",
+      "shares": 192,
+      "allocated_capital": 10000,
+      "entry_price": 51.97999954223633,
+      "composite_score": 78.2,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "Amkor Technology (AMKR) stock reached a new 52-week high following analyst upgrades, including JPMorgan raising its price target to $65 and shifting to Overweight, alongside positive Q1 revenue guidance exceeding expectations and strong AI-driven growth projections.[1] Recent earnings beat analyst forecasts with revenue up 15.9% year-over-year, prompting upward revisions in consensus EPS estimates and price targets.[2][4] Zacks highlights AMKR as a top momentum stock with a Momentum Style Score of A and shares up 15.4% in the past four weeks.[2]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "FLR",
+      "action": "BUY",
+      "shares": 214,
+      "allocated_capital": 10000,
+      "entry_price": 46.560001373291016,
+      "composite_score": 72.0,
+      "sentiment_score": 72.0,
+      "sentiment_summary": "Fluor Corporation (FLR) announced a partnership with Centrus Energy to serve as EPC contractor for expanding uranium enrichment capacity in Ohio, addressing a substantial LEU backlog amid rising demand. The stock rose in premarket trading, up 0.92% to $48.57, trading above key moving averages with positive technical indicators. Upcoming earnings on February 17, 2026, show lowered EPS estimates but a low P/E ratio suggesting value.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "APH",
+      "action": "BUY",
+      "shares": 67,
+      "allocated_capital": 10000,
+      "entry_price": 147.3699951171875,
+      "composite_score": 69.0,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "Amphenol announced a first quarter 2026 cash dividend of $0.25 per share, approved on February 4, 2026, signaling confidence in financial health[3]. Zacks highlighted strong growth prospects in AI-driven datacom and defense, justifying a premium P/E ratio despite trading above peers, with recent analyst upgrades and a Moderate Buy consensus[1][2][4]. Institutional investors like Varma Mutual increased stakes, and the stock opened positively amid acquisition updates[2][3][5].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CNM",
+      "action": "BUY",
+      "shares": 170,
+      "allocated_capital": 10000,
+      "entry_price": 58.540000915527344,
+      "composite_score": 68.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No specific news articles about Core & Main (CNM) stock appear in the last 24 hours from February 11-12, 2026. Available data shows minor price fluctuations, with the stock trading at $57.84 on February 11 and $56.72 recently, alongside a 1.65% decline noted on the investor relations page. General market news indicates U.S. stocks closed slightly lower amid mixed economic signals.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CDE",
+      "action": "BUY",
+      "shares": 436,
+      "allocated_capital": 10000,
+      "entry_price": 22.905000686645508,
+      "composite_score": 67.8,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "Coeur Mining (CDE) is trading around $23 amid a proposed acquisition of New Gold Inc. to create a larger North American precious metals producer, with positive exploration updates at Palmarejo supporting resource growth.[5] A recent valuation analysis estimates fair value at $21.60, suggesting the stock at $23.08 trades slightly above intrinsic value despite strong momentum from gold and silver rallies.[2] Pre-market data shows trading at $22.82, with improving earnings estimates and a consensus 'Buy' analyst rating.[1][3][4]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ACI",
+      "action": "BUY",
+      "shares": 553,
+      "allocated_capital": 10000,
+      "entry_price": 18.059999465942383,
+      "composite_score": 66.0,
+      "sentiment_score": 52.0,
+      "sentiment_summary": "LSV Asset Management acquired 368,100 shares of Albertsons Companies (ACI), while Sound Shore Management holds $85.84 million in the stock, signaling institutional interest on February 12, 2026. A technical analysis report highlights mixed sentiment with choppy conditions, neutral near-term signals, and both long and short trading strategies. Recent analyst consensus remains a Hold with a $21.58 target price, amid prior earnings beats but ongoing stock weakness.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "B",
+      "action": "BUY",
+      "shares": 209,
+      "allocated_capital": 10000,
+      "entry_price": 47.63999938964844,
+      "composite_score": 64.4,
+      "sentiment_score": 72.0,
+      "sentiment_summary": "Barrick Mining (NYSE: B) reported strong Q4 earnings on February 5th, beating analyst estimates with $1.04 EPS versus $0.85 expected and $5.98B in revenue versus $5.15B anticipated. Multiple analyst upgrades this week include Stifel raising its price target to C$95 with a Buy rating and ATB Cormark upgrading to 'moderate buy,' though Citi raised its price target to $48 while maintaining a Neutral rating, citing execution concerns around announced strategic moves.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CRDO",
+      "action": "BUY",
+      "shares": 77,
+      "allocated_capital": 10000,
+      "entry_price": 128.39999389648438,
+      "composite_score": 63.8,
+      "sentiment_score": 85.0,
+      "sentiment_summary": "Credo Technology Group (CRDO) stock surged 9.2% to $134.72 and up 17% in after-hours/premarket after announcing preliminary Q3 FY2026 revenue of $404-408 million, far exceeding prior guidance of $335-345 million and consensus estimates.[1][2][4] The beat is driven by strong AI/data-center demand, prompting analyst upgrades including Needham's Buy rating with $220 target and others up to $240.[3][6] Expected Q3 EPS of $0.78 (+212% YoY) and revenue growth over 150% fuel optimism despite high valuation concerns.[1][2]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "MTCH",
+      "action": "BUY",
+      "shares": 324,
+      "allocated_capital": 10000,
+      "entry_price": 30.799999237060547,
+      "composite_score": 61.4,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "Match Group (MTCH) reported strong Q4 2025 earnings with an earnings beat, updated 2026 guidance, a dividend hike to $0.20 quarterly (2.37% yield), and completion of a significant buyback program, alongside positive Tinder engagement trends.[1][4][5] Analysts maintain a consensus 'Hold' rating with an average price target of $35.86, above the recent price around $31.37-$31.64, while Simply Wall St views the stock as 16% undervalued at a fair value of $37.37 based on margin improvements from payment optimizations.[1][2] Share price showed short-term momentum with a 7-day return of 2.55% and a slight intraday gain of 0.76%, despite a 3.5% drop noted at open.[1][2][3]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "AXTA",
+      "action": "BUY",
+      "shares": 288,
+      "allocated_capital": 10000,
+      "entry_price": 34.65999984741211,
+      "composite_score": 60.2,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "Axalta Coating Systems reported record full-year 2025 earnings with strong Adjusted EBITDA margins and free cash flow on February 10, 2026, while issuing Q1 2026 guidance for net sales growth and $240-250 million Adjusted EBITDA[1][2]. The company continues advancing its all-stock merger of equals with AkzoNobel, announced in November 2025, expected to close in late 2026 or early 2027, promising synergies and value creation[2][3]. A passive investor increased its stake to 8.18% as of December 31, 2025[4].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ALLY",
+      "action": "SELL",
+      "shares": 233.0,
+      "sell_pct": 100,
+      "composite_score": 48.400000000000006,
+      "current_price": 40.58000183105469,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Ally Financial declared a $0.30 quarterly dividend payable February 17, 2026, alongside dividends on preferred securities, demonstrating continued capital distribution strength.[3] The company's stock trades at an attractive valuation with forward P/E of 8.12X below the industry average, supported by expected 13% revenue growth in 2026 and improving net financing revenues from balance sheet repositioning actions undertaken in March 2025.[1]",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 48.4 < 60 absolute minimum",
+      "current_value": 9457.47
+    },
+    {
+      "ticker": "BANC",
+      "action": "SELL",
+      "shares": 483.0,
+      "sell_pct": 100,
+      "composite_score": 56.0,
+      "current_price": 20.020000457763672,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No significant news articles about Banc of California (BANC) stock were published in the last 24 hours as of February 12, 2026, 4 PM UTC. The most recent items include a large insider sale by Warburg Pincus on February 2, 2026, totaling $237 million at $20.00 per share, and earlier positive earnings reports from early February with analyst upgrades.[2][1]",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 56.0 < 60 absolute minimum",
+      "current_value": 9679.32
+    },
+    {
+      "ticker": "C",
+      "action": "SELL",
+      "shares": 82.0,
+      "sell_pct": 100,
+      "composite_score": 41.6,
+      "current_price": 113.87000274658203,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Citigroup declared a quarterly common stock dividend of $0.60 per share, payable on February 27, 2026, to stockholders of record on February 2, 2026[4]. Impax Asset Management Group reduced its position in Citigroup shares by 13.6% during the third quarter[1]. No other major Citigroup-specific news events reported in the last 24 hours.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 41.6 < 60 absolute minimum",
+      "current_value": 9365.22
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 66 candidates (avg score: 43.0)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 77/77 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 3 SELLs, 10 BUYs ($100,000 allocated)",
+      "quality_score": 76,
+      "issues": [
+        "Capital deployment 72.6% (target 90.0%+)",
+        "Limited diversification: 10 new positions (target 12-20). Total after trades: 18"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 10 BUYs approved, 0 rejected, 3 SELLs",
+      "quality_score": 100,
+      "issues": []
+    }
+  ],
+  "approved_at": "2026-02-12T16:07:44.004027Z"
+}

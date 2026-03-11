@@ -1,0 +1,229 @@
+{
+  "plan_id": "PLAN_20251128_080842",
+  "generated_at": "2025-11-28T16:08:42.023950Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 13,
+    "research_candidates": 70,
+    "gpt5_selected": 13,
+    "compliance_flagged": 0,
+    "overall_quality_score": 90
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 70,
+    "compliance_advisory": 90
+  },
+  "trades": [
+    {
+      "ticker": "IVZ",
+      "action": "BUY",
+      "shares": 125,
+      "allocated_capital": 3082.13325,
+      "entry_price": 24.59000015258789,
+      "composite_score": 81.4,
+      "sentiment_score": 85.0,
+      "sentiment_summary": "Invesco (IVZ) stock surged 8.06% following strong Q3 2025 earnings and record assets under management (AUM) of $2.12 trillion, demonstrating robust operational performance and capital returns. The company reported adjusted EPS of $0.61, a 38.6% year-over-year net income growth, and significant net inflows, supported by strategic expansions in high-growth markets like China and India. Analyst ratings are largely positive, with several upgrades and price target increases, while institutional buying was noted recently.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CLSK",
+      "action": "BUY",
+      "shares": 202,
+      "allocated_capital": 3082.13325,
+      "entry_price": 15.231399536132812,
+      "composite_score": 77.8,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "CleanSpark (CLSK) shares are trading higher as crypto-linked stocks benefit from positive market momentum. Recent news highlights the company's successful closing of an upsized $1.15 billion financing and its ongoing business evolution beyond pure-play crypto mining.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "GPN",
+      "action": "BUY",
+      "shares": 40,
+      "allocated_capital": 3082.13325,
+      "entry_price": 76.02999877929688,
+      "composite_score": 69.8,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "Recent news for Global Payments (GPN) includes a slight increase in holdings by Charles Schwab Investment Management, a minor decrease by Boston Partners, and a reaffirmation of an 'outperform' rating by Raymond James with a $105 target price. The company reported quarterly earnings that beat estimates, with strong revenue and margin figures, and is set to present at the upcoming UBS Global Technology and AI Conference.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "COHR",
+      "action": "BUY",
+      "shares": 18,
+      "allocated_capital": 3082.13325,
+      "entry_price": 163.76499938964844,
+      "composite_score": 68.4,
+      "sentiment_score": 78.0,
+      "sentiment_summary": "Coherent reported strong Q1 FY2026 results with $1.58B revenue (up 17% YoY), GAAP gross margin of 36.6%, and GAAP diluted EPS of $1.19, beating expectations. The company also unveiled the Axon FP femtosecond laser for life sciences applications, demonstrating continued innovation momentum.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "IR",
+      "action": "BUY",
+      "shares": 38,
+      "allocated_capital": 3082.13325,
+      "entry_price": 80.27999877929688,
+      "composite_score": 66.6,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "Ingersoll-Rand (IR) stock showed positive momentum, gaining 1.59% on the last trading day and marking four consecutive days of gains. Technical indicators suggest a mix of short-term caution with a sell signal from the 3-month MACD, but both short and long-term moving averages indicate buy signals, supporting a generally positive outlook.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CX",
+      "action": "BUY",
+      "shares": 289,
+      "allocated_capital": 3082.13325,
+      "entry_price": 10.654999732971191,
+      "composite_score": 63.8,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "Cemex (NYSE: CX) recently reached a new 12-month high of $10.57 on strong volume, supported by several positive analyst upgrades and raised price targets. The company reported quarterly earnings on October 28, 2025, beating EPS estimates significantly and generating revenue well above expectations. However, technical indicators show mixed signals, including a recent MACD bearish crossover and RSI movement out of overbought territory, suggesting possible near-term caution.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "KD",
+      "action": "BUY",
+      "shares": 119,
+      "allocated_capital": 3082.13325,
+      "entry_price": 25.795000076293945,
+      "composite_score": 63.6,
+      "sentiment_score": 70.0,
+      "sentiment_summary": "Recent news highlights an upgrade of Kyndryl (NYSE:KD) to a 'Strong Buy' rating by Guggenheim, reflecting increased analyst confidence. While some revenue metrics showed slight declines, quarterly earnings beat consensus estimates, and the company is seen as undervalued with promising free cash flow growth projections through 2028. Analyst consensus remains a moderate buy with a positive outlook on Kyndryl's strategic transformation and financial performance.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CCL",
+      "action": "BUY",
+      "shares": 119,
+      "allocated_capital": 3080.3150272369385,
+      "entry_price": 25.885000228881836,
+      "composite_score": 62.2,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "Recent news indicates a positive outlook for Carnival Corporation (CCL) with Wells Fargo initiating coverage with an Overweight rating and a $37 price target, citing strong Q3 2025 earnings with record adjusted net income of $2 billion and raised full-year guidance. The company showed solid revenue growth, yield improvements, and strong return on invested capital, supported by ongoing Black Friday sales events for cruises boosting demand. While the stock price has seen minor fluctuations, the overall sector sentiment remains optimistic due to robust financial performance and expansion of cruise itineraries.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Auto-added for capital efficiency (score: 62.2)",
+      "gpt5_allocated": false,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "GSK",
+      "action": "BUY",
+      "shares": 64,
+      "allocated_capital": 3039.679931640625,
+      "entry_price": 47.494998931884766,
+      "composite_score": 61.8,
+      "sentiment_score": 73.0,
+      "sentiment_summary": "GSK recently reported strong quarterly earnings with EPS of $1.48 beating expectations and revenue of $11.35 billion surpassing analysts' forecasts. The company lifted its FY 2025 EPS guidance to the $4.73-$4.81 range and declared a quarterly dividend with an attractive yield around 3.5%. Additionally, there was a recent share repurchase, and some analysts upgraded or reaffirmed buy/neutral ratings with a raised price target from 1,400 to 1,500 GBp.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Auto-added for capital efficiency (score: 61.8)",
+      "gpt5_allocated": false,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CG",
+      "action": "BUY",
+      "shares": 56,
+      "allocated_capital": 3035.7599487304688,
+      "entry_price": 54.209999084472656,
+      "composite_score": 60.8,
+      "sentiment_score": 60.0,
+      "sentiment_summary": "Recent news on Carlyle Group (CG) reflects a moderately positive sentiment driven by solid Q3 2025 earnings with organic growth in fee-related earnings, assets under management, and fundraising momentum. The stock price has modestly increased recently, crossing above its 200-day moving average, suggesting technical bullishness despite mixed revenue results and some analyst caution. Meanwhile, there is also activity from institutional investors and ongoing stake sales linked to large funds, indicating continued market interest.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Auto-added for capital efficiency (score: 60.8)",
+      "gpt5_allocated": false,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ENPH",
+      "action": "SELL",
+      "shares": 138.0,
+      "sell_pct": 100,
+      "composite_score": 62.8,
+      "current_price": 28.901500701904297,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "```json\n{\n  \"sentiment_score\": 35,\n  \"news_summary\": \"Enphase Energy reported strong Q3 2025 results with record quarterly revenue of $410.4M and a non-GAAP gross margin of 49.2%, exceeding analyst ex",
+      "gpt5_reasoning": "AUTOMATED EXIT: Rank #29 (below top 28), score 62.8",
+      "current_value": 3988.2
+    },
+    {
+      "ticker": "GPK",
+      "action": "SELL",
+      "shares": 237.0,
+      "sell_pct": 100,
+      "composite_score": 62.0,
+      "current_price": 16.264999389648438,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Based on the available search results, I cannot provide a sentiment analysis for GPK stock from the last 24 hours. The search results provided do not contain news articles or updates from the last 24 ",
+      "gpt5_reasoning": "AUTOMATED EXIT: Rank #31 (below top 28), score 62.0",
+      "current_value": 3847.695
+    },
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "shares": 151.0,
+      "sell_pct": 100,
+      "composite_score": 56.0,
+      "current_price": 24.56999969482422,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Omnicom completed its $13.5 billion acquisition of Interpublic Group on November 28, 2025, with IPG shareholders receiving 0.344 Omnicom shares per IPG share. Following the merger completion, IPG has been delisted from the NYSE after more than 50 years of trading under the ticker symbol, with the combined company now trading as OMC.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 56.0 < 60 absolute minimum",
+      "current_value": 3710.07
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 70 candidates (avg score: 53.7)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 92/92 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 3 SELLs, 12 BUYs ($36,895 allocated)",
+      "quality_score": 70,
+      "issues": [
+        "Capital deployment 59.9% (target 90.0%+)"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 10 BUYs approved, 2 rejected, 3 SELLs",
+      "quality_score": 90,
+      "issues": [
+        "2 orders REJECTED by compliance"
+      ]
+    }
+  ],
+  "approved_at": "2025-11-28T16:08:43.379287Z"
+}

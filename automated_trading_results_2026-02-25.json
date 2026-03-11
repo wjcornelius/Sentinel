@@ -1,0 +1,292 @@
+{
+  "date": "2026-02-25",
+  "start_time": "2026-02-25T08:00:02.816133",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "11:00 AM ET",
+    "current_date": "Wednesday, February 25, 2026"
+  },
+  "regime_analysis": {
+    "regime": "BULLISH",
+    "confidence": "HIGH",
+    "spy_price": 690.8499755859375,
+    "spy_change_pct": 0.5092020257971777,
+    "vix_level": 18.770000457763672,
+    "recommendation": "GOOD DAY TO TRADE"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "AS",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260225T161009Z_dea1ce58"
+    },
+    {
+      "ticker": "MTCH",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260225T161009Z_657208c8"
+    },
+    {
+      "ticker": "AG",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260225T161011Z_142527a2"
+    },
+    {
+      "ticker": "DELL",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260225T161011Z_46659cfc"
+    },
+    {
+      "ticker": "BDX",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260225T161011Z_e3a198a7",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ACI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260225T161011Z_9b6fa4f0",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CENX",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260225T161011Z_3692bc85",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "AES",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260225T161011Z_d86b3d3b",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "DD",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260225T161011Z_86a070ee",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "AXTA",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260225T161011Z_902d6161",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ADMA",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260225T161011Z_34a0eeb4",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CRDO",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260225T161011Z_0d1bba7c",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BRO",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260225T161011Z_440d5004",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BMNR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260225T161011Z_54ccd6c0",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "AMKR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260225T161011Z_33d11041",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BZ",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260225T161011Z_5a5079a9",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CMCSA",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260225T161011Z_9db3b63e",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-02-25T08:10:39.859047",
+    "equity": 104326.42,
+    "cash": 6976.9,
+    "buying_power": 99348.75,
+    "portfolio_value": 104326.42,
+    "starting_capital": 100000.0,
+    "total_return": 4326.419999999998,
+    "total_return_pct": 4.326419999999998,
+    "daily_pl": 3455.5599999999977,
+    "daily_pl_pct": 3.4257267163182683,
+    "total_unrealized_pl": 6551.6435,
+    "position_count": 12,
+    "positions": [
+      {
+        "ticker": "AGI",
+        "shares": 224.0,
+        "entry_price": 44.8,
+        "current_price": 50.2,
+        "market_value": 11244.8,
+        "unrealized_pl": 1209.6,
+        "unrealized_pl_pct": 12.054
+      },
+      {
+        "ticker": "CDE",
+        "shares": 423.0,
+        "entry_price": 23.77,
+        "current_price": 24.785,
+        "market_value": 10484.055,
+        "unrealized_pl": 429.345,
+        "unrealized_pl_pct": 4.2700000000000005
+      },
+      {
+        "ticker": "B",
+        "shares": 205.0,
+        "entry_price": 46.84,
+        "current_price": 50.2697,
+        "market_value": 10305.2885,
+        "unrealized_pl": 703.0885,
+        "unrealized_pl_pct": 7.321999999999999
+      },
+      {
+        "ticker": "CF",
+        "shares": 107.0,
+        "entry_price": 92.61,
+        "current_price": 94.86,
+        "market_value": 10150.02,
+        "unrealized_pl": 240.75,
+        "unrealized_pl_pct": 2.4299999999999997
+      },
+      {
+        "ticker": "AU",
+        "shares": 71.0,
+        "entry_price": 106.66,
+        "current_price": 127.48,
+        "market_value": 9051.08,
+        "unrealized_pl": 1478.22,
+        "unrealized_pl_pct": 19.52
+      },
+      {
+        "ticker": "AG",
+        "shares": 275.0,
+        "entry_price": 29.97,
+        "current_price": 29.98,
+        "market_value": 8244.5,
+        "unrealized_pl": 2.75,
+        "unrealized_pl_pct": 0.033
+      },
+      {
+        "ticker": "DELL",
+        "shares": 67.0,
+        "entry_price": 122.94,
+        "current_price": 122.72,
+        "market_value": 8222.24,
+        "unrealized_pl": -14.74,
+        "unrealized_pl_pct": -0.179
+      },
+      {
+        "ticker": "AEM",
+        "shares": 31.0,
+        "entry_price": 189.73,
+        "current_price": 241.47,
+        "market_value": 7485.57,
+        "unrealized_pl": 1603.94,
+        "unrealized_pl_pct": 27.27
+      },
+      {
+        "ticker": "RRC",
+        "shares": 167.0,
+        "entry_price": 35.81,
+        "current_price": 38.2,
+        "market_value": 6379.4,
+        "unrealized_pl": 399.13,
+        "unrealized_pl_pct": 6.6739999999999995
+      },
+      {
+        "ticker": "SN",
+        "shares": 48.0,
+        "entry_price": 123.69,
+        "current_price": 127.09,
+        "market_value": 6100.32,
+        "unrealized_pl": 163.2,
+        "unrealized_pl_pct": 2.749
+      },
+      {
+        "ticker": "ABNB",
+        "shares": 46.0,
+        "entry_price": 120.22,
+        "current_price": 129.83,
+        "market_value": 5972.18,
+        "unrealized_pl": 442.06,
+        "unrealized_pl_pct": 7.994
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [
+    "Verification: Expected positions not found: CMCSA, ACI, BZ, ADMA, AES, BMNR, BDX, CENX, DD, BRO, AXTA, AMKR, CRDO"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 12,
+    "db_positions_before": 11,
+    "stale_closed": 0,
+    "in_sync": 11
+  },
+  "position_drift": {
+    "positions_checked": 12,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260225_081003",
+    "total_trades": 17,
+    "quality_score": 100,
+    "ceo_rating": "EXCELLENT",
+    "ceo_recommendation": "STRONGLY RECOMMEND APPROVAL"
+  },
+  "sells_count": 2,
+  "buys_count": 15,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: CMCSA, ACI, BZ, ADMA, AES, BMNR, BDX, CENX, DD, BRO, AXTA, AMKR, CRDO"
+    ],
+    "summary": {
+      "position_count": 12,
+      "sells_executed": 2,
+      "buys_executed": 15,
+      "expected_count_change": 13
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 4,
+    "fills_recorded": 4,
+    "orders_updated": 4,
+    "already_recorded": 0,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-02-25T08:10:41.511617",
+  "duration_seconds": 638.695496
+}

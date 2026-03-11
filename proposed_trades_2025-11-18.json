@@ -1,0 +1,229 @@
+{
+  "plan_id": "PLAN_20251118_073335",
+  "generated_at": "2025-11-18T15:33:35.402541Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 12,
+    "research_candidates": 67,
+    "gpt5_selected": 12,
+    "compliance_flagged": 3,
+    "overall_quality_score": 84
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 52,
+    "compliance_advisory": 85
+  },
+  "trades": [
+    {
+      "ticker": "DD",
+      "action": "BUY",
+      "shares": 445,
+      "allocated_capital": 17012.878000000004,
+      "entry_price": 38.220001220703125,
+      "composite_score": 66.2,
+      "sentiment_score": 55.0,
+      "sentiment_summary": "Recent news for DuPont (DD) includes a major institutional sale of shares and the company breaking ground on a new specialty lubricants manufacturing plant in China. There are no significant negative headlines, but the share sale may indicate some profit-taking by investors.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false,
+      "compliance_flagged": true,
+      "compliance_note": "Position size 17.0% of portfolio exceeds maximum 10.0% ($17,012.88 of $100,000.00)"
+    },
+    {
+      "ticker": "ADM",
+      "action": "BUY",
+      "shares": 283,
+      "allocated_capital": 17012.878000000004,
+      "entry_price": 59.97999954223633,
+      "composite_score": 65.4,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "Recent news on Archer Daniels Midland (ADM) highlights a modest positive momentum in stock price with a projected 18.56% increase over the next three months, despite some mixed technical signals and short-term sell warnings. ADM reported third-quarter 2025 results showing decreased earnings year-to-date compared to the prior year but maintained operational progress in key segments like Nutrition and Carbohydrate Solutions. Additionally, ADM announced a joint venture with Alltech to consolidate North American animal feed operations and moves to optimize its global protein production facilities, alongside continuing its long-standing dividend payments.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false,
+      "compliance_flagged": true,
+      "compliance_note": "Position size 17.0% of portfolio exceeds maximum 10.0% ($17,012.88 of $100,000.00)"
+    },
+    {
+      "ticker": "APH",
+      "action": "BUY",
+      "shares": 130,
+      "allocated_capital": 17012.878000000004,
+      "entry_price": 130.0,
+      "composite_score": 61.0,
+      "sentiment_score": 85.0,
+      "sentiment_summary": "Amphenol Corporation (APH) recently closed a $1 billion acquisition of Trexon and received EU approval for its acquisition of CommScope Technologies, signaling strong growth momentum. The company's stock has been performing well, with recent insider derivative transactions and a significant stake reported by Citigroup Inc. Short interest has increased slightly, but overall market activity and major acquisitions point to bullish sentiment.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false,
+      "compliance_flagged": true,
+      "compliance_note": "Position size 17.0% of portfolio exceeds maximum 10.0% ($17,012.88 of $100,000.00)"
+    },
+    {
+      "ticker": "APO",
+      "action": "SELL",
+      "shares": 54.0,
+      "sell_pct": 100,
+      "composite_score": 52.8,
+      "current_price": 124.04000091552734,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Apollo Global Management recently announced a $0.51 cash dividend with minimal downside risk on the ex-dividend date, reinforcing its position as a stable income stock supported by robust net investment income and resilient alternative assets. The company is actively investing $6.5 billion in a major renewable energy project and continues strategic acquisitions, alongside positive analyst rating adjustments and new institutional investments. However, there is some selling pressure from Rockefeller Capital Management reducing holdings.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 52.8 < 60 absolute minimum",
+      "current_value": 6671.16
+    },
+    {
+      "ticker": "AXTA",
+      "action": "SELL",
+      "shares": 123.0,
+      "sell_pct": 100,
+      "composite_score": 60.400000000000006,
+      "current_price": 28.424999237060547,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Axalta Coating Systems (AXTA) announced a transformative all-stock merger of equals with AkzoNobel, creating a global coatings leader with $17 billion in revenue and $25 billion enterprise value. The deal is expected to generate $600 million in synergies, with 90% realized within three years, and Axalta shareholders will receive 0.6539 AkzoNobel shares per share. The combined company will be dual-headquartered and dual-listed, with shared leadership and governance.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Rank #16 (below top 15), score 60.4",
+      "current_value": 3511.65
+    },
+    {
+      "ticker": "CADE",
+      "action": "SELL",
+      "shares": 223.0,
+      "sell_pct": 100,
+      "composite_score": 44.8,
+      "current_price": 37.439998626708984,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Cadence Bank (CADE) stock closed at $37.24 on November 17, 2025, with a day's high of $38.44. Westwood Holdings Group Inc. made a new $718,000 investment in Cadence Bank on November 18, 2025, signaling institutional confidence in the stock.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 44.8 < 60 absolute minimum",
+      "current_value": 8346.89
+    },
+    {
+      "ticker": "CF",
+      "action": "SELL",
+      "shares": 235.0,
+      "sell_pct": 100,
+      "composite_score": 54.0,
+      "current_price": 81.13999938964844,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "CF Industries reported Q3 2025 earnings of $2.19 per share, surpassing estimates, driven by higher prices despite a slight miss in net sales. The company projects continued strong global nitrogen demand through 2025 into 2026, citing robust demand in India, Brazil, and North America, supported by favorable farm economics and supply constraints. Additionally, CF is advancing a carbon capture project expected to qualify for tax credits, enhancing its long-term prospects.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 54.0 < 60 absolute minimum",
+      "current_value": 19093.75
+    },
+    {
+      "ticker": "CFG",
+      "action": "SELL",
+      "shares": 98.0,
+      "sell_pct": 100,
+      "composite_score": 50.0,
+      "current_price": 50.099998474121094,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Citizens Financial Group announced participation in the Goldman Sachs U.S. Financial Services Conference on November 18, 2025, while LSV Asset Management raised its stock position in CFG on the same day. The company's third-quarter 2025 earnings exceeded guidance, driven by stronger-than-expected net interest and non-interest income, along with improved credit quality and planned share repurchases.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 50.0 < 60 absolute minimum",
+      "current_value": 4893.14
+    },
+    {
+      "ticker": "COLB",
+      "action": "SELL",
+      "shares": 317.0,
+      "sell_pct": 100,
+      "composite_score": 43.2,
+      "current_price": 25.93000030517578,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Recent news for COLB shows a generally positive outlook with a forecasted stock price increase of about 4.3% over the next two weeks. The company announced an orderly CFO transition scheduled for December 31, 2025, which appears neutral in impact on stock performance. Additionally, Columbia Banking System recently increased its quarterly dividend by 3%, reinforcing a positive sentiment toward shareholder returns.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 43.2 < 60 absolute minimum",
+      "current_value": 8181.77
+    },
+    {
+      "ticker": "DOCN",
+      "action": "SELL",
+      "shares": 490.0,
+      "sell_pct": 100,
+      "composite_score": 55.6,
+      "current_price": 43.005001068115234,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "DigitalOcean (DOCN) recently reported strong Q3 2025 results, including a 16% YoY revenue increase to $230M and record organic ARR growth. The company closed a $625M convertible notes offering, announced a $100M stock repurchase program, and launched Cloudways Copilot, an AI-powered solution that significantly improves server issue resolution times.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 55.6 < 60 absolute minimum",
+      "current_value": 21116.55
+    },
+    {
+      "ticker": "EBC",
+      "action": "SELL",
+      "shares": 485.0,
+      "sell_pct": 100,
+      "composite_score": 48.0,
+      "current_price": 17.299999237060547,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Recent news on Eastern Bankshares, Inc. (EBC) shows a mixed but overall cautiously optimistic sentiment. The company reported mixed Q3 2025 earnings with earnings per share beating estimates, although it missed some profit expectations. EBC has completed regulatory approvals for its merger with HarborOne Bancorp, expected to create a leading $30 billion community bank in Greater Boston. Additionally, an activist investor has urged the board to consider a sale, while a fresh 5% share repurchase program has been authorized, both indicating active investor engagement and confidence in value creation. A notable new $950,000 investment by Anderson Financial Strategies further supports positive momentum.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 48.0 < 60 absolute minimum",
+      "current_value": 8380.8
+    },
+    {
+      "ticker": "FITB",
+      "action": "SELL",
+      "shares": 118.0,
+      "sell_pct": 100,
+      "composite_score": 50.400000000000006,
+      "current_price": 41.375,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Recent news for Fifth Third Bancorp (FITB) highlights positive investor interest, with Creative Planning purchasing 12,229 shares and Vise Technologies acquiring a new stake. Additionally, Fifth Third Bancorp secured a major acquisition by outbidding a rival to acquire Comerica for $10.9 billion.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 50.4 < 60 absolute minimum",
+      "current_value": 4868.68
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [
+    {
+      "ticker": "DD",
+      "suggestion_type": "POSITION_SIZE",
+      "suggestion": "Position size 17.0% of portfolio exceeds maximum 10.0% ($17,012.88 of $100,000.00)",
+      "severity": "WARNING"
+    },
+    {
+      "ticker": "ADM",
+      "suggestion_type": "POSITION_SIZE",
+      "suggestion": "Position size 17.0% of portfolio exceeds maximum 10.0% ($17,012.88 of $100,000.00)",
+      "severity": "WARNING"
+    },
+    {
+      "ticker": "APH",
+      "suggestion_type": "POSITION_SIZE",
+      "suggestion": "Position size 17.0% of portfolio exceeds maximum 10.0% ($17,012.88 of $100,000.00)",
+      "severity": "WARNING"
+    }
+  ],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 67 candidates (avg score: 40.4)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 88/88 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 9 SELLs, 3 BUYs ($51,039 allocated)",
+      "quality_score": 52,
+      "issues": [
+        "Capital deployment 60.0% (target 90.0%+)",
+        "Limited diversification: 3 new positions (target 12-20). Total after trades: 15"
+      ]
+    },
+    {
+      "stage": "compliance_advisory",
+      "message": "Compliance reviewed plan: 3 BUYs, 9 SELLs (3 suggestions)",
+      "quality_score": 85,
+      "issues": [
+        "3 orders flagged with advisory notes"
+      ]
+    }
+  ],
+  "approved_at": "2025-11-18T15:34:52.102412Z"
+}

@@ -1,0 +1,242 @@
+{
+  "plan_id": "PLAN_20260220_080800",
+  "generated_at": "2026-02-20T16:08:00.828583Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 14,
+    "research_candidates": 73,
+    "gpt5_selected": 14,
+    "compliance_flagged": 0,
+    "overall_quality_score": 96
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 86,
+    "compliance_advisory": 100
+  },
+  "trades": [
+    {
+      "ticker": "CDE",
+      "action": "BUY",
+      "shares": 423,
+      "allocated_capital": 10000,
+      "entry_price": 23.635000228881836,
+      "composite_score": 77.6,
+      "sentiment_score": 48.0,
+      "sentiment_summary": "Canaccord Genuity Group downgraded Coeur Mining (CDE) from 'buy' to 'hold' on February 20, 2026[5]. Jupiter Asset Management sold 421,620 shares of CDE, following CIBC World Markets' prior 83.9% reduction in holdings[4][1]. CDE traded up 1.04% to $24.31 in pre-market on February 20[2].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "B",
+      "action": "BUY",
+      "shares": 205,
+      "allocated_capital": 10000,
+      "entry_price": 48.54999923706055,
+      "composite_score": 73.0,
+      "sentiment_score": 55.0,
+      "sentiment_summary": "Barrick Mining Corp (B) stock closed at $48.55 on February 19, 2026, up 0.68% with bullish technical indicators including price crossing above 5-day and 20-day SMAs, MOM_10 > 0, and MACD > 0, despite one bearish Awesome Oscillator signal[2]. Overall, it shows 4 buy signals versus 1 sell, with a 'Buy' technical rating and bullish moving average trend as of February 19[2]. No other major news events specific to B stock appear in the last 24 hours.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CAVA",
+      "action": "BUY",
+      "shares": 147,
+      "allocated_capital": 10000,
+      "entry_price": 68.0199966430664,
+      "composite_score": 72.2,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "Prime Capital Management significantly increased its CAVA stake by 490,300 shares worth $27.34 million in Q4 2025, boosting its position value amid the stock's yearly decline[1]. Telsey Advisory maintains an Outperform rating with an $85 price target, while Stifel holds Buy at $75 and UBS Hold at $69; upcoming Q4 earnings on February 24 forecast modest EPS decline but revenue growth and restaurant expansion[2][3][4]. Stock traded slightly higher at $68.65 (+0.31%) during the day[2].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "MTCH",
+      "action": "BUY",
+      "shares": 319,
+      "allocated_capital": 10000,
+      "entry_price": 31.31999969482422,
+      "composite_score": 71.4,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "Match Group recently added tech leaders to refresh its board governance, signaling positive strategic changes. The company announced Q4 and full-year results alongside a 5% increased quarterly dividend of $0.20 per share. While a Buy analyst rating with $37 price target persists, an institutional investor reduced its stake by 69.8% in the prior quarter.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "AS",
+      "action": "BUY",
+      "shares": 236,
+      "allocated_capital": 10000,
+      "entry_price": 42.23500061035156,
+      "composite_score": 70.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "The available search results cover company news for February 20, 2026, highlighting Etsy Inc. (ETSY) shares climbing 9.3% after beating Q4 2025 earnings estimates. No specific news articles or mentions related to AS stock appear in the results from the last 24 hours.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "AXTA",
+      "action": "BUY",
+      "shares": 288,
+      "allocated_capital": 10000,
+      "entry_price": 34.709999084472656,
+      "composite_score": 68.2,
+      "sentiment_score": 45.0,
+      "sentiment_summary": "Axalta Coating Systems (AXTA) reported Q4 2025 sales of $1,262 million and net income of $60 million, with full-year sales at $5,117 million and net income of $378 million, alongside 2026 guidance for a mid-single digit Q4 revenue decline but low single-digit full-year growth.[1] The stock rose 5.9% following the results but fell 2.67% on February 19, 2026, to $34.62.[1][2] JPMorgan Chase reduced its position in AXTA on February 20, 2026.[4]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ACI",
+      "action": "BUY",
+      "shares": 565,
+      "allocated_capital": 10000,
+      "entry_price": 17.69499969482422,
+      "composite_score": 64.6,
+      "sentiment_score": 45.0,
+      "sentiment_summary": "Albertsons Companies (ACI) received mixed analyst signals on February 20, 2026, with an average 'Hold' recommendation despite some positive earnings revisions and price target increases from certain analysts.[1][2] The stock closed down 1.0% on the day, and while some analysts like UBS and BMO maintained 'buy' ratings with $23 price targets, Morgan Stanley downgraded its rating to 'underweight' with a $14 price target, significantly below current trading levels.[2]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ADMA",
+      "action": "BUY",
+      "shares": 608,
+      "allocated_capital": 10000,
+      "entry_price": 16.43000030517578,
+      "composite_score": 63.8,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "Recent news highlights ADMA Biologics' upcoming Q4 and full-year 2025 earnings release on February 25, 2026, following strong prior results like $510\u2013511M preliminary FY2025 revenue and raised multi-year guidance[4]. The stock has shown recent gains, closing up 2.06% at $16.32 while the market fell and up 1.16% at $17.50 outperforming benchmarks[2][3]. Analysts unanimously rate it a buy with a $25.67 target implying 59.52% upside, and DCF models suggest it's 66.1% undervalued[1][5].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "MGM",
+      "action": "BUY",
+      "shares": 275,
+      "allocated_capital": 10000,
+      "entry_price": 36.36000061035156,
+      "composite_score": 62.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "I cannot provide the requested JSON analysis because the search results do not contain sufficient news from the last 24 hours to support a reliable sentiment assessment.\n\nThe most recent substantive n",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ABNB",
+      "action": "BUY",
+      "shares": 79,
+      "allocated_capital": 10000,
+      "entry_price": 126.12999725341797,
+      "composite_score": 62.0,
+      "sentiment_score": 48.0,
+      "sentiment_summary": "Recent news from the last 24 hours highlights mixed signals for Airbnb (ABNB) stock, including a small institutional position decrease by BNP Paribas, an insider sale of 4,260 Class A shares on February 19, and neutral Zacks Rank #3 (Hold) amid recent underperformance of -6% over the past month. The stock opened at $123.84 and trades around $124 with minimal change. Earlier positive momentum from Q4 earnings and 2026 outlook has faded into cautious investor attention.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "AKAM",
+      "action": "BUY",
+      "shares": 100,
+      "allocated_capital": 10000,
+      "entry_price": 99.45500183105469,
+      "composite_score": 60.2,
+      "sentiment_score": 35.0,
+      "sentiment_summary": "Akamai Technologies (AKAM) reported Q4 earnings that beat EPS and revenue estimates, driven by growth in Guardicore and API security, but issued FY2026 guidance of $6.20-$7.20 EPS, below the consensus of $7.34, causing a 9% after-hours stock drop.[1][3] Analyst actions today include Susquehanna expecting a stock price rise, Robert W. Baird raising the price target to $110, and Craig Hallum to $100.[4][5][6]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "APG",
+      "action": "SELL",
+      "shares": 168.0,
+      "sell_pct": 100,
+      "composite_score": 49.6,
+      "current_price": 44.619998931884766,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "The State of New Jersey Common Pension Fund D increased its holdings in APi Group Corporation (NYSE:APG) stock, as reported today. APG's stock closed at $44.41, up from the day's open of $44.03, with high volume of 1,851,815 shares. Recent analyst consensus maintains a 'Moderate Buy' rating.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 49.6 < 60 absolute minimum",
+      "current_value": 7494.48
+    },
+    {
+      "ticker": "CMCSA",
+      "action": "SELL",
+      "shares": 196.0,
+      "sell_pct": 100,
+      "composite_score": 57.6,
+      "current_price": 31.284400939941406,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Recent coverage highlights Comcast's Q4 2025 struggles, including 1% revenue growth, 10% EBITDA decline, broadband subscriber losses, and widening Peacock losses amid heavy NBA costs[2][3][4]. Positive notes include an attractive 4.45% dividend yield with 18 years of growth, strong free cash flow, and a low valuation suggesting limited downside[4][5]. However, analysts recommend staying away with a Zacks #4 Sell rating, and a co-CEO sold 57,947 shares[2][3][6].",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 57.6 < 60 absolute minimum",
+      "current_value": 6130.88
+    },
+    {
+      "ticker": "DNOW",
+      "action": "SELL",
+      "shares": 467.0,
+      "sell_pct": 100,
+      "composite_score": 44.8,
+      "current_price": 13.210000038146973,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "DNOW Inc. reported Q4 2025 results on February 20, 2026, with revenue rising to $959 million but a GAAP net loss of $147 million due to merger and inventory charges, compared to prior-year earnings. Full-year revenue grew to $2.82 billion, though GAAP net loss was $89 million versus prior profit. The stock plunged 18-19% to around $13.20 amid the earnings reaction.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 44.8 < 60 absolute minimum",
+      "current_value": 6187.75
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 73 candidates (avg score: 48.6)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 84/84 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 3 SELLs, 11 BUYs ($110,000 allocated)",
+      "quality_score": 86,
+      "issues": [
+        "Capital deployment 83.4% (target 90.0%+)",
+        "Limited diversification: 11 new positions (target 12-20). Total after trades: 19"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 11 BUYs approved, 0 rejected, 3 SELLs",
+      "quality_score": 100,
+      "issues": []
+    }
+  ],
+  "approved_at": "2026-02-20T16:08:02.773910Z"
+}

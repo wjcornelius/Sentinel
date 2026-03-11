@@ -1,0 +1,299 @@
+{
+  "plan_id": "PLAN_20251202_081311",
+  "generated_at": "2025-12-02T16:13:11.383903Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 19,
+    "research_candidates": 75,
+    "gpt5_selected": 19,
+    "compliance_flagged": 0,
+    "overall_quality_score": 88
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 70,
+    "compliance_advisory": 85
+  },
+  "trades": [
+    {
+      "ticker": "DELL",
+      "action": "BUY",
+      "shares": 32,
+      "allocated_capital": 4427.204110000001,
+      "entry_price": 136.52000427246094,
+      "composite_score": 73.2,
+      "sentiment_score": 80.0,
+      "sentiment_summary": "Dell Technologies' stock price rose about 2-2.45% recently, supported by significant bullish options activity and positive analyst ratings, with target prices averaging around $155 to $175. Additionally, Michael and Susan Dell pledged $6.25 billion to fund savings accounts for 25 million American children, an initiative praised by President Trump and seen as a substantial philanthropic effort linked to Dell's family wealth.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "KDP",
+      "action": "BUY",
+      "shares": 158,
+      "allocated_capital": 4427.204110000001,
+      "entry_price": 27.895000457763672,
+      "composite_score": 73.2,
+      "sentiment_score": 70.0,
+      "sentiment_summary": "Keurig Dr Pepper (KDP) reported strong Q3 2025 results with net sales up 10.7% year-over-year and adjusted EPS increasing by 5.9%. The company announced a strategic \u20ac15.7 billion all-cash acquisition of JDE Peet's, aiming to split into two independent entities focused on beverages and global coffee by the end of 2026. KDP raised its full-year constant currency net sales growth outlook to high-single-digits and reaffirmed adjusted EPS growth guidance in the same range.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "GPN",
+      "action": "BUY",
+      "shares": 56,
+      "allocated_capital": 4427.204110000001,
+      "entry_price": 78.05999755859375,
+      "composite_score": 71.8,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "Global Payments (GPN) recently reported strong third-quarter 2025 results, beating earnings and revenue estimates, and reaffirmed its full-year outlook. The company received key regulatory approval for its Worldpay acquisition, paving the way for a 2026 close, and continues its strategic transformation with recent divestitures and product launches. CEO Cameron Bready is scheduled to present at the UBS Global Technology and AI Conference, highlighting ongoing momentum and future growth initiatives.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "DLO",
+      "action": "BUY",
+      "shares": 329,
+      "allocated_capital": 4427.204110000001,
+      "entry_price": 13.425000190734863,
+      "composite_score": 71.6,
+      "sentiment_score": 60.0,
+      "sentiment_summary": "Recent news for DLocal (DLO) highlights strong third-quarter financial results, with revenue up 52% year-over-year and record total payment volume. The company also surpassed earnings and revenue estimates, and short interest has decreased, indicating improving investor sentiment.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CNM",
+      "action": "BUY",
+      "shares": 91,
+      "allocated_capital": 4427.204110000001,
+      "entry_price": 48.435001373291016,
+      "composite_score": 70.6,
+      "sentiment_score": 55.0,
+      "sentiment_summary": "Mackenzie Financial Corp purchased 163,450 shares of Core & Main on December 1, 2025, showing institutional investor confidence. The company is scheduled to announce Q3 2025 fiscal results on December 9 before market open, with analysts expecting $0.72 EPS and $2.0606 billion in revenue.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "COHR",
+      "action": "BUY",
+      "shares": 26,
+      "allocated_capital": 4427.204110000001,
+      "entry_price": 164.83990478515625,
+      "composite_score": 69.8,
+      "sentiment_score": 85.0,
+      "sentiment_summary": "Coherent Corp. (COHR) has seen strong positive momentum recently, with shares trending up 7.14% on November 28, 2025, following a robust fiscal Q1 earnings beat and increased analyst price targets. Multiple analysts have raised their targets, citing AI-driven growth and strong demand in datacenters and communications. Insider activity also reflects confidence, with a company director exercising options and selling shares at a high price.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "EXE",
+      "action": "BUY",
+      "shares": 36,
+      "allocated_capital": 4427.204110000001,
+      "entry_price": 120.0166015625,
+      "composite_score": 69.0,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "Recent news highlights strong third-quarter earnings for Expand Energy (EXE), with results surpassing analyst expectations and production guidance being raised. The company continues to benefit from increased natural gas production and higher realized prices, while analysts maintain a bullish outlook, citing operational efficiency and growth potential linked to AI data center expansion. Institutional investors, such as Mackenzie Financial Corp, have also increased their holdings in EXE.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "FTNT",
+      "action": "BUY",
+      "shares": 53,
+      "allocated_capital": 4427.204110000001,
+      "entry_price": 82.66999816894531,
+      "composite_score": 65.4,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "Fortinet recently reported strong Q3 results, beating earnings and revenue estimates with $0.74 EPS and $1.72B revenue, up 14.4% year-over-year. The company maintained robust guidance for FY2025 and Q4 2025, while analysts remain mostly neutral with a consensus 'Hold' rating, though some upgrades and price target adjustments have occurred. Despite a recent stock price drop due to cautious guidance amid macro uncertainty, Fortinet continues to show solid fundamentals and market leadership in cybersecurity.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "HRL",
+      "action": "BUY",
+      "shares": 192,
+      "allocated_capital": 4427.204110000001,
+      "entry_price": 22.983800888061523,
+      "composite_score": 65.4,
+      "sentiment_score": 55.0,
+      "sentiment_summary": "Hormel Foods (HRL) recently announced a 1% increase in its quarterly dividend, marking its 60th consecutive annual dividend increase and reinforcing its reputation as a reliable dividend payer. The company also shared news of a corporate restructuring aimed at long-term growth, including workforce reductions and resource reallocation toward technology and innovation.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ADMA",
+      "action": "SELL",
+      "shares": 911.0,
+      "sell_pct": 100,
+      "composite_score": 64.8,
+      "current_price": 19.864999771118164,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Recent news on ADMA Biologics highlights strong financial performance in 2025, with Q2 revenues reaching $122 million (up 14% YoY) and GAAP net income of $34.2 million. The company raised its revenue guidance for 2025 and 2026, introduced a $500 million share repurchase program, and reported progress in expanding plasma supply and production capacity. Analysts maintain a buy consensus, supported by increased earnings estimates and optimistic growth forecasts.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Rank #30 (below top 28), score 64.8",
+      "current_value": 18019.58
+    },
+    {
+      "ticker": "CCL",
+      "action": "SELL",
+      "shares": 119.0,
+      "sell_pct": 100,
+      "composite_score": 57.2,
+      "current_price": 25.924999237060547,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Recent news for Carnival (CCL) highlights a mix of positive developments, including a Wells Fargo price target revision to $34.00 (still indicating significant upside), upgrades to 'Buy' by Zacks due to strong earnings estimate revisions, and robust cruise booking promotions like Princess Cruises' 'Blue Friday' sale and Seabourn's Black Friday Sail. Analysts continue to express confidence in Carnival's earnings outlook and future growth, despite some recent share price volatility.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 57.2 < 60 absolute minimum",
+      "current_value": 3079.9342
+    },
+    {
+      "ticker": "CX",
+      "action": "SELL",
+      "shares": 289.0,
+      "sell_pct": 100,
+      "composite_score": 60.8,
+      "current_price": 10.729999542236328,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Recent news highlights mixed signals for Cemex (CX). While the company continues to show strong pricing power and operational discipline, with solid margins and a global low-carbon platform, there are concerns about worsening volume declines in key markets like Mexico and the US, indicating a potential downturn in the cement cycle. Analysts remain divided, with some maintaining buy ratings and others noting caution due to weakening demand.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Rank #40 (below top 28), score 60.8",
+      "current_value": 3100.97
+    },
+    {
+      "ticker": "ELAN",
+      "action": "SELL",
+      "shares": 211.0,
+      "sell_pct": 100,
+      "composite_score": 64.8,
+      "current_price": 22.5,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Elanco Animal Health (ELAN) recently reported strong Q3 2025 results, beating analyst estimates with $1.14 billion in revenue and $0.19 EPS. The company raised its full-year 2025 guidance and saw increased institutional ownership, while analyst ratings remain predominantly positive with several recent target price increases.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Rank #31 (below top 28), score 64.8",
+      "current_value": 4745.39
+    },
+    {
+      "ticker": "GNTX",
+      "action": "SELL",
+      "shares": 218.0,
+      "sell_pct": 100,
+      "composite_score": 65.2,
+      "current_price": 22.739999771118164,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Gentex (NASDAQ: GNTX) reported strong Q2 2025 financial results with 15% year-over-year consolidated net sales growth and improved gross margins, despite some regional softness in Europe and China. The company completed its acquisition of VOXX International, initiated a substantial share buyback program, and announced a quarterly dividend of $0.12 per share. Recent institutional buying activity also suggests positive investor sentiment.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Rank #29 (below top 28), score 65.2",
+      "current_value": 4958.41
+    },
+    {
+      "ticker": "HALO",
+      "action": "SELL",
+      "shares": 52.0,
+      "sell_pct": 100,
+      "composite_score": 50.8,
+      "current_price": 68.25,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Halozyme Therapeutics (HALO) reported strong Q3 2025 results, beating earnings and revenue estimates, and completed the acquisition of Elektrofi to expand its drug delivery platform. Recent insider selling by CEO Helen Torley and CFO transition news were offset by positive analyst ratings and continued confidence in the company's growth strategy.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 50.8 < 60 absolute minimum",
+      "current_value": 3538.86
+    },
+    {
+      "ticker": "INCY",
+      "action": "SELL",
+      "shares": 36.0,
+      "sell_pct": 100,
+      "composite_score": 64.0,
+      "current_price": 102.5999984741211,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Incyte reported strong Q3 2025 results with $1.37 billion in revenue (up 20% YoY) and beat EPS expectations significantly ($2.26 vs. $1.65 consensus). The company announced a strategic partnership with Enable Injections for its investigational mutCALR monoclonal antibody and launched a celebrity partnership with Winnie Harlow to raise vitiligo awareness.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Rank #33 (below top 28), score 64.0",
+      "current_value": 3702.258
+    },
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "shares": 151.0,
+      "sell_pct": 100,
+      "composite_score": 56.0,
+      "current_price": 24.56999969482422,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "The Interpublic Group (IPG) completed its merger with Omnicom on November 26, 2025, with IPG shareholders receiving 0.344 Omnicom shares per IPG share. IPG has been dropped from the Russell 3000 Index, and the company will no longer trade independently, as it now operates as a wholly owned subsidiary of Omnicom. The famous Interpublic name is being phased out following the merger.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 56.0 < 60 absolute minimum",
+      "current_value": 3710.07
+    },
+    {
+      "ticker": "IR",
+      "action": "SELL",
+      "shares": 38.0,
+      "sell_pct": 100,
+      "composite_score": 63.6,
+      "current_price": 79.03500366210938,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Ingersoll Rand reported strong Q2 2025 results with record orders, revenue, and adjusted EBITDA, leading to a raised full-year guidance despite some margin pressures and non-cash impairments. The stock has shown modest gains recently, supported by active M&A pipeline activity and investor confidence following the earnings announcement. However, some technical indicators such as a bearish short-term MACD signal and recent stock price volatility indicate cautious sentiment.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Rank #35 (below top 28), score 63.6",
+      "current_value": 2998.2
+    },
+    {
+      "ticker": "KD",
+      "action": "SELL",
+      "shares": 119.0,
+      "sell_pct": 100,
+      "composite_score": 59.6,
+      "current_price": 25.770000457763672,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Kyndryl reported Q3 fiscal 2026 earnings on December 2, 2025, missing revenue estimates of $3.84 billion with actual sales of $3.72 billion, though earnings per share beat expectations at $0.38 versus $0.36 consensus. The stock experienced its worst day on record, plunging 19.9%, surpassing its previous record one-day drop from May 2022, driven by investor concerns over weak top-line growth despite margin improvements.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 59.6 < 60 absolute minimum",
+      "current_value": 3067.82
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 75 candidates (avg score: 56.5)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 101/101 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 10 SELLs, 12 BUYs ($53,126 allocated)",
+      "quality_score": 70,
+      "issues": [
+        "Capital deployment 60.0% (target 90.0%+)"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 9 BUYs approved, 3 rejected, 10 SELLs",
+      "quality_score": 85,
+      "issues": [
+        "3 orders REJECTED by compliance"
+      ]
+    }
+  ],
+  "approved_at": "2025-12-02T16:13:13.498898Z"
+}

@@ -1,0 +1,66 @@
+{
+  "plan_id": "PLAN_20251224_080931",
+  "generated_at": "2025-12-24T16:09:31.469836Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 1,
+    "research_candidates": 72,
+    "gpt5_selected": 1,
+    "compliance_flagged": 0,
+    "overall_quality_score": 79
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 49,
+    "compliance_advisory": 70
+  },
+  "trades": [
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "shares": 151.0,
+      "sell_pct": 100,
+      "composite_score": 56.0,
+      "current_price": 24.56999969482422,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Most recent 24\u2011hour news about IPG centers on the completed acquisition and integration into Omnicom, removal from the S&P 500 and NYSE delisting actions, and early post\u2011deal headwinds as major clients shift to competitors; reports note large portions of IPG debt were exchanged into Omnicom notes while a small remainder remains outstanding[2][3][4][6]. Market commentary highlights client losses and integration risks following the Nov. 26 closing, and index/NYSE adjustments reflect the corporate combination rather than standalone operational strength[6][3][4].",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 56.0 < 60 absolute minimum",
+      "current_value": 3710.07
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 72 candidates (avg score: 51.9)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 84/84 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 1 SELLs, 9 BUYs ($49,500 allocated)",
+      "quality_score": 49,
+      "issues": [
+        "Capital deployment 40.7% (target 90.0%+)",
+        "Limited diversification: 9 new positions (target 12-20). Total after trades: 20"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 0 BUYs approved, 9 rejected, 1 SELLs",
+      "quality_score": 70,
+      "issues": [
+        "9 orders REJECTED by compliance"
+      ]
+    }
+  ],
+  "approved_at": "2025-12-24T16:09:33.186180Z"
+}

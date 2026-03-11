@@ -1,0 +1,203 @@
+{
+  "date": "2026-02-05",
+  "start_time": "2026-02-05T08:00:05.320998",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "11:00 AM ET",
+    "current_date": "Thursday, February 05, 2026"
+  },
+  "regime_analysis": {
+    "regime": "BEARISH",
+    "confidence": "HIGH",
+    "spy_price": 677.4550170898438,
+    "spy_change_pct": -1.2729689037269791,
+    "vix_level": 22.309999465942383,
+    "recommendation": "UNFAVORABLE CONDITIONS"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "AES",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260205T160800Z_f815a8ff"
+    },
+    {
+      "ticker": "RRC",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260205T160800Z_2e4b4fab"
+    },
+    {
+      "ticker": "CMCSA",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260205T160800Z_21b1462e"
+    },
+    {
+      "ticker": "ARM",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260205T160800Z_268b01b1"
+    },
+    {
+      "ticker": "BWA",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260205T160800Z_cab82417"
+    },
+    {
+      "ticker": "AEM",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260205T160800Z_fcb681af"
+    },
+    {
+      "ticker": "WPM",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260205T160800Z_91153e20"
+    },
+    {
+      "ticker": "AGI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260205T160800Z_9c91a289"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-02-05T08:08:27.362146",
+    "equity": 101852.19,
+    "cash": 50844.94,
+    "buying_power": 148987.06,
+    "portfolio_value": 101852.19,
+    "starting_capital": 100000.0,
+    "total_return": 1852.1900000000023,
+    "total_return_pct": 1.8521900000000022,
+    "daily_pl": 3680.6199999999953,
+    "daily_pl_pct": 3.7491709667065476,
+    "total_unrealized_pl": -135.1535,
+    "position_count": 9,
+    "positions": [
+      {
+        "ticker": "CMCSA",
+        "shares": 196.0,
+        "entry_price": 30.56,
+        "current_price": 30.555,
+        "market_value": 5988.78,
+        "unrealized_pl": -0.98,
+        "unrealized_pl_pct": -0.016
+      },
+      {
+        "ticker": "AES",
+        "shares": 385.0,
+        "entry_price": 15.56,
+        "current_price": 15.555,
+        "market_value": 5988.675,
+        "unrealized_pl": -1.925,
+        "unrealized_pl_pct": -0.032
+      },
+      {
+        "ticker": "RRC",
+        "shares": 167.0,
+        "entry_price": 35.81,
+        "current_price": 35.77,
+        "market_value": 5973.59,
+        "unrealized_pl": -6.68,
+        "unrealized_pl_pct": -0.11199999999999999
+      },
+      {
+        "ticker": "BWA",
+        "shares": 118.0,
+        "entry_price": 50.61,
+        "current_price": 50.57,
+        "market_value": 5967.26,
+        "unrealized_pl": -4.72,
+        "unrealized_pl_pct": -0.079
+      },
+      {
+        "ticker": "WPM",
+        "shares": 45.0,
+        "entry_price": 132.53,
+        "current_price": 132.3387,
+        "market_value": 5955.2415,
+        "unrealized_pl": -8.6085,
+        "unrealized_pl_pct": -0.14400000000000002
+      },
+      {
+        "ticker": "ARM",
+        "shares": 54.0,
+        "entry_price": 109.33,
+        "current_price": 109.25,
+        "market_value": 5899.5,
+        "unrealized_pl": -4.32,
+        "unrealized_pl_pct": -0.073
+      },
+      {
+        "ticker": "AEM",
+        "shares": 31.0,
+        "entry_price": 189.73,
+        "current_price": 189.73,
+        "market_value": 5881.63,
+        "unrealized_pl": 0.0,
+        "unrealized_pl_pct": 0.0
+      },
+      {
+        "ticker": "AGI",
+        "shares": 148.0,
+        "entry_price": 38.14,
+        "current_price": 38.125,
+        "market_value": 5642.5,
+        "unrealized_pl": -2.22,
+        "unrealized_pl_pct": -0.039
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 1,
+    "db_positions_before": 0,
+    "stale_closed": 0,
+    "in_sync": 0
+  },
+  "position_drift": {
+    "positions_checked": 1,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260205_080758",
+    "total_trades": 8,
+    "quality_score": 82,
+    "ceo_rating": "GOOD",
+    "ceo_recommendation": "RECOMMEND APPROVAL"
+  },
+  "sells_count": 0,
+  "buys_count": 8,
+  "verification": {
+    "passed": true,
+    "issues": [],
+    "summary": {
+      "position_count": 9,
+      "sells_executed": 0,
+      "buys_executed": 8,
+      "expected_count_change": 8
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 9,
+    "fills_recorded": 8,
+    "orders_updated": 8,
+    "already_recorded": 1,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-02-05T08:08:29.273681",
+  "duration_seconds": 503.952697
+}

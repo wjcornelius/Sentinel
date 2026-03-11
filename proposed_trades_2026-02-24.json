@@ -1,0 +1,94 @@
+{
+  "plan_id": "PLAN_20260224_080708",
+  "generated_at": "2026-02-24T16:07:08.636829Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 3,
+    "research_candidates": 67,
+    "gpt5_selected": 3,
+    "compliance_flagged": 0,
+    "overall_quality_score": 81
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 26,
+    "compliance_advisory": 100
+  },
+  "trades": [
+    {
+      "ticker": "CRDO",
+      "action": "BUY",
+      "shares": 81,
+      "allocated_capital": 10000,
+      "entry_price": 123.1500015258789,
+      "composite_score": 71.8,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "Credo Technology Group Holding Ltd (CRDO) shows strong positive sentiment with institutional buying by Citigroup of 349,209 shares, robust analyst consensus of Buy ratings, and AI-driven trading signals indicating overweight bias across time horizons[1][3][4]. The stock traded up 2.15% to $130.66, supported by recent strong earnings beats and revenue growth of 272.1% year-over-year[3][6]. Note that negative news pertains to unrelated Credo Brands Marketing Ltd hitting an all-time low[2].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "SFM",
+      "action": "BUY",
+      "shares": 140,
+      "allocated_capital": 10000,
+      "entry_price": 71.2699966430664,
+      "composite_score": 70.0,
+      "sentiment_score": 62.0,
+      "sentiment_summary": "Sprouts Farmers Market (SFM) stock rose nearly 6% on Monday to close at $71.50 and held near $72 in Tuesday premarket, driven by a $1 billion share buyback announcement and plans for 40+ new stores despite guidance for flat to slightly negative comparable sales in 2026[1][3][5]. Management acknowledged challenges in early 2026, including weaker customer traffic, prompting leadership changes in merchandising and customer divisions[1][4]. Analyst consensus remains 'Moderate Buy' or 'Buy' with a $108.15 target price, supported by recent institutional investment[2][3].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ADMA",
+      "action": "BUY",
+      "shares": 613,
+      "allocated_capital": 10000,
+      "entry_price": 16.290000915527344,
+      "composite_score": 61.8,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "ADMA Biologics announced it will report Q4 and full-year 2025 financial results on February 25, 2026, after market close, followed by a conference call at 4:30 p.m. ET.[1][4] Shares closed up 2.06% at $16.32, outperforming the healthcare sector amid rising institutional interest ahead of the earnings release.[2] Recent price action shows mild gains of 0.25% to 0.59% on announcement days, building on strong prior quarters with revenue growth and raised guidance.[1][3]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 67 candidates (avg score: 44.8)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 78/78 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 0 SELLs, 3 BUYs ($30,000 allocated)",
+      "quality_score": 26,
+      "issues": [
+        "Capital deployment 26.7% (target 90.0%+)",
+        "Limited diversification: 3 new positions (target 12-20). Total after trades: 14"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 3 BUYs approved, 0 rejected, 0 SELLs",
+      "quality_score": 100,
+      "issues": []
+    }
+  ],
+  "approved_at": "2026-02-24T16:07:10.106929Z"
+}

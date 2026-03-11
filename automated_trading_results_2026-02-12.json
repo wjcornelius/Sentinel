@@ -1,0 +1,258 @@
+{
+  "date": "2026-02-12",
+  "start_time": "2026-02-12T08:00:02.173836",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "11:00 AM ET",
+    "current_date": "Thursday, February 12, 2026"
+  },
+  "regime_analysis": {
+    "regime": "NEUTRAL",
+    "confidence": "MEDIUM",
+    "spy_price": 688.4000244140625,
+    "spy_change_pct": -0.5144802366536759,
+    "vix_level": 18.260000228881836,
+    "recommendation": "NORMAL CONDITIONS"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "ALLY",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260212T160748Z_90800553"
+    },
+    {
+      "ticker": "BANC",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260212T160748Z_f35e7963"
+    },
+    {
+      "ticker": "C",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260212T160748Z_69250cbb"
+    },
+    {
+      "ticker": "AMKR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260212T160750Z_1e8b0fd8"
+    },
+    {
+      "ticker": "FLR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260212T160750Z_cb03a5e2"
+    },
+    {
+      "ticker": "APH",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260212T160750Z_68b5caea",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CNM",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260212T160750Z_cc807aa8",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CDE",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260212T160750Z_a9ab3c24",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ACI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260212T160750Z_d38246a2",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "B",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260212T160750Z_8aaa0ebf",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CRDO",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260212T160750Z_da2f787a",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "MTCH",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260212T160750Z_9df5a25c",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "AXTA",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260212T160750Z_c23a9a27",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-02-12T08:08:11.230861",
+    "equity": 103872.3,
+    "cash": 17520.29,
+    "buying_power": 117682.52,
+    "portfolio_value": 103872.3,
+    "starting_capital": 100000.0,
+    "total_return": 3872.300000000003,
+    "total_return_pct": 3.8723000000000027,
+    "daily_pl": 2670.1300000000047,
+    "daily_pl_pct": 2.638411804806166,
+    "total_unrealized_pl": 3078.545,
+    "position_count": 11,
+    "positions": [
+      {
+        "ticker": "DOCN",
+        "shares": 167.0,
+        "entry_price": 60.11,
+        "current_price": 62.48,
+        "market_value": 10434.16,
+        "unrealized_pl": 395.79,
+        "unrealized_pl_pct": 3.943
+      },
+      {
+        "ticker": "CF",
+        "shares": 107.0,
+        "entry_price": 92.61,
+        "current_price": 96.25,
+        "market_value": 10298.75,
+        "unrealized_pl": 389.48,
+        "unrealized_pl_pct": 3.93
+      },
+      {
+        "ticker": "FLR",
+        "shares": 214.0,
+        "entry_price": 46.27,
+        "current_price": 46.11,
+        "market_value": 9867.54,
+        "unrealized_pl": -34.24,
+        "unrealized_pl_pct": -0.346
+      },
+      {
+        "ticker": "AMKR",
+        "shares": 192.0,
+        "entry_price": 51.37,
+        "current_price": 51.34,
+        "market_value": 9857.28,
+        "unrealized_pl": -5.76,
+        "unrealized_pl_pct": -0.058
+      },
+      {
+        "ticker": "CRBG",
+        "shares": 321.0,
+        "entry_price": 31.15,
+        "current_price": 30.625,
+        "market_value": 9830.625,
+        "unrealized_pl": -168.525,
+        "unrealized_pl_pct": -1.685
+      },
+      {
+        "ticker": "AEM",
+        "shares": 31.0,
+        "entry_price": 189.73,
+        "current_price": 217.28,
+        "market_value": 6735.68,
+        "unrealized_pl": 854.05,
+        "unrealized_pl_pct": 14.521
+      },
+      {
+        "ticker": "ARM",
+        "shares": 54.0,
+        "entry_price": 109.33,
+        "current_price": 124.555,
+        "market_value": 6725.97,
+        "unrealized_pl": 822.15,
+        "unrealized_pl_pct": 13.926
+      },
+      {
+        "ticker": "AES",
+        "shares": 385.0,
+        "entry_price": 15.56,
+        "current_price": 16.74,
+        "market_value": 6444.9,
+        "unrealized_pl": 454.3,
+        "unrealized_pl_pct": 7.5840000000000005
+      },
+      {
+        "ticker": "CMCSA",
+        "shares": 196.0,
+        "entry_price": 30.56,
+        "current_price": 32.295,
+        "market_value": 6329.82,
+        "unrealized_pl": 340.06,
+        "unrealized_pl_pct": 5.6770000000000005
+      },
+      {
+        "ticker": "RRC",
+        "shares": 167.0,
+        "entry_price": 35.81,
+        "current_price": 36.63,
+        "market_value": 6117.21,
+        "unrealized_pl": 136.94,
+        "unrealized_pl_pct": 2.29
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [
+    "Verification: Expected positions not found: AXTA, CRDO, MTCH, CNM, B, ACI, APH, CDE"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 12,
+    "db_positions_before": 11,
+    "stale_closed": 0,
+    "in_sync": 11
+  },
+  "position_drift": {
+    "positions_checked": 12,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260212_080740",
+    "total_trades": 13,
+    "quality_score": 94,
+    "ceo_rating": "EXCELLENT",
+    "ceo_recommendation": "STRONGLY RECOMMEND APPROVAL"
+  },
+  "sells_count": 3,
+  "buys_count": 10,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: AXTA, CRDO, MTCH, CNM, B, ACI, APH, CDE"
+    ],
+    "summary": {
+      "position_count": 11,
+      "sells_executed": 3,
+      "buys_executed": 10,
+      "expected_count_change": 7
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 5,
+    "fills_recorded": 5,
+    "orders_updated": 5,
+    "already_recorded": 0,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-02-12T08:08:14.070543",
+  "duration_seconds": 491.896719
+}

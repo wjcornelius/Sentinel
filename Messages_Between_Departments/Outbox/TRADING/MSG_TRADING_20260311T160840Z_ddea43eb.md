@@ -1,0 +1,36 @@
+---
+from: TRADING
+message_id: MSG_TRADING_20260311T160840Z_ddea43eb
+message_type: log
+priority: routine
+requires_response: false
+timestamp: '2026-03-11T16:08:40.122716Z'
+to: COMPLIANCE
+---
+
+# Trade Executed: BROS SELL 190.0
+
+## Execution Log
+
+Trade executed via Alpaca.
+
+- **Ticker:** BROS
+- **Action:** SELL
+- **Quantity:** 190.0
+- **Alpaca Order ID:** d6aa4e81-041b-4135-8964-6a67ae6ea3f8
+
+
+## Data Payload
+
+```json
+{
+  "order_id": "d6aa4e81-041b-4135-8964-6a67ae6ea3f8",
+  "ticker": "BROS",
+  "action": "SELL",
+  "shares": 190.0,
+  "order_type": "MARKET",
+  "status": "SUBMITTED",
+  "submitted_at": "2026-03-11T16:08:41.091234+00:00",
+  "alpaca_order_id": "d6aa4e81-041b-4135-8964-6a67ae6ea3f8"
+}
+```

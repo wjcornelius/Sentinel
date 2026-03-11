@@ -421,6 +421,129 @@ Proceeding with trading plan generation.
                 if flagged and 'compliance_note' in trade:
                     print(f"    Note: {trade['compliance_note']}")
 
+        # Portfolio Preview - What will the portfolio look like after trades?
+        print(f"\n" + "-" * 80)
+        print("PORTFOLIO PREVIEW (After Executing This Plan):")
+        print("-" * 80)
+
+        # Build the projected portfolio
+        from alpaca.trading.client import TradingClient
+        api_key = os.getenv('APCA_API_KEY_ID')
+        api_secret = os.getenv('APCA_API_SECRET_KEY')
+
+        projected_portfolio = {}
+
+        if api_key and api_secret:
+            try:
+                # Get current positions from Alpaca
+                trading_client = TradingClient(api_key, api_secret, paper=True)
+                positions = trading_client.get_all_positions()
+
+                # Add all current positions to projected portfolio
+                for pos in positions:
+                    ticker = pos.symbol
+                    projected_portfolio[ticker] = {
+                        'shares': float(pos.qty),
+                        'price': float(pos.current_price),
+                        'value': float(pos.market_value),
+                        'score': None,  # Will try to get from trade data
+                        'rank': None
+                    }
+            except Exception as e:
+                print(f"  [Warning] Could not fetch current positions: {e}")
+                projected_portfolio = {}
+
+        # Apply the proposed trades to the projected portfolio
+        for trade in trades:
+            ticker = trade.get('ticker', trade.get('symbol'))
+            action = trade.get('action', 'BUY').upper()
+            shares = trade.get('shares', 0)
+            price = trade.get('entry_price', trade.get('current_price', trade.get('price', 0)))
+            score = trade.get('composite_score')
+
+            if action == 'SELL':
+                # Remove or reduce position
+                sell_pct = trade.get('sell_pct', 100)
+                if sell_pct >= 100:
+                    # Complete liquidation
+                    if ticker in projected_portfolio:
+                        del projected_portfolio[ticker]
+                else:
+                    # Partial trim
+                    if ticker in projected_portfolio:
+                        projected_portfolio[ticker]['shares'] -= shares
+                        projected_portfolio[ticker]['value'] = projected_portfolio[ticker]['shares'] * price
+                        if projected_portfolio[ticker]['shares'] <= 0:
+                            del projected_portfolio[ticker]
+            else:  # BUY or INCREASE
+                if ticker in projected_portfolio:
+                    # Adding to existing position
+                    projected_portfolio[ticker]['shares'] += shares
+                    projected_portfolio[ticker]['value'] = projected_portfolio[ticker]['shares'] * price
+                else:
+                    # New position
+                    projected_portfolio[ticker] = {
+                        'shares': shares,
+                        'price': price,
+                        'value': shares * price,
+                        'score': score,
+                        'rank': None
+                    }
+                # Update score if available
+                if score is not None:
+                    projected_portfolio[ticker]['score'] = score
+
+        # Get scores for positions that don't have them yet
+        # (from candidates or current holdings data)
+        try:
+            from Departments.Operations.operations_manager import OperationsManager
+            ops = OperationsManager(self.project_root)
+
+            # Try to get holdings with scores from database
+            holdings_data = ops._get_current_holdings()
+            for holding in holdings_data:
+                ticker = holding.get('ticker')
+                if ticker in projected_portfolio and projected_portfolio[ticker]['score'] is None:
+                    score = holding.get('research_composite_score', holding.get('composite_score'))
+                    if score is not None:
+                        projected_portfolio[ticker]['score'] = score
+        except Exception:
+            pass  # Silently fail if we can't get additional score data
+
+        # Sort by score (descending), then by ticker
+        portfolio_list = []
+        for ticker, data in projected_portfolio.items():
+            portfolio_list.append({
+                'ticker': ticker,
+                'shares': data['shares'],
+                'price': data['price'],
+                'value': data['value'],
+                'score': data['score']
+            })
+
+        # Sort: highest score first, then alphabetically by ticker
+        portfolio_list.sort(key=lambda x: (-x['score'] if x['score'] is not None else -999, x['ticker']))
+
+        # Assign ranks based on score
+        for rank, item in enumerate(portfolio_list, 1):
+            item['rank'] = rank
+
+        # Display the projected portfolio
+        if portfolio_list:
+            print(f"\n  Total Positions: {len(portfolio_list)}")
+            total_value = sum(p['value'] for p in portfolio_list)
+            print(f"  Total Value: ${total_value:,.2f}\n")
+
+            print(f"  {'Rank':<6} {'Ticker':<8} {'Shares':<10} {'Price':<12} {'Position Value':<16} {'Score':<8}")
+            print(f"  {'-'*6} {'-'*8} {'-'*10} {'-'*12} {'-'*16} {'-'*8}")
+
+            for p in portfolio_list:
+                rank_str = f"#{p['rank']}"
+                score_str = f"{p['score']:.1f}" if p['score'] is not None else "N/A"
+                print(f"  {rank_str:<6} {p['ticker']:<8} {p['shares']:<10.0f} ${p['price']:<11.2f} ${p['value']:<15,.2f} {score_str:<8}")
+        else:
+            print("  No positions (portfolio would be 100% cash)")
+
         # CEO's Strengths and Concerns
         if ceo_review['strengths']:
             print(f"\n" + "-" * 80)

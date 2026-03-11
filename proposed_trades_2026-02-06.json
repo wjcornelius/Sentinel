@@ -1,0 +1,228 @@
+{
+  "plan_id": "PLAN_20260206_080801",
+  "generated_at": "2026-02-06T16:08:01.741218Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 13,
+    "research_candidates": 68,
+    "gpt5_selected": 13,
+    "compliance_flagged": 0,
+    "overall_quality_score": 91
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 66,
+    "compliance_advisory": 100
+  },
+  "trades": [
+    {
+      "ticker": "DOCN",
+      "action": "BUY",
+      "shares": 167,
+      "allocated_capital": 10000,
+      "entry_price": 59.7400016784668,
+      "composite_score": 80.6,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "Cantor Fitzgerald upgraded DigitalOcean (DOCN) and raised its price target to $68 on February 5, 2026, signaling strong analyst confidence.[5] Pre-market trading on February 6 showed DOCN at $59.60, up 3.36%, following recent gains including a 7% rise earlier in the week.[2][1] A DCF analysis indicates the stock is slightly undervalued at recent closes around $57-58, with positive returns over short and long terms.[4]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "C",
+      "action": "BUY",
+      "shares": 82,
+      "allocated_capital": 10000,
+      "entry_price": 121.73999786376953,
+      "composite_score": 72.6,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "Citigroup announced the full redemption of its $2.3 billion Series X preferred stock on February 6, 2026, with a redemption date of February 18, alongside introducing new 6.250% Series II preferred stock and senior notes to optimize its capital structure. The company also declared a quarterly common stock dividend of $0.60 per share, payable February 27, 2026. Analysts view the stock as approximately 20% undervalued at $115.74, supported by growth in wealth management revenues despite short-term price declines.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ALLY",
+      "action": "BUY",
+      "shares": 233,
+      "allocated_capital": 10000,
+      "entry_price": 42.790000915527344,
+      "composite_score": 71.4,
+      "sentiment_score": 55.0,
+      "sentiment_summary": "Ally Financial announced a $2 billion share repurchase program, signaling management confidence in the stock's value. TIME and Ally named the 2026 Dealer of the Year, highlighting ongoing brand partnerships. However, a probe by Sen. Elizabeth Warren into Ally's auto loan repossession practices raises regulatory risks for its core business.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BANC",
+      "action": "BUY",
+      "shares": 483,
+      "allocated_capital": 10000,
+      "entry_price": 20.670000076293945,
+      "composite_score": 71.0,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "On February 5, 2026, Banc of California announced a 20% increase in its quarterly dividend to $0.12 per share[3][4]. The stock closed slightly higher at $20.18, up 0.22%[1]. No other significant news items from the last 24 hours were reported.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CF",
+      "action": "BUY",
+      "shares": 107,
+      "allocated_capital": 10000,
+      "entry_price": 92.63500213623047,
+      "composite_score": 71.0,
+      "sentiment_score": 55.0,
+      "sentiment_summary": "CF Industries launched a low carbon fertilizer pilot with POET and major farm cooperatives, gaining attention for tying nitrogen products to cleaner corn and ethanol production. The company declared a $0.50 per share quarterly dividend payable in late February 2026 and confirmed Q4 2025 earnings release on February 18. Analyst consensus remains Hold, with the stock trading near its average price target amid recent positive long-term returns.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CRBG",
+      "action": "BUY",
+      "shares": 321,
+      "allocated_capital": 10000,
+      "entry_price": 31.059999465942383,
+      "composite_score": 70.6,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "Corebridge Financial (CRBG) launched an innovative Power Select Index Annuity featuring the Invesco New Economy Index, which includes exposure to Nasdaq-100 and spot bitcoin ETFs for growth potential with principal protection[3][4]. The company is set to report quarterly earnings on February 9, with analysts expecting EPS of $1.11 amid anticipation for positive guidance[2]. Shares traded around $29.79-$31.21 today, down from recent highs but showing elevated volume[1][5].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "DD",
+      "action": "BUY",
+      "shares": 215,
+      "allocated_capital": 10000,
+      "entry_price": 46.505001068115234,
+      "composite_score": 66.2,
+      "sentiment_score": 55.0,
+      "sentiment_summary": "Argus lowered its price target for DuPont de Nemours (DD) from $86 to $52 while maintaining a buy rating, contributing to a Moderate Buy consensus from analysts with an average target of $46.42. Short interest dropped 41% to 2.43% of float, signaling reduced bearish sentiment. The company anticipates Q4 2025 earnings release on February 10, amid strategic moves like business separations and share repurchases.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "APG",
+      "action": "BUY",
+      "shares": 226,
+      "allocated_capital": 10000,
+      "entry_price": 44.064998626708984,
+      "composite_score": 65.6,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Based on the search results provided, I cannot deliver a complete analysis of recent news sentiment for APG stock from the last 24 hours. The most recent news items in the search results are from Febr",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "AU",
+      "action": "BUY",
+      "shares": 95,
+      "allocated_capital": 10000,
+      "entry_price": 104.8407974243164,
+      "composite_score": 63.6,
+      "sentiment_score": 38.0,
+      "sentiment_summary": "The S&P/ASX 200 index closed down 2.03% on Friday amid losses in A-REITs, IT, and gold sectors, with falling stocks outnumbering advancers 1099 to 190. Commodity price slumps and a collapsed $300 billion Rio Tinto-Glencore deal added to market concerns, mirroring negative global sentiment from US tech weakness. One article highlighted bullish analyst targets for select ASX 200 stocks like Iperionix, ARB, and Capricorn Metals, suggesting 70-80% upside potential.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "AXTA",
+      "action": "BUY",
+      "shares": 297,
+      "allocated_capital": 10000,
+      "entry_price": 33.66999816894531,
+      "composite_score": 62.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Based on the available search results, I cannot provide a reliable sentiment analysis for AXTA stock from the last 24 hours. The most recent news in the search results is from February 4, 2026 (two da",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "AGI",
+      "action": "SELL",
+      "shares": 148.0,
+      "sell_pct": 100,
+      "composite_score": 46.8,
+      "current_price": 37.66999816894531,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Alamos Gold (AGI) released guidance projecting 46% production growth by 2028 and lower AISC costs of $1200\u2013$1300/oz, with 12% production increase in 2026 despite some downward revisions from prior estimates.[1] CIBC raised its price target to C$80 with an 'Outperformer' rating on February 6, 2026.[4] Institutional activity showed mixed moves, including shares acquired by SBI Securities and sold by Principal Financial, amid a consensus 'Buy' analyst rating.[2][3]",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 46.8 < 60 absolute minimum",
+      "current_value": 5856.36
+    },
+    {
+      "ticker": "BWA",
+      "action": "SELL",
+      "shares": 118.0,
+      "sell_pct": 100,
+      "composite_score": 57.6,
+      "current_price": 51.5099983215332,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Based on the search results available, I cannot provide a sentiment analysis for BorgWarner (BWA) stock from the last 24 hours with confidence.\n\nThe most recent news in the search results is from Febr",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 57.6 < 60 absolute minimum",
+      "current_value": 6082.31
+    },
+    {
+      "ticker": "WPM",
+      "action": "SELL",
+      "shares": 45.0,
+      "sell_pct": 100,
+      "composite_score": 58.0,
+      "current_price": 136.2534942626953,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Wheaton Precious Metals announced a planned leadership transition effective March 31, 2026, with President Haytham Hodaly succeeding co-founder Randy Smallwood as CEO, while Smallwood becomes non-executive Chair for continuity.[4][5][6] The company benefits from surging gold prices above $4,700, boosting its streaming model margins and stock performance.[6] Analyst consensus remains a Buy rating, with institutional ownership strong at over 70%.[2][3]",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 58.0 < 60 absolute minimum",
+      "current_value": 6112.35
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 68 candidates (avg score: 44.2)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 76/76 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 3 SELLs, 10 BUYs ($100,000 allocated)",
+      "quality_score": 66,
+      "issues": [
+        "Capital deployment 59.2% (target 90.0%+)",
+        "Limited diversification: 10 new positions (target 12-20). Total after trades: 15"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 10 BUYs approved, 0 rejected, 3 SELLs",
+      "quality_score": 100,
+      "issues": []
+    }
+  ],
+  "approved_at": "2026-02-06T16:08:03.364090Z"
+}

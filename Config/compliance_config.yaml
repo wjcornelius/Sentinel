@@ -5,9 +5,9 @@ last_updated: 2025-10-31
 # POSITION SIZING RULES
 # ============================================================================
 position_sizing:
-  max_position_pct: 0.05  # Maximum 5% of portfolio in single position
+  max_position_pct: 0.10  # Maximum 10% of portfolio in single position (aligned with hard_constraints)
   min_position_value: 500  # Minimum $500 position size (lowered from $1000 to capture more opportunities)
-  max_position_value: 5000  # Maximum $5,000 position size (user preference)
+  max_position_value: 10000  # Maximum $10,000 position size (10% of $100K portfolio)
 
   # Enforcement
   enforce_max_position_pct: true

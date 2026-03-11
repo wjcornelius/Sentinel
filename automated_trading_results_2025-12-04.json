@@ -1,0 +1,303 @@
+{
+  "date": "2025-12-04",
+  "start_time": "2025-12-04T08:00:03.501767",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "11:00 AM ET",
+    "current_date": "Thursday, December 04, 2025"
+  },
+  "regime_analysis": {
+    "regime": "NEUTRAL",
+    "confidence": "MEDIUM",
+    "spy_price": 683.489990234375,
+    "spy_change_pct": -0.058492506908166764,
+    "vix_level": 16.110000610351562,
+    "recommendation": "NORMAL CONDITIONS"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "status": "SKIPPED",
+      "reason": "Asset not tradeable: AssetStatus.INACTIVE"
+    },
+    {
+      "ticker": "AZN",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20251204T161024Z_706bb943"
+    },
+    {
+      "ticker": "BRBR",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20251204T161024Z_e549a1c1"
+    },
+    {
+      "ticker": "DLTR",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20251204T161024Z_e0059935"
+    },
+    {
+      "ticker": "GSK",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251204T161025Z_99979363",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "KDP",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251204T161025Z_7cbca20e"
+    },
+    {
+      "ticker": "KKR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251204T161025Z_af715aaa",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CNM",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251204T161025Z_52ba7cc0",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "EXE",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251204T161025Z_3cea2831",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "GPN",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251204T161025Z_d06908f2",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "HSAI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251204T161025Z_371da289",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "DT",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251204T161025Z_8f1cc8b0",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "HIMS",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251204T161025Z_a1ce08c6",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "FRSH",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251204T161025Z_1154dc3a",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "FTNT",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251204T161025Z_ee095724",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "GLXY",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251204T161025Z_32a5a3dc",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "EMR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251204T161025Z_5f080de8",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BLSH",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251204T161025Z_173a509c",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "LEN",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251204T161025Z_021d49b6",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2025-12-04T08:10:34.072428",
+    "equity": 100298.22,
+    "cash": 13492.4,
+    "buying_power": 110080.55,
+    "portfolio_value": 100298.22,
+    "starting_capital": 100000.0,
+    "total_return": 298.22000000000116,
+    "total_return_pct": 0.29822000000000115,
+    "daily_pl": 3480.415000000008,
+    "daily_pl_pct": 3.5948088267442215,
+    "total_unrealized_pl": 4076.2576,
+    "position_count": 14,
+    "positions": [
+      {
+        "ticker": "CWAN",
+        "shares": 1151.0,
+        "entry_price": 19.6,
+        "current_price": 20.96,
+        "market_value": 24124.96,
+        "unrealized_pl": 1565.36,
+        "unrealized_pl_pct": 6.9387755102040805
+      },
+      {
+        "ticker": "FTI",
+        "shares": 175.0,
+        "entry_price": 43.4,
+        "current_price": 46.835,
+        "market_value": 8196.125,
+        "unrealized_pl": 601.125,
+        "unrealized_pl_pct": 7.9147465437788
+      },
+      {
+        "ticker": "MNST",
+        "shares": 83.0,
+        "entry_price": 71.871084,
+        "current_price": 73.47,
+        "market_value": 6098.01,
+        "unrealized_pl": 132.71,
+        "unrealized_pl_pct": 2.22469951217877
+      },
+      {
+        "ticker": "GEO",
+        "shares": 319.0,
+        "entry_price": 15.590188,
+        "current_price": 17.13,
+        "market_value": 5464.47,
+        "unrealized_pl": 491.2,
+        "unrealized_pl_pct": 9.87680138017843
+      },
+      {
+        "ticker": "DNOW",
+        "shares": 370.0,
+        "entry_price": 13.48,
+        "current_price": 14.2991,
+        "market_value": 5290.667,
+        "unrealized_pl": 303.067,
+        "unrealized_pl_pct": 6.07640949554896
+      },
+      {
+        "ticker": "BZ",
+        "shares": 241.0,
+        "entry_price": 20.57,
+        "current_price": 21.43,
+        "market_value": 5164.63,
+        "unrealized_pl": 207.26,
+        "unrealized_pl_pct": 4.18084589207584
+      },
+      {
+        "ticker": "GEHC",
+        "shares": 60.0,
+        "entry_price": 81.8,
+        "current_price": 82.985,
+        "market_value": 4979.1,
+        "unrealized_pl": 71.1,
+        "unrealized_pl_pct": 1.4486552567237199
+      },
+      {
+        "ticker": "KDP",
+        "shares": 175.0,
+        "entry_price": 28.43,
+        "current_price": 28.425,
+        "market_value": 4974.375,
+        "unrealized_pl": -0.875,
+        "unrealized_pl_pct": -0.017587055926839998
+      },
+      {
+        "ticker": "OPCH",
+        "shares": 154.0,
+        "entry_price": 28.03,
+        "current_price": 29.7,
+        "market_value": 4573.8,
+        "unrealized_pl": 257.18,
+        "unrealized_pl_pct": 5.95790224759187
+      },
+      {
+        "ticker": "HL",
+        "shares": 255.0,
+        "entry_price": 15.58,
+        "current_price": 16.915,
+        "market_value": 4313.325,
+        "unrealized_pl": 340.425,
+        "unrealized_pl_pct": 8.568677792041079
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.7700831024930697
+      },
+      {
+        "ticker": "BKR",
+        "shares": 73.0,
+        "entry_price": 48.95,
+        "current_price": 50.38,
+        "market_value": 3677.74,
+        "unrealized_pl": 104.39,
+        "unrealized_pl_pct": 2.92134831460674
+      },
+      {
+        "ticker": "IVZ",
+        "shares": 125.0,
+        "entry_price": 24.57,
+        "current_price": 25.68,
+        "market_value": 3210.0,
+        "unrealized_pl": 138.75,
+        "unrealized_pl_pct": 4.517704517704519
+      },
+      {
+        "ticker": "CLSK",
+        "shares": 202.0,
+        "entry_price": 15.14,
+        "current_price": 14.9928,
+        "market_value": 3028.5456,
+        "unrealized_pl": -29.7344,
+        "unrealized_pl_pct": -0.97225891677675
+      }
+    ]
+  },
+  "warnings": [
+    "Verification: Expected positions not found: CNM, EMR, EXE, FRSH, FTNT, GSK, LEN, GPN, GLXY, HSAI, KKR, HIMS, DT, BLSH"
+  ],
+  "errors": [],
+  "plan_summary": {
+    "plan_id": "PLAN_20251204_081020",
+    "total_trades": 19,
+    "quality_score": 94,
+    "ceo_rating": "EXCELLENT",
+    "ceo_recommendation": "STRONGLY RECOMMEND APPROVAL"
+  },
+  "sells_count": 3,
+  "buys_count": 15,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: CNM, EMR, EXE, FRSH, FTNT, GSK, LEN, GPN, GLXY, HSAI, KKR, HIMS, DT, BLSH"
+    ],
+    "summary": {
+      "position_count": 14,
+      "sells_executed": 3,
+      "buys_executed": 15,
+      "expected_count_change": 12
+    }
+  },
+  "end_time": "2025-12-04T08:10:36.848294",
+  "duration_seconds": 633.346544
+}

@@ -1,0 +1,296 @@
+{
+  "date": "2026-02-10",
+  "start_time": "2026-02-10T08:00:04.950710",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "11:00 AM ET",
+    "current_date": "Tuesday, February 10, 2026"
+  },
+  "regime_analysis": {
+    "regime": "BULLISH",
+    "confidence": "MEDIUM",
+    "spy_price": 695.4199829101562,
+    "spy_change_pct": 0.21182659806430734,
+    "vix_level": 17.290000915527344,
+    "recommendation": "FAVORABLE CONDITIONS"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "AGI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260210T161020Z_0e8b19ff",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CRDO",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260210T161020Z_f7dcf055",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "APO",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260210T161020Z_6c2e2524",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ALAB",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260210T161020Z_c62a2874",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ANET",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260210T161020Z_933697bd",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "EBC",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260210T161020Z_b72c551b",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BZ",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260210T161020Z_9d63ab29",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "AMKR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260210T161020Z_c6e9ced5",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "AU",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260210T161020Z_5797d3a4",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "AXTA",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260210T161020Z_6696d767",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ACI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260210T161020Z_726e73d7",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CENX",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260210T161020Z_0a6ab760",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "EMR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260210T161020Z_dfcb285b",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "B",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260210T161020Z_d0c6e430",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BILL",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260210T161020Z_5977e8f2",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "EQX",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260210T161020Z_65c940a7",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "DDOG",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260210T161020Z_7c8133e3",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-02-10T08:10:40.750083",
+    "equity": 105286.53,
+    "cash": 8955.94,
+    "buying_power": 110532.4,
+    "portfolio_value": 105286.53,
+    "starting_capital": 100000.0,
+    "total_return": 5286.529999999999,
+    "total_return_pct": 5.286529999999999,
+    "daily_pl": 3631.3300000000017,
+    "daily_pl_pct": 3.572202897638293,
+    "total_unrealized_pl": 2831.2850000000003,
+    "position_count": 12,
+    "positions": [
+      {
+        "ticker": "DOCN",
+        "shares": 167.0,
+        "entry_price": 60.11,
+        "current_price": 63.61,
+        "market_value": 10622.87,
+        "unrealized_pl": 584.5,
+        "unrealized_pl_pct": 5.8229999999999995
+      },
+      {
+        "ticker": "CF",
+        "shares": 107.0,
+        "entry_price": 92.61,
+        "current_price": 95.335,
+        "market_value": 10200.845,
+        "unrealized_pl": 291.575,
+        "unrealized_pl_pct": 2.942
+      },
+      {
+        "ticker": "BANC",
+        "shares": 483.0,
+        "entry_price": 20.76,
+        "current_price": 20.79,
+        "market_value": 10041.57,
+        "unrealized_pl": 14.49,
+        "unrealized_pl_pct": 0.145
+      },
+      {
+        "ticker": "C",
+        "shares": 82.0,
+        "entry_price": 121.73,
+        "current_price": 122.35,
+        "market_value": 10032.7,
+        "unrealized_pl": 50.84,
+        "unrealized_pl_pct": 0.509
+      },
+      {
+        "ticker": "CRBG",
+        "shares": 321.0,
+        "entry_price": 31.15,
+        "current_price": 30.83,
+        "market_value": 9896.43,
+        "unrealized_pl": -102.72,
+        "unrealized_pl_pct": -1.027
+      },
+      {
+        "ticker": "ALLY",
+        "shares": 233.0,
+        "entry_price": 42.84,
+        "current_price": 42.42,
+        "market_value": 9883.86,
+        "unrealized_pl": -97.86,
+        "unrealized_pl_pct": -0.98
+      },
+      {
+        "ticker": "ARM",
+        "shares": 54.0,
+        "entry_price": 109.33,
+        "current_price": 130.31,
+        "market_value": 7036.74,
+        "unrealized_pl": 1132.92,
+        "unrealized_pl_pct": 19.189999999999998
+      },
+      {
+        "ticker": "AEM",
+        "shares": 31.0,
+        "entry_price": 189.73,
+        "current_price": 210.165,
+        "market_value": 6515.115,
+        "unrealized_pl": 633.485,
+        "unrealized_pl_pct": 10.771
+      },
+      {
+        "ticker": "CMCSA",
+        "shares": 196.0,
+        "entry_price": 30.56,
+        "current_price": 32.065,
+        "market_value": 6284.74,
+        "unrealized_pl": 294.98,
+        "unrealized_pl_pct": 4.925
+      },
+      {
+        "ticker": "AES",
+        "shares": 385.0,
+        "entry_price": 15.56,
+        "current_price": 15.845,
+        "market_value": 6100.325,
+        "unrealized_pl": 109.725,
+        "unrealized_pl_pct": 1.8319999999999999
+      },
+      {
+        "ticker": "RRC",
+        "shares": 167.0,
+        "entry_price": 35.81,
+        "current_price": 35.96,
+        "market_value": 6005.32,
+        "unrealized_pl": 25.05,
+        "unrealized_pl_pct": 0.41900000000000004
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [
+    "Verification: Expected positions not found: ACI, EBC, AXTA, BILL, AMKR, ALAB, EMR, ANET, BZ, CRDO, EQX, CENX, AGI, AU, APO, DDOG, B"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 12,
+    "db_positions_before": 11,
+    "stale_closed": 0,
+    "in_sync": 11
+  },
+  "position_drift": {
+    "positions_checked": 12,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260210_081018",
+    "total_trades": 17,
+    "quality_score": 100,
+    "ceo_rating": "EXCELLENT",
+    "ceo_recommendation": "STRONGLY RECOMMEND APPROVAL"
+  },
+  "sells_count": 0,
+  "buys_count": 17,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: ACI, EBC, AXTA, BILL, AMKR, ALAB, EMR, ANET, BZ, CRDO, EQX, CENX, AGI, AU, APO, DDOG, B"
+    ],
+    "summary": {
+      "position_count": 12,
+      "sells_executed": 0,
+      "buys_executed": 17,
+      "expected_count_change": 17
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 0,
+    "fills_recorded": 0,
+    "orders_updated": 0,
+    "already_recorded": 0,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-02-10T08:10:42.741829",
+  "duration_seconds": 637.791132
+}

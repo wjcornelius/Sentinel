@@ -92,6 +92,9 @@ class CEO:
         self.current_plan = None
         self.plan_approved = False
 
+        # Mandatory sells (e.g., from position drift monitor)
+        self.mandatory_sells = []
+
         self.logger.info("CEO ready to serve")
         self.logger.info(f"Data source: {self.data_source.get_data_source_info()['data_source']}")
 
@@ -118,6 +121,10 @@ class CEO:
         self.logger.info(f"\n[CEO] User request received: {request}")
 
         if request == "generate_plan":
+            # Pass any mandatory sells to operations manager
+            if self.mandatory_sells:
+                self.logger.info(f"[CEO] Including {len(self.mandatory_sells)} mandatory sell(s) in plan")
+                self.operations_manager.set_mandatory_sells(self.mandatory_sells)
             ai_model = kwargs.get('ai_model', 'gpt-4o-mini')  # Default to budget model
             return self.generate_trading_plan(ai_model=ai_model)
 
@@ -135,6 +142,21 @@ class CEO:
                 'status': 'ERROR',
                 'message': f"Unknown request type: {request}"
             }
+
+    def set_mandatory_sells(self, sells: List[Dict]):
+        """
+        Set mandatory sell orders (e.g., from position drift monitor).
+        These will be included in the next trading plan.
+
+        Args:
+            sells: List of sell orders with ticker, shares, reason
+        """
+        self.mandatory_sells = sells
+        if sells:
+            self.logger.info(f"[CEO] Registered {len(sells)} mandatory sell order(s):")
+            for sell in sells:
+                self.logger.info(f"  - SELL {sell.get('shares', '?')} shares of {sell.get('ticker', '?')}")
+                self.logger.info(f"    Reason: {sell.get('reason', 'Not specified')}")
 
     def generate_trading_plan(self, ai_model: str = 'gpt-4o-mini') -> Dict:
         """
@@ -633,6 +655,29 @@ class CEO:
             # STEP 1: Execute all SELL orders first
             if sells:
                 self.logger.info(f"[CEO] === STEP 1: Executing {len(sells)} SELL orders ===")
+
+                # PRE-CHECK: Filter out inactive/untradeable assets
+                tradeable_sells = []
+                skipped_sells = []
+                for trade in sells:
+                    ticker = trade.get('ticker')
+                    try:
+                        asset = trading_dept.trading_client.get_asset(ticker)
+                        if asset.tradable:
+                            tradeable_sells.append(trade)
+                        else:
+                            self.logger.warning(f"[CEO] SKIPPING {ticker} SELL - asset not tradeable (status: {asset.status})")
+                            skipped_sells.append({'ticker': ticker, 'reason': f'Asset not tradeable: {asset.status}'})
+                    except Exception as e:
+                        self.logger.warning(f"[CEO] SKIPPING {ticker} SELL - cannot verify asset status: {e}")
+                        skipped_sells.append({'ticker': ticker, 'reason': f'Cannot verify: {str(e)}'})
+
+                if skipped_sells:
+                    self.logger.warning(f"[CEO] Skipped {len(skipped_sells)} untradeable sells: {[s['ticker'] for s in skipped_sells]}")
+                    execution_results.extend([{'ticker': s['ticker'], 'action': 'SELL', 'status': 'SKIPPED', 'reason': s['reason']} for s in skipped_sells])
+
+                sells = tradeable_sells  # Replace with filtered list
+
                 sell_results = []
                 for trade in sells:
                     message_id = self._send_trade_to_trading_dept(trade)
@@ -968,7 +1013,7 @@ class CEO:
         # Check 2: Total position count after execution
         # Get current positions count
         try:
-            positions = self.data_source.get_current_positions()
+            positions = self.data_source.get_open_positions()
             current_count = len(positions)
         except:
             current_count = 0
@@ -1028,8 +1073,14 @@ class CEO:
         }
 
         try:
+            # Wait for orders to settle before verifying
+            # Market orders typically fill within seconds, but position updates may lag
+            import time
+            self.logger.info("[CEO] Waiting 10 seconds for orders to settle...")
+            time.sleep(10)
+
             # Query Alpaca for current positions
-            positions = self.data_source.get_current_positions()
+            positions = self.data_source.get_open_positions()
             position_count = len(positions)
 
             self.logger.info(f"[CEO] Current position count: {position_count}")

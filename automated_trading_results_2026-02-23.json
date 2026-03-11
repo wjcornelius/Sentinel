@@ -1,0 +1,246 @@
+{
+  "date": "2026-02-23",
+  "start_time": "2026-02-23T08:00:02.228222",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "11:00 AM ET",
+    "current_date": "Monday, February 23, 2026"
+  },
+  "regime_analysis": {
+    "regime": "BEARISH",
+    "confidence": "HIGH",
+    "spy_price": 682.3900146484375,
+    "spy_change_pct": -1.0211302238274462,
+    "vix_level": 21.0,
+    "recommendation": "UNFAVORABLE CONDITIONS"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "AES",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260223T160907Z_edcd21bb"
+    },
+    {
+      "ticker": "ANET",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260223T160907Z_19d1dc24"
+    },
+    {
+      "ticker": "AXTA",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260223T160907Z_53c39610"
+    },
+    {
+      "ticker": "DOCN",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260223T160907Z_575246e1"
+    },
+    {
+      "ticker": "SN",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260223T160910Z_133357b5"
+    },
+    {
+      "ticker": "AS",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260223T160910Z_b8064df3"
+    },
+    {
+      "ticker": "MTCH",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260223T160910Z_4563989c"
+    },
+    {
+      "ticker": "ABNB",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260223T160910Z_9172f4cc"
+    },
+    {
+      "ticker": "FLEX",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260223T160910Z_003f5af3",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "G",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260223T160910Z_a1fd55ac",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-02-23T08:09:36.077495",
+    "equity": 103132.06,
+    "cash": 12167.21,
+    "buying_power": 111589.2,
+    "portfolio_value": 103132.06,
+    "starting_capital": 100000.0,
+    "total_return": 3132.0599999999977,
+    "total_return_pct": 3.1320599999999974,
+    "daily_pl": 2980.0599999999977,
+    "daily_pl_pct": 2.9755371834811064,
+    "total_unrealized_pl": 4728.0199999999995,
+    "position_count": 12,
+    "positions": [
+      {
+        "ticker": "AGI",
+        "shares": 224.0,
+        "entry_price": 44.8,
+        "current_price": 48.38,
+        "market_value": 10837.12,
+        "unrealized_pl": 801.92,
+        "unrealized_pl_pct": 7.991
+      },
+      {
+        "ticker": "CDE",
+        "shares": 423.0,
+        "entry_price": 23.77,
+        "current_price": 24.7,
+        "market_value": 10448.1,
+        "unrealized_pl": 393.39,
+        "unrealized_pl_pct": 3.9120000000000004
+      },
+      {
+        "ticker": "CF",
+        "shares": 107.0,
+        "entry_price": 92.61,
+        "current_price": 95.63,
+        "market_value": 10232.41,
+        "unrealized_pl": 323.14,
+        "unrealized_pl_pct": 3.261
+      },
+      {
+        "ticker": "B",
+        "shares": 205.0,
+        "entry_price": 46.84,
+        "current_price": 49.01,
+        "market_value": 10047.05,
+        "unrealized_pl": 444.85,
+        "unrealized_pl_pct": 4.633
+      },
+      {
+        "ticker": "AU",
+        "shares": 71.0,
+        "entry_price": 106.66,
+        "current_price": 119.68,
+        "market_value": 8497.28,
+        "unrealized_pl": 924.42,
+        "unrealized_pl_pct": 12.206999999999999
+      },
+      {
+        "ticker": "AEM",
+        "shares": 31.0,
+        "entry_price": 189.73,
+        "current_price": 236.27,
+        "market_value": 7324.37,
+        "unrealized_pl": 1442.74,
+        "unrealized_pl_pct": 24.529999999999998
+      },
+      {
+        "ticker": "RRC",
+        "shares": 167.0,
+        "entry_price": 35.81,
+        "current_price": 38.99,
+        "market_value": 6511.33,
+        "unrealized_pl": 531.06,
+        "unrealized_pl_pct": 8.88
+      },
+      {
+        "ticker": "MTCH",
+        "shares": 191.0,
+        "entry_price": 31.2,
+        "current_price": 31.19,
+        "market_value": 5957.29,
+        "unrealized_pl": -1.91,
+        "unrealized_pl_pct": -0.032
+      },
+      {
+        "ticker": "AS",
+        "shares": 148.0,
+        "entry_price": 40.26,
+        "current_price": 40.21,
+        "market_value": 5951.08,
+        "unrealized_pl": -7.4,
+        "unrealized_pl_pct": -0.124
+      },
+      {
+        "ticker": "SN",
+        "shares": 48.0,
+        "entry_price": 123.69,
+        "current_price": 123.3,
+        "market_value": 5918.4,
+        "unrealized_pl": -18.72,
+        "unrealized_pl_pct": -0.315
+      },
+      {
+        "ticker": "ABNB",
+        "shares": 46.0,
+        "entry_price": 120.22,
+        "current_price": 120.225,
+        "market_value": 5530.35,
+        "unrealized_pl": 0.23,
+        "unrealized_pl_pct": 0.004
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [
+    "Verification: Expected positions not found: FLEX, G"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 12,
+    "db_positions_before": 11,
+    "stale_closed": 0,
+    "in_sync": 11
+  },
+  "position_drift": {
+    "positions_checked": 12,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260223_080858",
+    "total_trades": 10,
+    "quality_score": 83,
+    "ceo_rating": "GOOD",
+    "ceo_recommendation": "RECOMMEND APPROVAL"
+  },
+  "sells_count": 4,
+  "buys_count": 6,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: FLEX, G"
+    ],
+    "summary": {
+      "position_count": 12,
+      "sells_executed": 4,
+      "buys_executed": 6,
+      "expected_count_change": 2
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 8,
+    "fills_recorded": 8,
+    "orders_updated": 8,
+    "already_recorded": 0,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-02-23T08:09:37.693536",
+  "duration_seconds": 575.465332
+}

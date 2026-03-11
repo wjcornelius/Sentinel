@@ -1,0 +1,66 @@
+{
+  "plan_id": "PLAN_20260115_080838",
+  "generated_at": "2026-01-15T16:08:38.269474Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 1,
+    "research_candidates": 76,
+    "gpt5_selected": 1,
+    "compliance_flagged": 0,
+    "overall_quality_score": 80
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 50,
+    "compliance_advisory": 70
+  },
+  "trades": [
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "shares": 151.0,
+      "sell_pct": 100,
+      "composite_score": 56.0,
+      "current_price": 24.56999969482422,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Omnicom and Interpublic (IPG) received unconditional antitrust clearance from the European Commission, marking the final regulatory approval for the acquisition, with closure expected by Wednesday[2]. Bank of America downgraded Omnicom to underperform on January 5, 2026, citing growth risks and potential earnings dilution from the $13B IPG deal, though no direct IPG-specific news in the last 24 hours[3]. IPG's current stock price stands at $24.57 as of January 2026, with Q4 2025 earnings reported on February 11, 2026[1][4].",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 56.0 < 60 absolute minimum",
+      "current_value": 3710.07
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 76 candidates (avg score: 55.2)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 79/79 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 1 SELLs, 8 BUYs ($80,000 allocated)",
+      "quality_score": 50,
+      "issues": [
+        "Capital deployment 44.6% (target 90.0%+)",
+        "Limited diversification: 8 new positions (target 12-20). Total after trades: 10"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 0 BUYs approved, 8 rejected, 1 SELLs",
+      "quality_score": 70,
+      "issues": [
+        "8 orders REJECTED by compliance"
+      ]
+    }
+  ],
+  "approved_at": "2026-01-15T16:08:40.064075Z"
+}

@@ -1,0 +1,257 @@
+{
+  "date": "2026-02-17",
+  "start_time": "2026-02-17T08:00:02.450080",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "11:00 AM ET",
+    "current_date": "Tuesday, February 17, 2026"
+  },
+  "regime_analysis": {
+    "regime": "BEARISH",
+    "confidence": "MEDIUM",
+    "spy_price": 678.7000122070312,
+    "spy_change_pct": -0.4473762805968097,
+    "vix_level": 22.6299991607666,
+    "recommendation": "PROCEED WITH CAUTION"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "DNOW",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260217T160804Z_e33fa0d1"
+    },
+    {
+      "ticker": "ANET",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260217T160804Z_8e117bd1"
+    },
+    {
+      "ticker": "APG",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260217T160804Z_78d5b138"
+    },
+    {
+      "ticker": "AU",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260217T160804Z_0a0ec30c"
+    },
+    {
+      "ticker": "COMM",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260217T160804Z_1346d4bf",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BKR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260217T160804Z_4ee9f688",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "AS",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260217T160804Z_850201f0",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "AXTA",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260217T160804Z_270a5c7c",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-02-17T08:08:28.981558",
+    "equity": 102299.85,
+    "cash": -3830.61,
+    "buying_power": 94759.17,
+    "portfolio_value": 102299.85,
+    "starting_capital": 100000.0,
+    "total_return": 2299.850000000006,
+    "total_return_pct": 2.2998500000000055,
+    "daily_pl": 2046.9700000000012,
+    "daily_pl_pct": 2.0418066792694645,
+    "total_unrealized_pl": 2485.5764,
+    "position_count": 14,
+    "positions": [
+      {
+        "ticker": "DOCN",
+        "shares": 167.0,
+        "entry_price": 60.11,
+        "current_price": 66.56,
+        "market_value": 11115.52,
+        "unrealized_pl": 1077.15,
+        "unrealized_pl_pct": 10.73
+      },
+      {
+        "ticker": "CF",
+        "shares": 107.0,
+        "entry_price": 92.61,
+        "current_price": 93.4,
+        "market_value": 9993.8,
+        "unrealized_pl": 84.53,
+        "unrealized_pl_pct": 0.853
+      },
+      {
+        "ticker": "CNM",
+        "shares": 173.0,
+        "entry_price": 57.6,
+        "current_price": 57.055,
+        "market_value": 9870.515,
+        "unrealized_pl": -94.285,
+        "unrealized_pl_pct": -0.946
+      },
+      {
+        "ticker": "AGI",
+        "shares": 224.0,
+        "entry_price": 44.8,
+        "current_price": 42.54,
+        "market_value": 9528.96,
+        "unrealized_pl": -506.24,
+        "unrealized_pl_pct": -5.045
+      },
+      {
+        "ticker": "AU",
+        "shares": 71.0,
+        "entry_price": 106.66,
+        "current_price": 106.61,
+        "market_value": 7569.31,
+        "unrealized_pl": -3.55,
+        "unrealized_pl_pct": -0.047
+      },
+      {
+        "ticker": "ANET",
+        "shares": 53.0,
+        "entry_price": 142.18,
+        "current_price": 142.14,
+        "market_value": 7533.42,
+        "unrealized_pl": -2.12,
+        "unrealized_pl_pct": -0.027999999999999997
+      },
+      {
+        "ticker": "DNOW",
+        "shares": 467.0,
+        "entry_price": 16.09,
+        "current_price": 16.09,
+        "market_value": 7514.03,
+        "unrealized_pl": 0.0,
+        "unrealized_pl_pct": 0.0
+      },
+      {
+        "ticker": "APG",
+        "shares": 168.0,
+        "entry_price": 44.72,
+        "current_price": 44.69,
+        "market_value": 7507.92,
+        "unrealized_pl": -5.04,
+        "unrealized_pl_pct": -0.067
+      },
+      {
+        "ticker": "ARM",
+        "shares": 54.0,
+        "entry_price": 109.33,
+        "current_price": 124.0666,
+        "market_value": 6699.5964,
+        "unrealized_pl": 795.7764,
+        "unrealized_pl_pct": 13.479
+      },
+      {
+        "ticker": "AEM",
+        "shares": 31.0,
+        "entry_price": 189.73,
+        "current_price": 210.56,
+        "market_value": 6527.36,
+        "unrealized_pl": 645.73,
+        "unrealized_pl_pct": 10.979
+      },
+      {
+        "ticker": "AES",
+        "shares": 385.0,
+        "entry_price": 15.56,
+        "current_price": 16.295,
+        "market_value": 6273.575,
+        "unrealized_pl": 282.975,
+        "unrealized_pl_pct": 4.723999999999999
+      },
+      {
+        "ticker": "CMCSA",
+        "shares": 196.0,
+        "entry_price": 30.56,
+        "current_price": 31.535,
+        "market_value": 6180.86,
+        "unrealized_pl": 191.1,
+        "unrealized_pl_pct": 3.19
+      },
+      {
+        "ticker": "RRC",
+        "shares": 167.0,
+        "entry_price": 35.81,
+        "current_price": 36.56,
+        "market_value": 6105.52,
+        "unrealized_pl": 125.25,
+        "unrealized_pl_pct": 2.094
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [
+    "Reconciliation cleaned 1 stale records",
+    "Verification: Expected positions not found: AXTA, BKR, AS, COMM"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 10,
+    "db_positions_before": 10,
+    "stale_closed": 1,
+    "in_sync": 9
+  },
+  "position_drift": {
+    "positions_checked": 10,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260217_080800",
+    "total_trades": 8,
+    "quality_score": 88,
+    "ceo_rating": "EXCELLENT",
+    "ceo_recommendation": "STRONGLY RECOMMEND APPROVAL"
+  },
+  "sells_count": 0,
+  "buys_count": 8,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: AXTA, BKR, AS, COMM"
+    ],
+    "summary": {
+      "position_count": 14,
+      "sells_executed": 0,
+      "buys_executed": 8,
+      "expected_count_change": 8
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 5,
+    "fills_recorded": 5,
+    "orders_updated": 5,
+    "already_recorded": 0,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-02-17T08:08:30.723952",
+  "duration_seconds": 508.27388
+}

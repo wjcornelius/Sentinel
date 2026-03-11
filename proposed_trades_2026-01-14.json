@@ -1,0 +1,66 @@
+{
+  "plan_id": "PLAN_20260114_080710",
+  "generated_at": "2026-01-14T16:07:10.296439Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 1,
+    "research_candidates": 66,
+    "gpt5_selected": 1,
+    "compliance_flagged": 0,
+    "overall_quality_score": 75
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 26,
+    "compliance_advisory": 75
+  },
+  "trades": [
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "shares": 151.0,
+      "sell_pct": 100,
+      "composite_score": 56.0,
+      "current_price": 24.56999969482422,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Omnicom completed a $2.95 billion exchange offer for Interpublic Group notes on January 14, 2026, following the merger closure on November 26, 2025, with most IPG notes exchanged and retired. This transaction supports the integration of IPG as a wholly owned subsidiary of Omnicom, creating a leading global marketing entity. A predicted fair opening price of $24.57 for IPG stock aligns with current levels around $24.57-$24.63.[5][4][1]",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 56.0 < 60 absolute minimum",
+      "current_value": 3710.07
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 66 candidates (avg score: 54.1)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 69/69 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 1 SELLs, 5 BUYs ($37,500 allocated)",
+      "quality_score": 26,
+      "issues": [
+        "Capital deployment 21.0% (target 90.0%+)",
+        "Limited diversification: 5 new positions (target 12-20). Total after trades: 7"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 0 BUYs approved, 5 rejected, 1 SELLs",
+      "quality_score": 75,
+      "issues": [
+        "5 orders REJECTED by compliance"
+      ]
+    }
+  ],
+  "approved_at": "2026-01-14T16:07:11.934743Z"
+}

@@ -1,0 +1,118 @@
+{
+  "date": "2026-01-05",
+  "start_time": "2026-01-05T08:00:11.367571",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "11:00 AM ET",
+    "current_date": "Monday, January 05, 2026"
+  },
+  "regime_analysis": {
+    "regime": "BULLISH",
+    "confidence": "HIGH",
+    "spy_price": 688.094970703125,
+    "spy_change_pct": 0.7209022521729318,
+    "vix_level": 14.819999694824219,
+    "recommendation": "GOOD DAY TO TRADE"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "status": "SKIPPED",
+      "reason": "Asset not tradeable: AssetStatus.INACTIVE"
+    },
+    {
+      "ticker": "BX",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260105T160842Z_18de152e"
+    },
+    {
+      "ticker": "EWY",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260105T160842Z_6b88df21"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-01-05T08:08:48.008436",
+    "equity": 101482.93,
+    "cash": 66218.45,
+    "buying_power": 163991.31,
+    "portfolio_value": 101482.93,
+    "starting_capital": 100000.0,
+    "total_return": 1482.929999999993,
+    "total_return_pct": 1.482929999999993,
+    "daily_pl": 3976.4899999999907,
+    "daily_pl_pct": 4.078181912907486,
+    "total_unrealized_pl": 5276.985,
+    "position_count": 3,
+    "positions": [
+      {
+        "ticker": "CWAN",
+        "shares": 1151.0,
+        "entry_price": 19.6,
+        "current_price": 24.095,
+        "market_value": 27733.345,
+        "unrealized_pl": 5173.745,
+        "unrealized_pl_pct": 22.93367346938776
+      },
+      {
+        "ticker": "JCI",
+        "shares": 31.0,
+        "entry_price": 116.52,
+        "current_price": 123.26,
+        "market_value": 3821.06,
+        "unrealized_pl": 208.94,
+        "unrealized_pl_pct": 5.78441469275661
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.7700831024930697
+      }
+    ]
+  },
+  "warnings": [
+    "Verification: Still holding positions that should have been sold: BX, EWY"
+  ],
+  "errors": [],
+  "plan_summary": {
+    "plan_id": "PLAN_20260105_080837",
+    "total_trades": 3,
+    "quality_score": 74,
+    "ceo_rating": "GOOD",
+    "ceo_recommendation": "RECOMMEND APPROVAL"
+  },
+  "sells_count": 2,
+  "buys_count": 0,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Still holding positions that should have been sold: BX, EWY"
+    ],
+    "summary": {
+      "position_count": 5,
+      "sells_executed": 2,
+      "buys_executed": 0,
+      "expected_count_change": -2
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 2,
+    "fills_recorded": 2,
+    "orders_updated": 2,
+    "already_recorded": 0,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-01-05T08:08:49.977421",
+  "duration_seconds": 518.609862
+}

@@ -1,0 +1,191 @@
+{
+  "date": "2026-03-09",
+  "start_time": "2026-03-09T09:00:02.703412",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "12:00 PM ET",
+    "current_date": "Monday, March 09, 2026"
+  },
+  "regime_analysis": {
+    "regime": "BEARISH",
+    "confidence": "MEDIUM",
+    "spy_price": 669.3798828125,
+    "spy_change_pct": -0.44619442109010726,
+    "vix_level": 28.1200008392334,
+    "recommendation": "PROCEED WITH CAUTION"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "CCI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260309T160805Z_bb66b4a9"
+    },
+    {
+      "ticker": "ADMA",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260309T160805Z_e8d70db3"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-03-09T09:08:23.174273",
+    "equity": 103279.01,
+    "cash": 18578.36,
+    "buying_power": 118147.3,
+    "portfolio_value": 103279.01,
+    "starting_capital": 100000.0,
+    "total_return": 3279.0099999999948,
+    "total_return_pct": 3.2790099999999947,
+    "daily_pl": 3336.0199999999895,
+    "daily_pl_pct": 3.3379229498737124,
+    "total_unrealized_pl": 6762.485000000001,
+    "position_count": 11,
+    "positions": [
+      {
+        "ticker": "CF",
+        "shares": 107.0,
+        "entry_price": 92.61,
+        "current_price": 117.23,
+        "market_value": 12543.61,
+        "unrealized_pl": 2634.34,
+        "unrealized_pl_pct": 26.584999999999997
+      },
+      {
+        "ticker": "AGI",
+        "shares": 224.0,
+        "entry_price": 44.8,
+        "current_price": 49.15,
+        "market_value": 11009.6,
+        "unrealized_pl": 974.4,
+        "unrealized_pl_pct": 9.71
+      },
+      {
+        "ticker": "DELL",
+        "shares": 67.0,
+        "entry_price": 122.94,
+        "current_price": 143.545,
+        "market_value": 9617.515,
+        "unrealized_pl": 1380.535,
+        "unrealized_pl_pct": 16.76
+      },
+      {
+        "ticker": "CCI",
+        "shares": 84.0,
+        "entry_price": 89.34,
+        "current_price": 89.28,
+        "market_value": 7499.52,
+        "unrealized_pl": -5.04,
+        "unrealized_pl_pct": -0.067
+      },
+      {
+        "ticker": "ADMA",
+        "shares": 478.0,
+        "entry_price": 15.64,
+        "current_price": 15.635,
+        "market_value": 7473.53,
+        "unrealized_pl": -2.39,
+        "unrealized_pl_pct": -0.032
+      },
+      {
+        "ticker": "BRO",
+        "shares": 104.0,
+        "entry_price": 71.61,
+        "current_price": 71.53,
+        "market_value": 7439.12,
+        "unrealized_pl": -8.32,
+        "unrealized_pl_pct": -0.11199999999999999
+      },
+      {
+        "ticker": "RRC",
+        "shares": 167.0,
+        "entry_price": 35.81,
+        "current_price": 41.88,
+        "market_value": 6993.96,
+        "unrealized_pl": 1013.69,
+        "unrealized_pl_pct": 16.951
+      },
+      {
+        "ticker": "AEM",
+        "shares": 31.0,
+        "entry_price": 189.73,
+        "current_price": 220.27,
+        "market_value": 6828.37,
+        "unrealized_pl": 946.74,
+        "unrealized_pl_pct": 16.097
+      },
+      {
+        "ticker": "CHWY",
+        "shares": 230.0,
+        "entry_price": 25.64,
+        "current_price": 26.145,
+        "market_value": 6013.35,
+        "unrealized_pl": 116.15,
+        "unrealized_pl_pct": 1.97
+      },
+      {
+        "ticker": "DASH",
+        "shares": 32.0,
+        "entry_price": 179.81,
+        "current_price": 174.125,
+        "market_value": 5572.0,
+        "unrealized_pl": -181.92,
+        "unrealized_pl_pct": -3.1620000000000004
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 9,
+    "db_positions_before": 8,
+    "stale_closed": 0,
+    "in_sync": 8
+  },
+  "position_drift": {
+    "positions_checked": 9,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260309_090804",
+    "total_trades": 2,
+    "quality_score": 78,
+    "ceo_rating": "GOOD",
+    "ceo_recommendation": "RECOMMEND APPROVAL"
+  },
+  "sells_count": 0,
+  "buys_count": 2,
+  "verification": {
+    "passed": true,
+    "issues": [],
+    "summary": {
+      "position_count": 11,
+      "sells_executed": 0,
+      "buys_executed": 2,
+      "expected_count_change": 2
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 2,
+    "fills_recorded": 2,
+    "orders_updated": 2,
+    "already_recorded": 0,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-03-09T09:08:24.854057",
+  "duration_seconds": 502.15066
+}

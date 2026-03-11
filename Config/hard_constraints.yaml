@@ -7,7 +7,7 @@ last_updated: 2025-10-30
 
 position_limits:
   max_single_position_pct: 0.25          # Never >25% portfolio in one stock (give GPT-4o room to run)
-  min_position_pct: 0.03                 # Never <3% (too small to matter)
+  min_position_pct: 0.025                # Never <2.5% (too small to matter) - lowered from 3% to prevent edge-case rejections
   max_positions_total: 30                # Never hold >30 simultaneous positions (raised from 20 for better diversification with $100K+margin)
   max_sector_concentration_pct: 0.40     # Never >40% in single sector
   max_correlated_positions: 5            # Max 5 stocks with mutual correlation >0.7

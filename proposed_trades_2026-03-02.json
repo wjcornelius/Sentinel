@@ -1,0 +1,150 @@
+{
+  "plan_id": "PLAN_20260302_080811",
+  "generated_at": "2026-03-02T16:08:11.442294Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 7,
+    "research_candidates": 67,
+    "gpt5_selected": 7,
+    "compliance_flagged": 0,
+    "overall_quality_score": 87
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 50,
+    "compliance_advisory": 100
+  },
+  "trades": [
+    {
+      "ticker": "ADMA",
+      "action": "BUY",
+      "shares": 451,
+      "allocated_capital": 7500.0,
+      "entry_price": 16.600000381469727,
+      "composite_score": 75.8,
+      "sentiment_score": 85.0,
+      "sentiment_summary": "ADMA Biologics announced a $200 million capital return plan for 2026, including a $125 million accelerated share repurchase (ASR) agreement with JPMorgan Chase, under which it will receive about 6.4 million shares initially.[3][4][6] The company highlighted sustained revenue growth, expanding margins, and strong cash flow generation as reasons for viewing its stock as undervalued and prioritizing shareholder returns.[3][4] Earlier reports noted a rating upgrade to 'buy' by Wall Street Zen and positive financial metrics like high institutional ownership and a consensus price target of $28.50.[1]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "DXCM",
+      "action": "BUY",
+      "shares": 103,
+      "allocated_capital": 7500.0,
+      "entry_price": 72.72779846191406,
+      "composite_score": 75.8,
+      "sentiment_score": 55.0,
+      "sentiment_summary": "Dexcom announced a presentation at the Raymond James Institutional Investors Conference today, March 2, 2026, with a live webcast. Recent reports highlight institutional share sales by American Century Companies and Allianz SE, alongside a 1.3% stock decline to $73.43. Earlier Q4 2025 earnings beat expectations with $1.26B revenue and $0.68 EPS, but analyst price targets average $85.18 amid mixed ratings.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CAVA",
+      "action": "BUY",
+      "shares": 95,
+      "allocated_capital": 7500.0,
+      "entry_price": 78.63500213623047,
+      "composite_score": 69.0,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "Riverview Capital Advisers LLC sold 16,500 shares of CAVA Group on March 2, 2026, amid recent analyst upgrades including UBS raising its price target to $75 (neutral rating). CAVA named Doug Thompson as Chief Operations Officer effective March 2, 2026, bringing over 20 years of restaurant operations experience. Recent coverage highlights strong Q4 and FY 2025 results with revenue beats and aggressive 2026 guidance, though dated to late February.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "DBX",
+      "action": "BUY",
+      "shares": 301,
+      "allocated_capital": 7500.0,
+      "entry_price": 24.885000228881836,
+      "composite_score": 66.8,
+      "sentiment_score": 58.0,
+      "sentiment_summary": "Dropbox reported Q4 2025 earnings that beat estimates on both EPS (+2.52%) and revenue (+1.39%), despite a slight year-over-year revenue decline of 1.1%, with shares rising modestly post-earnings[1][3][4]. The company highlighted strong free cash flow over $1 billion, aggressive share repurchases totaling $1.46 billion, and AI product advancements, though guidance reiterated flat FY26 revenue around $2.5B[1][2][4]. Recent insider sales by CEO Andrew Houston (164,502 shares at ~$25.66) and a price target cut by RBC from $35 to $30 were noted, alongside a consensus 'Hold' rating[4][7].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CRDO",
+      "action": "BUY",
+      "shares": 65,
+      "allocated_capital": 7500.0,
+      "entry_price": 114.54000091552734,
+      "composite_score": 63.8,
+      "sentiment_score": 85.0,
+      "sentiment_summary": "Credo Technology announced the acquisition of CoMira Solutions to integrate high-performance IP for advancing AI infrastructure connectivity solutions[4][5]. TD Asset Management acquired 119,870 shares of CRDO, signaling institutional confidence[1]. The company is set to report Q3 earnings after market close today, with analysts anticipating strong growth including EPS of 94 cents and revenue of $387.62 million[2][3].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CELH",
+      "action": "BUY",
+      "shares": 150,
+      "allocated_capital": 7500.0,
+      "entry_price": 49.84000015258789,
+      "composite_score": 62.6,
+      "sentiment_score": 85.0,
+      "sentiment_summary": "Celsius Holdings (CELH) reported record Q4 2025 revenue of $721.6 million, up 117% year-over-year, and full-year revenue of $2.515 billion, up 85.5%, surpassing analyst estimates with EPS of $0.26 versus $0.19 expected[1][2][3]. Analyst upgrades followed, including Bank of America to Buy with $65 PT and Needham raising to $75, citing acquisition momentum[2]. Integrations of Alani Nu and Rockstar are progressing on track for completion in early 2026[1].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BMNR",
+      "action": "BUY",
+      "shares": 361,
+      "allocated_capital": 7500.0,
+      "entry_price": 20.76740074157715,
+      "composite_score": 61.8,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "Bitmine Immersion Technologies (BMNR) announced on March 1, 2026, that its ETH holdings reached 4.47 million tokens (3.71% of supply) with $9.9B in total crypto, cash, and moonshot assets, including 3.04M staked ETH generating $172M annualized revenues. The company is progressing toward launching its MAVAN staking solution in early 2026. Despite positive fundamentals, the stock dropped 7.14% amid technical bearish signals and broader sector pressure.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 67 candidates (avg score: 45.0)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 78/78 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 0 SELLs, 7 BUYs ($52,500 allocated)",
+      "quality_score": 50,
+      "issues": [
+        "Capital deployment 46.9% (target 90.0%+)",
+        "Limited diversification: 7 new positions (target 12-20). Total after trades: 18"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 7 BUYs approved, 0 rejected, 0 SELLs",
+      "quality_score": 100,
+      "issues": []
+    }
+  ],
+  "approved_at": "2026-03-02T16:08:13.346894Z"
+}

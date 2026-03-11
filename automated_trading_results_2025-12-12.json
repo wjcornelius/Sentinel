@@ -1,0 +1,309 @@
+{
+  "date": "2025-12-12",
+  "start_time": "2025-12-12T08:00:03.770787",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "11:00 AM ET",
+    "current_date": "Friday, December 12, 2025"
+  },
+  "regime_analysis": {
+    "regime": "NEUTRAL",
+    "confidence": "MEDIUM",
+    "spy_price": 681.8900146484375,
+    "spy_change_pct": -1.056338558301342,
+    "vix_level": 15.5600004196167,
+    "recommendation": "NORMAL CONDITIONS"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "status": "SKIPPED",
+      "reason": "Asset not tradeable: AssetStatus.INACTIVE"
+    },
+    {
+      "ticker": "MNST",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20251212T160757Z_eed7cf9d"
+    },
+    {
+      "ticker": "MRVL",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20251212T160757Z_0177ae0c"
+    },
+    {
+      "ticker": "MARA",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251212T160758Z_40bfd43a",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "FTNT",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251212T160758Z_a6f8ba3e"
+    },
+    {
+      "ticker": "JD",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251212T160758Z_152889ac"
+    },
+    {
+      "ticker": "GLXY",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251212T160758Z_35073e15",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "EOSE",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251212T160758Z_2b9a6f16",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "EWY",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251212T160758Z_59035574",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "EMR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251212T160758Z_af9d2f25",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "HRL",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251212T160758Z_1c6166ea",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "MGY",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251212T160758Z_f2bd90a9",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "AG",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251212T160758Z_f8b1efe3",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "GSK",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251212T160758Z_64e59a7b",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "JCI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251212T160758Z_4b2170da",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CARR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251212T160758Z_6c9badf5",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "JBS",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20251212T160758Z_caaf815e",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2025-12-12T08:08:06.106639",
+    "equity": 101510.67,
+    "cash": 6345.22,
+    "buying_power": 104145.82,
+    "portfolio_value": 101510.67,
+    "starting_capital": 100000.0,
+    "total_return": 1510.6699999999983,
+    "total_return_pct": 1.5106699999999984,
+    "daily_pl": 2408.529999999999,
+    "daily_pl_pct": 2.430351150842957,
+    "total_unrealized_pl": 4083.5445,
+    "position_count": 16,
+    "positions": [
+      {
+        "ticker": "CWAN",
+        "shares": 1151.0,
+        "entry_price": 19.6,
+        "current_price": 21.7345,
+        "market_value": 25016.4095,
+        "unrealized_pl": 2456.8095,
+        "unrealized_pl_pct": 10.89030612244898
+      },
+      {
+        "ticker": "GEO",
+        "shares": 319.0,
+        "entry_price": 15.590188,
+        "current_price": 17.06,
+        "market_value": 5442.14,
+        "unrealized_pl": 468.87,
+        "unrealized_pl_pct": 9.42780102427578
+      },
+      {
+        "ticker": "HSAI",
+        "shares": 254.0,
+        "entry_price": 19.7,
+        "current_price": 20.77,
+        "market_value": 5275.58,
+        "unrealized_pl": 271.78,
+        "unrealized_pl_pct": 5.43147208121827
+      },
+      {
+        "ticker": "KDP",
+        "shares": 175.0,
+        "entry_price": 28.43,
+        "current_price": 29.465,
+        "market_value": 5156.375,
+        "unrealized_pl": 181.125,
+        "unrealized_pl_pct": 3.64052057685543
+      },
+      {
+        "ticker": "GEHC",
+        "shares": 60.0,
+        "entry_price": 81.8,
+        "current_price": 85.07,
+        "market_value": 5104.2,
+        "unrealized_pl": 196.2,
+        "unrealized_pl_pct": 3.9975550122249395
+      },
+      {
+        "ticker": "LKQ",
+        "shares": 160.0,
+        "entry_price": 31.18,
+        "current_price": 31.31,
+        "market_value": 5009.6,
+        "unrealized_pl": 20.8,
+        "unrealized_pl_pct": 0.41693393200769996
+      },
+      {
+        "ticker": "JD",
+        "shares": 169.0,
+        "entry_price": 29.58,
+        "current_price": 29.58,
+        "market_value": 4999.02,
+        "unrealized_pl": 0.0,
+        "unrealized_pl_pct": 0.0
+      },
+      {
+        "ticker": "DT",
+        "shares": 109.0,
+        "entry_price": 45.6,
+        "current_price": 45.64,
+        "market_value": 4974.76,
+        "unrealized_pl": 4.36,
+        "unrealized_pl_pct": 0.08771929824561
+      },
+      {
+        "ticker": "MAS",
+        "shares": 77.0,
+        "entry_price": 64.47,
+        "current_price": 64.28,
+        "market_value": 4949.56,
+        "unrealized_pl": -14.63,
+        "unrealized_pl_pct": -0.29471071816349
+      },
+      {
+        "ticker": "FTNT",
+        "shares": 60.0,
+        "entry_price": 82.2995,
+        "current_price": 82.27,
+        "market_value": 4936.2,
+        "unrealized_pl": -1.77,
+        "unrealized_pl_pct": -0.03584468921439
+      },
+      {
+        "ticker": "HUT",
+        "shares": 115.0,
+        "entry_price": 43.1,
+        "current_price": 42.45,
+        "market_value": 4881.75,
+        "unrealized_pl": -74.75,
+        "unrealized_pl_pct": -1.50812064965197
+      },
+      {
+        "ticker": "HL",
+        "shares": 255.0,
+        "entry_price": 15.58,
+        "current_price": 18.81,
+        "market_value": 4796.55,
+        "unrealized_pl": 823.65,
+        "unrealized_pl_pct": 20.73170731707317
+      },
+      {
+        "ticker": "BMNR",
+        "shares": 129.0,
+        "entry_price": 38.19,
+        "current_price": 36.25,
+        "market_value": 4676.25,
+        "unrealized_pl": -250.26,
+        "unrealized_pl_pct": -5.07986383870123
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.7700831024930697
+      },
+      {
+        "ticker": "IVZ",
+        "shares": 125.0,
+        "entry_price": 24.57,
+        "current_price": 26.59,
+        "market_value": 3323.75,
+        "unrealized_pl": 252.5,
+        "unrealized_pl_pct": 8.22140822140822
+      },
+      {
+        "ticker": "CLSK",
+        "shares": 202.0,
+        "entry_price": 15.14,
+        "current_price": 14.42,
+        "market_value": 2912.84,
+        "unrealized_pl": -145.44,
+        "unrealized_pl_pct": -4.7556142668428
+      }
+    ]
+  },
+  "warnings": [
+    "Verification: Expected positions not found: AG, MGY, GSK, EMR, HRL, CARR, GLXY, EOSE, JCI, JBS, MARA, EWY"
+  ],
+  "errors": [],
+  "plan_summary": {
+    "plan_id": "PLAN_20251212_080753",
+    "total_trades": 17,
+    "quality_score": 93,
+    "ceo_rating": "EXCELLENT",
+    "ceo_recommendation": "STRONGLY RECOMMEND APPROVAL"
+  },
+  "sells_count": 2,
+  "buys_count": 14,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: AG, MGY, GSK, EMR, HRL, CARR, GLXY, EOSE, JCI, JBS, MARA, EWY"
+    ],
+    "summary": {
+      "position_count": 16,
+      "sells_executed": 2,
+      "buys_executed": 14,
+      "expected_count_change": 12
+    }
+  },
+  "end_time": "2025-12-12T08:08:08.840118",
+  "duration_seconds": 485.069344
+}

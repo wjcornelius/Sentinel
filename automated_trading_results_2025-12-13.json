@@ -1,0 +1,22 @@
+{
+  "date": "2025-12-13",
+  "start_time": "2025-12-13T08:00:06.742465",
+  "status": "MARKET_CLOSED",
+  "market_status": {
+    "is_open": false,
+    "status": "CLOSED",
+    "message": "Weekend - Market opens Monday, Dec 15 at 9:30 AM ET",
+    "current_time_et": "11:00 AM ET",
+    "current_date": "Saturday, December 13, 2025",
+    "next_open": "Monday, Dec 15 at 9:30 AM ET"
+  },
+  "regime_analysis": null,
+  "plan_generated": false,
+  "plan_approved": false,
+  "trades_executed": [],
+  "portfolio_state": null,
+  "warnings": [],
+  "errors": [],
+  "end_time": "2025-12-13T08:00:29.089359",
+  "duration_seconds": 22.346907
+}

@@ -1,0 +1,120 @@
+{
+  "plan_id": "PLAN_20251126_080257",
+  "generated_at": "2025-11-26T16:02:57.684393Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 5,
+    "research_candidates": 70,
+    "gpt5_selected": 5,
+    "compliance_flagged": 0,
+    "overall_quality_score": 79
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 29,
+    "compliance_advisory": 90
+  },
+  "trades": [
+    {
+      "ticker": "IVZ",
+      "action": "BUY",
+      "shares": 101,
+      "allocated_capital": 2506.2010000000005,
+      "entry_price": 24.6200008392334,
+      "composite_score": 77.4,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "Recent news for Invesco (IVZ) highlights a positive upgrade in its Piotroski strategy score to 80%, indicating increased interest from value-quant investors. There are no major negative developments reported in the last 24 hours, and the company continues to provide regular updates on its ETFs and capital gain distributions.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "IR",
+      "action": "BUY",
+      "shares": 31,
+      "allocated_capital": 2506.2010000000005,
+      "entry_price": 80.0199966430664,
+      "composite_score": 65.6,
+      "sentiment_score": 60.0,
+      "sentiment_summary": "Ingersoll Rand (IR) saw a $7.1 million investment from XTX Topco Ltd and a smaller share purchase by MAI Capital Management. Recent quarterly results showed revenue and earnings slightly above or in line with estimates, with a 5.1% year-over-year revenue increase. Analyst ratings remain mixed, with a consensus 'Hold' and a slight reduction in average price targets.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "KD",
+      "action": "BUY",
+      "shares": 96,
+      "allocated_capital": 2506.2010000000005,
+      "entry_price": 25.860000610351562,
+      "composite_score": 63.6,
+      "sentiment_score": 70.0,
+      "sentiment_summary": "Kyndryl (KD) received a Buy rating and a $30 price target from Guggenheim analyst Jonathan Lee on November 26, 2025, which contributed to a slight rise in premarket trading. The company also reported solid Q2 fiscal 2026 results, including a 15% year-over-year increase in adjusted EBITDA and an expanded share buyback program, signaling management confidence despite a minor revenue decline.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BAH",
+      "action": "SELL",
+      "shares": 45.0,
+      "sell_pct": 100,
+      "composite_score": 60.0,
+      "current_price": 84.19999694824219,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Recent news for Booz Allen Hamilton (BAH) includes notable institutional buying, with Edmond de Rothschild Holding S.A. acquiring over 300,000 shares and Prudential PLC also increasing its stake. The company's latest quarterly results showed revenue and earnings slightly below or in line with expectations, with a year-over-year decline in revenue but strong profitability metrics. Analyst ratings remain mixed, with some downgrades and lowered price targets, but also continued institutional interest.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Rank #29 (below top 28), score 60.0",
+      "current_value": 3781.8
+    },
+    {
+      "ticker": "CIEN",
+      "action": "SELL",
+      "shares": 19.0,
+      "sell_pct": 100,
+      "composite_score": 54.0,
+      "current_price": 199.19500732421875,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Ciena Corporation (CIEN) experienced a notable 9.2% stock price rally recently, driven by strong AI-driven demand and record orders in AI infrastructure and data center management. The company reported Q3 2025 revenue of $1.22 billion, surpassing guidance, with management signaling accelerated operating margin targets and highlighting its strengthened position amid rising AI adoption. Jefferies and other analysts maintain buy ratings, supported by fresh significant investments and upgraded price targets.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 54.0 < 60 absolute minimum",
+      "current_value": 3803.42
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 70 candidates (avg score: 50.6)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 95/95 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 2 SELLs, 5 BUYs ($12,531 allocated)",
+      "quality_score": 29,
+      "issues": [
+        "Capital deployment 25.0% (target 90.0%+)",
+        "Limited diversification: 5 new positions (target 12-20). Total after trades: 28"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 3 BUYs approved, 2 rejected, 2 SELLs",
+      "quality_score": 90,
+      "issues": [
+        "2 orders REJECTED by compliance"
+      ]
+    }
+  ],
+  "approved_at": "2025-11-26T16:02:57.769875Z"
+}

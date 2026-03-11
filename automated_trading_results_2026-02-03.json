@@ -1,0 +1,42 @@
+{
+  "date": "2026-02-03",
+  "start_time": "2026-02-03T08:00:04.962184",
+  "status": "EXECUTION_FAILED",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "11:00 AM ET",
+    "current_date": "Tuesday, February 03, 2026"
+  },
+  "regime_analysis": {
+    "regime": "NEUTRAL",
+    "confidence": "MEDIUM",
+    "spy_price": 693.1099853515625,
+    "spy_change_pct": -0.33073839631154234,
+    "vix_level": 17.260000228881836,
+    "recommendation": "NORMAL CONDITIONS"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [],
+  "portfolio_state": null,
+  "warnings": [],
+  "errors": [
+    "Execution failed: [CEO] Approved plan contains no trades to execute."
+  ],
+  "position_drift": {
+    "positions_checked": 2,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260203_080727",
+    "total_trades": 0,
+    "quality_score": 78,
+    "ceo_rating": "GOOD",
+    "ceo_recommendation": "RECOMMEND APPROVAL"
+  },
+  "end_time": "2026-02-03T08:07:29.696718",
+  "duration_seconds": 444.734546
+}

@@ -1,0 +1,199 @@
+{
+  "date": "2025-12-23",
+  "start_time": "2025-12-23T08:00:12.088965",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "11:00 AM ET",
+    "current_date": "Tuesday, December 23, 2025"
+  },
+  "regime_analysis": {
+    "regime": "BULLISH",
+    "confidence": "HIGH",
+    "spy_price": 686.4199829101562,
+    "spy_change_pct": 0.23216941147950737,
+    "vix_level": 13.770000457763672,
+    "recommendation": "GOOD DAY TO TRADE"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "status": "SKIPPED",
+      "reason": "Asset not tradeable: AssetStatus.INACTIVE"
+    },
+    {
+      "ticker": "GEO",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20251223T160912Z_0765ec14"
+    },
+    {
+      "ticker": "LKQ",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20251223T160912Z_e5455e6b"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2025-12-23T08:09:18.403273",
+    "equity": 102284.42,
+    "cash": 24469.49,
+    "buying_power": 117821.55,
+    "portfolio_value": 102284.42,
+    "starting_capital": 100000.0,
+    "total_return": 2284.4199999999983,
+    "total_return_pct": 2.284419999999998,
+    "daily_pl": 2714.8399999999965,
+    "daily_pl_pct": 2.7265757272452054,
+    "total_unrealized_pl": 7176.854,
+    "position_count": 12,
+    "positions": [
+      {
+        "ticker": "CWAN",
+        "shares": 1151.0,
+        "entry_price": 19.6,
+        "current_price": 24.085,
+        "market_value": 27721.835,
+        "unrealized_pl": 5162.235,
+        "unrealized_pl_pct": 22.882653061224488
+      },
+      {
+        "ticker": "CDE",
+        "shares": 295.0,
+        "entry_price": 16.651627,
+        "current_price": 18.51,
+        "market_value": 5460.45,
+        "unrealized_pl": 548.22,
+        "unrealized_pl_pct": 11.1603080474652
+      },
+      {
+        "ticker": "AG",
+        "shares": 308.0,
+        "entry_price": 16.07,
+        "current_price": 16.9555,
+        "market_value": 5222.294,
+        "unrealized_pl": 272.734,
+        "unrealized_pl_pct": 5.510267579340391
+      },
+      {
+        "ticker": "HL",
+        "shares": 255.0,
+        "entry_price": 15.58,
+        "current_price": 20.12,
+        "market_value": 5130.6,
+        "unrealized_pl": 1157.7,
+        "unrealized_pl_pct": 29.13992297817715
+      },
+      {
+        "ticker": "ONB",
+        "shares": 218.0,
+        "entry_price": 23.12,
+        "current_price": 23.01,
+        "market_value": 5016.18,
+        "unrealized_pl": -23.98,
+        "unrealized_pl_pct": -0.4757785467128
+      },
+      {
+        "ticker": "NVST",
+        "shares": 229.0,
+        "entry_price": 21.75,
+        "current_price": 21.77,
+        "market_value": 4985.33,
+        "unrealized_pl": 4.58,
+        "unrealized_pl_pct": 0.09195402298851
+      },
+      {
+        "ticker": "MAS",
+        "shares": 77.0,
+        "entry_price": 64.47,
+        "current_price": 63.59,
+        "market_value": 4896.43,
+        "unrealized_pl": -67.76,
+        "unrealized_pl_pct": -1.36497595780983
+      },
+      {
+        "ticker": "DT",
+        "shares": 109.0,
+        "entry_price": 45.6,
+        "current_price": 43.79,
+        "market_value": 4773.11,
+        "unrealized_pl": -197.29,
+        "unrealized_pl_pct": -3.96929824561404
+      },
+      {
+        "ticker": "HRL",
+        "shares": 158.0,
+        "entry_price": 23.99,
+        "current_price": 23.955,
+        "market_value": 3784.89,
+        "unrealized_pl": -5.53,
+        "unrealized_pl_pct": -0.14589412255106002
+      },
+      {
+        "ticker": "JCI",
+        "shares": 31.0,
+        "entry_price": 116.52,
+        "current_price": 119.94,
+        "market_value": 3718.14,
+        "unrealized_pl": 106.02,
+        "unrealized_pl_pct": 2.9351184346035
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.7700831024930697
+      },
+      {
+        "ticker": "IVZ",
+        "shares": 125.0,
+        "entry_price": 24.57,
+        "current_price": 27.175,
+        "market_value": 3396.875,
+        "unrealized_pl": 325.625,
+        "unrealized_pl_pct": 10.6023606023606
+      }
+    ]
+  },
+  "warnings": [
+    "Verification: Still holding positions that should have been sold: GEO, LKQ"
+  ],
+  "errors": [],
+  "plan_summary": {
+    "plan_id": "PLAN_20251223_080907",
+    "total_trades": 3,
+    "quality_score": 78,
+    "ceo_rating": "GOOD",
+    "ceo_recommendation": "RECOMMEND APPROVAL"
+  },
+  "sells_count": 2,
+  "buys_count": 0,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Still holding positions that should have been sold: GEO, LKQ"
+    ],
+    "summary": {
+      "position_count": 14,
+      "sells_executed": 2,
+      "buys_executed": 0,
+      "expected_count_change": -2
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 3,
+    "fills_recorded": 2,
+    "orders_updated": 2,
+    "already_recorded": 1,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2025-12-23T08:09:20.715216",
+  "duration_seconds": 548.626261
+}

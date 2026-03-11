@@ -1,0 +1,185 @@
+{
+  "date": "2025-12-25",
+  "start_time": "2025-12-25T08:00:04.685147",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "11:00 AM ET",
+    "current_date": "Thursday, December 25, 2025"
+  },
+  "regime_analysis": {
+    "regime": "BULLISH",
+    "confidence": "HIGH",
+    "spy_price": 690.3800048828125,
+    "spy_change_pct": 0.35176214211069884,
+    "vix_level": 13.470000267028809,
+    "recommendation": "GOOD DAY TO TRADE"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "status": "SKIPPED",
+      "reason": "Asset not tradeable: AssetStatus.INACTIVE"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2025-12-25T08:09:13.330585",
+    "equity": 102733.1,
+    "cash": 24469.39,
+    "buying_power": 118191.74,
+    "portfolio_value": 102733.1,
+    "starting_capital": 100000.0,
+    "total_return": 2733.100000000006,
+    "total_return_pct": 2.7331000000000056,
+    "daily_pl": 3710.070000000007,
+    "daily_pl_pct": 3.7466738798035233,
+    "total_unrealized_pl": 7624.3600000000015,
+    "position_count": 12,
+    "positions": [
+      {
+        "ticker": "CWAN",
+        "shares": 1151.0,
+        "entry_price": 19.6,
+        "current_price": 24.19,
+        "market_value": 27842.69,
+        "unrealized_pl": 5283.09,
+        "unrealized_pl_pct": 23.41836734693878
+      },
+      {
+        "ticker": "CDE",
+        "shares": 295.0,
+        "entry_price": 16.651627,
+        "current_price": 18.72,
+        "market_value": 5522.4,
+        "unrealized_pl": 610.17,
+        "unrealized_pl_pct": 12.42144606421116
+      },
+      {
+        "ticker": "AG",
+        "shares": 308.0,
+        "entry_price": 16.07,
+        "current_price": 17.21,
+        "market_value": 5300.68,
+        "unrealized_pl": 351.12,
+        "unrealized_pl_pct": 7.0939639079029195
+      },
+      {
+        "ticker": "HL",
+        "shares": 255.0,
+        "entry_price": 15.58,
+        "current_price": 19.83,
+        "market_value": 5056.65,
+        "unrealized_pl": 1083.75,
+        "unrealized_pl_pct": 27.2785622593068
+      },
+      {
+        "ticker": "NVST",
+        "shares": 229.0,
+        "entry_price": 21.75,
+        "current_price": 22.0,
+        "market_value": 5038.0,
+        "unrealized_pl": 57.25,
+        "unrealized_pl_pct": 1.14942528735632
+      },
+      {
+        "ticker": "ONB",
+        "shares": 218.0,
+        "entry_price": 23.12,
+        "current_price": 23.06,
+        "market_value": 5027.08,
+        "unrealized_pl": -13.08,
+        "unrealized_pl_pct": -0.25951557093426
+      },
+      {
+        "ticker": "MAS",
+        "shares": 77.0,
+        "entry_price": 64.47,
+        "current_price": 64.75,
+        "market_value": 4985.75,
+        "unrealized_pl": 21.56,
+        "unrealized_pl_pct": 0.43431053203040004
+      },
+      {
+        "ticker": "DT",
+        "shares": 109.0,
+        "entry_price": 45.6,
+        "current_price": 43.75,
+        "market_value": 4768.75,
+        "unrealized_pl": -201.65,
+        "unrealized_pl_pct": -4.05701754385965
+      },
+      {
+        "ticker": "HRL",
+        "shares": 158.0,
+        "entry_price": 23.99,
+        "current_price": 24.35,
+        "market_value": 3847.3,
+        "unrealized_pl": 56.88,
+        "unrealized_pl_pct": 1.50062526052522
+      },
+      {
+        "ticker": "JCI",
+        "shares": 31.0,
+        "entry_price": 116.52,
+        "current_price": 121.39,
+        "market_value": 3763.09,
+        "unrealized_pl": 150.97,
+        "unrealized_pl_pct": 4.17953999313423
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.7700831024930697
+      },
+      {
+        "ticker": "IVZ",
+        "shares": 125.0,
+        "entry_price": 24.57,
+        "current_price": 27.21,
+        "market_value": 3401.25,
+        "unrealized_pl": 330.0,
+        "unrealized_pl_pct": 10.74481074481074
+      }
+    ]
+  },
+  "warnings": [],
+  "errors": [],
+  "plan_summary": {
+    "plan_id": "PLAN_20251225_080906",
+    "total_trades": 1,
+    "quality_score": 84,
+    "ceo_rating": "GOOD",
+    "ceo_recommendation": "RECOMMEND APPROVAL"
+  },
+  "sells_count": 0,
+  "buys_count": 0,
+  "verification": {
+    "passed": true,
+    "issues": [],
+    "summary": {
+      "position_count": 12,
+      "sells_executed": 0,
+      "buys_executed": 0,
+      "expected_count_change": 0
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 0,
+    "fills_recorded": 0,
+    "orders_updated": 0,
+    "already_recorded": 0,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2025-12-25T08:09:15.246441",
+  "duration_seconds": 550.561308
+}

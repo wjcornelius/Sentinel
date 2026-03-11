@@ -238,10 +238,12 @@ class PreTradeValidator:
             current_portfolio_value = row[0] if row[0] else 0.0
 
             # Calculate new sector allocation after adding this position
+            # Use TOTAL CAPITAL as denominator (not current portfolio value)
+            # This prevents the edge case where first position = 100% of sector
             new_sector_value = current_sector_value + position_value
-            new_portfolio_value = current_portfolio_value + position_value
 
-            new_sector_pct = new_sector_value / new_portfolio_value if new_portfolio_value > 0 else 0
+            # Use total capital for percentage calculation to ensure consistency
+            new_sector_pct = new_sector_value / self.total_capital if self.total_capital > 0 else 0
 
             # Check against sector-specific limit (if exists) or default limit
             sector_limit = self.sector_specific_limits.get(sector, self.max_sector_concentration)
@@ -250,7 +252,7 @@ class PreTradeValidator:
                 return True, (
                     f"Adding {ticker} would increase {sector} allocation to {new_sector_pct:.1%}, "
                     f"exceeding limit of {sector_limit:.1%} "
-                    f"(${new_sector_value:,.2f} of ${new_portfolio_value:,.2f})"
+                    f"(${new_sector_value:,.2f} of ${self.total_capital:,.2f})"
                 )
 
             return False, None

@@ -1,0 +1,176 @@
+{
+  "date": "2025-12-31",
+  "start_time": "2025-12-31T08:00:06.874910",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "11:00 AM ET",
+    "current_date": "Wednesday, December 31, 2025"
+  },
+  "regime_analysis": {
+    "regime": "BULLISH",
+    "confidence": "MEDIUM",
+    "spy_price": 684.3599853515625,
+    "spy_change_pct": -0.3857330135504957,
+    "vix_level": 14.6899995803833,
+    "recommendation": "FAVORABLE CONDITIONS"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "status": "SKIPPED",
+      "reason": "Asset not tradeable: AssetStatus.INACTIVE"
+    },
+    {
+      "ticker": "MAS",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20251231T160721Z_0ec74bb1"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2025-12-31T08:07:25.626422",
+    "equity": 101571.68,
+    "cash": 33226.35,
+    "buying_power": 131087.96,
+    "portfolio_value": 101571.68,
+    "starting_capital": 100000.0,
+    "total_return": 1571.679999999993,
+    "total_return_pct": 1.571679999999993,
+    "daily_pl": 3553.859999999986,
+    "daily_pl_pct": 3.625728464477159,
+    "total_unrealized_pl": 5490.822,
+    "position_count": 10,
+    "positions": [
+      {
+        "ticker": "CWAN",
+        "shares": 1151.0,
+        "entry_price": 19.6,
+        "current_price": 24.085,
+        "market_value": 27721.835,
+        "unrealized_pl": 5162.235,
+        "unrealized_pl_pct": 22.882653061224488
+      },
+      {
+        "ticker": "CDE",
+        "shares": 295.0,
+        "entry_price": 16.651627,
+        "current_price": 18.18,
+        "market_value": 5363.1,
+        "unrealized_pl": 450.87,
+        "unrealized_pl_pct": 9.17851973543584
+      },
+      {
+        "ticker": "CART",
+        "shares": 110.0,
+        "entry_price": 45.28,
+        "current_price": 45.21,
+        "market_value": 4973.1,
+        "unrealized_pl": -7.7,
+        "unrealized_pl_pct": -0.15459363957597
+      },
+      {
+        "ticker": "JBS",
+        "shares": 344.0,
+        "entry_price": 14.5,
+        "current_price": 14.455,
+        "market_value": 4972.52,
+        "unrealized_pl": -15.48,
+        "unrealized_pl_pct": -0.31034482758621
+      },
+      {
+        "ticker": "BX",
+        "shares": 32.0,
+        "entry_price": 155.14,
+        "current_price": 154.43,
+        "market_value": 4941.76,
+        "unrealized_pl": -22.72,
+        "unrealized_pl_pct": -0.45765115379657
+      },
+      {
+        "ticker": "CG",
+        "shares": 82.0,
+        "entry_price": 60.73,
+        "current_price": 59.59,
+        "market_value": 4886.38,
+        "unrealized_pl": -93.48,
+        "unrealized_pl_pct": -1.87716120533509
+      },
+      {
+        "ticker": "DT",
+        "shares": 109.0,
+        "entry_price": 45.6,
+        "current_price": 43.445,
+        "market_value": 4735.505,
+        "unrealized_pl": -234.895,
+        "unrealized_pl_pct": -4.72587719298246
+      },
+      {
+        "ticker": "JCI",
+        "shares": 31.0,
+        "entry_price": 116.52,
+        "current_price": 120.377,
+        "market_value": 3731.687,
+        "unrealized_pl": 119.567,
+        "unrealized_pl_pct": 3.31016134569173
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.7700831024930697
+      },
+      {
+        "ticker": "IVZ",
+        "shares": 125.0,
+        "entry_price": 24.57,
+        "current_price": 26.475,
+        "market_value": 3309.375,
+        "unrealized_pl": 238.125,
+        "unrealized_pl_pct": 7.75335775335775
+      }
+    ]
+  },
+  "warnings": [
+    "Verification: Still holding positions that should have been sold: MAS"
+  ],
+  "errors": [],
+  "plan_summary": {
+    "plan_id": "PLAN_20251231_080717",
+    "total_trades": 2,
+    "quality_score": 75,
+    "ceo_rating": "GOOD",
+    "ceo_recommendation": "RECOMMEND APPROVAL"
+  },
+  "sells_count": 1,
+  "buys_count": 0,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Still holding positions that should have been sold: MAS"
+    ],
+    "summary": {
+      "position_count": 11,
+      "sells_executed": 1,
+      "buys_executed": 0,
+      "expected_count_change": -1
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 5,
+    "fills_recorded": 1,
+    "orders_updated": 1,
+    "already_recorded": 3,
+    "no_match_in_db": 1,
+    "errors": []
+  },
+  "end_time": "2025-12-31T08:07:27.823194",
+  "duration_seconds": 440.948298
+}

@@ -1,0 +1,66 @@
+{
+  "plan_id": "PLAN_20260113_080745",
+  "generated_at": "2026-01-13T16:07:45.822669Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 1,
+    "research_candidates": 69,
+    "gpt5_selected": 1,
+    "compliance_flagged": 0,
+    "overall_quality_score": 76
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 25,
+    "compliance_advisory": 80
+  },
+  "trades": [
+    {
+      "ticker": "IPG",
+      "action": "SELL",
+      "shares": 151.0,
+      "sell_pct": 100,
+      "composite_score": 56.0,
+      "current_price": 24.56999969482422,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No news articles from the last 24 hours (since January 12, 2026, 4 PM UTC) were found in the search results regarding IPG stock. Recent available data mentions institutional buying by Nisa Investment Advisors LLC in Q3 2025 and a predicted fair opening price of $24.57 on January 13, 2026, with the stock trading around $24.63-$27.04 recently.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 56.0 < 60 absolute minimum",
+      "current_value": 3710.07
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 69 candidates (avg score: 54.6)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 72/72 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 1 SELLs, 4 BUYs ($40,000 allocated)",
+      "quality_score": 25,
+      "issues": [
+        "Capital deployment 22.3% (target 90.0%+)",
+        "Limited diversification: 4 new positions (target 12-20). Total after trades: 6"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 0 BUYs approved, 4 rejected, 1 SELLs",
+      "quality_score": 80,
+      "issues": [
+        "4 orders REJECTED by compliance"
+      ]
+    }
+  ],
+  "approved_at": "2026-01-13T16:07:47.267165Z"
+}

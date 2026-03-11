@@ -224,9 +224,24 @@ class ResearchDepartment:
                 # If no entry date found, don't set entry_date field at all
                 # Position monitoring will skip time-based checks for positions without entry_date
 
+                # Check if asset is tradeable (handles mergers, delistings, halts)
+                try:
+                    asset = self.alpaca.trading_client.get_asset(pos.symbol)
+                    holding_dict['tradeable'] = asset.tradable
+                    holding_dict['asset_status'] = str(asset.status)
+                    if not asset.tradable:
+                        logger.warning(f"{pos.symbol}: UNTRADEABLE (status: {asset.status}) - will not count against position limit")
+                except Exception as e:
+                    holding_dict['tradeable'] = True  # Assume tradeable if can't check
+                    holding_dict['asset_status'] = 'UNKNOWN'
+                    logger.warning(f"{pos.symbol}: Could not verify asset status: {e}")
+
                 holdings.append(holding_dict)
 
-            logger.info(f"Fetched {len(holdings)} positions from Alpaca")
+            # Count tradeable vs untradeable
+            tradeable_count = sum(1 for h in holdings if h.get('tradeable', True))
+            untradeable_count = len(holdings) - tradeable_count
+            logger.info(f"Fetched {len(holdings)} positions from Alpaca ({tradeable_count} tradeable, {untradeable_count} frozen/untradeable)")
             return holdings
 
         except Exception as e:
