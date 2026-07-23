@@ -752,6 +752,31 @@ class TradingDepartment:
         max_retries = 5
         retry_delays = [1, 2, 4, 8, 16]  # Exponential backoff
 
+        # Shared blacklist gate (added 2026-07-23) — refuses entries for
+        # tickers with >=5 historical trades across bots, <30% win rate,
+        # and net-negative PnL. Exits are always allowed even for blacklisted
+        # tickers so we can unwind. Registry is auto-refreshed by weekly review.
+        if order.action == 'BUY':
+            try:
+                import sys as _sys
+                _sys.path.insert(0, r'C:\Users\wjcor\OneDrive\Desktop\_shared_trading_lib')
+                from ticker_registry import load_registry, get_ticker_context
+                _reg = load_registry()
+                _ctx = get_ticker_context(order.ticker, _reg)
+                if _ctx.get("classification") == "blacklist":
+                    logger.warning(
+                        f"[BLACKLIST-BLOCK] {order.ticker}: n={_ctx.get('n')}, "
+                        f"win_rate={_ctx.get('win_rate'):.0%}, "
+                        f"net=${_ctx.get('net_pnl')} — refusing BUY. "
+                        f"Bots share ticker performance history via _shared_trading_lib."
+                    )
+                    self._handle_submission_failure(order, metadata, "blacklisted ticker")
+                    return
+                if _ctx.get("classification") == "greenlist":
+                    logger.info(f"[GREENLIST] {order.ticker}: n={_ctx.get('n')}, win_rate={_ctx.get('win_rate'):.0%}")
+            except Exception as _reg_err:
+                logger.debug(f"ticker_registry consult failed for {order.ticker}: {_reg_err}")
+
         # Step 1: Submit to Alpaca (NO RETRY - happens once only)
         try:
             alpaca_order = self._submit_to_alpaca(order, metadata)
