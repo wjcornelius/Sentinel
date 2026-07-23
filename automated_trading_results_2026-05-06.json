@@ -1,0 +1,322 @@
+{
+  "date": "2026-05-06",
+  "start_time": "2026-05-06T09:00:05.508223",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "12:00 PM ET",
+    "current_date": "Wednesday, May 06, 2026"
+  },
+  "regime_analysis": {
+    "regime": "BULLISH",
+    "confidence": "HIGH",
+    "spy_price": 731.530029296875,
+    "spy_change_pct": 1.0721651292838537,
+    "vix_level": 17.260000228881836,
+    "recommendation": "GOOD DAY TO TRADE"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "SLM",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260506T160800Z_b70549de"
+    },
+    {
+      "ticker": "COLB",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260506T160801Z_b22c0076",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CRDO",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260506T160801Z_901f98a2"
+    },
+    {
+      "ticker": "EBAY",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260506T160801Z_c7e81c20"
+    },
+    {
+      "ticker": "IREN",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260506T160801Z_8b156cdd"
+    },
+    {
+      "ticker": "KDP",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260506T160801Z_808faf62",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "LBRT",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260506T160801Z_50d76055",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CPRT",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260506T160801Z_69c98094",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "JCI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260506T160801Z_0ef5e889",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "EXEL",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260506T160801Z_b9e12f23",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "DBX",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260506T160801Z_c3501c6e",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "IONQ",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260506T160801Z_4ad1a42e",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ADM",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260506T160801Z_1340f755",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BTDR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260506T160801Z_a3af3404",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "HPQ",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260506T160801Z_119c5989",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CLSK",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260506T160801Z_bbdaf395",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CCI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260506T160801Z_c0ff5176",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "GLW",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260506T160801Z_b6e708db",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "DAR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260506T160801Z_c8a56463",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-05-06T09:08:28.154223",
+    "equity": 114726.33,
+    "cash": 3427.92,
+    "buying_power": 114444.18,
+    "portfolio_value": 114726.33,
+    "starting_capital": 100000.0,
+    "total_return": 14726.330000000002,
+    "total_return_pct": 14.72633,
+    "daily_pl": 4422.570000000007,
+    "daily_pl_pct": 4.009446278168584,
+    "total_unrealized_pl": 12465.315,
+    "position_count": 14,
+    "positions": [
+      {
+        "ticker": "DOCN",
+        "shares": 73.0,
+        "entry_price": 95.98,
+        "current_price": 153.345,
+        "market_value": 11194.185,
+        "unrealized_pl": 4187.645,
+        "unrealized_pl_pct": 59.768
+      },
+      {
+        "ticker": "BZ",
+        "shares": 751.0,
+        "entry_price": 13.29,
+        "current_price": 14.44,
+        "market_value": 10844.44,
+        "unrealized_pl": 863.65,
+        "unrealized_pl_pct": 8.652999999999999
+      },
+      {
+        "ticker": "ALAB",
+        "shares": 51.0,
+        "entry_price": 125.28,
+        "current_price": 207.03,
+        "market_value": 10558.53,
+        "unrealized_pl": 4169.25,
+        "unrealized_pl_pct": 65.254
+      },
+      {
+        "ticker": "ARM",
+        "shares": 41.0,
+        "entry_price": 161.17,
+        "current_price": 235.17,
+        "market_value": 9641.97,
+        "unrealized_pl": 3034.0,
+        "unrealized_pl_pct": 45.914
+      },
+      {
+        "ticker": "GNTX",
+        "shares": 343.0,
+        "entry_price": 21.87,
+        "current_price": 23.475,
+        "market_value": 8051.925,
+        "unrealized_pl": 550.515,
+        "unrealized_pl_pct": 7.3389999999999995
+      },
+      {
+        "ticker": "IREN",
+        "shares": 124.0,
+        "entry_price": 61.21,
+        "current_price": 60.99,
+        "market_value": 7562.76,
+        "unrealized_pl": -27.28,
+        "unrealized_pl_pct": -0.359
+      },
+      {
+        "ticker": "EBAY",
+        "shares": 70.0,
+        "entry_price": 108.08,
+        "current_price": 108.0025,
+        "market_value": 7560.175,
+        "unrealized_pl": -5.425,
+        "unrealized_pl_pct": -0.07200000000000001
+      },
+      {
+        "ticker": "CRDO",
+        "shares": 39.0,
+        "entry_price": 190.79,
+        "current_price": 190.79,
+        "market_value": 7440.81,
+        "unrealized_pl": 0.0,
+        "unrealized_pl_pct": 0.0
+      },
+      {
+        "ticker": "FTI",
+        "shares": 96.0,
+        "entry_price": 74.94,
+        "current_price": 73.78,
+        "market_value": 7082.88,
+        "unrealized_pl": -111.36,
+        "unrealized_pl_pct": -1.548
+      },
+      {
+        "ticker": "HAL",
+        "shares": 174.0,
+        "entry_price": 41.5,
+        "current_price": 40.22,
+        "market_value": 6998.28,
+        "unrealized_pl": -222.72,
+        "unrealized_pl_pct": -3.084
+      },
+      {
+        "ticker": "BANC",
+        "shares": 360.0,
+        "entry_price": 18.66,
+        "current_price": 19.39,
+        "market_value": 6980.4,
+        "unrealized_pl": 262.8,
+        "unrealized_pl_pct": 3.9120000000000004
+      },
+      {
+        "ticker": "PR",
+        "shares": 324.0,
+        "entry_price": 21.3,
+        "current_price": 21.475,
+        "market_value": 6957.9,
+        "unrealized_pl": 56.7,
+        "unrealized_pl_pct": 0.822
+      },
+      {
+        "ticker": "EQT",
+        "shares": 116.0,
+        "entry_price": 59.49,
+        "current_price": 57.88,
+        "market_value": 6714.08,
+        "unrealized_pl": -186.76,
+        "unrealized_pl_pct": -2.706
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [
+    "Verification: Expected positions not found: COLB, CLSK, KDP, CCI, EXEL, IONQ, HPQ, CPRT, LBRT, ADM, BTDR, JCI, DBX, DAR, GLW"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 12,
+    "db_positions_before": 11,
+    "stale_closed": 0,
+    "in_sync": 11
+  },
+  "position_drift": {
+    "positions_checked": 12,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260506_090756",
+    "total_trades": 19,
+    "quality_score": 100,
+    "ceo_rating": "EXCELLENT",
+    "ceo_recommendation": "STRONGLY RECOMMEND APPROVAL"
+  },
+  "sells_count": 1,
+  "buys_count": 18,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: COLB, CLSK, KDP, CCI, EXEL, IONQ, HPQ, CPRT, LBRT, ADM, BTDR, JCI, DBX, DAR, GLW"
+    ],
+    "summary": {
+      "position_count": 14,
+      "sells_executed": 1,
+      "buys_executed": 18,
+      "expected_count_change": 17
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 4,
+    "fills_recorded": 4,
+    "orders_updated": 4,
+    "already_recorded": 0,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-05-06T09:08:30.500645",
+  "duration_seconds": 504.992438
+}

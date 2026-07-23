@@ -1,0 +1,160 @@
+{
+  "plan_id": "PLAN_20260714_090759",
+  "generated_at": "2026-07-14T16:07:59.426409Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 8,
+    "research_candidates": 64,
+    "gpt5_selected": 8,
+    "compliance_flagged": 0,
+    "overall_quality_score": 81
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 26,
+    "compliance_advisory": 100
+  },
+  "trades": [
+    {
+      "ticker": "DHT",
+      "action": "BUY",
+      "shares": 551,
+      "allocated_capital": 10000,
+      "entry_price": 18.124399185180664,
+      "composite_score": 68.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "JCI",
+      "action": "BUY",
+      "shares": 69,
+      "allocated_capital": 10000,
+      "entry_price": 144.14500427246094,
+      "composite_score": 68.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "FRO",
+      "action": "BUY",
+      "shares": 259,
+      "allocated_capital": 10000,
+      "entry_price": 38.595001220703125,
+      "composite_score": 68.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BRBR",
+      "action": "BUY",
+      "shares": 818,
+      "allocated_capital": 10000,
+      "entry_price": 12.218999862670898,
+      "composite_score": 66.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BMNR",
+      "action": "BUY",
+      "shares": 625,
+      "allocated_capital": 10000,
+      "entry_price": 15.984999656677246,
+      "composite_score": 62.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "IBKR",
+      "action": "BUY",
+      "shares": 105,
+      "allocated_capital": 10000,
+      "entry_price": 94.80000305175781,
+      "composite_score": 61.6,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ABNB",
+      "action": "SELL",
+      "shares": 17.0,
+      "sell_pct": 100,
+      "composite_score": 59.6,
+      "current_price": 146.25999450683594,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 59.6 < 60 absolute minimum",
+      "current_value": 2486.5543
+    },
+    {
+      "ticker": "AFRM",
+      "action": "SELL",
+      "shares": 135.0,
+      "sell_pct": 100,
+      "composite_score": 55.2,
+      "current_price": 82.40499877929688,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 55.2 < 60 absolute minimum",
+      "current_value": 11117.925
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 64 candidates (avg score: 45.6)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 78/78 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 2 SELLs, 6 BUYs ($60,000 allocated)",
+      "quality_score": 26,
+      "issues": [
+        "Capital deployment 18.8% (target 90.0%+)",
+        "Limited diversification: 6 new positions (target 12-20). Total after trades: 18"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 6 BUYs approved, 0 rejected, 2 SELLs",
+      "quality_score": 100,
+      "issues": []
+    }
+  ],
+  "approved_at": "2026-07-14T16:08:02.091792Z"
+}

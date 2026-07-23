@@ -1,0 +1,220 @@
+{
+  "date": "2026-03-20",
+  "start_time": "2026-03-20T09:00:03.135254",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "12:00 PM ET",
+    "current_date": "Friday, March 20, 2026"
+  },
+  "regime_analysis": {
+    "regime": "BEARISH",
+    "confidence": "HIGH",
+    "spy_price": 652.9199829101562,
+    "spy_change_pct": -1.0427409836465926,
+    "vix_level": 25.700000762939453,
+    "recommendation": "UNFAVORABLE CONDITIONS"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "ACI",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260320T160813Z_69fa08cf"
+    },
+    {
+      "ticker": "ALAB",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260320T160813Z_4003ba22"
+    },
+    {
+      "ticker": "EXEL",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260320T160814Z_64ed2a10",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "SRAD",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260320T160814Z_790444b4",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CE",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260320T160814Z_5081f38a",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ALLY",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260320T160814Z_894d9f88",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-03-20T09:08:28.740276",
+    "equity": 102212.72,
+    "cash": 17868.31,
+    "buying_power": 116370.96,
+    "portfolio_value": 102212.72,
+    "starting_capital": 100000.0,
+    "total_return": 2212.720000000001,
+    "total_return_pct": 2.212720000000001,
+    "daily_pl": 4053.4199999999983,
+    "daily_pl_pct": 4.129430425848593,
+    "total_unrealized_pl": 10110.134500000002,
+    "position_count": 11,
+    "positions": [
+      {
+        "ticker": "CF",
+        "shares": 107.0,
+        "entry_price": 92.61,
+        "current_price": 128.83,
+        "market_value": 13784.81,
+        "unrealized_pl": 3875.54,
+        "unrealized_pl_pct": 39.11
+      },
+      {
+        "ticker": "DELL",
+        "shares": 67.0,
+        "entry_price": 122.94,
+        "current_price": 166.14,
+        "market_value": 11131.38,
+        "unrealized_pl": 2894.4,
+        "unrealized_pl_pct": 35.138999999999996
+      },
+      {
+        "ticker": "DOCN",
+        "shares": 110.0,
+        "entry_price": 67.88,
+        "current_price": 82.12,
+        "market_value": 9033.2,
+        "unrealized_pl": 1566.4,
+        "unrealized_pl_pct": 20.977999999999998
+      },
+      {
+        "ticker": "RRC",
+        "shares": 167.0,
+        "entry_price": 35.81,
+        "current_price": 45.82,
+        "market_value": 7651.94,
+        "unrealized_pl": 1671.67,
+        "unrealized_pl_pct": 27.953
+      },
+      {
+        "ticker": "SLM",
+        "shares": 380.0,
+        "entry_price": 19.68,
+        "current_price": 19.795,
+        "market_value": 7522.1,
+        "unrealized_pl": 43.7,
+        "unrealized_pl_pct": 0.584
+      },
+      {
+        "ticker": "DHT",
+        "shares": 421.0,
+        "entry_price": 17.87,
+        "current_price": 17.465,
+        "market_value": 7352.765,
+        "unrealized_pl": -170.505,
+        "unrealized_pl_pct": -2.266
+      },
+      {
+        "ticker": "CAVA",
+        "shares": 73.0,
+        "entry_price": 81.12,
+        "current_price": 85.38,
+        "market_value": 6232.74,
+        "unrealized_pl": 310.98,
+        "unrealized_pl_pct": 5.251
+      },
+      {
+        "ticker": "FOXA",
+        "shares": 104.0,
+        "entry_price": 57.39,
+        "current_price": 58.16,
+        "market_value": 6048.64,
+        "unrealized_pl": 80.08,
+        "unrealized_pl_pct": 1.3419999999999999
+      },
+      {
+        "ticker": "DVN",
+        "shares": 121.0,
+        "entry_price": 49.62,
+        "current_price": 49.5545,
+        "market_value": 5996.0945,
+        "unrealized_pl": -7.9255,
+        "unrealized_pl_pct": -0.132
+      },
+      {
+        "ticker": "EQT",
+        "shares": 89.0,
+        "entry_price": 66.62,
+        "current_price": 66.075,
+        "market_value": 5880.675,
+        "unrealized_pl": -48.505,
+        "unrealized_pl_pct": -0.818
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [
+    "Reconciliation cleaned 2 stale records",
+    "Verification: Expected positions not found: EXEL, ALLY, SRAD, CE"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 13,
+    "db_positions_before": 14,
+    "stale_closed": 2,
+    "in_sync": 12
+  },
+  "position_drift": {
+    "positions_checked": 13,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260320_090809",
+    "total_trades": 6,
+    "quality_score": 81,
+    "ceo_rating": "GOOD",
+    "ceo_recommendation": "RECOMMEND APPROVAL"
+  },
+  "sells_count": 2,
+  "buys_count": 4,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: EXEL, ALLY, SRAD, CE"
+    ],
+    "summary": {
+      "position_count": 11,
+      "sells_executed": 2,
+      "buys_executed": 4,
+      "expected_count_change": 2
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 8,
+    "fills_recorded": 2,
+    "orders_updated": 2,
+    "already_recorded": 6,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-03-20T09:08:30.776471",
+  "duration_seconds": 507.641232
+}

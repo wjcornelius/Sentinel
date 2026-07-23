@@ -7,6 +7,55 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [Alpha Rework] - 2026-07-22
+
+Surgical fixes from the deep-dive analysis (hold-period bucketing, 83% Compliance
+rejection loop, dead News dept, sector="Unknown" on 90% of trades).
+
+### Changed
+- **ATR trailing stops widened**: 2x multiplier -> 3x, floor 3% -> 5%
+  (`Utils/atr_calculator.py`). Hold-period data: <=7 day holds = 19% win rate
+  vs >=30 day holds = 95% win rate. Wider stops let the swing thesis develop.
+- **Delayed initial stop**: on entry, stop is placed at the 15% ceiling. A
+  new `TrailingStopMonitor.tighten_stops_after_delay()` swaps it to the
+  tighter 3x ATR trailing stop on day 6. Prevents noise-driven exits.
+- **Allocator/Compliance rejection loop fixed**: `operations_manager.py`
+  now pre-checks `hard_constraints.yaml:min_cash_reserve_pct` before
+  proposing orders. Was proposing plans that used 100% of available_capital
+  which Trading's HardConstraintValidator then rejected.
+- **Composite rebalanced 50/50**: `research_department.py:_score_stocks`
+  now weights technical=0.5, fundamental=0.5 (was 0.4/0.4/0.2 with a
+  hard-coded sentiment=50 that contributed pure noise).
+
+### Added
+- **Cheap Poe LLM portfolio finalizer**: `poe_portfolio_optimizer.py` calls
+  Claude Haiku 4.5 via Poe to re-rank the shortlist with sector-diversification
+  bias, then hands off to the deterministic sizer. Silently falls back to
+  deterministic on any failure. Cost: ~40-80 Poe points/day (<0.01% of
+  monthly budget). Response text logged to
+  `Departments/Operations/data/llm_decisions.jsonl` for review.
+- **Shared closed_trades table**: `Departments/Trading/data/closed_trades.db`
+  via `_shared_trading_lib/closed_trades.ClosedTradesTable`. Single source
+  of truth for realized P&L across QuantLab/Sentinel/Mag7.
+- **One-shot backfill**: `backfill_closed_trades.py` FIFO-reconstructs closed
+  round-trips from `trading_fills` join `trading_orders`.
+- **Sector cache**: `populate_ticker_sectors.py` writes
+  `Config/ticker_sectors.json`. Research falls back to it when yfinance's
+  `.info['sector']` is missing (ETFs, ADRs), so the 40% sector-concentration
+  hard constraint can bind.
+- **Canary checks**: Ops daily cycle now calls
+  `check_position_state_drift` and `check_cash_drag` from the shared
+  library (writes to `_shared_trading_lib/data/canary_alerts.jsonl`).
+
+### Removed
+- **Messaging theater**: `Messages_Between_Departments/` accumulated 2,559
+  files in Outbox/TRADING alone. Archival script
+  `archive_messaging_theater.py` moves everything to
+  `_archive_20260722/`; write_message() is now a no-op unless env var
+  `SENTINEL_ENABLE_DEPT_MESSAGES=1` is set.
+
+---
+
 ## [Live Trading v1.2] - 2025-11-06
 
 ### 🔧 CRITICAL FIXES: Trading Plan Generation & Position Tracking

@@ -1,0 +1,311 @@
+{
+  "date": "2026-04-14",
+  "start_time": "2026-04-14T09:00:03.646464",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "12:00 PM ET",
+    "current_date": "Tuesday, April 14, 2026"
+  },
+  "regime_analysis": {
+    "regime": "BULLISH",
+    "confidence": "HIGH",
+    "spy_price": 692.9299926757812,
+    "spy_change_pct": 0.995484234496705,
+    "vix_level": 18.1200008392334,
+    "recommendation": "GOOD DAY TO TRADE"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "GSK",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260414T160824Z_a5c8ca42"
+    },
+    {
+      "ticker": "CDE",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260414T160825Z_e6d7f16f",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "COLB",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260414T160825Z_93044999",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "FTI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260414T160825Z_bd04ff86"
+    },
+    {
+      "ticker": "ARM",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260414T160825Z_ac5583af"
+    },
+    {
+      "ticker": "CPRT",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260414T160825Z_26ef0de5",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "GILD",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260414T160825Z_ae6a6700",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "HIMS",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260414T160825Z_d5823c62",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BRO",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260414T160825Z_8957625c",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "GEHC",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260414T160825Z_1c10be51",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BMNR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260414T160825Z_7aeec807",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "IREN",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260414T160825Z_8b6e3c9b",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BKR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260414T160825Z_2ddcad3a",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "DHR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260414T160825Z_de75df8f",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "DHI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260414T160825Z_059c88dd",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "OBDC",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260414T160825Z_aa0bda1e",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CNM",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260414T160825Z_a3a3f4cb",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "AG",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260414T160825Z_a67dcf3c",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "JCI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260414T160825Z_b5a1e6da",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "MMM",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260414T160825Z_11dbb02a",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-04-14T09:08:52.671593",
+    "equity": 106375.89,
+    "cash": 12477.4,
+    "buying_power": 115143.22,
+    "portfolio_value": 106375.89,
+    "starting_capital": 100000.0,
+    "total_return": 6375.889999999999,
+    "total_return_pct": 6.375889999999999,
+    "daily_pl": 4756.044999999998,
+    "daily_pl_pct": 4.680232488053882,
+    "total_unrealized_pl": 5549.5700000000015,
+    "position_count": 12,
+    "positions": [
+      {
+        "ticker": "EXEL",
+        "shares": 233.0,
+        "entry_price": 42.85,
+        "current_price": 45.8,
+        "market_value": 10671.4,
+        "unrealized_pl": 687.35,
+        "unrealized_pl_pct": 6.8839999999999995
+      },
+      {
+        "ticker": "BZ",
+        "shares": 751.0,
+        "entry_price": 13.29,
+        "current_price": 13.675,
+        "market_value": 10269.925,
+        "unrealized_pl": 289.135,
+        "unrealized_pl_pct": 2.897
+      },
+      {
+        "ticker": "HL",
+        "shares": 508.0,
+        "entry_price": 19.68,
+        "current_price": 20.005,
+        "market_value": 10162.54,
+        "unrealized_pl": 165.1,
+        "unrealized_pl_pct": 1.651
+      },
+      {
+        "ticker": "ALAB",
+        "shares": 51.0,
+        "entry_price": 125.28,
+        "current_price": 167.78,
+        "market_value": 8556.78,
+        "unrealized_pl": 2167.5,
+        "unrealized_pl_pct": 33.924
+      },
+      {
+        "ticker": "SLM",
+        "shares": 380.0,
+        "entry_price": 19.68,
+        "current_price": 22.155,
+        "market_value": 8418.9,
+        "unrealized_pl": 940.5,
+        "unrealized_pl_pct": 12.576
+      },
+      {
+        "ticker": "ALLY",
+        "shares": 189.0,
+        "entry_price": 39.53,
+        "current_price": 42.635,
+        "market_value": 8058.015,
+        "unrealized_pl": 586.845,
+        "unrealized_pl_pct": 7.8549999999999995
+      },
+      {
+        "ticker": "GNTX",
+        "shares": 343.0,
+        "entry_price": 21.87,
+        "current_price": 21.965,
+        "market_value": 7533.995,
+        "unrealized_pl": 32.585,
+        "unrealized_pl_pct": 0.434
+      },
+      {
+        "ticker": "GLW",
+        "shares": 40.0,
+        "entry_price": 160.29,
+        "current_price": 169.775,
+        "market_value": 6791.0,
+        "unrealized_pl": 379.4,
+        "unrealized_pl_pct": 5.917
+      },
+      {
+        "ticker": "FTI",
+        "shares": 91.0,
+        "entry_price": 73.73,
+        "current_price": 73.72,
+        "market_value": 6708.52,
+        "unrealized_pl": -0.91,
+        "unrealized_pl_pct": -0.013999999999999999
+      },
+      {
+        "ticker": "ARM",
+        "shares": 41.0,
+        "entry_price": 161.17,
+        "current_price": 160.98,
+        "market_value": 6600.18,
+        "unrealized_pl": -7.79,
+        "unrealized_pl_pct": -0.11800000000000001
+      },
+      {
+        "ticker": "HMY",
+        "shares": 383.0,
+        "entry_price": 15.67,
+        "current_price": 16.755,
+        "market_value": 6417.165,
+        "unrealized_pl": 415.555,
+        "unrealized_pl_pct": 6.9239999999999995
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [
+    "Verification: Expected positions not found: BMNR, HIMS, AG, CPRT, BRO, MMM, IREN, BKR, DHI, DHR, CDE, CNM, GEHC, COLB, GILD, OBDC, JCI"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 11,
+    "db_positions_before": 10,
+    "stale_closed": 0,
+    "in_sync": 10
+  },
+  "position_drift": {
+    "positions_checked": 11,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260414_090817",
+    "total_trades": 20,
+    "quality_score": 100,
+    "ceo_rating": "EXCELLENT",
+    "ceo_recommendation": "STRONGLY RECOMMEND APPROVAL"
+  },
+  "sells_count": 1,
+  "buys_count": 19,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: BMNR, HIMS, AG, CPRT, BRO, MMM, IREN, BKR, DHI, DHR, CDE, CNM, GEHC, COLB, GILD, OBDC, JCI"
+    ],
+    "summary": {
+      "position_count": 12,
+      "sells_executed": 1,
+      "buys_executed": 19,
+      "expected_count_change": 18
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 3,
+    "fills_recorded": 3,
+    "orders_updated": 3,
+    "already_recorded": 0,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-04-14T09:08:54.566334",
+  "duration_seconds": 530.919892
+}

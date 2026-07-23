@@ -1,0 +1,296 @@
+{
+  "date": "2026-04-30",
+  "start_time": "2026-04-30T09:00:03.729498",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "12:00 PM ET",
+    "current_date": "Thursday, April 30, 2026"
+  },
+  "regime_analysis": {
+    "regime": "BULLISH",
+    "confidence": "HIGH",
+    "spy_price": 714.60498046875,
+    "spy_change_pct": 0.42510516122662834,
+    "vix_level": 17.459999084472656,
+    "recommendation": "GOOD DAY TO TRADE"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "ALLY",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260430T160707Z_66e6f76a"
+    },
+    {
+      "ticker": "HST",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260430T160707Z_053f80ff",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CRDO",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260430T160707Z_28f36bf0",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ONB",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260430T160707Z_fad15596",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "HAYW",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260430T160707Z_01d86f56",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "AMKR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260430T160707Z_171afa65",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "MGY",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260430T160707Z_716d85b2",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "DVN",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260430T160707Z_389d8f0d",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "FTI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260430T160707Z_d77117af",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "OBDC",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260430T160707Z_bdd15fce",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ORLY",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260430T160707Z_f10e056f",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "EXE",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260430T160707Z_bc5338b6",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CPRT",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260430T160707Z_ea0e097e",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "MDLZ",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260430T160707Z_9a7812e7",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "JCI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260430T160707Z_3e032597",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "DAR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260430T160707Z_f715947a",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BEAM",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260430T160707Z_a263107e",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-04-30T09:07:26.139274",
+    "equity": 109266.37,
+    "cash": 14888.33,
+    "buying_power": 120444.63,
+    "portfolio_value": 109266.37,
+    "starting_capital": 100000.0,
+    "total_return": 9266.369999999995,
+    "total_return_pct": 9.266369999999997,
+    "daily_pl": 4728.119999999995,
+    "daily_pl_pct": 4.522861249351309,
+    "total_unrealized_pl": 8397.495,
+    "position_count": 12,
+    "positions": [
+      {
+        "ticker": "EXEL",
+        "shares": 233.0,
+        "entry_price": 42.85,
+        "current_price": 45.235,
+        "market_value": 10539.755,
+        "unrealized_pl": 555.705,
+        "unrealized_pl_pct": 5.566
+      },
+      {
+        "ticker": "BZ",
+        "shares": 751.0,
+        "entry_price": 13.29,
+        "current_price": 13.48,
+        "market_value": 10123.48,
+        "unrealized_pl": 142.69,
+        "unrealized_pl_pct": 1.43
+      },
+      {
+        "ticker": "ALAB",
+        "shares": 51.0,
+        "entry_price": 125.28,
+        "current_price": 192.87,
+        "market_value": 9836.37,
+        "unrealized_pl": 3447.09,
+        "unrealized_pl_pct": 53.95100000000001
+      },
+      {
+        "ticker": "SLM",
+        "shares": 380.0,
+        "entry_price": 19.68,
+        "current_price": 23.16,
+        "market_value": 8800.8,
+        "unrealized_pl": 1322.4,
+        "unrealized_pl_pct": 17.683
+      },
+      {
+        "ticker": "ARM",
+        "shares": 41.0,
+        "entry_price": 161.17,
+        "current_price": 213.885,
+        "market_value": 8769.285,
+        "unrealized_pl": 2161.315,
+        "unrealized_pl_pct": 32.708
+      },
+      {
+        "ticker": "GNTX",
+        "shares": 343.0,
+        "entry_price": 21.87,
+        "current_price": 23.345,
+        "market_value": 8007.335,
+        "unrealized_pl": 505.925,
+        "unrealized_pl_pct": 6.744
+      },
+      {
+        "ticker": "DOCN",
+        "shares": 73.0,
+        "entry_price": 95.98,
+        "current_price": 96.35,
+        "market_value": 7033.55,
+        "unrealized_pl": 27.01,
+        "unrealized_pl_pct": 0.385
+      },
+      {
+        "ticker": "PR",
+        "shares": 324.0,
+        "entry_price": 21.3,
+        "current_price": 21.645,
+        "market_value": 7012.98,
+        "unrealized_pl": 111.78,
+        "unrealized_pl_pct": 1.6199999999999999
+      },
+      {
+        "ticker": "EQT",
+        "shares": 116.0,
+        "entry_price": 59.49,
+        "current_price": 60.19,
+        "market_value": 6982.04,
+        "unrealized_pl": 81.2,
+        "unrealized_pl_pct": 1.1769999999999998
+      },
+      {
+        "ticker": "COLB",
+        "shares": 231.0,
+        "entry_price": 28.99,
+        "current_price": 29.67,
+        "market_value": 6853.77,
+        "unrealized_pl": 157.08,
+        "unrealized_pl_pct": 2.346
+      },
+      {
+        "ticker": "BANC",
+        "shares": 360.0,
+        "entry_price": 18.66,
+        "current_price": 18.635,
+        "market_value": 6708.6,
+        "unrealized_pl": -9.0,
+        "unrealized_pl_pct": -0.134
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [
+    "Reconciliation cleaned 1 stale records",
+    "Verification: Expected positions not found: DVN, EXE, ORLY, CPRT, CRDO, OBDC, JCI, FTI, MGY, HST, MDLZ, DAR, BEAM, HAYW, AMKR, ONB"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 13,
+    "db_positions_before": 13,
+    "stale_closed": 1,
+    "in_sync": 12
+  },
+  "position_drift": {
+    "positions_checked": 13,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260430_090703",
+    "total_trades": 17,
+    "quality_score": 98,
+    "ceo_rating": "EXCELLENT",
+    "ceo_recommendation": "STRONGLY RECOMMEND APPROVAL"
+  },
+  "sells_count": 1,
+  "buys_count": 16,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: DVN, EXE, ORLY, CPRT, CRDO, OBDC, JCI, FTI, MGY, HST, MDLZ, DAR, BEAM, HAYW, AMKR, ONB"
+    ],
+    "summary": {
+      "position_count": 12,
+      "sells_executed": 1,
+      "buys_executed": 16,
+      "expected_count_change": 15
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 4,
+    "fills_recorded": 1,
+    "orders_updated": 1,
+    "already_recorded": 3,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-04-30T09:07:27.901433",
+  "duration_seconds": 444.171948
+}

@@ -1,0 +1,270 @@
+{
+  "date": "2026-06-11",
+  "start_time": "2026-06-11T09:00:07.814662",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "12:01 PM ET",
+    "current_date": "Thursday, June 11, 2026"
+  },
+  "regime_analysis": {
+    "regime": "NEUTRAL",
+    "confidence": "MEDIUM",
+    "spy_price": 728.6699829101562,
+    "spy_change_pct": 0.44663031127568215,
+    "vix_level": 21.959999084472656,
+    "recommendation": "NORMAL CONDITIONS"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "CTSH",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260611T160807Z_772bcbda"
+    },
+    {
+      "ticker": "JCI",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260611T160807Z_e96e22ff"
+    },
+    {
+      "ticker": "LYFT",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260611T160807Z_36a27a49"
+    },
+    {
+      "ticker": "HAYW",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260611T160809Z_e00650d6",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "FTI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260611T160809Z_77133984",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "DNOW",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260611T160809Z_d6c826cc"
+    },
+    {
+      "ticker": "DHR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260611T160809Z_02adefcd"
+    },
+    {
+      "ticker": "IBKR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260611T160809Z_22f5557f"
+    },
+    {
+      "ticker": "AMKR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260611T160809Z_b125fa22",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-06-11T09:08:34.401615",
+    "equity": 110737.27,
+    "cash": -4556.85,
+    "buying_power": 294207.93,
+    "portfolio_value": 110737.27,
+    "starting_capital": 100000.0,
+    "total_return": 10737.270000000004,
+    "total_return_pct": 10.737270000000004,
+    "daily_pl": 4309.590000000011,
+    "daily_pl_pct": 4.0493131110252625,
+    "total_unrealized_pl": 2626.2150240000005,
+    "position_count": 15,
+    "positions": [
+      {
+        "ticker": "EW",
+        "shares": 121.0,
+        "entry_price": 82.2,
+        "current_price": 85.935,
+        "market_value": 10398.135,
+        "unrealized_pl": 451.935,
+        "unrealized_pl_pct": 4.5440000000000005
+      },
+      {
+        "ticker": "OKE",
+        "shares": 110.0,
+        "entry_price": 90.83,
+        "current_price": 91.58,
+        "market_value": 10073.8,
+        "unrealized_pl": 82.5,
+        "unrealized_pl_pct": 0.826
+      },
+      {
+        "ticker": "DNOW",
+        "shares": 724.0,
+        "entry_price": 13.78,
+        "current_price": 13.78,
+        "market_value": 9976.72,
+        "unrealized_pl": 0.0,
+        "unrealized_pl_pct": 0.0
+      },
+      {
+        "ticker": "IBKR",
+        "shares": 115.0,
+        "entry_price": 86.39,
+        "current_price": 86.39,
+        "market_value": 9934.85,
+        "unrealized_pl": 0.0,
+        "unrealized_pl_pct": 0.0
+      },
+      {
+        "ticker": "DHR",
+        "shares": 55.0,
+        "entry_price": 180.53,
+        "current_price": 180.445,
+        "market_value": 9924.475,
+        "unrealized_pl": -4.675,
+        "unrealized_pl_pct": -0.047
+      },
+      {
+        "ticker": "GNTX",
+        "shares": 343.0,
+        "entry_price": 21.87,
+        "current_price": 25.085,
+        "market_value": 8604.155,
+        "unrealized_pl": 1102.745,
+        "unrealized_pl_pct": 14.701
+      },
+      {
+        "ticker": "BRO",
+        "shares": 128.0,
+        "entry_price": 58.24,
+        "current_price": 60.4,
+        "market_value": 7731.2,
+        "unrealized_pl": 276.48,
+        "unrealized_pl_pct": 3.7089999999999996
+      },
+      {
+        "ticker": "G",
+        "shares": 232.0,
+        "entry_price": 32.321293,
+        "current_price": 31.875,
+        "market_value": 7395.0,
+        "unrealized_pl": -103.539976,
+        "unrealized_pl_pct": -1.381
+      },
+      {
+        "ticker": "C",
+        "shares": 52.0,
+        "entry_price": 129.9,
+        "current_price": 135.14,
+        "market_value": 7027.28,
+        "unrealized_pl": 272.48,
+        "unrealized_pl_pct": 4.034
+      },
+      {
+        "ticker": "M",
+        "shares": 261.0,
+        "entry_price": 23.02,
+        "current_price": 24.07,
+        "market_value": 6282.27,
+        "unrealized_pl": 274.05,
+        "unrealized_pl_pct": 4.561
+      },
+      {
+        "ticker": "DG",
+        "shares": 55.0,
+        "entry_price": 109.26,
+        "current_price": 112.43,
+        "market_value": 6183.65,
+        "unrealized_pl": 174.35,
+        "unrealized_pl_pct": 2.9010000000000002
+      },
+      {
+        "ticker": "COLB",
+        "shares": 200.0,
+        "entry_price": 29.93,
+        "current_price": 30.34,
+        "market_value": 6068.0,
+        "unrealized_pl": 82.0,
+        "unrealized_pl_pct": 1.37
+      },
+      {
+        "ticker": "FOXA",
+        "shares": 88.0,
+        "entry_price": 67.55,
+        "current_price": 68.17,
+        "market_value": 5998.96,
+        "unrealized_pl": 54.56,
+        "unrealized_pl_pct": 0.918
+      },
+      {
+        "ticker": "KMB",
+        "shares": 59.0,
+        "entry_price": 100.28,
+        "current_price": 101.45,
+        "market_value": 5985.55,
+        "unrealized_pl": 69.03,
+        "unrealized_pl_pct": 1.167
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [
+    "Reconciliation cleaned 3 stale records",
+    "Verification: Expected positions not found: HAYW, FTI, AMKR"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 15,
+    "db_positions_before": 17,
+    "stale_closed": 3,
+    "in_sync": 14
+  },
+  "position_drift": {
+    "positions_checked": 15,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260611_090800",
+    "total_trades": 9,
+    "quality_score": 81,
+    "ceo_rating": "GOOD",
+    "ceo_recommendation": "RECOMMEND APPROVAL"
+  },
+  "sells_count": 3,
+  "buys_count": 6,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: HAYW, FTI, AMKR"
+    ],
+    "summary": {
+      "position_count": 15,
+      "sells_executed": 3,
+      "buys_executed": 6,
+      "expected_count_change": 3
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 12,
+    "fills_recorded": 6,
+    "orders_updated": 6,
+    "already_recorded": 6,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-06-11T09:08:37.440193",
+  "duration_seconds": 509.625545
+}

@@ -1,0 +1,144 @@
+{
+  "plan_id": "PLAN_20260312_090825",
+  "generated_at": "2026-03-12T16:08:25.775515Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 7,
+    "research_candidates": 68,
+    "gpt5_selected": 7,
+    "compliance_flagged": 0,
+    "overall_quality_score": 80
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 23,
+    "compliance_advisory": 100
+  },
+  "trades": [
+    {
+      "ticker": "AA",
+      "action": "BUY",
+      "shares": 89,
+      "allocated_capital": 6000.0,
+      "entry_price": 66.69000244140625,
+      "composite_score": 66.4,
+      "sentiment_score": 22.0,
+      "sentiment_summary": "American Airlines (AAL) stock is declining sharply, trading down 1.18% to 2.40% in premarket and intraday on March 12, 2026, amid surging crude oil prices with Brent topping $100 per barrel due to the ongoing U.S.-Iran war.[1][2] Geopolitical tensions have led to massive flight cancellations in the Middle East, costing the industry nearly $1 billion, while AAL lacks fuel hedges, amplifying its vulnerability compared to peers.[1][2] Additional pressures include a recent earnings miss, Q1 loss guidance of $0.10-$0.50 per share, labor unrest, and a debt-heavy balance sheet.[2]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ADMA",
+      "action": "BUY",
+      "shares": 389,
+      "allocated_capital": 6000.0,
+      "entry_price": 15.420000076293945,
+      "composite_score": 63.8,
+      "sentiment_score": 85.0,
+      "sentiment_summary": "ADMA Biologics reported preliminary 2025 results and raised its 2026 revenue guidance to ~$635M from $630M, along with increased adjusted EBITDA outlook to $360M, driven by yield-enhanced production and accelerating Asceniv demand[1]. The company signed a new distribution agreement with McKesson Specialty and advanced its preclinical SG-001 program, with analysts unanimously rating the stock a Buy and projecting 59-104% upside to targets of $25.67-$32[2][3]. ADMA also announced a $125M accelerated share repurchase as part of a $200M 2026 program[5].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CAVA",
+      "action": "BUY",
+      "shares": 73,
+      "allocated_capital": 6000.0,
+      "entry_price": 81.875,
+      "composite_score": 63.0,
+      "sentiment_score": 45.0,
+      "sentiment_summary": "No news articles from the last 24 hours (March 12, 2026, 4 PM UTC) were found in the search results. The most recent coverage discusses Q4 2025 earnings beats from late February 2026, with revenue and EPS exceeding expectations, driving a 20-21% stock jump, alongside analyst price target increases[2][3]. However, mixed signals include flat same-store sales, slightly below-expectation EBITDA guidance, and some institutional profit-taking[1][2].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ADM",
+      "action": "BUY",
+      "shares": 82,
+      "allocated_capital": 6000.0,
+      "entry_price": 72.99500274658203,
+      "composite_score": 62.6,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "Archer Daniels Midland (ADM) stock recently hit a new 52-week and 12-month high around $69-70, driven by beating Q4 2025 EPS estimates ($0.87 vs. $0.80) despite revenue declines, alongside FY2026 EPS guidance of $3.60-4.25 and a raised quarterly dividend to $0.52.[1][2][3][5] Positive factors include cost savings programs, biofuel policy tailwinds, and resumed Chinese soybean purchases, boosting investor confidence amid strong agricultural demand.[3][4]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ABNB",
+      "action": "SELL",
+      "shares": 56.0,
+      "sell_pct": 100,
+      "composite_score": 52.400000000000006,
+      "current_price": 127.19499969482422,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Airbnb shares fell 1.19% on March 10, 2026, closing at $132.44, despite Q4 revenue beating forecasts by 2.58%; however, EPS missed estimates by 15.15%, leading to investor skepticism.[1] On March 5, 2026, CFO Elinor Mertz sold 4,308 shares at $135.73 under a pre-arranged 10b5-1 plan, reported with negative filing sentiment.[2] No other major news emerged in the last 24 hours, with stock opening at $132.54 on March 11.[3]",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 52.4 < 60 absolute minimum",
+      "current_value": 7143.36
+    },
+    {
+      "ticker": "BMNR",
+      "action": "SELL",
+      "shares": 361.0,
+      "sell_pct": 100,
+      "composite_score": 58.8,
+      "current_price": 20.719999313354492,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "BitMine Immersion Technologies (BMNR) announced on March 9, 2026 that its crypto and cash holdings reached $10.3 billion, with 4.535 million ETH tokens and annualized staking revenues of $174 million.[3] The company continues advancing its MAVAN staking infrastructure for early 2026 deployment while maintaining strong Ethereum accumulation efforts.[3]",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 58.8 < 60 absolute minimum",
+      "current_value": 7451.04
+    },
+    {
+      "ticker": "INDV",
+      "action": "SELL",
+      "shares": 300.0,
+      "sell_pct": 100,
+      "composite_score": 48.0,
+      "current_price": 30.170000076293945,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No news articles from the last 24 hours (since March 11, 2026, 4 PM UTC) appear in the search results for INDV stock. Available recent coverage includes surging implied volatility in options indicating expected price swings, positive technical forecasts from July 2025 with predicted rises, and older analyst upgrades to 'Moderate Buy' with targets up to $48. Insider purchases and Q4 2026 earnings beats from February were also noted in prior reports.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 48.0 < 60 absolute minimum",
+      "current_value": 9061.5
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 68 candidates (avg score: 40.8)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 79/79 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 3 SELLs, 4 BUYs ($24,000 allocated)",
+      "quality_score": 23,
+      "issues": [
+        "Capital deployment 19.8% (target 90.0%+)",
+        "Limited diversification: 4 new positions (target 12-20). Total after trades: 12"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 4 BUYs approved, 0 rejected, 3 SELLs",
+      "quality_score": 100,
+      "issues": []
+    }
+  ],
+  "approved_at": "2026-03-12T16:08:28.969128Z"
+}

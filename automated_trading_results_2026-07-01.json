@@ -1,0 +1,267 @@
+{
+  "date": "2026-07-01",
+  "start_time": "2026-07-01T09:00:02.973474",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "12:00 PM ET",
+    "current_date": "Wednesday, July 01, 2026"
+  },
+  "regime_analysis": {
+    "regime": "BULLISH",
+    "confidence": "MEDIUM",
+    "spy_price": 748.7421875,
+    "spy_change_pct": 0.264093083167417,
+    "vix_level": 16.09000015258789,
+    "recommendation": "FAVORABLE CONDITIONS"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "EBAY",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260701T160710Z_6619edc1",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "AR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260701T160710Z_2a57efcb",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "EW",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260701T160710Z_0ed4cc72",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "PCAR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260701T160710Z_7c2b6894",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "EQT",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260701T160710Z_67a4df3d",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "KDP",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260701T160710Z_c1f62cb0",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ASX",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260701T160710Z_0bc1f1b7",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CVNA",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260701T160710Z_6e707061",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ORLY",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260701T160710Z_97e4ef35",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "PYPL",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260701T160710Z_e91250e7",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BDX",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260701T160710Z_5200819a",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "AG",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260701T160710Z_431144b5",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-07-01T09:07:32.688827",
+    "equity": 112355.58,
+    "cash": 11801.74,
+    "buying_power": 318369.5,
+    "portfolio_value": 112355.58,
+    "starting_capital": 100000.0,
+    "total_return": 12355.580000000002,
+    "total_return_pct": 12.355580000000002,
+    "daily_pl": 4454.389999999999,
+    "daily_pl_pct": 4.1282121170304045,
+    "total_unrealized_pl": 7414.945011000001,
+    "position_count": 12,
+    "positions": [
+      {
+        "ticker": "AFRM",
+        "shares": 135.0,
+        "entry_price": 74.26,
+        "current_price": 84.87,
+        "market_value": 11457.45,
+        "unrealized_pl": 1432.35,
+        "unrealized_pl_pct": 14.288
+      },
+      {
+        "ticker": "HAYW",
+        "shares": 657.0,
+        "entry_price": 15.21,
+        "current_price": 17.305,
+        "market_value": 11369.385,
+        "unrealized_pl": 1376.415,
+        "unrealized_pl_pct": 13.774000000000001
+      },
+      {
+        "ticker": "ALLY",
+        "shares": 218.0,
+        "entry_price": 45.75,
+        "current_price": 46.44,
+        "market_value": 10123.92,
+        "unrealized_pl": 150.42,
+        "unrealized_pl_pct": 1.508
+      },
+      {
+        "ticker": "ENTG",
+        "shares": 59.0,
+        "entry_price": 167.21,
+        "current_price": 168.89,
+        "market_value": 9964.51,
+        "unrealized_pl": 99.12,
+        "unrealized_pl_pct": 1.005
+      },
+      {
+        "ticker": "DHR",
+        "shares": 51.0,
+        "entry_price": 193.008039,
+        "current_price": 194.98,
+        "market_value": 9943.98,
+        "unrealized_pl": 100.570011,
+        "unrealized_pl_pct": 1.022
+      },
+      {
+        "ticker": "BRO",
+        "shares": 128.0,
+        "entry_price": 58.24,
+        "current_price": 67.765,
+        "market_value": 8673.92,
+        "unrealized_pl": 1219.2,
+        "unrealized_pl_pct": 16.355
+      },
+      {
+        "ticker": "GNTX",
+        "shares": 343.0,
+        "entry_price": 21.87,
+        "current_price": 24.975,
+        "market_value": 8566.425,
+        "unrealized_pl": 1065.015,
+        "unrealized_pl_pct": 14.198
+      },
+      {
+        "ticker": "C",
+        "shares": 52.0,
+        "entry_price": 129.9,
+        "current_price": 140.64,
+        "market_value": 7313.28,
+        "unrealized_pl": 558.48,
+        "unrealized_pl_pct": 8.268
+      },
+      {
+        "ticker": "KMB",
+        "shares": 59.0,
+        "entry_price": 100.28,
+        "current_price": 110.68,
+        "market_value": 6530.12,
+        "unrealized_pl": 613.6,
+        "unrealized_pl_pct": 10.371
+      },
+      {
+        "ticker": "COLB",
+        "shares": 200.0,
+        "entry_price": 29.93,
+        "current_price": 32.63,
+        "market_value": 6526.0,
+        "unrealized_pl": 540.0,
+        "unrealized_pl_pct": 9.020999999999999
+      },
+      {
+        "ticker": "DG",
+        "shares": 55.0,
+        "entry_price": 109.26,
+        "current_price": 115.905,
+        "market_value": 6374.775,
+        "unrealized_pl": 365.475,
+        "unrealized_pl_pct": 6.082
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [
+    "Reconciliation cleaned 1 stale records",
+    "Verification: Expected positions not found: AG, EW, CVNA, EQT, BDX, ASX, AR, EBAY, ORLY, KDP, PYPL, PCAR"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 12,
+    "db_positions_before": 12,
+    "stale_closed": 1,
+    "in_sync": 11
+  },
+  "position_drift": {
+    "positions_checked": 12,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260701_090707",
+    "total_trades": 12,
+    "quality_score": 88,
+    "ceo_rating": "EXCELLENT",
+    "ceo_recommendation": "STRONGLY RECOMMEND APPROVAL"
+  },
+  "sells_count": 0,
+  "buys_count": 12,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: AG, EW, CVNA, EQT, BDX, ASX, AR, EBAY, ORLY, KDP, PYPL, PCAR"
+    ],
+    "summary": {
+      "position_count": 12,
+      "sells_executed": 0,
+      "buys_executed": 12,
+      "expected_count_change": 12
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 1,
+    "fills_recorded": 0,
+    "orders_updated": 0,
+    "already_recorded": 1,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-07-01T09:07:35.632589",
+  "duration_seconds": 452.659127
+}

@@ -1,0 +1,188 @@
+{
+  "plan_id": "PLAN_20260515_090627",
+  "generated_at": "2026-05-15T16:06:27.693943Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 10,
+    "research_candidates": 65,
+    "gpt5_selected": 10,
+    "compliance_flagged": 0,
+    "overall_quality_score": 87
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 51,
+    "compliance_advisory": 100
+  },
+  "trades": [
+    {
+      "ticker": "HALO",
+      "action": "BUY",
+      "shares": 111,
+      "allocated_capital": 7500.0,
+      "entry_price": 67.19000244140625,
+      "composite_score": 78.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "DXCM",
+      "action": "BUY",
+      "shares": 121,
+      "allocated_capital": 7500.0,
+      "entry_price": 61.755001068115234,
+      "composite_score": 70.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "EXE",
+      "action": "BUY",
+      "shares": 77,
+      "allocated_capital": 7500.0,
+      "entry_price": 96.94999694824219,
+      "composite_score": 68.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CDE",
+      "action": "BUY",
+      "shares": 425,
+      "allocated_capital": 7500.0,
+      "entry_price": 17.645000457763672,
+      "composite_score": 64.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BTDR",
+      "action": "BUY",
+      "shares": 564,
+      "allocated_capital": 7500.0,
+      "entry_price": 13.289999961853027,
+      "composite_score": 63.2,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "DD",
+      "action": "BUY",
+      "shares": 152,
+      "allocated_capital": 7500.0,
+      "entry_price": 49.279998779296875,
+      "composite_score": 61.6,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CORZ",
+      "action": "BUY",
+      "shares": 317,
+      "allocated_capital": 7500.0,
+      "entry_price": 23.635000228881836,
+      "composite_score": 60.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "AG",
+      "action": "BUY",
+      "shares": 374,
+      "allocated_capital": 7500.0,
+      "entry_price": 20.049999237060547,
+      "composite_score": 60.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BANC",
+      "action": "SELL",
+      "shares": 532.0,
+      "sell_pct": 100,
+      "composite_score": 54.400000000000006,
+      "current_price": 18.270000457763672,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 54.4 < 60 absolute minimum",
+      "current_value": 9754.22
+    },
+    {
+      "ticker": "HST",
+      "action": "SELL",
+      "shares": 328.0,
+      "sell_pct": 100,
+      "composite_score": 56.8,
+      "current_price": 21.235000610351562,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 56.8 < 60 absolute minimum",
+      "current_value": 6963.44
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 65 candidates (avg score: 45.5)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 76/76 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 2 SELLs, 8 BUYs ($60,000 allocated)",
+      "quality_score": 51,
+      "issues": [
+        "Capital deployment 46.0% (target 90.0%+)",
+        "Limited diversification: 8 new positions (target 12-20). Total after trades: 17"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 8 BUYs approved, 0 rejected, 2 SELLs",
+      "quality_score": 100,
+      "issues": []
+    }
+  ],
+  "approved_at": "2026-05-15T16:06:30.057102Z"
+}

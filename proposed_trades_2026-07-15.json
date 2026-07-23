@@ -1,0 +1,261 @@
+{
+  "plan_id": "PLAN_20260715_090807",
+  "generated_at": "2026-07-15T16:08:07.193734Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 15,
+    "research_candidates": 69,
+    "gpt5_selected": 15,
+    "compliance_flagged": 0,
+    "overall_quality_score": 90
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 66,
+    "compliance_advisory": 95
+  },
+  "trades": [
+    {
+      "ticker": "MTCH",
+      "action": "BUY",
+      "shares": 254,
+      "allocated_capital": 10000,
+      "entry_price": 39.36000061035156,
+      "composite_score": 75.6,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "DHT",
+      "action": "BUY",
+      "shares": 561,
+      "allocated_capital": 10000,
+      "entry_price": 17.81999969482422,
+      "composite_score": 70.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ANET",
+      "action": "BUY",
+      "shares": 59,
+      "allocated_capital": 10000,
+      "entry_price": 169.2050018310547,
+      "composite_score": 68.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "NKE",
+      "action": "BUY",
+      "shares": 231,
+      "allocated_capital": 10000,
+      "entry_price": 43.165000915527344,
+      "composite_score": 65.2,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "MAT",
+      "action": "BUY",
+      "shares": 720,
+      "allocated_capital": 10000,
+      "entry_price": 13.885000228881836,
+      "composite_score": 64.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "SBRA",
+      "action": "BUY",
+      "shares": 508,
+      "allocated_capital": 10000,
+      "entry_price": 19.684999465942383,
+      "composite_score": 64.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "LEVI",
+      "action": "BUY",
+      "shares": 413,
+      "allocated_capital": 10000,
+      "entry_price": 24.209999084472656,
+      "composite_score": 64.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BDX",
+      "action": "BUY",
+      "shares": 63,
+      "allocated_capital": 10000,
+      "entry_price": 156.3300018310547,
+      "composite_score": 64.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "AG",
+      "action": "BUY",
+      "shares": 606,
+      "allocated_capital": 10000,
+      "entry_price": 16.485000610351562,
+      "composite_score": 64.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "RBRK",
+      "action": "BUY",
+      "shares": 122,
+      "allocated_capital": 10000,
+      "entry_price": 81.56999969482422,
+      "composite_score": 63.6,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "RRC",
+      "action": "BUY",
+      "shares": 279,
+      "allocated_capital": 10000,
+      "entry_price": 35.7599983215332,
+      "composite_score": 62.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ALLY",
+      "action": "BUY",
+      "shares": 215,
+      "allocated_capital": 10000,
+      "entry_price": 46.5099983215332,
+      "composite_score": 60.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ROL",
+      "action": "BUY",
+      "shares": 225,
+      "allocated_capital": 10000,
+      "entry_price": 44.415000915527344,
+      "composite_score": 60.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "FRO",
+      "action": "BUY",
+      "shares": 268,
+      "allocated_capital": 10000,
+      "entry_price": 37.26499938964844,
+      "composite_score": 60.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "HAL",
+      "action": "SELL",
+      "shares": 211.0,
+      "sell_pct": 100,
+      "composite_score": 58.400000000000006,
+      "current_price": 34.540000915527344,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 58.4 < 60 absolute minimum",
+      "current_value": 7306.93
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 69 candidates (avg score: 48.2)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 82/82 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 1 SELLs, 15 BUYs ($150,000 allocated)",
+      "quality_score": 66,
+      "issues": [
+        "Capital deployment 47.4% (target 90.0%+)"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 14 BUYs approved, 1 rejected, 1 SELLs",
+      "quality_score": 95,
+      "issues": [
+        "1 orders REJECTED by compliance"
+      ]
+    }
+  ],
+  "approved_at": "2026-07-15T16:08:10.131937Z"
+}

@@ -1,0 +1,53 @@
+{
+  "plan_id": "PLAN_20260619_090746",
+  "generated_at": "2026-06-19T16:07:46.414981Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 0,
+    "research_candidates": 69,
+    "gpt5_selected": 0,
+    "compliance_flagged": 0,
+    "overall_quality_score": 81
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 50,
+    "compliance_advisory": 75
+  },
+  "trades": [],
+  "gpt5_reasoning": "",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 69 candidates (avg score: 46.6)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 81/81 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "gpt5_optimizer",
+      "message": "AI optimizer failed - using fallback allocation (5 orders)",
+      "quality_score": 50,
+      "issues": [
+        "AI optimization failed: unsupported format string passed to NoneType.__format__",
+        "Using fallback equal-weight allocation"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 0 BUYs approved, 5 rejected, 0 SELLs",
+      "quality_score": 75,
+      "issues": [
+        "5 orders REJECTED by compliance"
+      ]
+    }
+  ],
+  "approved_at": "2026-06-19T16:07:49.791531Z"
+}

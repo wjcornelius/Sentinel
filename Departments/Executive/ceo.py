@@ -865,6 +865,7 @@ class CEO:
         import config
         from alpaca.trading.client import TradingClient
         from alpaca.trading.enums import QueryOrderStatus
+        from alpaca.trading.requests import GetOrdersRequest
 
         # Initialize Alpaca client
         trading_client = TradingClient(
@@ -882,10 +883,16 @@ class CEO:
             # Check each ticker for pending orders
             for ticker in tickers:
                 try:
-                    # Get open orders for this symbol
+                    # Get open orders for this symbol. Newer alpaca-py takes a
+                    # GetOrdersRequest instead of kwargs — using the kwargs form
+                    # silently threw "unexpected keyword argument 'status'" for
+                    # every ticker and the code fell through to "all filled"
+                    # without actually verifying anything (log 2026-07-23).
                     orders = trading_client.get_orders(
-                        status=QueryOrderStatus.OPEN,
-                        symbols=[ticker]
+                        filter=GetOrdersRequest(
+                            status=QueryOrderStatus.OPEN,
+                            symbols=[ticker],
+                        )
                     )
 
                     if orders:

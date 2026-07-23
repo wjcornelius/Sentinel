@@ -1,0 +1,188 @@
+{
+  "plan_id": "PLAN_20260512_090617",
+  "generated_at": "2026-05-12T16:06:17.283095Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 10,
+    "research_candidates": 64,
+    "gpt5_selected": 10,
+    "compliance_flagged": 0,
+    "overall_quality_score": 90
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 62,
+    "compliance_advisory": 100
+  },
+  "trades": [
+    {
+      "ticker": "FOXA",
+      "action": "BUY",
+      "shares": 151,
+      "allocated_capital": 10000,
+      "entry_price": 66.0199966430664,
+      "composite_score": 74.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "GLW",
+      "action": "BUY",
+      "shares": 52,
+      "allocated_capital": 10000,
+      "entry_price": 190.63999938964844,
+      "composite_score": 73.2,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "IONQ",
+      "action": "BUY",
+      "shares": 185,
+      "allocated_capital": 10000,
+      "entry_price": 53.78499984741211,
+      "composite_score": 72.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "HL",
+      "action": "BUY",
+      "shares": 518,
+      "allocated_capital": 10000,
+      "entry_price": 19.29010009765625,
+      "composite_score": 66.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "HPQ",
+      "action": "BUY",
+      "shares": 477,
+      "allocated_capital": 10000,
+      "entry_price": 20.940000534057617,
+      "composite_score": 63.2,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "GTLB",
+      "action": "BUY",
+      "shares": 419,
+      "allocated_capital": 10000,
+      "entry_price": 23.850000381469727,
+      "composite_score": 62.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CORZ",
+      "action": "BUY",
+      "shares": 456,
+      "allocated_capital": 10000,
+      "entry_price": 21.92919921875,
+      "composite_score": 60.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "DXCM",
+      "action": "BUY",
+      "shares": 166,
+      "allocated_capital": 10000,
+      "entry_price": 60.165000915527344,
+      "composite_score": 60.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BANC",
+      "action": "SELL",
+      "shares": 360.0,
+      "sell_pct": 100,
+      "composite_score": 54.400000000000006,
+      "current_price": 18.514999389648438,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 54.4 < 60 absolute minimum",
+      "current_value": 6665.4
+    },
+    {
+      "ticker": "COLB",
+      "action": "SELL",
+      "shares": 242.0,
+      "sell_pct": 100,
+      "composite_score": 58.0,
+      "current_price": 29.040000915527344,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 58.0 < 60 absolute minimum",
+      "current_value": 7025.26
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 64 candidates (avg score: 46.3)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 75/75 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 2 SELLs, 8 BUYs ($80,000 allocated)",
+      "quality_score": 62,
+      "issues": [
+        "Capital deployment 59.2% (target 90.0%+)",
+        "Limited diversification: 8 new positions (target 12-20). Total after trades: 17"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 8 BUYs approved, 0 rejected, 2 SELLs",
+      "quality_score": 100,
+      "issues": []
+    }
+  ],
+  "approved_at": "2026-05-12T16:06:18.908435Z"
+}

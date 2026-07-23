@@ -1,0 +1,150 @@
+{
+  "plan_id": "PLAN_20260330_090643",
+  "generated_at": "2026-03-30T16:06:43.382297Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 7,
+    "research_candidates": 66,
+    "gpt5_selected": 7,
+    "compliance_flagged": 0,
+    "overall_quality_score": 91
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 65,
+    "compliance_advisory": 100
+  },
+  "trades": [
+    {
+      "ticker": "EXEL",
+      "action": "BUY",
+      "shares": 237,
+      "allocated_capital": 10000,
+      "entry_price": 42.08000183105469,
+      "composite_score": 72.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BZ",
+      "action": "BUY",
+      "shares": 739,
+      "allocated_capital": 10000,
+      "entry_price": 13.515000343322754,
+      "composite_score": 72.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "GSK",
+      "action": "BUY",
+      "shares": 183,
+      "allocated_capital": 10000,
+      "entry_price": 54.380001068115234,
+      "composite_score": 68.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "HRL",
+      "action": "BUY",
+      "shares": 431,
+      "allocated_capital": 10000,
+      "entry_price": 23.18000030517578,
+      "composite_score": 62.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BANC",
+      "action": "BUY",
+      "shares": 585,
+      "allocated_capital": 10000,
+      "entry_price": 17.084999084472656,
+      "composite_score": 62.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "AA",
+      "action": "BUY",
+      "shares": 153,
+      "allocated_capital": 10000,
+      "entry_price": 65.19999694824219,
+      "composite_score": 60.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "COLB",
+      "action": "BUY",
+      "shares": 370,
+      "allocated_capital": 10000,
+      "entry_price": 26.9950008392334,
+      "composite_score": 60.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 66 candidates (avg score: 44.1)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 78/78 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 0 SELLs, 7 BUYs ($70,000 allocated)",
+      "quality_score": 65,
+      "issues": [
+        "Capital deployment 66.8% (target 90.0%+)",
+        "Limited diversification: 7 new positions (target 12-20). Total after trades: 19"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 7 BUYs approved, 0 rejected, 0 SELLs",
+      "quality_score": 100,
+      "issues": []
+    }
+  ],
+  "approved_at": "2026-03-30T16:06:45.258564Z"
+}

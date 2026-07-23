@@ -1,0 +1,275 @@
+{
+  "date": "2026-06-22",
+  "start_time": "2026-06-22T09:00:17.462667",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "12:01 PM ET",
+    "current_date": "Monday, June 22, 2026"
+  },
+  "regime_analysis": {
+    "regime": "NEUTRAL",
+    "confidence": "MEDIUM",
+    "spy_price": 744.4849853515625,
+    "spy_change_pct": -0.30197992772621357,
+    "vix_level": 17.229999542236328,
+    "recommendation": "NORMAL CONDITIONS"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "INCY",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260622T162443Z_74c9d0e4",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "GLW",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260622T162443Z_d05e639a",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ASX",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260622T162443Z_6a75eec7",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "JCI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260622T162443Z_9bf04f65",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CDE",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260622T162443Z_f1e964a5",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ABNB",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260622T162443Z_50211eea",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "GFS",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260622T162444Z_d0ab1648",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "HRL",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260622T162444Z_632f7f27",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BEAM",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260622T162444Z_69256eb8",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BX",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260622T162444Z_cce7330f",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "AG",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260622T162444Z_5bb20a4c",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "APO",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260622T162444Z_c6a0376b",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-06-22T09:25:10.766148",
+    "equity": 109747.14,
+    "cash": 6394.2,
+    "buying_power": 304576.84,
+    "portfolio_value": 109747.14,
+    "starting_capital": 100000.0,
+    "total_return": 9747.14,
+    "total_return_pct": 9.74714,
+    "daily_pl": 4030.3800000000047,
+    "daily_pl_pct": 3.8124323900959554,
+    "total_unrealized_pl": 3966.1428,
+    "position_count": 13,
+    "positions": [
+      {
+        "ticker": "IBKR",
+        "shares": 115.0,
+        "entry_price": 86.39,
+        "current_price": 97.015,
+        "market_value": 11156.725,
+        "unrealized_pl": 1221.875,
+        "unrealized_pl_pct": 12.299
+      },
+      {
+        "ticker": "ALLY",
+        "shares": 218.0,
+        "entry_price": 45.75,
+        "current_price": 45.845,
+        "market_value": 9994.21,
+        "unrealized_pl": 20.71,
+        "unrealized_pl_pct": 0.208
+      },
+      {
+        "ticker": "IAG",
+        "shares": 588.0,
+        "entry_price": 17.03,
+        "current_price": 16.7,
+        "market_value": 9819.6,
+        "unrealized_pl": -194.04,
+        "unrealized_pl_pct": -1.9380000000000002
+      },
+      {
+        "ticker": "HAYW",
+        "shares": 657.0,
+        "entry_price": 15.21,
+        "current_price": 14.865,
+        "market_value": 9766.305,
+        "unrealized_pl": -226.665,
+        "unrealized_pl_pct": -2.268
+      },
+      {
+        "ticker": "AFRM",
+        "shares": 135.0,
+        "entry_price": 74.26,
+        "current_price": 72.33,
+        "market_value": 9764.55,
+        "unrealized_pl": -260.55,
+        "unrealized_pl_pct": -2.5989999999999998
+      },
+      {
+        "ticker": "GNTX",
+        "shares": 343.0,
+        "entry_price": 21.87,
+        "current_price": 26.02,
+        "market_value": 8924.86,
+        "unrealized_pl": 1423.45,
+        "unrealized_pl_pct": 18.976000000000003
+      },
+      {
+        "ticker": "C",
+        "shares": 52.0,
+        "entry_price": 129.9,
+        "current_price": 146.01,
+        "market_value": 7592.52,
+        "unrealized_pl": 837.72,
+        "unrealized_pl_pct": 12.402000000000001
+      },
+      {
+        "ticker": "BRO",
+        "shares": 128.0,
+        "entry_price": 58.24,
+        "current_price": 58.765,
+        "market_value": 7521.92,
+        "unrealized_pl": 67.2,
+        "unrealized_pl_pct": 0.901
+      },
+      {
+        "ticker": "M",
+        "shares": 261.0,
+        "entry_price": 23.02,
+        "current_price": 25.005,
+        "market_value": 6526.305,
+        "unrealized_pl": 518.085,
+        "unrealized_pl_pct": 8.623
+      },
+      {
+        "ticker": "DG",
+        "shares": 55.0,
+        "entry_price": 109.26,
+        "current_price": 115.31,
+        "market_value": 6342.05,
+        "unrealized_pl": 332.75,
+        "unrealized_pl_pct": 5.537
+      },
+      {
+        "ticker": "COLB",
+        "shares": 200.0,
+        "entry_price": 29.93,
+        "current_price": 30.895,
+        "market_value": 6179.0,
+        "unrealized_pl": 193.0,
+        "unrealized_pl_pct": 3.2239999999999998
+      },
+      {
+        "ticker": "KMB",
+        "shares": 59.0,
+        "entry_price": 100.28,
+        "current_price": 102.6242,
+        "market_value": 6054.8278,
+        "unrealized_pl": 138.3078,
+        "unrealized_pl_pct": 2.338
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [
+    "Verification: Expected positions not found: CDE, AG, JCI, GFS, INCY, GLW, ABNB, APO, ASX, HRL, BX, BEAM"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 13,
+    "db_positions_before": 12,
+    "stale_closed": 0,
+    "in_sync": 12
+  },
+  "position_drift": {
+    "positions_checked": 13,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260622_092439",
+    "total_trades": 12,
+    "quality_score": 88,
+    "ceo_rating": "EXCELLENT",
+    "ceo_recommendation": "STRONGLY RECOMMEND APPROVAL"
+  },
+  "sells_count": 0,
+  "buys_count": 12,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: CDE, AG, JCI, GFS, INCY, GLW, ABNB, APO, ASX, HRL, BX, BEAM"
+    ],
+    "summary": {
+      "position_count": 13,
+      "sells_executed": 0,
+      "buys_executed": 12,
+      "expected_count_change": 12
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 0,
+    "fills_recorded": 0,
+    "orders_updated": 0,
+    "already_recorded": 0,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-06-22T09:25:13.237021",
+  "duration_seconds": 1495.774368
+}

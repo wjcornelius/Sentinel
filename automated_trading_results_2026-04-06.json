@@ -1,0 +1,266 @@
+{
+  "date": "2026-04-06",
+  "start_time": "2026-04-06T09:00:03.429342",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "12:00 PM ET",
+    "current_date": "Monday, April 06, 2026"
+  },
+  "regime_analysis": {
+    "regime": "NEUTRAL",
+    "confidence": "MEDIUM",
+    "spy_price": 657.9500122070312,
+    "spy_change_pct": 0.3232537489812816,
+    "vix_level": 24.219999313354492,
+    "recommendation": "NORMAL CONDITIONS"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "IAG",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260406T160554Z_77901909",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "EGO",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260406T160554Z_8b616f18",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "HST",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260406T160554Z_14fd616e",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "HMY",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260406T160554Z_127b4e11",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "GLW",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260406T160554Z_b6933ded",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ALAB",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260406T160554Z_46f8172b",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "AMKR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260406T160554Z_0bff7024",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CDE",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260406T160554Z_adecd74a",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "JD",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260406T160554Z_0a623069",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BBY",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260406T160554Z_db33ff86",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CRDO",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260406T160554Z_f37be77f",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "DHR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260406T160554Z_37b1d686",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "DOCU",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260406T160554Z_b55a6c40",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "HPQ",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260406T160554Z_b4cebee7",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "INDV",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260406T160554Z_5506988d",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-04-06T09:06:13.308348",
+    "equity": 102737.68,
+    "cash": 12114.67,
+    "buying_power": 111142.28,
+    "portfolio_value": 102737.68,
+    "starting_capital": 100000.0,
+    "total_return": 2737.679999999993,
+    "total_return_pct": 2.737679999999993,
+    "daily_pl": 3529.0999999999913,
+    "daily_pl_pct": 3.5572528101903997,
+    "total_unrealized_pl": 7045.730700000001,
+    "position_count": 10,
+    "positions": [
+      {
+        "ticker": "CF",
+        "shares": 107.0,
+        "entry_price": 92.61,
+        "current_price": 130.64,
+        "market_value": 13978.48,
+        "unrealized_pl": 4069.21,
+        "unrealized_pl_pct": 41.065000000000005
+      },
+      {
+        "ticker": "EXEL",
+        "shares": 233.0,
+        "entry_price": 42.85,
+        "current_price": 44.05,
+        "market_value": 10263.65,
+        "unrealized_pl": 279.6,
+        "unrealized_pl_pct": 2.8000000000000003
+      },
+      {
+        "ticker": "BZ",
+        "shares": 751.0,
+        "entry_price": 13.29,
+        "current_price": 13.595,
+        "market_value": 10209.845,
+        "unrealized_pl": 229.055,
+        "unrealized_pl_pct": 2.2950000000000004
+      },
+      {
+        "ticker": "GSK",
+        "shares": 177.0,
+        "entry_price": 56.34,
+        "current_price": 56.4,
+        "market_value": 9982.8,
+        "unrealized_pl": 10.62,
+        "unrealized_pl_pct": 0.106
+      },
+      {
+        "ticker": "HL",
+        "shares": 508.0,
+        "entry_price": 19.68,
+        "current_price": 19.045,
+        "market_value": 9674.86,
+        "unrealized_pl": -322.58,
+        "unrealized_pl_pct": -3.227
+      },
+      {
+        "ticker": "DOCN",
+        "shares": 110.0,
+        "entry_price": 67.88,
+        "current_price": 85.46,
+        "market_value": 9400.6,
+        "unrealized_pl": 1933.8,
+        "unrealized_pl_pct": 25.899
+      },
+      {
+        "ticker": "SLM",
+        "shares": 380.0,
+        "entry_price": 19.68,
+        "current_price": 22.22,
+        "market_value": 8443.6,
+        "unrealized_pl": 965.2,
+        "unrealized_pl_pct": 12.906999999999998
+      },
+      {
+        "ticker": "ALLY",
+        "shares": 189.0,
+        "entry_price": 39.53,
+        "current_price": 40.33,
+        "market_value": 7622.37,
+        "unrealized_pl": 151.2,
+        "unrealized_pl_pct": 2.024
+      },
+      {
+        "ticker": "GNTX",
+        "shares": 343.0,
+        "entry_price": 21.87,
+        "current_price": 21.3899,
+        "market_value": 7336.7357,
+        "unrealized_pl": -164.6743,
+        "unrealized_pl_pct": -2.1950000000000003
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [
+    "Verification: Expected positions not found: JD, DHR, IAG, AMKR, CRDO, HPQ, BBY, INDV, GLW, ALAB, HST, DOCU, HMY, CDE, EGO"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 10,
+    "db_positions_before": 9,
+    "stale_closed": 0,
+    "in_sync": 9
+  },
+  "position_drift": {
+    "positions_checked": 10,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260406_090553",
+    "total_trades": 15,
+    "quality_score": 100,
+    "ceo_rating": "EXCELLENT",
+    "ceo_recommendation": "STRONGLY RECOMMEND APPROVAL"
+  },
+  "sells_count": 0,
+  "buys_count": 15,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: JD, DHR, IAG, AMKR, CRDO, HPQ, BBY, INDV, GLW, ALAB, HST, DOCU, HMY, CDE, EGO"
+    ],
+    "summary": {
+      "position_count": 10,
+      "sells_executed": 0,
+      "buys_executed": 15,
+      "expected_count_change": 15
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 0,
+    "fills_recorded": 0,
+    "orders_updated": 0,
+    "already_recorded": 0,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-04-06T09:06:15.102435",
+  "duration_seconds": 371.673105
+}

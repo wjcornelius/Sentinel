@@ -1,0 +1,241 @@
+{
+  "date": "2026-05-19",
+  "start_time": "2026-05-19T09:00:05.827148",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "12:00 PM ET",
+    "current_date": "Tuesday, May 19, 2026"
+  },
+  "regime_analysis": {
+    "regime": "NEUTRAL",
+    "confidence": "MEDIUM",
+    "spy_price": 733.2899780273438,
+    "spy_change_pct": -0.725654397828069,
+    "vix_level": 17.950000762939453,
+    "recommendation": "NORMAL CONDITIONS"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "CDE",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260519T160629Z_ab2ebbf9"
+    },
+    {
+      "ticker": "GLW",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260519T160629Z_6865acc3"
+    },
+    {
+      "ticker": "EW",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260519T160630Z_5c242bb7"
+    },
+    {
+      "ticker": "EQT",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260519T160630Z_acd30a75"
+    },
+    {
+      "ticker": "HAL",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260519T160630Z_dc510631"
+    },
+    {
+      "ticker": "BILL",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260519T160630Z_6565cca3",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CART",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260519T160630Z_62233fca",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "EXE",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260519T160630Z_32977c35",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BBY",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260519T160630Z_5612f8c7",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "F",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260519T160630Z_3d5b840b",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-05-19T09:06:50.291529",
+    "equity": 108504.65,
+    "cash": 6911.08,
+    "buying_power": 111705.66,
+    "portfolio_value": 108504.65,
+    "starting_capital": 100000.0,
+    "total_return": 8504.649999999994,
+    "total_return_pct": 8.504649999999994,
+    "daily_pl": 3344.439999999988,
+    "daily_pl_pct": 3.1803283770543893,
+    "total_unrealized_pl": 6504.245000000001,
+    "position_count": 11,
+    "positions": [
+      {
+        "ticker": "ALAB",
+        "shares": 51.0,
+        "entry_price": 125.28,
+        "current_price": 228.575,
+        "market_value": 11657.325,
+        "unrealized_pl": 5268.045,
+        "unrealized_pl_pct": 82.451
+      },
+      {
+        "ticker": "BZ",
+        "shares": 751.0,
+        "entry_price": 13.29,
+        "current_price": 14.175,
+        "market_value": 10645.425,
+        "unrealized_pl": 664.635,
+        "unrealized_pl_pct": 6.659
+      },
+      {
+        "ticker": "HALO",
+        "shares": 148.0,
+        "entry_price": 67.33,
+        "current_price": 68.9,
+        "market_value": 10197.2,
+        "unrealized_pl": 232.36,
+        "unrealized_pl_pct": 2.332
+      },
+      {
+        "ticker": "HAL",
+        "shares": 233.0,
+        "entry_price": 42.85,
+        "current_price": 42.85,
+        "market_value": 9984.05,
+        "unrealized_pl": 0.0,
+        "unrealized_pl_pct": 0.0
+      },
+      {
+        "ticker": "EQT",
+        "shares": 168.0,
+        "entry_price": 59.29,
+        "current_price": 59.26,
+        "market_value": 9955.68,
+        "unrealized_pl": -5.04,
+        "unrealized_pl_pct": -0.051000000000000004
+      },
+      {
+        "ticker": "EW",
+        "shares": 121.0,
+        "entry_price": 82.2,
+        "current_price": 82.125,
+        "market_value": 9937.125,
+        "unrealized_pl": -9.075,
+        "unrealized_pl_pct": -0.091
+      },
+      {
+        "ticker": "MAT",
+        "shares": 660.0,
+        "entry_price": 15.16,
+        "current_price": 15.02,
+        "market_value": 9913.2,
+        "unrealized_pl": -92.4,
+        "unrealized_pl_pct": -0.923
+      },
+      {
+        "ticker": "FOXA",
+        "shares": 151.0,
+        "entry_price": 66.06,
+        "current_price": 65.21,
+        "market_value": 9846.71,
+        "unrealized_pl": -128.35,
+        "unrealized_pl_pct": -1.287
+      },
+      {
+        "ticker": "EBAY",
+        "shares": 70.0,
+        "entry_price": 108.08,
+        "current_price": 113.92,
+        "market_value": 7974.4,
+        "unrealized_pl": 408.8,
+        "unrealized_pl_pct": 5.4030000000000005
+      },
+      {
+        "ticker": "GNTX",
+        "shares": 343.0,
+        "entry_price": 21.87,
+        "current_price": 22.66,
+        "market_value": 7772.38,
+        "unrealized_pl": 270.97,
+        "unrealized_pl_pct": 3.612
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [
+    "Reconciliation cleaned 4 stale records",
+    "Verification: Expected positions not found: EXE, BBY, BILL, F, CART"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 10,
+    "db_positions_before": 13,
+    "stale_closed": 4,
+    "in_sync": 9
+  },
+  "position_drift": {
+    "positions_checked": 10,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260519_090625",
+    "total_trades": 10,
+    "quality_score": 89,
+    "ceo_rating": "EXCELLENT",
+    "ceo_recommendation": "STRONGLY RECOMMEND APPROVAL"
+  },
+  "sells_count": 2,
+  "buys_count": 8,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: EXE, BBY, BILL, F, CART"
+    ],
+    "summary": {
+      "position_count": 11,
+      "sells_executed": 2,
+      "buys_executed": 8,
+      "expected_count_change": 6
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 11,
+    "fills_recorded": 5,
+    "orders_updated": 5,
+    "already_recorded": 5,
+    "no_match_in_db": 1,
+    "errors": []
+  },
+  "end_time": "2026-05-19T09:06:51.912411",
+  "duration_seconds": 406.085278
+}

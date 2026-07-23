@@ -1,0 +1,225 @@
+{
+  "date": "2026-03-25",
+  "start_time": "2026-03-25T09:00:02.967619",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "12:00 PM ET",
+    "current_date": "Wednesday, March 25, 2026"
+  },
+  "regime_analysis": {
+    "regime": "NEUTRAL",
+    "confidence": "MEDIUM",
+    "spy_price": 656.9099731445312,
+    "spy_change_pct": 0.5710494060710536,
+    "vix_level": 25.889999389648438,
+    "recommendation": "NORMAL CONDITIONS"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "BANC",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260325T160733Z_44d4073d",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "COLB",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260325T160733Z_7cc42dc5",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "HST",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260325T160733Z_26abd92b",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "EBC",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260325T160733Z_2472d2f5",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CNK",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260325T160733Z_fe189430",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-03-25T09:07:49.468475",
+    "equity": 104228.51,
+    "cash": 9161.23,
+    "buying_power": 109679.67,
+    "portfolio_value": 104228.51,
+    "starting_capital": 100000.0,
+    "total_return": 4228.509999999995,
+    "total_return_pct": 4.228509999999995,
+    "daily_pl": 4197.179999999993,
+    "daily_pl_pct": 4.195865435359095,
+    "total_unrealized_pl": 11782.1754,
+    "position_count": 12,
+    "positions": [
+      {
+        "ticker": "CF",
+        "shares": 107.0,
+        "entry_price": 92.61,
+        "current_price": 128.81,
+        "market_value": 13782.67,
+        "unrealized_pl": 3873.4,
+        "unrealized_pl_pct": 39.089
+      },
+      {
+        "ticker": "DELL",
+        "shares": 67.0,
+        "entry_price": 122.94,
+        "current_price": 181.155,
+        "market_value": 12137.385,
+        "unrealized_pl": 3900.405,
+        "unrealized_pl_pct": 47.352
+      },
+      {
+        "ticker": "DOCN",
+        "shares": 110.0,
+        "entry_price": 67.88,
+        "current_price": 86.4,
+        "market_value": 9504.0,
+        "unrealized_pl": 2037.2,
+        "unrealized_pl_pct": 27.283
+      },
+      {
+        "ticker": "RRC",
+        "shares": 167.0,
+        "entry_price": 35.81,
+        "current_price": 46.39,
+        "market_value": 7747.13,
+        "unrealized_pl": 1766.86,
+        "unrealized_pl_pct": 29.544999999999998
+      },
+      {
+        "ticker": "SLM",
+        "shares": 380.0,
+        "entry_price": 19.68,
+        "current_price": 20.25,
+        "market_value": 7695.0,
+        "unrealized_pl": 216.6,
+        "unrealized_pl_pct": 2.896
+      },
+      {
+        "ticker": "DHT",
+        "shares": 421.0,
+        "entry_price": 17.87,
+        "current_price": 17.72,
+        "market_value": 7460.12,
+        "unrealized_pl": -63.15,
+        "unrealized_pl_pct": -0.839
+      },
+      {
+        "ticker": "GNTX",
+        "shares": 343.0,
+        "entry_price": 21.87,
+        "current_price": 21.74,
+        "market_value": 7456.82,
+        "unrealized_pl": -44.59,
+        "unrealized_pl_pct": -0.594
+      },
+      {
+        "ticker": "ALLY",
+        "shares": 189.0,
+        "entry_price": 39.53,
+        "current_price": 39.335,
+        "market_value": 7434.315,
+        "unrealized_pl": -36.855,
+        "unrealized_pl_pct": -0.49300000000000005
+      },
+      {
+        "ticker": "DVN",
+        "shares": 121.0,
+        "entry_price": 49.62,
+        "current_price": 50.355,
+        "market_value": 6092.955,
+        "unrealized_pl": 88.935,
+        "unrealized_pl_pct": 1.481
+      },
+      {
+        "ticker": "FOXA",
+        "shares": 104.0,
+        "entry_price": 57.39,
+        "current_price": 58.11,
+        "market_value": 6043.44,
+        "unrealized_pl": 74.88,
+        "unrealized_pl_pct": 1.2550000000000001
+      },
+      {
+        "ticker": "EQT",
+        "shares": 89.0,
+        "entry_price": 66.62,
+        "current_price": 67.4536,
+        "market_value": 6003.3704,
+        "unrealized_pl": 74.1904,
+        "unrealized_pl_pct": 1.2510000000000001
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [
+    "Reconciliation cleaned 1 stale records",
+    "Verification: Expected positions not found: COLB, BANC, EBC, CNK, HST"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 12,
+    "db_positions_before": 12,
+    "stale_closed": 1,
+    "in_sync": 11
+  },
+  "position_drift": {
+    "positions_checked": 12,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260325_090732",
+    "total_trades": 5,
+    "quality_score": 86,
+    "ceo_rating": "EXCELLENT",
+    "ceo_recommendation": "STRONGLY RECOMMEND APPROVAL"
+  },
+  "sells_count": 0,
+  "buys_count": 5,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: COLB, BANC, EBC, CNK, HST"
+    ],
+    "summary": {
+      "position_count": 12,
+      "sells_executed": 0,
+      "buys_executed": 5,
+      "expected_count_change": 5
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 3,
+    "fills_recorded": 0,
+    "orders_updated": 0,
+    "already_recorded": 3,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-03-25T09:07:51.076901",
+  "duration_seconds": 468.109299
+}

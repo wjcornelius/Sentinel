@@ -1,0 +1,192 @@
+{
+  "plan_id": "PLAN_20260511_090714",
+  "generated_at": "2026-05-11T16:07:14.448534Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 10,
+    "research_candidates": 68,
+    "gpt5_selected": 10,
+    "compliance_flagged": 0,
+    "overall_quality_score": 95
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 82,
+    "compliance_advisory": 100
+  },
+  "trades": [
+    {
+      "ticker": "IONQ",
+      "action": "BUY",
+      "shares": 176,
+      "allocated_capital": 10000,
+      "entry_price": 56.69499969482422,
+      "composite_score": 72.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "KDP",
+      "action": "BUY",
+      "shares": 349,
+      "allocated_capital": 10000,
+      "entry_price": 28.6200008392334,
+      "composite_score": 69.6,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CRCL",
+      "action": "BUY",
+      "shares": 78,
+      "allocated_capital": 10000,
+      "entry_price": 127.44000244140625,
+      "composite_score": 63.6,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BTDR",
+      "action": "BUY",
+      "shares": 746,
+      "allocated_capital": 10000,
+      "entry_price": 13.400300025939941,
+      "composite_score": 63.2,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BEAM",
+      "action": "BUY",
+      "shares": 307,
+      "allocated_capital": 10000,
+      "entry_price": 32.5,
+      "composite_score": 62.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CCI",
+      "action": "BUY",
+      "shares": 108,
+      "allocated_capital": 10000,
+      "entry_price": 91.91999816894531,
+      "composite_score": 62.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "DD",
+      "action": "BUY",
+      "shares": 197,
+      "allocated_capital": 10000,
+      "entry_price": 50.630001068115234,
+      "composite_score": 61.6,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "AMKR",
+      "action": "BUY",
+      "shares": 128,
+      "allocated_capital": 10000,
+      "entry_price": 77.65499877929688,
+      "composite_score": 61.2,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CORZ",
+      "action": "BUY",
+      "shares": 431,
+      "allocated_capital": 10000,
+      "entry_price": 23.155000686645508,
+      "composite_score": 60.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "DXCM",
+      "action": "BUY",
+      "shares": 170,
+      "allocated_capital": 10000,
+      "entry_price": 58.6609001159668,
+      "composite_score": 60.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 68 candidates (avg score: 47.1)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 79/79 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 0 SELLs, 10 BUYs ($100,000 allocated)",
+      "quality_score": 82,
+      "issues": [
+        "Capital deployment 80.5% (target 90.0%+)",
+        "Limited diversification: 10 new positions (target 12-20). Total after trades: 21"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 10 BUYs approved, 0 rejected, 0 SELLs",
+      "quality_score": 100,
+      "issues": []
+    }
+  ],
+  "approved_at": "2026-05-11T16:07:15.743167Z"
+}

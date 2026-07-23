@@ -1,0 +1,264 @@
+{
+  "date": "2026-07-17",
+  "start_time": "2026-07-17T09:00:03.283016",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "12:00 PM ET",
+    "current_date": "Friday, July 17, 2026"
+  },
+  "regime_analysis": {
+    "regime": "NEUTRAL",
+    "confidence": "MEDIUM",
+    "spy_price": 747.0499877929688,
+    "spy_change_pct": -0.48886176648783447,
+    "vix_level": 18.079999923706055,
+    "recommendation": "NORMAL CONDITIONS"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "HAL",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260717T160832Z_ec5bb30a",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "EBC",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260717T160832Z_3668b734",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "NKE",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260717T160832Z_939e2422",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "MAT",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260717T160832Z_5210c322",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "LEVI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260717T160832Z_a94e731d",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BDX",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260717T160832Z_77eb6e7a",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "GNTX",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260717T160832Z_dd5e9a3a",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "AG",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260717T160832Z_89e0c490",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "MDLZ",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260717T160832Z_fd0abe24",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ALLY",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260717T160832Z_fed850c0",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-07-17T09:08:55.248210",
+    "equity": 107408.82,
+    "cash": 16347.53,
+    "buying_power": 309973.52,
+    "portfolio_value": 107408.82,
+    "starting_capital": 100000.0,
+    "total_return": 7408.820000000007,
+    "total_return_pct": 7.4088200000000075,
+    "daily_pl": 3129.300000000003,
+    "daily_pl_pct": 3.000876874001724,
+    "total_unrealized_pl": 3013.9950110000004,
+    "position_count": 13,
+    "positions": [
+      {
+        "ticker": "DHR",
+        "shares": 51.0,
+        "entry_price": 193.008039,
+        "current_price": 202.86,
+        "market_value": 10345.86,
+        "unrealized_pl": 502.450011,
+        "unrealized_pl_pct": 5.104
+      },
+      {
+        "ticker": "RRC",
+        "shares": 279.0,
+        "entry_price": 35.67,
+        "current_price": 36.38,
+        "market_value": 10150.02,
+        "unrealized_pl": 198.09,
+        "unrealized_pl_pct": 1.9900000000000002
+      },
+      {
+        "ticker": "BMNR",
+        "shares": 625.0,
+        "entry_price": 16.14,
+        "current_price": 15.075,
+        "market_value": 9421.875,
+        "unrealized_pl": -665.625,
+        "unrealized_pl_pct": -6.598999999999999
+      },
+      {
+        "ticker": "BRO",
+        "shares": 128.0,
+        "entry_price": 58.24,
+        "current_price": 68.955,
+        "market_value": 8826.24,
+        "unrealized_pl": 1371.52,
+        "unrealized_pl_pct": 18.398
+      },
+      {
+        "ticker": "MGY",
+        "shares": 283.0,
+        "entry_price": 26.52,
+        "current_price": 26.935,
+        "market_value": 7622.605,
+        "unrealized_pl": 117.445,
+        "unrealized_pl_pct": 1.5650000000000002
+      },
+      {
+        "ticker": "GILD",
+        "shares": 55.0,
+        "entry_price": 135.81,
+        "current_price": 136.425,
+        "market_value": 7503.375,
+        "unrealized_pl": 33.825,
+        "unrealized_pl_pct": 0.453
+      },
+      {
+        "ticker": "ONON",
+        "shares": 197.0,
+        "entry_price": 37.93,
+        "current_price": 37.65,
+        "market_value": 7417.05,
+        "unrealized_pl": -55.16,
+        "unrealized_pl_pct": -0.738
+      },
+      {
+        "ticker": "FTI",
+        "shares": 102.0,
+        "entry_price": 73.37,
+        "current_price": 71.54,
+        "market_value": 7297.08,
+        "unrealized_pl": -186.66,
+        "unrealized_pl_pct": -2.494
+      },
+      {
+        "ticker": "DG",
+        "shares": 55.0,
+        "entry_price": 109.26,
+        "current_price": 126.61,
+        "market_value": 6963.55,
+        "unrealized_pl": 954.25,
+        "unrealized_pl_pct": 15.879999999999999
+      },
+      {
+        "ticker": "COLB",
+        "shares": 200.0,
+        "entry_price": 29.93,
+        "current_price": 33.285,
+        "market_value": 6657.0,
+        "unrealized_pl": 671.0,
+        "unrealized_pl_pct": 11.209
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      },
+      {
+        "ticker": "OKE",
+        "shares": 28.0,
+        "entry_price": 89.35,
+        "current_price": 93.12,
+        "market_value": 2607.36,
+        "unrealized_pl": 105.56,
+        "unrealized_pl_pct": 4.218999999999999
+      },
+      {
+        "ticker": "PCAR",
+        "shares": 20.0,
+        "entry_price": 123.31,
+        "current_price": 126.96,
+        "market_value": 2539.2,
+        "unrealized_pl": 73.0,
+        "unrealized_pl_pct": 2.96
+      }
+    ]
+  },
+  "warnings": [
+    "Reconciliation cleaned 2 stale records",
+    "Verification: Expected positions not found: GNTX, BDX, ALLY, EBC, AG, HAL, LEVI, NKE, MDLZ, MAT"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 13,
+    "db_positions_before": 10,
+    "stale_closed": 2,
+    "in_sync": 8
+  },
+  "position_drift": {
+    "positions_checked": 13,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260717_090829",
+    "total_trades": 10,
+    "quality_score": 86,
+    "ceo_rating": "EXCELLENT",
+    "ceo_recommendation": "STRONGLY RECOMMEND APPROVAL"
+  },
+  "sells_count": 0,
+  "buys_count": 10,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: GNTX, BDX, ALLY, EBC, AG, HAL, LEVI, NKE, MDLZ, MAT"
+    ],
+    "summary": {
+      "position_count": 13,
+      "sells_executed": 0,
+      "buys_executed": 10,
+      "expected_count_change": 10
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 2,
+    "fills_recorded": 0,
+    "orders_updated": 0,
+    "already_recorded": 2,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-07-17T09:08:58.062484",
+  "duration_seconds": 534.779481
+}

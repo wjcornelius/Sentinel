@@ -1,0 +1,204 @@
+{
+  "plan_id": "PLAN_20260629_091421",
+  "generated_at": "2026-06-29T16:14:21.091037Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 11,
+    "research_candidates": 70,
+    "gpt5_selected": 11,
+    "compliance_flagged": 0,
+    "overall_quality_score": 85
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 43,
+    "compliance_advisory": 100
+  },
+  "trades": [
+    {
+      "ticker": "LYFT",
+      "action": "BUY",
+      "shares": 686,
+      "allocated_capital": 10000,
+      "entry_price": 14.574999809265137,
+      "composite_score": 76.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "EW",
+      "action": "BUY",
+      "shares": 109,
+      "allocated_capital": 10000,
+      "entry_price": 91.5999984741211,
+      "composite_score": 72.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ASX",
+      "action": "BUY",
+      "shares": 241,
+      "allocated_capital": 10000,
+      "entry_price": 41.46500015258789,
+      "composite_score": 68.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "DHR",
+      "action": "BUY",
+      "shares": 51,
+      "allocated_capital": 10000,
+      "entry_price": 193.86500549316406,
+      "composite_score": 68.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "GSK",
+      "action": "BUY",
+      "shares": 190,
+      "allocated_capital": 10000,
+      "entry_price": 52.43000030517578,
+      "composite_score": 66.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ENTG",
+      "action": "BUY",
+      "shares": 59,
+      "allocated_capital": 10000,
+      "entry_price": 166.97500610351562,
+      "composite_score": 66.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "LEN",
+      "action": "BUY",
+      "shares": 109,
+      "allocated_capital": 10000,
+      "entry_price": 91.2300033569336,
+      "composite_score": 66.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ABNB",
+      "action": "BUY",
+      "shares": 67,
+      "allocated_capital": 10000,
+      "entry_price": 148.7100067138672,
+      "composite_score": 65.6,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "AR",
+      "action": "BUY",
+      "shares": 291,
+      "allocated_capital": 10000,
+      "entry_price": 34.29399871826172,
+      "composite_score": 62.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "EBAY",
+      "action": "BUY",
+      "shares": 90,
+      "allocated_capital": 10000,
+      "entry_price": 110.62000274658203,
+      "composite_score": 61.6,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "IBKR",
+      "action": "SELL",
+      "shares": 115.0,
+      "sell_pct": 100,
+      "composite_score": 51.6,
+      "current_price": 87.90499877929688,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 51.6 < 60 absolute minimum",
+      "current_value": 10115.4
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 70 candidates (avg score: 46.7)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 81/81 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 1 SELLs, 10 BUYs ($100,000 allocated)",
+      "quality_score": 43,
+      "issues": [
+        "Capital deployment 30.4% (target 90.0%+)",
+        "Limited diversification: 10 new positions (target 12-20). Total after trades: 20"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 10 BUYs approved, 0 rejected, 1 SELLs",
+      "quality_score": 100,
+      "issues": []
+    }
+  ],
+  "approved_at": "2026-06-29T16:14:23.756122Z"
+}

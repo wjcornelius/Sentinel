@@ -1,0 +1,284 @@
+{
+  "date": "2026-06-30",
+  "start_time": "2026-06-30T09:00:02.748637",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "12:00 PM ET",
+    "current_date": "Tuesday, June 30, 2026"
+  },
+  "regime_analysis": {
+    "regime": "BULLISH",
+    "confidence": "HIGH",
+    "spy_price": 745.8200073242188,
+    "spy_change_pct": 0.650473323106444,
+    "vix_level": 16.8700008392334,
+    "recommendation": "GOOD DAY TO TRADE"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "M",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260630T160731Z_a0a9f806"
+    },
+    {
+      "ticker": "EBAY",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260630T160732Z_4d546c3a",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "OKE",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260630T160732Z_3171247c",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "AR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260630T160732Z_597d07f1",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "EQT",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260630T160732Z_0f1d3bc3",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "EW",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260630T160732Z_7d293945",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ABNB",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260630T160732Z_cfb2e212",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "KDP",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260630T160732Z_e949b23f",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "MTCH",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260630T160732Z_95c762a0",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "EXE",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260630T160732Z_9ab24fe3",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "GSK",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260630T160732Z_263d7edf",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ORLY",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260630T160732Z_4cc94c53",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BDX",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260630T160732Z_41951df0",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BEAM",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260630T160732Z_70e6e12a",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "AMKR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260630T160732Z_c734edf5",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-06-30T09:07:51.864905",
+    "equity": 111110.91,
+    "cash": 11801.8,
+    "buying_power": 314884.51,
+    "portfolio_value": 111110.91,
+    "starting_capital": 100000.0,
+    "total_return": 11110.910000000003,
+    "total_return_pct": 11.110910000000002,
+    "daily_pl": 3029.4400000000023,
+    "daily_pl_pct": 2.802922647147566,
+    "total_unrealized_pl": 6170.219011,
+    "position_count": 12,
+    "positions": [
+      {
+        "ticker": "HAYW",
+        "shares": 657.0,
+        "entry_price": 15.21,
+        "current_price": 17.045,
+        "market_value": 11198.565,
+        "unrealized_pl": 1205.595,
+        "unrealized_pl_pct": 12.064
+      },
+      {
+        "ticker": "AFRM",
+        "shares": 135.0,
+        "entry_price": 74.26,
+        "current_price": 81.01,
+        "market_value": 10936.35,
+        "unrealized_pl": 911.25,
+        "unrealized_pl_pct": 9.09
+      },
+      {
+        "ticker": "ENTG",
+        "shares": 59.0,
+        "entry_price": 167.21,
+        "current_price": 174.7,
+        "market_value": 10307.3,
+        "unrealized_pl": 441.91,
+        "unrealized_pl_pct": 4.479
+      },
+      {
+        "ticker": "ALLY",
+        "shares": 218.0,
+        "entry_price": 45.75,
+        "current_price": 46.53,
+        "market_value": 10143.54,
+        "unrealized_pl": 170.04,
+        "unrealized_pl_pct": 1.7049999999999998
+      },
+      {
+        "ticker": "DHR",
+        "shares": 51.0,
+        "entry_price": 193.008039,
+        "current_price": 190.45,
+        "market_value": 9712.95,
+        "unrealized_pl": -130.459989,
+        "unrealized_pl_pct": -1.325
+      },
+      {
+        "ticker": "GNTX",
+        "shares": 343.0,
+        "entry_price": 21.87,
+        "current_price": 25.18,
+        "market_value": 8636.74,
+        "unrealized_pl": 1135.33,
+        "unrealized_pl_pct": 15.135000000000002
+      },
+      {
+        "ticker": "BRO",
+        "shares": 128.0,
+        "entry_price": 58.24,
+        "current_price": 63.39,
+        "market_value": 8113.92,
+        "unrealized_pl": 659.2,
+        "unrealized_pl_pct": 8.843
+      },
+      {
+        "ticker": "C",
+        "shares": 52.0,
+        "entry_price": 129.9,
+        "current_price": 140.36,
+        "market_value": 7298.72,
+        "unrealized_pl": 543.92,
+        "unrealized_pl_pct": 8.052
+      },
+      {
+        "ticker": "KMB",
+        "shares": 59.0,
+        "entry_price": 100.28,
+        "current_price": 109.706,
+        "market_value": 6472.654,
+        "unrealized_pl": 556.134,
+        "unrealized_pl_pct": 9.4
+      },
+      {
+        "ticker": "COLB",
+        "shares": 200.0,
+        "entry_price": 29.93,
+        "current_price": 32.14,
+        "market_value": 6428.0,
+        "unrealized_pl": 442.0,
+        "unrealized_pl_pct": 7.384
+      },
+      {
+        "ticker": "DG",
+        "shares": 55.0,
+        "entry_price": 109.26,
+        "current_price": 115.46,
+        "market_value": 6350.3,
+        "unrealized_pl": 341.0,
+        "unrealized_pl_pct": 5.675
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [
+    "Reconciliation cleaned 1 stale records",
+    "Verification: Expected positions not found: EXE, AMKR, ORLY, AR, EQT, EBAY, OKE, KDP, MTCH, GSK, BDX, BEAM, ABNB, EW"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 13,
+    "db_positions_before": 13,
+    "stale_closed": 1,
+    "in_sync": 12
+  },
+  "position_drift": {
+    "positions_checked": 13,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260630_090725",
+    "total_trades": 15,
+    "quality_score": 90,
+    "ceo_rating": "EXCELLENT",
+    "ceo_recommendation": "STRONGLY RECOMMEND APPROVAL"
+  },
+  "sells_count": 1,
+  "buys_count": 14,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: EXE, AMKR, ORLY, AR, EQT, EBAY, OKE, KDP, MTCH, GSK, BDX, BEAM, ABNB, EW"
+    ],
+    "summary": {
+      "position_count": 12,
+      "sells_executed": 1,
+      "buys_executed": 14,
+      "expected_count_change": 13
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 4,
+    "fills_recorded": 1,
+    "orders_updated": 1,
+    "already_recorded": 3,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-06-30T09:07:54.297105",
+  "duration_seconds": 471.548483
+}

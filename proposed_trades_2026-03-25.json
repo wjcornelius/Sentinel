@@ -1,0 +1,122 @@
+{
+  "plan_id": "PLAN_20260325_090732",
+  "generated_at": "2026-03-25T16:07:32.224070Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 5,
+    "research_candidates": 68,
+    "gpt5_selected": 5,
+    "compliance_flagged": 0,
+    "overall_quality_score": 86
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 45,
+    "compliance_advisory": 100
+  },
+  "trades": [
+    {
+      "ticker": "BANC",
+      "action": "BUY",
+      "shares": 574,
+      "allocated_capital": 10000,
+      "entry_price": 17.420000076293945,
+      "composite_score": 72.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "COLB",
+      "action": "BUY",
+      "shares": 364,
+      "allocated_capital": 10000,
+      "entry_price": 27.424999237060547,
+      "composite_score": 70.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "HST",
+      "action": "BUY",
+      "shares": 517,
+      "allocated_capital": 10000,
+      "entry_price": 19.315000534057617,
+      "composite_score": 68.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "EBC",
+      "action": "BUY",
+      "shares": 519,
+      "allocated_capital": 10000,
+      "entry_price": 19.260000228881836,
+      "composite_score": 64.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CNK",
+      "action": "BUY",
+      "shares": 357,
+      "allocated_capital": 10000,
+      "entry_price": 27.94499969482422,
+      "composite_score": 60.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 68 candidates (avg score: 46.0)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 79/79 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 0 SELLs, 5 BUYs ($50,000 allocated)",
+      "quality_score": 45,
+      "issues": [
+        "Capital deployment 45.6% (target 90.0%+)",
+        "Limited diversification: 5 new positions (target 12-20). Total after trades: 16"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 5 BUYs approved, 0 rejected, 0 SELLs",
+      "quality_score": 100,
+      "issues": []
+    }
+  ],
+  "approved_at": "2026-03-25T16:07:33.722248Z"
+}

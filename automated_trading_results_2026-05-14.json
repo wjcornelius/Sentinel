@@ -1,0 +1,251 @@
+{
+  "date": "2026-05-14",
+  "start_time": "2026-05-14T09:00:02.967845",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "12:00 PM ET",
+    "current_date": "Thursday, May 14, 2026"
+  },
+  "regime_analysis": {
+    "regime": "BULLISH",
+    "confidence": "HIGH",
+    "spy_price": 749.260009765625,
+    "spy_change_pct": 0.9362681669234362,
+    "vix_level": 17.829999923706055,
+    "recommendation": "GOOD DAY TO TRADE"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "CRDO",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260514T160645Z_a1c9fd7f"
+    },
+    {
+      "ticker": "KDP",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260514T160646Z_34781a6f",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "HL",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260514T160646Z_ce3ecb1a",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "MAT",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260514T160646Z_a127ca2b"
+    },
+    {
+      "ticker": "BANC",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260514T160646Z_f9fb7b92"
+    },
+    {
+      "ticker": "EW",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260514T160646Z_790f58ec",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "DD",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260514T160646Z_4465a727",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "AMKR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260514T160646Z_0a867dae",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CORZ",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260514T160646Z_40e2fcc6",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "DXCM",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260514T160646Z_0673c7bd",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-05-14T09:07:04.088827",
+    "equity": 112975.38,
+    "cash": 6319.27,
+    "buying_power": 115584.58,
+    "portfolio_value": 112975.38,
+    "starting_capital": 100000.0,
+    "total_return": 12975.380000000005,
+    "total_return_pct": 12.975380000000007,
+    "daily_pl": 3567.5800000000017,
+    "daily_pl_pct": 3.2608095583678693,
+    "total_unrealized_pl": 12981.573199999999,
+    "position_count": 12,
+    "positions": [
+      {
+        "ticker": "DOCN",
+        "shares": 73.0,
+        "entry_price": 95.98,
+        "current_price": 155.685,
+        "market_value": 11365.005,
+        "unrealized_pl": 4358.465,
+        "unrealized_pl_pct": 62.205999999999996
+      },
+      {
+        "ticker": "ALAB",
+        "shares": 51.0,
+        "entry_price": 125.28,
+        "current_price": 221.32,
+        "market_value": 11287.32,
+        "unrealized_pl": 4898.04,
+        "unrealized_pl_pct": 76.66
+      },
+      {
+        "ticker": "BZ",
+        "shares": 751.0,
+        "entry_price": 13.29,
+        "current_price": 14.335,
+        "market_value": 10765.585,
+        "unrealized_pl": 784.795,
+        "unrealized_pl_pct": 7.863
+      },
+      {
+        "ticker": "MAT",
+        "shares": 660.0,
+        "entry_price": 15.16,
+        "current_price": 15.165,
+        "market_value": 10008.9,
+        "unrealized_pl": 3.3,
+        "unrealized_pl_pct": 0.033
+      },
+      {
+        "ticker": "BANC",
+        "shares": 532.0,
+        "entry_price": 18.78,
+        "current_price": 18.7701,
+        "market_value": 9985.6932,
+        "unrealized_pl": -5.2668,
+        "unrealized_pl_pct": -0.053
+      },
+      {
+        "ticker": "FOXA",
+        "shares": 151.0,
+        "entry_price": 66.06,
+        "current_price": 65.59,
+        "market_value": 9904.09,
+        "unrealized_pl": -70.97,
+        "unrealized_pl_pct": -0.711
+      },
+      {
+        "ticker": "ARM",
+        "shares": 41.0,
+        "entry_price": 161.17,
+        "current_price": 221.92,
+        "market_value": 9098.72,
+        "unrealized_pl": 2490.75,
+        "unrealized_pl_pct": 37.693
+      },
+      {
+        "ticker": "GNTX",
+        "shares": 343.0,
+        "entry_price": 21.87,
+        "current_price": 23.57,
+        "market_value": 8084.51,
+        "unrealized_pl": 583.1,
+        "unrealized_pl_pct": 7.773
+      },
+      {
+        "ticker": "EBAY",
+        "shares": 70.0,
+        "entry_price": 108.08,
+        "current_price": 113.05,
+        "market_value": 7913.5,
+        "unrealized_pl": 347.9,
+        "unrealized_pl_pct": 4.598
+      },
+      {
+        "ticker": "IREN",
+        "shares": 124.0,
+        "entry_price": 61.21,
+        "current_price": 59.31,
+        "market_value": 7354.44,
+        "unrealized_pl": -235.6,
+        "unrealized_pl_pct": -3.104
+      },
+      {
+        "ticker": "HST",
+        "shares": 328.0,
+        "entry_price": 22.09,
+        "current_price": 21.885,
+        "market_value": 7178.28,
+        "unrealized_pl": -67.24,
+        "unrealized_pl_pct": -0.928
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [
+    "Verification: Expected positions not found: CORZ, HL, KDP, DXCM, AMKR, DD, EW"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 11,
+    "db_positions_before": 10,
+    "stale_closed": 0,
+    "in_sync": 10
+  },
+  "position_drift": {
+    "positions_checked": 11,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260514_090642",
+    "total_trades": 10,
+    "quality_score": 92,
+    "ceo_rating": "EXCELLENT",
+    "ceo_recommendation": "STRONGLY RECOMMEND APPROVAL"
+  },
+  "sells_count": 1,
+  "buys_count": 9,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: CORZ, HL, KDP, DXCM, AMKR, DD, EW"
+    ],
+    "summary": {
+      "position_count": 12,
+      "sells_executed": 1,
+      "buys_executed": 9,
+      "expected_count_change": 8
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 3,
+    "fills_recorded": 3,
+    "orders_updated": 3,
+    "already_recorded": 0,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-05-14T09:07:05.808378",
+  "duration_seconds": 422.84055
+}

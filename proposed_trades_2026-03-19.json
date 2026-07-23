@@ -1,0 +1,184 @@
+{
+  "plan_id": "PLAN_20260319_090855",
+  "generated_at": "2026-03-19T16:08:55.259146Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 10,
+    "research_candidates": 74,
+    "gpt5_selected": 10,
+    "compliance_flagged": 0,
+    "overall_quality_score": 83
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 32,
+    "compliance_advisory": 100
+  },
+  "trades": [
+    {
+      "ticker": "EQT",
+      "action": "BUY",
+      "shares": 89,
+      "allocated_capital": 6000.0,
+      "entry_price": 66.71499633789062,
+      "composite_score": 71.0,
+      "sentiment_score": 55.0,
+      "sentiment_summary": "New March 2026 options trading for EQT began today, offering investors opportunities like selling puts at $50 strike as an alternative to buying shares at $54.06 or covered calls at $60 strike for potential 18.76% return by expiration. No other major news events reported in the last 24 hours.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "FOXA",
+      "action": "BUY",
+      "shares": 104,
+      "allocated_capital": 6000.0,
+      "entry_price": 57.540000915527344,
+      "composite_score": 67.0,
+      "sentiment_score": 45.0,
+      "sentiment_summary": "No news articles from the last 24 hours (March 18-19, 2026) are available in the search results for FOXA stock. Recent coverage references Fox Corporation's Q1 FY2026 earnings from October 30, 2025, which reported revenues of $3.74 billion, net income of $609 million, and highlighted Tubi's profitability and strong ad sales.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ACI",
+      "action": "BUY",
+      "shares": 341,
+      "allocated_capital": 6000.0,
+      "entry_price": 17.545000076293945,
+      "composite_score": 65.6,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No news articles or events specific to ACI stock from the last 24 hours (March 19, 2026, 4 PM UTC) are present in the available search results. Recent data shows a stock price of $16.91 as of March 12, 2026, up 2.83% that day, amid predominantly 'buy' analyst ratings with price targets ranging from $22 to $27.25[1][2]. Options flow data is outdated, with the most recent entries from March 2025[3].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "DVN",
+      "action": "BUY",
+      "shares": 121,
+      "allocated_capital": 6000.0,
+      "entry_price": 49.584999084472656,
+      "composite_score": 65.0,
+      "sentiment_score": 45.0,
+      "sentiment_summary": "No significant news articles specifically about Devon Energy (DVN) from the last 24 hours (March 18-19, 2026) were identified in the search results. Analyst consensus as of March 19 remains a Buy rating from 18 analysts with a price target of $47.61, matching the recent closing price around $47.43, alongside mostly Buy ratings from firms like Wells Fargo, J.P. Morgan, and Mizuho.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "SRAD",
+      "action": "BUY",
+      "shares": 313,
+      "allocated_capital": 6000.0,
+      "entry_price": 19.15999984741211,
+      "composite_score": 63.6,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "The only notable news item in the last 24 hours is a neutral SEC Form 3 filing by Sportradar Group AG's Chief Accounting Officer, James Scott Ritter, disclosing initial beneficial ownership of 18,345 Class A shares, primarily from RSUs vesting over the coming years[2]. No other financial announcements, earnings releases, or analyst updates appear in the provided results from March 18-19, 2026. Earlier events like Goldman Sachs' price target cut occurred on March 4, 2026, outside the 24-hour window[1].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "FTI",
+      "action": "BUY",
+      "shares": 88,
+      "allocated_capital": 6000.0,
+      "entry_price": 67.7699966430664,
+      "composite_score": 62.2,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "Analyst price targets for TechnipFMC (FTI) have been raised significantly, with the average one-year target increasing 17.16% to $59.36, alongside upgrades from firms like BMO Capital, Susquehanna, and Goldman Sachs[1][2]. The company secured major contracts including a $600-800 million iEPCI deal from bp for the Tiber development and a significant Subsea 2.0 contract from Chevron[4]. Institutional activity shows mixed signals with some funds reducing holdings, but overall fund sentiment remains bullish with a low put/call ratio[1][2].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "AA",
+      "action": "SELL",
+      "shares": 117.0,
+      "sell_pct": 100,
+      "composite_score": 44.0,
+      "current_price": 58.290000915527344,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "American Airlines raised its Q1 2026 revenue outlook to more than 10% year-over-year growth, signaling strong travel demand across business and leisure segments[1][2]. However, elevated jet fuel prices averaging $2.75 per gallon are pressuring earnings, with the company expecting adjusted losses toward the lower end of its prior guidance range[2].",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 44.0 < 60 absolute minimum",
+      "current_value": 6804.72
+    },
+    {
+      "ticker": "BMNR",
+      "action": "SELL",
+      "shares": 340.0,
+      "sell_pct": 100,
+      "composite_score": 58.8,
+      "current_price": 20.709999084472656,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "BMNR stock declined 7.62% amid reports of significant financial challenges, including high debt, negative margins, and operating losses, fostering a bearish outlook. However, recent treasury additions of 61,000 ETH and indirect exposure to OpenAI via Orbs provided some positive momentum, with institutional buying from firms like Menard Financial and analysts maintaining a Buy rating at $34.50 target. Trading remains volatile around $20.50-$20.70, below key moving averages.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 58.8 < 60 absolute minimum",
+      "current_value": 7046.5
+    },
+    {
+      "ticker": "CAVA",
+      "action": "SELL",
+      "shares": 73.0,
+      "sell_pct": 100,
+      "composite_score": 48.0,
+      "current_price": NaN,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "CAVA Group stock rallied 9% after-hours following a Q4 earnings beat, with revenue of $272.8 million surpassing estimates of $268.04 million and FY26 guidance aligning with Wall Street expectations of $176-184 million adjusted core profit. CEO Brett Schulman highlighted record FY25 revenue over $1 billion, 22.5% growth, 72 net new restaurants, and 4.0% same-restaurant sales growth despite challenges. Same-store sales rose 0.5% in Q4, though margins dipped due to delivery mix, tech investments, and cost pressures.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 48.0 < 60 absolute minimum",
+      "current_value": 6241.5
+    },
+    {
+      "ticker": "DELL",
+      "action": "SELL",
+      "shares": 67.0,
+      "sell_pct": 100,
+      "composite_score": 57.2,
+      "current_price": NaN,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Dell Technologies released strong Q3 2026 results on November 25, 2025, reporting record revenue of $27 billion (up 11% YoY), EPS of $2.59 (up 17%), and $12.3 billion in AI server orders, with full-year revenue guidance raised to $111.7 billion (up 17%). Recent stock price action shows volatility, with a 7.5% drop on March 3, 2026 due to profit-taking and component cost concerns, but shares have recovered to $153.01 by March 17, up from March lows.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 57.2 < 60 absolute minimum",
+      "current_value": 10303.93
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 74 candidates (avg score: 41.1)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 84/84 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 4 SELLs, 6 BUYs ($36,000 allocated)",
+      "quality_score": 32,
+      "issues": [
+        "Capital deployment 26.3% (target 90.0%+)",
+        "Limited diversification: 6 new positions (target 12-20). Total after trades: 12"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 6 BUYs approved, 0 rejected, 4 SELLs",
+      "quality_score": 100,
+      "issues": []
+    }
+  ],
+  "approved_at": "2026-03-19T16:08:57.918680Z"
+}

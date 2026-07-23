@@ -1,0 +1,148 @@
+{
+  "plan_id": "PLAN_20260324_090748",
+  "generated_at": "2026-03-24T16:07:48.048942Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 7,
+    "research_candidates": 66,
+    "gpt5_selected": 7,
+    "compliance_flagged": 0,
+    "overall_quality_score": 85
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 40,
+    "compliance_advisory": 100
+  },
+  "trades": [
+    {
+      "ticker": "GNTX",
+      "action": "BUY",
+      "shares": 343,
+      "allocated_capital": 7500.0,
+      "entry_price": 21.844999313354492,
+      "composite_score": 75.0,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "Gentex (GNTX) declared a quarterly cash dividend of $0.12 per share, payable April 22, 2026, to shareholders of record on April 8, 2026, announced on February 24, 2026. The stock reacted positively with a 0.93% gain on the announcement day. No other significant news appears in the last 24 hours.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ALLY",
+      "action": "BUY",
+      "shares": 189,
+      "allocated_capital": 7500.0,
+      "entry_price": 39.5099983215332,
+      "composite_score": 69.4,
+      "sentiment_score": 45.0,
+      "sentiment_summary": "No significant news articles about Ally Financial (ALLY) stock were published in the last 24 hours as of March 24, 2026, 4 PM UTC. The most recent items include a March 12 press release scheduling Q1 2026 earnings and neutral market cap updates noting $11.98B valuation. Earlier reports from March 6 highlight year-to-date declines amid macro pressures but note analyst upside and institutional buying.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "GLW",
+      "action": "BUY",
+      "shares": 51,
+      "allocated_capital": 7500.0,
+      "entry_price": 144.51840209960938,
+      "composite_score": 66.2,
+      "sentiment_score": 85.0,
+      "sentiment_summary": "Corning (GLW) shares rose 3.2% on March 23, 2026, amid an S&P 500 tech rally, reflecting continued positive momentum from AI-driven demand and strong fundamentals.[6] Recent analyst consensus remains a Buy rating, supported by growth in optical connectivity and carrier segments, despite some older concerns about environmental sales declines.[4] Bullish options activity and institutional buying further indicate investor optimism.[7]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CNK",
+      "action": "BUY",
+      "shares": 265,
+      "allocated_capital": 7500.0,
+      "entry_price": 28.200000762939453,
+      "composite_score": 63.0,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "Analysts maintain a bullish outlook on CNK stock with a median price target of $32.00, implying 11.8% upside from current levels, supported by Strong Buy ratings from 23 Wall Street analysts[1]. New March 2026 options are now available, offering attractive premiums for puts and calls, indicating investor interest[2]. Forecasts project 10% domestic box office growth in 2026, driving revenues up 12% and EBITDA 25%, despite recent attendance declines[3].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "EXEL",
+      "action": "BUY",
+      "shares": 180,
+      "allocated_capital": 7500.0,
+      "entry_price": 41.45249938964844,
+      "composite_score": 61.4,
+      "sentiment_score": 45.0,
+      "sentiment_summary": "Exelixis is highlighted as a strong momentum stock with a Zacks Momentum Style Score of A, upward earnings revisions for fiscal 2026, and an average earnings surprise of +25%.[1] The company recently reported preliminary FY2025 cabozantinib revenues of ~$2.123 billion and issued FY2026 guidance of $2.325\u2013$2.425 billion, alongside a new $750 million share repurchase authorization and upcoming clinical readouts.[2] However, Royal Bank of Canada recently lowered its price target to $43 with a 'sector perform' rating, citing a prior revenue miss despite EPS beat.[3]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BANC",
+      "action": "BUY",
+      "shares": 430,
+      "allocated_capital": 7500.0,
+      "entry_price": 17.440000534057617,
+      "composite_score": 61.0,
+      "sentiment_score": 45.0,
+      "sentiment_summary": "No specific news articles from the last 24 hours (since March 23, 2026, 4 PM UTC) were identified in the search results. The most recent mentions include JPMorgan Chase acquiring shares and Barclays raising its price target to $25 with an 'overweight' rating, alongside a consensus 'Moderate Buy' rating[3]. Stock opened at $17.22 today with generally positive analyst updates[3][6].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CAVA",
+      "action": "SELL",
+      "shares": 73.0,
+      "sell_pct": 100,
+      "composite_score": 52.0,
+      "current_price": 85.4800033569336,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "CAVA Group stock rallied 9% after-hours following a Q4 earnings beat with revenue of $272.8 million, surpassing estimates of $268.04 million. Fiscal year 2026 guidance matched Wall Street expectations, projecting adjusted core profit of $176-184 million and same-restaurant sales growth of 3-5%. CEO Brett Schulman highlighted a milestone full-year 2025 revenue exceeding $1 billion despite macroeconomic challenges.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 52.0 < 60 absolute minimum",
+      "current_value": 6252.45
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 66 candidates (avg score: 43.8)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 76/76 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 1 SELLs, 6 BUYs ($45,000 allocated)",
+      "quality_score": 40,
+      "issues": [
+        "Capital deployment 36.3% (target 90.0%+)",
+        "Limited diversification: 6 new positions (target 12-20). Total after trades: 15"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 6 BUYs approved, 0 rejected, 1 SELLs",
+      "quality_score": 100,
+      "issues": []
+    }
+  ],
+  "approved_at": "2026-03-24T16:07:50.649106Z"
+}

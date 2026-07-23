@@ -222,6 +222,124 @@ class TrailingStopMonitor:
 
         return results
 
+    def tighten_stops_after_delay(self, delay_days: int = 5, dry_run: bool = True) -> Dict:
+        """
+        Swap the initial wide 15% stop for the tighter target ATR-based stop
+        once a position has been held for `delay_days` trading days.
+
+        This implements the "delayed-stop rule" added 2026-07-22 to fix the
+        <=7 day hold-period problem where ATR stops were cutting winners into
+        losers on normal intraday noise.
+
+        Args:
+            delay_days: Calendar days after entry before tightening (default 5)
+            dry_run: If True, only report what would happen
+
+        Returns:
+            Dict of results per ticker
+        """
+        import sqlite3
+        from pathlib import Path
+
+        db_path = Path(__file__).parent.parent / "sentinel.db"
+        results = {'dry_run': dry_run, 'tightened': [], 'still_in_delay': [], 'errors': []}
+
+        # Get all open positions with entry dates
+        try:
+            conn = sqlite3.connect(str(db_path), timeout=30.0)
+            cur = conn.cursor()
+            cur.execute(
+                """
+                SELECT ticker, actual_shares, actual_entry_price, actual_entry_date
+                FROM portfolio_positions
+                WHERE status = 'OPEN' AND actual_entry_date IS NOT NULL
+                """
+            )
+            open_positions = cur.fetchall()
+            conn.close()
+        except Exception as e:
+            logger.error(f"Failed to read open positions: {e}")
+            return results
+
+        trailing_stops = self.get_open_trailing_stops()
+
+        for ticker, shares, entry_price, entry_date_str in open_positions:
+            try:
+                entry_date = datetime.fromisoformat(entry_date_str).date()
+                age_days = (datetime.now().date() - entry_date).days
+
+                if age_days < delay_days:
+                    results['still_in_delay'].append({
+                        'ticker': ticker,
+                        'age_days': age_days,
+                        'delay_days': delay_days,
+                    })
+                    continue
+
+                # Find the current trailing stop
+                stop_info = trailing_stops.get(ticker)
+                if not stop_info:
+                    logger.info(f"{ticker}: no active trailing stop found (skipping)")
+                    continue
+
+                current_trail_pct = stop_info.get('trail_percent') or 0
+                # Get current price to compute target ATR
+                pos = next((p for p in self.get_all_positions() if p['ticker'] == ticker), None)
+                if pos is None:
+                    continue
+                atr_result = calculate_trailing_stop_percent(ticker, pos['current_price'])
+                target_pct = atr_result['trail_percent']
+
+                # Only tighten if the current stop is still the wide 15% initial
+                # (allow a small tolerance for float noise)
+                if current_trail_pct < 14.5:
+                    logger.debug(f"{ticker}: stop already tightened to {current_trail_pct}% — skipping")
+                    continue
+                # And only if the target is materially tighter
+                if target_pct >= current_trail_pct - 0.5:
+                    continue
+
+                if dry_run:
+                    logger.info(
+                        f"[DRY RUN] Would tighten {ticker}: {current_trail_pct}% -> {target_pct}% "
+                        f"(age {age_days} days)"
+                    )
+                    results['tightened'].append({
+                        'ticker': ticker, 'from_pct': current_trail_pct,
+                        'to_pct': target_pct, 'status': 'would_tighten'
+                    })
+                    continue
+
+                # Cancel old stop
+                try:
+                    self.trading_client.cancel_order_by_id(stop_info['order_id'])
+                except Exception as e:
+                    logger.warning(f"{ticker}: could not cancel old stop: {e}")
+
+                # Submit new tighter trailing stop
+                new_req = TrailingStopOrderRequest(
+                    symbol=ticker,
+                    qty=shares,
+                    side=OrderSide.SELL,
+                    time_in_force=TimeInForce.GTC,
+                    trail_percent=target_pct,
+                )
+                new_order = self.trading_client.submit_order(new_req)
+                logger.info(
+                    f"{ticker}: tightened stop {current_trail_pct}% -> {target_pct}% "
+                    f"(new order {new_order.id}, age {age_days} days)"
+                )
+                results['tightened'].append({
+                    'ticker': ticker, 'from_pct': current_trail_pct,
+                    'to_pct': target_pct, 'status': 'tightened',
+                    'new_order_id': str(new_order.id),
+                })
+            except Exception as e:
+                logger.error(f"{ticker}: tighten failed - {e}")
+                results['errors'].append({'ticker': ticker, 'error': str(e)})
+
+        return results
+
     def generate_report(self) -> str:
         """Generate a human-readable protection status report."""
         status = self.check_protection_status()
@@ -286,6 +404,8 @@ def main():
 
     parser = argparse.ArgumentParser(description='Trailing Stop Monitor')
     parser.add_argument('--protect', action='store_true', help='Add trailing stops to unprotected positions')
+    parser.add_argument('--tighten', action='store_true', help='Swap wide 15%% stops for tight ATR stops after delay')
+    parser.add_argument('--delay-days', type=int, default=5, help='Days before tightening (default 5)')
     parser.add_argument('--dry-run', action='store_true', help='Show what would be done without making changes')
     parser.add_argument('--report', action='store_true', help='Generate protection status report')
 
@@ -293,8 +413,18 @@ def main():
 
     monitor = TrailingStopMonitor()
 
-    if args.report or (not args.protect):
+    if args.report or (not args.protect and not args.tighten):
         print(monitor.generate_report())
+
+    if args.tighten:
+        dry_run = args.dry_run
+        print(f"\n{'[DRY RUN] ' if dry_run else ''}Tightening stops after {args.delay_days} day delay...\n")
+        tighten_results = monitor.tighten_stops_after_delay(
+            delay_days=args.delay_days, dry_run=dry_run
+        )
+        print(f"Tightened: {len(tighten_results['tightened'])}")
+        print(f"Still in delay window: {len(tighten_results['still_in_delay'])}")
+        print(f"Errors: {len(tighten_results['errors'])}")
 
     if args.protect:
         dry_run = args.dry_run

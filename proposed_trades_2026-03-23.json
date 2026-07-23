@@ -1,0 +1,134 @@
+{
+  "plan_id": "PLAN_20260323_090936",
+  "generated_at": "2026-03-23T16:09:36.779563Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 6,
+    "research_candidates": 74,
+    "gpt5_selected": 6,
+    "compliance_flagged": 0,
+    "overall_quality_score": 85
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 42,
+    "compliance_advisory": 100
+  },
+  "trades": [
+    {
+      "ticker": "OKE",
+      "action": "BUY",
+      "shares": 112,
+      "allocated_capital": 10000,
+      "entry_price": 89.08999633789062,
+      "composite_score": 77.6,
+      "sentiment_score": 72.0,
+      "sentiment_summary": "ONEOK shares surged over 4% on March 20, 2026, driven by strong investor interest including a 174% increase in call option volume, positive reactions to FY2026 guidance, and positioning in AI-driven natural gas demand. Wall Street firms upgraded to 'Strong Buy' amid robust trading volume, though flat EBITDA guidance raised some valuation concerns. The company announced its 2026 annual shareholder meeting for May 20.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ALLY",
+      "action": "BUY",
+      "shares": 254,
+      "allocated_capital": 10000,
+      "entry_price": 39.29999923706055,
+      "composite_score": 70.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Based on the available search results, I cannot provide a sentiment analysis from the last 24 hours. The most recent news in the search results is from March 12, 2026[6], which is over 10 days old rel",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "SEI",
+      "action": "BUY",
+      "shares": 158,
+      "allocated_capital": 10000,
+      "entry_price": 62.93000030517578,
+      "composite_score": 69.2,
+      "sentiment_score": 82.0,
+      "sentiment_summary": "SEI stock recently reached an all-time high of $62.26, currently trading around $62.98-$64.15, reflecting strong performance with 182% yearly returns and robust financials including $68M Q3 2025 Adjusted EBITDA. Analysts maintain a 'Strong Buy' rating with a $53.38-$57.67 average price target, supported by capacity expansions like 900 MW in natural gas turbines and positive coverage from GLJ Research. However, it's noted as trading above fair value, indicating potential overvaluation.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "TTMI",
+      "action": "BUY",
+      "shares": 98,
+      "allocated_capital": 10000,
+      "entry_price": 101.19999694824219,
+      "composite_score": 61.0,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "TTM Technologies (TTMI) stock has shown recent positive momentum with a 6.9% surge and 32.35% gain over six days, alongside increased trading volume as a bullish indicator. Analyst consensus from four analysts rates it as Strong Buy as of March 23, 2026, supported by robust growth in Aerospace & Defense and Data Center segments. However, challenges include declining cash flow from operations and elevated insider selling.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "SRAD",
+      "action": "BUY",
+      "shares": 512,
+      "allocated_capital": 10000,
+      "entry_price": 19.5,
+      "composite_score": 60.6,
+      "sentiment_score": 35.0,
+      "sentiment_summary": "Sportradar reported record 2025 results with \u20ac1.29 billion revenue (up significantly) and expanded its share buyback to $1 billion, but shares tumbled 11% on March 3, 2026, due to 2026 guidance of 23-25% revenue growth seen as conservative by investors.[1][3][8] No other news appears in the last 24 hours from March 23, 2026.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "EQT",
+      "action": "SELL",
+      "shares": 89.0,
+      "sell_pct": 100,
+      "composite_score": 56.0,
+      "current_price": NaN,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "EQT Corporation reported strong Q4 2025 earnings, beating analyst expectations with adjusted EPS of $0.90 versus $0.72 expected and revenue of $2.39 billion against $2.1 billion consensus, driven by higher production and lower costs[1]. The company projects $3.5 billion in free cash flow for 2026 and anticipates net debt below $6 billion by Q1 2026 end[1]. EQT's stock recently hit an all-time high of 65.73 USD and new March 2026 options trading has begun, signaling investor interest[2][4].",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 56.0 < 60 absolute minimum",
+      "current_value": 5796.57
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 74 candidates (avg score: 43.3)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 84/84 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 1 SELLs, 5 BUYs ($50,000 allocated)",
+      "quality_score": 42,
+      "issues": [
+        "Capital deployment 41.2% (target 90.0%+)",
+        "Limited diversification: 5 new positions (target 12-20). Total after trades: 14"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 5 BUYs approved, 0 rejected, 1 SELLs",
+      "quality_score": 100,
+      "issues": []
+    }
+  ],
+  "approved_at": "2026-03-23T16:09:38.606804Z"
+}

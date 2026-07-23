@@ -1,0 +1,303 @@
+{
+  "date": "2026-07-21",
+  "start_time": "2026-07-21T09:00:02.921676",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "12:00 PM ET",
+    "current_date": "Tuesday, July 21, 2026"
+  },
+  "regime_analysis": {
+    "regime": "BULLISH",
+    "confidence": "HIGH",
+    "spy_price": 747.5,
+    "spy_change_pct": 0.7290184409909756,
+    "vix_level": 17.209999084472656,
+    "recommendation": "GOOD DAY TO TRADE"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "BMNR",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260721T160820Z_f9765587"
+    },
+    {
+      "ticker": "BRO",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260721T160820Z_d2e1a821"
+    },
+    {
+      "ticker": "DHR",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260721T160820Z_54a40a25"
+    },
+    {
+      "ticker": "MGY",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260721T160820Z_d9c3d1db"
+    },
+    {
+      "ticker": "BANC",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260721T160823Z_48f3426e"
+    },
+    {
+      "ticker": "MTCH",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260721T160823Z_3cd0c919"
+    },
+    {
+      "ticker": "AG",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260721T160823Z_403ee727"
+    },
+    {
+      "ticker": "ANET",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260721T160823Z_4b62e9e8"
+    },
+    {
+      "ticker": "KD",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260721T160823Z_db1f1d97",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "NKE",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260721T160823Z_e07b2883",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "MAT",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260721T160823Z_a37e44e7",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "MMM",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260721T160823Z_90661ba9",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "LEVI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260721T160823Z_445cdfda",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BDX",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260721T160823Z_97d45716",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BKR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260721T160823Z_aa4626c5",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CMCSA",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260721T160823Z_e8d21f19",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "EQH",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260721T160823Z_d293e978",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "IBKR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260721T160823Z_ceeb7d9a",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-07-21T09:08:48.829754",
+    "equity": 105733.35,
+    "cash": 11331.9,
+    "buying_power": 271346.46,
+    "portfolio_value": 105733.35,
+    "starting_capital": 100000.0,
+    "total_return": 5733.350000000006,
+    "total_return_pct": 5.733350000000006,
+    "daily_pl": 1834.9900000000052,
+    "daily_pl_pct": 1.7661395232802568,
+    "total_unrealized_pl": 1310.085,
+    "position_count": 13,
+    "positions": [
+      {
+        "ticker": "RRC",
+        "shares": 279.0,
+        "entry_price": 35.67,
+        "current_price": 37.01,
+        "market_value": 10325.79,
+        "unrealized_pl": 373.86,
+        "unrealized_pl_pct": 3.757
+      },
+      {
+        "ticker": "BANC",
+        "shares": 459.0,
+        "entry_price": 21.79,
+        "current_price": 21.825,
+        "market_value": 10017.675,
+        "unrealized_pl": 16.065,
+        "unrealized_pl_pct": 0.161
+      },
+      {
+        "ticker": "MTCH",
+        "shares": 258.0,
+        "entry_price": 38.71,
+        "current_price": 38.68,
+        "market_value": 9979.44,
+        "unrealized_pl": -7.74,
+        "unrealized_pl_pct": -0.077
+      },
+      {
+        "ticker": "AG",
+        "shares": 599.0,
+        "entry_price": 16.65,
+        "current_price": 16.645,
+        "market_value": 9970.355,
+        "unrealized_pl": -2.995,
+        "unrealized_pl_pct": -0.03
+      },
+      {
+        "ticker": "ANET",
+        "shares": 57.0,
+        "entry_price": 174.96,
+        "current_price": 174.87,
+        "market_value": 9967.59,
+        "unrealized_pl": -5.13,
+        "unrealized_pl_pct": -0.051000000000000004
+      },
+      {
+        "ticker": "FTI",
+        "shares": 102.0,
+        "entry_price": 73.37,
+        "current_price": 73.395,
+        "market_value": 7486.29,
+        "unrealized_pl": 2.55,
+        "unrealized_pl_pct": 0.034
+      },
+      {
+        "ticker": "ONON",
+        "shares": 197.0,
+        "entry_price": 37.93,
+        "current_price": 37.38,
+        "market_value": 7363.86,
+        "unrealized_pl": -108.35,
+        "unrealized_pl_pct": -1.4500000000000002
+      },
+      {
+        "ticker": "GILD",
+        "shares": 55.0,
+        "entry_price": 135.81,
+        "current_price": 129.64,
+        "market_value": 7130.2,
+        "unrealized_pl": -339.35,
+        "unrealized_pl_pct": -4.543
+      },
+      {
+        "ticker": "DG",
+        "shares": 55.0,
+        "entry_price": 109.26,
+        "current_price": 124.065,
+        "market_value": 6823.575,
+        "unrealized_pl": 814.275,
+        "unrealized_pl_pct": 13.55
+      },
+      {
+        "ticker": "COLB",
+        "shares": 200.0,
+        "entry_price": 29.93,
+        "current_price": 32.615,
+        "market_value": 6523.0,
+        "unrealized_pl": 537.0,
+        "unrealized_pl_pct": 8.971
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      },
+      {
+        "ticker": "OKE",
+        "shares": 28.0,
+        "entry_price": 89.35,
+        "current_price": 92.0,
+        "market_value": 2576.0,
+        "unrealized_pl": 74.2,
+        "unrealized_pl_pct": 2.9659999999999997
+      },
+      {
+        "ticker": "PCAR",
+        "shares": 20.0,
+        "entry_price": 123.31,
+        "current_price": 126.38,
+        "market_value": 2527.6,
+        "unrealized_pl": 61.4,
+        "unrealized_pl_pct": 2.4899999999999998
+      }
+    ]
+  },
+  "warnings": [
+    "Verification: Expected positions not found: CMCSA, KD, LEVI, MAT, BKR, EQH, IBKR, BDX, MMM, NKE"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 13,
+    "db_positions_before": 8,
+    "stale_closed": 0,
+    "in_sync": 8
+  },
+  "position_drift": {
+    "positions_checked": 13,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260721_090813",
+    "total_trades": 18,
+    "quality_score": 90,
+    "ceo_rating": "EXCELLENT",
+    "ceo_recommendation": "STRONGLY RECOMMEND APPROVAL"
+  },
+  "sells_count": 4,
+  "buys_count": 14,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: CMCSA, KD, LEVI, MAT, BKR, EQH, IBKR, BDX, MMM, NKE"
+    ],
+    "summary": {
+      "position_count": 13,
+      "sells_executed": 4,
+      "buys_executed": 14,
+      "expected_count_change": 10
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 8,
+    "fills_recorded": 8,
+    "orders_updated": 8,
+    "already_recorded": 0,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-07-21T09:08:51.156923",
+  "duration_seconds": 528.235262
+}

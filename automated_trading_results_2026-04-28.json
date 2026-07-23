@@ -1,0 +1,290 @@
+{
+  "date": "2026-04-28",
+  "start_time": "2026-04-28T09:00:03.547489",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "12:00 PM ET",
+    "current_date": "Tuesday, April 28, 2026"
+  },
+  "regime_analysis": {
+    "regime": "NEUTRAL",
+    "confidence": "MEDIUM",
+    "spy_price": 709.8800048828125,
+    "spy_change_pct": -0.7396812161799452,
+    "vix_level": 18.610000610351562,
+    "recommendation": "NORMAL CONDITIONS"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "HST",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260428T160716Z_92e39d30",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CRDO",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260428T160716Z_2ec920c1",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ONB",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260428T160716Z_332d11a0",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "FOXA",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260428T160716Z_32bc1402",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "EQT",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260428T160716Z_2d8b132e",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "IREN",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260428T160716Z_60ba63cc",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "HAL",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260428T160716Z_77b60373",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "DVN",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260428T160716Z_cd290713",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "PSX",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260428T160716Z_224b485d",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CPRT",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260428T160716Z_a97fecf2",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "OKE",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260428T160716Z_75f614c7",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "JCI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260428T160716Z_b7db4108",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "COIN",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260428T160716Z_459cfb17",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "DBX",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260428T160716Z_dde95304",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CLSK",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260428T160716Z_8c8f8dd2",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "MGY",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260428T160716Z_8037a0ec",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-04-28T09:07:36.907804",
+    "equity": 108566.57,
+    "cash": 14522.9,
+    "buying_power": 119379.4,
+    "portfolio_value": 108566.57,
+    "starting_capital": 100000.0,
+    "total_return": 8566.570000000007,
+    "total_return_pct": 8.566570000000006,
+    "daily_pl": 1854.2000000000116,
+    "daily_pl_pct": 1.7375680064082653,
+    "total_unrealized_pl": 8392.385,
+    "position_count": 12,
+    "positions": [
+      {
+        "ticker": "EXEL",
+        "shares": 233.0,
+        "entry_price": 42.85,
+        "current_price": 45.14,
+        "market_value": 10517.62,
+        "unrealized_pl": 533.57,
+        "unrealized_pl_pct": 5.344
+      },
+      {
+        "ticker": "BZ",
+        "shares": 751.0,
+        "entry_price": 13.29,
+        "current_price": 13.645,
+        "market_value": 10247.395,
+        "unrealized_pl": 266.605,
+        "unrealized_pl_pct": 2.6710000000000003
+      },
+      {
+        "ticker": "ALAB",
+        "shares": 51.0,
+        "entry_price": 125.28,
+        "current_price": 182.83,
+        "market_value": 9324.33,
+        "unrealized_pl": 2935.05,
+        "unrealized_pl_pct": 45.937
+      },
+      {
+        "ticker": "SLM",
+        "shares": 380.0,
+        "entry_price": 19.68,
+        "current_price": 23.78,
+        "market_value": 9036.4,
+        "unrealized_pl": 1558.0,
+        "unrealized_pl_pct": 20.833
+      },
+      {
+        "ticker": "ALLY",
+        "shares": 189.0,
+        "entry_price": 39.53,
+        "current_price": 44.44,
+        "market_value": 8399.16,
+        "unrealized_pl": 927.99,
+        "unrealized_pl_pct": 12.421
+      },
+      {
+        "ticker": "ARM",
+        "shares": 41.0,
+        "entry_price": 161.17,
+        "current_price": 197.76,
+        "market_value": 8108.16,
+        "unrealized_pl": 1500.19,
+        "unrealized_pl_pct": 22.703
+      },
+      {
+        "ticker": "GNTX",
+        "shares": 343.0,
+        "entry_price": 21.87,
+        "current_price": 23.4,
+        "market_value": 8026.2,
+        "unrealized_pl": 524.79,
+        "unrealized_pl_pct": 6.9959999999999996
+      },
+      {
+        "ticker": "DOCN",
+        "shares": 73.0,
+        "entry_price": 95.98,
+        "current_price": 95.87,
+        "market_value": 6998.51,
+        "unrealized_pl": -8.03,
+        "unrealized_pl_pct": -0.11499999999999999
+      },
+      {
+        "ticker": "COLB",
+        "shares": 231.0,
+        "entry_price": 28.99,
+        "current_price": 29.775,
+        "market_value": 6878.025,
+        "unrealized_pl": 181.335,
+        "unrealized_pl_pct": 2.708
+      },
+      {
+        "ticker": "BANC",
+        "shares": 360.0,
+        "entry_price": 18.66,
+        "current_price": 18.99,
+        "market_value": 6836.4,
+        "unrealized_pl": 118.8,
+        "unrealized_pl_pct": 1.7680000000000002
+      },
+      {
+        "ticker": "HMY",
+        "shares": 383.0,
+        "entry_price": 15.67,
+        "current_price": 15.565,
+        "market_value": 5961.395,
+        "unrealized_pl": -40.215,
+        "unrealized_pl_pct": -0.67
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [
+    "Verification: Expected positions not found: HAL, CPRT, ONB, CRDO, CLSK, EQT, IREN, COIN, DVN, HST, JCI, PSX, OKE, FOXA, DBX, MGY"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 12,
+    "db_positions_before": 11,
+    "stale_closed": 0,
+    "in_sync": 11
+  },
+  "position_drift": {
+    "positions_checked": 12,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260428_090714",
+    "total_trades": 16,
+    "quality_score": 98,
+    "ceo_rating": "EXCELLENT",
+    "ceo_recommendation": "STRONGLY RECOMMEND APPROVAL"
+  },
+  "sells_count": 0,
+  "buys_count": 16,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: HAL, CPRT, ONB, CRDO, CLSK, EQT, IREN, COIN, DVN, HST, JCI, PSX, OKE, FOXA, DBX, MGY"
+    ],
+    "summary": {
+      "position_count": 12,
+      "sells_executed": 0,
+      "buys_executed": 16,
+      "expected_count_change": 16
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 0,
+    "fills_recorded": 0,
+    "orders_updated": 0,
+    "already_recorded": 0,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-04-28T09:07:38.719033",
+  "duration_seconds": 455.171559
+}

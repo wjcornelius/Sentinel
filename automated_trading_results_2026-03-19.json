@@ -1,0 +1,260 @@
+{
+  "date": "2026-03-19",
+  "start_time": "2026-03-19T09:00:15.490259",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "12:00 PM ET",
+    "current_date": "Thursday, March 19, 2026"
+  },
+  "regime_analysis": {
+    "regime": "BEARISH",
+    "confidence": "HIGH",
+    "spy_price": 657.7899780273438,
+    "spy_change_pct": -0.5503250062356572,
+    "vix_level": 25.8700008392334,
+    "recommendation": "UNFAVORABLE CONDITIONS"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "AA",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260319T160901Z_5f225127"
+    },
+    {
+      "ticker": "BMNR",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260319T160901Z_d45355ba"
+    },
+    {
+      "ticker": "CAVA",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260319T160901Z_d8fee07a",
+      "_unfilled_reason": "Position still held"
+    },
+    {
+      "ticker": "DELL",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260319T160901Z_9d86f01d",
+      "_unfilled_reason": "Position still held"
+    },
+    {
+      "ticker": "EQT",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260319T160902Z_dd0b9e78"
+    },
+    {
+      "ticker": "FOXA",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260319T160902Z_25ddb7b8"
+    },
+    {
+      "ticker": "ACI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260319T160902Z_ad6c7eab"
+    },
+    {
+      "ticker": "DVN",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260319T160902Z_f0aa1fc5"
+    },
+    {
+      "ticker": "SRAD",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260319T160902Z_80105561",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "FTI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260319T160902Z_13e28f2a",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-03-19T09:09:23.860333",
+    "equity": 101997.7,
+    "cash": 5021.25,
+    "buying_power": 103308.88,
+    "portfolio_value": 101997.7,
+    "starting_capital": 100000.0,
+    "total_return": 1997.699999999997,
+    "total_return_pct": 1.9976999999999971,
+    "daily_pl": 3680.8499999999913,
+    "daily_pl_pct": 3.7438648614148957,
+    "total_unrealized_pl": 9457.735,
+    "position_count": 13,
+    "positions": [
+      {
+        "ticker": "CF",
+        "shares": 107.0,
+        "entry_price": 92.61,
+        "current_price": 129.01,
+        "market_value": 13804.07,
+        "unrealized_pl": 3894.8,
+        "unrealized_pl_pct": 39.305
+      },
+      {
+        "ticker": "DELL",
+        "shares": 67.0,
+        "entry_price": 122.94,
+        "current_price": 154.16,
+        "market_value": 10328.72,
+        "unrealized_pl": 2091.74,
+        "unrealized_pl_pct": 25.395
+      },
+      {
+        "ticker": "DOCN",
+        "shares": 110.0,
+        "entry_price": 67.88,
+        "current_price": 84.665,
+        "market_value": 9313.15,
+        "unrealized_pl": 1846.35,
+        "unrealized_pl_pct": 24.727
+      },
+      {
+        "ticker": "RRC",
+        "shares": 167.0,
+        "entry_price": 35.81,
+        "current_price": 45.805,
+        "market_value": 7649.435,
+        "unrealized_pl": 1669.165,
+        "unrealized_pl_pct": 27.911
+      },
+      {
+        "ticker": "SLM",
+        "shares": 380.0,
+        "entry_price": 19.68,
+        "current_price": 19.645,
+        "market_value": 7465.1,
+        "unrealized_pl": -13.3,
+        "unrealized_pl_pct": -0.178
+      },
+      {
+        "ticker": "DHT",
+        "shares": 421.0,
+        "entry_price": 17.87,
+        "current_price": 17.705,
+        "market_value": 7453.805,
+        "unrealized_pl": -69.465,
+        "unrealized_pl_pct": -0.923
+      },
+      {
+        "ticker": "ALAB",
+        "shares": 58.0,
+        "entry_price": 125.86,
+        "current_price": 122.58,
+        "market_value": 7109.64,
+        "unrealized_pl": -190.24,
+        "unrealized_pl_pct": -2.606
+      },
+      {
+        "ticker": "CAVA",
+        "shares": 73.0,
+        "entry_price": 81.12,
+        "current_price": 85.765,
+        "market_value": 6260.845,
+        "unrealized_pl": 339.085,
+        "unrealized_pl_pct": 5.726
+      },
+      {
+        "ticker": "DVN",
+        "shares": 121.0,
+        "entry_price": 49.62,
+        "current_price": 49.61,
+        "market_value": 6002.81,
+        "unrealized_pl": -1.21,
+        "unrealized_pl_pct": -0.02
+      },
+      {
+        "ticker": "ACI",
+        "shares": 341.0,
+        "entry_price": 17.55,
+        "current_price": 17.555,
+        "market_value": 5986.255,
+        "unrealized_pl": 1.705,
+        "unrealized_pl_pct": 0.027999999999999997
+      },
+      {
+        "ticker": "FOXA",
+        "shares": 104.0,
+        "entry_price": 57.39,
+        "current_price": 57.37,
+        "market_value": 5966.48,
+        "unrealized_pl": -2.08,
+        "unrealized_pl_pct": -0.034999999999999996
+      },
+      {
+        "ticker": "EQT",
+        "shares": 89.0,
+        "entry_price": 66.62,
+        "current_price": 66.585,
+        "market_value": 5926.065,
+        "unrealized_pl": -3.115,
+        "unrealized_pl_pct": -0.053
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [
+    "Reconciliation cleaned 1 stale records",
+    "Verification: Still holding positions that should have been sold: CAVA, DELL",
+    "Verification: Expected positions not found: SRAD, FTI"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 11,
+    "db_positions_before": 11,
+    "stale_closed": 1,
+    "in_sync": 10
+  },
+  "position_drift": {
+    "positions_checked": 11,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260319_090855",
+    "total_trades": 10,
+    "quality_score": 83,
+    "ceo_rating": "GOOD",
+    "ceo_recommendation": "RECOMMEND APPROVAL"
+  },
+  "sells_count": 4,
+  "buys_count": 6,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Still holding positions that should have been sold: CAVA, DELL",
+      "Expected positions not found: SRAD, FTI"
+    ],
+    "summary": {
+      "position_count": 13,
+      "sells_executed": 4,
+      "buys_executed": 6,
+      "expected_count_change": 2
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 8,
+    "fills_recorded": 6,
+    "orders_updated": 6,
+    "already_recorded": 2,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-03-19T09:09:26.312792",
+  "duration_seconds": 550.822544
+}

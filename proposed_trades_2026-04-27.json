@@ -1,0 +1,247 @@
+{
+  "plan_id": "PLAN_20260427_090943",
+  "generated_at": "2026-04-27T16:09:43.632877Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 14,
+    "research_candidates": 64,
+    "gpt5_selected": 14,
+    "compliance_flagged": 0,
+    "overall_quality_score": 98
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 100,
+    "compliance_advisory": 95
+  },
+  "trades": [
+    {
+      "ticker": "ONB",
+      "action": "BUY",
+      "shares": 338,
+      "allocated_capital": 8060.468666666667,
+      "entry_price": 23.790000915527344,
+      "composite_score": 80.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "FOXA",
+      "action": "BUY",
+      "shares": 126,
+      "allocated_capital": 8060.468666666667,
+      "entry_price": 63.86000061035156,
+      "composite_score": 74.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "OKE",
+      "action": "BUY",
+      "shares": 92,
+      "allocated_capital": 8060.468666666667,
+      "entry_price": 87.20999908447266,
+      "composite_score": 73.2,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "EQT",
+      "action": "BUY",
+      "shares": 135,
+      "allocated_capital": 8060.468666666667,
+      "entry_price": 59.38999938964844,
+      "composite_score": 72.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "HAL",
+      "action": "BUY",
+      "shares": 200,
+      "allocated_capital": 8060.468666666667,
+      "entry_price": 40.25849914550781,
+      "composite_score": 70.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BMNR",
+      "action": "BUY",
+      "shares": 374,
+      "allocated_capital": 8060.468666666667,
+      "entry_price": 21.514999389648438,
+      "composite_score": 68.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "OBDC",
+      "action": "BUY",
+      "shares": 719,
+      "allocated_capital": 8060.468666666667,
+      "entry_price": 11.199999809265137,
+      "composite_score": 68.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CPRT",
+      "action": "BUY",
+      "shares": 240,
+      "allocated_capital": 8060.468666666667,
+      "entry_price": 33.48500061035156,
+      "composite_score": 68.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "DBX",
+      "action": "BUY",
+      "shares": 332,
+      "allocated_capital": 8060.468666666667,
+      "entry_price": 24.270000457763672,
+      "composite_score": 65.2,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "PATH",
+      "action": "BUY",
+      "shares": 773,
+      "allocated_capital": 8060.468666666667,
+      "entry_price": 10.425000190734863,
+      "composite_score": 64.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "HPQ",
+      "action": "BUY",
+      "shares": 411,
+      "allocated_capital": 8060.468666666667,
+      "entry_price": 19.584999084472656,
+      "composite_score": 63.2,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "DXCM",
+      "action": "BUY",
+      "shares": 130,
+      "allocated_capital": 8060.468666666667,
+      "entry_price": 61.64500045776367,
+      "composite_score": 60.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "COIN",
+      "action": "BUY",
+      "shares": 40,
+      "allocated_capital": 8060.468666666667,
+      "entry_price": 196.7449951171875,
+      "composite_score": 60.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "EW",
+      "action": "BUY",
+      "shares": 95,
+      "allocated_capital": 8060.468666666667,
+      "entry_price": 84.4000015258789,
+      "composite_score": 60.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 64 candidates (avg score: 51.5)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 75/75 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 0 SELLs, 15 BUYs ($120,907 allocated)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 14 BUYs approved, 1 rejected, 0 SELLs",
+      "quality_score": 95,
+      "issues": [
+        "1 orders REJECTED by compliance"
+      ]
+    }
+  ],
+  "approved_at": "2026-04-27T16:09:46.501950Z"
+}

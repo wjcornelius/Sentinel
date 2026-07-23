@@ -1,0 +1,210 @@
+{
+  "plan_id": "PLAN_20260326_090725",
+  "generated_at": "2026-03-26T16:07:25.552209Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 12,
+    "research_candidates": 74,
+    "gpt5_selected": 12,
+    "compliance_flagged": 0,
+    "overall_quality_score": 83
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 35,
+    "compliance_advisory": 100
+  },
+  "trades": [
+    {
+      "ticker": "HST",
+      "action": "BUY",
+      "shares": 305,
+      "allocated_capital": 6000.0,
+      "entry_price": 19.670000076293945,
+      "composite_score": 74.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "EXEL",
+      "action": "BUY",
+      "shares": 140,
+      "allocated_capital": 6000.0,
+      "entry_price": 42.779998779296875,
+      "composite_score": 72.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BANC",
+      "action": "BUY",
+      "shares": 346,
+      "allocated_capital": 6000.0,
+      "entry_price": 17.315000534057617,
+      "composite_score": 72.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "GLW",
+      "action": "BUY",
+      "shares": 43,
+      "allocated_capital": 6000.0,
+      "entry_price": 139.00999450683594,
+      "composite_score": 71.2,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "COLB",
+      "action": "BUY",
+      "shares": 218,
+      "allocated_capital": 6000.0,
+      "entry_price": 27.42530059814453,
+      "composite_score": 70.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "EBC",
+      "action": "BUY",
+      "shares": 307,
+      "allocated_capital": 6000.0,
+      "entry_price": 19.52400016784668,
+      "composite_score": 64.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ALAB",
+      "action": "BUY",
+      "shares": 51,
+      "allocated_capital": 6000.0,
+      "entry_price": 117.49500274658203,
+      "composite_score": 60.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "DELL",
+      "action": "SELL",
+      "shares": 67.0,
+      "sell_pct": 100,
+      "composite_score": 47.2,
+      "current_price": NaN,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 47.2 < 60 absolute minimum",
+      "current_value": 12190.315
+    },
+    {
+      "ticker": "DHT",
+      "action": "SELL",
+      "shares": 421.0,
+      "sell_pct": 100,
+      "composite_score": 54.4,
+      "current_price": NaN,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 54.4 < 60 absolute minimum",
+      "current_value": 7695.88
+    },
+    {
+      "ticker": "DOCN",
+      "action": "SELL",
+      "shares": 110.0,
+      "sell_pct": 100,
+      "composite_score": 48.0,
+      "current_price": NaN,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 48.0 < 60 absolute minimum",
+      "current_value": 9599.7
+    },
+    {
+      "ticker": "DVN",
+      "action": "SELL",
+      "shares": 121.0,
+      "sell_pct": 100,
+      "composite_score": 46.0,
+      "current_price": NaN,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 46.0 < 60 absolute minimum",
+      "current_value": 6229.08
+    },
+    {
+      "ticker": "EQT",
+      "action": "SELL",
+      "shares": 89.0,
+      "sell_pct": 100,
+      "composite_score": 50.0,
+      "current_price": NaN,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 50.0 < 60 absolute minimum",
+      "current_value": 6026.635
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 74 candidates (avg score: 45.8)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 85/85 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 5 SELLs, 7 BUYs ($42,000 allocated)",
+      "quality_score": 35,
+      "issues": [
+        "Capital deployment 27.5% (target 90.0%+)",
+        "Limited diversification: 7 new positions (target 12-20). Total after trades: 13"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 7 BUYs approved, 0 rejected, 5 SELLs",
+      "quality_score": 100,
+      "issues": []
+    }
+  ],
+  "approved_at": "2026-03-26T16:07:27.945599Z"
+}

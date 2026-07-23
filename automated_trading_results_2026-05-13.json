@@ -1,0 +1,246 @@
+{
+  "date": "2026-05-13",
+  "start_time": "2026-05-13T09:00:03.792148",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "12:00 PM ET",
+    "current_date": "Wednesday, May 13, 2026"
+  },
+  "regime_analysis": {
+    "regime": "BULLISH",
+    "confidence": "MEDIUM",
+    "spy_price": 739.7000122070312,
+    "spy_change_pct": 0.20591448512986363,
+    "vix_level": 18.079999923706055,
+    "recommendation": "FAVORABLE CONDITIONS"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "IONQ",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260513T160617Z_649344fb",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "KDP",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260513T160617Z_3e060787",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "HPQ",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260513T160617Z_0a5e84a2",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BEAM",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260513T160617Z_c67f9d24",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CRCL",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260513T160617Z_18f5da91",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "DD",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260513T160617Z_1d8f0900",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "AMKR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260513T160617Z_e41720ff",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ALB",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260513T160617Z_ea648cb9",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CORZ",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260513T160617Z_391b32e4",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "DXCM",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260513T160617Z_9615daca",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-05-13T09:06:36.661067",
+    "equity": 112285.87,
+    "cash": 19119.55,
+    "buying_power": 127695.35,
+    "portfolio_value": 112285.87,
+    "starting_capital": 100000.0,
+    "total_return": 12285.869999999995,
+    "total_return_pct": 12.285869999999996,
+    "daily_pl": 4692.599999999991,
+    "daily_pl_pct": 4.361425208100833,
+    "total_unrealized_pl": 12047.529999999999,
+    "position_count": 11,
+    "positions": [
+      {
+        "ticker": "DOCN",
+        "shares": 73.0,
+        "entry_price": 95.98,
+        "current_price": 159.0,
+        "market_value": 11607.0,
+        "unrealized_pl": 4600.46,
+        "unrealized_pl_pct": 65.66
+      },
+      {
+        "ticker": "ALAB",
+        "shares": 51.0,
+        "entry_price": 125.28,
+        "current_price": 217.28,
+        "market_value": 11081.28,
+        "unrealized_pl": 4692.0,
+        "unrealized_pl_pct": 73.436
+      },
+      {
+        "ticker": "BZ",
+        "shares": 751.0,
+        "entry_price": 13.29,
+        "current_price": 14.74,
+        "market_value": 11069.74,
+        "unrealized_pl": 1088.95,
+        "unrealized_pl_pct": 10.91
+      },
+      {
+        "ticker": "FOXA",
+        "shares": 151.0,
+        "entry_price": 66.06,
+        "current_price": 66.08,
+        "market_value": 9978.08,
+        "unrealized_pl": 3.02,
+        "unrealized_pl_pct": 0.03
+      },
+      {
+        "ticker": "ARM",
+        "shares": 41.0,
+        "entry_price": 161.17,
+        "current_price": 216.34,
+        "market_value": 8869.94,
+        "unrealized_pl": 2261.97,
+        "unrealized_pl_pct": 34.231
+      },
+      {
+        "ticker": "EBAY",
+        "shares": 70.0,
+        "entry_price": 108.08,
+        "current_price": 112.665,
+        "market_value": 7886.55,
+        "unrealized_pl": 320.95,
+        "unrealized_pl_pct": 4.242
+      },
+      {
+        "ticker": "GNTX",
+        "shares": 343.0,
+        "entry_price": 21.87,
+        "current_price": 22.795,
+        "market_value": 7818.685,
+        "unrealized_pl": 317.275,
+        "unrealized_pl_pct": 4.2299999999999995
+      },
+      {
+        "ticker": "CRDO",
+        "shares": 39.0,
+        "entry_price": 190.79,
+        "current_price": 187.945,
+        "market_value": 7329.855,
+        "unrealized_pl": -110.955,
+        "unrealized_pl_pct": -1.4909999999999999
+      },
+      {
+        "ticker": "HST",
+        "shares": 328.0,
+        "entry_price": 22.09,
+        "current_price": 21.595,
+        "market_value": 7083.16,
+        "unrealized_pl": -162.36,
+        "unrealized_pl_pct": -2.241
+      },
+      {
+        "ticker": "IREN",
+        "shares": 124.0,
+        "entry_price": 61.21,
+        "current_price": 54.29,
+        "market_value": 6731.96,
+        "unrealized_pl": -858.08,
+        "unrealized_pl_pct": -11.305
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [
+    "Reconciliation cleaned 2 stale records",
+    "Verification: Expected positions not found: KDP, CRCL, AMKR, HPQ, IONQ, BEAM, DXCM, ALB, CORZ, DD"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 11,
+    "db_positions_before": 12,
+    "stale_closed": 2,
+    "in_sync": 10
+  },
+  "position_drift": {
+    "positions_checked": 11,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260513_090615",
+    "total_trades": 10,
+    "quality_score": 95,
+    "ceo_rating": "EXCELLENT",
+    "ceo_recommendation": "STRONGLY RECOMMEND APPROVAL"
+  },
+  "sells_count": 0,
+  "buys_count": 10,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: KDP, CRCL, AMKR, HPQ, IONQ, BEAM, DXCM, ALB, CORZ, DD"
+    ],
+    "summary": {
+      "position_count": 11,
+      "sells_executed": 0,
+      "buys_executed": 10,
+      "expected_count_change": 10
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 3,
+    "fills_recorded": 0,
+    "orders_updated": 0,
+    "already_recorded": 3,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-05-13T09:06:38.761491",
+  "duration_seconds": 394.969351
+}

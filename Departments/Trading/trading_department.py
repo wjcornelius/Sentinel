@@ -41,6 +41,14 @@ from alpaca.data.requests import StockLatestBarRequest
 # Import ATR calculator for volatility-based trailing stops
 from Utils.atr_calculator import calculate_trailing_stop_percent
 
+# Shared cross-bot library (closed_trades canonical table)
+sys.path.insert(0, r'C:\Users\wjcor\OneDrive\Desktop\_shared_trading_lib')
+try:
+    from closed_trades import ClosedTradesTable  # noqa: E402
+    _CLOSED_TRADES_AVAILABLE = True
+except ImportError:
+    _CLOSED_TRADES_AVAILABLE = False
+
 # Import configuration
 from config import APCA_API_KEY_ID, APCA_API_SECRET_KEY, APCA_API_BASE_URL
 
@@ -119,26 +127,28 @@ class MessageHandler:
         logger.info(f"Read message: {metadata.get('message_id', 'unknown')}")
         return metadata, body
 
+    # Set to False to fully disable outbox writes (default). Nothing reads
+    # the inter-department Markdown messages — they accumulated to 2,559 files
+    # in Outbox/TRADING before the 2026-07-22 cleanup. Set the environment
+    # variable SENTINEL_ENABLE_DEPT_MESSAGES=1 to re-enable if needed.
+    _MESSAGING_ENABLED = os.environ.get("SENTINEL_ENABLE_DEPT_MESSAGES", "0") == "1"
+
     def write_message(self, to_dept: str, message_type: str, subject: str,
                      body: str, data_payload: Optional[Dict] = None,
                      priority: str = 'routine') -> str:
         """
-        Write message to outbox
-
-        Args:
-            to_dept: Recipient department
-            message_type: Type of message (execution, log, escalation)
-            subject: Message subject line
-            body: Markdown message body
-            data_payload: Optional JSON data
-            priority: Message priority (routine, elevated, critical)
-
-        Returns:
-            message_id
+        Write message to outbox — disabled by default (2026-07-22).
+        Returns a synthesized ID for API compatibility.
         """
         # Generate message ID
         timestamp = datetime.utcnow().strftime('%Y%m%dT%H%M%SZ')
         msg_id = f"MSG_TRADING_{timestamp}_{uuid.uuid4().hex[:8]}"
+
+        if not self._MESSAGING_ENABLED:
+            # Silent no-op. The messages are pure side effects that nobody
+            # reads. See archive_messaging_theater.py for the archival step.
+            logger.debug(f"[msg-disabled] would have written {msg_id} to {to_dept}")
+            return msg_id
 
         # Create metadata
         metadata = {
@@ -521,8 +531,57 @@ class TradingDepartment:
         self.trading_client = TradingClient(APCA_API_KEY_ID, APCA_API_SECRET_KEY, paper=True)
         self.data_client = StockHistoricalDataClient(APCA_API_KEY_ID, APCA_API_SECRET_KEY)
 
+        # Canonical closed-trades table (shared library, one row per exit)
+        self.closed_trades = None
+        if _CLOSED_TRADES_AVAILABLE:
+            try:
+                ct_path = Path(__file__).parent / "data" / "closed_trades.db"
+                self.closed_trades = ClosedTradesTable(db_path=ct_path, bot_name="Sentinel")
+                logger.info(f"ClosedTradesTable ready at {ct_path}")
+            except Exception as e:
+                logger.warning(f"Could not initialize ClosedTradesTable: {e}")
+
         logger.info("Trading Department initialized")
         logger.info(f"Using Alpaca paper trading endpoint: {APCA_API_BASE_URL}")
+
+    def record_close(
+        self,
+        ticker: str,
+        entry_ts: str,
+        exit_ts: str,
+        entry_price: float,
+        exit_price: float,
+        qty: int,
+        exit_reason: str = "unknown",
+        sector: str = "Unknown",
+        entry_features: Optional[Dict] = None,
+        alpaca_entry_order_id: Optional[str] = None,
+        alpaca_exit_order_id: Optional[str] = None,
+    ) -> Optional[int]:
+        """
+        Record a closed round-trip trade to the canonical closed_trades table.
+        Idempotent on alpaca_exit_order_id.
+        """
+        if not self.closed_trades:
+            return None
+        try:
+            return self.closed_trades.record_close(
+                strategy="SentinelDept",
+                ticker=ticker,
+                entry_ts=entry_ts,
+                exit_ts=exit_ts,
+                entry_price=entry_price,
+                exit_price=exit_price,
+                qty=int(qty),
+                exit_reason=exit_reason,
+                sector=sector,
+                entry_features=entry_features,
+                alpaca_entry_order_id=alpaca_entry_order_id,
+                alpaca_exit_order_id=alpaca_exit_order_id,
+            )
+        except Exception as e:
+            logger.error(f"record_close failed for {ticker}: {e}")
+            return None
 
     def process_inbox(self):
         """
@@ -766,18 +825,31 @@ class TradingDepartment:
                     raise ValueError(f"Cannot determine current price for {order.ticker}")
                 logger.info(f"Using estimated price for {order.ticker}: ${current_price:.2f}")
 
-            # Calculate ATR-based trailing stop percentage
+            # Calculate ATR-based trailing stop percentage (target — used from day 6)
             atr_result = calculate_trailing_stop_percent(order.ticker, current_price)
-            trail_percent = atr_result['trail_percent']
+            target_trail_percent = atr_result['trail_percent']
+
+            # DELAYED-STOP RULE (added 2026-07-22): For the first 5 trading days
+            # after entry, park the stop at the 15% ceiling to give the swing
+            # thesis room to develop. A daily job (trailing_stop_monitor) swaps
+            # the stop to the tighter target_trail_percent on day 6. Rationale:
+            # hold-period bucketing showed <=7 day holds returned 19% win rate
+            # vs 95% for holds >=30 days — early ATR stops were cutting winners
+            # into losers on normal intraday noise.
+            initial_trail_percent = 15.0  # matches max_stop_pct ceiling
+            trail_percent = initial_trail_percent
 
             # Store trailing stop info in metadata for later use
             metadata['trail_percent'] = trail_percent
+            metadata['target_trail_percent'] = target_trail_percent
             metadata['atr_method'] = atr_result['method']
             metadata['price'] = current_price
+            metadata['delayed_stop_days'] = 5
 
             logger.info(
-                f"ATR trailing stop for {order.ticker}: {trail_percent}% "
-                f"(method: {atr_result['method']}, ATR%: {atr_result.get('atr_percent', 'N/A')})"
+                f"Initial trailing stop for {order.ticker}: {trail_percent}% "
+                f"(target after 5 trading days: {target_trail_percent}%, "
+                f"ATR method: {atr_result['method']})"
             )
 
             # Step 1: Submit simple market order for the BUY
@@ -1148,6 +1220,59 @@ class TradingDepartment:
                  f"**Action Required:** Review logs and investigate.",
             priority='critical'
         )
+
+    def reconcile_closed_trades(self) -> Dict:
+        """
+        Sync completed (CLOSED / EXITED) portfolio_positions rows into the
+        canonical closed_trades table. Idempotent — the shared table's UNIQUE
+        constraint on (bot_name, alpaca_exit_order_id) prevents duplicates.
+
+        Returns:
+            Dict with counts of newly recorded closes and errors.
+        """
+        if not self.closed_trades:
+            return {'status': 'SKIP', 'reason': 'ClosedTradesTable unavailable'}
+
+        conn = sqlite3.connect(self.db_path, timeout=30.0)
+        cur = conn.cursor()
+        cur.execute("""
+            SELECT position_id, ticker, actual_shares, actual_entry_price,
+                   actual_entry_date, exit_price, exit_date, exit_reason,
+                   sector, entry_order_message_id, exit_order_message_id
+            FROM portfolio_positions
+            WHERE status IN ('CLOSED', 'EXITED', 'SOLD')
+              AND exit_price IS NOT NULL
+              AND actual_entry_price IS NOT NULL
+              AND actual_shares IS NOT NULL
+        """)
+        rows = cur.fetchall()
+        conn.close()
+
+        recorded, errors = 0, 0
+        for row in rows:
+            (pid, ticker, shares, entry_px, entry_date, exit_px,
+             exit_date, exit_reason, sector, entry_msg, exit_msg) = row
+            try:
+                entry_ts = f"{entry_date}T00:00:00+00:00" if entry_date else datetime.utcnow().isoformat()
+                exit_ts = f"{exit_date}T00:00:00+00:00" if exit_date else datetime.utcnow().isoformat()
+                self.closed_trades.record_close(
+                    strategy="SentinelDept",
+                    ticker=ticker,
+                    entry_ts=entry_ts,
+                    exit_ts=exit_ts,
+                    entry_price=float(entry_px),
+                    exit_price=float(exit_px),
+                    qty=int(shares),
+                    exit_reason=(exit_reason or "unknown").lower()[:32],
+                    sector=(sector or "Unknown"),
+                    alpaca_entry_order_id=entry_msg,
+                    alpaca_exit_order_id=(exit_msg or pid),
+                )
+                recorded += 1
+            except Exception as e:
+                logger.warning(f"reconcile_closed_trades: {ticker} failed - {e}")
+                errors += 1
+        return {'status': 'SUCCESS', 'recorded': recorded, 'errors': errors, 'scanned': len(rows)}
 
     def reconcile_positions(self, max_age_hours: int = 24) -> Dict:
         """

@@ -43,6 +43,38 @@ from pathlib import Path
 logger = logging.getLogger(__name__)
 
 
+# ---------------------------------------------------------------------------
+# Sector-lookup cache (populated by populate_ticker_sectors.py, added 2026-07-22)
+# ---------------------------------------------------------------------------
+_SECTOR_CACHE_PATH = Path(__file__).parent.parent.parent / "Config" / "ticker_sectors.json"
+_SECTOR_CACHE: Optional[Dict[str, str]] = None
+
+
+def _load_sector_cache() -> Dict[str, str]:
+    global _SECTOR_CACHE
+    if _SECTOR_CACHE is not None:
+        return _SECTOR_CACHE
+    try:
+        if _SECTOR_CACHE_PATH.exists():
+            data = json.loads(_SECTOR_CACHE_PATH.read_text(encoding="utf-8"))
+            _SECTOR_CACHE = data.get("sectors", {}) or {}
+        else:
+            _SECTOR_CACHE = {}
+    except Exception as e:
+        logger.warning(f"Could not load ticker_sectors.json: {e}")
+        _SECTOR_CACHE = {}
+    return _SECTOR_CACHE
+
+
+def _lookup_sector_from_cache(ticker: str) -> Optional[str]:
+    """Return a cached sector for `ticker`, or None if not in cache/Unknown."""
+    cache = _load_sector_cache()
+    v = cache.get(ticker.upper()) if ticker else None
+    if v and v != "Unknown":
+        return v
+    return None
+
+
 class ResearchDepartment:
     """
     Research Department - Programmatic Stock Analysis
@@ -588,11 +620,15 @@ class ResearchDepartment:
             # Fundamental score - fetch and analyze fundamentals
             fund_score, sector = self._calculate_fundamental_score(ticker)
 
-            # Sentiment = 50 (placeholder for News Dept)
-            sent_score = 50.0
+            # Sentiment dropped 2026-07-22 — News dept was returning
+            # sentiment=50 on 100% of trades (77% of scores at the default,
+            # sentiment_summary="No recent news" on 407/407 recent trades).
+            # It contributed nothing but noise. Composite rebalanced to
+            # 50% technical + 50% fundamental.
+            sent_score = 50.0  # retained for schema compatibility; NOT used in composite
 
-            # Composite
-            composite = (tech_score * 0.4) + (fund_score * 0.4) + (sent_score * 0.2)
+            # Composite (50/50 technical/fundamental — sentiment weight = 0)
+            composite = (tech_score * 0.5) + (fund_score * 0.5)
 
             # Get current price safely (avoid FutureWarning)
             close_value = data['Close'].iloc[-1]
@@ -708,7 +744,13 @@ class ResearchDepartment:
             info = stock.info
 
             score = 0.0
-            sector = info.get('sector', 'Unknown')
+            sector = info.get('sector') or 'Unknown'
+            if not sector or sector == 'Unknown':
+                # Fall back to the pre-populated Config/ticker_sectors.json
+                # cache (added 2026-07-22). Ensures the 40% sector-concentration
+                # hard constraint can bind on ETFs/ADRs whose live sector field
+                # yfinance sometimes omits.
+                sector = _lookup_sector_from_cache(ticker) or 'Unknown'
 
             # Component 1: Profitability (0-25 points)
             roe = info.get('returnOnEquity')
@@ -955,6 +997,9 @@ class ResearchDepartment:
         }
 
         # Step 6: Write message to outbox
+        # Note: NOT gated by SENTINEL_ENABLE_DEPT_MESSAGES — Ops reads this
+        # file back as an internal handoff. It's one file per daily cycle,
+        # not per-order, so it isn't part of the 2,559-file theater.
         outbox_path = Path("Messages_Between_Departments/Outbox/RESEARCH")
         outbox_path.mkdir(parents=True, exist_ok=True)
 

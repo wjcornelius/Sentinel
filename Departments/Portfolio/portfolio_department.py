@@ -90,29 +90,22 @@ class MessageHandler:
         logger.info(f"Read message: {metadata.get('message_id')}")
         return metadata, body, data_payload
 
+    # Set to False to fully disable outbox writes (default 2026-07-22).
+    # Set the env var SENTINEL_ENABLE_DEPT_MESSAGES=1 to re-enable.
+    _MESSAGING_ENABLED = os.environ.get("SENTINEL_ENABLE_DEPT_MESSAGES", "0") == "1"
+
     def write_message(self, to_dept: str, message_type: str, subject: str,
                      body: str, data_payload: Optional[Dict] = None,
                      parent_message_id: Optional[str] = None,
                      priority: str = 'routine',
                      requires_response: bool = False) -> str:
-        """
-        Write message to outbox with YAML frontmatter + markdown + JSON payload
-
-        Args:
-            to_dept: Destination department
-            message_type: Type of message (e.g., 'TradeOrder', 'PortfolioDecision')
-            subject: Message subject line
-            body: Markdown body content
-            data_payload: Optional JSON data
-            parent_message_id: Optional parent message ID (for tracking message chains)
-            priority: Message priority (routine/high/urgent/critical)
-            requires_response: Whether this message requires a response
-
-        Returns:
-            message_id (for database tracking)
-        """
+        """Write message to outbox — disabled by default (2026-07-22)."""
         timestamp = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')
         msg_id = f"MSG_PORTFOLIO_{timestamp}_{uuid.uuid4().hex[:8]}"
+
+        if not self._MESSAGING_ENABLED:
+            logger.debug(f"[msg-disabled] would have written {msg_id} to {to_dept}")
+            return msg_id
 
         # Build YAML frontmatter
         metadata = {

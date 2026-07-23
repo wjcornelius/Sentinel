@@ -1,0 +1,284 @@
+{
+  "date": "2026-07-22",
+  "start_time": "2026-07-22T09:00:02.509931",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "12:00 PM ET",
+    "current_date": "Wednesday, July 22, 2026"
+  },
+  "regime_analysis": {
+    "regime": "BULLISH",
+    "confidence": "MEDIUM",
+    "spy_price": 749.77001953125,
+    "spy_change_pct": 0.1991220099479438,
+    "vix_level": 16.860000610351562,
+    "recommendation": "FAVORABLE CONDITIONS"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "MTCH",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260722T160824Z_8f4f4fa6"
+    },
+    {
+      "ticker": "ONON",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260722T160824Z_f9725924"
+    },
+    {
+      "ticker": "AR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260722T160825Z_59dead01",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "EXE",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260722T160825Z_cd505992"
+    },
+    {
+      "ticker": "MAT",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260722T160825Z_053af209"
+    },
+    {
+      "ticker": "LEVI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260722T160825Z_0a77cef4",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "EQT",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260722T160825Z_583c42c3",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "MDLZ",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260722T160825Z_085b4920",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CMCSA",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260722T160825Z_ef50adff",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CPRT",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260722T160825Z_9f17853f",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "DOCN",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260722T160825Z_ce95d727",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "IBKR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260722T160825Z_e3f65d95",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "EMR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260722T160825Z_75ccdfaf",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "HAL",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260722T160825Z_b269a4a3",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-07-22T09:08:50.577867",
+    "equity": 106294.35,
+    "cash": 8372.96,
+    "buying_power": 267840.28,
+    "portfolio_value": 106294.35,
+    "starting_capital": 100000.0,
+    "total_return": 6294.350000000006,
+    "total_return_pct": 6.294350000000006,
+    "daily_pl": 3801.5800000000017,
+    "daily_pl_pct": 3.709120165256536,
+    "total_unrealized_pl": 2340.0800719999997,
+    "position_count": 13,
+    "positions": [
+      {
+        "ticker": "RRC",
+        "shares": 279.0,
+        "entry_price": 35.67,
+        "current_price": 38.235,
+        "market_value": 10667.565,
+        "unrealized_pl": 715.635,
+        "unrealized_pl_pct": 7.191
+      },
+      {
+        "ticker": "AG",
+        "shares": 599.0,
+        "entry_price": 16.65,
+        "current_price": 17.555,
+        "market_value": 10515.445,
+        "unrealized_pl": 542.095,
+        "unrealized_pl_pct": 5.4350000000000005
+      },
+      {
+        "ticker": "ANET",
+        "shares": 57.0,
+        "entry_price": 174.96,
+        "current_price": 176.315,
+        "market_value": 10049.955,
+        "unrealized_pl": 77.235,
+        "unrealized_pl_pct": 0.774
+      },
+      {
+        "ticker": "MAT",
+        "shares": 702.0,
+        "entry_price": 14.28,
+        "current_price": 14.275,
+        "market_value": 10021.05,
+        "unrealized_pl": -3.51,
+        "unrealized_pl_pct": -0.034999999999999996
+      },
+      {
+        "ticker": "EXE",
+        "shares": 108.0,
+        "entry_price": 91.929166,
+        "current_price": 91.85,
+        "market_value": 9919.8,
+        "unrealized_pl": -8.549928,
+        "unrealized_pl_pct": -0.086
+      },
+      {
+        "ticker": "BANC",
+        "shares": 459.0,
+        "entry_price": 21.79,
+        "current_price": 21.285,
+        "market_value": 9769.815,
+        "unrealized_pl": -231.795,
+        "unrealized_pl_pct": -2.318
+      },
+      {
+        "ticker": "FTI",
+        "shares": 102.0,
+        "entry_price": 73.37,
+        "current_price": 74.89,
+        "market_value": 7638.78,
+        "unrealized_pl": 155.04,
+        "unrealized_pl_pct": 2.072
+      },
+      {
+        "ticker": "GILD",
+        "shares": 55.0,
+        "entry_price": 135.81,
+        "current_price": 131.525,
+        "market_value": 7233.875,
+        "unrealized_pl": -235.675,
+        "unrealized_pl_pct": -3.1550000000000002
+      },
+      {
+        "ticker": "DG",
+        "shares": 55.0,
+        "entry_price": 109.26,
+        "current_price": 121.835,
+        "market_value": 6700.925,
+        "unrealized_pl": 691.625,
+        "unrealized_pl_pct": 11.509
+      },
+      {
+        "ticker": "COLB",
+        "shares": 200.0,
+        "entry_price": 29.93,
+        "current_price": 32.61,
+        "market_value": 6522.0,
+        "unrealized_pl": 536.0,
+        "unrealized_pl_pct": 8.953999999999999
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      },
+      {
+        "ticker": "PCAR",
+        "shares": 20.0,
+        "entry_price": 123.31,
+        "current_price": 130.04,
+        "market_value": 2600.8,
+        "unrealized_pl": 134.6,
+        "unrealized_pl_pct": 5.457999999999999
+      },
+      {
+        "ticker": "OKE",
+        "shares": 28.0,
+        "entry_price": 89.35,
+        "current_price": 91.96,
+        "market_value": 2574.88,
+        "unrealized_pl": 73.08,
+        "unrealized_pl_pct": 2.921
+      }
+    ]
+  },
+  "warnings": [
+    "Reconciliation cleaned 2 stale records",
+    "Verification: Expected positions not found: CPRT, HAL, IBKR, MDLZ, AR, LEVI, EMR, DOCN, EQT, CMCSA"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 13,
+    "db_positions_before": 12,
+    "stale_closed": 2,
+    "in_sync": 10
+  },
+  "position_drift": {
+    "positions_checked": 13,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260722_090818",
+    "total_trades": 14,
+    "quality_score": 89,
+    "ceo_rating": "EXCELLENT",
+    "ceo_recommendation": "STRONGLY RECOMMEND APPROVAL"
+  },
+  "sells_count": 2,
+  "buys_count": 12,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: CPRT, HAL, IBKR, MDLZ, AR, LEVI, EMR, DOCN, EQT, CMCSA"
+    ],
+    "summary": {
+      "position_count": 13,
+      "sells_executed": 2,
+      "buys_executed": 12,
+      "expected_count_change": 10
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 12,
+    "fills_recorded": 4,
+    "orders_updated": 4,
+    "already_recorded": 8,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-07-22T09:08:52.586728",
+  "duration_seconds": 530.076811
+}

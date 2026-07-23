@@ -1,0 +1,245 @@
+{
+  "plan_id": "PLAN_20260709_090701",
+  "generated_at": "2026-07-09T16:07:01.806008Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 14,
+    "research_candidates": 73,
+    "gpt5_selected": 14,
+    "compliance_flagged": 0,
+    "overall_quality_score": 89
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 59,
+    "compliance_advisory": 100
+  },
+  "trades": [
+    {
+      "ticker": "RDDT",
+      "action": "BUY",
+      "shares": 51,
+      "allocated_capital": 10000,
+      "entry_price": 194.49000549316406,
+      "composite_score": 80.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "AG",
+      "action": "BUY",
+      "shares": 579,
+      "allocated_capital": 10000,
+      "entry_price": 17.2549991607666,
+      "composite_score": 74.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "IBKR",
+      "action": "BUY",
+      "shares": 103,
+      "allocated_capital": 10000,
+      "entry_price": 96.55999755859375,
+      "composite_score": 73.6,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "EW",
+      "action": "BUY",
+      "shares": 108,
+      "allocated_capital": 10000,
+      "entry_price": 92.04010009765625,
+      "composite_score": 72.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "FTI",
+      "action": "BUY",
+      "shares": 142,
+      "allocated_capital": 10000,
+      "entry_price": 70.41000366210938,
+      "composite_score": 68.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ONON",
+      "action": "BUY",
+      "shares": 268,
+      "allocated_capital": 10000,
+      "entry_price": 37.22999954223633,
+      "composite_score": 67.2,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BRBR",
+      "action": "BUY",
+      "shares": 810,
+      "allocated_capital": 10000,
+      "entry_price": 12.34000015258789,
+      "composite_score": 66.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "PYPL",
+      "action": "BUY",
+      "shares": 222,
+      "allocated_capital": 10000,
+      "entry_price": 44.974300384521484,
+      "composite_score": 65.2,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BDX",
+      "action": "BUY",
+      "shares": 66,
+      "allocated_capital": 10000,
+      "entry_price": 150.61500549316406,
+      "composite_score": 64.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "AGI",
+      "action": "BUY",
+      "shares": 334,
+      "allocated_capital": 10000,
+      "entry_price": 29.920000076293945,
+      "composite_score": 64.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "IVZ",
+      "action": "BUY",
+      "shares": 349,
+      "allocated_capital": 10000,
+      "entry_price": 28.575000762939453,
+      "composite_score": 64.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "EQH",
+      "action": "BUY",
+      "shares": 213,
+      "allocated_capital": 10000,
+      "entry_price": 46.90999984741211,
+      "composite_score": 63.2,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BEAM",
+      "action": "BUY",
+      "shares": 276,
+      "allocated_capital": 10000,
+      "entry_price": 36.220001220703125,
+      "composite_score": 60.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "FRO",
+      "action": "SELL",
+      "shares": 196.0,
+      "sell_pct": 100,
+      "composite_score": 60.0,
+      "current_price": 36.314998626708984,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "gpt5_reasoning": "AUTOMATED EXIT: Rank #30 (below top 28), score 60.0",
+      "current_value": 7085.4
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 73 candidates (avg score: 50.0)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 89/89 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 1 SELLs, 13 BUYs ($130,000 allocated)",
+      "quality_score": 59,
+      "issues": [
+        "Capital deployment 42.8% (target 90.0%+)"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 13 BUYs approved, 0 rejected, 1 SELLs",
+      "quality_score": 100,
+      "issues": []
+    }
+  ],
+  "approved_at": "2026-07-09T16:07:04.062679Z"
+}

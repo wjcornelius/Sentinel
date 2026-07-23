@@ -1,0 +1,188 @@
+{
+  "plan_id": "PLAN_20260519_090625",
+  "generated_at": "2026-05-19T16:06:25.321007Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 10,
+    "research_candidates": 66,
+    "gpt5_selected": 10,
+    "compliance_flagged": 0,
+    "overall_quality_score": 89
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 59,
+    "compliance_advisory": 100
+  },
+  "trades": [
+    {
+      "ticker": "EW",
+      "action": "BUY",
+      "shares": 121,
+      "allocated_capital": 10000,
+      "entry_price": 82.11499786376953,
+      "composite_score": 74.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "EQT",
+      "action": "BUY",
+      "shares": 168,
+      "allocated_capital": 10000,
+      "entry_price": 59.290000915527344,
+      "composite_score": 72.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "HAL",
+      "action": "BUY",
+      "shares": 233,
+      "allocated_capital": 10000,
+      "entry_price": 42.915000915527344,
+      "composite_score": 70.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BILL",
+      "action": "BUY",
+      "shares": 254,
+      "allocated_capital": 10000,
+      "entry_price": 39.244998931884766,
+      "composite_score": 70.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CART",
+      "action": "BUY",
+      "shares": 240,
+      "allocated_capital": 10000,
+      "entry_price": 41.650001525878906,
+      "composite_score": 68.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "EXE",
+      "action": "BUY",
+      "shares": 99,
+      "allocated_capital": 10000,
+      "entry_price": 100.36000061035156,
+      "composite_score": 68.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BBY",
+      "action": "BUY",
+      "shares": 168,
+      "allocated_capital": 10000,
+      "entry_price": 59.439998626708984,
+      "composite_score": 64.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "F",
+      "action": "BUY",
+      "shares": 757,
+      "allocated_capital": 10000,
+      "entry_price": 13.199999809265137,
+      "composite_score": 64.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CDE",
+      "action": "SELL",
+      "shares": 425.0,
+      "sell_pct": 100,
+      "composite_score": 52.0,
+      "current_price": 16.770000457763672,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 52.0 < 60 absolute minimum",
+      "current_value": 7137.875
+    },
+    {
+      "ticker": "GLW",
+      "action": "SELL",
+      "shares": 55.0,
+      "sell_pct": 100,
+      "composite_score": 51.2,
+      "current_price": 174.0850067138672,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 51.2 < 60 absolute minimum",
+      "current_value": 9564.5
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 66 candidates (avg score: 44.7)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 75/75 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 2 SELLs, 8 BUYs ($80,000 allocated)",
+      "quality_score": 59,
+      "issues": [
+        "Capital deployment 56.4% (target 90.0%+)",
+        "Limited diversification: 8 new positions (target 12-20). Total after trades: 15"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 8 BUYs approved, 0 rejected, 2 SELLs",
+      "quality_score": 100,
+      "issues": []
+    }
+  ],
+  "approved_at": "2026-05-19T16:06:27.228100Z"
+}

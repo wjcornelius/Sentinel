@@ -1,0 +1,217 @@
+{
+  "date": "2026-03-13",
+  "start_time": "2026-03-13T09:00:03.241318",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "12:00 PM ET",
+    "current_date": "Friday, March 13, 2026"
+  },
+  "regime_analysis": {
+    "regime": "BEARISH",
+    "confidence": "MEDIUM",
+    "spy_price": 663.6900024414062,
+    "spy_change_pct": -0.35582306787295237,
+    "vix_level": 27.290000915527344,
+    "recommendation": "PROCEED WITH CAUTION"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "ADM",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260313T160900Z_a1011c72"
+    },
+    {
+      "ticker": "ADMA",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260313T160900Z_21994943"
+    },
+    {
+      "ticker": "AEM",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260313T160900Z_df3610f4"
+    },
+    {
+      "ticker": "CAVA",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260313T160900Z_4c4c6928",
+      "_unfilled_reason": "Position still held"
+    },
+    {
+      "ticker": "DOCN",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260313T160902Z_bcb992c6"
+    },
+    {
+      "ticker": "AA",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260313T160902Z_d18f33ef"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-03-13T09:09:19.212345",
+    "equity": 100552.43,
+    "cash": 15861.04,
+    "buying_power": 112703.4,
+    "portfolio_value": 100552.43,
+    "starting_capital": 100000.0,
+    "total_return": 552.429999999993,
+    "total_return_pct": 0.552429999999993,
+    "daily_pl": 2877.6399999999994,
+    "daily_pl_pct": 2.946144035733273,
+    "total_unrealized_pl": 6093.243700000001,
+    "position_count": 11,
+    "positions": [
+      {
+        "ticker": "CF",
+        "shares": 107.0,
+        "entry_price": 92.61,
+        "current_price": 130.48,
+        "market_value": 13961.36,
+        "unrealized_pl": 4052.09,
+        "unrealized_pl_pct": 40.892
+      },
+      {
+        "ticker": "DELL",
+        "shares": 67.0,
+        "entry_price": 122.94,
+        "current_price": 148.585,
+        "market_value": 9955.195,
+        "unrealized_pl": 1718.215,
+        "unrealized_pl_pct": 20.86
+      },
+      {
+        "ticker": "SLM",
+        "shares": 380.0,
+        "entry_price": 19.68,
+        "current_price": 19.79,
+        "market_value": 7520.2,
+        "unrealized_pl": 41.8,
+        "unrealized_pl_pct": 0.559
+      },
+      {
+        "ticker": "AA",
+        "shares": 117.0,
+        "entry_price": 64.35,
+        "current_price": 64.2715,
+        "market_value": 7519.7655,
+        "unrealized_pl": -9.1845,
+        "unrealized_pl_pct": -0.122
+      },
+      {
+        "ticker": "DOCN",
+        "shares": 110.0,
+        "entry_price": 67.88,
+        "current_price": 67.785,
+        "market_value": 7456.35,
+        "unrealized_pl": -10.45,
+        "unrealized_pl_pct": -0.13999999999999999
+      },
+      {
+        "ticker": "CRDO",
+        "shares": 64.0,
+        "entry_price": 116.2,
+        "current_price": 115.4963,
+        "market_value": 7391.7632,
+        "unrealized_pl": -45.0368,
+        "unrealized_pl_pct": -0.606
+      },
+      {
+        "ticker": "RRC",
+        "shares": 167.0,
+        "entry_price": 35.81,
+        "current_price": 42.97,
+        "market_value": 7175.99,
+        "unrealized_pl": 1195.72,
+        "unrealized_pl_pct": 19.994
+      },
+      {
+        "ticker": "DHT",
+        "shares": 421.0,
+        "entry_price": 17.87,
+        "current_price": 16.955,
+        "market_value": 7138.055,
+        "unrealized_pl": -385.215,
+        "unrealized_pl_pct": -5.12
+      },
+      {
+        "ticker": "ALAB",
+        "shares": 58.0,
+        "entry_price": 125.86,
+        "current_price": 118.695,
+        "market_value": 6884.31,
+        "unrealized_pl": -415.57,
+        "unrealized_pl_pct": -5.6930000000000005
+      },
+      {
+        "ticker": "CAVA",
+        "shares": 73.0,
+        "entry_price": 81.12,
+        "current_price": 81.895,
+        "market_value": 5978.335,
+        "unrealized_pl": 56.575,
+        "unrealized_pl_pct": 0.955
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [
+    "Reconciliation cleaned 3 stale records",
+    "Verification: Still holding positions that should have been sold: CAVA"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 12,
+    "db_positions_before": 14,
+    "stale_closed": 3,
+    "in_sync": 11
+  },
+  "position_drift": {
+    "positions_checked": 12,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260313_090857",
+    "total_trades": 6,
+    "quality_score": 78,
+    "ceo_rating": "GOOD",
+    "ceo_recommendation": "RECOMMEND APPROVAL"
+  },
+  "sells_count": 4,
+  "buys_count": 2,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Still holding positions that should have been sold: CAVA"
+    ],
+    "summary": {
+      "position_count": 11,
+      "sells_executed": 4,
+      "buys_executed": 2,
+      "expected_count_change": -2
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 11,
+    "fills_recorded": 5,
+    "orders_updated": 5,
+    "already_recorded": 6,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-03-13T09:09:21.233776",
+  "duration_seconds": 557.992474
+}

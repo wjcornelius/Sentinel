@@ -1,0 +1,277 @@
+{
+  "plan_id": "PLAN_20260703_090709",
+  "generated_at": "2026-07-03T16:07:09.188462Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 16,
+    "research_candidates": 72,
+    "gpt5_selected": 16,
+    "compliance_flagged": 0,
+    "overall_quality_score": 91
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 72,
+    "compliance_advisory": 95
+  },
+  "trades": [
+    {
+      "ticker": "LEVI",
+      "action": "BUY",
+      "shares": 409,
+      "allocated_capital": 10000,
+      "entry_price": 24.40999984741211,
+      "composite_score": 78.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CDE",
+      "action": "BUY",
+      "shares": 578,
+      "allocated_capital": 10000,
+      "entry_price": 17.299999237060547,
+      "composite_score": 76.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "EBAY",
+      "action": "BUY",
+      "shares": 87,
+      "allocated_capital": 10000,
+      "entry_price": 114.83999633789062,
+      "composite_score": 73.6,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "GSK",
+      "action": "BUY",
+      "shares": 186,
+      "allocated_capital": 10000,
+      "entry_price": 53.65999984741211,
+      "composite_score": 72.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "AR",
+      "action": "BUY",
+      "shares": 282,
+      "allocated_capital": 10000,
+      "entry_price": 35.380001068115234,
+      "composite_score": 72.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "PCAR",
+      "action": "BUY",
+      "shares": 83,
+      "allocated_capital": 10000,
+      "entry_price": 119.5,
+      "composite_score": 70.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "AG",
+      "action": "BUY",
+      "shares": 561,
+      "allocated_capital": 10000,
+      "entry_price": 17.81999969482422,
+      "composite_score": 70.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "EQT",
+      "action": "BUY",
+      "shares": 190,
+      "allocated_capital": 10000,
+      "entry_price": 52.61000061035156,
+      "composite_score": 70.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "GILD",
+      "action": "BUY",
+      "shares": 76,
+      "allocated_capital": 10000,
+      "entry_price": 131.27000427246094,
+      "composite_score": 69.6,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "KDP",
+      "action": "BUY",
+      "shares": 300,
+      "allocated_capital": 10000,
+      "entry_price": 33.29999923706055,
+      "composite_score": 69.6,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "MTCH",
+      "action": "BUY",
+      "shares": 263,
+      "allocated_capital": 10000,
+      "entry_price": 37.900001525878906,
+      "composite_score": 69.6,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ORLY",
+      "action": "BUY",
+      "shares": 110,
+      "allocated_capital": 10000,
+      "entry_price": 90.25,
+      "composite_score": 66.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BDX",
+      "action": "BUY",
+      "shares": 63,
+      "allocated_capital": 10000,
+      "entry_price": 158.0800018310547,
+      "composite_score": 64.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BEAM",
+      "action": "BUY",
+      "shares": 287,
+      "allocated_capital": 10000,
+      "entry_price": 34.790000915527344,
+      "composite_score": 62.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "KTOS",
+      "action": "BUY",
+      "shares": 180,
+      "allocated_capital": 10000,
+      "entry_price": 55.349998474121094,
+      "composite_score": 62.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "IBKR",
+      "action": "BUY",
+      "shares": 109,
+      "allocated_capital": 10000,
+      "entry_price": 91.33000183105469,
+      "composite_score": 61.6,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 72 candidates (avg score: 50.8)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 83/83 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 0 SELLs, 17 BUYs ($170,000 allocated)",
+      "quality_score": 72,
+      "issues": [
+        "Capital deployment 54.8% (target 90.0%+)"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 16 BUYs approved, 1 rejected, 0 SELLs",
+      "quality_score": 95,
+      "issues": [
+        "1 orders REJECTED by compliance"
+      ]
+    }
+  ],
+  "approved_at": "2026-07-03T16:07:12.074166Z"
+}

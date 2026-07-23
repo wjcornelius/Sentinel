@@ -1,0 +1,279 @@
+{
+  "plan_id": "PLAN_20260609_090642",
+  "generated_at": "2026-06-09T16:06:42.315499Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 17,
+    "research_candidates": 69,
+    "gpt5_selected": 17,
+    "compliance_flagged": 0,
+    "overall_quality_score": 84
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 42,
+    "compliance_advisory": 95
+  },
+  "trades": [
+    {
+      "ticker": "COLB",
+      "action": "BUY",
+      "shares": 200,
+      "allocated_capital": 6000.0,
+      "entry_price": 29.90999984741211,
+      "composite_score": 80.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "FOXA",
+      "action": "BUY",
+      "shares": 88,
+      "allocated_capital": 6000.0,
+      "entry_price": 67.55999755859375,
+      "composite_score": 72.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "KMB",
+      "action": "BUY",
+      "shares": 59,
+      "allocated_capital": 6000.0,
+      "entry_price": 100.05000305175781,
+      "composite_score": 71.2,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "DG",
+      "action": "BUY",
+      "shares": 55,
+      "allocated_capital": 6000.0,
+      "entry_price": 109.05999755859375,
+      "composite_score": 68.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "JCI",
+      "action": "BUY",
+      "shares": 41,
+      "allocated_capital": 6000.0,
+      "entry_price": 144.7899932861328,
+      "composite_score": 68.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "LVS",
+      "action": "BUY",
+      "shares": 116,
+      "allocated_capital": 6000.0,
+      "entry_price": 51.47999954223633,
+      "composite_score": 68.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ALLY",
+      "action": "BUY",
+      "shares": 138,
+      "allocated_capital": 6000.0,
+      "entry_price": 43.29999923706055,
+      "composite_score": 66.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "GSK",
+      "action": "BUY",
+      "shares": 117,
+      "allocated_capital": 6000.0,
+      "entry_price": 51.04499816894531,
+      "composite_score": 66.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "DNOW",
+      "action": "BUY",
+      "shares": 740,
+      "allocated_capital": 9997.400169372559,
+      "entry_price": 13.510000228881836,
+      "composite_score": 62.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Auto-added for capital efficiency (score: 62.8)",
+      "gpt5_allocated": false,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CCI",
+      "action": "BUY",
+      "shares": 107,
+      "allocated_capital": 9982.564804077148,
+      "entry_price": 93.29499816894531,
+      "composite_score": 62.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Auto-added for capital efficiency (score: 62.0)",
+      "gpt5_allocated": false,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "EMR",
+      "action": "BUY",
+      "shares": 71,
+      "allocated_capital": 9944.615173339844,
+      "entry_price": 140.06500244140625,
+      "composite_score": 61.2,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Auto-added for capital efficiency (score: 61.2)",
+      "gpt5_allocated": false,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ALAB",
+      "action": "SELL",
+      "shares": 51.0,
+      "sell_pct": 100,
+      "composite_score": 64.0,
+      "current_price": 324.69000244140625,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "gpt5_reasoning": "AUTOMATED EXIT: Rank #19 (below top 15), score 64.0",
+      "current_value": 16559.19
+    },
+    {
+      "ticker": "BAH",
+      "action": "SELL",
+      "shares": 116.0,
+      "sell_pct": 100,
+      "composite_score": 65.2,
+      "current_price": 77.91500091552734,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "gpt5_reasoning": "AUTOMATED EXIT: Rank #17 (below top 15), score 65.2",
+      "current_value": 9034.66
+    },
+    {
+      "ticker": "BZ",
+      "action": "SELL",
+      "shares": 524.0,
+      "sell_pct": 100,
+      "composite_score": 58.4,
+      "current_price": 13.279999732971191,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 58.4 < 60 absolute minimum",
+      "current_value": 6958.8248
+    },
+    {
+      "ticker": "HAYW",
+      "action": "SELL",
+      "shares": 698.0,
+      "sell_pct": 100,
+      "composite_score": 66.4,
+      "current_price": 14.524999618530273,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "gpt5_reasoning": "AUTOMATED EXIT: Rank #16 (below top 15), score 66.4",
+      "current_value": 10141.94
+    },
+    {
+      "ticker": "KDP",
+      "action": "SELL",
+      "shares": 245.0,
+      "sell_pct": 100,
+      "composite_score": 61.6,
+      "current_price": 31.375,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "gpt5_reasoning": "AUTOMATED EXIT: Rank #22 (below top 15), score 61.6",
+      "current_value": 7670.95
+    },
+    {
+      "ticker": "MMM",
+      "action": "SELL",
+      "shares": 64.0,
+      "sell_pct": 100,
+      "composite_score": 64.8,
+      "current_price": 155.83999633789062,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "gpt5_reasoning": "AUTOMATED EXIT: Rank #18 (below top 15), score 64.8",
+      "current_value": 9982.08
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 69 candidates (avg score: 49.2)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 81/81 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 6 SELLs, 12 BUYs ($83,925 allocated)",
+      "quality_score": 42,
+      "issues": [
+        "Capital deployment 23.5% (target 90.0%+)"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 11 BUYs approved, 1 rejected, 6 SELLs",
+      "quality_score": 95,
+      "issues": [
+        "1 orders REJECTED by compliance"
+      ]
+    }
+  ],
+  "approved_at": "2026-06-09T16:06:44.232630Z"
+}

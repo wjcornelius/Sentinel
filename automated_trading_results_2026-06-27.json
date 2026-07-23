@@ -1,0 +1,28 @@
+{
+  "date": "2026-06-27",
+  "start_time": "2026-06-27T09:00:02.883473",
+  "status": "MARKET_CLOSED",
+  "market_status": {
+    "is_open": false,
+    "status": "CLOSED",
+    "message": "Weekend - Market opens Monday, Jun 29 at 9:30 AM ET",
+    "current_time_et": "12:00 PM ET",
+    "current_date": "Saturday, June 27, 2026",
+    "next_open": "Monday, Jun 29 at 9:30 AM ET"
+  },
+  "regime_analysis": null,
+  "plan_generated": false,
+  "plan_approved": false,
+  "trades_executed": [],
+  "portfolio_state": null,
+  "warnings": [],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 12,
+    "db_positions_before": 11,
+    "stale_closed": 0,
+    "in_sync": 11
+  },
+  "end_time": "2026-06-27T09:00:29.059141",
+  "duration_seconds": 26.175681
+}

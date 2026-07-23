@@ -1,0 +1,205 @@
+{
+  "plan_id": "PLAN_20260505_091129",
+  "generated_at": "2026-05-05T16:11:29.638466Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 11,
+    "research_candidates": 68,
+    "gpt5_selected": 11,
+    "compliance_flagged": 0,
+    "overall_quality_score": 97
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 96,
+    "compliance_advisory": 95
+  },
+  "trades": [
+    {
+      "ticker": "CRDO",
+      "action": "BUY",
+      "shares": 51,
+      "allocated_capital": 10000,
+      "entry_price": 193.7908935546875,
+      "composite_score": 80.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "EBAY",
+      "action": "BUY",
+      "shares": 95,
+      "allocated_capital": 10000,
+      "entry_price": 104.8416976928711,
+      "composite_score": 73.6,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "IREN",
+      "action": "BUY",
+      "shares": 191,
+      "allocated_capital": 10000,
+      "entry_price": 52.290000915527344,
+      "composite_score": 70.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "EXE",
+      "action": "BUY",
+      "shares": 100,
+      "allocated_capital": 10000,
+      "entry_price": 99.87999725341797,
+      "composite_score": 68.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "HST",
+      "action": "BUY",
+      "shares": 471,
+      "allocated_capital": 10000,
+      "entry_price": 21.225299835205078,
+      "composite_score": 68.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "IONQ",
+      "action": "BUY",
+      "shares": 213,
+      "allocated_capital": 10000,
+      "entry_price": 46.779998779296875,
+      "composite_score": 64.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "HPQ",
+      "action": "BUY",
+      "shares": 483,
+      "allocated_capital": 10000,
+      "entry_price": 20.690000534057617,
+      "composite_score": 63.2,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CLSK",
+      "action": "BUY",
+      "shares": 749,
+      "allocated_capital": 10000,
+      "entry_price": 13.350199699401855,
+      "composite_score": 62.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CCI",
+      "action": "BUY",
+      "shares": 112,
+      "allocated_capital": 10000,
+      "entry_price": 89.25499725341797,
+      "composite_score": 62.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ALLY",
+      "action": "BUY",
+      "shares": 228,
+      "allocated_capital": 10000,
+      "entry_price": 43.68000030517578,
+      "composite_score": 60.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "EW",
+      "action": "BUY",
+      "shares": 120,
+      "allocated_capital": 10000,
+      "entry_price": 83.11000061035156,
+      "composite_score": 60.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 68 candidates (avg score: 47.8)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 79/79 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 0 SELLs, 12 BUYs ($120,000 allocated)",
+      "quality_score": 96,
+      "issues": []
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 11 BUYs approved, 1 rejected, 0 SELLs",
+      "quality_score": 95,
+      "issues": [
+        "1 orders REJECTED by compliance"
+      ]
+    }
+  ],
+  "approved_at": "2026-05-05T16:11:31.818394Z"
+}

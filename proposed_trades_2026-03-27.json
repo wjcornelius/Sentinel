@@ -1,0 +1,176 @@
+{
+  "plan_id": "PLAN_20260327_090635",
+  "generated_at": "2026-03-27T16:06:35.312683Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 9,
+    "research_candidates": 67,
+    "gpt5_selected": 9,
+    "compliance_flagged": 0,
+    "overall_quality_score": 88
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 55,
+    "compliance_advisory": 100
+  },
+  "trades": [
+    {
+      "ticker": "EXEL",
+      "action": "BUY",
+      "shares": 143,
+      "allocated_capital": 6000.0,
+      "entry_price": 41.935001373291016,
+      "composite_score": 72.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BZ",
+      "action": "BUY",
+      "shares": 456,
+      "allocated_capital": 6000.0,
+      "entry_price": 13.145000457763672,
+      "composite_score": 68.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "AMKR",
+      "action": "BUY",
+      "shares": 131,
+      "allocated_capital": 6000.0,
+      "entry_price": 45.63999938964844,
+      "composite_score": 67.2,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "EBC",
+      "action": "BUY",
+      "shares": 311,
+      "allocated_capital": 6000.0,
+      "entry_price": 19.270000457763672,
+      "composite_score": 64.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "HST",
+      "action": "BUY",
+      "shares": 313,
+      "allocated_capital": 6000.0,
+      "entry_price": 19.110000610351562,
+      "composite_score": 64.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BANC",
+      "action": "BUY",
+      "shares": 583,
+      "allocated_capital": 9995.53526687622,
+      "entry_price": 17.145000457763672,
+      "composite_score": 62.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Auto-added for capital efficiency (score: 62.0)",
+      "gpt5_allocated": false,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ALAB",
+      "action": "BUY",
+      "shares": 87,
+      "allocated_capital": 9889.289840698242,
+      "entry_price": 113.66999816894531,
+      "composite_score": 60.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Auto-added for capital efficiency (score: 60.0)",
+      "gpt5_allocated": false,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "COLB",
+      "action": "BUY",
+      "shares": 368,
+      "allocated_capital": 9991.19985961914,
+      "entry_price": 27.149999618530273,
+      "composite_score": 60.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Auto-added for capital efficiency (score: 60.0)",
+      "gpt5_allocated": false,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "DHT",
+      "action": "SELL",
+      "shares": 421.0,
+      "sell_pct": 100,
+      "composite_score": 60.4,
+      "current_price": 17.97879981994629,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "gpt5_reasoning": "AUTOMATED EXIT: Rank #17 (below top 15), score 60.4",
+      "current_value": 7565.3279
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 67 candidates (avg score: 45.0)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 78/78 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 1 SELLs, 8 BUYs ($59,876 allocated)",
+      "quality_score": 55,
+      "issues": [
+        "Capital deployment 51.1% (target 90.0%+)",
+        "Limited diversification: 8 new positions (target 12-20). Total after trades: 18"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 8 BUYs approved, 0 rejected, 1 SELLs",
+      "quality_score": 100,
+      "issues": []
+    }
+  ],
+  "approved_at": "2026-03-27T16:06:36.802111Z"
+}

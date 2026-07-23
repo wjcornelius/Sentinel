@@ -1,0 +1,206 @@
+{
+  "plan_id": "PLAN_20260521_090653",
+  "generated_at": "2026-05-21T16:06:53.661905Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 11,
+    "research_candidates": 75,
+    "gpt5_selected": 11,
+    "compliance_flagged": 0,
+    "overall_quality_score": 97
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 90,
+    "compliance_advisory": 100
+  },
+  "trades": [
+    {
+      "ticker": "BWA",
+      "action": "BUY",
+      "shares": 159,
+      "allocated_capital": 10000,
+      "entry_price": 62.56999969482422,
+      "composite_score": 68.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "EXE",
+      "action": "BUY",
+      "shares": 101,
+      "allocated_capital": 10000,
+      "entry_price": 98.63999938964844,
+      "composite_score": 68.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ACN",
+      "action": "BUY",
+      "shares": 56,
+      "allocated_capital": 10000,
+      "entry_price": 176.92999267578125,
+      "composite_score": 66.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "GSK",
+      "action": "BUY",
+      "shares": 194,
+      "allocated_capital": 10000,
+      "entry_price": 51.33000183105469,
+      "composite_score": 66.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "HST",
+      "action": "BUY",
+      "shares": 452,
+      "allocated_capital": 10000,
+      "entry_price": 22.114999771118164,
+      "composite_score": 66.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "GTLB",
+      "action": "BUY",
+      "shares": 393,
+      "allocated_capital": 10000,
+      "entry_price": 25.43000030517578,
+      "composite_score": 62.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "KLAR",
+      "action": "BUY",
+      "shares": 632,
+      "allocated_capital": 10000,
+      "entry_price": 15.811400413513184,
+      "composite_score": 62.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CCI",
+      "action": "BUY",
+      "shares": 107,
+      "allocated_capital": 10000,
+      "entry_price": 92.65499877929688,
+      "composite_score": 62.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "DHR",
+      "action": "BUY",
+      "shares": 58,
+      "allocated_capital": 10000,
+      "entry_price": 172.22999572753906,
+      "composite_score": 62.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "G",
+      "action": "BUY",
+      "shares": 312,
+      "allocated_capital": 10000,
+      "entry_price": 31.950000762939453,
+      "composite_score": 61.6,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "GLW",
+      "action": "BUY",
+      "shares": 53,
+      "allocated_capital": 10000,
+      "entry_price": 187.8699951171875,
+      "composite_score": 61.2,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 75 candidates (avg score: 45.9)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 84/84 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 0 SELLs, 11 BUYs ($110,000 allocated)",
+      "quality_score": 90,
+      "issues": [
+        "Capital deployment 88.6% (target 90.0%+)",
+        "Limited diversification: 11 new positions (target 12-20). Total after trades: 20"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 11 BUYs approved, 0 rejected, 0 SELLs",
+      "quality_score": 100,
+      "issues": []
+    }
+  ],
+  "approved_at": "2026-05-21T16:06:56.129134Z"
+}

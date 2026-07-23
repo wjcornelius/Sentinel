@@ -1,0 +1,231 @@
+{
+  "date": "2026-03-12",
+  "start_time": "2026-03-12T09:00:03.577765",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "12:00 PM ET",
+    "current_date": "Thursday, March 12, 2026"
+  },
+  "regime_analysis": {
+    "regime": "BEARISH",
+    "confidence": "HIGH",
+    "spy_price": 669.3839111328125,
+    "spy_change_pct": -1.0270290807022586,
+    "vix_level": 26.0,
+    "recommendation": "UNFAVORABLE CONDITIONS"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "ABNB",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260312T160832Z_9bbe8ce3"
+    },
+    {
+      "ticker": "BMNR",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260312T160832Z_c36f1c33"
+    },
+    {
+      "ticker": "INDV",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260312T160832Z_da507166"
+    },
+    {
+      "ticker": "AA",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260312T160834Z_a6f5ea17",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ADMA",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260312T160834Z_090aef16"
+    },
+    {
+      "ticker": "CAVA",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260312T160834Z_3c1206c0"
+    },
+    {
+      "ticker": "ADM",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260312T160834Z_c57a2fbb"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-03-12T09:08:54.734816",
+    "equity": 101953.66,
+    "cash": 12582.16,
+    "buying_power": 110825.75,
+    "portfolio_value": 101953.66,
+    "starting_capital": 100000.0,
+    "total_return": 1953.6600000000035,
+    "total_return_pct": 1.9536600000000035,
+    "daily_pl": 3449.050000000003,
+    "daily_pl_pct": 3.5014097309760452,
+    "total_unrealized_pl": 7892.220082,
+    "position_count": 12,
+    "positions": [
+      {
+        "ticker": "CF",
+        "shares": 107.0,
+        "entry_price": 92.61,
+        "current_price": 136.11,
+        "market_value": 14563.77,
+        "unrealized_pl": 4654.5,
+        "unrealized_pl_pct": 46.971000000000004
+      },
+      {
+        "ticker": "DELL",
+        "shares": 67.0,
+        "entry_price": 122.94,
+        "current_price": 150.64,
+        "market_value": 10092.88,
+        "unrealized_pl": 1855.9,
+        "unrealized_pl_pct": 22.531000000000002
+      },
+      {
+        "ticker": "SLM",
+        "shares": 380.0,
+        "entry_price": 19.68,
+        "current_price": 20.445,
+        "market_value": 7769.1,
+        "unrealized_pl": 290.7,
+        "unrealized_pl_pct": 3.887
+      },
+      {
+        "ticker": "CRDO",
+        "shares": 64.0,
+        "entry_price": 116.2,
+        "current_price": 112.785,
+        "market_value": 7218.24,
+        "unrealized_pl": -218.56,
+        "unrealized_pl_pct": -2.939
+      },
+      {
+        "ticker": "DHT",
+        "shares": 421.0,
+        "entry_price": 17.87,
+        "current_price": 17.135,
+        "market_value": 7213.835,
+        "unrealized_pl": -309.435,
+        "unrealized_pl_pct": -4.1129999999999995
+      },
+      {
+        "ticker": "RRC",
+        "shares": 167.0,
+        "entry_price": 35.81,
+        "current_price": 42.805,
+        "market_value": 7148.435,
+        "unrealized_pl": 1168.165,
+        "unrealized_pl_pct": 19.534000000000002
+      },
+      {
+        "ticker": "ALAB",
+        "shares": 58.0,
+        "entry_price": 125.86,
+        "current_price": 120.265,
+        "market_value": 6975.37,
+        "unrealized_pl": -324.51,
+        "unrealized_pl_pct": -4.445
+      },
+      {
+        "ticker": "AEM",
+        "shares": 31.0,
+        "entry_price": 189.73,
+        "current_price": 218.58,
+        "market_value": 6775.98,
+        "unrealized_pl": 894.35,
+        "unrealized_pl_pct": 15.206
+      },
+      {
+        "ticker": "ADM",
+        "shares": 82.0,
+        "entry_price": 73.179999,
+        "current_price": 73.12,
+        "market_value": 5995.84,
+        "unrealized_pl": -4.919918,
+        "unrealized_pl_pct": -0.082
+      },
+      {
+        "ticker": "ADMA",
+        "shares": 389.0,
+        "entry_price": 15.41,
+        "current_price": 15.4,
+        "market_value": 5990.6,
+        "unrealized_pl": -3.89,
+        "unrealized_pl_pct": -0.065
+      },
+      {
+        "ticker": "CAVA",
+        "shares": 73.0,
+        "entry_price": 81.12,
+        "current_price": 81.06,
+        "market_value": 5917.38,
+        "unrealized_pl": -4.38,
+        "unrealized_pl_pct": -0.074
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [
+    "Reconciliation cleaned 6 stale records",
+    "Verification: Expected positions not found: AA"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 12,
+    "db_positions_before": 17,
+    "stale_closed": 6,
+    "in_sync": 11
+  },
+  "position_drift": {
+    "positions_checked": 12,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260312_090825",
+    "total_trades": 7,
+    "quality_score": 80,
+    "ceo_rating": "GOOD",
+    "ceo_recommendation": "RECOMMEND APPROVAL"
+  },
+  "sells_count": 3,
+  "buys_count": 4,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: AA"
+    ],
+    "summary": {
+      "position_count": 12,
+      "sells_executed": 3,
+      "buys_executed": 4,
+      "expected_count_change": 1
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 18,
+    "fills_recorded": 6,
+    "orders_updated": 6,
+    "already_recorded": 12,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-03-12T09:08:56.744600",
+  "duration_seconds": 533.166856
+}

@@ -1,0 +1,304 @@
+{
+  "date": "2026-06-15",
+  "start_time": "2026-06-15T09:00:05.753719",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "12:00 PM ET",
+    "current_date": "Monday, June 15, 2026"
+  },
+  "regime_analysis": {
+    "regime": "BULLISH",
+    "confidence": "HIGH",
+    "spy_price": 756.219970703125,
+    "spy_change_pct": 1.950788096140883,
+    "vix_level": 16.350000381469727,
+    "recommendation": "GOOD DAY TO TRADE"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "FOXA",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260615T160712Z_b6a7bb8b"
+    },
+    {
+      "ticker": "INCY",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260615T160713Z_e3c0fd0c",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BZ",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260615T160713Z_e4ac1f5e",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "AMKR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260615T160713Z_777f388a",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "HAYW",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260615T160713Z_f6c6c274",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "LYFT",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260615T160713Z_1ea478af",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "HBM",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260615T160713Z_73d665e2",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CVNA",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260615T160713Z_4fb2d39e",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ALLY",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260615T160713Z_665a712a",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "GSK",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260615T160713Z_c3008393",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ABNB",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260615T160713Z_463f9584",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CDE",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260615T160713Z_cd51f0ce",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "IVZ",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260615T160713Z_1a0886d2",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "LYV",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260615T160713Z_861395da",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "GLW",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260615T160713Z_e24c287b",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "FUTU",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260615T160713Z_781f8536",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "APO",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260615T160713Z_ed3902fd",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-06-15T09:07:31.217583",
+    "equity": 111369.58,
+    "cash": 10546.65,
+    "buying_power": 314102.6,
+    "portfolio_value": 111369.58,
+    "starting_capital": 100000.0,
+    "total_return": 11369.580000000002,
+    "total_return_pct": 11.369580000000001,
+    "daily_pl": 2940.720000000001,
+    "daily_pl_pct": 2.712119264188521,
+    "total_unrealized_pl": 4045.628024,
+    "position_count": 13,
+    "positions": [
+      {
+        "ticker": "IBKR",
+        "shares": 115.0,
+        "entry_price": 86.39,
+        "current_price": 93.26,
+        "market_value": 10724.9,
+        "unrealized_pl": 790.05,
+        "unrealized_pl_pct": 7.951999999999999
+      },
+      {
+        "ticker": "DNOW",
+        "shares": 724.0,
+        "entry_price": 13.78,
+        "current_price": 14.025,
+        "market_value": 10154.1,
+        "unrealized_pl": 177.38,
+        "unrealized_pl_pct": 1.778
+      },
+      {
+        "ticker": "DHR",
+        "shares": 55.0,
+        "entry_price": 180.53,
+        "current_price": 181.4066,
+        "market_value": 9977.363,
+        "unrealized_pl": 48.213,
+        "unrealized_pl_pct": 0.486
+      },
+      {
+        "ticker": "OKE",
+        "shares": 110.0,
+        "entry_price": 90.83,
+        "current_price": 88.395,
+        "market_value": 9723.45,
+        "unrealized_pl": -267.85,
+        "unrealized_pl_pct": -2.681
+      },
+      {
+        "ticker": "GNTX",
+        "shares": 343.0,
+        "entry_price": 21.87,
+        "current_price": 26.125,
+        "market_value": 8960.875,
+        "unrealized_pl": 1459.465,
+        "unrealized_pl_pct": 19.456
+      },
+      {
+        "ticker": "BRO",
+        "shares": 128.0,
+        "entry_price": 58.24,
+        "current_price": 59.695,
+        "market_value": 7640.96,
+        "unrealized_pl": 186.24,
+        "unrealized_pl_pct": 2.4979999999999998
+      },
+      {
+        "ticker": "C",
+        "shares": 52.0,
+        "entry_price": 129.9,
+        "current_price": 141.99,
+        "market_value": 7383.48,
+        "unrealized_pl": 628.68,
+        "unrealized_pl_pct": 9.307
+      },
+      {
+        "ticker": "G",
+        "shares": 232.0,
+        "entry_price": 32.321293,
+        "current_price": 31.31,
+        "market_value": 7263.92,
+        "unrealized_pl": -234.619976,
+        "unrealized_pl_pct": -3.129
+      },
+      {
+        "ticker": "DG",
+        "shares": 55.0,
+        "entry_price": 109.26,
+        "current_price": 118.105,
+        "market_value": 6495.775,
+        "unrealized_pl": 486.475,
+        "unrealized_pl_pct": 8.094999999999999
+      },
+      {
+        "ticker": "M",
+        "shares": 261.0,
+        "entry_price": 23.02,
+        "current_price": 24.585,
+        "market_value": 6416.685,
+        "unrealized_pl": 408.465,
+        "unrealized_pl_pct": 6.798
+      },
+      {
+        "ticker": "COLB",
+        "shares": 200.0,
+        "entry_price": 29.93,
+        "current_price": 31.28,
+        "market_value": 6256.0,
+        "unrealized_pl": 270.0,
+        "unrealized_pl_pct": 4.511
+      },
+      {
+        "ticker": "KMB",
+        "shares": 59.0,
+        "entry_price": 100.28,
+        "current_price": 103.65,
+        "market_value": 6115.35,
+        "unrealized_pl": 198.83,
+        "unrealized_pl_pct": 3.361
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [
+    "Verification: Expected positions not found: INCY, GLW, BZ, CVNA, ABNB, GSK, APO, IVZ, FUTU, AMKR, HAYW, ALLY, LYV, LYFT, HBM, CDE"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 14,
+    "db_positions_before": 13,
+    "stale_closed": 0,
+    "in_sync": 13
+  },
+  "position_drift": {
+    "positions_checked": 14,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260615_090707",
+    "total_trades": 17,
+    "quality_score": 92,
+    "ceo_rating": "EXCELLENT",
+    "ceo_recommendation": "STRONGLY RECOMMEND APPROVAL"
+  },
+  "sells_count": 1,
+  "buys_count": 16,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: INCY, GLW, BZ, CVNA, ABNB, GSK, APO, IVZ, FUTU, AMKR, HAYW, ALLY, LYV, LYFT, HBM, CDE"
+    ],
+    "summary": {
+      "position_count": 13,
+      "sells_executed": 1,
+      "buys_executed": 16,
+      "expected_count_change": 15
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 1,
+    "fills_recorded": 1,
+    "orders_updated": 1,
+    "already_recorded": 0,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-06-15T09:07:33.701315",
+  "duration_seconds": 447.94761
+}

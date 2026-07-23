@@ -1,0 +1,233 @@
+{
+  "plan_id": "PLAN_20260624_090724",
+  "generated_at": "2026-06-24T16:07:24.925023Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 13,
+    "research_candidates": 70,
+    "gpt5_selected": 13,
+    "compliance_flagged": 0,
+    "overall_quality_score": 88
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 58,
+    "compliance_advisory": 95
+  },
+  "trades": [
+    {
+      "ticker": "INCY",
+      "action": "BUY",
+      "shares": 92,
+      "allocated_capital": 10000,
+      "entry_price": 108.11000061035156,
+      "composite_score": 86.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "EW",
+      "action": "BUY",
+      "shares": 111,
+      "allocated_capital": 10000,
+      "entry_price": 89.69999694824219,
+      "composite_score": 72.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ASX",
+      "action": "BUY",
+      "shares": 238,
+      "allocated_capital": 10000,
+      "entry_price": 41.880001068115234,
+      "composite_score": 68.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "DHR",
+      "action": "BUY",
+      "shares": 53,
+      "allocated_capital": 10000,
+      "entry_price": 187.42010498046875,
+      "composite_score": 68.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ENTG",
+      "action": "BUY",
+      "shares": 58,
+      "allocated_capital": 10000,
+      "entry_price": 170.33999633789062,
+      "composite_score": 66.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ABNB",
+      "action": "BUY",
+      "shares": 68,
+      "allocated_capital": 10000,
+      "entry_price": 145.65499877929688,
+      "composite_score": 65.6,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "LYV",
+      "action": "BUY",
+      "shares": 58,
+      "allocated_capital": 10000,
+      "entry_price": 171.55999755859375,
+      "composite_score": 62.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "AR",
+      "action": "BUY",
+      "shares": 291,
+      "allocated_capital": 10000,
+      "entry_price": 34.30500030517578,
+      "composite_score": 62.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "JEF",
+      "action": "BUY",
+      "shares": 170,
+      "allocated_capital": 10000,
+      "entry_price": 58.4900016784668,
+      "composite_score": 62.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "EBAY",
+      "action": "BUY",
+      "shares": 90,
+      "allocated_capital": 10000,
+      "entry_price": 111.04000091552734,
+      "composite_score": 61.6,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BEAM",
+      "action": "BUY",
+      "shares": 281,
+      "allocated_capital": 10000,
+      "entry_price": 35.4900016784668,
+      "composite_score": 60.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "EQT",
+      "action": "BUY",
+      "shares": 193,
+      "allocated_capital": 10000,
+      "entry_price": 51.59000015258789,
+      "composite_score": 60.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "IAG",
+      "action": "SELL",
+      "shares": 588.0,
+      "sell_pct": 100,
+      "composite_score": 52.8,
+      "current_price": 15.140000343322754,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 52.8 < 60 absolute minimum",
+      "current_value": 8884.68
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 70 candidates (avg score: 47.5)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 82/82 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 1 SELLs, 13 BUYs ($130,000 allocated)",
+      "quality_score": 58,
+      "issues": [
+        "Capital deployment 41.3% (target 90.0%+)"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 12 BUYs approved, 1 rejected, 1 SELLs",
+      "quality_score": 95,
+      "issues": [
+        "1 orders REJECTED by compliance"
+      ]
+    }
+  ],
+  "approved_at": "2026-06-24T16:07:27.516761Z"
+}

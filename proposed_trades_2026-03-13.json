@@ -1,0 +1,128 @@
+{
+  "plan_id": "PLAN_20260313_090857",
+  "generated_at": "2026-03-13T16:08:57.449216Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 6,
+    "research_candidates": 70,
+    "gpt5_selected": 6,
+    "compliance_flagged": 0,
+    "overall_quality_score": 78
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 12,
+    "compliance_advisory": 100
+  },
+  "trades": [
+    {
+      "ticker": "DOCN",
+      "action": "BUY",
+      "shares": 110,
+      "allocated_capital": 7500.0,
+      "entry_price": 67.7750015258789,
+      "composite_score": 79.0,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "DigitalOcean Holdings (DOCN) stock rose 5.66% to $57.53 today, with high trading volume of 624 shares.[3] Analysts maintain a strong Buy consensus rating from 12 firms, with 33% Strong Buy and 42% Buy, alongside a $66.83 price target implying potential upside.[1] Recent company news from January highlighted doubled AI inference throughput, contributing to positive momentum.[2]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "AA",
+      "action": "BUY",
+      "shares": 117,
+      "allocated_capital": 7500.0,
+      "entry_price": 63.76499938964844,
+      "composite_score": 69.0,
+      "sentiment_score": 35.0,
+      "sentiment_summary": "American Airlines (AAL) stock dropped 4% following an Evercore ISI price target cut from $17 to $14, amid surging crude oil prices to $94.65 per barrel and unhedged fuel exposure, compounded by labor unrest from flight attendants and pilots.[1] The broader airline sector faced a selloff, with peers like Southwest (-6%), United (-4%), and Delta (-2%) also declining due to stagflation fears and eroding economic confidence.[1] While Q1 2026 revenue growth of 7-10% and full-year free cash flow above $2 billion are projected, macro headwinds are overshadowing operational improvements.[1]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ADM",
+      "action": "SELL",
+      "shares": 82.0,
+      "sell_pct": 100,
+      "composite_score": 53.6,
+      "current_price": 72.87999725341797,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Archer Daniels Midland (ADM) stock recently reached a new 12-month high around $69, supported by beating Q4 2025 EPS estimates and issuing 2026 guidance of $3.60-$4.25 adjusted EPS, alongside a raised quarterly dividend to $0.52. Despite 2025 profits falling 81% due to weak crush margins and revenue declines, the outlook highlights potential recovery from biofuel policy clarity, cost savings, and resumed Chinese soybean purchases. Analyst consensus remains mixed with a 'Reduce' rating and average price target of $58, below current levels.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 53.6 < 60 absolute minimum",
+      "current_value": 5974.11
+    },
+    {
+      "ticker": "ADMA",
+      "action": "SELL",
+      "shares": 389.0,
+      "sell_pct": 100,
+      "composite_score": 44.8,
+      "current_price": 14.930000305175781,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "ADMA Biologics was upgraded to Zacks Rank #1 (Strong Buy) due to upward revisions in earnings estimates, with analysts raising the consensus estimate by 6.1% over the past three months. The company announced a $200 million capital return plan for 2026, including a $125 million accelerated share repurchase, leading to a 6.49% stock price increase. Analysts unanimously rate it a buy with a $25.67 target price, implying 59.52% upside from current levels around $16.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 44.8 < 60 absolute minimum",
+      "current_value": 5792.21
+    },
+    {
+      "ticker": "AEM",
+      "action": "SELL",
+      "shares": 31.0,
+      "sell_pct": 100,
+      "composite_score": 50.0,
+      "current_price": 208.10009765625,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Agnico Eagle Mines (AEM) saw new put and call options trading for March 13th expiration, with attractive premiums suggesting investor interest in both buying and selling strategies amid a stock price around $217.[1] The company announced upcoming release of Q4 and full-year 2025 results, following strong Q3 2025 performance with record adjusted net income and robust gold production.[3][4] A minor divestment of its stake in Royal Road Minerals was also noted, generating modest proceeds.[3]",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 50.0 < 60 absolute minimum",
+      "current_value": 6471.56
+    },
+    {
+      "ticker": "CAVA",
+      "action": "SELL",
+      "shares": 73.0,
+      "sell_pct": 100,
+      "composite_score": 48.0,
+      "current_price": NaN,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "CAVA stock has experienced mixed sentiment with institutional investors taking profits following a recent rally driven by management optimism around unit growth and category expansion[1]. However, analyst concerns about high valuations, market weakness, and softer labor statistics are creating downward pressure on the stock[1].",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 48.0 < 60 absolute minimum",
+      "current_value": 6016.66
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 70 candidates (avg score: 41.0)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 81/81 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 4 SELLs, 2 BUYs ($15,000 allocated)",
+      "quality_score": 12,
+      "issues": [
+        "Capital deployment 11.2% (target 90.0%+)",
+        "Limited diversification: 2 new positions (target 12-20). Total after trades: 9"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 2 BUYs approved, 0 rejected, 4 SELLs",
+      "quality_score": 100,
+      "issues": []
+    }
+  ],
+  "approved_at": "2026-03-13T16:08:58.989861Z"
+}

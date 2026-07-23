@@ -1,0 +1,231 @@
+{
+  "plan_id": "PLAN_20260407_090710",
+  "generated_at": "2026-04-07T16:07:10.602100Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 13,
+    "research_candidates": 68,
+    "gpt5_selected": 13,
+    "compliance_flagged": 0,
+    "overall_quality_score": 95
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 83,
+    "compliance_advisory": 100
+  },
+  "trades": [
+    {
+      "ticker": "IAG",
+      "action": "BUY",
+      "shares": 314,
+      "allocated_capital": 6000.0,
+      "entry_price": 19.104999542236328,
+      "composite_score": 76.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "HST",
+      "action": "BUY",
+      "shares": 312,
+      "allocated_capital": 6000.0,
+      "entry_price": 19.184999465942383,
+      "composite_score": 74.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "HMY",
+      "action": "BUY",
+      "shares": 383,
+      "allocated_capital": 6000.0,
+      "entry_price": 15.630000114440918,
+      "composite_score": 72.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "DOCU",
+      "action": "BUY",
+      "shares": 126,
+      "allocated_capital": 6000.0,
+      "entry_price": 47.599998474121094,
+      "composite_score": 69.6,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ARM",
+      "action": "BUY",
+      "shares": 42,
+      "allocated_capital": 6000.0,
+      "entry_price": 141.52999877929688,
+      "composite_score": 68.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "AMKR",
+      "action": "BUY",
+      "shares": 127,
+      "allocated_capital": 6000.0,
+      "entry_price": 47.15999984741211,
+      "composite_score": 67.2,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CDE",
+      "action": "BUY",
+      "shares": 320,
+      "allocated_capital": 6000.0,
+      "entry_price": 18.7450008392334,
+      "composite_score": 66.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BBY",
+      "action": "BUY",
+      "shares": 156,
+      "allocated_capital": 9937.980285644531,
+      "entry_price": 63.70500183105469,
+      "composite_score": 64.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Auto-added for capital efficiency (score: 64.8)",
+      "gpt5_allocated": false,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "EGO",
+      "action": "BUY",
+      "shares": 283,
+      "allocated_capital": 9981.24063873291,
+      "entry_price": 35.26940155029297,
+      "composite_score": 64.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Auto-added for capital efficiency (score: 64.8)",
+      "gpt5_allocated": false,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CNM",
+      "action": "BUY",
+      "shares": 199,
+      "allocated_capital": 9965.920364379883,
+      "entry_price": 50.08000183105469,
+      "composite_score": 64.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Auto-added for capital efficiency (score: 64.4)",
+      "gpt5_allocated": false,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CRDO",
+      "action": "BUY",
+      "shares": 96,
+      "allocated_capital": 9922.56005859375,
+      "entry_price": 103.36000061035156,
+      "composite_score": 64.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Auto-added for capital efficiency (score: 64.0)",
+      "gpt5_allocated": false,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "DHR",
+      "action": "BUY",
+      "shares": 52,
+      "allocated_capital": 9857.119873046875,
+      "entry_price": 189.55999755859375,
+      "composite_score": 64.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Auto-added for capital efficiency (score: 64.0)",
+      "gpt5_allocated": false,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "DOCN",
+      "action": "SELL",
+      "shares": 110.0,
+      "sell_pct": 100,
+      "composite_score": 60.0,
+      "current_price": 85.54000091552734,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "gpt5_reasoning": "AUTOMATED EXIT: Rank #21 (below top 15), score 60.0",
+      "current_value": 9342.3
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 68 candidates (avg score: 49.3)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 77/77 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 1 SELLs, 12 BUYs ($91,665 allocated)",
+      "quality_score": 83,
+      "issues": [
+        "Capital deployment 76.1% (target 90.0%+)"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 12 BUYs approved, 0 rejected, 1 SELLs",
+      "quality_score": 100,
+      "issues": []
+    }
+  ],
+  "approved_at": "2026-04-07T16:07:13.420063Z"
+}

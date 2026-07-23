@@ -38,6 +38,15 @@ from Departments.Portfolio.portfolio_department import PortfolioDepartment
 from Departments.Compliance.compliance_department import ComplianceDepartment
 from Departments.Executive.gpt5_portfolio_optimizer import GPT5PortfolioOptimizer
 from Departments.Operations.realism_simulator import RealismSimulator
+from Departments.Operations.poe_portfolio_optimizer import optimize_with_llm as poe_optimize
+
+# Shared canary + closed_trades library
+sys.path.insert(0, r'C:\Users\wjcor\OneDrive\Desktop\_shared_trading_lib')
+try:
+    from canary import check_sentiment_coverage, check_position_state_drift, check_cash_drag  # noqa: E402
+    _CANARY_AVAILABLE = True
+except ImportError:
+    _CANARY_AVAILABLE = False
 
 # Import config
 import config
@@ -116,6 +125,56 @@ class OperationsManager:
         self.logger.info("Operations Manager initialized successfully")
         self.logger.info(f"Project root: {project_root}")
         self.logger.info(f"Database: {self.db_path}")
+
+    def _run_canary_checks(self) -> None:
+        """
+        Silent-failure canary checks (added 2026-07-22).
+
+        Guards against the specific patterns that ate live trading history:
+          * cash_drag_high      — sizer-rejection loop leaving idle cash
+          * position_state_drift — the RECONCILIATION_CLEANUP pattern that
+                                   flagged 89% of portfolio_positions rows
+        Sentiment coverage is skipped because News was killed in this rework.
+        """
+        # Cash drag: pull Alpaca portfolio_value + cash
+        try:
+            from Utils.alpaca_client import AlpacaClient
+            alpaca = AlpacaClient()
+            account = alpaca.trading_client.get_account()
+            portfolio_value = float(account.portfolio_value) or 0.0
+            cash = float(account.cash) or 0.0
+            cash_pct = (cash / portfolio_value) if portfolio_value > 0 else 0.0
+            check_cash_drag(bot_name="Sentinel", cash_pct=cash_pct)
+            self.logger.info(f"[canary] cash_drag check: cash_pct={cash_pct:.1%}")
+        except Exception as e:
+            self.logger.debug(f"[canary] cash_drag skipped: {e}")
+
+        # Position state drift: db-active vs alpaca-active tickers
+        try:
+            import sqlite3 as _sq
+            conn = _sq.connect(str(self.db_path), timeout=30.0)
+            cur = conn.cursor()
+            cur.execute(
+                "SELECT DISTINCT ticker FROM portfolio_positions WHERE status = 'OPEN'"
+            )
+            db_active = [r[0] for r in cur.fetchall() if r[0]]
+            conn.close()
+
+            from Utils.alpaca_client import AlpacaClient
+            alpaca = AlpacaClient()
+            positions = alpaca.trading_client.get_all_positions()
+            alpaca_active = [p.symbol for p in positions]
+            check_position_state_drift(
+                bot_name="Sentinel",
+                db_active_tickers=db_active,
+                alpaca_active_tickers=alpaca_active,
+            )
+            self.logger.info(
+                f"[canary] position drift check: {len(db_active)} db / "
+                f"{len(alpaca_active)} alpaca"
+            )
+        except Exception as e:
+            self.logger.debug(f"[canary] position_state_drift skipped: {e}")
 
     def set_mandatory_sells(self, sells: List[Dict]):
         """
@@ -199,6 +258,17 @@ class OperationsManager:
             self.logger.info("=" * 80)
             self.logger.info(f"TRADING PLAN GENERATION COMPLETE - {final_plan['summary']['total_trades']} trades")
             self.logger.info("=" * 80)
+
+            # ================================================================
+            # CANARY CHECKS (added 2026-07-22)
+            # Silent-failure detection using the shared library. Writes to
+            # _shared_trading_lib/data/canary_alerts.jsonl. Never fatal.
+            # ================================================================
+            if _CANARY_AVAILABLE:
+                try:
+                    self._run_canary_checks()
+                except Exception as e:
+                    self.logger.warning(f"Canary checks raised {e} — non-fatal")
 
             return {
                 'status': 'SUCCESS',
@@ -1027,11 +1097,41 @@ class OperationsManager:
                 available_candidates.sort(key=lambda x: -x.get('composite_score', 0))
 
                 # Select top candidates to fill slots (may be fewer than open_slots if quality is scarce)
+                # Give the LLM a slightly bigger shortlist to choose from so it
+                # has room to prefer sector-diversified picks over pure score-rank.
+                _shortlist_size = max(open_slots * 2, open_slots + 5)
+                shortlist = available_candidates[:_shortlist_size]
                 selected_candidates = available_candidates[:open_slots]
 
                 if len(selected_candidates) < open_slots:
                     self.logger.warning(f"  Only {len(selected_candidates)} candidates meet quality threshold (score ≥ {ABSOLUTE_SCORE_FLOOR})")
                     self.logger.warning(f"  Will leave {open_slots - len(selected_candidates)} slots unfilled rather than buy low-quality stocks")
+
+                # ============================================================
+                # POE CHEAP-LLM PORTFOLIO FINALIZATION (added 2026-07-22)
+                # Replace the previous 174/178 deterministic-only path with a
+                # cheap Poe LLM call that re-ranks the shortlist with sector
+                # diversification bias, then hands off to the deterministic
+                # sizer below. Silently falls back to deterministic if:
+                #   - Poe key not present (offline / laptop mode)
+                #   - openai package missing
+                #   - LLM output is unparseable
+                #   - LLM API call raises
+                # ============================================================
+                try:
+                    llm_selected, llm_reasoning, used_llm = poe_optimize(
+                        selected_candidates=shortlist,
+                        target_n=open_slots,
+                        cash_available=available_capital,
+                        current_holdings=holdings,
+                    )
+                    if used_llm and llm_selected:
+                        self.logger.info(f"  [Poe LLM] {llm_reasoning}")
+                        selected_candidates = llm_selected
+                    else:
+                        self.logger.info(f"  [Poe LLM] {llm_reasoning} — keeping deterministic top-N")
+                except Exception as e:
+                    self.logger.warning(f"  [Poe LLM] optimizer raised {e} — deterministic fallback")
 
                 # Step 3: Equal-weight allocation across selected candidates
                 if len(selected_candidates) > 0:
@@ -1048,16 +1148,58 @@ class OperationsManager:
                         max_position_value = 50000
                         max_position_pct = 0.10
 
+                    # ============================================================
+                    # CASH RESERVE PRE-CHECK (added 2026-07-22)
+                    # Root cause of the 83% Compliance rejection rate: this
+                    # allocator was proposing orders that used ALL of
+                    # available_capital, but Trading's HardConstraintValidator
+                    # required min_cash_reserve_pct (10%) of portfolio_value
+                    # to remain in cash. Every buy tripped the reserve rule
+                    # after the first few positions.
+                    #
+                    # Fix: subtract the reserve from deployable capital BEFORE
+                    # equal-weighting the positions. Use portfolio_value (not
+                    # buying_power) as the denominator to match Trading's math.
+                    # ============================================================
+                    hc_path = self.project_root / "Config" / "hard_constraints.yaml"
+                    try:
+                        with open(hc_path) as f:
+                            hc_cfg = yaml.safe_load(f)
+                        min_cash_reserve_pct = hc_cfg.get('portfolio_risk', {}).get('min_cash_reserve_pct', 0.10)
+                    except Exception as e:
+                        self.logger.warning(f"  Could not load hard_constraints: {e}, using 0.10 reserve")
+                        min_cash_reserve_pct = 0.10
+
+                    # portfolio_value ≈ current holdings market value + cash. We
+                    # don't reliably have market-value here, so approximate with
+                    # buying_power for the reserve; conservative when buying_power
+                    # is the only available signal.
+                    reserve_required = available_capital * min_cash_reserve_pct
+                    deployable_capital = max(0.0, available_capital - reserve_required)
+                    self.logger.info(
+                        f"  Cash-reserve pre-check: reserve {min_cash_reserve_pct:.0%} "
+                        f"= ${reserve_required:,.0f} / deployable ${deployable_capital:,.0f}"
+                    )
+
                     # Calculate max position size (smaller of absolute limit or percentage limit)
                     max_position_from_pct = available_capital * max_position_pct
                     max_allowed_position = min(max_position_value, max_position_from_pct)
 
                     # Calculate equal-weight per position, capped at compliance limits
-                    capital_per_position = available_capital / len(selected_candidates)
+                    # Use deployable_capital (reserve-adjusted) not available_capital
+                    if len(selected_candidates) > 0 and deployable_capital > 0:
+                        capital_per_position = deployable_capital / len(selected_candidates)
+                    else:
+                        capital_per_position = 0
                     capital_per_position = min(capital_per_position, max_allowed_position)
 
                     self.logger.info(f"  Position sizing limits: ${max_position_value:,.0f} absolute, {max_position_pct:.0%} of portfolio (${max_position_from_pct:,.0f})")
                     self.logger.info(f"  Max allowed per position: ${max_allowed_position:,.0f}")
+
+                    # Running-cash simulator: track how much of deployable_capital
+                    # each candidate consumes so we never propose a plan that
+                    # would breach the reserve mid-execution.
+                    running_deployed = 0.0
 
                     for candidate in selected_candidates:
                         entry_price = candidate.get('current_price', candidate.get('entry_price', 0))
@@ -1065,13 +1207,33 @@ class OperationsManager:
                             continue
 
                         allocated_capital = capital_per_position
+                        # Shrink the last few positions if adding them would
+                        # exceed deployable_capital.
+                        remaining = deployable_capital - running_deployed
+                        if allocated_capital > remaining:
+                            allocated_capital = remaining
+                        if allocated_capital <= 0:
+                            self.logger.info(
+                                f"  Skipping {candidate.get('ticker')}: no deployable capital left "
+                                f"(reserve preserved)"
+                            )
+                            continue
+
                         shares = int(allocated_capital / entry_price)
+                        if shares <= 0:
+                            continue
 
-                        if shares > 0:
-                            candidate['allocated_capital'] = allocated_capital
-                            optimized_candidates.append(candidate)
+                        actual_cost = shares * entry_price
+                        running_deployed += actual_cost
+                        candidate['allocated_capital'] = actual_cost
+                        candidate['allocated_shares'] = shares
+                        optimized_candidates.append(candidate)
 
-                    self.logger.info(f"  Selected {len(optimized_candidates)} candidates (equal-weight: ${capital_per_position:,.2f} each)")
+                    self.logger.info(
+                        f"  Selected {len(optimized_candidates)} candidates "
+                        f"(deployed ${running_deployed:,.2f} of ${deployable_capital:,.2f} deployable, "
+                        f"reserve preserved: ${available_capital - running_deployed:,.2f})"
+                    )
                 else:
                     self.logger.info("  No candidates available for purchase")
             else:

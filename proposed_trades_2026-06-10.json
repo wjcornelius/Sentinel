@@ -1,0 +1,202 @@
+{
+  "plan_id": "PLAN_20260610_090728",
+  "generated_at": "2026-06-10T16:07:28.945604Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 11,
+    "research_candidates": 73,
+    "gpt5_selected": 11,
+    "compliance_flagged": 0,
+    "overall_quality_score": 82
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 39,
+    "compliance_advisory": 90
+  },
+  "trades": [
+    {
+      "ticker": "M",
+      "action": "BUY",
+      "shares": 261,
+      "allocated_capital": 6000.0,
+      "entry_price": 22.954999923706055,
+      "composite_score": 70.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "LYFT",
+      "action": "BUY",
+      "shares": 434,
+      "allocated_capital": 6000.0,
+      "entry_price": 13.805000305175781,
+      "composite_score": 70.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "OKE",
+      "action": "BUY",
+      "shares": 110,
+      "allocated_capital": 9988.00033569336,
+      "entry_price": 90.80000305175781,
+      "composite_score": 66.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Auto-added for capital efficiency (score: 66.4)",
+      "gpt5_allocated": false,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CNM",
+      "action": "BUY",
+      "shares": 201,
+      "allocated_capital": 9978.645092010498,
+      "entry_price": 49.64500045776367,
+      "composite_score": 64.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Auto-added for capital efficiency (score: 64.4)",
+      "gpt5_allocated": false,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "DNOW",
+      "action": "BUY",
+      "shares": 725,
+      "allocated_capital": 9994.632387161255,
+      "entry_price": 13.785699844360352,
+      "composite_score": 62.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Auto-added for capital efficiency (score: 62.8)",
+      "gpt5_allocated": false,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "DHR",
+      "action": "BUY",
+      "shares": 53,
+      "allocated_capital": 9837.330032348633,
+      "entry_price": 185.61000061035156,
+      "composite_score": 62.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Auto-added for capital efficiency (score: 62.0)",
+      "gpt5_allocated": false,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "IBKR",
+      "action": "BUY",
+      "shares": 116,
+      "allocated_capital": 9959.180389404297,
+      "entry_price": 85.8550033569336,
+      "composite_score": 61.6,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Auto-added for capital efficiency (score: 61.6)",
+      "gpt5_allocated": false,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "AMKR",
+      "action": "BUY",
+      "shares": 141,
+      "allocated_capital": 9967.994956970215,
+      "entry_price": 70.69499969482422,
+      "composite_score": 61.2,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Auto-added for capital efficiency (score: 61.2)",
+      "gpt5_allocated": false,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ALLY",
+      "action": "SELL",
+      "shares": 138.0,
+      "sell_pct": 100,
+      "composite_score": 66.8,
+      "current_price": 42.369998931884766,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "gpt5_reasoning": "AUTOMATED EXIT: Rank #16 (below top 15), score 66.8",
+      "current_value": 5845.68
+    },
+    {
+      "ticker": "GSK",
+      "action": "SELL",
+      "shares": 117.0,
+      "sell_pct": 100,
+      "composite_score": 66.8,
+      "current_price": 51.290000915527344,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "gpt5_reasoning": "AUTOMATED EXIT: Rank #17 (below top 15), score 66.8",
+      "current_value": 6002.1
+    },
+    {
+      "ticker": "LVS",
+      "action": "SELL",
+      "shares": 116.0,
+      "sell_pct": 100,
+      "composite_score": 58.400000000000006,
+      "current_price": 50.68000030517578,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 58.4 < 60 absolute minimum",
+      "current_value": 5876.56
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 73 candidates (avg score: 48.0)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 87/87 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 3 SELLs, 10 BUYs ($83,726 allocated)",
+      "quality_score": 39,
+      "issues": [
+        "Capital deployment 25.3% (target 90.0%+)",
+        "Limited diversification: 10 new positions (target 12-20). Total after trades: 21"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 8 BUYs approved, 2 rejected, 3 SELLs",
+      "quality_score": 90,
+      "issues": [
+        "2 orders REJECTED by compliance"
+      ]
+    }
+  ],
+  "approved_at": "2026-06-10T16:07:31.473216Z"
+}

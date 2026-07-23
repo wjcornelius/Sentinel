@@ -1,0 +1,310 @@
+{
+  "date": "2026-06-09",
+  "start_time": "2026-06-09T09:00:02.559141",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "12:00 PM ET",
+    "current_date": "Tuesday, June 09, 2026"
+  },
+  "regime_analysis": {
+    "regime": "BEARISH",
+    "confidence": "HIGH",
+    "spy_price": 729.0399780273438,
+    "spy_change_pct": -1.3771263060031145,
+    "vix_level": 20.010000228881836,
+    "recommendation": "UNFAVORABLE CONDITIONS"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "ALAB",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260609T160646Z_168a22d2"
+    },
+    {
+      "ticker": "BAH",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260609T160646Z_430d3cda"
+    },
+    {
+      "ticker": "BZ",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260609T160646Z_2e470db8"
+    },
+    {
+      "ticker": "HAYW",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260609T160646Z_2e78f8a9"
+    },
+    {
+      "ticker": "KDP",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260609T160646Z_3dcb6382"
+    },
+    {
+      "ticker": "MMM",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260609T160646Z_5424ad4c"
+    },
+    {
+      "ticker": "COLB",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260609T160649Z_842b863d"
+    },
+    {
+      "ticker": "FOXA",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260609T160649Z_49de489f"
+    },
+    {
+      "ticker": "KMB",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260609T160649Z_52d376ad"
+    },
+    {
+      "ticker": "DG",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260609T160649Z_dff42e1e"
+    },
+    {
+      "ticker": "JCI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260609T160649Z_61a5eb23"
+    },
+    {
+      "ticker": "LVS",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260609T160649Z_7f236d2c"
+    },
+    {
+      "ticker": "ALLY",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260609T160649Z_07d0fa5d"
+    },
+    {
+      "ticker": "GSK",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260609T160649Z_30da2001"
+    },
+    {
+      "ticker": "DNOW",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260609T160649Z_ce8efd75",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CCI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260609T160649Z_b3e13ba6",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "EMR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260609T160649Z_3aa8c093",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-06-09T09:07:14.242481",
+    "equity": 110573.67,
+    "cash": 10714.68,
+    "buying_power": 312075.7,
+    "portfolio_value": 110573.67,
+    "starting_capital": 100000.0,
+    "total_return": 10573.669999999998,
+    "total_return_pct": 10.573669999999998,
+    "daily_pl": 2782.0099999999948,
+    "daily_pl_pct": 2.5809139593916584,
+    "total_unrealized_pl": 1676.57005,
+    "position_count": 15,
+    "positions": [
+      {
+        "ticker": "EW",
+        "shares": 121.0,
+        "entry_price": 82.2,
+        "current_price": 86.58,
+        "market_value": 10476.18,
+        "unrealized_pl": 529.98,
+        "unrealized_pl_pct": 5.328
+      },
+      {
+        "ticker": "GNTX",
+        "shares": 343.0,
+        "entry_price": 21.87,
+        "current_price": 24.59,
+        "market_value": 8434.37,
+        "unrealized_pl": 932.96,
+        "unrealized_pl_pct": 12.437
+      },
+      {
+        "ticker": "BRO",
+        "shares": 128.0,
+        "entry_price": 58.24,
+        "current_price": 59.305,
+        "market_value": 7591.04,
+        "unrealized_pl": 136.32,
+        "unrealized_pl_pct": 1.8290000000000002
+      },
+      {
+        "ticker": "G",
+        "shares": 232.0,
+        "entry_price": 32.321293,
+        "current_price": 32.395,
+        "market_value": 7515.64,
+        "unrealized_pl": 17.100024,
+        "unrealized_pl_pct": 0.22799999999999998
+      },
+      {
+        "ticker": "CTSH",
+        "shares": 143.0,
+        "entry_price": 52.54,
+        "current_price": 52.45,
+        "market_value": 7500.35,
+        "unrealized_pl": -12.87,
+        "unrealized_pl_pct": -0.17099999999999999
+      },
+      {
+        "ticker": "C",
+        "shares": 52.0,
+        "entry_price": 129.9,
+        "current_price": 133.13,
+        "market_value": 6922.76,
+        "unrealized_pl": 167.96,
+        "unrealized_pl_pct": 2.487
+      },
+      {
+        "ticker": "DG",
+        "shares": 55.0,
+        "entry_price": 109.26,
+        "current_price": 109.26,
+        "market_value": 6009.3,
+        "unrealized_pl": 0.0,
+        "unrealized_pl_pct": 0.0
+      },
+      {
+        "ticker": "COLB",
+        "shares": 200.0,
+        "entry_price": 29.93,
+        "current_price": 29.95,
+        "market_value": 5990.0,
+        "unrealized_pl": 4.0,
+        "unrealized_pl_pct": 0.067
+      },
+      {
+        "ticker": "ALLY",
+        "shares": 138.0,
+        "entry_price": 43.29,
+        "current_price": 43.3,
+        "market_value": 5975.4,
+        "unrealized_pl": 1.38,
+        "unrealized_pl_pct": 0.023
+      },
+      {
+        "ticker": "LVS",
+        "shares": 116.0,
+        "entry_price": 51.49,
+        "current_price": 51.5,
+        "market_value": 5974.0,
+        "unrealized_pl": 1.16,
+        "unrealized_pl_pct": 0.019
+      },
+      {
+        "ticker": "GSK",
+        "shares": 117.0,
+        "entry_price": 51.04,
+        "current_price": 51.055,
+        "market_value": 5973.435,
+        "unrealized_pl": 1.755,
+        "unrealized_pl_pct": 0.029
+      },
+      {
+        "ticker": "FOXA",
+        "shares": 88.0,
+        "entry_price": 67.55,
+        "current_price": 67.55,
+        "market_value": 5944.4,
+        "unrealized_pl": 0.0,
+        "unrealized_pl_pct": 0.0
+      },
+      {
+        "ticker": "JCI",
+        "shares": 41.0,
+        "entry_price": 144.463414,
+        "current_price": 144.525,
+        "market_value": 5925.525,
+        "unrealized_pl": 2.525026,
+        "unrealized_pl_pct": 0.043
+      },
+      {
+        "ticker": "KMB",
+        "shares": 59.0,
+        "entry_price": 100.28,
+        "current_price": 100.28,
+        "market_value": 5916.52,
+        "unrealized_pl": 0.0,
+        "unrealized_pl_pct": 0.0
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [
+    "Reconciliation cleaned 1 stale records",
+    "Verification: Expected positions not found: CCI, EMR, DNOW"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 13,
+    "db_positions_before": 13,
+    "stale_closed": 1,
+    "in_sync": 12
+  },
+  "position_drift": {
+    "positions_checked": 13,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260609_090642",
+    "total_trades": 17,
+    "quality_score": 84,
+    "ceo_rating": "GOOD",
+    "ceo_recommendation": "RECOMMEND APPROVAL"
+  },
+  "sells_count": 6,
+  "buys_count": 11,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: CCI, EMR, DNOW"
+    ],
+    "summary": {
+      "position_count": 15,
+      "sells_executed": 6,
+      "buys_executed": 11,
+      "expected_count_change": 5
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 15,
+    "fills_recorded": 14,
+    "orders_updated": 14,
+    "already_recorded": 1,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-06-09T09:07:15.848509",
+  "duration_seconds": 433.289394
+}

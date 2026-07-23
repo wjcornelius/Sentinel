@@ -1,0 +1,284 @@
+{
+  "date": "2026-06-16",
+  "start_time": "2026-06-16T09:00:09.601879",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "12:01 PM ET",
+    "current_date": "Tuesday, June 16, 2026"
+  },
+  "regime_analysis": {
+    "regime": "BULLISH",
+    "confidence": "HIGH",
+    "spy_price": 753.4000244140625,
+    "spy_change_pct": 1.5706133352291878,
+    "vix_level": 16.040000915527344,
+    "recommendation": "GOOD DAY TO TRADE"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "OKE",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260616T161103Z_4d592878"
+    },
+    {
+      "ticker": "INCY",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260616T161111Z_7d179ecf",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "HAYW",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260616T161111Z_b431c207",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "AMKR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260616T161111Z_ea2c008e",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "LYFT",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260616T161111Z_1b119683",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "HBM",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260616T161111Z_d0ce6abe",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ALLY",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260616T161111Z_d907ca9b",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "GSK",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260616T161111Z_f4688aa9",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ABNB",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260616T161111Z_b148b68e",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CDE",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260616T161111Z_6019cf9b",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "IVZ",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260616T161111Z_9f70a642",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "LYV",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260616T161111Z_3d5c3dcd",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "EW",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260616T161111Z_b25cb6b8",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "APO",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260616T161111Z_ef3d98e2",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ENTG",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260616T161111Z_8e0d1ba6",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-06-16T09:12:05.537794",
+    "equity": 110837.69,
+    "cash": 20015.42,
+    "buying_power": 323975.83,
+    "portfolio_value": 110837.69,
+    "starting_capital": 100000.0,
+    "total_return": 10837.690000000002,
+    "total_return_pct": 10.837690000000002,
+    "daily_pl": 3952.199999999997,
+    "daily_pl_pct": 3.6976019850776725,
+    "total_unrealized_pl": 4036.2650240000007,
+    "position_count": 12,
+    "positions": [
+      {
+        "ticker": "IBKR",
+        "shares": 115.0,
+        "entry_price": 86.39,
+        "current_price": 93.16,
+        "market_value": 10713.4,
+        "unrealized_pl": 778.55,
+        "unrealized_pl_pct": 7.837
+      },
+      {
+        "ticker": "DHR",
+        "shares": 55.0,
+        "entry_price": 180.53,
+        "current_price": 182.985,
+        "market_value": 10064.175,
+        "unrealized_pl": 135.025,
+        "unrealized_pl_pct": 1.3599999999999999
+      },
+      {
+        "ticker": "DNOW",
+        "shares": 724.0,
+        "entry_price": 13.78,
+        "current_price": 13.535,
+        "market_value": 9799.34,
+        "unrealized_pl": -177.38,
+        "unrealized_pl_pct": -1.778
+      },
+      {
+        "ticker": "GNTX",
+        "shares": 343.0,
+        "entry_price": 21.87,
+        "current_price": 25.955,
+        "market_value": 8902.565,
+        "unrealized_pl": 1401.155,
+        "unrealized_pl_pct": 18.679000000000002
+      },
+      {
+        "ticker": "BRO",
+        "shares": 128.0,
+        "entry_price": 58.24,
+        "current_price": 59.66,
+        "market_value": 7636.48,
+        "unrealized_pl": 181.76,
+        "unrealized_pl_pct": 2.4379999999999997
+      },
+      {
+        "ticker": "C",
+        "shares": 52.0,
+        "entry_price": 129.9,
+        "current_price": 142.605,
+        "market_value": 7415.46,
+        "unrealized_pl": 660.66,
+        "unrealized_pl_pct": 9.780999999999999
+      },
+      {
+        "ticker": "G",
+        "shares": 232.0,
+        "entry_price": 32.321293,
+        "current_price": 31.12,
+        "market_value": 7219.84,
+        "unrealized_pl": -278.699976,
+        "unrealized_pl_pct": -3.717
+      },
+      {
+        "ticker": "M",
+        "shares": 261.0,
+        "entry_price": 23.02,
+        "current_price": 25.51,
+        "market_value": 6658.11,
+        "unrealized_pl": 649.89,
+        "unrealized_pl_pct": 10.817
+      },
+      {
+        "ticker": "DG",
+        "shares": 55.0,
+        "entry_price": 109.26,
+        "current_price": 115.41,
+        "market_value": 6347.55,
+        "unrealized_pl": 338.25,
+        "unrealized_pl_pct": 5.629
+      },
+      {
+        "ticker": "COLB",
+        "shares": 200.0,
+        "entry_price": 29.93,
+        "current_price": 31.03,
+        "market_value": 6206.0,
+        "unrealized_pl": 220.0,
+        "unrealized_pl_pct": 3.675
+      },
+      {
+        "ticker": "KMB",
+        "shares": 59.0,
+        "entry_price": 100.28,
+        "current_price": 104.225,
+        "market_value": 6149.275,
+        "unrealized_pl": 232.755,
+        "unrealized_pl_pct": 3.934
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [
+    "Reconciliation cleaned 1 stale records",
+    "Verification: Expected positions not found: APO, AMKR, LYFT, ENTG, HAYW, HBM, ALLY, CDE, GSK, EW, INCY, IVZ, LYV, ABNB"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 13,
+    "db_positions_before": 13,
+    "stale_closed": 1,
+    "in_sync": 12
+  },
+  "position_drift": {
+    "positions_checked": 13,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260616_091056",
+    "total_trades": 15,
+    "quality_score": 90,
+    "ceo_rating": "EXCELLENT",
+    "ceo_recommendation": "STRONGLY RECOMMEND APPROVAL"
+  },
+  "sells_count": 1,
+  "buys_count": 14,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: APO, AMKR, LYFT, ENTG, HAYW, HBM, ALLY, CDE, GSK, EW, INCY, IVZ, LYV, ABNB"
+    ],
+    "summary": {
+      "position_count": 12,
+      "sells_executed": 1,
+      "buys_executed": 14,
+      "expected_count_change": 13
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 2,
+    "fills_recorded": 1,
+    "orders_updated": 1,
+    "already_recorded": 1,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-06-16T09:12:11.886853",
+  "duration_seconds": 722.284992
+}

@@ -1,0 +1,303 @@
+{
+  "date": "2026-05-01",
+  "start_time": "2026-05-01T09:00:03.833833",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "12:00 PM ET",
+    "current_date": "Friday, May 01, 2026"
+  },
+  "regime_analysis": {
+    "regime": "BULLISH",
+    "confidence": "HIGH",
+    "spy_price": 723.4400024414062,
+    "spy_change_pct": 0.6651308651516727,
+    "vix_level": 16.68000030517578,
+    "recommendation": "GOOD DAY TO TRADE"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "EXEL",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260501T160644Z_4ae9a3a5"
+    },
+    {
+      "ticker": "HST",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260501T160645Z_4dc55238",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CRDO",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260501T160645Z_37fe0704",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "HAYW",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260501T160645Z_ad5304a3",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "FTI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260501T160645Z_c80dc030"
+    },
+    {
+      "ticker": "HAL",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260501T160645Z_ecf866d8"
+    },
+    {
+      "ticker": "SIRI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260501T160645Z_d5b270f3",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "DVN",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260501T160645Z_161fdbd2",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "OBDC",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260501T160645Z_1cd3176b",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "EXE",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260501T160645Z_3b9bb3f4",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "JCI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260501T160645Z_d0ae3aac",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "MGY",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260501T160645Z_52dc9135",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "DAR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260501T160645Z_c7d5ff29",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CLSK",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260501T160645Z_b4323a4f",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CCI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260501T160645Z_b7e01b50",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "FOXA",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260501T160645Z_9816602f",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "AMKR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260501T160645Z_ce61e0b5",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-05-01T09:07:06.064681",
+    "equity": 109604.13,
+    "cash": 10711.07,
+    "buying_power": 116605.13,
+    "portfolio_value": 109604.13,
+    "starting_capital": 100000.0,
+    "total_return": 9604.130000000005,
+    "total_return_pct": 9.604130000000005,
+    "daily_pl": 4357.200000000012,
+    "daily_pl_pct": 4.139978239745341,
+    "total_unrealized_pl": 8481.325,
+    "position_count": 13,
+    "positions": [
+      {
+        "ticker": "ALAB",
+        "shares": 51.0,
+        "entry_price": 125.28,
+        "current_price": 204.415,
+        "market_value": 10425.165,
+        "unrealized_pl": 4035.885,
+        "unrealized_pl_pct": 63.166999999999994
+      },
+      {
+        "ticker": "BZ",
+        "shares": 751.0,
+        "entry_price": 13.29,
+        "current_price": 13.64,
+        "market_value": 10243.64,
+        "unrealized_pl": 262.85,
+        "unrealized_pl_pct": 2.634
+      },
+      {
+        "ticker": "ARM",
+        "shares": 41.0,
+        "entry_price": 161.17,
+        "current_price": 213.41,
+        "market_value": 8749.81,
+        "unrealized_pl": 2141.84,
+        "unrealized_pl_pct": 32.413
+      },
+      {
+        "ticker": "SLM",
+        "shares": 380.0,
+        "entry_price": 19.68,
+        "current_price": 22.92,
+        "market_value": 8709.6,
+        "unrealized_pl": 1231.2,
+        "unrealized_pl_pct": 16.463
+      },
+      {
+        "ticker": "GNTX",
+        "shares": 343.0,
+        "entry_price": 21.87,
+        "current_price": 22.74,
+        "market_value": 7799.82,
+        "unrealized_pl": 298.41,
+        "unrealized_pl_pct": 3.978
+      },
+      {
+        "ticker": "DOCN",
+        "shares": 73.0,
+        "entry_price": 95.98,
+        "current_price": 101.885,
+        "market_value": 7437.605,
+        "unrealized_pl": 431.065,
+        "unrealized_pl_pct": 6.152
+      },
+      {
+        "ticker": "HAL",
+        "shares": 174.0,
+        "entry_price": 41.5,
+        "current_price": 41.5,
+        "market_value": 7221.0,
+        "unrealized_pl": 0.0,
+        "unrealized_pl_pct": 0.0
+      },
+      {
+        "ticker": "FTI",
+        "shares": 96.0,
+        "entry_price": 74.94,
+        "current_price": 74.95,
+        "market_value": 7195.2,
+        "unrealized_pl": 0.96,
+        "unrealized_pl_pct": 0.013
+      },
+      {
+        "ticker": "PR",
+        "shares": 324.0,
+        "entry_price": 21.3,
+        "current_price": 21.645,
+        "market_value": 7012.98,
+        "unrealized_pl": 111.78,
+        "unrealized_pl_pct": 1.6199999999999999
+      },
+      {
+        "ticker": "COLB",
+        "shares": 231.0,
+        "entry_price": 28.99,
+        "current_price": 29.755,
+        "market_value": 6873.405,
+        "unrealized_pl": 176.715,
+        "unrealized_pl_pct": 2.6390000000000002
+      },
+      {
+        "ticker": "EQT",
+        "shares": 116.0,
+        "entry_price": 59.49,
+        "current_price": 58.41,
+        "market_value": 6775.56,
+        "unrealized_pl": -125.28,
+        "unrealized_pl_pct": -1.815
+      },
+      {
+        "ticker": "BANC",
+        "shares": 360.0,
+        "entry_price": 18.66,
+        "current_price": 18.72,
+        "market_value": 6739.2,
+        "unrealized_pl": 21.6,
+        "unrealized_pl_pct": 0.322
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [
+    "Reconciliation cleaned 1 stale records",
+    "Verification: Expected positions not found: OBDC, HST, CRDO, HAYW, JCI, DVN, SIRI, EXE, CLSK, FOXA, CCI, MGY, AMKR, DAR"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 12,
+    "db_positions_before": 12,
+    "stale_closed": 1,
+    "in_sync": 11
+  },
+  "position_drift": {
+    "positions_checked": 12,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260501_090640",
+    "total_trades": 17,
+    "quality_score": 97,
+    "ceo_rating": "EXCELLENT",
+    "ceo_recommendation": "STRONGLY RECOMMEND APPROVAL"
+  },
+  "sells_count": 1,
+  "buys_count": 16,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: OBDC, HST, CRDO, HAYW, JCI, DVN, SIRI, EXE, CLSK, FOXA, CCI, MGY, AMKR, DAR"
+    ],
+    "summary": {
+      "position_count": 13,
+      "sells_executed": 1,
+      "buys_executed": 16,
+      "expected_count_change": 15
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 4,
+    "fills_recorded": 3,
+    "orders_updated": 3,
+    "already_recorded": 1,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-05-01T09:07:07.563759",
+  "duration_seconds": 423.72994
+}

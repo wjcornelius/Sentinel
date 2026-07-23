@@ -1,0 +1,289 @@
+{
+  "date": "2026-05-04",
+  "start_time": "2026-05-04T09:00:04.852910",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "12:00 PM ET",
+    "current_date": "Monday, May 04, 2026"
+  },
+  "regime_analysis": {
+    "regime": "NEUTRAL",
+    "confidence": "MEDIUM",
+    "spy_price": 717.6900024414062,
+    "spy_change_pct": -0.4107433389824623,
+    "vix_level": 18.350000381469727,
+    "recommendation": "NORMAL CONDITIONS"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "COLB",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260504T160702Z_878afb36"
+    },
+    {
+      "ticker": "SIRI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260504T160703Z_15100526",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "EXE",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260504T160703Z_9f15bedd",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "HST",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260504T160703Z_90f1fc65",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CRDO",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260504T160703Z_e1e8a638",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "MDLZ",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260504T160703Z_62aad86c",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "JCI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260504T160703Z_257cee18",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "MGY",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260504T160703Z_8c7b10e5",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "IONQ",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260504T160703Z_dad7c2a3",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "HPQ",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260504T160703Z_ceaa310d",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CLSK",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260504T160703Z_31fd49a8",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CCI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260504T160703Z_efcc7d11",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "AMKR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260504T160703Z_fa2568ed",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ALLY",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260504T160703Z_f7dec31e",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "DAR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260504T160703Z_3949c110",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "EW",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260504T160703Z_b4f243c3",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-05-04T09:07:21.794593",
+    "equity": 109430.57,
+    "cash": 17451.61,
+    "buying_power": 123172.11,
+    "portfolio_value": 109430.57,
+    "starting_capital": 100000.0,
+    "total_return": 9430.570000000007,
+    "total_return_pct": 9.430570000000008,
+    "daily_pl": 3535.220000000001,
+    "daily_pl_pct": 3.338409099171966,
+    "total_unrealized_pl": 8263.919999999998,
+    "position_count": 12,
+    "positions": [
+      {
+        "ticker": "BZ",
+        "shares": 751.0,
+        "entry_price": 13.29,
+        "current_price": 13.86,
+        "market_value": 10408.86,
+        "unrealized_pl": 428.07,
+        "unrealized_pl_pct": 4.289
+      },
+      {
+        "ticker": "ALAB",
+        "shares": 51.0,
+        "entry_price": 125.28,
+        "current_price": 202.79,
+        "market_value": 10342.29,
+        "unrealized_pl": 3953.01,
+        "unrealized_pl_pct": 61.869
+      },
+      {
+        "ticker": "SLM",
+        "shares": 380.0,
+        "entry_price": 19.68,
+        "current_price": 22.585,
+        "market_value": 8582.3,
+        "unrealized_pl": 1103.9,
+        "unrealized_pl_pct": 14.761
+      },
+      {
+        "ticker": "ARM",
+        "shares": 41.0,
+        "entry_price": 161.17,
+        "current_price": 200.0,
+        "market_value": 8200.0,
+        "unrealized_pl": 1592.03,
+        "unrealized_pl_pct": 24.093
+      },
+      {
+        "ticker": "DOCN",
+        "shares": 73.0,
+        "entry_price": 95.98,
+        "current_price": 105.75,
+        "market_value": 7719.75,
+        "unrealized_pl": 713.21,
+        "unrealized_pl_pct": 10.179
+      },
+      {
+        "ticker": "GNTX",
+        "shares": 343.0,
+        "entry_price": 21.87,
+        "current_price": 22.48,
+        "market_value": 7710.64,
+        "unrealized_pl": 209.23,
+        "unrealized_pl_pct": 2.789
+      },
+      {
+        "ticker": "HAL",
+        "shares": 174.0,
+        "entry_price": 41.5,
+        "current_price": 41.845,
+        "market_value": 7281.03,
+        "unrealized_pl": 60.03,
+        "unrealized_pl_pct": 0.831
+      },
+      {
+        "ticker": "PR",
+        "shares": 324.0,
+        "entry_price": 21.3,
+        "current_price": 22.425,
+        "market_value": 7265.7,
+        "unrealized_pl": 364.5,
+        "unrealized_pl_pct": 5.282
+      },
+      {
+        "ticker": "FTI",
+        "shares": 96.0,
+        "entry_price": 74.94,
+        "current_price": 74.58,
+        "market_value": 7159.68,
+        "unrealized_pl": -34.56,
+        "unrealized_pl_pct": -0.48
+      },
+      {
+        "ticker": "EQT",
+        "shares": 116.0,
+        "entry_price": 59.49,
+        "current_price": 59.49,
+        "market_value": 6900.84,
+        "unrealized_pl": 0.0,
+        "unrealized_pl_pct": 0.0
+      },
+      {
+        "ticker": "BANC",
+        "shares": 360.0,
+        "entry_price": 18.66,
+        "current_price": 18.605,
+        "market_value": 6697.8,
+        "unrealized_pl": -19.8,
+        "unrealized_pl_pct": -0.295
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [
+    "Verification: Expected positions not found: IONQ, JCI, MDLZ, HST, CCI, AMKR, MGY, DAR, CRDO, SIRI, EXE, EW, ALLY, HPQ, CLSK"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 13,
+    "db_positions_before": 12,
+    "stale_closed": 0,
+    "in_sync": 12
+  },
+  "position_drift": {
+    "positions_checked": 13,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260504_090658",
+    "total_trades": 16,
+    "quality_score": 100,
+    "ceo_rating": "EXCELLENT",
+    "ceo_recommendation": "STRONGLY RECOMMEND APPROVAL"
+  },
+  "sells_count": 1,
+  "buys_count": 15,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: IONQ, JCI, MDLZ, HST, CCI, AMKR, MGY, DAR, CRDO, SIRI, EXE, EW, ALLY, HPQ, CLSK"
+    ],
+    "summary": {
+      "position_count": 12,
+      "sells_executed": 1,
+      "buys_executed": 15,
+      "expected_count_change": 14
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 1,
+    "fills_recorded": 1,
+    "orders_updated": 1,
+    "already_recorded": 0,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-05-04T09:07:23.637511",
+  "duration_seconds": 438.784614
+}

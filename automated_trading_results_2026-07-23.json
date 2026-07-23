@@ -1,0 +1,244 @@
+{
+  "date": "2026-07-23",
+  "start_time": "2026-07-23T09:00:02.378490",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "12:00 PM ET",
+    "current_date": "Thursday, July 23, 2026"
+  },
+  "regime_analysis": {
+    "regime": "BEARISH",
+    "confidence": "MEDIUM",
+    "spy_price": 737.75,
+    "spy_change_pct": -1.292459759921245,
+    "vix_level": 19.950000762939453,
+    "recommendation": "PROCEED WITH CAUTION"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "DG",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260723T160826Z_1b99148b"
+    },
+    {
+      "ticker": "GILD",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260723T160826Z_f697b5d2"
+    },
+    {
+      "ticker": "AR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260723T160827Z_8036692e",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "JCI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260723T160827Z_7b6b5507",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "MGY",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260723T160827Z_120365b6",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "MDLZ",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260723T160827Z_de442d44",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "DOCN",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260723T160827Z_2f862226",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "EQT",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260723T160827Z_3674a192",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "EMR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260723T160827Z_a049ce9b",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "HAL",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260723T160827Z_83b2708e",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-07-23T09:08:44.706891",
+    "equity": 105430.96,
+    "cash": 21856.76,
+    "buying_power": 21856.76,
+    "portfolio_value": 105430.96,
+    "starting_capital": 100000.0,
+    "total_return": 5430.960000000006,
+    "total_return_pct": 5.430960000000006,
+    "daily_pl": 105430.96,
+    "daily_pl_pct": 0,
+    "total_unrealized_pl": 1468.164964,
+    "position_count": 11,
+    "positions": [
+      {
+        "ticker": "RRC",
+        "shares": 279.0,
+        "entry_price": 35.67,
+        "current_price": 39.4,
+        "market_value": 10992.6,
+        "unrealized_pl": 1040.67,
+        "unrealized_pl_pct": 10.456999999999999
+      },
+      {
+        "ticker": "EXE",
+        "shares": 108.0,
+        "entry_price": 91.929167,
+        "current_price": 93.25,
+        "market_value": 10071.0,
+        "unrealized_pl": 142.649964,
+        "unrealized_pl_pct": 1.437
+      },
+      {
+        "ticker": "ANET",
+        "shares": 57.0,
+        "entry_price": 174.96,
+        "current_price": 175.68,
+        "market_value": 10013.76,
+        "unrealized_pl": 41.04,
+        "unrealized_pl_pct": 0.41200000000000003
+      },
+      {
+        "ticker": "MAT",
+        "shares": 702.0,
+        "entry_price": 14.28,
+        "current_price": 14.2,
+        "market_value": 9968.4,
+        "unrealized_pl": -56.16,
+        "unrealized_pl_pct": -0.5599999999999999
+      },
+      {
+        "ticker": "AG",
+        "shares": 599.0,
+        "entry_price": 16.65,
+        "current_price": 16.275,
+        "market_value": 9748.725,
+        "unrealized_pl": -224.625,
+        "unrealized_pl_pct": -2.252
+      },
+      {
+        "ticker": "BANC",
+        "shares": 459.0,
+        "entry_price": 21.79,
+        "current_price": 20.95,
+        "market_value": 9616.05,
+        "unrealized_pl": -385.56,
+        "unrealized_pl_pct": -3.855
+      },
+      {
+        "ticker": "FTI",
+        "shares": 102.0,
+        "entry_price": 73.37,
+        "current_price": 76.185,
+        "market_value": 7770.87,
+        "unrealized_pl": 287.13,
+        "unrealized_pl_pct": 3.837
+      },
+      {
+        "ticker": "COLB",
+        "shares": 200.0,
+        "entry_price": 29.93,
+        "current_price": 32.085,
+        "market_value": 6417.0,
+        "unrealized_pl": 431.0,
+        "unrealized_pl_pct": 7.199999999999999
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      },
+      {
+        "ticker": "PCAR",
+        "shares": 20.0,
+        "entry_price": 123.31,
+        "current_price": 133.17,
+        "market_value": 2663.4,
+        "unrealized_pl": 197.2,
+        "unrealized_pl_pct": 7.996
+      },
+      {
+        "ticker": "OKE",
+        "shares": 28.0,
+        "entry_price": 89.35,
+        "current_price": 92.94,
+        "market_value": 2602.32,
+        "unrealized_pl": 100.52,
+        "unrealized_pl_pct": 4.018
+      }
+    ]
+  },
+  "warnings": [
+    "Reconciliation cleaned 2 stale records",
+    "Verification: Expected positions not found: AR, EQT, JCI, HAL, MDLZ, DOCN, EMR, MGY"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 13,
+    "db_positions_before": 12,
+    "stale_closed": 2,
+    "in_sync": 10
+  },
+  "position_drift": {
+    "positions_checked": 13,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260723_090816",
+    "total_trades": 10,
+    "quality_score": 90,
+    "ceo_rating": "EXCELLENT",
+    "ceo_recommendation": "STRONGLY RECOMMEND APPROVAL"
+  },
+  "sells_count": 2,
+  "buys_count": 8,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: AR, EQT, JCI, HAL, MDLZ, DOCN, EMR, MGY"
+    ],
+    "summary": {
+      "position_count": 11,
+      "sells_executed": 2,
+      "buys_executed": 8,
+      "expected_count_change": 6
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 6,
+    "fills_recorded": 2,
+    "orders_updated": 2,
+    "already_recorded": 4,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-07-23T09:08:46.782471",
+  "duration_seconds": 524.403998
+}

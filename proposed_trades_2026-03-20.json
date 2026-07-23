@@ -1,0 +1,134 @@
+{
+  "plan_id": "PLAN_20260320_090809",
+  "generated_at": "2026-03-20T16:08:09.632196Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 6,
+    "research_candidates": 64,
+    "gpt5_selected": 6,
+    "compliance_flagged": 0,
+    "overall_quality_score": 81
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 30,
+    "compliance_advisory": 95
+  },
+  "trades": [
+    {
+      "ticker": "EXEL",
+      "action": "BUY",
+      "shares": 144,
+      "allocated_capital": 6000.0,
+      "entry_price": 41.63999938964844,
+      "composite_score": 65.4,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "Exelixis received analyst upgrades with six analysts raising 2026 earnings forecasts, citing strong oncology pipeline growth potential, and the stock has a consensus fair value of $46.83 against a current price of $41.25, suggesting upside potential.[1][3] However, recent price action has been mixed, with a 4.21% decline over the past 30 days and insider selling activity.[2]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "SRAD",
+      "action": "BUY",
+      "shares": 300,
+      "allocated_capital": 6000.0,
+      "entry_price": 19.989999771118164,
+      "composite_score": 62.6,
+      "sentiment_score": 45.0,
+      "sentiment_summary": "No news articles from the last 24 hours (since March 19, 2026, 4 PM UTC) were found in the search results for SRAD stock. The most recent coverage, from March 3, 2026, discusses Sportradar's record 2025 revenue of \u20ac1.29 billion and Adjusted EBITDA growth, offset by an 11% stock drop due to conservative 2026 guidance, countered by a $1 billion buyback expansion.[1]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CE",
+      "action": "BUY",
+      "shares": 104,
+      "allocated_capital": 6000.0,
+      "entry_price": 57.3650016784668,
+      "composite_score": 61.8,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "Recent news highlights analyst upgrades for Celanese (CE), including Wells Fargo to Overweight with a $70 target and Citigroup raising to $81, driven by price increases across chemical products and geopolitical tensions boosting oil and chemical prices. The company announced global price hikes on acetyls and engineered materials effective immediately or from April 1, alongside strong free cash flow and deleveraging efforts. Stock has rallied 9.2% since the last earnings report amid a positive shift in institutional sentiment.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ALLY",
+      "action": "BUY",
+      "shares": 157,
+      "allocated_capital": 6000.0,
+      "entry_price": 38.209999084472656,
+      "composite_score": 60.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No significant news articles about Ally Financial (ALLY) stock were published in the last 24 hours as of March 20, 2026, 4 PM UTC. Recent coverage from earlier in March focuses on scheduling Q1 2026 earnings release for April 17 and market cap updates, with older reports noting stock declines amid macro pressures but analyst upside potential.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ACI",
+      "action": "SELL",
+      "shares": 341.0,
+      "sell_pct": 100,
+      "composite_score": 49.6,
+      "current_price": 17.399999618530273,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No news articles from the last 24 hours (since March 19, 2026, 4 PM UTC) are available in the search results. Recent stock data shows ACI trading at $16.91 with a +2.83% gain as of March 12, 2026, amid mostly 'buy' analyst ratings and price targets averaging around $25-27.",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 49.6 < 60 absolute minimum",
+      "current_value": 5941.925
+    },
+    {
+      "ticker": "ALAB",
+      "action": "SELL",
+      "shares": 58.0,
+      "sell_pct": 100,
+      "composite_score": 60.0,
+      "current_price": 119.59980010986328,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "Astera Labs reported strong 115% year-over-year revenue growth, but management disclosed a 200 basis point gross margin headwind at the Morgan Stanley conference on March 3rd[4]. The stock closed at $126.16 on March 19, 2026, with recent trading showing volatility between $119.64 and $127.43[5].",
+      "gpt5_reasoning": "AUTOMATED EXIT: Rank #16 (below top 15), score 60.0",
+      "current_value": 6914.76
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 64 candidates (avg score: 41.9)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 76/76 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 2 SELLs, 5 BUYs ($30,000 allocated)",
+      "quality_score": 30,
+      "issues": [
+        "Capital deployment 25.8% (target 90.0%+)",
+        "Limited diversification: 5 new positions (target 12-20). Total after trades: 15"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 4 BUYs approved, 1 rejected, 2 SELLs",
+      "quality_score": 95,
+      "issues": [
+        "1 orders REJECTED by compliance"
+      ]
+    }
+  ],
+  "approved_at": "2026-03-20T16:08:11.193562Z"
+}

@@ -1,0 +1,227 @@
+{
+  "date": "2026-03-18",
+  "start_time": "2026-03-18T09:00:02.174184",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "12:00 PM ET",
+    "current_date": "Wednesday, March 18, 2026"
+  },
+  "regime_analysis": {
+    "regime": "BEARISH",
+    "confidence": "MEDIUM",
+    "spy_price": 666.75,
+    "spy_change_pct": -0.6022716736502981,
+    "vix_level": 23.280000686645508,
+    "recommendation": "PROCEED WITH CAUTION"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "AA",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260318T160829Z_d8e00d63",
+      "_unfilled_reason": "Position still held"
+    },
+    {
+      "ticker": "CRDO",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260318T160829Z_7721d945"
+    },
+    {
+      "ticker": "FTNT",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260318T160830Z_f532a451",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BMNR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260318T160830Z_b267e89e"
+    },
+    {
+      "ticker": "DAR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260318T160830Z_959d64c4",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "SRAD",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260318T160830Z_7c70311f",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ADMA",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260318T160830Z_c2ff1f68",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-03-18T09:08:48.842014",
+    "equity": 102717.47,
+    "cash": 14992.51,
+    "buying_power": 106536.81,
+    "portfolio_value": 102717.47,
+    "starting_capital": 100000.0,
+    "total_return": 2717.470000000001,
+    "total_return_pct": 2.717470000000001,
+    "daily_pl": 4665.9100000000035,
+    "daily_pl_pct": 4.758629031501389,
+    "total_unrealized_pl": 9100.609,
+    "position_count": 11,
+    "positions": [
+      {
+        "ticker": "CF",
+        "shares": 107.0,
+        "entry_price": 92.61,
+        "current_price": 124.54,
+        "market_value": 13325.78,
+        "unrealized_pl": 3416.51,
+        "unrealized_pl_pct": 34.477999999999994
+      },
+      {
+        "ticker": "DELL",
+        "shares": 67.0,
+        "entry_price": 122.94,
+        "current_price": 152.585,
+        "market_value": 10223.195,
+        "unrealized_pl": 1986.215,
+        "unrealized_pl_pct": 24.113
+      },
+      {
+        "ticker": "DOCN",
+        "shares": 110.0,
+        "entry_price": 67.88,
+        "current_price": 83.9702,
+        "market_value": 9236.722,
+        "unrealized_pl": 1769.922,
+        "unrealized_pl_pct": 23.704
+      },
+      {
+        "ticker": "AA",
+        "shares": 117.0,
+        "entry_price": 64.35,
+        "current_price": 65.04,
+        "market_value": 7609.68,
+        "unrealized_pl": 80.73,
+        "unrealized_pl_pct": 1.072
+      },
+      {
+        "ticker": "SLM",
+        "shares": 380.0,
+        "entry_price": 19.68,
+        "current_price": 19.91,
+        "market_value": 7565.8,
+        "unrealized_pl": 87.4,
+        "unrealized_pl_pct": 1.169
+      },
+      {
+        "ticker": "BMNR",
+        "shares": 340.0,
+        "entry_price": 21.95,
+        "current_price": 21.9503,
+        "market_value": 7463.102,
+        "unrealized_pl": 0.102,
+        "unrealized_pl_pct": 0.001
+      },
+      {
+        "ticker": "DHT",
+        "shares": 421.0,
+        "entry_price": 17.87,
+        "current_price": 17.61,
+        "market_value": 7413.81,
+        "unrealized_pl": -109.46,
+        "unrealized_pl_pct": -1.455
+      },
+      {
+        "ticker": "ALAB",
+        "shares": 58.0,
+        "entry_price": 125.86,
+        "current_price": 127.445,
+        "market_value": 7391.81,
+        "unrealized_pl": 91.93,
+        "unrealized_pl_pct": 1.2590000000000001
+      },
+      {
+        "ticker": "RRC",
+        "shares": 167.0,
+        "entry_price": 35.81,
+        "current_price": 42.95,
+        "market_value": 7172.65,
+        "unrealized_pl": 1192.38,
+        "unrealized_pl_pct": 19.939
+      },
+      {
+        "ticker": "CAVA",
+        "shares": 73.0,
+        "entry_price": 81.12,
+        "current_price": 90.58,
+        "market_value": 6612.34,
+        "unrealized_pl": 690.58,
+        "unrealized_pl_pct": 11.662
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [
+    "Verification: Still holding positions that should have been sold: AA",
+    "Verification: Expected positions not found: DAR, FTNT, SRAD, ADMA"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 11,
+    "db_positions_before": 10,
+    "stale_closed": 0,
+    "in_sync": 10
+  },
+  "position_drift": {
+    "positions_checked": 11,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260318_090823",
+    "total_trades": 7,
+    "quality_score": 83,
+    "ceo_rating": "GOOD",
+    "ceo_recommendation": "RECOMMEND APPROVAL"
+  },
+  "sells_count": 2,
+  "buys_count": 5,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Still holding positions that should have been sold: AA",
+      "Expected positions not found: DAR, FTNT, SRAD, ADMA"
+    ],
+    "summary": {
+      "position_count": 11,
+      "sells_executed": 2,
+      "buys_executed": 5,
+      "expected_count_change": 3
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 2,
+    "fills_recorded": 2,
+    "orders_updated": 2,
+    "already_recorded": 0,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-03-18T09:08:51.595100",
+  "duration_seconds": 529.420933
+}

@@ -1,0 +1,248 @@
+{
+  "date": "2026-05-20",
+  "start_time": "2026-05-20T09:00:03.852931",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "12:00 PM ET",
+    "current_date": "Wednesday, May 20, 2026"
+  },
+  "regime_analysis": {
+    "regime": "BULLISH",
+    "confidence": "HIGH",
+    "spy_price": 740.2249755859375,
+    "spy_change_pct": 0.8852023619149533,
+    "vix_level": 17.639999389648438,
+    "recommendation": "GOOD DAY TO TRADE"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "MAT",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260520T160646Z_d34510be"
+    },
+    {
+      "ticker": "CVE",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260520T160647Z_3d9f58ae",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BWA",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260520T160647Z_5232f388",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "EXE",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260520T160647Z_289f092f",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "COLB",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260520T160647Z_331f1e57",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "HST",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260520T160647Z_3e3af757",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BBY",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260520T160647Z_0e105ec4",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BANC",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260520T160647Z_392de174",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "GTLB",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260520T160647Z_2f316fd5",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CCI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260520T160647Z_1d21cbee",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "FTI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260520T160647Z_be5d27f6",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "G",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260520T160647Z_08d4f6d2",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-05-20T09:07:04.018171",
+    "equity": 110767.19,
+    "cash": 16685.27,
+    "buying_power": 123742.39,
+    "portfolio_value": 110767.19,
+    "starting_capital": 100000.0,
+    "total_return": 10767.190000000002,
+    "total_return_pct": 10.767190000000003,
+    "daily_pl": 5213.580000000002,
+    "daily_pl_pct": 4.939272091215073,
+    "total_unrealized_pl": 8998.195000000002,
+    "position_count": 10,
+    "positions": [
+      {
+        "ticker": "ALAB",
+        "shares": 51.0,
+        "entry_price": 125.28,
+        "current_price": 279.74,
+        "market_value": 14266.74,
+        "unrealized_pl": 7877.46,
+        "unrealized_pl_pct": 123.292
+      },
+      {
+        "ticker": "BZ",
+        "shares": 751.0,
+        "entry_price": 13.29,
+        "current_price": 13.89,
+        "market_value": 10431.39,
+        "unrealized_pl": 450.6,
+        "unrealized_pl_pct": 4.515000000000001
+      },
+      {
+        "ticker": "HALO",
+        "shares": 148.0,
+        "entry_price": 67.33,
+        "current_price": 68.52,
+        "market_value": 10140.96,
+        "unrealized_pl": 176.12,
+        "unrealized_pl_pct": 1.7670000000000001
+      },
+      {
+        "ticker": "HAL",
+        "shares": 233.0,
+        "entry_price": 42.85,
+        "current_price": 42.645,
+        "market_value": 9936.285,
+        "unrealized_pl": -47.765,
+        "unrealized_pl_pct": -0.47800000000000004
+      },
+      {
+        "ticker": "EW",
+        "shares": 121.0,
+        "entry_price": 82.2,
+        "current_price": 81.9,
+        "market_value": 9909.9,
+        "unrealized_pl": -36.3,
+        "unrealized_pl_pct": -0.365
+      },
+      {
+        "ticker": "FOXA",
+        "shares": 151.0,
+        "entry_price": 66.06,
+        "current_price": 64.84,
+        "market_value": 9790.84,
+        "unrealized_pl": -184.22,
+        "unrealized_pl_pct": -1.847
+      },
+      {
+        "ticker": "EQT",
+        "shares": 168.0,
+        "entry_price": 59.29,
+        "current_price": 58.26,
+        "market_value": 9787.68,
+        "unrealized_pl": -173.04,
+        "unrealized_pl_pct": -1.737
+      },
+      {
+        "ticker": "EBAY",
+        "shares": 70.0,
+        "entry_price": 108.08,
+        "current_price": 118.64,
+        "market_value": 8304.8,
+        "unrealized_pl": 739.2,
+        "unrealized_pl_pct": 9.771
+      },
+      {
+        "ticker": "GNTX",
+        "shares": 343.0,
+        "entry_price": 21.87,
+        "current_price": 22.75,
+        "market_value": 7803.25,
+        "unrealized_pl": 301.84,
+        "unrealized_pl_pct": 4.024
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [
+    "Reconciliation cleaned 2 stale records",
+    "Verification: Expected positions not found: CVE, FTI, BWA, EXE, BBY, GTLB, BANC, HST, COLB, CCI, G"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 11,
+    "db_positions_before": 12,
+    "stale_closed": 2,
+    "in_sync": 10
+  },
+  "position_drift": {
+    "positions_checked": 11,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260520_090643",
+    "total_trades": 12,
+    "quality_score": 98,
+    "ceo_rating": "EXCELLENT",
+    "ceo_recommendation": "STRONGLY RECOMMEND APPROVAL"
+  },
+  "sells_count": 1,
+  "buys_count": 11,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: CVE, FTI, BWA, EXE, BBY, GTLB, BANC, HST, COLB, CCI, G"
+    ],
+    "summary": {
+      "position_count": 10,
+      "sells_executed": 1,
+      "buys_executed": 11,
+      "expected_count_change": 10
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 7,
+    "fills_recorded": 1,
+    "orders_updated": 1,
+    "already_recorded": 5,
+    "no_match_in_db": 1,
+    "errors": []
+  },
+  "end_time": "2026-05-20T09:07:05.446476",
+  "duration_seconds": 421.59356
+}

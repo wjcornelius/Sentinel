@@ -1,0 +1,291 @@
+{
+  "date": "2026-06-04",
+  "start_time": "2026-06-04T09:00:05.133744",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "12:00 PM ET",
+    "current_date": "Thursday, June 04, 2026"
+  },
+  "regime_analysis": {
+    "regime": "BULLISH",
+    "confidence": "MEDIUM",
+    "spy_price": 755.3400268554688,
+    "spy_change_pct": 0.14584702950474968,
+    "vix_level": 15.680000305175781,
+    "recommendation": "FAVORABLE CONDITIONS"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "BZ",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260604T160634Z_a987c7c4",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "AR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260604T160634Z_e0786688",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ABNB",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260604T160634Z_300ab163",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "LYFT",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260604T160634Z_a71f15da",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "KDP",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260604T160634Z_7b96863f",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BWA",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260604T160634Z_2dbfba0e",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BRO",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260604T160634Z_a2e1728e",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "HPQ",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260604T160634Z_46cf5b34",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "JCI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260604T160634Z_f2bd46ed",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "GSK",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260604T160634Z_0cb761f6",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "NXT",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260604T160634Z_cb462d90",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BEAM",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260604T160634Z_9e37e04b",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "IREN",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260604T160634Z_e88340f7",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "JEF",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260604T160634Z_0e852971",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "KTOS",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260604T160634Z_11c7395e",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "GLW",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260604T160634Z_2331a001",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-06-04T09:06:55.188843",
+    "equity": 114325.11,
+    "cash": 4909.98,
+    "buying_power": 231050.04,
+    "portfolio_value": 114325.11,
+    "starting_capital": 100000.0,
+    "total_return": 14325.11,
+    "total_return_pct": 14.325109999999999,
+    "daily_pl": 3981.9199999999983,
+    "daily_pl_pct": 3.608668554896771,
+    "total_unrealized_pl": 14189.269999999999,
+    "position_count": 12,
+    "positions": [
+      {
+        "ticker": "ALAB",
+        "shares": 51.0,
+        "entry_price": 125.28,
+        "current_price": 356.18,
+        "market_value": 18165.18,
+        "unrealized_pl": 11775.9,
+        "unrealized_pl_pct": 184.307
+      },
+      {
+        "ticker": "EW",
+        "shares": 121.0,
+        "entry_price": 82.2,
+        "current_price": 87.48,
+        "market_value": 10585.08,
+        "unrealized_pl": 638.88,
+        "unrealized_pl_pct": 6.422999999999999
+      },
+      {
+        "ticker": "CNM",
+        "shares": 200.0,
+        "entry_price": 49.03,
+        "current_price": 52.195,
+        "market_value": 10439.0,
+        "unrealized_pl": 633.0,
+        "unrealized_pl_pct": 6.455
+      },
+      {
+        "ticker": "HAYW",
+        "shares": 698.0,
+        "entry_price": 14.04,
+        "current_price": 14.075,
+        "market_value": 9824.35,
+        "unrealized_pl": 24.43,
+        "unrealized_pl_pct": 0.249
+      },
+      {
+        "ticker": "MMM",
+        "shares": 64.0,
+        "entry_price": 152.55,
+        "current_price": 153.35,
+        "market_value": 9814.4,
+        "unrealized_pl": 51.2,
+        "unrealized_pl_pct": 0.524
+      },
+      {
+        "ticker": "BAH",
+        "shares": 116.0,
+        "entry_price": 78.25,
+        "current_price": 80.65,
+        "market_value": 9355.4,
+        "unrealized_pl": 278.4,
+        "unrealized_pl_pct": 3.0669999999999997
+      },
+      {
+        "ticker": "ACN",
+        "shares": 50.0,
+        "entry_price": 178.96,
+        "current_price": 179.67,
+        "market_value": 8983.5,
+        "unrealized_pl": 35.5,
+        "unrealized_pl_pct": 0.39699999999999996
+      },
+      {
+        "ticker": "GNTX",
+        "shares": 343.0,
+        "entry_price": 21.87,
+        "current_price": 24.86,
+        "market_value": 8526.98,
+        "unrealized_pl": 1025.57,
+        "unrealized_pl_pct": 13.672
+      },
+      {
+        "ticker": "C",
+        "shares": 52.0,
+        "entry_price": 129.9,
+        "current_price": 134.21,
+        "market_value": 6978.92,
+        "unrealized_pl": 224.12,
+        "unrealized_pl_pct": 3.318
+      },
+      {
+        "ticker": "AMKR",
+        "shares": 89.0,
+        "entry_price": 76.21,
+        "current_price": 73.44,
+        "market_value": 6536.16,
+        "unrealized_pl": -246.53,
+        "unrealized_pl_pct": -3.6350000000000002
+      },
+      {
+        "ticker": "IONQ",
+        "shares": 97.0,
+        "entry_price": 68.47,
+        "current_price": 66.97,
+        "market_value": 6496.09,
+        "unrealized_pl": -145.5,
+        "unrealized_pl_pct": -2.191
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [
+    "Reconciliation cleaned 1 stale records",
+    "Verification: Expected positions not found: JEF, GLW, LYFT, JCI, NXT, KTOS, KDP, ABNB, AR, BRO, GSK, BWA, HPQ, BZ, BEAM, IREN"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 12,
+    "db_positions_before": 12,
+    "stale_closed": 1,
+    "in_sync": 11
+  },
+  "position_drift": {
+    "positions_checked": 12,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260604_090632",
+    "total_trades": 16,
+    "quality_score": 95,
+    "ceo_rating": "EXCELLENT",
+    "ceo_recommendation": "STRONGLY RECOMMEND APPROVAL"
+  },
+  "sells_count": 0,
+  "buys_count": 16,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: JEF, GLW, LYFT, JCI, NXT, KTOS, KDP, ABNB, AR, BRO, GSK, BWA, HPQ, BZ, BEAM, IREN"
+    ],
+    "summary": {
+      "position_count": 12,
+      "sells_executed": 0,
+      "buys_executed": 16,
+      "expected_count_change": 16
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 4,
+    "fills_recorded": 0,
+    "orders_updated": 0,
+    "already_recorded": 4,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-06-04T09:06:57.670951",
+  "duration_seconds": 412.53722
+}

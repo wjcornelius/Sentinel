@@ -1,0 +1,314 @@
+{
+  "date": "2026-07-09",
+  "start_time": "2026-07-09T09:00:02.851195",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "12:00 PM ET",
+    "current_date": "Thursday, July 09, 2026"
+  },
+  "regime_analysis": {
+    "regime": "BULLISH",
+    "confidence": "HIGH",
+    "spy_price": 749.9849853515625,
+    "spy_change_pct": 0.6151007227433493,
+    "vix_level": 16.100000381469727,
+    "recommendation": "GOOD DAY TO TRADE"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "FRO",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260709T160706Z_3f63e1ac"
+    },
+    {
+      "ticker": "RDDT",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260709T160707Z_d2b8716b",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "AG",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260709T160707Z_591e93bc",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "IBKR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260709T160707Z_13b10181",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "EW",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260709T160707Z_5ac71613",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "FTI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260709T160707Z_4cf5a363",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ONON",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260709T160707Z_d6e6ee78",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BRBR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260709T160707Z_94545ef9",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "PYPL",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260709T160707Z_61abc4d5",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BDX",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260709T160707Z_b58c0bdc",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "AGI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260709T160707Z_381ac32c",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "IVZ",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260709T160707Z_e631a58a",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "EQH",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260709T160707Z_23fed10f",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BEAM",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260709T160707Z_f290cab3",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-07-09T09:07:27.593387",
+    "equity": 107639.11,
+    "cash": 11957.03,
+    "buying_power": 305349.73,
+    "portfolio_value": 107639.11,
+    "starting_capital": 100000.0,
+    "total_return": 7639.110000000001,
+    "total_return_pct": 7.6391100000000005,
+    "daily_pl": 4044.5099999999948,
+    "daily_pl_pct": 3.904170680711151,
+    "total_unrealized_pl": 4137.625311000001,
+    "position_count": 16,
+    "positions": [
+      {
+        "ticker": "AFRM",
+        "shares": 135.0,
+        "entry_price": 74.26,
+        "current_price": 84.26,
+        "market_value": 11375.1,
+        "unrealized_pl": 1350.0,
+        "unrealized_pl_pct": 13.466000000000001
+      },
+      {
+        "ticker": "HAYW",
+        "shares": 657.0,
+        "entry_price": 15.21,
+        "current_price": 16.045,
+        "market_value": 10541.565,
+        "unrealized_pl": 548.595,
+        "unrealized_pl_pct": 5.489999999999999
+      },
+      {
+        "ticker": "CVNA",
+        "shares": 148.0,
+        "entry_price": 67.54,
+        "current_price": 66.94,
+        "market_value": 9907.12,
+        "unrealized_pl": -88.8,
+        "unrealized_pl_pct": -0.8880000000000001
+      },
+      {
+        "ticker": "DHR",
+        "shares": 51.0,
+        "entry_price": 193.008039,
+        "current_price": 194.04,
+        "market_value": 9896.04,
+        "unrealized_pl": 52.630011,
+        "unrealized_pl_pct": 0.5349999999999999
+      },
+      {
+        "ticker": "BRO",
+        "shares": 128.0,
+        "entry_price": 58.24,
+        "current_price": 67.49,
+        "market_value": 8638.72,
+        "unrealized_pl": 1184.0,
+        "unrealized_pl_pct": 15.883
+      },
+      {
+        "ticker": "GILD",
+        "shares": 55.0,
+        "entry_price": 135.81,
+        "current_price": 133.67,
+        "market_value": 7351.85,
+        "unrealized_pl": -117.7,
+        "unrealized_pl_pct": -1.576
+      },
+      {
+        "ticker": "KMB",
+        "shares": 59.0,
+        "entry_price": 100.28,
+        "current_price": 110.55,
+        "market_value": 6522.45,
+        "unrealized_pl": 605.93,
+        "unrealized_pl_pct": 10.241
+      },
+      {
+        "ticker": "DG",
+        "shares": 55.0,
+        "entry_price": 109.26,
+        "current_price": 116.085,
+        "market_value": 6384.675,
+        "unrealized_pl": 375.375,
+        "unrealized_pl_pct": 6.247
+      },
+      {
+        "ticker": "COLB",
+        "shares": 200.0,
+        "entry_price": 29.93,
+        "current_price": 31.82,
+        "market_value": 6364.0,
+        "unrealized_pl": 378.0,
+        "unrealized_pl_pct": 6.3149999999999995
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      },
+      {
+        "ticker": "EBAY",
+        "shares": 22.0,
+        "entry_price": 114.06,
+        "current_price": 116.73,
+        "market_value": 2568.06,
+        "unrealized_pl": 58.74,
+        "unrealized_pl_pct": 2.341
+      },
+      {
+        "ticker": "OKE",
+        "shares": 28.0,
+        "entry_price": 89.35,
+        "current_price": 90.225,
+        "market_value": 2526.3,
+        "unrealized_pl": 24.5,
+        "unrealized_pl_pct": 0.979
+      },
+      {
+        "ticker": "ABNB",
+        "shares": 17.0,
+        "entry_price": 148.27,
+        "current_price": 146.71,
+        "market_value": 2494.07,
+        "unrealized_pl": -26.52,
+        "unrealized_pl_pct": -1.052
+      },
+      {
+        "ticker": "AR",
+        "shares": 72.0,
+        "entry_price": 35.13,
+        "current_price": 34.385,
+        "market_value": 2475.72,
+        "unrealized_pl": -53.64,
+        "unrealized_pl_pct": -2.121
+      },
+      {
+        "ticker": "PCAR",
+        "shares": 20.0,
+        "entry_price": 123.31,
+        "current_price": 123.2475,
+        "market_value": 2464.95,
+        "unrealized_pl": -1.25,
+        "unrealized_pl_pct": -0.051000000000000004
+      },
+      {
+        "ticker": "GSK",
+        "shares": 47.0,
+        "entry_price": 53.36,
+        "current_price": 52.3699,
+        "market_value": 2461.3853,
+        "unrealized_pl": -46.5347,
+        "unrealized_pl_pct": -1.856
+      }
+    ]
+  },
+  "warnings": [
+    "Reconciliation cleaned 1 stale records",
+    "Verification: Expected positions not found: IBKR, IVZ, RDDT, AG, BRBR, ONON, AGI, BDX, FTI, EW, EQH, BEAM, PYPL"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 17,
+    "db_positions_before": 9,
+    "stale_closed": 1,
+    "in_sync": 8
+  },
+  "position_drift": {
+    "positions_checked": 17,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260709_090701",
+    "total_trades": 14,
+    "quality_score": 89,
+    "ceo_rating": "EXCELLENT",
+    "ceo_recommendation": "STRONGLY RECOMMEND APPROVAL"
+  },
+  "sells_count": 1,
+  "buys_count": 13,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: IBKR, IVZ, RDDT, AG, BRBR, ONON, AGI, BDX, FTI, EW, EQH, BEAM, PYPL"
+    ],
+    "summary": {
+      "position_count": 16,
+      "sells_executed": 1,
+      "buys_executed": 13,
+      "expected_count_change": 12
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 6,
+    "fills_recorded": 1,
+    "orders_updated": 1,
+    "already_recorded": 5,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-07-09T09:07:29.726632",
+  "duration_seconds": 446.875452
+}

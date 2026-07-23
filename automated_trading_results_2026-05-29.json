@@ -1,0 +1,281 @@
+{
+  "date": "2026-05-29",
+  "start_time": "2026-05-29T09:00:03.785568",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "12:00 PM ET",
+    "current_date": "Friday, May 29, 2026"
+  },
+  "regime_analysis": {
+    "regime": "BULLISH",
+    "confidence": "MEDIUM",
+    "spy_price": 756.6199951171875,
+    "spy_change_pct": 0.2676940891339785,
+    "vix_level": 15.369999885559082,
+    "recommendation": "FAVORABLE CONDITIONS"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "HALO",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260529T160717Z_83671081"
+    },
+    {
+      "ticker": "HST",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260529T160718Z_9ffb29ff",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "PATH",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260529T160718Z_947c41a0",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "G",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260529T160718Z_0232e89f",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "DG",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260529T160718Z_5bff867d",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "LYFT",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260529T160718Z_8c9ffa47",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "KDP",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260529T160718Z_42366fcc",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "C",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260529T160718Z_f9a63b82",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "NXT",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260529T160718Z_60b24c39",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "GFS",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260529T160718Z_1fbbb081",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "IVZ",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260529T160718Z_2fb919e0",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "DHR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260529T160718Z_2e5386e7",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "IREN",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260529T160718Z_6802a118",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ALLY",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260529T160718Z_b0bd80c4",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ON",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260529T160718Z_2d4b0fc0",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "FOXA",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260529T160718Z_21c694a4",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-05-29T09:07:38.984198",
+    "equity": 113750.1,
+    "cash": 7623.3,
+    "buying_power": 117663.33,
+    "portfolio_value": 113750.1,
+    "starting_capital": 100000.0,
+    "total_return": 13750.100000000006,
+    "total_return_pct": 13.750100000000007,
+    "daily_pl": 3653.270000000004,
+    "daily_pl_pct": 3.3182335949182225,
+    "total_unrealized_pl": 12990.484999999999,
+    "position_count": 11,
+    "positions": [
+      {
+        "ticker": "ALAB",
+        "shares": 51.0,
+        "entry_price": 125.28,
+        "current_price": 340.61,
+        "market_value": 17371.11,
+        "unrealized_pl": 10981.83,
+        "unrealized_pl_pct": 171.879
+      },
+      {
+        "ticker": "EW",
+        "shares": 121.0,
+        "entry_price": 82.2,
+        "current_price": 86.76,
+        "market_value": 10497.96,
+        "unrealized_pl": 551.76,
+        "unrealized_pl_pct": 5.547
+      },
+      {
+        "ticker": "CNM",
+        "shares": 200.0,
+        "entry_price": 49.03,
+        "current_price": 49.75,
+        "market_value": 9950.0,
+        "unrealized_pl": 144.0,
+        "unrealized_pl_pct": 1.468
+      },
+      {
+        "ticker": "HAYW",
+        "shares": 698.0,
+        "entry_price": 14.04,
+        "current_price": 14.145,
+        "market_value": 9873.21,
+        "unrealized_pl": 73.29,
+        "unrealized_pl_pct": 0.748
+      },
+      {
+        "ticker": "MMM",
+        "shares": 64.0,
+        "entry_price": 152.55,
+        "current_price": 153.94,
+        "market_value": 9852.16,
+        "unrealized_pl": 88.96,
+        "unrealized_pl_pct": 0.911
+      },
+      {
+        "ticker": "BAH",
+        "shares": 116.0,
+        "entry_price": 78.25,
+        "current_price": 80.45,
+        "market_value": 9332.2,
+        "unrealized_pl": 255.2,
+        "unrealized_pl_pct": 2.812
+      },
+      {
+        "ticker": "ACN",
+        "shares": 50.0,
+        "entry_price": 178.96,
+        "current_price": 183.8,
+        "market_value": 9190.0,
+        "unrealized_pl": 242.0,
+        "unrealized_pl_pct": 2.705
+      },
+      {
+        "ticker": "COLB",
+        "shares": 305.0,
+        "entry_price": 29.69,
+        "current_price": 29.725,
+        "market_value": 9066.125,
+        "unrealized_pl": 10.675,
+        "unrealized_pl_pct": 0.11800000000000001
+      },
+      {
+        "ticker": "GSK",
+        "shares": 176.0,
+        "entry_price": 51.33,
+        "current_price": 50.73,
+        "market_value": 8928.48,
+        "unrealized_pl": -105.6,
+        "unrealized_pl_pct": -1.169
+      },
+      {
+        "ticker": "GNTX",
+        "shares": 343.0,
+        "entry_price": 21.87,
+        "current_price": 24.36,
+        "market_value": 8355.48,
+        "unrealized_pl": 854.07,
+        "unrealized_pl_pct": 11.385000000000002
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [
+    "Reconciliation cleaned 2 stale records",
+    "Verification: Expected positions not found: NXT, PATH, ALLY, C, DG, LYFT, HST, G, DHR, ON, GFS, FOXA, KDP, IVZ, IREN"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 12,
+    "db_positions_before": 13,
+    "stale_closed": 2,
+    "in_sync": 11
+  },
+  "position_drift": {
+    "positions_checked": 12,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260529_090713",
+    "total_trades": 16,
+    "quality_score": 100,
+    "ceo_rating": "EXCELLENT",
+    "ceo_recommendation": "STRONGLY RECOMMEND APPROVAL"
+  },
+  "sells_count": 1,
+  "buys_count": 15,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: NXT, PATH, ALLY, C, DG, LYFT, HST, G, DHR, ON, GFS, FOXA, KDP, IVZ, IREN"
+    ],
+    "summary": {
+      "position_count": 11,
+      "sells_executed": 1,
+      "buys_executed": 15,
+      "expected_count_change": 14
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 6,
+    "fills_recorded": 1,
+    "orders_updated": 1,
+    "already_recorded": 5,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-05-29T09:07:40.434591",
+  "duration_seconds": 456.649037
+}

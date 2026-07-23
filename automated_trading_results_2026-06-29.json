@@ -1,0 +1,266 @@
+{
+  "date": "2026-06-29",
+  "start_time": "2026-06-29T09:00:45.252043",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "12:02 PM ET",
+    "current_date": "Monday, June 29, 2026"
+  },
+  "regime_analysis": {
+    "regime": "BULLISH",
+    "confidence": "HIGH",
+    "spy_price": 738.8175048828125,
+    "spy_change_pct": 1.3481000809459525,
+    "vix_level": 17.989999771118164,
+    "recommendation": "GOOD DAY TO TRADE"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "IBKR",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260629T161426Z_edee309c"
+    },
+    {
+      "ticker": "LYFT",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260629T161427Z_5fc4f8a0",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "EW",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260629T161427Z_257f800e",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ASX",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260629T161427Z_7b2f8bc8",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "DHR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260629T161427Z_435d14f2"
+    },
+    {
+      "ticker": "GSK",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260629T161427Z_ef514dd3",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ENTG",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260629T161427Z_7c0429d8"
+    },
+    {
+      "ticker": "LEN",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260629T161427Z_c3197a3d",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ABNB",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260629T161427Z_9c2499ba",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "AR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260629T161427Z_cc67f761",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "EBAY",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260629T161427Z_b1e2fa7c",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-06-29T09:14:49.676477",
+    "equity": 110855.34,
+    "cash": 5707.48,
+    "buying_power": 306855.73,
+    "portfolio_value": 110855.34,
+    "starting_capital": 100000.0,
+    "total_return": 10855.339999999997,
+    "total_return_pct": 10.855339999999996,
+    "daily_pl": 2766.300000000003,
+    "daily_pl_pct": 2.559278905613375,
+    "total_unrealized_pl": 6000.749959999999,
+    "position_count": 13,
+    "positions": [
+      {
+        "ticker": "AFRM",
+        "shares": 135.0,
+        "entry_price": 74.26,
+        "current_price": 80.64,
+        "market_value": 10886.4,
+        "unrealized_pl": 861.3,
+        "unrealized_pl_pct": 8.591
+      },
+      {
+        "ticker": "HAYW",
+        "shares": 657.0,
+        "entry_price": 15.21,
+        "current_price": 16.435,
+        "market_value": 10797.795,
+        "unrealized_pl": 804.825,
+        "unrealized_pl_pct": 8.054
+      },
+      {
+        "ticker": "ALLY",
+        "shares": 218.0,
+        "entry_price": 45.75,
+        "current_price": 46.755,
+        "market_value": 10192.59,
+        "unrealized_pl": 219.09,
+        "unrealized_pl_pct": 2.197
+      },
+      {
+        "ticker": "ENTG",
+        "shares": 59.0,
+        "entry_price": 167.21,
+        "current_price": 166.98,
+        "market_value": 9851.82,
+        "unrealized_pl": -13.57,
+        "unrealized_pl_pct": -0.13799999999999998
+      },
+      {
+        "ticker": "DHR",
+        "shares": 51.0,
+        "entry_price": 193.00804,
+        "current_price": 192.76,
+        "market_value": 9830.76,
+        "unrealized_pl": -12.65004,
+        "unrealized_pl_pct": -0.129
+      },
+      {
+        "ticker": "GNTX",
+        "shares": 343.0,
+        "entry_price": 21.87,
+        "current_price": 25.195,
+        "market_value": 8641.885,
+        "unrealized_pl": 1140.475,
+        "unrealized_pl_pct": 15.203
+      },
+      {
+        "ticker": "BRO",
+        "shares": 128.0,
+        "entry_price": 58.24,
+        "current_price": 63.66,
+        "market_value": 8148.48,
+        "unrealized_pl": 693.76,
+        "unrealized_pl_pct": 9.306000000000001
+      },
+      {
+        "ticker": "C",
+        "shares": 52.0,
+        "entry_price": 129.9,
+        "current_price": 143.35,
+        "market_value": 7454.2,
+        "unrealized_pl": 699.4,
+        "unrealized_pl_pct": 10.354
+      },
+      {
+        "ticker": "DG",
+        "shares": 55.0,
+        "entry_price": 109.26,
+        "current_price": 117.74,
+        "market_value": 6475.7,
+        "unrealized_pl": 466.4,
+        "unrealized_pl_pct": 7.761
+      },
+      {
+        "ticker": "KMB",
+        "shares": 59.0,
+        "entry_price": 100.28,
+        "current_price": 108.935,
+        "market_value": 6427.165,
+        "unrealized_pl": 510.645,
+        "unrealized_pl_pct": 8.631
+      },
+      {
+        "ticker": "COLB",
+        "shares": 200.0,
+        "entry_price": 29.93,
+        "current_price": 31.95,
+        "market_value": 6390.0,
+        "unrealized_pl": 404.0,
+        "unrealized_pl_pct": 6.749
+      },
+      {
+        "ticker": "M",
+        "shares": 261.0,
+        "entry_price": 23.02,
+        "current_price": 24.295,
+        "market_value": 6340.995,
+        "unrealized_pl": 332.775,
+        "unrealized_pl_pct": 5.539000000000001
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [
+    "Verification: Expected positions not found: ABNB, AR, ASX, GSK, EBAY, LEN, EW, LYFT"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 12,
+    "db_positions_before": 11,
+    "stale_closed": 0,
+    "in_sync": 11
+  },
+  "position_drift": {
+    "positions_checked": 12,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260629_091421",
+    "total_trades": 11,
+    "quality_score": 85,
+    "ceo_rating": "EXCELLENT",
+    "ceo_recommendation": "STRONGLY RECOMMEND APPROVAL"
+  },
+  "sells_count": 1,
+  "buys_count": 10,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: ABNB, AR, ASX, GSK, EBAY, LEN, EW, LYFT"
+    ],
+    "summary": {
+      "position_count": 13,
+      "sells_executed": 1,
+      "buys_executed": 10,
+      "expected_count_change": 9
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 3,
+    "fills_recorded": 3,
+    "orders_updated": 3,
+    "already_recorded": 0,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-06-29T09:14:51.480945",
+  "duration_seconds": 846.228918
+}

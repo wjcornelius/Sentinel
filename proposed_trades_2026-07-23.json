@@ -1,0 +1,188 @@
+{
+  "plan_id": "PLAN_20260723_090816",
+  "generated_at": "2026-07-23T16:08:16.486426Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 10,
+    "research_candidates": 68,
+    "gpt5_selected": 10,
+    "compliance_flagged": 0,
+    "overall_quality_score": 90
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 62,
+    "compliance_advisory": 100
+  },
+  "trades": [
+    {
+      "ticker": "AR",
+      "action": "BUY",
+      "shares": 45,
+      "allocated_capital": 1627.785083770752,
+      "entry_price": 35.58000183105469,
+      "composite_score": 72.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "JCI",
+      "action": "BUY",
+      "shares": 11,
+      "allocated_capital": 1618.1999588012695,
+      "entry_price": 143.83999633789062,
+      "composite_score": 68.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "MGY",
+      "action": "BUY",
+      "shares": 61,
+      "allocated_capital": 1620.2174577713013,
+      "entry_price": 26.344999313354492,
+      "composite_score": 67.2,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "MDLZ",
+      "action": "BUY",
+      "shares": 27,
+      "allocated_capital": 1618.7850494384766,
+      "entry_price": 59.95500183105469,
+      "composite_score": 65.6,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "DOCN",
+      "action": "BUY",
+      "shares": 12,
+      "allocated_capital": 1611.659912109375,
+      "entry_price": 134.30499267578125,
+      "composite_score": 62.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "EQT",
+      "action": "BUY",
+      "shares": 30,
+      "allocated_capital": 1619.1000366210938,
+      "entry_price": 53.970001220703125,
+      "composite_score": 62.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "EMR",
+      "action": "BUY",
+      "shares": 11,
+      "allocated_capital": 1614.7124862670898,
+      "entry_price": 143.52999877929688,
+      "composite_score": 61.2,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "HAL",
+      "action": "BUY",
+      "shares": 49,
+      "allocated_capital": 1635.974962234497,
+      "entry_price": 33.04999923706055,
+      "composite_score": 60.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "DG",
+      "action": "SELL",
+      "shares": 55.0,
+      "sell_pct": 100,
+      "composite_score": 53.0,
+      "current_price": 114.93000030517578,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 53.0 < 60 absolute minimum",
+      "current_value": 6333.25
+    },
+    {
+      "ticker": "GILD",
+      "action": "SELL",
+      "shares": 55.0,
+      "sell_pct": 100,
+      "composite_score": 54.5,
+      "current_price": 130.0500030517578,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 54.5 < 60 absolute minimum",
+      "current_value": 7154.4
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 68 candidates (avg score: 43.7)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 80/80 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 2 SELLs, 8 BUYs ($12,966 allocated)",
+      "quality_score": 62,
+      "issues": [
+        "Capital deployment 59.3% (target 90.0%+)",
+        "Limited diversification: 8 new positions (target 12-20). Total after trades: 18"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 8 BUYs approved, 0 rejected, 2 SELLs",
+      "quality_score": 100,
+      "issues": []
+    }
+  ],
+  "approved_at": "2026-07-23T16:08:23.612704Z"
+}

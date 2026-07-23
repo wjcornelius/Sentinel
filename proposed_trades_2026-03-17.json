@@ -1,0 +1,122 @@
+{
+  "plan_id": "PLAN_20260317_090845",
+  "generated_at": "2026-03-17T16:08:45.937600Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 5,
+    "research_candidates": 71,
+    "gpt5_selected": 5,
+    "compliance_flagged": 0,
+    "overall_quality_score": 85
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 43,
+    "compliance_advisory": 100
+  },
+  "trades": [
+    {
+      "ticker": "ADMA",
+      "action": "BUY",
+      "shares": 627,
+      "allocated_capital": 10000,
+      "entry_price": 15.9399995803833,
+      "composite_score": 71.8,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "ADMA Biologics announced a $200 million capital return plan for 2026, including a $125 million accelerated share repurchase, driving a 6.49% stock price increase.[1] Recent earnings showed EPS beating estimates by $0.03 at $0.2132, though revenue slightly missed at $139.16M versus $139.85M expected.[2] CEO Adam Grossman sold 21,000 shares at $16.08 under a pre-planned 10b5-1 rule after exercising options, while retaining significant holdings.[3]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BMNR",
+      "action": "BUY",
+      "shares": 432,
+      "allocated_capital": 10000,
+      "entry_price": 23.139999389648438,
+      "composite_score": 63.2,
+      "sentiment_score": 72.0,
+      "sentiment_summary": "Bitmine Immersion Technologies (BMNR) announced ETH holdings reaching 4.535 million tokens with total crypto and cash holdings of $10.3 billion, including $1.2 billion in cash and strong staking revenues of $174 million annualized[3]. A prior update noted 4.423 million ETH and $9.6 billion total holdings, with progress on the MAVAN staking solution for Q1 2026[4]. Major investors like Marex Group and Goldman Sachs significantly increased their BMNR stakes, despite a recent analyst price target cut to $43.86 from $49.64[2].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "EW",
+      "action": "BUY",
+      "shares": 119,
+      "allocated_capital": 10000,
+      "entry_price": 83.98500061035156,
+      "composite_score": 61.8,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "Analyst coverage highlights an 18.16% upside potential for Edwards Lifesciences (EW) stock with an average target price of $96.46 and predominantly buy ratings (21 buys, 12 holds, 0 sells).[1] Recent performance shows positive trends including +1.70% over 1 day and +9.16% over 1 week, alongside an upcoming presentation at the Leerink Global Healthcare Conference on March 11, 2026.[2] One institutional investor reduced its position by 34.78%, though no specific news from the last 24 hours dominates.[4]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ADM",
+      "action": "BUY",
+      "shares": 137,
+      "allocated_capital": 10000,
+      "entry_price": 72.875,
+      "composite_score": 60.6,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "ADM stock surged 3.19% on March 17, reaching an intraday high of $73.08, and hit a 52-week high of $70.56[1][2]. However, broader agricultural markets experienced sharp declines on March 16 with commodity prices falling $0.08 to $0.13, and analyst consensus leans toward 'Hold' with a price target implying 12.5% downside[3].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BX",
+      "action": "BUY",
+      "shares": 90,
+      "allocated_capital": 10000,
+      "entry_price": 110.58000183105469,
+      "composite_score": 60.6,
+      "sentiment_score": 55.0,
+      "sentiment_summary": "Blackstone (BX) stock rose 4.2% today amid a rebound in private credit stocks, recovering from a prior 4.3% drop due to JPMorgan's lending restrictions signaling market stress[1]. The company announced a majority stake acquisition in Advanced Cooling Technologies via its Energy Transition Partners, viewed very positively for thermal management in data centers[4]. However, ongoing concerns persist with premium valuation, downward earnings revisions, and a 28.2% three-month decline amid private credit woes[2][3].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 71 candidates (avg score: 42.2)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 81/81 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 0 SELLs, 5 BUYs ($50,000 allocated)",
+      "quality_score": 43,
+      "issues": [
+        "Capital deployment 43.6% (target 90.0%+)",
+        "Limited diversification: 5 new positions (target 12-20). Total after trades: 15"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 5 BUYs approved, 0 rejected, 0 SELLs",
+      "quality_score": 100,
+      "issues": []
+    }
+  ],
+  "approved_at": "2026-03-17T16:08:47.433575Z"
+}

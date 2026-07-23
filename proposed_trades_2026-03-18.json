@@ -1,0 +1,146 @@
+{
+  "plan_id": "PLAN_20260318_090823",
+  "generated_at": "2026-03-18T16:08:23.409602Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 7,
+    "research_candidates": 69,
+    "gpt5_selected": 7,
+    "compliance_flagged": 0,
+    "overall_quality_score": 83
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 32,
+    "compliance_advisory": 100
+  },
+  "trades": [
+    {
+      "ticker": "FTNT",
+      "action": "BUY",
+      "shares": 89,
+      "allocated_capital": 7500.0,
+      "entry_price": 83.43000030517578,
+      "composite_score": 67.4,
+      "sentiment_score": 45.0,
+      "sentiment_summary": "No news articles from the last 24 hours (since March 17, 2026, 4 PM UTC) were found in the search results. Recent coverage from early March highlights Fortinet's Q4 earnings beat with EPS of $0.81 versus $0.74 expected and revenue of $1.91 billion versus $1.86 billion, plus a 13% billings growth forecast for 2026.[1][3] Analyst consensus remains a Hold rating with a $88.62 target price, amid mixed views including a new underweight initiation by Wells Fargo at $64.[3]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BMNR",
+      "action": "BUY",
+      "shares": 340,
+      "allocated_capital": 7500.0,
+      "entry_price": 22.040000915527344,
+      "composite_score": 64.4,
+      "sentiment_score": 78.0,
+      "sentiment_summary": "Bitmine Immersion Technologies (BMNR) reported its largest ETH purchase of 2026 last week, acquiring 60,999 ETH to reach total holdings of 4.6 million ETH valued at $10 billion, plus $1.2 billion in cash.[1][2][3] Staking operations from these holdings generate $180 million in annualized revenue, with potential to increase to $272-358 million upon full deployment.[1][2][3] The stock rose nearly 9% pre-market on Monday amid an ETH rebound, trading near its net asset value per share of $23.[1][3]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "DAR",
+      "action": "BUY",
+      "shares": 130,
+      "allocated_capital": 7500.0,
+      "entry_price": 57.34000015258789,
+      "composite_score": 63.6,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "I cannot provide a JSON response as requested because the search results do not contain news from the last 24 hours. The most recent dated news in the results is from **March 12, 2026** (a Zacks analy",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "SRAD",
+      "action": "BUY",
+      "shares": 401,
+      "allocated_capital": 7500.0,
+      "entry_price": 18.69499969482422,
+      "composite_score": 62.6,
+      "sentiment_score": 65.0,
+      "sentiment_summary": "Sportradar reported record 2025 revenue of \u20ac1.29 billion and expanded its share buyback program to $1 billion, signaling confidence in undervaluation despite an 11% stock drop on March 3, 2026, due to conservative 2026 guidance of 23-25% revenue growth missing higher expectations[1][3]. Analysts largely maintained Buy ratings with price targets implying significant upside from current levels around $18-23, though some firms like Wells Fargo lowered targets while keeping overweight ratings[2][3].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ADMA",
+      "action": "BUY",
+      "shares": 495,
+      "allocated_capital": 7500.0,
+      "entry_price": 15.130000114440918,
+      "composite_score": 61.8,
+      "sentiment_score": 75.0,
+      "sentiment_summary": "No news articles from the last 24 hours (since March 17, 2026, 4 PM UTC) were identified in the search results. The most recent item is ADMA Biologics' announcement on March 2, 2026, of a $125 million accelerated share repurchase with JPMorgan as part of a $200 million 2026 buyback program, signaling strong confidence in undervaluation and long-term value.[1] Recent analyst reports highlight bullish outlooks with unanimous buy ratings and average price targets of $25.67, implying 59-65% upside from current levels around $16.[2][3]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "AA",
+      "action": "SELL",
+      "shares": 117.0,
+      "sell_pct": 100,
+      "composite_score": 56.0,
+      "current_price": NaN,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "American Airlines raised its Q1 2026 revenue outlook above 10% year-over-year growth on March 17, 2026, indicating strong travel demand and premium seating performance.[3] However, this positive outlook is tempered by management warnings of rising fuel costs and non-fuel unit cost increases of 4-5%, which could pressure profitability.[3]",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 56.0 < 60 absolute minimum",
+      "current_value": 7600.32
+    },
+    {
+      "ticker": "CRDO",
+      "action": "SELL",
+      "shares": 64.0,
+      "sell_pct": 100,
+      "composite_score": 52.0,
+      "current_price": 103.28500366210938,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "I cannot provide the analysis you've requested because the search results do not contain news from the last 24 hours. The most recent earnings-related news in these results dates to March 2-3, 2026\u2014ap",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 52.0 < 60 absolute minimum",
+      "current_value": 6623.04
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 69 candidates (avg score: 42.4)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 79/79 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 2 SELLs, 5 BUYs ($37,500 allocated)",
+      "quality_score": 32,
+      "issues": [
+        "Capital deployment 29.0% (target 90.0%+)",
+        "Limited diversification: 5 new positions (target 12-20). Total after trades: 13"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 5 BUYs approved, 0 rejected, 2 SELLs",
+      "quality_score": 100,
+      "issues": []
+    }
+  ],
+  "approved_at": "2026-03-18T16:08:27.030821Z"
+}

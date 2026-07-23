@@ -1,0 +1,298 @@
+{
+  "date": "2026-07-16",
+  "start_time": "2026-07-16T09:00:02.424393",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "12:00 PM ET",
+    "current_date": "Thursday, July 16, 2026"
+  },
+  "regime_analysis": {
+    "regime": "NEUTRAL",
+    "confidence": "MEDIUM",
+    "spy_price": 753.4500122070312,
+    "spy_change_pct": -0.18017585299099437,
+    "vix_level": 16.040000915527344,
+    "recommendation": "NORMAL CONDITIONS"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "EBAY",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260716T160824Z_049004a4"
+    },
+    {
+      "ticker": "RBRK",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260716T160824Z_9b8b4656"
+    },
+    {
+      "ticker": "RDDT",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260716T160825Z_f1f179f4",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ABNB",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260716T160825Z_a62bb8a0",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "EBC",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260716T160825Z_11a318f2",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "NKE",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260716T160825Z_92cf7a91",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "MAT",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260716T160825Z_2313b2d7",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "SBRA",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260716T160825Z_771b136c",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "LEVI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260716T160825Z_01e35d83",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BDX",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260716T160825Z_b001e59e",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "GNTX",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260716T160825Z_d08e0b1b",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "AG",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260716T160825Z_398a9e35",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ALLY",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260716T160825Z_02a3cfff",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "GSK",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260716T160825Z_a1a1149b",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "GTLB",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260716T160825Z_0d83e3ec",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ROL",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260716T160825Z_c9feb70e",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-07-16T09:08:47.791821",
+    "equity": 107751.5,
+    "cash": 16347.57,
+    "buying_power": 310933.09,
+    "portfolio_value": 107751.5,
+    "starting_capital": 100000.0,
+    "total_return": 7751.5,
+    "total_return_pct": 7.7515,
+    "daily_pl": 4906.75,
+    "daily_pl_pct": 4.771026231285505,
+    "total_unrealized_pl": 3354.670011,
+    "position_count": 13,
+    "positions": [
+      {
+        "ticker": "DHR",
+        "shares": 51.0,
+        "entry_price": 193.008039,
+        "current_price": 203.36,
+        "market_value": 10371.36,
+        "unrealized_pl": 527.950011,
+        "unrealized_pl_pct": 5.3629999999999995
+      },
+      {
+        "ticker": "RRC",
+        "shares": 279.0,
+        "entry_price": 35.67,
+        "current_price": 36.25,
+        "market_value": 10113.75,
+        "unrealized_pl": 161.82,
+        "unrealized_pl_pct": 1.6260000000000001
+      },
+      {
+        "ticker": "BMNR",
+        "shares": 625.0,
+        "entry_price": 16.14,
+        "current_price": 15.625,
+        "market_value": 9765.625,
+        "unrealized_pl": -321.875,
+        "unrealized_pl_pct": -3.1910000000000003
+      },
+      {
+        "ticker": "BRO",
+        "shares": 128.0,
+        "entry_price": 58.24,
+        "current_price": 69.075,
+        "market_value": 8841.6,
+        "unrealized_pl": 1386.88,
+        "unrealized_pl_pct": 18.604000000000003
+      },
+      {
+        "ticker": "MGY",
+        "shares": 283.0,
+        "entry_price": 26.52,
+        "current_price": 27.03,
+        "market_value": 7649.49,
+        "unrealized_pl": 144.33,
+        "unrealized_pl_pct": 1.923
+      },
+      {
+        "ticker": "ONON",
+        "shares": 197.0,
+        "entry_price": 37.93,
+        "current_price": 38.37,
+        "market_value": 7558.89,
+        "unrealized_pl": 86.68,
+        "unrealized_pl_pct": 1.16
+      },
+      {
+        "ticker": "FTI",
+        "shares": 102.0,
+        "entry_price": 73.37,
+        "current_price": 72.11,
+        "market_value": 7355.22,
+        "unrealized_pl": -128.52,
+        "unrealized_pl_pct": -1.717
+      },
+      {
+        "ticker": "GILD",
+        "shares": 55.0,
+        "entry_price": 135.81,
+        "current_price": 132.93,
+        "market_value": 7311.15,
+        "unrealized_pl": -158.4,
+        "unrealized_pl_pct": -2.121
+      },
+      {
+        "ticker": "DG",
+        "shares": 55.0,
+        "entry_price": 109.26,
+        "current_price": 126.175,
+        "market_value": 6939.625,
+        "unrealized_pl": 930.325,
+        "unrealized_pl_pct": 15.481
+      },
+      {
+        "ticker": "COLB",
+        "shares": 200.0,
+        "entry_price": 29.93,
+        "current_price": 33.365,
+        "market_value": 6673.0,
+        "unrealized_pl": 687.0,
+        "unrealized_pl_pct": 11.477
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      },
+      {
+        "ticker": "OKE",
+        "shares": 28.0,
+        "entry_price": 89.35,
+        "current_price": 92.81,
+        "market_value": 2598.68,
+        "unrealized_pl": 96.88,
+        "unrealized_pl_pct": 3.872
+      },
+      {
+        "ticker": "PCAR",
+        "shares": 20.0,
+        "entry_price": 123.31,
+        "current_price": 125.675,
+        "market_value": 2513.5,
+        "unrealized_pl": 47.3,
+        "unrealized_pl_pct": 1.918
+      }
+    ]
+  },
+  "warnings": [
+    "Reconciliation cleaned 1 stale records",
+    "Verification: Expected positions not found: EBC, RDDT, ABNB, GSK, AG, MAT, GTLB, GNTX, LEVI, ALLY, SBRA, NKE, ROL, BDX"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 15,
+    "db_positions_before": 11,
+    "stale_closed": 1,
+    "in_sync": 10
+  },
+  "position_drift": {
+    "positions_checked": 15,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260716_090815",
+    "total_trades": 16,
+    "quality_score": 90,
+    "ceo_rating": "EXCELLENT",
+    "ceo_recommendation": "STRONGLY RECOMMEND APPROVAL"
+  },
+  "sells_count": 2,
+  "buys_count": 14,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: EBC, RDDT, ABNB, GSK, AG, MAT, GTLB, GNTX, LEVI, ALLY, SBRA, NKE, ROL, BDX"
+    ],
+    "summary": {
+      "position_count": 13,
+      "sells_executed": 2,
+      "buys_executed": 14,
+      "expected_count_change": 12
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 5,
+    "fills_recorded": 2,
+    "orders_updated": 2,
+    "already_recorded": 3,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-07-16T09:08:50.036726",
+  "duration_seconds": 527.612348
+}

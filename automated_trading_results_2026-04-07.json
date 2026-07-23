@@ -1,0 +1,260 @@
+{
+  "date": "2026-04-07",
+  "start_time": "2026-04-07T09:00:03.415848",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "12:00 PM ET",
+    "current_date": "Tuesday, April 07, 2026"
+  },
+  "regime_analysis": {
+    "regime": "BEARISH",
+    "confidence": "HIGH",
+    "spy_price": 653.8900146484375,
+    "spy_change_pct": -0.7648730644172713,
+    "vix_level": 26.739999771118164,
+    "recommendation": "UNFAVORABLE CONDITIONS"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "DOCN",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260407T160716Z_7d676b48"
+    },
+    {
+      "ticker": "IAG",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260407T160716Z_7cdc883f",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "HST",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260407T160716Z_e5bb2805",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "HMY",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260407T160716Z_270de4ca"
+    },
+    {
+      "ticker": "DOCU",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260407T160716Z_aedbfcc4"
+    },
+    {
+      "ticker": "ARM",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260407T160716Z_47f77f30",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "AMKR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260407T160716Z_309ea675",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CDE",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260407T160716Z_77a88494",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BBY",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260407T160716Z_20b96ff4",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "EGO",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260407T160716Z_02c7f5c0",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CNM",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260407T160716Z_c71b2942",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CRDO",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260407T160716Z_b7e269e6",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "DHR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260407T160716Z_8a67bb56",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-04-07T09:07:40.747212",
+    "equity": 102688.74,
+    "cash": 9496.22,
+    "buying_power": 108474.89,
+    "portfolio_value": 102688.74,
+    "starting_capital": 100000.0,
+    "total_return": 2688.7400000000052,
+    "total_return_pct": 2.688740000000005,
+    "daily_pl": 3489.4400000000023,
+    "daily_pl_pct": 3.5176054669740635,
+    "total_unrealized_pl": 5065.185,
+    "position_count": 11,
+    "positions": [
+      {
+        "ticker": "CF",
+        "shares": 107.0,
+        "entry_price": 92.61,
+        "current_price": 134.45,
+        "market_value": 14386.15,
+        "unrealized_pl": 4476.88,
+        "unrealized_pl_pct": 45.179
+      },
+      {
+        "ticker": "EXEL",
+        "shares": 233.0,
+        "entry_price": 42.85,
+        "current_price": 44.25,
+        "market_value": 10310.25,
+        "unrealized_pl": 326.2,
+        "unrealized_pl_pct": 3.267
+      },
+      {
+        "ticker": "BZ",
+        "shares": 751.0,
+        "entry_price": 13.29,
+        "current_price": 13.265,
+        "market_value": 9962.015,
+        "unrealized_pl": -18.775,
+        "unrealized_pl_pct": -0.188
+      },
+      {
+        "ticker": "GSK",
+        "shares": 177.0,
+        "entry_price": 56.34,
+        "current_price": 55.6,
+        "market_value": 9841.2,
+        "unrealized_pl": -130.98,
+        "unrealized_pl_pct": -1.313
+      },
+      {
+        "ticker": "HL",
+        "shares": 508.0,
+        "entry_price": 19.68,
+        "current_price": 19.2,
+        "market_value": 9753.6,
+        "unrealized_pl": -243.84,
+        "unrealized_pl_pct": -2.439
+      },
+      {
+        "ticker": "SLM",
+        "shares": 380.0,
+        "entry_price": 19.68,
+        "current_price": 21.84,
+        "market_value": 8299.2,
+        "unrealized_pl": 820.8,
+        "unrealized_pl_pct": 10.975999999999999
+      },
+      {
+        "ticker": "ALLY",
+        "shares": 189.0,
+        "entry_price": 39.53,
+        "current_price": 40.07,
+        "market_value": 7573.23,
+        "unrealized_pl": 102.06,
+        "unrealized_pl_pct": 1.366
+      },
+      {
+        "ticker": "GNTX",
+        "shares": 343.0,
+        "entry_price": 21.87,
+        "current_price": 21.405,
+        "market_value": 7341.915,
+        "unrealized_pl": -159.495,
+        "unrealized_pl_pct": -2.1260000000000003
+      },
+      {
+        "ticker": "DOCU",
+        "shares": 126.0,
+        "entry_price": 47.74,
+        "current_price": 47.77,
+        "market_value": 6019.02,
+        "unrealized_pl": 3.78,
+        "unrealized_pl_pct": 0.063
+      },
+      {
+        "ticker": "HMY",
+        "shares": 383.0,
+        "entry_price": 15.67,
+        "current_price": 15.655,
+        "market_value": 5995.865,
+        "unrealized_pl": -5.745,
+        "unrealized_pl_pct": -0.096
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [
+    "Verification: Expected positions not found: CNM, CRDO, BBY, EGO, ARM, AMKR, IAG, HST, DHR, CDE"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 10,
+    "db_positions_before": 9,
+    "stale_closed": 0,
+    "in_sync": 9
+  },
+  "position_drift": {
+    "positions_checked": 10,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260407_090710",
+    "total_trades": 13,
+    "quality_score": 95,
+    "ceo_rating": "EXCELLENT",
+    "ceo_recommendation": "STRONGLY RECOMMEND APPROVAL"
+  },
+  "sells_count": 1,
+  "buys_count": 12,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: CNM, CRDO, BBY, EGO, ARM, AMKR, IAG, HST, DHR, CDE"
+    ],
+    "summary": {
+      "position_count": 11,
+      "sells_executed": 1,
+      "buys_executed": 12,
+      "expected_count_change": 11
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 3,
+    "fills_recorded": 3,
+    "orders_updated": 3,
+    "already_recorded": 0,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-04-07T09:07:42.532881",
+  "duration_seconds": 459.117055
+}

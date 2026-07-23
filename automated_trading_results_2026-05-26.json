@@ -1,0 +1,276 @@
+{
+  "date": "2026-05-26",
+  "start_time": "2026-05-26T09:00:04.402824",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "12:00 PM ET",
+    "current_date": "Tuesday, May 26, 2026"
+  },
+  "regime_analysis": {
+    "regime": "BULLISH",
+    "confidence": "MEDIUM",
+    "spy_price": 749.1099853515625,
+    "spy_change_pct": 0.46536809116407996,
+    "vix_level": 16.959999084472656,
+    "recommendation": "FAVORABLE CONDITIONS"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "KDP",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260526T160655Z_3c30e000",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BWA",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260526T160655Z_04e8a605",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "M",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260526T160655Z_2ffaa3ae",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "C",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260526T160655Z_9d7e12a5",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "AKAM",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260526T160655Z_70ec2c3d",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BBY",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260526T160655Z_a6a2a028",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CNM",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260526T160655Z_95ea6dbb",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "GTLB",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260526T160655Z_fa4ab7e6",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "KLAR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260526T160655Z_3c026e90",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CCI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260526T160655Z_afbc4544",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "DHR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260526T160655Z_1064b9ec",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "G",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260526T160655Z_6179fbb8",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "AMKR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260526T160655Z_4755ebc8",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "GLW",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260526T160655Z_3c165c8b",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CORZ",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260526T160655Z_0d85dd59",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-05-26T09:07:17.308424",
+    "equity": 112573.9,
+    "cash": 10054.07,
+    "buying_power": 118917.9,
+    "portfolio_value": 112573.9,
+    "starting_capital": 100000.0,
+    "total_return": 12573.899999999994,
+    "total_return_pct": 12.573899999999993,
+    "daily_pl": 4145.619999999995,
+    "daily_pl_pct": 3.8233752301521298,
+    "total_unrealized_pl": 11261.482100000001,
+    "position_count": 11,
+    "positions": [
+      {
+        "ticker": "ALAB",
+        "shares": 51.0,
+        "entry_price": 125.28,
+        "current_price": 312.0,
+        "market_value": 15912.0,
+        "unrealized_pl": 9522.72,
+        "unrealized_pl_pct": 149.042
+      },
+      {
+        "ticker": "EW",
+        "shares": 121.0,
+        "entry_price": 82.2,
+        "current_price": 87.1101,
+        "market_value": 10540.3221,
+        "unrealized_pl": 594.1221,
+        "unrealized_pl_pct": 5.973
+      },
+      {
+        "ticker": "HALO",
+        "shares": 148.0,
+        "entry_price": 67.33,
+        "current_price": 69.205,
+        "market_value": 10242.34,
+        "unrealized_pl": 277.5,
+        "unrealized_pl_pct": 2.785
+      },
+      {
+        "ticker": "EQT",
+        "shares": 168.0,
+        "entry_price": 59.29,
+        "current_price": 56.8,
+        "market_value": 9542.4,
+        "unrealized_pl": -418.32,
+        "unrealized_pl_pct": -4.2
+      },
+      {
+        "ticker": "BAH",
+        "shares": 116.0,
+        "entry_price": 78.25,
+        "current_price": 79.585,
+        "market_value": 9231.86,
+        "unrealized_pl": 154.86,
+        "unrealized_pl_pct": 1.706
+      },
+      {
+        "ticker": "GSK",
+        "shares": 176.0,
+        "entry_price": 51.33,
+        "current_price": 51.74,
+        "market_value": 9106.24,
+        "unrealized_pl": 72.16,
+        "unrealized_pl_pct": 0.799
+      },
+      {
+        "ticker": "COLB",
+        "shares": 305.0,
+        "entry_price": 29.69,
+        "current_price": 29.83,
+        "market_value": 9098.15,
+        "unrealized_pl": 42.7,
+        "unrealized_pl_pct": 0.47200000000000003
+      },
+      {
+        "ticker": "ACN",
+        "shares": 50.0,
+        "entry_price": 178.96,
+        "current_price": 178.44,
+        "market_value": 8922.0,
+        "unrealized_pl": -26.0,
+        "unrealized_pl_pct": -0.291
+      },
+      {
+        "ticker": "GNTX",
+        "shares": 343.0,
+        "entry_price": 21.87,
+        "current_price": 23.75,
+        "market_value": 8146.25,
+        "unrealized_pl": 644.84,
+        "unrealized_pl_pct": 8.596
+      },
+      {
+        "ticker": "EBAY",
+        "shares": 70.0,
+        "entry_price": 108.08,
+        "current_price": 115.26,
+        "market_value": 8068.2,
+        "unrealized_pl": 502.6,
+        "unrealized_pl_pct": 6.643000000000001
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [
+    "Reconciliation cleaned 1 stale records",
+    "Verification: Expected positions not found: CCI, G, CORZ, AMKR, BWA, BBY, C, AKAM, DHR, CNM, GTLB, KLAR, M, GLW, KDP"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 11,
+    "db_positions_before": 11,
+    "stale_closed": 1,
+    "in_sync": 10
+  },
+  "position_drift": {
+    "positions_checked": 11,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260526_090653",
+    "total_trades": 15,
+    "quality_score": 98,
+    "ceo_rating": "EXCELLENT",
+    "ceo_recommendation": "STRONGLY RECOMMEND APPROVAL"
+  },
+  "sells_count": 0,
+  "buys_count": 15,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: CCI, G, CORZ, AMKR, BWA, BBY, C, AKAM, DHR, CNM, GTLB, KLAR, M, GLW, KDP"
+    ],
+    "summary": {
+      "position_count": 11,
+      "sells_executed": 0,
+      "buys_executed": 15,
+      "expected_count_change": 15
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 1,
+    "fills_recorded": 1,
+    "orders_updated": 1,
+    "already_recorded": 0,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-05-26T09:07:19.196909",
+  "duration_seconds": 434.7941
+}

@@ -1,0 +1,282 @@
+{
+  "date": "2026-06-10",
+  "start_time": "2026-06-10T09:00:02.557985",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "12:00 PM ET",
+    "current_date": "Wednesday, June 10, 2026"
+  },
+  "regime_analysis": {
+    "regime": "BEARISH",
+    "confidence": "HIGH",
+    "spy_price": 731.8599853515625,
+    "spy_change_pct": -0.704158812477191,
+    "vix_level": 21.540000915527344,
+    "recommendation": "UNFAVORABLE CONDITIONS"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "ALLY",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260610T160734Z_052c4b89"
+    },
+    {
+      "ticker": "GSK",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260610T160734Z_06862d67"
+    },
+    {
+      "ticker": "LVS",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260610T160734Z_ec45da71"
+    },
+    {
+      "ticker": "M",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260610T160736Z_719425e1"
+    },
+    {
+      "ticker": "LYFT",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260610T160736Z_9933c7fe"
+    },
+    {
+      "ticker": "OKE",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260610T160736Z_16aa1eb1"
+    },
+    {
+      "ticker": "CNM",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260610T160736Z_797f7d8a",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "DNOW",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260610T160736Z_d06c5c45",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "DHR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260610T160736Z_b3fcc74c",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "IBKR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260610T160736Z_cdb6010a",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "AMKR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260610T160736Z_fd49b087",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-06-10T09:07:59.606037",
+    "equity": 110985.38,
+    "cash": 6438.88,
+    "buying_power": 308097.52,
+    "portfolio_value": 110985.38,
+    "starting_capital": 100000.0,
+    "total_return": 10985.380000000005,
+    "total_return_pct": 10.985380000000005,
+    "daily_pl": 3429.4800000000105,
+    "daily_pl_pct": 3.188555904418085,
+    "total_unrealized_pl": 2276.5400090000003,
+    "position_count": 15,
+    "positions": [
+      {
+        "ticker": "EW",
+        "shares": 121.0,
+        "entry_price": 82.2,
+        "current_price": 86.475,
+        "market_value": 10463.475,
+        "unrealized_pl": 517.275,
+        "unrealized_pl_pct": 5.2010000000000005
+      },
+      {
+        "ticker": "OKE",
+        "shares": 110.0,
+        "entry_price": 90.83,
+        "current_price": 90.75,
+        "market_value": 9982.5,
+        "unrealized_pl": -8.8,
+        "unrealized_pl_pct": -0.08800000000000001
+      },
+      {
+        "ticker": "GNTX",
+        "shares": 343.0,
+        "entry_price": 21.87,
+        "current_price": 25.02,
+        "market_value": 8581.86,
+        "unrealized_pl": 1080.45,
+        "unrealized_pl_pct": 14.402999999999999
+      },
+      {
+        "ticker": "BRO",
+        "shares": 128.0,
+        "entry_price": 58.24,
+        "current_price": 61.175,
+        "market_value": 7830.4,
+        "unrealized_pl": 375.68,
+        "unrealized_pl_pct": 5.039
+      },
+      {
+        "ticker": "CTSH",
+        "shares": 143.0,
+        "entry_price": 52.54,
+        "current_price": 52.63,
+        "market_value": 7526.09,
+        "unrealized_pl": 12.87,
+        "unrealized_pl_pct": 0.17099999999999999
+      },
+      {
+        "ticker": "G",
+        "shares": 232.0,
+        "entry_price": 32.321293,
+        "current_price": 32.35,
+        "market_value": 7505.2,
+        "unrealized_pl": 6.660024,
+        "unrealized_pl_pct": 0.089
+      },
+      {
+        "ticker": "C",
+        "shares": 52.0,
+        "entry_price": 129.9,
+        "current_price": 133.415,
+        "market_value": 6937.58,
+        "unrealized_pl": 182.78,
+        "unrealized_pl_pct": 2.706
+      },
+      {
+        "ticker": "COLB",
+        "shares": 200.0,
+        "entry_price": 29.93,
+        "current_price": 30.48,
+        "market_value": 6096.0,
+        "unrealized_pl": 110.0,
+        "unrealized_pl_pct": 1.838
+      },
+      {
+        "ticker": "DG",
+        "shares": 55.0,
+        "entry_price": 109.26,
+        "current_price": 109.885,
+        "market_value": 6043.675,
+        "unrealized_pl": 34.375,
+        "unrealized_pl_pct": 0.5720000000000001
+      },
+      {
+        "ticker": "FOXA",
+        "shares": 88.0,
+        "entry_price": 67.55,
+        "current_price": 68.48,
+        "market_value": 6026.24,
+        "unrealized_pl": 81.84,
+        "unrealized_pl_pct": 1.377
+      },
+      {
+        "ticker": "M",
+        "shares": 261.0,
+        "entry_price": 23.02,
+        "current_price": 23.03,
+        "market_value": 6010.83,
+        "unrealized_pl": 2.61,
+        "unrealized_pl_pct": 0.043
+      },
+      {
+        "ticker": "KMB",
+        "shares": 59.0,
+        "entry_price": 100.28,
+        "current_price": 101.79,
+        "market_value": 6005.61,
+        "unrealized_pl": 89.09,
+        "unrealized_pl_pct": 1.506
+      },
+      {
+        "ticker": "LYFT",
+        "shares": 434.0,
+        "entry_price": 13.84,
+        "current_price": 13.825,
+        "market_value": 6000.05,
+        "unrealized_pl": -6.51,
+        "unrealized_pl_pct": -0.108
+      },
+      {
+        "ticker": "JCI",
+        "shares": 41.0,
+        "entry_price": 144.463415,
+        "current_price": 142.12,
+        "market_value": 5826.92,
+        "unrealized_pl": -96.080015,
+        "unrealized_pl_pct": -1.6219999999999999
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [
+    "Reconciliation cleaned 6 stale records",
+    "Verification: Expected positions not found: AMKR, DNOW, CNM, DHR, IBKR"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 15,
+    "db_positions_before": 20,
+    "stale_closed": 6,
+    "in_sync": 14
+  },
+  "position_drift": {
+    "positions_checked": 15,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260610_090728",
+    "total_trades": 11,
+    "quality_score": 82,
+    "ceo_rating": "GOOD",
+    "ceo_recommendation": "RECOMMEND APPROVAL"
+  },
+  "sells_count": 3,
+  "buys_count": 8,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: AMKR, DNOW, CNM, DHR, IBKR"
+    ],
+    "summary": {
+      "position_count": 15,
+      "sells_executed": 3,
+      "buys_executed": 8,
+      "expected_count_change": 5
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 20,
+    "fills_recorded": 6,
+    "orders_updated": 6,
+    "already_recorded": 14,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-06-10T09:08:01.422065",
+  "duration_seconds": 478.864106
+}

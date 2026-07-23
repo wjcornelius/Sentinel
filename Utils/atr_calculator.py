@@ -6,10 +6,14 @@ This provides volatility-adjusted stop levels that respect each stock's natural
 price movement patterns.
 
 Key Features:
-- 2x ATR as trailing stop (standard risk management practice)
-- Floor: 3% (never tighter than this - avoids whipsaws)
+- 3x ATR as trailing stop (widened 2026-07-22 — 2x was killing swing thesis
+  on noise. Hold-period bucketing showed <=7 day holds = 19% win rate.)
+- Floor: 5% (widened from 3% — same reason)
 - Ceiling: 15% (never wider than this - limits max loss)
 - Uses 14-day ATR (industry standard)
+- Companion rule (see trading_department.py): first 5 trading days after entry
+  the stop sits at the 15% ceiling to let the swing thesis develop; on day 6
+  it gets replaced with the tighter 3x ATR trailing stop.
 
 Why ATR-Based Stops:
 - Volatile stocks (miners, crypto) need wider stops
@@ -90,8 +94,8 @@ def calculate_atr(ticker: str, period: int = 14, days: int = 30) -> Optional[flo
 def calculate_trailing_stop_percent(
     ticker: str,
     current_price: Optional[float] = None,
-    atr_multiplier: float = 2.0,
-    min_stop_pct: float = 3.0,
+    atr_multiplier: float = 3.0,
+    min_stop_pct: float = 5.0,
     max_stop_pct: float = 15.0
 ) -> Dict:
     """
@@ -100,8 +104,8 @@ def calculate_trailing_stop_percent(
     Args:
         ticker: Stock symbol
         current_price: Current price (fetched if not provided)
-        atr_multiplier: Multiplier for ATR (default 2.0)
-        min_stop_pct: Minimum trailing stop % (floor, default 3%)
+        atr_multiplier: Multiplier for ATR (default 3.0, widened 2026-07-22)
+        min_stop_pct: Minimum trailing stop % (floor, default 5%, widened 2026-07-22)
         max_stop_pct: Maximum trailing stop % (ceiling, default 15%)
 
     Returns:
@@ -158,7 +162,7 @@ def calculate_trailing_stop_percent(
     atr_percent = (atr_value / current_price) * 100
     result['atr_percent'] = atr_percent
 
-    # Calculate trailing stop percentage (2x ATR)
+    # Calculate trailing stop percentage (3x ATR — widened 2026-07-22)
     raw_trail_pct = atr_percent * atr_multiplier
 
     # Apply floor and ceiling

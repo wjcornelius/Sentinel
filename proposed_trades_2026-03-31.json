@@ -1,0 +1,158 @@
+{
+  "plan_id": "PLAN_20260331_090704",
+  "generated_at": "2026-03-31T16:07:04.583197Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 8,
+    "research_candidates": 68,
+    "gpt5_selected": 8,
+    "compliance_flagged": 0,
+    "overall_quality_score": 85
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 40,
+    "compliance_advisory": 100
+  },
+  "trades": [
+    {
+      "ticker": "EXEL",
+      "action": "BUY",
+      "shares": 233,
+      "allocated_capital": 10000,
+      "entry_price": 42.75,
+      "composite_score": 72.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BZ",
+      "action": "BUY",
+      "shares": 751,
+      "allocated_capital": 10000,
+      "entry_price": 13.305000305175781,
+      "composite_score": 72.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "COLB",
+      "action": "BUY",
+      "shares": 368,
+      "allocated_capital": 10000,
+      "entry_price": 27.172399520874023,
+      "composite_score": 70.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "GSK",
+      "action": "BUY",
+      "shares": 183,
+      "allocated_capital": 10000,
+      "entry_price": 54.459999084472656,
+      "composite_score": 68.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "HMY",
+      "action": "BUY",
+      "shares": 665,
+      "allocated_capital": 10000,
+      "entry_price": 15.020000457763672,
+      "composite_score": 60.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "DELL",
+      "action": "SELL",
+      "shares": 67.0,
+      "sell_pct": 100,
+      "composite_score": 51.2,
+      "current_price": 156.0540008544922,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 51.2 < 60 absolute minimum",
+      "current_value": 10445.97
+    },
+    {
+      "ticker": "FOXA",
+      "action": "SELL",
+      "shares": 104.0,
+      "sell_pct": 100,
+      "composite_score": 58.0,
+      "current_price": 58.189998626708984,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 58.0 < 60 absolute minimum",
+      "current_value": 6032.0
+    },
+    {
+      "ticker": "HST",
+      "action": "SELL",
+      "shares": 313.0,
+      "sell_pct": 100,
+      "composite_score": 52.400000000000006,
+      "current_price": 18.989999771118164,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 52.4 < 60 absolute minimum",
+      "current_value": 5948.565
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 68 candidates (avg score: 44.7)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 80/80 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 3 SELLs, 5 BUYs ($50,000 allocated)",
+      "quality_score": 40,
+      "issues": [
+        "Capital deployment 39.6% (target 90.0%+)",
+        "Limited diversification: 5 new positions (target 12-20). Total after trades: 14"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 5 BUYs approved, 0 rejected, 3 SELLs",
+      "quality_score": 100,
+      "issues": []
+    }
+  ],
+  "approved_at": "2026-03-31T16:07:06.878274Z"
+}

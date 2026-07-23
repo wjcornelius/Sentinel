@@ -1,0 +1,28 @@
+{
+  "date": "2026-04-05",
+  "start_time": "2026-04-05T09:00:03.880841",
+  "status": "MARKET_CLOSED",
+  "market_status": {
+    "is_open": false,
+    "status": "CLOSED",
+    "message": "Weekend - Market opens Monday, Apr 06 at 9:30 AM ET",
+    "current_time_et": "12:00 PM ET",
+    "current_date": "Sunday, April 05, 2026",
+    "next_open": "Monday, Apr 06 at 9:30 AM ET"
+  },
+  "regime_analysis": null,
+  "plan_generated": false,
+  "plan_approved": false,
+  "trades_executed": [],
+  "portfolio_state": null,
+  "warnings": [],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 10,
+    "db_positions_before": 9,
+    "stale_closed": 0,
+    "in_sync": 9
+  },
+  "end_time": "2026-04-05T09:00:23.323001",
+  "duration_seconds": 19.442173
+}

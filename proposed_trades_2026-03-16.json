@@ -1,0 +1,94 @@
+{
+  "plan_id": "PLAN_20260316_090837",
+  "generated_at": "2026-03-16T16:08:37.224461Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 3,
+    "research_candidates": 72,
+    "gpt5_selected": 3,
+    "compliance_flagged": 0,
+    "overall_quality_score": 81
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 26,
+    "compliance_advisory": 100
+  },
+  "trades": [
+    {
+      "ticker": "DVN",
+      "action": "BUY",
+      "shares": 214,
+      "allocated_capital": 10000,
+      "entry_price": 46.650001525878906,
+      "composite_score": 75.6,
+      "sentiment_score": 78.0,
+      "sentiment_summary": "Barclays raised its price target on Devon Energy (DVN) from $52 to $54 and maintained an 'overweight' rating, implying approximately 15.62% upside potential.[1] Analyst sentiment is broadly positive with 23 Buy ratings and 7 Hold ratings, and multiple brokerages recently increased price targets into the $52-$55 range.[1] The company recently beat earnings expectations with an EPS of $0.82 versus consensus estimates of $0.81, and reported strong quarterly revenue of $17.19 billion.[1]",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BMNR",
+      "action": "BUY",
+      "shares": 443,
+      "allocated_capital": 10000,
+      "entry_price": 22.530000686645508,
+      "composite_score": 64.4,
+      "sentiment_score": 78.0,
+      "sentiment_summary": "Bitmine Immersion Technologies announced it holds 4.596 million ETH tokens (3.81% of all Ethereum), with total crypto and cash holdings of $11.5 billion as of March 15, 2026. The company reported annualized staking revenues of $180 million and confirmed its MAVAN (Made-in America VAlidator Network) staking infrastructure is on track to launch in Q1 2026. The stock gained 8.46% following the announcement, with analyst price targets averaging $34.50.",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CE",
+      "action": "BUY",
+      "shares": 177,
+      "allocated_capital": 10000,
+      "entry_price": 56.18000030517578,
+      "composite_score": 61.2,
+      "sentiment_score": 72.0,
+      "sentiment_summary": "Celanese announced global price increases across its acetyls product chain effective immediately, demonstrating pricing power in a recovering market[6][7]. The company is in the midst of a sharp recovery with strong analyst backing, including a Wells Fargo upgrade to Overweight citing 'price optimism' and a tightening global supply chain[2].",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 72 candidates (avg score: 40.0)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 82/82 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 0 SELLs, 3 BUYs ($30,000 allocated)",
+      "quality_score": 26,
+      "issues": [
+        "Capital deployment 26.3% (target 90.0%+)",
+        "Limited diversification: 3 new positions (target 12-20). Total after trades: 13"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 3 BUYs approved, 0 rejected, 0 SELLs",
+      "quality_score": 100,
+      "issues": []
+    }
+  ],
+  "approved_at": "2026-03-16T16:08:42.490982Z"
+}

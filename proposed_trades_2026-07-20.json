@@ -1,0 +1,178 @@
+{
+  "plan_id": "PLAN_20260720_090809",
+  "generated_at": "2026-07-20T16:08:09.848730Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 9,
+    "research_candidates": 70,
+    "gpt5_selected": 9,
+    "compliance_flagged": 0,
+    "overall_quality_score": 85
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 40,
+    "compliance_advisory": 100
+  },
+  "trades": [
+    {
+      "ticker": "MTCH",
+      "action": "BUY",
+      "shares": 254,
+      "allocated_capital": 10000,
+      "entry_price": 39.29999923706055,
+      "composite_score": 75.6,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "HAL",
+      "action": "BUY",
+      "shares": 280,
+      "allocated_capital": 10000,
+      "entry_price": 35.6349983215332,
+      "composite_score": 68.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "EBC",
+      "action": "BUY",
+      "shares": 438,
+      "allocated_capital": 10000,
+      "entry_price": 22.81999969482422,
+      "composite_score": 68.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "MDLZ",
+      "action": "BUY",
+      "shares": 167,
+      "allocated_capital": 10000,
+      "entry_price": 59.779998779296875,
+      "composite_score": 65.6,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "NKE",
+      "action": "BUY",
+      "shares": 231,
+      "allocated_capital": 10000,
+      "entry_price": 43.27989959716797,
+      "composite_score": 65.2,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "MAT",
+      "action": "BUY",
+      "shares": 698,
+      "allocated_capital": 10000,
+      "entry_price": 14.324999809265137,
+      "composite_score": 64.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BDX",
+      "action": "BUY",
+      "shares": 64,
+      "allocated_capital": 10000,
+      "entry_price": 155.86000061035156,
+      "composite_score": 64.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "EBAY",
+      "action": "BUY",
+      "shares": 87,
+      "allocated_capital": 10000,
+      "entry_price": 113.98999786376953,
+      "composite_score": 61.6,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "KD",
+      "action": "BUY",
+      "shares": 814,
+      "allocated_capital": 10000,
+      "entry_price": 12.274999618530273,
+      "composite_score": 60.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 70 candidates (avg score: 46.4)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 82/82 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 0 SELLs, 9 BUYs ($90,000 allocated)",
+      "quality_score": 40,
+      "issues": [
+        "Capital deployment 28.8% (target 90.0%+)",
+        "Limited diversification: 9 new positions (target 12-20). Total after trades: 21"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 9 BUYs approved, 0 rejected, 0 SELLs",
+      "quality_score": 100,
+      "issues": []
+    }
+  ],
+  "approved_at": "2026-07-20T16:08:13.270170Z"
+}

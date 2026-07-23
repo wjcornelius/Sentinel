@@ -1,0 +1,223 @@
+{
+  "date": "2026-03-23",
+  "start_time": "2026-03-23T09:00:02.439271",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "12:00 PM ET",
+    "current_date": "Monday, March 23, 2026"
+  },
+  "regime_analysis": {
+    "regime": "BULLISH",
+    "confidence": "MEDIUM",
+    "spy_price": 655.969970703125,
+    "spy_change_pct": 1.1409660168276983,
+    "vix_level": 24.959999084472656,
+    "recommendation": "FAVORABLE CONDITIONS"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "EQT",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260323T160940Z_12482380",
+      "_unfilled_reason": "Position still held"
+    },
+    {
+      "ticker": "OKE",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260323T160940Z_6964c9be",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ALLY",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260323T160940Z_f8f002f3",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "SEI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260323T160940Z_6d11ef6e",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "TTMI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260323T160940Z_97f5d13a",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "SRAD",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260323T160940Z_1af53350",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-03-23T09:09:58.071298",
+    "equity": 101366.94,
+    "cash": 17868.24,
+    "buying_power": 115525.11,
+    "portfolio_value": 101366.94,
+    "starting_capital": 100000.0,
+    "total_return": 1366.9400000000023,
+    "total_return_pct": 1.3669400000000023,
+    "daily_pl": 4475.970000000001,
+    "daily_pl_pct": 4.619594581414554,
+    "total_unrealized_pl": 9264.415,
+    "position_count": 11,
+    "positions": [
+      {
+        "ticker": "CF",
+        "shares": 107.0,
+        "entry_price": 92.61,
+        "current_price": 119.76,
+        "market_value": 12814.32,
+        "unrealized_pl": 2905.05,
+        "unrealized_pl_pct": 29.316
+      },
+      {
+        "ticker": "DELL",
+        "shares": 67.0,
+        "entry_price": 122.94,
+        "current_price": 160.99,
+        "market_value": 10786.33,
+        "unrealized_pl": 2549.35,
+        "unrealized_pl_pct": 30.95
+      },
+      {
+        "ticker": "DOCN",
+        "shares": 110.0,
+        "entry_price": 67.88,
+        "current_price": 87.38,
+        "market_value": 9611.8,
+        "unrealized_pl": 2145.0,
+        "unrealized_pl_pct": 28.727000000000004
+      },
+      {
+        "ticker": "SLM",
+        "shares": 380.0,
+        "entry_price": 19.68,
+        "current_price": 20.24,
+        "market_value": 7691.2,
+        "unrealized_pl": 212.8,
+        "unrealized_pl_pct": 2.846
+      },
+      {
+        "ticker": "RRC",
+        "shares": 167.0,
+        "entry_price": 35.81,
+        "current_price": 44.35,
+        "market_value": 7406.45,
+        "unrealized_pl": 1426.18,
+        "unrealized_pl_pct": 23.848
+      },
+      {
+        "ticker": "DHT",
+        "shares": 421.0,
+        "entry_price": 17.87,
+        "current_price": 17.515,
+        "market_value": 7373.815,
+        "unrealized_pl": -149.455,
+        "unrealized_pl_pct": -1.9869999999999999
+      },
+      {
+        "ticker": "CAVA",
+        "shares": 73.0,
+        "entry_price": 81.12,
+        "current_price": 88.39,
+        "market_value": 6452.47,
+        "unrealized_pl": 530.71,
+        "unrealized_pl_pct": 8.962
+      },
+      {
+        "ticker": "FOXA",
+        "shares": 104.0,
+        "entry_price": 57.39,
+        "current_price": 57.83,
+        "market_value": 6014.32,
+        "unrealized_pl": 45.76,
+        "unrealized_pl_pct": 0.767
+      },
+      {
+        "ticker": "DVN",
+        "shares": 121.0,
+        "entry_price": 49.62,
+        "current_price": 48.18,
+        "market_value": 5829.78,
+        "unrealized_pl": -174.24,
+        "unrealized_pl_pct": -2.902
+      },
+      {
+        "ticker": "EQT",
+        "shares": 89.0,
+        "entry_price": 66.62,
+        "current_price": 65.26,
+        "market_value": 5808.14,
+        "unrealized_pl": -121.04,
+        "unrealized_pl_pct": -2.041
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [
+    "Verification: Still holding positions that should have been sold: EQT",
+    "Verification: Expected positions not found: SEI, OKE, SRAD, ALLY, TTMI"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 11,
+    "db_positions_before": 10,
+    "stale_closed": 0,
+    "in_sync": 10
+  },
+  "position_drift": {
+    "positions_checked": 11,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260323_090936",
+    "total_trades": 6,
+    "quality_score": 85,
+    "ceo_rating": "EXCELLENT",
+    "ceo_recommendation": "STRONGLY RECOMMEND APPROVAL"
+  },
+  "sells_count": 1,
+  "buys_count": 5,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Still holding positions that should have been sold: EQT",
+      "Expected positions not found: SEI, OKE, SRAD, ALLY, TTMI"
+    ],
+    "summary": {
+      "position_count": 11,
+      "sells_executed": 1,
+      "buys_executed": 5,
+      "expected_count_change": 4
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 0,
+    "fills_recorded": 0,
+    "orders_updated": 0,
+    "already_recorded": 0,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-03-23T09:09:59.761227",
+  "duration_seconds": 597.32197
+}

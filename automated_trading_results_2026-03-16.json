@@ -1,0 +1,203 @@
+{
+  "date": "2026-03-16",
+  "start_time": "2026-03-16T09:00:01.931004",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "12:00 PM ET",
+    "current_date": "Monday, March 16, 2026"
+  },
+  "regime_analysis": {
+    "regime": "BULLISH",
+    "confidence": "MEDIUM",
+    "spy_price": 668.7449951171875,
+    "spy_change_pct": 0.9746511806007193,
+    "vix_level": 23.780000686645508,
+    "recommendation": "FAVORABLE CONDITIONS"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "DVN",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260316T160842Z_54cac005",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BMNR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260316T160842Z_3b3fc5df",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CE",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260316T160842Z_f5f7776f",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-03-16T09:09:01.665904",
+    "equity": 101999.92,
+    "cash": 15860.95,
+    "buying_power": 114150.8,
+    "portfolio_value": 101999.92,
+    "starting_capital": 100000.0,
+    "total_return": 1999.9199999999983,
+    "total_return_pct": 1.9999199999999981,
+    "daily_pl": 4769.75,
+    "daily_pl_pct": 4.905627543384939,
+    "total_unrealized_pl": 7540.815000000001,
+    "position_count": 11,
+    "positions": [
+      {
+        "ticker": "CF",
+        "shares": 107.0,
+        "entry_price": 92.61,
+        "current_price": 122.06,
+        "market_value": 13060.42,
+        "unrealized_pl": 3151.15,
+        "unrealized_pl_pct": 31.8
+      },
+      {
+        "ticker": "DELL",
+        "shares": 67.0,
+        "entry_price": 122.94,
+        "current_price": 155.615,
+        "market_value": 10426.205,
+        "unrealized_pl": 2189.225,
+        "unrealized_pl_pct": 26.578000000000003
+      },
+      {
+        "ticker": "DOCN",
+        "shares": 110.0,
+        "entry_price": 67.88,
+        "current_price": 73.14,
+        "market_value": 8045.4,
+        "unrealized_pl": 578.6,
+        "unrealized_pl_pct": 7.7490000000000006
+      },
+      {
+        "ticker": "AA",
+        "shares": 117.0,
+        "entry_price": 64.35,
+        "current_price": 66.33,
+        "market_value": 7760.61,
+        "unrealized_pl": 231.66,
+        "unrealized_pl_pct": 3.077
+      },
+      {
+        "ticker": "SLM",
+        "shares": 380.0,
+        "entry_price": 19.68,
+        "current_price": 20.14,
+        "market_value": 7653.2,
+        "unrealized_pl": 174.8,
+        "unrealized_pl_pct": 2.3369999999999997
+      },
+      {
+        "ticker": "CRDO",
+        "shares": 64.0,
+        "entry_price": 116.2,
+        "current_price": 115.24,
+        "market_value": 7375.36,
+        "unrealized_pl": -61.44,
+        "unrealized_pl_pct": -0.826
+      },
+      {
+        "ticker": "RRC",
+        "shares": 167.0,
+        "entry_price": 35.81,
+        "current_price": 43.995,
+        "market_value": 7347.165,
+        "unrealized_pl": 1366.895,
+        "unrealized_pl_pct": 22.857
+      },
+      {
+        "ticker": "ALAB",
+        "shares": 58.0,
+        "entry_price": 125.86,
+        "current_price": 124.66,
+        "market_value": 7230.28,
+        "unrealized_pl": -69.6,
+        "unrealized_pl_pct": -0.9530000000000001
+      },
+      {
+        "ticker": "DHT",
+        "shares": 421.0,
+        "entry_price": 17.87,
+        "current_price": 17.065,
+        "market_value": 7184.365,
+        "unrealized_pl": -338.905,
+        "unrealized_pl_pct": -4.505
+      },
+      {
+        "ticker": "CAVA",
+        "shares": 73.0,
+        "entry_price": 81.12,
+        "current_price": 86.93,
+        "market_value": 6345.89,
+        "unrealized_pl": 424.13,
+        "unrealized_pl_pct": 7.162
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [
+    "Verification: Expected positions not found: DVN, CE, BMNR"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 11,
+    "db_positions_before": 10,
+    "stale_closed": 0,
+    "in_sync": 10
+  },
+  "position_drift": {
+    "positions_checked": 11,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260316_090837",
+    "total_trades": 3,
+    "quality_score": 81,
+    "ceo_rating": "GOOD",
+    "ceo_recommendation": "RECOMMEND APPROVAL"
+  },
+  "sells_count": 0,
+  "buys_count": 3,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: DVN, CE, BMNR"
+    ],
+    "summary": {
+      "position_count": 11,
+      "sells_executed": 0,
+      "buys_executed": 3,
+      "expected_count_change": 3
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 0,
+    "fills_recorded": 0,
+    "orders_updated": 0,
+    "already_recorded": 0,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-03-16T09:09:03.517384",
+  "duration_seconds": 541.586396
+}

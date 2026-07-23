@@ -1,0 +1,254 @@
+{
+  "date": "2026-03-27",
+  "start_time": "2026-03-27T09:00:03.144586",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "12:00 PM ET",
+    "current_date": "Friday, March 27, 2026"
+  },
+  "regime_analysis": {
+    "regime": "BEARISH",
+    "confidence": "HIGH",
+    "spy_price": 640.39501953125,
+    "spy_change_pct": -0.7278065275795463,
+    "vix_level": 29.020000457763672,
+    "recommendation": "UNFAVORABLE CONDITIONS"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "DHT",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260327T160638Z_af787e70"
+    },
+    {
+      "ticker": "EXEL",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260327T160638Z_d7570d57",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BZ",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260327T160638Z_44818420",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "AMKR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260327T160638Z_4177f128",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "EBC",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260327T160638Z_bcdb8793"
+    },
+    {
+      "ticker": "HST",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260327T160638Z_e26f9ee6"
+    },
+    {
+      "ticker": "BANC",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260327T160638Z_70dbc09a",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ALAB",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260327T160638Z_912d9cdf",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "COLB",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260327T160638Z_c7e7af22",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-03-27T09:06:56.281293",
+    "equity": 104216.67,
+    "cash": 4779.13,
+    "buying_power": 105285.73,
+    "portfolio_value": 104216.67,
+    "starting_capital": 100000.0,
+    "total_return": 4216.669999999998,
+    "total_return_pct": 4.216669999999998,
+    "daily_pl": 3284.2899999999936,
+    "daily_pl_pct": 3.253950813405959,
+    "total_unrealized_pl": 11732.444999999998,
+    "position_count": 13,
+    "positions": [
+      {
+        "ticker": "CF",
+        "shares": 107.0,
+        "entry_price": 92.61,
+        "current_price": 134.11,
+        "market_value": 14349.77,
+        "unrealized_pl": 4440.5,
+        "unrealized_pl_pct": 44.812000000000005
+      },
+      {
+        "ticker": "DELL",
+        "shares": 67.0,
+        "entry_price": 122.94,
+        "current_price": 171.98,
+        "market_value": 11522.66,
+        "unrealized_pl": 3285.68,
+        "unrealized_pl_pct": 39.889
+      },
+      {
+        "ticker": "DOCN",
+        "shares": 110.0,
+        "entry_price": 67.88,
+        "current_price": 81.81,
+        "market_value": 8999.1,
+        "unrealized_pl": 1532.3,
+        "unrealized_pl_pct": 20.522000000000002
+      },
+      {
+        "ticker": "RRC",
+        "shares": 167.0,
+        "entry_price": 35.81,
+        "current_price": 47.865,
+        "market_value": 7993.455,
+        "unrealized_pl": 2013.185,
+        "unrealized_pl_pct": 33.664
+      },
+      {
+        "ticker": "SLM",
+        "shares": 380.0,
+        "entry_price": 19.68,
+        "current_price": 20.43,
+        "market_value": 7763.4,
+        "unrealized_pl": 285.0,
+        "unrealized_pl_pct": 3.811
+      },
+      {
+        "ticker": "GNTX",
+        "shares": 343.0,
+        "entry_price": 21.87,
+        "current_price": 21.885,
+        "market_value": 7506.555,
+        "unrealized_pl": 5.145,
+        "unrealized_pl_pct": 0.06899999999999999
+      },
+      {
+        "ticker": "ALLY",
+        "shares": 189.0,
+        "entry_price": 39.53,
+        "current_price": 38.27,
+        "market_value": 7233.03,
+        "unrealized_pl": -238.14,
+        "unrealized_pl_pct": -3.1870000000000003
+      },
+      {
+        "ticker": "DVN",
+        "shares": 121.0,
+        "entry_price": 49.62,
+        "current_price": 52.01,
+        "market_value": 6293.21,
+        "unrealized_pl": 289.19,
+        "unrealized_pl_pct": 4.817
+      },
+      {
+        "ticker": "FOXA",
+        "shares": 104.0,
+        "entry_price": 57.39,
+        "current_price": 58.54,
+        "market_value": 6088.16,
+        "unrealized_pl": 119.6,
+        "unrealized_pl_pct": 2.004
+      },
+      {
+        "ticker": "EQT",
+        "shares": 89.0,
+        "entry_price": 66.62,
+        "current_price": 67.86,
+        "market_value": 6039.54,
+        "unrealized_pl": 110.36,
+        "unrealized_pl_pct": 1.8610000000000002
+      },
+      {
+        "ticker": "HST",
+        "shares": 313.0,
+        "entry_price": 19.09,
+        "current_price": 19.085,
+        "market_value": 5973.605,
+        "unrealized_pl": -1.565,
+        "unrealized_pl_pct": -0.026
+      },
+      {
+        "ticker": "EBC",
+        "shares": 311.0,
+        "entry_price": 19.19,
+        "current_price": 19.18,
+        "market_value": 5964.98,
+        "unrealized_pl": -3.11,
+        "unrealized_pl_pct": -0.052
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [
+    "Verification: Expected positions not found: BANC, EXEL, COLB, AMKR, ALAB, BZ"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 12,
+    "db_positions_before": 11,
+    "stale_closed": 0,
+    "in_sync": 11
+  },
+  "position_drift": {
+    "positions_checked": 12,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260327_090635",
+    "total_trades": 9,
+    "quality_score": 88,
+    "ceo_rating": "EXCELLENT",
+    "ceo_recommendation": "STRONGLY RECOMMEND APPROVAL"
+  },
+  "sells_count": 1,
+  "buys_count": 8,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: BANC, EXEL, COLB, AMKR, ALAB, BZ"
+    ],
+    "summary": {
+      "position_count": 13,
+      "sells_executed": 1,
+      "buys_executed": 8,
+      "expected_count_change": 7
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 3,
+    "fills_recorded": 3,
+    "orders_updated": 3,
+    "already_recorded": 0,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-03-27T09:06:58.578860",
+  "duration_seconds": 415.434286
+}

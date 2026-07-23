@@ -1,0 +1,233 @@
+{
+  "date": "2026-03-24",
+  "start_time": "2026-03-24T09:00:03.137623",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "12:00 PM ET",
+    "current_date": "Tuesday, March 24, 2026"
+  },
+  "regime_analysis": {
+    "regime": "BEARISH",
+    "confidence": "MEDIUM",
+    "spy_price": 655.02001953125,
+    "spy_change_pct": -0.05492772878032317,
+    "vix_level": 25.780000686645508,
+    "recommendation": "PROCEED WITH CAUTION"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "CAVA",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260324T160753Z_f8e975c7"
+    },
+    {
+      "ticker": "GNTX",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260324T160753Z_f1a6c82b"
+    },
+    {
+      "ticker": "ALLY",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260324T160753Z_d4f27b2c"
+    },
+    {
+      "ticker": "GLW",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260324T160753Z_c1c70c09",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CNK",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260324T160753Z_ebda75c4",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "EXEL",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260324T160753Z_52ce19c1",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BANC",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260324T160753Z_8efcb49a",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-03-24T09:08:14.577236",
+    "equity": 103555.4,
+    "cash": 9161.25,
+    "buying_power": 109006.58,
+    "portfolio_value": 103555.4,
+    "starting_capital": 100000.0,
+    "total_return": 3555.399999999994,
+    "total_return_pct": 3.555399999999994,
+    "daily_pl": 5760.509999999995,
+    "daily_pl_pct": 5.8903997949177045,
+    "total_unrealized_pl": 11109.05,
+    "position_count": 12,
+    "positions": [
+      {
+        "ticker": "CF",
+        "shares": 107.0,
+        "entry_price": 92.61,
+        "current_price": 127.21,
+        "market_value": 13611.47,
+        "unrealized_pl": 3702.2,
+        "unrealized_pl_pct": 37.361
+      },
+      {
+        "ticker": "DELL",
+        "shares": 67.0,
+        "entry_price": 122.94,
+        "current_price": 172.28,
+        "market_value": 11542.76,
+        "unrealized_pl": 3305.78,
+        "unrealized_pl_pct": 40.133
+      },
+      {
+        "ticker": "DOCN",
+        "shares": 110.0,
+        "entry_price": 67.88,
+        "current_price": 84.38,
+        "market_value": 9281.8,
+        "unrealized_pl": 1815.0,
+        "unrealized_pl_pct": 24.308
+      },
+      {
+        "ticker": "SLM",
+        "shares": 380.0,
+        "entry_price": 19.68,
+        "current_price": 20.55,
+        "market_value": 7809.0,
+        "unrealized_pl": 330.6,
+        "unrealized_pl_pct": 4.421
+      },
+      {
+        "ticker": "DHT",
+        "shares": 421.0,
+        "entry_price": 17.87,
+        "current_price": 18.445,
+        "market_value": 7765.345,
+        "unrealized_pl": 242.075,
+        "unrealized_pl_pct": 3.218
+      },
+      {
+        "ticker": "RRC",
+        "shares": 167.0,
+        "entry_price": 35.81,
+        "current_price": 45.76,
+        "market_value": 7641.92,
+        "unrealized_pl": 1661.65,
+        "unrealized_pl_pct": 27.786
+      },
+      {
+        "ticker": "GNTX",
+        "shares": 343.0,
+        "entry_price": 21.87,
+        "current_price": 21.865,
+        "market_value": 7499.695,
+        "unrealized_pl": -1.715,
+        "unrealized_pl_pct": -0.023
+      },
+      {
+        "ticker": "ALLY",
+        "shares": 189.0,
+        "entry_price": 39.53,
+        "current_price": 39.51,
+        "market_value": 7467.39,
+        "unrealized_pl": -3.78,
+        "unrealized_pl_pct": -0.051000000000000004
+      },
+      {
+        "ticker": "FOXA",
+        "shares": 104.0,
+        "entry_price": 57.39,
+        "current_price": 58.805,
+        "market_value": 6115.72,
+        "unrealized_pl": 147.16,
+        "unrealized_pl_pct": 2.466
+      },
+      {
+        "ticker": "DVN",
+        "shares": 121.0,
+        "entry_price": 49.62,
+        "current_price": 50.28,
+        "market_value": 6083.88,
+        "unrealized_pl": 79.86,
+        "unrealized_pl_pct": 1.3299999999999998
+      },
+      {
+        "ticker": "EQT",
+        "shares": 89.0,
+        "entry_price": 66.62,
+        "current_price": 65.9,
+        "market_value": 5865.1,
+        "unrealized_pl": -64.08,
+        "unrealized_pl_pct": -1.081
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      }
+    ]
+  },
+  "warnings": [
+    "Verification: Expected positions not found: GLW, EXEL, CNK, BANC"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 11,
+    "db_positions_before": 10,
+    "stale_closed": 0,
+    "in_sync": 10
+  },
+  "position_drift": {
+    "positions_checked": 11,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260324_090748",
+    "total_trades": 7,
+    "quality_score": 85,
+    "ceo_rating": "EXCELLENT",
+    "ceo_recommendation": "STRONGLY RECOMMEND APPROVAL"
+  },
+  "sells_count": 1,
+  "buys_count": 6,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: GLW, EXEL, CNK, BANC"
+    ],
+    "summary": {
+      "position_count": 12,
+      "sells_executed": 1,
+      "buys_executed": 6,
+      "expected_count_change": 5
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 3,
+    "fills_recorded": 3,
+    "orders_updated": 3,
+    "already_recorded": 0,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-03-24T09:08:16.300802",
+  "duration_seconds": 493.163188
+}

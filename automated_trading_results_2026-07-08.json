@@ -1,0 +1,318 @@
+{
+  "date": "2026-07-08",
+  "start_time": "2026-07-08T09:00:02.707732",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "12:00 PM ET",
+    "current_date": "Wednesday, July 08, 2026"
+  },
+  "regime_analysis": {
+    "regime": "BEARISH",
+    "confidence": "MEDIUM",
+    "spy_price": 740.8400268554688,
+    "spy_change_pct": -0.9188047391771801,
+    "vix_level": 18.299999237060547,
+    "recommendation": "PROCEED WITH CAUTION"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "ASX",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260708T160616Z_3d89462b"
+    },
+    {
+      "ticker": "GNTX",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260708T160616Z_3b53259e"
+    },
+    {
+      "ticker": "LEVI",
+      "action": "SELL",
+      "message_id": "MSG_EXECUTIVE_20260708T160616Z_0aefdc06"
+    },
+    {
+      "ticker": "RDDT",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260708T160618Z_781a6bff",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "ANET",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260708T160618Z_889c3362",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "MTCH",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260708T160618Z_fc284cd9",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "RRC",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260708T160618Z_de62213e",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "EW",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260708T160618Z_98f628e4",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "FRO",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260708T160618Z_c09f9fbb"
+    },
+    {
+      "ticker": "GILD",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260708T160618Z_24dd03e0"
+    },
+    {
+      "ticker": "EBC",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260708T160618Z_722b09ce",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "TTEK",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260708T160618Z_a0ce3db5",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "PYPL",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260708T160618Z_c125b8fe",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BDX",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260708T160618Z_62900e31",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-07-08T09:06:42.699532",
+    "equity": 106930.31,
+    "cash": 4846.28,
+    "buying_power": 294832.21,
+    "portfolio_value": 106930.31,
+    "starting_capital": 100000.0,
+    "total_return": 6930.309999999998,
+    "total_return_pct": 6.930309999999998,
+    "daily_pl": 988.9899999999907,
+    "daily_pl_pct": 0.9335262199866782,
+    "total_unrealized_pl": 3049.869411,
+    "position_count": 17,
+    "positions": [
+      {
+        "ticker": "AFRM",
+        "shares": 135.0,
+        "entry_price": 74.26,
+        "current_price": 80.325,
+        "market_value": 10843.875,
+        "unrealized_pl": 818.775,
+        "unrealized_pl_pct": 8.167
+      },
+      {
+        "ticker": "HAYW",
+        "shares": 657.0,
+        "entry_price": 15.21,
+        "current_price": 15.765,
+        "market_value": 10357.605,
+        "unrealized_pl": 364.635,
+        "unrealized_pl_pct": 3.649
+      },
+      {
+        "ticker": "DHR",
+        "shares": 51.0,
+        "entry_price": 193.008039,
+        "current_price": 190.935,
+        "market_value": 9737.685,
+        "unrealized_pl": -105.724989,
+        "unrealized_pl_pct": -1.0739999999999998
+      },
+      {
+        "ticker": "CVNA",
+        "shares": 148.0,
+        "entry_price": 67.54,
+        "current_price": 64.4805,
+        "market_value": 9543.114,
+        "unrealized_pl": -452.806,
+        "unrealized_pl_pct": -4.53
+      },
+      {
+        "ticker": "BRO",
+        "shares": 128.0,
+        "entry_price": 58.24,
+        "current_price": 69.135,
+        "market_value": 8849.28,
+        "unrealized_pl": 1394.56,
+        "unrealized_pl_pct": 18.706999999999997
+      },
+      {
+        "ticker": "FRO",
+        "shares": 196.0,
+        "entry_price": 38.21,
+        "current_price": 38.195,
+        "market_value": 7486.22,
+        "unrealized_pl": -2.94,
+        "unrealized_pl_pct": -0.039
+      },
+      {
+        "ticker": "GILD",
+        "shares": 55.0,
+        "entry_price": 135.81,
+        "current_price": 135.8,
+        "market_value": 7469.0,
+        "unrealized_pl": -0.55,
+        "unrealized_pl_pct": -0.006999999999999999
+      },
+      {
+        "ticker": "KMB",
+        "shares": 59.0,
+        "entry_price": 100.28,
+        "current_price": 111.71,
+        "market_value": 6590.89,
+        "unrealized_pl": 674.37,
+        "unrealized_pl_pct": 11.398
+      },
+      {
+        "ticker": "DG",
+        "shares": 55.0,
+        "entry_price": 109.26,
+        "current_price": 115.73,
+        "market_value": 6365.15,
+        "unrealized_pl": 355.85,
+        "unrealized_pl_pct": 5.922000000000001
+      },
+      {
+        "ticker": "COLB",
+        "shares": 200.0,
+        "entry_price": 29.93,
+        "current_price": 30.895,
+        "market_value": 6179.0,
+        "unrealized_pl": 193.0,
+        "unrealized_pl_pct": 3.2239999999999998
+      },
+      {
+        "ticker": "IPG",
+        "shares": 151.0,
+        "entry_price": 25.27,
+        "current_price": 24.57,
+        "market_value": 3710.07,
+        "unrealized_pl": -105.7,
+        "unrealized_pl_pct": -2.77
+      },
+      {
+        "ticker": "OKE",
+        "shares": 28.0,
+        "entry_price": 89.35,
+        "current_price": 91.8968,
+        "market_value": 2573.1104,
+        "unrealized_pl": 71.3104,
+        "unrealized_pl_pct": 2.85
+      },
+      {
+        "ticker": "AR",
+        "shares": 72.0,
+        "entry_price": 35.13,
+        "current_price": 35.315,
+        "market_value": 2542.68,
+        "unrealized_pl": 13.32,
+        "unrealized_pl_pct": 0.527
+      },
+      {
+        "ticker": "EBAY",
+        "shares": 22.0,
+        "entry_price": 114.06,
+        "current_price": 113.56,
+        "market_value": 2498.32,
+        "unrealized_pl": -11.0,
+        "unrealized_pl_pct": -0.438
+      },
+      {
+        "ticker": "GSK",
+        "shares": 47.0,
+        "entry_price": 53.36,
+        "current_price": 52.85,
+        "market_value": 2483.95,
+        "unrealized_pl": -23.97,
+        "unrealized_pl_pct": -0.9560000000000001
+      },
+      {
+        "ticker": "PCAR",
+        "shares": 20.0,
+        "entry_price": 123.31,
+        "current_price": 121.985,
+        "market_value": 2439.7,
+        "unrealized_pl": -26.5,
+        "unrealized_pl_pct": -1.075
+      },
+      {
+        "ticker": "ABNB",
+        "shares": 17.0,
+        "entry_price": 148.27,
+        "current_price": 141.99,
+        "market_value": 2413.83,
+        "unrealized_pl": -106.76,
+        "unrealized_pl_pct": -4.236
+      }
+    ]
+  },
+  "warnings": [
+    "Verification: Expected positions not found: RDDT, PYPL, TTEK, MTCH, ANET, EW, BDX, EBC, RRC"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 18,
+    "db_positions_before": 7,
+    "stale_closed": 0,
+    "in_sync": 7
+  },
+  "position_drift": {
+    "positions_checked": 18,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260708_090611",
+    "total_trades": 14,
+    "quality_score": 85,
+    "ceo_rating": "EXCELLENT",
+    "ceo_recommendation": "STRONGLY RECOMMEND APPROVAL"
+  },
+  "sells_count": 3,
+  "buys_count": 11,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: RDDT, PYPL, TTEK, MTCH, ANET, EW, BDX, EBC, RRC"
+    ],
+    "summary": {
+      "position_count": 17,
+      "sells_executed": 3,
+      "buys_executed": 11,
+      "expected_count_change": 8
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 12,
+    "fills_recorded": 5,
+    "orders_updated": 5,
+    "already_recorded": 7,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-07-08T09:06:44.563882",
+  "duration_seconds": 401.856164
+}

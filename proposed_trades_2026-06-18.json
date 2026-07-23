@@ -1,0 +1,285 @@
+{
+  "plan_id": "PLAN_20260618_090713",
+  "generated_at": "2026-06-18T16:07:13.549810Z",
+  "status": "APPROVED_BY_USER",
+  "summary": {
+    "total_trades": 17,
+    "research_candidates": 76,
+    "gpt5_selected": 17,
+    "compliance_flagged": 0,
+    "overall_quality_score": 89
+  },
+  "stage_quality": {
+    "research": 100,
+    "news": 100,
+    "gpt5_optimizer": 63,
+    "compliance_advisory": 95
+  },
+  "trades": [
+    {
+      "ticker": "IAG",
+      "action": "BUY",
+      "shares": 588,
+      "allocated_capital": 10000,
+      "entry_price": 16.979999542236328,
+      "composite_score": 74.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ALLY",
+      "action": "BUY",
+      "shares": 218,
+      "allocated_capital": 10000,
+      "entry_price": 45.76499938964844,
+      "composite_score": 72.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "HAYW",
+      "action": "BUY",
+      "shares": 657,
+      "allocated_capital": 10000,
+      "entry_price": 15.199999809265137,
+      "composite_score": 72.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "AFRM",
+      "action": "BUY",
+      "shares": 135,
+      "allocated_capital": 10000,
+      "entry_price": 73.95999908447266,
+      "composite_score": 71.2,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "JCI",
+      "action": "BUY",
+      "shares": 68,
+      "allocated_capital": 10000,
+      "entry_price": 145.9149932861328,
+      "composite_score": 68.4,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "CDE",
+      "action": "BUY",
+      "shares": 578,
+      "allocated_capital": 10000,
+      "entry_price": 17.280000686645508,
+      "composite_score": 66.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ABNB",
+      "action": "BUY",
+      "shares": 69,
+      "allocated_capital": 10000,
+      "entry_price": 142.90499877929688,
+      "composite_score": 65.6,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "IVZ",
+      "action": "BUY",
+      "shares": 351,
+      "allocated_capital": 10000,
+      "entry_price": 28.459999084472656,
+      "composite_score": 64.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "BEAM",
+      "action": "BUY",
+      "shares": 303,
+      "allocated_capital": 10000,
+      "entry_price": 32.91999816894531,
+      "composite_score": 62.8,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "EW",
+      "action": "BUY",
+      "shares": 114,
+      "allocated_capital": 10000,
+      "entry_price": 87.2699966430664,
+      "composite_score": 62.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "GLW",
+      "action": "BUY",
+      "shares": 53,
+      "allocated_capital": 10000,
+      "entry_price": 188.3300018310547,
+      "composite_score": 61.2,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "AG",
+      "action": "BUY",
+      "shares": 552,
+      "allocated_capital": 10000,
+      "entry_price": 18.100000381469727,
+      "composite_score": 60.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "APO",
+      "action": "BUY",
+      "shares": 72,
+      "allocated_capital": 10000,
+      "entry_price": 138.4199981689453,
+      "composite_score": 60.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "ENTG",
+      "action": "BUY",
+      "shares": 58,
+      "allocated_capital": 10000,
+      "entry_price": 171.25,
+      "composite_score": 60.0,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "sector": "Unknown",
+      "gpt5_reasoning": "Selected by GPT-5",
+      "gpt5_allocated": true,
+      "is_position_adjustment": false
+    },
+    {
+      "ticker": "DHR",
+      "action": "SELL",
+      "shares": 55.0,
+      "sell_pct": 100,
+      "composite_score": 40.0,
+      "current_price": 177.48500061035156,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 40.0 < 60 absolute minimum",
+      "current_value": 9765.8
+    },
+    {
+      "ticker": "DNOW",
+      "action": "SELL",
+      "shares": 724.0,
+      "sell_pct": 100,
+      "composite_score": 50.8,
+      "current_price": 13.460000038146973,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 50.8 < 60 absolute minimum",
+      "current_value": 9737.8
+    },
+    {
+      "ticker": "INCY",
+      "action": "SELL",
+      "shares": 99.0,
+      "sell_pct": 100,
+      "composite_score": 58.0,
+      "current_price": 96.51000213623047,
+      "sentiment_score": 50.0,
+      "sentiment_summary": "No recent news",
+      "gpt5_reasoning": "AUTOMATED EXIT: Score 58.0 < 60 absolute minimum",
+      "current_value": 9567.36
+    }
+  ],
+  "gpt5_reasoning": "Deterministic allocation: Top-ranked candidates selected by comparative ranking system, equal-weighted.",
+  "compliance_suggestions": [],
+  "workflow_summary": [
+    {
+      "stage": "research",
+      "message": "Research found 76 candidates (avg score: 47.8)",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "news",
+      "message": "News enriched 87/87 stocks with sentiment",
+      "quality_score": 100,
+      "issues": []
+    },
+    {
+      "stage": "portfolio_allocator",
+      "message": "Deterministic allocator created trading plan: 3 SELLs, 15 BUYs ($150,000 allocated)",
+      "quality_score": 63,
+      "issues": [
+        "Capital deployment 43.2% (target 90.0%+)"
+      ]
+    },
+    {
+      "stage": "compliance_enforcement",
+      "message": "Compliance enforced: 14 BUYs approved, 1 rejected, 3 SELLs",
+      "quality_score": 95,
+      "issues": [
+        "1 orders REJECTED by compliance"
+      ]
+    }
+  ],
+  "approved_at": "2026-06-18T16:07:17.021613Z"
+}

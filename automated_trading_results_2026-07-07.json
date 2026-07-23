@@ -1,0 +1,287 @@
+{
+  "date": "2026-07-07",
+  "start_time": "2026-07-07T09:00:05.447537",
+  "status": "SUCCESS",
+  "market_status": {
+    "is_open": true,
+    "status": "OPEN",
+    "message": "Market is OPEN",
+    "current_time_et": "12:00 PM ET",
+    "current_date": "Tuesday, July 07, 2026"
+  },
+  "regime_analysis": {
+    "regime": "NEUTRAL",
+    "confidence": "MEDIUM",
+    "spy_price": 747.6423950195312,
+    "spy_change_pct": -0.484191531185545,
+    "vix_level": 16.229999542236328,
+    "recommendation": "NORMAL CONDITIONS"
+  },
+  "plan_generated": true,
+  "plan_approved": true,
+  "trades_executed": [
+    {
+      "ticker": "LEVI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260707T161221Z_ed97fa23"
+    },
+    {
+      "ticker": "EBAY",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260707T161221Z_0edb51f8"
+    },
+    {
+      "ticker": "GSK",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260707T161221Z_1f9d65a7"
+    },
+    {
+      "ticker": "OKE",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260707T161221Z_9d6f57e0"
+    },
+    {
+      "ticker": "AR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260707T161221Z_b40f637e"
+    },
+    {
+      "ticker": "ABNB",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260707T161221Z_2be547b0"
+    },
+    {
+      "ticker": "PCAR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260707T161221Z_7f5feaf5"
+    },
+    {
+      "ticker": "FRO",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260707T161221Z_88168a62",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "GILD",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260707T161221Z_f342778d",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "MTCH",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260707T161221Z_22f086de",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "EXE",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260707T161221Z_1f8379f5",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "FTI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260707T161221Z_a8a522b5",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "PYPL",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260707T161221Z_c5f51f4a",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BDX",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260707T161221Z_1c3ca9fe",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "AG",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260707T161221Z_dc190366",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "AGI",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260707T161221Z_be331a54",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "EQH",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260707T161221Z_96c17d56",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BMNR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260707T161221Z_cbbaf1a1",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "LYV",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260707T161221Z_1a72686b",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "PSX",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260707T161221Z_7b1ea69e",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CDE",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260707T161221Z_2c3c0a8d",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "IBKR",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260707T161221Z_8130f352",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "CPRT",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260707T161221Z_b0b49bc5",
+      "_unfilled_reason": "Insufficient cash"
+    },
+    {
+      "ticker": "BEAM",
+      "action": "BUY",
+      "message_id": "MSG_EXECUTIVE_20260707T161221Z_9cb8adad",
+      "_unfilled_reason": "Insufficient cash"
+    }
+  ],
+  "portfolio_state": {
+    "timestamp": "2026-07-07T09:13:18.904280",
+    "equity": 17855.27,
+    "cash": 282.92,
+    "buying_power": 50334.25,
+    "portfolio_value": 17855.27,
+    "starting_capital": 100000.0,
+    "total_return": -82144.73,
+    "total_return_pct": -82.14473,
+    "daily_pl": -89541.29,
+    "daily_pl_pct": -83.37444886502881,
+    "total_unrealized_pl": -5.915,
+    "position_count": 7,
+    "positions": [
+      {
+        "ticker": "LEVI",
+        "shares": 103.0,
+        "entry_price": 24.69,
+        "current_price": 24.67,
+        "market_value": 2541.01,
+        "unrealized_pl": -2.06,
+        "unrealized_pl_pct": -0.08099999999999999
+      },
+      {
+        "ticker": "AR",
+        "shares": 72.0,
+        "entry_price": 35.13,
+        "current_price": 35.11,
+        "market_value": 2527.92,
+        "unrealized_pl": -1.44,
+        "unrealized_pl_pct": -0.056999999999999995
+      },
+      {
+        "ticker": "ABNB",
+        "shares": 17.0,
+        "entry_price": 148.27,
+        "current_price": 148.33,
+        "market_value": 2521.61,
+        "unrealized_pl": 1.02,
+        "unrealized_pl_pct": 0.04
+      },
+      {
+        "ticker": "EBAY",
+        "shares": 22.0,
+        "entry_price": 114.06,
+        "current_price": 114.0,
+        "market_value": 2508.0,
+        "unrealized_pl": -1.32,
+        "unrealized_pl_pct": -0.053
+      },
+      {
+        "ticker": "GSK",
+        "shares": 47.0,
+        "entry_price": 53.36,
+        "current_price": 53.355,
+        "market_value": 2507.685,
+        "unrealized_pl": -0.235,
+        "unrealized_pl_pct": -0.009000000000000001
+      },
+      {
+        "ticker": "OKE",
+        "shares": 28.0,
+        "entry_price": 89.35,
+        "current_price": 89.29,
+        "market_value": 2500.12,
+        "unrealized_pl": -1.68,
+        "unrealized_pl_pct": -0.067
+      },
+      {
+        "ticker": "PCAR",
+        "shares": 20.0,
+        "entry_price": 123.31,
+        "current_price": 123.3,
+        "market_value": 2466.0,
+        "unrealized_pl": -0.2,
+        "unrealized_pl_pct": -0.008
+      }
+    ]
+  },
+  "warnings": [
+    "Reconciliation cleaned 11 stale records",
+    "Verification: Expected positions not found: FRO, CDE, AGI, GILD, MTCH, BMNR, AG, FTI, EQH, IBKR, PYPL, EXE, LYV, BEAM, BDX, PSX, CPRT"
+  ],
+  "errors": [],
+  "db_reconciliation": {
+    "alpaca_positions": 0,
+    "db_positions_before": 11,
+    "stale_closed": 11,
+    "in_sync": 0
+  },
+  "position_drift": {
+    "positions_checked": 0,
+    "oversized_count": 0,
+    "trim_recommendations": 0
+  },
+  "plan_summary": {
+    "plan_id": "PLAN_20260707_091214",
+    "total_trades": 24,
+    "quality_score": 95,
+    "ceo_rating": "EXCELLENT",
+    "ceo_recommendation": "STRONGLY RECOMMEND APPROVAL"
+  },
+  "sells_count": 0,
+  "buys_count": 24,
+  "verification": {
+    "passed": false,
+    "issues": [
+      "Expected positions not found: FRO, CDE, AGI, GILD, MTCH, BMNR, AG, FTI, EQH, IBKR, PYPL, EXE, LYV, BEAM, BDX, PSX, CPRT"
+    ],
+    "summary": {
+      "position_count": 7,
+      "sells_executed": 0,
+      "buys_executed": 24,
+      "expected_count_change": 24
+    }
+  },
+  "fill_sync": {
+    "orders_checked": 8,
+    "fills_recorded": 7,
+    "orders_updated": 7,
+    "already_recorded": 1,
+    "no_match_in_db": 0,
+    "errors": []
+  },
+  "end_time": "2026-07-07T09:13:21.107403",
+  "duration_seconds": 795.659882
+}
