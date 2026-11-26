@@ -84,6 +84,20 @@ class NewsDepartment:
                 }
             }
         """
+        # KILL_SWITCH_2026_07_25: News Perplexity fetching disabled per Bill's $30/mo
+        # budget directive. Enriching 68+ tickers/day (Research v3.0 output) was
+        # overrunning the budget. Returns neutral stubs (sentiment_score=50.0) so
+        # Portfolio/Trading callers keep working. To re-enable, delete this block
+        # down through the return statement — the original code below is intact.
+        logger.info(f"News Department DISABLED (2026-07-25 kill-switch): "
+                    f"{len(tickers)} tickers -> neutral stubs, 0 Perplexity calls")
+        return {ticker: {
+            'sentiment_score': 50.0,
+            'news_summary': 'News Department disabled 2026-07-25 per $30/mo budget cap',
+            'sentiment_reasoning': 'Perplexity fetching disabled per user directive',
+            'age_hours': 0.0
+        } for ticker in tickers}
+
         logger.info(f"Fetching sentiment scores for {len(tickers)} tickers")
 
         # Check cache

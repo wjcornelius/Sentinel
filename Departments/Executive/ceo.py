@@ -196,6 +196,14 @@ class CEO:
         elif result['status'] == 'FAILED':
             return self._handle_workflow_failure(result)
 
+        elif result['status'] == 'NO_TRADES_NEEDED':
+            # 2026-11-25: quiet day (nothing to buy, nothing to sell). Not a failure.
+            self.logger.info("[CEO] No trades needed today")
+            return {
+                'status': 'NO_TRADES_NEEDED',
+                'message': result.get('message', 'No trades needed today')
+            }
+
         else:
             return {
                 'status': 'ERROR',
@@ -1021,7 +1029,15 @@ class CEO:
         # Get current positions count
         try:
             positions = self.data_source.get_open_positions()
-            current_count = len(positions)
+            # Capacity must be measured in slots the strategy can actually
+            # use. A frozen holding (IPG, INACTIVE since the Omnicom merger)
+            # occupies a slot it can never free, so counting it makes the book
+            # look fuller than it is available. See Utils/tradability.py.
+            try:
+                from Utils.tradability import actionable_count
+                current_count = actionable_count(trading_client, positions)
+            except Exception:
+                current_count = len(positions)
         except:
             current_count = 0
 

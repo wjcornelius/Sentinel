@@ -1,3 +1,19 @@
+# ============================================================================
+# [*] AUTHORITATIVE FILE - resolved 2026-08-10
+#
+# Four limits were defined in three files with different values. Traced at
+# runtime: trading_department.py loads THIS file and validates every order
+# against it. The Compliance department has written 0 rows to every one of its
+# tables, and the Risk department last wrote anything on 2025-11-02 - neither
+# is imported by run_automated_trading.py. So this file is what governs, and
+# the values in compliance_config.yaml and risk_config.yaml were decorative.
+#
+# They have been made to agree with the numbers below and marked
+# non-authoritative. Resolution rationale is on each line.
+# The governing values are also snapshotted daily into the `config_snapshots`
+# table by Utils/audit_recorder.py, so any later performance analysis can ask
+# what the limits were on the day a given trade was made.
+# ============================================================================
 # Trading_Wisdom Hard Constraints - Phase 1
 # Auto-reject any violation (no human approval needed)
 # Extracted: 2025-10-30 by C(P) from Trading_Wisdom.txt
@@ -6,15 +22,32 @@ version: 1.0
 last_updated: 2025-10-30
 
 position_limits:
-  max_single_position_pct: 0.25          # Never >25% portfolio in one stock (give GPT-4o room to run)
+  max_single_position_pct: 0.25          # AUTHORITATIVE 2026-08-10. Kept over compliance_config's 0.10.
+                                         # Rationale: the entire +8.34% account return traces to one position
+                                         # (ALAB, +156%). At a 36% win rate with a 1.97 payoff the edge lives
+                                         # in the right tail; a 10% cap would have cut that winner by 60%.
   min_position_pct: 0.025                # Never <2.5% (too small to matter) - lowered from 3% to prevent edge-case rejections
   max_positions_total: 30                # Never hold >30 simultaneous positions (raised from 20 for better diversification with $100K+margin)
-  max_sector_concentration_pct: 0.40     # Never >40% in single sector
+  max_sector_concentration_pct: 0.40     # AUTHORITATIVE 2026-08-10. Kept over compliance_config's 0.30.
+                                         # Rationale: 2 of 3 files already said 0.40, and at 10-30 positions a
+                                         # 30% cap binds often for weak diversification benefit.
   max_correlated_positions: 5            # Max 5 stocks with mutual correlation >0.7
 
+risk_per_trade:
+  max_risk_per_trade_pct: 0.02           # AUTHORITATIVE 2026-08-10. Was 0.02 in compliance_config and 0.01 in
+                                         # risk_config, and enforced by neither - no code read either one.
+                                         # Declared here so the number has one home. Note that max_portfolio_heat
+                                         # above is the operative governor: 40 positions x 1% already exceeds 8%.
+
 portfolio_risk:
-  max_portfolio_heat: 0.08               # Never exceed 8% portfolio heat (sum of position heats)
-  min_cash_reserve_pct: 0.10             # Always keep ≥10% cash (prefer 15%)
+  max_portfolio_heat: 0.08               # AUTHORITATIVE 2026-08-10. Kept over compliance 0.10 / risk_config 0.05.
+                                         # Rationale: 0.08 is the value that has actually been enforced for nine
+                                         # months, over which the account returned +8.34%. Loosening a risk limit
+                                         # with no evidence it binds is unjustified; 0.05 would block most orders.
+                                         # [!] WATCH: heat scales with position count. If auto_tune raises
+                                         # max_positions_total toward 40, heat becomes the hidden binding
+                                         # constraint and orders will start failing here rather than on capacity.
+  min_cash_reserve_pct: 0.10             # Always keep >=10% cash (prefer 15%)
   max_drawdown_halt_pct: 0.15            # Halt all trading if portfolio down >15% from peak
 
 liquidity_requirements:
@@ -25,7 +58,7 @@ liquidity_requirements:
 price_constraints:
   min_stock_price: 5.00                  # No penny stocks (<$5)
   max_stock_price: null                  # No upper limit
-  min_market_cap_millions: 1000          # ≥$1B market cap (large/mid cap only)
+  min_market_cap_millions: 1000          # >=$1B market cap (large/mid cap only)
 
 market_conditions:
   vix_panic_threshold: 40                # Halt ALL trading if VIX >40
@@ -40,13 +73,13 @@ timing_rules:
   no_earnings_day_trades: true           # No new positions on earnings day (Phase 1)
 
 kelly_criterion:
-  min_backtest_trades: 1000              # Never use Kelly without ≥1000 OOS trades
+  min_backtest_trades: 1000              # Never use Kelly without >=1000 OOS trades
   max_kelly_fraction: 0.25               # Never bet >25% Kelly (quarter-Kelly max)
   kelly_enabled: false                   # Disabled for Phase 1 (equal-weight allocation)
 
 risk_score_gates:
-  auto_reject_threshold: 8.0             # Auto-reject if risk_score ≥8 (escalate to WJC)
-  executive_review_threshold: 5.0        # Scores ≥5 require Executive review
+  auto_reject_threshold: 8.0             # Auto-reject if risk_score >=8 (escalate to WJC)
+  executive_review_threshold: 5.0        # Scores >=5 require Executive review
   routine_approval_threshold: 3.0        # Scores <3 auto-approve (low risk)
 
 correlation_limits:

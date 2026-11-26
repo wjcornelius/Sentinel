@@ -1,3 +1,13 @@
+# ============================================================================
+# [!] NON-AUTHORITATIVE for portfolio/sector/position limits - see
+# hard_constraints.yaml, resolved 2026-08-10. The Risk department that would
+# have read them last wrote anything on 2025-11-02 and is not in the live path.
+#
+# [*] EXCEPT the `trailing_stop:` block at the bottom, which IS live: it is read
+# by Utils/atr_calculator.py on every stop calculation and is the block
+# auto_tune.py writes. The old `stop_loss.atr_multiplier` above it was never
+# read by anything.
+# ============================================================================
 # Risk Department Configuration - Phase 1
 # Machine-readable settings for position sizing, stop-loss calculation, portfolio risk management
 # Created: 2025-10-31
@@ -27,7 +37,10 @@ stop_loss:
 
   # ATR-Based Settings
   atr_period: 14  # Use 14-day ATR
-  atr_multiplier: 2.0  # Stop = Entry - (2 × ATR)
+  atr_multiplier: 2.0  # [!] DEAD PARAMETER - nothing reads this. Restored to its
+                       # original value 2026-08-10 after auto_tune moved it to 1.8
+                       # with no effect. The live knob is trailing_stop.atr_multiplier
+                       # at the bottom of this file.
 
   # Percentage-Based Settings (fallback if ATR unavailable)
   percentage_stop: 0.05  # 5% stop-loss below entry
@@ -38,7 +51,7 @@ stop_loss:
 
 # Risk Per Trade Configuration
 risk_per_trade:
-  max_risk_pct: 0.01  # Never risk more than 1% of capital per trade
+  max_risk_pct: 0.02  # ALIGNED 2026-08-10 to hard_constraints.risk_per_trade (was 0.01)
 
   # VIX-Adjusted Risk (future enhancement)
   enable_vix_adjustment: false
@@ -57,7 +70,7 @@ risk_per_trade:
 
 # Portfolio Heat Configuration
 portfolio_heat:
-  max_total_heat_pct: 0.05  # Maximum 5% of capital at risk across all positions
+  max_total_heat_pct: 0.08  # ALIGNED 2026-08-10 to hard_constraints.max_portfolio_heat (was 0.05)
 
   # Heat Monitoring
   warning_threshold_pct: 0.04  # Warn when heat reaches 4%
@@ -145,4 +158,28 @@ logging:
 # - Sector concentration is enabled (simpler than correlation)
 # - Testing section provides initial portfolio state for Week 3 testing
 # - Message configuration follows Research Department pattern
-# - Can tune risk tolerance (1% → 2%) without code changes
+# - Can tune risk tolerance (1% -> 2%) without code changes
+
+# ============================================================================
+# [*] LIVE STOP PARAMETERS - added 2026-08-10
+#
+# Read by Utils/atr_calculator.calculate_trailing_stop_percent on every stop
+# calculation, which is called by Departments/Trading/trading_department.py and
+# Utils/trailing_stop_monitor.py. These are the only numbers that actually set
+# where Sentinel's stops go. The stop_loss.atr_multiplier higher up this file
+# is read by nothing.
+#
+# Seeded with the values that were previously hardcoded as function defaults,
+# so introducing this block changed no behaviour. auto_tune.py writes
+# atr_multiplier here now instead of the dead one above.
+#
+# Evidence for tightening, from 226 reconstructed round trips: stops fired on
+# only 13% of exits while the worst single loss ran 11.9% against a 4.45%
+# average, and winners' maximum adverse excursion at the 90th percentile was
+# -5.63% - so there is room between where losses actually happen and where the
+# stop currently sits.
+# ============================================================================
+trailing_stop:
+  atr_multiplier: 2.43   # stop distance = atr_multiplier x ATR%, then clamped below
+  min_stop_pct: 5.0     # floor on stop distance, percent
+  max_stop_pct: 15.0    # ceiling on stop distance, percent

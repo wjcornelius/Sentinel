@@ -19,6 +19,65 @@ from datetime import datetime
 logger = logging.getLogger(__name__)
 
 
+# ---------------------------------------------------------------------------
+# Winner protection, added 2026-08-10.
+#
+# From 225 reconstructed round trips: the top 1 trade produced 987% of total
+# realised P&L, the top 3 produced $15,353 while the other 222 lost $14,341,
+# and the median winner was closed at +4.02%. 190 of 225 exits were
+# `strategy_exit` — the rebalancer closing a position, not the trade resolving.
+#
+# That combination is the strategy eating itself. A position that has run is
+# now oversized against its target weight, so it becomes the natural thing to
+# trim — which means the rotation logic systematically harvests exactly the
+# positions on their way to being the one trade that pays for the year. For a
+# power-law return distribution that is precisely backwards.
+#
+# So: a position up more than WINNER_PROTECT_PCT is not eligible for
+# rebalance-driven selling. It can still be closed by its trailing stop, and it
+# can still be closed if GPT-5 gives a reason that is not portfolio housekeeping
+# (a thesis break, a risk event) — the veto only applies to rotation language.
+#
+# Set WINNER_PROTECT_PCT to a very large number to disable.
+# ---------------------------------------------------------------------------
+WINNER_PROTECT_PCT = 12.0
+
+# Reasons that mean "housekeeping", i.e. the sell exists to free a slot or
+# rebalance weights rather than because something is wrong with the position.
+_ROTATION_WORDS = (
+    'rebalanc', 'rotat', 'trim', 'lower score', 'lower composite',
+    'better opportunit', 'free up', 'make room', 'weight', 'overweight',
+    'reallocat', 'position limit', 'max position',
+)
+
+
+def _protect_running_winners(sell_decisions, holdings):
+    """Drop rotation-driven sells of positions that are meaningfully up."""
+    if not sell_decisions or not holdings:
+        return sell_decisions
+    by_ticker = {h.get('ticker'): h for h in holdings if h.get('ticker')}
+    kept, vetoed = [], []
+    for s in sell_decisions:
+        h = by_ticker.get(s.get('ticker'))
+        gain = None
+        if h:
+            gain = h.get('unrealized_plpc')
+            if gain is None:
+                gain = h.get('unrealized_pl_pct')
+        reason = (s.get('gpt5_reasoning') or '').lower()
+        is_rotation = any(w in reason for w in _ROTATION_WORDS) or not reason.strip()
+        if gain is not None and gain >= WINNER_PROTECT_PCT and is_rotation:
+            vetoed.append((s.get('ticker'), gain, s.get('gpt5_reasoning')))
+            continue
+        kept.append(s)
+    for tkr, gain, why in vetoed:
+        logger.warning(
+            f"[WinnerProtect] Holding {tkr} (+{gain:.1f}%) — refused a "
+            f"rotation sell. Reason given was: {why!r}. Its trailing stop still "
+            f"governs the exit.")
+    return kept
+
+
 class GPT5PortfolioOptimizer:
     """
     Use GPT-5 (OpenAI) as Chief Investment Officer
@@ -79,6 +138,33 @@ class GPT5PortfolioOptimizer:
         logger.info(f"Available capital: ${available_capital:,.0f}")
         logger.info(f"Current positions: {current_positions}/{max_positions}")
 
+        # Regime-scaled deployment, added 2026-08-10. The regime has been
+        # assessed every morning for nine months and changed nothing; this is
+        # the one place to apply it, because every downstream number — the
+        # GPT-5 prompt's capital figures and the fallback allocation alike —
+        # derives from available_capital. See Utils/regime_sizing.py.
+        #
+        # The multiplier is clamped to [0, 1], so this can only ever deploy
+        # LESS than the bot would have. It cannot cause a loss that would not
+        # otherwise have happened; the downside is opportunity cost, and
+        # regime_sizing_log records enough to measure that later.
+        try:
+            from Utils.regime_sizing import deployment_multiplier, log_decision
+            _rd = deployment_multiplier()
+            if _rd["multiplier"] < 1.0:
+                _before = available_capital
+                available_capital = available_capital * _rd["multiplier"]
+                logger.warning(
+                    f"[Regime] {_rd['regime']}/{_rd['confidence']} — deploying "
+                    f"{_rd['multiplier']:.0%} of capital: "
+                    f"${_before:,.0f} -> ${available_capital:,.0f} ({_rd['reason']})")
+                log_decision(_rd, _before)
+            else:
+                logger.info(f"[Regime] {_rd['regime']} — full deployment ({_rd['reason']})")
+                log_decision(_rd, available_capital)
+        except Exception as _e:
+            logger.warning(f"[Regime] sizing unavailable, deploying in full: {_e}")
+
         # SAFEGUARD: Limit total stocks to prevent prompt from being too long
         # GPT-5 struggles with 50+ stocks. Limit to top 40 candidates + all holdings
         # Need 40 to give optimizer enough options to select 15-20 positions
@@ -93,6 +179,16 @@ class GPT5PortfolioOptimizer:
             )
             candidates = sorted_candidates[:MAX_CANDIDATES]
             logger.info(f"Using top {len(candidates)} candidates (scores {candidates[0].get('composite_score', 0):.1f} to {candidates[-1].get('composite_score', 0):.1f})")
+
+        # Record what each candidate scored today, so that months from now it
+        # can be asked whether those scores predicted anything. Instrumentation
+        # only — wrapped so it can never interrupt a trading run.
+        # See Utils/entry_features.py.
+        try:
+            from Utils.entry_features import record_candidates
+            record_candidates(candidates, source="gpt5_optimizer")
+        except Exception:
+            pass
 
         # Build comprehensive prompt for GPT-5
         prompt = self._build_optimization_prompt(
@@ -555,6 +651,7 @@ HOLDING #{i}: {h.get('ticker', 'UNKNOWN')}
                     'current_value': holding.get('market_value', 0) * (sell_pct / 100.0)  # Calculate value being sold
                 })
 
+        sell_decisions = _protect_running_winners(sell_decisions, holdings)
         return optimized, sell_decisions
 
     def _fallback_allocation(self, candidates: List[Dict], available_capital: float, holdings: List[Dict] = None) -> Tuple[List[Dict], List[Dict]]:
@@ -628,6 +725,14 @@ HOLDING #{i}: {h.get('ticker', 'UNKNOWN')}
         # Allocate 90% of capital equally across top 10
         target_deployment = available_capital * 0.9
         per_position = target_deployment / len(top_candidates) if top_candidates else 0
+
+        # Same instrumentation on the fallback path, marked selected=True so
+        # the chosen names are distinguishable from the ones merely considered.
+        try:
+            from Utils.entry_features import record_candidates
+            record_candidates(top_candidates, source="fallback_topN", selected=True)
+        except Exception:
+            pass
 
         for candidate in top_candidates:
             candidate['allocated_capital'] = per_position

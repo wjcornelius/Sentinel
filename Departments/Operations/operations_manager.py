@@ -51,6 +51,32 @@ except ImportError:
 # Import config
 import config
 
+# ============================================================================
+# STRATEGY SWITCHES (added 2026-11-25, approved by Bill). ASCII only here.
+# Each one is a single True/False. Set it back to restore the old behaviour.
+# ============================================================================
+# False = the daily comparative ranking no longer force-sells holdings (score
+#         under the floor, or ranked below the keeper threshold). The broker
+#         trailing stops become the only exit. True = old daily rotation.
+RANKING_SELLS_ENABLED = False
+
+# True  = size new buys from the account's own cash (never negative), less the
+#         cash reserve, plus guaranteed sell proceeds. Margin buying power is
+#         logged but never used. False = old behaviour (Alpaca buying_power).
+SIZE_FROM_CASH_NOT_MARGIN = True
+
+# True  = apply Utils/regime_sizing.py to the capital that may be deployed
+#         today and write regime_sizing_log. It can only shrink deployment.
+REGIME_DEPLOYMENT_SIZING_ENABLED = True
+
+# True  = a holding up at least WINNER_PROTECT_PCT cannot be closed by a
+#         ranking sell. Only matters while RANKING_SELLS_ENABLED is True.
+WINNER_PROTECTION_ENABLED = True
+try:
+    from Departments.Executive.gpt5_portfolio_optimizer import WINNER_PROTECT_PCT
+except Exception:
+    WINNER_PROTECT_PCT = 12.0
+
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
@@ -240,6 +266,14 @@ class OperationsManager:
             stage_results.append(gpt5_result)
 
             if not gpt5_result.success:
+                if (gpt5_result.data or {}).get('no_trades_needed'):
+                    # 2026-11-25: a quiet day is not a failure.
+                    self.logger.info("NO TRADES NEEDED TODAY - nothing to buy, nothing to sell")
+                    return {
+                        'status': 'NO_TRADES_NEEDED',
+                        'message': 'Nothing to buy and nothing to sell today',
+                        'stage_results': [self._serialize_result(r) for r in stage_results]
+                    }
                 return self._handle_stage_failure('gpt5_optimizer', gpt5_result, stage_results)
 
             # COMPLIANCE ENFORCEMENT - Reject trades that violate rules
@@ -842,6 +876,8 @@ class OperationsManager:
 
             mandatory_sells = []
             holdings_to_keep = []
+            ranking_sells_suppressed = []   # would-have-sold while RANKING_SELLS_ENABLED is False
+            winners_protected = []          # ranking sells vetoed by winner protection
 
             if holdings:
                 self.logger.info("")
@@ -965,6 +1001,25 @@ class OperationsManager:
                         must_sell = True
                         sell_reason = f"Rank #{holding_rank} (below top {keeper_threshold_rank}), score {score:.1f}"
 
+                    # ---- 2026-11-25 switches (see top of file) ----
+                    # A stranded (inactive / untradeable) holding can never be
+                    # sold, so it is never a mandatory sell and its value is
+                    # never counted as sell proceeds.
+                    if must_sell and not holding.get('tradeable', True):
+                        self.logger.warning(f"    [STRANDED] {ticker}: cannot be traded at the broker - not sold ({sell_reason})")
+                        must_sell = False
+                    if must_sell and not RANKING_SELLS_ENABLED:
+                        self.logger.info(f"    [RANKING SELLS OFF] {ticker}: kept - would have been sold ({sell_reason}); its trailing stop governs the exit")
+                        ranking_sells_suppressed.append(ticker)
+                        must_sell = False
+                    elif (must_sell and WINNER_PROTECTION_ENABLED
+                          and isinstance(unrealized_plpc, (int, float))
+                          and unrealized_plpc >= WINNER_PROTECT_PCT):
+                        self.logger.warning(f"    [WinnerProtect] {ticker}: up {unrealized_plpc:+.1f}% - refused ranking sell ({sell_reason}); its trailing stop governs the exit")
+                        holding['WINNER_PROTECTED'] = True
+                        winners_protected.append(ticker)
+                        must_sell = False
+
                     if must_sell:
                         self.logger.warning(f"    ❌ {ticker}: MANDATORY SELL - {sell_reason}")
                         holding['MANDATORY_SELL'] = True
@@ -1001,17 +1056,38 @@ class OperationsManager:
                 'market_sentiment': 'NEUTRAL'
             })
 
-            # Get REAL buying power from Alpaca (ground truth)
+            # Capital base. Changed 2026-11-25: with SIZE_FROM_CASH_NOT_MARGIN the
+            # allocator sizes from the account's own cash, not Alpaca's margin
+            # buying power (which read $363,337 on a $102,000 account and let the
+            # bot run about 2x leveraged in November 2025). The variable keeps
+            # its old name because everything below reads it.
+            account_equity = None
             try:
                 from Utils.alpaca_client import AlpacaClient
                 alpaca = AlpacaClient()
                 account = alpaca.trading_client.get_account()
-                buying_power = float(account.buying_power)
-                self.logger.info(f"  Alpaca buying power: ${buying_power:,.2f}")
+                margin_buying_power = float(account.buying_power)
+                if SIZE_FROM_CASH_NOT_MARGIN:
+                    account_equity = float(account.equity)
+                    _own_cash = float(account.cash)
+                    _long_mv = float(account.long_market_value)
+                    # Never negative; never more than equity not already invested.
+                    buying_power = max(0.0, min(_own_cash, account_equity - _long_mv))
+                    self.logger.info(
+                        f"  Own cash available: ${buying_power:,.2f} "
+                        f"(cash ${_own_cash:,.2f}, equity ${account_equity:,.2f}); "
+                        f"margin buying power ${margin_buying_power:,.2f} is NOT used")
+                else:
+                    buying_power = margin_buying_power
+                    self.logger.info(f"  Alpaca buying power: ${buying_power:,.2f}")
             except Exception as e:
-                self.logger.warning(f"  Could not fetch Alpaca buying power: {e}")
-                buying_power = 100000.0  # Fallback
-                self.logger.info(f"  Using fallback capital: ${buying_power:,.2f}")
+                self.logger.warning(f"  Could not fetch Alpaca account: {e}")
+                if SIZE_FROM_CASH_NOT_MARGIN:
+                    buying_power = 0.0
+                    self.logger.warning("  Cash unknown - no new buys will be sized today")
+                else:
+                    buying_power = 100000.0  # Fallback
+                    self.logger.info(f"  Using fallback capital: ${buying_power:,.2f}")
 
             # CRITICAL FIX: Calculate proceeds from MANDATORY sells
             # These positions MUST be sold, so their proceeds are guaranteed capital
@@ -1030,6 +1106,45 @@ class OperationsManager:
                 self.logger.info(f"  Total available capital: ${available_capital:,.2f} (buying power + sell proceeds)")
             else:
                 self.logger.info(f"  Total available capital: ${available_capital:,.2f} (no mandatory sells)")
+
+            # Hard ceiling on today's buys (2026-11-25): own cash plus guaranteed
+            # sell proceeds, less the cash reserve Trading enforces (a share of
+            # account equity). Nothing below may plan more than this, so total
+            # long exposure cannot exceed equity.
+            max_total_buy_dollars = None
+            if SIZE_FROM_CASH_NOT_MARGIN:
+                _reserve_pct = 0.10
+                try:
+                    with open(self.project_root / "Config" / "hard_constraints.yaml") as _f:
+                        _reserve_pct = yaml.safe_load(_f).get('portfolio_risk', {}).get('min_cash_reserve_pct', 0.10)
+                except Exception as _e:
+                    self.logger.warning(f"  Could not load hard_constraints for reserve: {_e}, using 0.10")
+                _reserve_dollars = (account_equity or 0.0) * _reserve_pct
+                max_total_buy_dollars = max(0.0, available_capital - _reserve_dollars)
+                self.logger.info(
+                    f"  Buy ceiling: ${max_total_buy_dollars:,.2f} "
+                    f"(own cash + sell proceeds ${available_capital:,.2f} "
+                    f"less {_reserve_pct:.0%} reserve ${_reserve_dollars:,.2f})")
+
+            # Regime-scaled deployment (Utils/regime_sizing.py, written 2026-08-10,
+            # wired into the live path 2026-11-25). The multiplier is clamped to
+            # [0, 1]: it can only deploy LESS. Logged to regime_sizing_log.
+            if REGIME_DEPLOYMENT_SIZING_ENABLED:
+                try:
+                    from Utils.regime_sizing import deployment_multiplier, log_decision
+                    _rd = deployment_multiplier(self.db_path)
+                    _before = available_capital
+                    if _rd["multiplier"] < 1.0:
+                        available_capital = available_capital * _rd["multiplier"]
+                        self.logger.warning(
+                            f"  [Regime] {_rd.get('regime')}/{_rd.get('confidence')} - deploying "
+                            f"{_rd['multiplier']:.0%} of capital: ${_before:,.0f} -> "
+                            f"${available_capital:,.0f} ({_rd.get('reason')})")
+                    else:
+                        self.logger.info(f"  [Regime] {_rd.get('regime')} - full deployment ({_rd.get('reason')})")
+                    log_decision(_rd, _before, self.db_path)
+                except Exception as _e:
+                    self.logger.warning(f"  [Regime] sizing unavailable, deploying in full: {_e}")
 
             current_positions = len(holdings)
             max_positions = 20
@@ -1174,15 +1289,26 @@ class OperationsManager:
                     # don't reliably have market-value here, so approximate with
                     # buying_power for the reserve; conservative when buying_power
                     # is the only available signal.
-                    reserve_required = available_capital * min_cash_reserve_pct
-                    deployable_capital = max(0.0, available_capital - reserve_required)
+                    if max_total_buy_dollars is not None:
+                        # 2026-11-25: reserve is a share of account equity (the
+                        # same math Trading enforces) and was already taken out
+                        # of the buy ceiling.
+                        reserve_required = (account_equity or 0.0) * min_cash_reserve_pct
+                        deployable_capital = max(0.0, min(available_capital, max_total_buy_dollars))
+                    else:
+                        reserve_required = available_capital * min_cash_reserve_pct
+                        deployable_capital = max(0.0, available_capital - reserve_required)
                     self.logger.info(
                         f"  Cash-reserve pre-check: reserve {min_cash_reserve_pct:.0%} "
                         f"= ${reserve_required:,.0f} / deployable ${deployable_capital:,.0f}"
                     )
 
                     # Calculate max position size (smaller of absolute limit or percentage limit)
-                    max_position_from_pct = available_capital * max_position_pct
+                    # 2026-11-25: the percentage cap is a share of account equity
+                    # when sizing from own cash (available_capital is now only
+                    # the cash on hand, not the size of the portfolio).
+                    _pct_base = account_equity if (SIZE_FROM_CASH_NOT_MARGIN and account_equity) else available_capital
+                    max_position_from_pct = _pct_base * max_position_pct
                     max_allowed_position = min(max_position_value, max_position_from_pct)
 
                     # Calculate equal-weight per position, capped at compliance limits
@@ -1345,14 +1471,16 @@ class OperationsManager:
 
             # Third: Fallback safety check for any remaining underperformers
             # (Should be unnecessary since comparative ranking catches everything, but kept as safeguard)
-            if not mandatory_sell_tickers:
+            if RANKING_SELLS_ENABLED and not mandatory_sell_tickers:
                 self.logger.info(f"  No mandatory sells - checking for any stragglers below score threshold")
                 for holding in holdings:
                     ticker = holding.get('ticker')
                     composite = holding.get('research_composite_score', holding.get('composite_score', 0))
 
                     # Only sell if score is genuinely poor (< 60) AND not already processed
-                    if composite < ABSOLUTE_SCORE_FLOOR and ticker not in mandatory_sell_tickers:
+                    if (composite < ABSOLUTE_SCORE_FLOOR and ticker not in mandatory_sell_tickers
+                            and holding.get('tradeable', True)
+                            and not holding.get('WINNER_PROTECTED')):
                         self.logger.warning(f"  Fallback auto-sell: {ticker} (score: {composite:.1f} < {ABSOLUTE_SCORE_FLOOR} threshold)")
                         sell_order = {
                             'ticker': ticker,
@@ -1496,6 +1624,14 @@ class OperationsManager:
 
                 remaining_capital = available_capital - total_allocated
                 target_deployment = available_capital * (MIN_DEPLOYMENT_PCT / 100.0)
+                # 2026-11-25: never auto-fill past the own-cash buy ceiling, and
+                # with ranking sells off never past the open slots (nothing is
+                # force-sold any more to make room).
+                if max_total_buy_dollars is not None:
+                    target_deployment = min(target_deployment, max_total_buy_dollars)
+                _autofill_room = None
+                if not RANKING_SELLS_ENABLED:
+                    _autofill_room = max(0, open_slots - len(buy_orders))
                 capital_needed = target_deployment - total_allocated
 
                 # Load compliance config to get position sizing limits
@@ -1515,7 +1651,8 @@ class OperationsManager:
                     self.logger.warning(f"Could not load compliance config, using defaults")
 
                 # Calculate max allowed position (smaller of absolute or percentage limit)
-                max_position_from_pct = available_capital * MAX_POSITION_PCT
+                _pct_base = account_equity if (SIZE_FROM_CASH_NOT_MARGIN and account_equity) else available_capital
+                max_position_from_pct = _pct_base * MAX_POSITION_PCT
                 max_allowed_position = min(MAX_POSITION_VALUE, max_position_from_pct)
 
                 added_count = 0
@@ -1524,6 +1661,8 @@ class OperationsManager:
                     if total_allocated >= target_deployment:
                         break
                     if len(buy_orders) >= 30:  # Hard cap at 30 positions (raised from 20)
+                        break
+                    if _autofill_room is not None and added_count >= _autofill_room:
                         break
 
                     # Calculate position size (aim for equal weighting of remaining capital)
@@ -1549,6 +1688,10 @@ class OperationsManager:
                         continue
 
                     allocated = shares * entry_price
+
+                    if max_total_buy_dollars is not None and total_allocated + allocated > max_total_buy_dollars:
+                        skipped_count += 1
+                        continue
 
                     # VALIDATION: Skip if position would be below minimum OR above compliance max
                     if allocated < MIN_POSITION_VALUE:
@@ -1597,6 +1740,24 @@ class OperationsManager:
                 self.logger.warning(f"    - Remaining idle capital: ${available_capital - total_allocated:,.0f}")
                 self.logger.warning("=" * 80)
 
+            # FINAL GUARD (2026-11-25): whatever the steps above did (regime
+            # multipliers, auto-fill), planned buys may not exceed the own-cash
+            # buy ceiling. Scale down proportionally if they do.
+            if max_total_buy_dollars is not None and buy_orders:
+                _planned = sum(o.get('allocated_capital', 0) for o in buy_orders)
+                if _planned > max_total_buy_dollars + 1.0:
+                    _scale = (max_total_buy_dollars / _planned) if _planned > 0 else 0.0
+                    self.logger.warning(
+                        f"  [Own-cash guard] planned buys ${_planned:,.2f} exceed the "
+                        f"ceiling ${max_total_buy_dollars:,.2f} - scaling by {_scale:.3f}")
+                    for order in buy_orders:
+                        _px = order.get('entry_price', 0)
+                        order['shares'] = int(order.get('allocated_capital', 0) * _scale / _px) if _px > 0 else 0
+                        order['allocated_capital'] = order['shares'] * _px
+                    buy_orders = [o for o in buy_orders if o.get('shares', 0) > 0]
+                    total_allocated = sum(o['allocated_capital'] for o in buy_orders)
+                    capital_deployment_pct = (total_allocated / available_capital * 100) if available_capital > 0 else 0
+
             # Quality score based on deployment and diversification
             quality_score = min(100, int(
                 (capital_deployment_pct / 90.0 * 70) +  # 70% weight on deployment
@@ -1612,7 +1773,30 @@ class OperationsManager:
             if len(buy_orders) < MIN_POSITIONS:
                 issues.append(f"Limited diversification: {len(buy_orders)} new positions (target {MIN_POSITIONS}-20). Total after trades: {positions_after_trades}")
 
+            total_orders = len(buy_orders) + len(sell_orders)
             success = total_orders > 0
+
+            # Entry-score capture (Utils/entry_features.py, written 2026-08-10,
+            # wired into the live path 2026-11-25). One row per candidate scored
+            # today, then the planned buys again with selected=1. Instrumentation
+            # only: it can never interrupt a trading run.
+            try:
+                from Utils.entry_features import record_candidates
+                record_candidates(candidates, source="deterministic_allocator",
+                                  db_path=self.db_path)
+                _bought = {o.get('ticker') for o in buy_orders}
+                record_candidates([c for c in candidates if c.get('ticker') in _bought],
+                                  source="deterministic_allocator", selected=True,
+                                  db_path=self.db_path)
+            except Exception:
+                pass
+
+            # With ranking sells off, a day with nothing to buy and nothing to
+            # sell is normal. Flag it so the run ends NO_TRADES_NEEDED instead
+            # of being reported as a failed plan.
+            no_trades_needed = (total_orders == 0)
+            if no_trades_needed:
+                self.logger.info("  No trades needed today (nothing to buy, nothing to sell)")
 
             return WorkflowStageResult(
                 stage='portfolio_allocator',
@@ -1624,7 +1808,11 @@ class OperationsManager:
                     'total_allocated': total_allocated,
                     'capital_deployment_pct': capital_deployment_pct,
                     'gpt5_reasoning': reasoning,  # Keep key name for compatibility
-                    'optimized_candidates': optimized_candidates
+                    'optimized_candidates': optimized_candidates,
+                    'no_trades_needed': no_trades_needed,
+                    'ranking_sells_enabled': RANKING_SELLS_ENABLED,
+                    'ranking_sells_suppressed': ranking_sells_suppressed,
+                    'winners_protected': winners_protected
                 },
                 message=f"Deterministic allocator created trading plan: {len(sell_orders)} SELLs, {len(buy_orders)} BUYs (${total_allocated:,.0f} allocated)",
                 quality_score=int(quality_score),
@@ -1640,6 +1828,11 @@ class OperationsManager:
             # Take top 5 candidates by composite score
             candidates = news_result.data.get('candidates', [])
             top_candidates = sorted(candidates, key=lambda x: x.get('composite_score', 0), reverse=True)[:5]
+            if SIZE_FROM_CASH_NOT_MARGIN:
+                # 2026-11-25: this fallback assumes $100,000 of capital it has
+                # not checked. When sizing from own cash, buy nothing instead.
+                self.logger.warning("  Fallback allocation disabled (own-cash sizing) - no orders today")
+                top_candidates = []
 
             available_capital = 100000.0
             per_position = (available_capital * 0.9) / max(len(top_candidates), 1)

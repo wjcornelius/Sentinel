@@ -98,6 +98,10 @@ class AutomatedTradingRunner:
             if not self._check_market_status():
                 return self._finalize_results('MARKET_CLOSED')
 
+            # Step 2.5: Stop-protection check (added 2026-11-25). With daily
+            # ranking sells off, a trailing stop is a position's ONLY exit.
+            self._check_stop_protection()
+
             # Step 3: Check if already traded today
             if self._has_traded_today():
                 logger.info("[AutoTrader] Already traded today - skipping execution")
@@ -116,6 +120,9 @@ class AutomatedTradingRunner:
             # Step 5: Generate trading plan (with any mandatory drift trims)
             plan = self._generate_trading_plan(mandatory_sells=drift_trims)
             if not plan:
+                if self.results.get('no_trades_needed'):
+                    # Quiet day: nothing to buy, nothing to sell. Not a failure.
+                    return self._finalize_results('NO_TRADES_NEEDED')
                 return self._finalize_results('PLAN_GENERATION_FAILED')
 
             # Step 6: Auto-approve plan
@@ -256,6 +263,66 @@ class AutomatedTradingRunner:
             logger.error(f"[AutoTrader] Market status check failed: {e}")
             self.results['errors'].append(f"Market status check failed: {str(e)}")
             return False
+
+    def _check_stop_protection(self):
+        """Flag, loudly, any held position with no trailing stop (added 2026-11-25).
+
+        With daily ranking sells switched off, the broker trailing stop is the
+        only thing that will ever close a position, so a tradeable position
+        without one has NO exit. Runs before trading: positions bought later
+        this morning get their stops from the 'Sentinel Stop Protection' task.
+        Stranded positions (inactive at the broker, cannot be traded or
+        stopped) are reported separately so they do not hide a real gap.
+        Never raises and never places or cancels an order.
+        """
+        logger.info("\n[AutoTrader] Checking stop protection...")
+        try:
+            from Utils.trailing_stop_monitor import TrailingStopMonitor
+            from Utils.tradability import is_tradable
+            monitor = TrailingStopMonitor()
+            status = monitor.check_protection_status()
+            details = status.get('details', {})
+
+            stranded = []
+            naked = []
+            under_covered = []
+            for ticker in status.get('unprotected', []):
+                if is_tradable(monitor.trading_client, ticker):
+                    naked.append(ticker)
+                else:
+                    stranded.append(ticker)
+            for ticker in status.get('protected', []):
+                pos = details.get(ticker, {})
+                stop = pos.get('trailing_stop') or {}
+                held = pos.get('qty', pos.get('shares', pos.get('quantity')))
+                try:
+                    if held is not None and float(stop.get('qty', 0)) + 1e-9 < float(held):
+                        under_covered.append(ticker)
+                except (TypeError, ValueError):
+                    pass
+
+            self.results['stranded_positions'] = stranded
+            self.results['unprotected_positions'] = naked
+            self.results['under_covered_positions'] = under_covered
+
+            if stranded:
+                logger.warning(f"[AutoTrader] STRANDED (inactive at broker, cannot be traded or stopped): {', '.join(stranded)}")
+                self.results['warnings'].append(f"Stranded positions: {', '.join(stranded)}")
+            if naked or under_covered:
+                logger.error("!" * 80)
+                if naked:
+                    logger.error(f"[AutoTrader] NO TRAILING STOP - THESE POSITIONS HAVE NO EXIT: {', '.join(naked)}")
+                    self.results['warnings'].append(f"NO TRAILING STOP (no exit): {', '.join(naked)}")
+                if under_covered:
+                    logger.error(f"[AutoTrader] TRAILING STOP SMALLER THAN POSITION: {', '.join(under_covered)}")
+                    self.results['warnings'].append(f"Trailing stop smaller than position: {', '.join(under_covered)}")
+                logger.error("[AutoTrader] The 'Sentinel Stop Protection' task should cover these at its next run; check its log")
+                logger.error("!" * 80)
+            else:
+                logger.info(f"[AutoTrader] Every tradeable position has a trailing stop ({len(status.get('protected', []))} protected)")
+        except Exception as e:
+            logger.error(f"[AutoTrader] STOP PROTECTION CHECK FAILED - protection is UNKNOWN: {e}")
+            self.results['warnings'].append(f"Stop protection check failed: {str(e)}")
 
     def _has_traded_today(self) -> bool:
         """Check if we've already executed trades today"""
@@ -452,6 +519,11 @@ class AutomatedTradingRunner:
                 self._ceo = ceo
 
                 return plan
+
+            elif result['status'] == 'NO_TRADES_NEEDED':
+                logger.info("[AutoTrader] No trades needed today (nothing to buy, nothing to sell)")
+                self.results['no_trades_needed'] = True
+                return None
 
             elif result['status'] == 'REJECTED':
                 logger.warning(f"[AutoTrader] Plan rejected: {result['message']}")
@@ -716,6 +788,42 @@ class AutomatedTradingRunner:
         self.results['end_time'] = datetime.now().isoformat()
         self.results['duration_seconds'] = (datetime.now() - self.start_time).total_seconds()
 
+        # The equity curve should have a point for every day the bot woke up,
+        # not only the days it traded. _get_portfolio_state() normally runs at
+        # step 8, which the MARKET_CLOSED / ALREADY_TRADED / failure paths never
+        # reach — which is part of why portfolio_snapshots has 11 rows for nine
+        # months. It is internally try/excepted, so this is safe on every path.
+        if not self.results.get('portfolio_state'):
+            try:
+                self._get_portfolio_state()
+            except Exception:
+                pass
+
+        # Restore the recording layer that stopped writing in November 2025.
+        # Single hook, every exit path: portfolio_snapshots, trading_daily_logs,
+        # portfolio_decisions, portfolio_rejections, and the fills writeback
+        # into portfolio_positions. See Utils/audit_recorder.py — it cannot
+        # raise, and it never overwrites a value the trading system already set.
+        try:
+            from Utils.audit_recorder import record_cycle
+            record_cycle(self.results, logger=logger)
+        except Exception as e:
+            logger.warning(f"[AutoTrader] Audit recording unavailable: {e}")
+
+        # Close the learning loop. auto_tune.py reads closed_trades.db to decide
+        # whether to adjust anything, and the weekly review task runs it — but
+        # nothing was keeping closed_trades.db current, so the tuner would have
+        # been reading a log that stopped growing. Syncing here means the
+        # evidence is fresh every trading day without a second scheduled task.
+        try:
+            import subprocess
+            subprocess.run(
+                [sys.executable, str(self.project_root / "sync_closed_trades.py")],
+                capture_output=True, timeout=180, cwd=str(self.project_root))
+            logger.info("[AutoTrader] Closed-trades log synced")
+        except Exception as e:
+            logger.warning(f"[AutoTrader] Closed-trades sync skipped: {e}")
+
         # Save results to file
         results_file = self.project_root / f"automated_trading_results_{date.today()}.json"
         with open(results_file, 'w') as f:
@@ -743,7 +851,7 @@ def main():
     # Exit with appropriate code
     if result['status'] == 'SUCCESS':
         sys.exit(0)
-    elif result['status'] in ['MARKET_CLOSED', 'ALREADY_TRADED']:
+    elif result['status'] in ['MARKET_CLOSED', 'ALREADY_TRADED', 'NO_TRADES_NEEDED']:
         sys.exit(0)  # Not an error, just skipped
     else:
         sys.exit(1)

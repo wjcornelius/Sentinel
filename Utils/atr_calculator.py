@@ -91,12 +91,51 @@ def calculate_atr(ticker: str, period: int = 14, days: int = 30) -> Optional[flo
         return None
 
 
+# ---------------------------------------------------------------------------
+# Stop parameters, 2026-08-10.
+#
+# These three numbers set every stop Sentinel places, and until now they lived
+# only as function defaults here. risk_config.yaml had a `stop_loss:` block with
+# an atr_multiplier in it that NOTHING READ — the Risk department that would
+# have used it hardcodes its own 2.0 and is not in the live path at all. So the
+# file said 2.0, the bot used 3.0, and a tuner pointed at the file would have
+# adjusted a dead knob.
+#
+# They are now loaded from Config/risk_config.yaml -> trailing_stop, with the
+# previous hardcoded values as fallback so behaviour is unchanged if the file
+# is missing. auto_tune.py writes that block, which is what makes stop width
+# genuinely tunable rather than decoratively so.
+# ---------------------------------------------------------------------------
+_STOP_DEFAULTS = {"atr_multiplier": 3.0, "min_stop_pct": 5.0, "max_stop_pct": 15.0}
+
+
+def _load_stop_params() -> Dict:
+    try:
+        import yaml
+        from pathlib import Path as _P
+        cfg = _P(__file__).resolve().parent.parent / "Config" / "risk_config.yaml"
+        block = (yaml.safe_load(cfg.read_text(encoding="utf-8")) or {}).get("trailing_stop")
+        if isinstance(block, dict):
+            out = dict(_STOP_DEFAULTS)
+            for k in out:
+                v = block.get(k)
+                if isinstance(v, (int, float)):
+                    out[k] = float(v)
+            return out
+    except Exception:
+        pass
+    return dict(_STOP_DEFAULTS)
+
+
+STOP_PARAMS = _load_stop_params()
+
+
 def calculate_trailing_stop_percent(
     ticker: str,
     current_price: Optional[float] = None,
-    atr_multiplier: float = 3.0,
-    min_stop_pct: float = 5.0,
-    max_stop_pct: float = 15.0
+    atr_multiplier: Optional[float] = None,
+    min_stop_pct: Optional[float] = None,
+    max_stop_pct: Optional[float] = None
 ) -> Dict:
     """
     Calculate the optimal trailing stop percentage for a ticker based on ATR.
@@ -104,9 +143,10 @@ def calculate_trailing_stop_percent(
     Args:
         ticker: Stock symbol
         current_price: Current price (fetched if not provided)
-        atr_multiplier: Multiplier for ATR (default 3.0, widened 2026-07-22)
-        min_stop_pct: Minimum trailing stop % (floor, default 5%, widened 2026-07-22)
-        max_stop_pct: Maximum trailing stop % (ceiling, default 15%)
+        atr_multiplier: Multiplier for ATR. None -> Config/risk_config.yaml
+            trailing_stop.atr_multiplier (3.0 if unset). Tuned by auto_tune.py.
+        min_stop_pct: Floor on the stop %. None -> config (5.0 if unset).
+        max_stop_pct: Ceiling on the stop %. None -> config (15.0 if unset).
 
     Returns:
         Dictionary with:
@@ -116,6 +156,16 @@ def calculate_trailing_stop_percent(
         - current_price: The current price used
         - method: How the value was determined
     """
+    # Resolve from config at call time, not import time, so a tuning change
+    # takes effect on the next run without restarting anything.
+    _p = _load_stop_params()
+    if atr_multiplier is None:
+        atr_multiplier = _p["atr_multiplier"]
+    if min_stop_pct is None:
+        min_stop_pct = _p["min_stop_pct"]
+    if max_stop_pct is None:
+        max_stop_pct = _p["max_stop_pct"]
+
     result = {
         'ticker': ticker,
         'trail_percent': None,
